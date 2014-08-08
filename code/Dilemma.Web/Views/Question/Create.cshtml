@@ -1,0 +1,24 @@
+﻿@model Dilemma.ViewModels.QuestionViewModel
+@{
+    ViewBag.Title = "Ask a question";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("Create", "Question"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Text, new { @class = "control-label" })
+        <div>
+            @Html.TextAreaFor(m => m.Text, 10, 10, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-default" value="Register" />
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
