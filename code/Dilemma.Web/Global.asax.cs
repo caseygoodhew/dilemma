@@ -14,7 +14,9 @@ namespace Dilemma.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
+
+            TwitterBootstrapMVC.Bootstrap.Configure();
+
             DilemmaCore.Initialize();
             Registration.Register(null);
         }

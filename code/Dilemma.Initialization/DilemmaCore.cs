@@ -1,7 +1,11 @@
 ﻿using System;
 
+using Dilemma.Business;
+
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
+
+using Microsoft.VisualBasic;
 
 namespace Dilemma.Initialization
 {
@@ -21,12 +25,11 @@ namespace Dilemma.Initialization
                 throw new InvalidOperationException();
             }
 
-            var registrar = locator.BaseRegistrar;
-
-            ViewModels.Registration.Register(registrar);
-
-            // misc
-            registrar.Register<ITimeSource>(() => new LocalTimeSource());
+            locator.Initialize(
+                Registration.Register,
+                Conversion.Registration.Register,
+                Disposable.Common.Registration.Register
+            );
         }
 
         /// <summary>

@@ -1,11 +1,14 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
+
+using Dilemma.Web;
+
 using RazorGenerator.Mvc;
 
-[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Dilemma.Web.App_Start.RazorGeneratorMvcStart), "Start")]
+[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(RazorGeneratorMvcStart), "Start")]
 
-namespace Dilemma.Web.App_Start {
+namespace Dilemma.Web {
     public static class RazorGeneratorMvcStart {
         public static void Start() {
             var engine = new PrecompiledMvcEngine(typeof(RazorGeneratorMvcStart).Assembly) {

@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Disposable.Common">
-      <HintPath>..\packages\Disposable.Common.1.0.0\lib\net45\Disposable.Common.dll</HintPath>
+    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Disposable.Common.1.0.2\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,13 +47,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Dilemma.Business\Dilemma.Business.csproj">
+      <Project>{2170e2ea-2976-4186-9b7a-536737139a61}</Project>
+      <Name>Dilemma.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dilemma.Conversion\Dilemma.Conversion.csproj">
+      <Project>{cc181d46-32ea-4dc0-a170-53d4d9a66563}</Project>
+      <Name>Dilemma.Conversion</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dilemma.ViewModels\Dilemma.ViewModels.csproj">
-      <Project>{2170e2ea-2976-4186-9b7a-536737139a61}</Project>
-      <Name>Dilemma.ViewModels</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

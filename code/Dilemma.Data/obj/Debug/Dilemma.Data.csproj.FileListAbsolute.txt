@@ -1,0 +1,5 @@
+C:\git\dilemma\code\Dilemma.Data\bin\Debug\Dilemma.Data.dll
+C:\git\dilemma\code\Dilemma.Data\bin\Debug\Dilemma.Data.pdb
+C:\git\dilemma\code\Dilemma.Data\obj\Debug\Dilemma.Data.csprojResolveAssemblyReference.cache
+C:\git\dilemma\code\Dilemma.Data\obj\Debug\Dilemma.Data.dll
+C:\git\dilemma\code\Dilemma.Data\obj\Debug\Dilemma.Data.pdb

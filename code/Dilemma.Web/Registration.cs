@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-using Dilemma.ViewModels.Validation;
+using Dilemma.Business.Validators;
 
 using Disposable.Common.ServiceLocator;
 

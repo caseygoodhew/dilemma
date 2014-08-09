@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-using Dilemma.ViewModels;
+using Dilemma.Business.ViewModels;
 
 namespace Dilemma.Web.Controllers
 {
@@ -36,25 +36,7 @@ namespace Dilemma.Web.Controllers
         [HttpPost]
         public ActionResult Create(QuestionViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                int y = 0;
-            }
-            else
-            {
-                int x = 0;
-            }
-
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Create");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(model);
         }
     }
 }
