@@ -28,6 +28,8 @@ namespace Dilemma.Web.Views.Shared
     using System.Web.UI;
     using System.Web.WebPages;
     using Dilemma.Web;
+    using Disposable.Web.TwitterBootstrap3.MVC5;
+    using TwitterBootstrap3;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/_Layout.cshtml")]
@@ -57,7 +59,7 @@ WriteLiteral(">\r\n    <title>");
             
             #line default
             #line hidden
-WriteLiteral(" - My ASP.NET Application</title>\r\n");
+WriteLiteral(" - Dilemma</title>\r\n");
 
 WriteLiteral("    ");
 
@@ -166,7 +168,7 @@ WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; ")
             
             #line default
             #line hidden
-WriteLiteral(" - My ASP.NET Application</p>\r\n        </footer>\r\n    </div>\r\n\r\n");
+WriteLiteral(" - Dilemma</p>\r\n        </footer>\r\n    </div>\r\n\r\n");
 
 WriteLiteral("    ");
 

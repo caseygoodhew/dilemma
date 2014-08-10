@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Data.Models;
+using Dilemma.Data.Repositories;
+
+using Disposable.Common.Conversion;
 
 namespace Dilemma.Web.Controllers
 {
@@ -24,6 +28,11 @@ namespace Dilemma.Web.Controllers
             return View();
         }*/
 
+        public ActionResult List()
+        {
+            return View(new QuestionRepository().List().Select(ConverterFactory.Convert<Question, QuestionViewModel>));
+        }
+
         //
         // GET: /Question/Create
         public ActionResult Create()
@@ -36,6 +45,11 @@ namespace Dilemma.Web.Controllers
         [HttpPost]
         public ActionResult Create(QuestionViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                var question = ConverterFactory.Convert<QuestionViewModel, Question>(model);
+                new QuestionRepository().Create(question);
+            }
             return View(model);
         }
     }

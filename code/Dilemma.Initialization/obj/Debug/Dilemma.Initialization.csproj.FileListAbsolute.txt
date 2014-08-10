@@ -50,3 +50,7 @@ C:\git\dilemma\code\Dilemma.Initialization\bin\Debug\tr\FluentValidation.resourc
 C:\git\dilemma\code\Dilemma.Initialization\obj\Debug\Dilemma.Initialization.csprojResolveAssemblyReference.cache
 C:\git\dilemma\code\Dilemma.Initialization\obj\Debug\Dilemma.Initialization.dll
 C:\git\dilemma\code\Dilemma.Initialization\obj\Debug\Dilemma.Initialization.pdb
+C:\git\dilemma\code\Dilemma.Initialization\bin\Debug\EntityFramework.dll
+C:\git\dilemma\code\Dilemma.Initialization\bin\Debug\EntityFramework.xml
+C:\git\dilemma\code\Dilemma.Initialization\bin\Debug\EntityFramework.SqlServer.dll
+C:\git\dilemma\code\Dilemma.Initialization\bin\Debug\EntityFramework.SqlServer.xml

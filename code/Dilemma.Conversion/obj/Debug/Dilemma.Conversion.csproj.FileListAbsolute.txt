@@ -24,3 +24,7 @@ C:\git\dilemma\code\Dilemma.Conversion\bin\Debug\tr\FluentValidation.resources.d
 C:\git\dilemma\code\Dilemma.Conversion\obj\Debug\Dilemma.Conversion.csprojResolveAssemblyReference.cache
 C:\git\dilemma\code\Dilemma.Conversion\obj\Debug\Dilemma.Conversion.dll
 C:\git\dilemma\code\Dilemma.Conversion\obj\Debug\Dilemma.Conversion.pdb
+C:\git\dilemma\code\Dilemma.Conversion\bin\Debug\EntityFramework.dll
+C:\git\dilemma\code\Dilemma.Conversion\bin\Debug\EntityFramework.xml
+C:\git\dilemma\code\Dilemma.Conversion\bin\Debug\EntityFramework.SqlServer.dll
+C:\git\dilemma\code\Dilemma.Conversion\bin\Debug\EntityFramework.SqlServer.xml

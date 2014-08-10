@@ -7,7 +7,7 @@ namespace Dilemma.Conversion
     {
         public static QuestionViewModel ToQuestionViewModel(Question question)
         {
-            return new QuestionViewModel { Text = question.Text + "->QuestionViewModel" };
+            return new QuestionViewModel { Text = question.Text };
         }
     }
 }

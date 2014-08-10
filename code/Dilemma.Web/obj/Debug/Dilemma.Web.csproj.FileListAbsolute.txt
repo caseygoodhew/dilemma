@@ -75,7 +75,6 @@ C:\git\dilemma\code\Dilemma.Web\bin\Dilemma.Initialization.dll
 C:\git\dilemma\code\Dilemma.Web\bin\Disposable.Common.dll
 C:\git\dilemma\code\Dilemma.Web\bin\Disposable.Web.TwitterBootstrap3.MVC5.dll
 C:\git\dilemma\code\Dilemma.Web\bin\EntityFramework.dll
-C:\git\dilemma\code\Dilemma.Web\bin\EntityFramework.SqlServer.dll
 C:\git\dilemma\code\Dilemma.Web\bin\FluentValidation.dll
 C:\git\dilemma\code\Dilemma.Web\bin\FluentValidation.Mvc.dll
 C:\git\dilemma\code\Dilemma.Web\bin\Microsoft.AspNet.Identity.Core.dll
@@ -108,7 +107,6 @@ C:\git\dilemma\code\Dilemma.Web\bin\Dilemma.Initialization.pdb
 C:\git\dilemma\code\Dilemma.Web\bin\Dilemma.Business.pdb
 C:\git\dilemma\code\Dilemma.Web\bin\Antlr3.Runtime.pdb
 C:\git\dilemma\code\Dilemma.Web\bin\EntityFramework.xml
-C:\git\dilemma\code\Dilemma.Web\bin\EntityFramework.SqlServer.xml
 C:\git\dilemma\code\Dilemma.Web\bin\FluentValidation.pdb
 C:\git\dilemma\code\Dilemma.Web\bin\FluentValidation.xml
 C:\git\dilemma\code\Dilemma.Web\bin\FluentValidation.Mvc.pdb
@@ -146,3 +144,5 @@ C:\git\dilemma\code\Dilemma.Web\bin\tr\FluentValidation.resources.dll
 C:\git\dilemma\code\Dilemma.Web\obj\Debug\Dilemma.Web.csprojResolveAssemblyReference.cache
 C:\git\dilemma\code\Dilemma.Web\obj\Debug\Dilemma.Web.dll
 C:\git\dilemma\code\Dilemma.Web\obj\Debug\Dilemma.Web.pdb
+C:\git\dilemma\code\Dilemma.Web\bin\EntityFramework.SqlServer.dll
+C:\git\dilemma\code\Dilemma.Web\bin\EntityFramework.SqlServer.xml
