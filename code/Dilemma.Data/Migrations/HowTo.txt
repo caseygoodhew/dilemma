@@ -1,0 +1,6 @@
+﻿The model backing the 'DilemmaContext' context has changed since the database was created. Consider using Code First Migrations to update the database (http://go.microsoft.com/fwlink/?LinkId=238269).
+
+From the package manager console:
+
+Add-Migration -ProjectName Dilemma.Data -Name Migration
+Update-Database -ProjectName Dilemma.Data -Verbose

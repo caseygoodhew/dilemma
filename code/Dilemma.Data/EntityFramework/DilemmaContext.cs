@@ -7,12 +7,10 @@ namespace Dilemma.Data.EntityFramework
 {
     public class DilemmaContext : DbContext
     {
-        public DilemmaContext() : base("DilemmaContext")
-        {
-        }
-
+        public DilemmaContext() : base("DilemmaContext") {}
+        
         public DbSet<Question> Questions { get; set; }
-
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

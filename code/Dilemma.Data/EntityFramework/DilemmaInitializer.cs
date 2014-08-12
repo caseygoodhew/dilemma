@@ -10,6 +10,7 @@ namespace Dilemma.Data.EntityFramework
     {
         protected override void Seed(DilemmaContext context)
         {
+           
             // nothing for now
         }
     }
