@@ -4,16 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
-using Dilemma.Data.Models;
-using Dilemma.Data.Repositories;
 
 using Disposable.Common.Conversion;
+using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
     public class QuestionController : Controller
     {
+        private static readonly Lazy<IQuestionService> QuestionService = new Lazy<IQuestionService>(Locator.Current.Instance<IQuestionService>);
+        
         //
         // GET: /Question/
         /*public ActionResult Index()
@@ -30,7 +32,7 @@ namespace Dilemma.Web.Controllers
 
         public ActionResult List()
         {
-            return View(new QuestionRepository().List().Select(ConverterFactory.Convert<Question, QuestionViewModel>));
+            return View(QuestionService.Value.GetAll());
         }
 
         //
@@ -47,8 +49,7 @@ namespace Dilemma.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var question = ConverterFactory.Convert<QuestionViewModel, Question>(model);
-                new QuestionRepository().Create(question);
+                QuestionService.Value.SaveNew(model);
             }
             return View(model);
         }

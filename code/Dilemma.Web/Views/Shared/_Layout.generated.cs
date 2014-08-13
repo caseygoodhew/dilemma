@@ -30,6 +30,7 @@ namespace Dilemma.Web.Views.Shared
     using Dilemma.Web;
     using Disposable.Web.TwitterBootstrap3.MVC5;
     using TwitterBootstrap3;
+    using TwitterBootstrapMVC;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/_Layout.cshtml")]
@@ -138,7 +139,25 @@ WriteLiteral(">\r\n                    <li>");
 
             
             #line 24 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("Question list", "List", "Question"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n                    <li>");
+
+            
+            #line 25 "..\..\Views\Shared\_Layout.cshtml"
                    Write(Html.ActionLink("Ask a question", "Create", "Question"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n                    <li>");
+
+            
+            #line 26 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("System configuration", "Index", "SystemConfiguration"));
 
             
             #line default
@@ -153,7 +172,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 30 "..\..\Views\Shared\_Layout.cshtml"
+            #line 32 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -162,7 +181,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; ");
 
             
-            #line 33 "..\..\Views\Shared\_Layout.cshtml"
+            #line 35 "..\..\Views\Shared\_Layout.cshtml"
                  Write(DateTime.Now.Year);
 
             
@@ -173,7 +192,7 @@ WriteLiteral(" - Dilemma</p>\r\n        </footer>\r\n    </div>\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 37 "..\..\Views\Shared\_Layout.cshtml"
+            #line 39 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -184,7 +203,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 38 "..\..\Views\Shared\_Layout.cshtml"
+            #line 40 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -195,7 +214,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 39 "..\..\Views\Shared\_Layout.cshtml"
+            #line 41 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

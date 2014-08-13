@@ -1,11 +1,6 @@
 ﻿using System;
 
-using Dilemma.Business;
-
 using Disposable.Common.ServiceLocator;
-using Disposable.Common.Services;
-
-using Microsoft.VisualBasic;
 
 namespace Dilemma.Initialization
 {
@@ -26,8 +21,8 @@ namespace Dilemma.Initialization
             }
 
             locator.Initialize(
-                Registration.Register,
-                Conversion.Registration.Register,
+                Business.Registration.Register,
+                Data.Registration.Register,
                 Disposable.Common.Registration.Register
             );
         }

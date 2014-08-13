@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+
+using Dilemma.Data.Models;
 
 namespace Dilemma.Data.EntityFramework
 {
     public class DilemmaInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<DilemmaContext>
     {
+        public static void Seeder(DilemmaContext context)
+        {
+            new DilemmaInitializer().Seed(context);
+        }
+        
         protected override void Seed(DilemmaContext context)
         {
-           
-            // nothing for now
+            if (!context.SystemConfiguration.Any())
+            {
+                context.SystemConfiguration.Add(new SystemConfiguration
+                                                    {
+                                                        MaxAnswers = 10
+                                                    });
+            }
         }
     }
 }

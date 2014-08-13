@@ -1,0 +1,18 @@
+﻿@model Dilemma.Business.ViewModels.SystemConfigurationViewModel
+
+@{
+    ViewBag.Title = "System Configuration";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (var f = Html.Bootstrap().Begin(new Form("Index", "SystemConfiguration").Type(FormType.Horizontal)))
+{
+    @f.FormGroup().TextBoxFor(x => x.MaxAnswers).WidthMd(3).WidthSm(4)
+    @f.FormGroup().CustomControls(Html.Bootstrap().SubmitButton())
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

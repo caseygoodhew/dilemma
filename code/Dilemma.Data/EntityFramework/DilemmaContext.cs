@@ -10,6 +10,8 @@ namespace Dilemma.Data.EntityFramework
         public DilemmaContext() : base("DilemmaContext") {}
         
         public DbSet<Question> Questions { get; set; }
+
+        public DbSet<SystemConfiguration> SystemConfiguration { get; set; }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
