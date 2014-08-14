@@ -15,8 +15,6 @@ namespace Dilemma.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            TwitterBootstrapMVC.Bootstrap.Configure();
-
             DilemmaCore.Initialize();
             Registration.Register(null);
         }

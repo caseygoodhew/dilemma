@@ -66,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dilemma.Common\Dilemma.Common.csproj">
+      <Project>{9554F188-2EA1-4AF5-9C8E-20260652A74C}</Project>
+      <Name>Dilemma.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dilemma.Data\Dilemma.Data.csproj">
       <Project>{81E63148-C585-4AD5-88BC-6AB47B6B0B89}</Project>
       <Name>Dilemma.Data</Name>

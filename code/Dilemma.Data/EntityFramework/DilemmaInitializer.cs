@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 
+using Dilemma.Common;
 using Dilemma.Data.Models;
 
 namespace Dilemma.Data.EntityFramework
@@ -17,7 +18,8 @@ namespace Dilemma.Data.EntityFramework
             {
                 context.SystemConfiguration.Add(new SystemConfiguration
                                                     {
-                                                        MaxAnswers = 10
+                                                        MaxAnswers = 10,
+                                                        QuestionLifetime = QuestionLifetime.OneDay
                                                     });
             }
         }

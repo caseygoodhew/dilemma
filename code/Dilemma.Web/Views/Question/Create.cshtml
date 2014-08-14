@@ -1,15 +1,27 @@
-﻿@using TwitterBootstrapMVC
-@model Dilemma.Business.ViewModels.QuestionViewModel
+﻿@model Dilemma.Business.ViewModels.QuestionViewModel
 @{
     ViewBag.Title = "Ask a question";
 }
 
 <h2>@ViewBag.Title</h2>
 
-@using (var f = Html.Bootstrap().Begin(new Form("Create", "Question")))
+@using (Html.BeginForm("Create", "Question", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @f.FormGroup().TextAreaFor(m => m.Text).Rows(10).NoLabel();
-    @f.FormGroup().CustomControls(Html.Bootstrap().SubmitButton())
+    @Html.AntiForgeryToken()
+    
+    <div class="form-group">
+        @Html.LabelFor(x => x.Text, new { @class = "sr-only" })
+        <div class="col-md-12">
+            @Html.TextAreaFor(x => x.Text, new { @class = "form-control", rows="10"})
+            @Html.ValidationMessageFor(x => x.Text)
+        </div>
+    </div>
+        
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </div>
 }
 
 @section Scripts {

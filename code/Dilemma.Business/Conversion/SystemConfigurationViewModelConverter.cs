@@ -9,7 +9,8 @@ namespace Dilemma.Business.Conversion
         {
             return new SystemConfiguration
                        {
-                           MaxAnswers = viewModel.MaxAnswers
+                           MaxAnswers = viewModel.MaxAnswers,
+                           QuestionLifetime = viewModel.QuestionLifetime
                        };
         }
 
@@ -17,7 +18,8 @@ namespace Dilemma.Business.Conversion
         {
             return new SystemConfigurationViewModel
                        {
-                           MaxAnswers = model.MaxAnswers
+                           MaxAnswers = model.MaxAnswers,
+                           QuestionLifetime = model.QuestionLifetime
                        };
         }
     }

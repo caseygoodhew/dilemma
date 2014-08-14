@@ -6,6 +6,8 @@ using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 
+using Dilemma.Common;
+
 namespace Dilemma.Data.Models
 {
     public class SystemConfiguration
@@ -19,5 +21,7 @@ namespace Dilemma.Data.Models
         }
 
         public int MaxAnswers { get; set; }
+
+        public QuestionLifetime QuestionLifetime { get; set; }
     }
 }

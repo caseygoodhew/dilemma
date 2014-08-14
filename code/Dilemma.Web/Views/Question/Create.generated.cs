@@ -27,15 +27,8 @@ namespace Dilemma.Web.Views.Question
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Dilemma.Common;
     using Dilemma.Web;
-    using Disposable.Web.TwitterBootstrap3.MVC5;
-    using TwitterBootstrap3;
-    
-    #line 1 "..\..\Views\Question\Create.cshtml"
-    using TwitterBootstrapMVC;
-    
-    #line default
-    #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Question/Create.cshtml")]
@@ -47,7 +40,7 @@ namespace Dilemma.Web.Views.Question
         public override void Execute()
         {
             
-            #line 3 "..\..\Views\Question\Create.cshtml"
+            #line 2 "..\..\Views\Question\Create.cshtml"
   
     ViewBag.Title = "Ask a question";
 
@@ -57,7 +50,7 @@ namespace Dilemma.Web.Views.Question
 WriteLiteral("\r\n\r\n<h2>");
 
             
-            #line 7 "..\..\Views\Question\Create.cshtml"
+            #line 6 "..\..\Views\Question\Create.cshtml"
 Write(ViewBag.Title);
 
             
@@ -66,37 +59,98 @@ Write(ViewBag.Title);
 WriteLiteral("</h2>\r\n\r\n");
 
             
-            #line 9 "..\..\Views\Question\Create.cshtml"
- using (var f = Html.Bootstrap().Begin(new Form("Create", "Question")))
+            #line 8 "..\..\Views\Question\Create.cshtml"
+ using (Html.BeginForm("Create", "Question", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\Question\Create.cshtml"
-Write(f.FormGroup().TextAreaFor(m => m.Text).Rows(10).NoLabel());
+            #line 10 "..\..\Views\Question\Create.cshtml"
+Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\Question\Create.cshtml"
-                                                              ;
+            #line 10 "..\..\Views\Question\Create.cshtml"
+                            
     
-            
-            #line default
-            #line hidden
-            
-            #line 12 "..\..\Views\Question\Create.cshtml"
-Write(f.FormGroup().CustomControls(Html.Bootstrap().SubmitButton()));
 
             
             #line default
             #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
+
             
-            #line 12 "..\..\Views\Question\Create.cshtml"
-                                                                  
+            #line 13 "..\..\Views\Question\Create.cshtml"
+   Write(Html.LabelFor(x => x.Text, new { @class = "sr-only" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        <div");
+
+WriteLiteral(" class=\"col-md-12\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 15 "..\..\Views\Question\Create.cshtml"
+       Write(Html.TextAreaFor(x => x.Text, new { @class = "form-control", rows="10"}));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 16 "..\..\Views\Question\Create.cshtml"
+       Write(Html.ValidationMessageFor(x => x.Text));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 19 "..\..\Views\Question\Create.cshtml"
+        
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"col-md-12\"");
+
+WriteLiteral(">\r\n            <input");
+
+WriteLiteral(" type=\"submit\"");
+
+WriteLiteral(" class=\"btn btn-default\"");
+
+WriteLiteral(" value=\"Submit\"");
+
+WriteLiteral(" />\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 25 "..\..\Views\Question\Create.cshtml"
 }
 
             
@@ -111,7 +165,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 16 "..\..\Views\Question\Create.cshtml"
+            #line 28 "..\..\Views\Question\Create.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             
