@@ -15,6 +15,8 @@ namespace Dilemma.Web.Controllers
     public class QuestionController : Controller
     {
         private static readonly Lazy<IQuestionService> QuestionService = new Lazy<IQuestionService>(Locator.Current.Instance<IQuestionService>);
+
+        private static readonly Lazy<ISiteService> SiteService = new Lazy<ISiteService>(Locator.Current.Instance<ISiteService>);
         
         //
         // GET: /Question/
@@ -39,18 +41,22 @@ namespace Dilemma.Web.Controllers
         // GET: /Question/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new CreateQuestionViewModel { Categories = SiteService.Value.GetCategories() };
+            return View(model);
         }
 
         //
         // POST: /Question/Create
         [HttpPost]
-        public ActionResult Create(QuestionViewModel model)
+        public ActionResult Create(CreateQuestionViewModel model)
         {
             if (ModelState.IsValid)
             {
                 QuestionService.Value.SaveNew(model);
             }
+
+            model.Categories = SiteService.Value.GetCategories();
+
             return View(model);
         }
     }

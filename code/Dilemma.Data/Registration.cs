@@ -12,6 +12,13 @@ namespace Dilemma.Data
         {
             registrar.Register<IAdministrationRepository>(() => new AdministrationRepository());
             registrar.Register<IQuestionRepository>(() => new QuestionRepository());
+            registrar.Register<ISiteRepository>(() => new SiteRepository());
+
+            ConverterFactory.Register<Question>(registrar);
+            ConverterFactory.Register<Category>(registrar);
+            ConverterFactory.Register<SystemConfiguration>(registrar);
+
+            EntityFramework.DilemmaContext.Startup();
         }
     }
 }

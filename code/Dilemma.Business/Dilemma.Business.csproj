@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dilemma.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dilemma.Web\Bin\Dilemma.Business.dll</HintPath>
+    </Reference>
     <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Disposable.Common.1.0.3\lib\net45\Disposable.Common.dll</HintPath>
@@ -48,13 +52,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\SystemConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\QuestionViewModelConverter.cs" />
     <Compile Include="Services\AdministrationService.cs" />
+    <Compile Include="Services\SiteService.cs" />
+    <Compile Include="Services\ISiteService.cs" />
     <Compile Include="Services\IAdministrationService.cs" />
     <Compile Include="Services\IQuestionService.cs" />
     <Compile Include="Services\QuestionService.cs" />
+    <Compile Include="Validators\DerivativeValidator.cs" />
     <Compile Include="Validators\SystemConfigurationViewModelValidator.cs" />
+    <Compile Include="Validators\TrimmedLengthValidator.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CreateQuestionViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.cs" />

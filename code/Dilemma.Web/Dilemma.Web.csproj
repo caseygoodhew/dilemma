@@ -175,6 +175,7 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\SystemConfigurationController.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Startup.cs" />

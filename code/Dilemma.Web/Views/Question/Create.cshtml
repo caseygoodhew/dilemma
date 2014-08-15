@@ -1,4 +1,4 @@
-﻿@model Dilemma.Business.ViewModels.QuestionViewModel
+﻿@model Dilemma.Business.ViewModels.CreateQuestionViewModel
 @{
     ViewBag.Title = "Ask a question";
 }
@@ -10,13 +10,21 @@
     @Html.AntiForgeryToken()
     
     <div class="form-group">
-        @Html.LabelFor(x => x.Text, new { @class = "sr-only" })
-        <div class="col-md-12">
+        @Html.LabelFor(x => x.Text, new { @class = "col-md-2 col-sm-3 control-label" })
+        <div class="col-md-10 col-sm-9">
             @Html.TextAreaFor(x => x.Text, new { @class = "form-control", rows="10"})
             @Html.ValidationMessageFor(x => x.Text)
         </div>
     </div>
-        
+    
+    <div class="form-group">
+        @Html.LabelFor(x => x.CategoryId, new { @class = "col-md-2 col-sm-3 control-label" })
+        <div class="col-md-3 col-sm-4">
+            @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), string.Empty, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.CategoryId)
+        </div>
+    </div>
+    
     <div class="form-group">
         <div class="col-md-12">
             <input type="submit" class="btn btn-default" value="Submit" />

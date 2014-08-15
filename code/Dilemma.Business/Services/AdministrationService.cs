@@ -7,7 +7,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Business.Services
 {
-    class AdministrationService : IAdministrationService
+    internal class AdministrationService : IAdministrationService
     {
         private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
             new Lazy<IAdministrationRepository>(Locator.Current.Instance<IAdministrationRepository>);

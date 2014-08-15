@@ -13,12 +13,12 @@ namespace Dilemma.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201408130607186_Migration"; }
+            get { return "201408151541183_Migration"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

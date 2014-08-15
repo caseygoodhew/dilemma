@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 using Dilemma.Common;
+using Dilemma.Data.EntityFramework.Initialization;
 using Dilemma.Data.Models;
 
 namespace Dilemma.Data.EntityFramework
@@ -14,14 +16,8 @@ namespace Dilemma.Data.EntityFramework
         
         protected override void Seed(DilemmaContext context)
         {
-            if (!context.SystemConfiguration.Any())
-            {
-                context.SystemConfiguration.Add(new SystemConfiguration
-                                                    {
-                                                        MaxAnswers = 10,
-                                                        QuestionLifetime = QuestionLifetime.OneDay
-                                                    });
-            }
+            SystemConfigurationInitialization.Seed(context);
+            CategoryInitialization.Seed(context);
         }
     }
 }

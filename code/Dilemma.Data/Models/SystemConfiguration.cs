@@ -12,7 +12,6 @@ namespace Dilemma.Data.Models
 {
     public class SystemConfiguration
     {
-        [Key]
         public int Id 
         { 
             get { return 1; }

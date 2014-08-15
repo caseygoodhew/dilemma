@@ -32,7 +32,7 @@ namespace Dilemma.Web.Views.Question
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Question/Create.cshtml")]
-    public partial class Create : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.QuestionViewModel>
+    public partial class Create : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.CreateQuestionViewModel>
     {
         public Create()
         {
@@ -91,14 +91,14 @@ WriteLiteral("        ");
 
             
             #line 13 "..\..\Views\Question\Create.cshtml"
-   Write(Html.LabelFor(x => x.Text, new { @class = "sr-only" }));
+   Write(Html.LabelFor(x => x.Text, new { @class = "col-md-2 col-sm-3 control-label" }));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n        <div");
 
-WriteLiteral(" class=\"col-md-12\"");
+WriteLiteral(" class=\"col-md-10 col-sm-9\"");
 
 WriteLiteral(">\r\n");
 
@@ -126,7 +126,57 @@ WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 19 "..\..\Views\Question\Create.cshtml"
-        
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
+
+            
+            #line 21 "..\..\Views\Question\Create.cshtml"
+   Write(Html.LabelFor(x => x.CategoryId, new { @class = "col-md-2 col-sm-3 control-label" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        <div");
+
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 23 "..\..\Views\Question\Create.cshtml"
+       Write(Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), string.Empty, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 24 "..\..\Views\Question\Create.cshtml"
+       Write(Html.ValidationMessageFor(x => x.CategoryId));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 27 "..\..\Views\Question\Create.cshtml"
+    
 
             
             #line default
@@ -150,7 +200,7 @@ WriteLiteral(" value=\"Submit\"");
 WriteLiteral(" />\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 25 "..\..\Views\Question\Create.cshtml"
+            #line 33 "..\..\Views\Question\Create.cshtml"
 }
 
             
@@ -165,7 +215,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 28 "..\..\Views\Question\Create.cshtml"
+            #line 36 "..\..\Views\Question\Create.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             

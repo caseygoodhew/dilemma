@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +10,8 @@ using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 
 using Disposable.Common.Conversion;
+
+
 
 namespace Dilemma.Data.Repositories
 {
@@ -18,6 +22,7 @@ namespace Dilemma.Data.Repositories
             var question = ConverterFactory.ConvertOne<T, Question>(questionType);
             
             var context = new DilemmaContext();
+            context.Categories.Attach(question.Category);
             context.Questions.Add(question);
             context.SaveChanges();
         }
@@ -25,7 +30,7 @@ namespace Dilemma.Data.Repositories
         public IEnumerable<T> List<T>() where T : class
         {
             var context = new DilemmaContext();
-            return ConverterFactory.ConvertMany<Question, T>(context.Questions);
+            return ConverterFactory.ConvertMany<Question, T>(context.Questions.Include(x => x.Category));
         }
     }
 }

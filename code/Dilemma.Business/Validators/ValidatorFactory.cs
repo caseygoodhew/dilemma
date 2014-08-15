@@ -10,13 +10,7 @@ namespace Dilemma.Business.Validators
     {
         public override IValidator CreateInstance(Type validatorType)
         {
-            object validator;
-            if (Locator.Current.TryGetInstance(validatorType, out validator))
-            {
-                return validator as IValidator;
-            }
-
-            return null;
+            return Locator.Current.Instance(validatorType) as IValidator;
         }
     }
 }

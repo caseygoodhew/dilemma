@@ -1,7 +1,6 @@
 ﻿using Dilemma.Business.ViewModels;
 
 using FluentValidation;
-using FluentValidation.Results;
 
 namespace Dilemma.Business.Validators
 {
@@ -9,8 +8,8 @@ namespace Dilemma.Business.Validators
     {
         public QuestionViewModelValidator()
         {
-            //RuleFor(x => x.Text).NotEmpty().Must(x => x.Length > 2).WithMessage("This is a test message for '{PropertyName}'.");
-            RuleFor(x => x.Text).NotEmpty();
+            RuleFor(x => x.Text).TrimmedLength(50, 500);
+            RuleFor(x => x.CategoryId).NotEmpty();
         }
     }
 }

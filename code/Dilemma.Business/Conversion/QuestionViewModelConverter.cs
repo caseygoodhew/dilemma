@@ -3,6 +3,7 @@
 using Dilemma.Business.ViewModels;
 using Dilemma.Data.Models;
 
+using Disposable.Common;
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
 
@@ -14,20 +15,26 @@ namespace Dilemma.Business.Conversion
         
         public static Question ToQuestion(QuestionViewModel viewModel)
         {
+            Guard.ArgumentNotNull(viewModel.CategoryId, "QuestionViewModel.CategoryId");
+            
             return new Question
                        {
-                           Text = viewModel.Text,
-                           CreatedDateTime = viewModel.CreatedDateTime ?? TimeSource.Value.Now
+                           Text = viewModel.Text.Trim(),
+                           CreatedDateTime = viewModel.CreatedDateTime ?? TimeSource.Value.Now,
+                           Category = new Category { CategoryId = viewModel.CategoryId.Value }
                        };
         }
 
         public static QuestionViewModel FromQuestion(Question model)
         {
             return new QuestionViewModel
-                       {
-                           Text = model.Text,
-                           CreatedDateTime = model.CreatedDateTime
-                       };
+                {
+                    QuestionId = model.QuestionId,
+                    Text = model.Text,
+                    CreatedDateTime = model.CreatedDateTime,
+                    CategoryId = model.Category.CategoryId,
+                    CategoryName = model.Category.Name
+                };
         }
     }
 }
