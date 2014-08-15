@@ -27,6 +27,7 @@ namespace Dilemma.Web.Views.Shared
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Dilemma.Common;
     using Dilemma.Web;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -159,8 +160,20 @@ WriteLiteral("</li>\r\n                    <li>");
             
             #line default
             #line hidden
-WriteLiteral("</li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n   " +
-" <div");
+WriteLiteral("</li>\r\n                </ul>\r\n                <ul");
+
+WriteLiteral(" class=\"nav navbar-nav navbar-right\"");
+
+WriteLiteral(">\r\n                    <li");
+
+WriteLiteral(" class=\"\"");
+
+WriteLiteral("><a");
+
+WriteLiteral(" href=\"/glimpse.axd\"");
+
+WriteLiteral(">Glimpse</a></li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n   " +
+" </div>\r\n    <div");
 
 WriteLiteral(" class=\"container body-content\"");
 
@@ -169,7 +182,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 32 "..\..\Views\Shared\_Layout.cshtml"
+            #line 35 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -178,7 +191,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; ");
 
             
-            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+            #line 38 "..\..\Views\Shared\_Layout.cshtml"
                  Write(DateTime.Now.Year);
 
             
@@ -189,7 +202,7 @@ WriteLiteral(" - Dilemma</p>\r\n        </footer>\r\n    </div>\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 39 "..\..\Views\Shared\_Layout.cshtml"
+            #line 42 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -200,7 +213,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 40 "..\..\Views\Shared\_Layout.cshtml"
+            #line 43 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -211,7 +224,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 41 "..\..\Views\Shared\_Layout.cshtml"
+            #line 44 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             
