@@ -16,22 +16,6 @@ namespace Dilemma.Web.Controllers
     {
         private static readonly Lazy<IQuestionService> QuestionService = new Lazy<IQuestionService>(Locator.Current.Instance<IQuestionService>);
 
-        private static readonly Lazy<ISiteService> SiteService = new Lazy<ISiteService>(Locator.Current.Instance<ISiteService>);
-        
-        //
-        // GET: /Question/
-        /*public ActionResult Index()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Question/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }*/
-
         public ActionResult List()
         {
             return View(QuestionService.Value.GetAll());
@@ -41,7 +25,7 @@ namespace Dilemma.Web.Controllers
         // GET: /Question/Create
         public ActionResult Create()
         {
-            var model = new CreateQuestionViewModel { Categories = SiteService.Value.GetCategories() };
+            var model = QuestionService.Value.InitNew();
             return View(model);
         }
 
@@ -53,10 +37,11 @@ namespace Dilemma.Web.Controllers
             if (ModelState.IsValid)
             {
                 QuestionService.Value.SaveNew(model);
+                return RedirectToAction("List");
             }
 
-            model.Categories = SiteService.Value.GetCategories();
-
+            QuestionService.Value.InitNew(model);
+            
             return View(model);
         }
     }

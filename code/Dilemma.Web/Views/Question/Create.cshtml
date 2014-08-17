@@ -25,6 +25,25 @@
         </div>
     </div>
     
+    if (Model.ShowTestingOptions)
+    {
+        <div class="form-group">
+            @Html.LabelFor(x => x.MaxAnswers, new { @class = "col-md-2 col-sm-3 control-label" })
+            <div class="col-md-3 col-sm-4">
+                @Html.TextBoxFor(x => x.MaxAnswers, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.MaxAnswers)
+            </div>
+        </div>
+    
+        <div class="form-group">
+            @Html.LabelFor(x => x.QuestionLifetime, new { @class = "col-md-2 col-sm-3 control-label" })
+            <div class="col-md-3 col-sm-4">
+                @Html.EnumDropDownListFor(x => x.QuestionLifetime, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.QuestionLifetime)
+            </div>
+        </div>
+    }
+    
     <div class="form-group">
         <div class="col-md-12">
             <input type="submit" class="btn btn-default" value="Submit" />

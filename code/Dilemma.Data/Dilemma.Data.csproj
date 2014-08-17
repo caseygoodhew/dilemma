@@ -32,8 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Disposable.Common">
-      <HintPath>..\packages\Disposable.Common.1.0.3\lib\net45\Disposable.Common.dll</HintPath>
+    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Disposable.Common.1.0.5\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -63,6 +64,10 @@
     <Compile Include="Migrations\201408151541183_Migration.cs" />
     <Compile Include="Migrations\201408151541183_Migration.Designer.cs">
       <DependentUpon>201408151541183_Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408170841035_Migration1.cs" />
+    <Compile Include="Migrations\201408170841035_Migration1.Designer.cs">
+      <DependentUpon>201408170841035_Migration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -95,6 +100,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408151541183_Migration.resx">
       <DependentUpon>201408151541183_Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408170841035_Migration1.resx">
+      <DependentUpon>201408170841035_Migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -177,6 +177,109 @@ WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
             
             #line 27 "..\..\Views\Question\Create.cshtml"
     
+    if (Model.ShowTestingOptions)
+    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 31 "..\..\Views\Question\Create.cshtml"
+       Write(Html.LabelFor(x => x.MaxAnswers, new { @class = "col-md-2 col-sm-3 control-label" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            <div");
+
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 33 "..\..\Views\Question\Create.cshtml"
+           Write(Html.TextBoxFor(x => x.MaxAnswers, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 34 "..\..\Views\Question\Create.cshtml"
+           Write(Html.ValidationMessageFor(x => x.MaxAnswers));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
+
+            
+            #line 37 "..\..\Views\Question\Create.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 39 "..\..\Views\Question\Create.cshtml"
+       Write(Html.LabelFor(x => x.QuestionLifetime, new { @class = "col-md-2 col-sm-3 control-label" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            <div");
+
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 41 "..\..\Views\Question\Create.cshtml"
+           Write(Html.EnumDropDownListFor(x => x.QuestionLifetime, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 42 "..\..\Views\Question\Create.cshtml"
+           Write(Html.ValidationMessageFor(x => x.QuestionLifetime));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
+
+            
+            #line 45 "..\..\Views\Question\Create.cshtml"
+    }
+    
 
             
             #line default
@@ -200,7 +303,7 @@ WriteLiteral(" value=\"Submit\"");
 WriteLiteral(" />\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 33 "..\..\Views\Question\Create.cshtml"
+            #line 52 "..\..\Views\Question\Create.cshtml"
 }
 
             
@@ -215,7 +318,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 36 "..\..\Views\Question\Create.cshtml"
+            #line 55 "..\..\Views\Question\Create.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             

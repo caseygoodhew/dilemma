@@ -10,6 +10,7 @@ namespace Dilemma.Data.EntityFramework.Maps
         {
             HasKey(p => p.QuestionId);
             Property(p => p.Text).IsRequired().HasMaxLength(2000);
+            Property(p => p.MaxAnswers).IsRequired();
             HasRequired(x => x.Category).WithMany().WillCascadeOnDelete(false);
         }
     }

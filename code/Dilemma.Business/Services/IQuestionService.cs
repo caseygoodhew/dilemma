@@ -10,7 +10,9 @@ namespace Dilemma.Business.Services
 {
     public interface IQuestionService
     {
-        void SaveNew(QuestionViewModel questionViewModel);
+        CreateQuestionViewModel InitNew(CreateQuestionViewModel questionViewModel = null);
+        
+        void SaveNew(CreateQuestionViewModel questionViewModel);
 
         IEnumerable<QuestionViewModel> GetAll();
     }

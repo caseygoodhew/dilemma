@@ -20,7 +20,8 @@ namespace Dilemma.Business
             registrar.Register<ISiteService>(() => new SiteService());
             
             registrar.Register<IValidator<CreateQuestionViewModel>>(() => new DerivativeValidator<CreateQuestionViewModel, QuestionViewModel>());
-            
+            ConverterFactory.Register<CreateQuestionViewModel, Question>(registrar, QuestionViewModelConverter.ToQuestion);
+
             registrar.Register<IValidator<QuestionViewModel>>(() => new QuestionViewModelValidator());
             ConverterFactory.Register<QuestionViewModel, Question>(registrar, QuestionViewModelConverter.ToQuestion);
             ConverterFactory.Register<Question, QuestionViewModel>(registrar, QuestionViewModelConverter.FromQuestion);

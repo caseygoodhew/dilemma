@@ -11,6 +11,10 @@ namespace Dilemma.Data.Models
 
         public DateTime CreatedDateTime { get; set; }
 
+        public DateTime ClosesDateTime { get; set; }
+
         public Category Category { get; set; }
+
+        public int MaxAnswers { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             HasKey(p => p.Id);
             Property(p => p.MaxAnswers).IsRequired();
             Property(p => p.QuestionLifetime).IsRequired();
+            Property(p => p.SystemEnvironment).IsRequired();
         }
     }
 }

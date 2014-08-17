@@ -18,7 +18,8 @@ namespace Dilemma.Data.EntityFramework.Initialization
                 context.SystemConfiguration.Add(new SystemConfiguration
                 {
                     MaxAnswers = 10,
-                    QuestionLifetime = QuestionLifetime.OneDay
+                    QuestionLifetime = QuestionLifetime.OneDay,
+                    SystemEnvironment = SystemEnvironment.Development
                 });
             }
         }

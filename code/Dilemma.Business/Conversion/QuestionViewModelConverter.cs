@@ -5,14 +5,12 @@ using Dilemma.Data.Models;
 
 using Disposable.Common;
 using Disposable.Common.ServiceLocator;
-using Disposable.Common.Services;
+using Disposable.Common.Extensions;
 
 namespace Dilemma.Business.Conversion
 {
     public static class QuestionViewModelConverter
     {
-        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
-        
         public static Question ToQuestion(QuestionViewModel viewModel)
         {
             Guard.ArgumentNotNull(viewModel.CategoryId, "QuestionViewModel.CategoryId");
@@ -20,8 +18,10 @@ namespace Dilemma.Business.Conversion
             return new Question
                        {
                            Text = viewModel.Text.Trim(),
-                           CreatedDateTime = viewModel.CreatedDateTime ?? TimeSource.Value.Now,
-                           Category = new Category { CategoryId = viewModel.CategoryId.Value }
+                           CreatedDateTime = viewModel.CreatedDateTime.GuardedValue("CreatedDateTime"),
+                           ClosesDateTime = viewModel.ClosesDateTime.GuardedValue("ClosesDateTime"),
+                           Category = new Category { CategoryId = viewModel.CategoryId.GuardedValue("CategoryId") },
+                           MaxAnswers = viewModel.MaxAnswers.GuardedValue("MaxAnswers")
                        };
         }
 
@@ -32,8 +32,10 @@ namespace Dilemma.Business.Conversion
                     QuestionId = model.QuestionId,
                     Text = model.Text,
                     CreatedDateTime = model.CreatedDateTime,
+                    ClosesDateTime = model.ClosesDateTime,
                     CategoryId = model.Category.CategoryId,
-                    CategoryName = model.Category.Name
+                    CategoryName = model.Category.Name,
+                    MaxAnswers = model.MaxAnswers
                 };
         }
     }

@@ -7,5 +7,7 @@ namespace Dilemma.Business.ViewModels
         public int MaxAnswers { get; set; }
 
         public QuestionLifetime QuestionLifetime { get; set; }
+
+        public SystemEnvironment SystemEnvironment { get; set; }
     }
 }

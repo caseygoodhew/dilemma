@@ -22,5 +22,7 @@ namespace Dilemma.Data.Models
         public int MaxAnswers { get; set; }
 
         public QuestionLifetime QuestionLifetime { get; set; }
+
+        public SystemEnvironment SystemEnvironment { get; set; }
     }
 }
