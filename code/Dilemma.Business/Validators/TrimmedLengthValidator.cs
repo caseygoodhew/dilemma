@@ -18,7 +18,7 @@ namespace Dilemma.Business.Validators
 
         protected override bool IsValid(PropertyValidatorContext context)
         {
-            context.PropertyValue = context.PropertyValue.ToString().Trim();
+            context.PropertyValue = context.PropertyValue == null ? null : context.PropertyValue.ToString().Trim();
             return base.IsValid(context);
         }
     }

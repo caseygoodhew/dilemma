@@ -19,7 +19,9 @@ namespace Dilemma.Business
             registrar.Register<IQuestionService>(() => new QuestionService());
             registrar.Register<ISiteService>(() => new SiteService());
             
-            registrar.Register<IValidator<CreateQuestionViewModel>>(() => new DerivativeValidator<CreateQuestionViewModel, QuestionViewModel>());
+            registrar.Register<IValidator<CreateQuestionViewModel>>(() => new CreateQuestionViewModelValidator());
+            // keep this here as it will be used when we're out of testing
+            //registrar.Register<IValidator<CreateQuestionViewModel>>(() => new DerivativeValidator<CreateQuestionViewModel, QuestionViewModel>());
             ConverterFactory.Register<CreateQuestionViewModel, Question>(registrar, QuestionViewModelConverter.ToQuestion);
 
             registrar.Register<IValidator<QuestionViewModel>>(() => new QuestionViewModelValidator());

@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Disposable.Caching;
 using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Initialization
@@ -23,8 +24,14 @@ namespace Dilemma.Initialization
             locator.Initialize(
                 Business.Registration.Register,
                 Data.Registration.Register,
-                Disposable.Common.Registration.Register
+                Disposable.Common.Registration.Register,
+                RegisterShared
             );
+        }
+
+        private static void RegisterShared(IRegistrar registrar)
+        {
+            registrar.Register<IProviderCache>(() => new ProviderCache());
         }
 
         /// <summary>

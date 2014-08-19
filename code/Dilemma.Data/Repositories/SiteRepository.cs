@@ -1,22 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 
+using Disposable.Caching;
 using Disposable.Common.Conversion;
+using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Data.Repositories
 {
     internal class SiteRepository : ISiteRepository
     {
+        private static readonly Lazy<IProviderCache> Cache = new Lazy<IProviderCache>(Locator.Current.Instance<IProviderCache>);
+        
         public IList<T> GetCategories<T>() where T : class
         {
-            var context = new DilemmaContext();
-            return ConverterFactory.ConvertMany<Category, T>(context.Categories).ToList();
+            var categories = Cache.Value.Get<IList<Category>>(
+                () =>
+                    {
+                        var context = new DilemmaContext();
+                        return context.Categories.ToList();
+                    });
+            
+            return ConverterFactory.ConvertMany<Category, T>(categories).ToList();
         }
     }
 }

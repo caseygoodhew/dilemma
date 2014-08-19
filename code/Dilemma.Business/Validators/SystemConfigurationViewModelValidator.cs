@@ -15,6 +15,8 @@ namespace Dilemma.Business.Validators
         public SystemConfigurationViewModelValidator()
         {
             RuleFor(x => x.MaxAnswers).InclusiveBetween(1, 10);
+            RuleFor(x => x.QuestionLifetime).NotNull();
+            RuleFor(x => x.SystemEnvironment).NotNull();
         }
     }
 }

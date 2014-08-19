@@ -57,6 +57,7 @@
     <Compile Include="Services\IAdministrationService.cs" />
     <Compile Include="Services\IQuestionService.cs" />
     <Compile Include="Services\QuestionService.cs" />
+    <Compile Include="Validators\CreateQuestionViewModelValidator.cs" />
     <Compile Include="Validators\DerivativeValidator.cs" />
     <Compile Include="Validators\SystemConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\TrimmedLengthValidator.cs" />
