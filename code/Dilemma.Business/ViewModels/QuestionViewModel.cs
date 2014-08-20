@@ -14,6 +14,8 @@ namespace Dilemma.Business.ViewModels
 
         public DateTime? ClosesDateTime { get; set; }
 
+        public int AnswerCount { get; set; }
+        
         public int? MaxAnswers { get; set; }
 
         public int? CategoryId { get; set; }

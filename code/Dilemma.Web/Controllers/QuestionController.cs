@@ -30,6 +30,14 @@ namespace Dilemma.Web.Controllers
         }
 
         //
+        // GET: /Question/Details
+        public ActionResult Details(int id)
+        {
+            var model = new QuestionViewModel { QuestionId = id };
+            return View(model);
+        }
+
+        //
         // POST: /Question/Create
         [HttpPost]
         public ActionResult Create(CreateQuestionViewModel model)

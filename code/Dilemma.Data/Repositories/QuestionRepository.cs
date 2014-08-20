@@ -29,8 +29,13 @@ namespace Dilemma.Data.Repositories
 
         public IEnumerable<T> List<T>() where T : class
         {
+            // http://stackoverflow.com/questions/2010897/how-to-count-associated-entities-without-fetching-them-in-entity-framework
             var context = new DilemmaContext();
-            return ConverterFactory.ConvertMany<Question, T>(context.Questions.Include(x => x.Category));
+            var questions = context.Questions
+                                   .Include(x => x.Category)
+                                   .OrderByDescending(x => x.CreatedDateTime);
+            
+            return ConverterFactory.ConvertMany<Question, T>(questions.ToList());
         }
     }
 }

@@ -35,6 +35,7 @@ namespace Dilemma.Business.Conversion
                     ClosesDateTime = model.ClosesDateTime,
                     CategoryId = model.Category.CategoryId,
                     CategoryName = model.Category.Name,
+                    AnswerCount = 1,
                     MaxAnswers = model.MaxAnswers
                 };
         }
