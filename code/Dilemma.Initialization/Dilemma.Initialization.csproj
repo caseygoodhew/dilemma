@@ -35,10 +35,6 @@
     <Reference Include="Disposable.Caching">
       <HintPath>..\packages\Disposable.Caching.1.0.1\lib\net45\Disposable.Caching.dll</HintPath>
     </Reference>
-    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.5\lib\net45\Disposable.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\disposable\code\Disposable.Common\Disposable.Common.csproj">
+      <Project>{1ff2cbdd-7f6e-4dde-91d1-ebd5763e8018}</Project>
+      <Name>Disposable.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dilemma.Business\Dilemma.Business.csproj">
       <Project>{2170e2ea-2976-4186-9b7a-536737139a61}</Project>
       <Name>Dilemma.Business</Name>

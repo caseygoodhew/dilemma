@@ -15,5 +15,13 @@ namespace Dilemma.Business.Services
         void SaveNew(CreateQuestionViewModel questionViewModel);
 
         IEnumerable<QuestionViewModel> GetAll();
+
+        QuestionDetailsViewModel GetQuestion(int questionId);
+        
+        int? RequestAnswerSlot(int questionId);
+
+        AnswerViewModel GetAnswerInProgress(int questionId, int answerId);
+
+        void SaveAnswer(int questionId, AnswerViewModel answer);
     }
 }

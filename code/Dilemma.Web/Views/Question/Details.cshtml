@@ -1,8 +1,19 @@
-﻿@model Dilemma.Business.ViewModels.QuestionViewModel
+﻿@using Dilemma.Web.Extensions
+@using Microsoft.Ajax.Utilities
+@using WebGrease.Css.Extensions
+@model Dilemma.Business.ViewModels.QuestionDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details for @Model.QuestionId</h2>
+@Html.DisplayFor(x => x.QuestionViewModel);
 
+@if (Model.CanAnswer)
+{
+    <div class="row top-buffer-xlg">
+        <div class="col-md-8 col-md-offset-2">
+            @Html.ActionLink("Add an answer", "AnswerSlot", new { id = Model.QuestionViewModel.QuestionId }, new { @class = "btn btn-primary" });
+        </div>
+    </div>
+}

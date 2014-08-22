@@ -8,6 +8,24 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.top-buffer {
+    margin-top: 20px;
+}
+
+.top-buffer-lg {
+    margin-top: 40px;
+}
+
+.top-buffer-xlg {
+    margin-top: 80px;
+}
+
+.padded {
+    padding: 15px;
+}
+
+
 /*
 /* Set width on the form input elements since they're 100% wide by default * /
 input[type="text"],

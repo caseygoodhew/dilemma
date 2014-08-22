@@ -1,20 +1,23 @@
 ﻿using System;
+using System.Linq;
 
 using Dilemma.Business.ViewModels;
 using Dilemma.Data.Models;
 
 using Disposable.Common;
+using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Extensions;
+using Disposable.Common.Services;
 
 namespace Dilemma.Business.Conversion
 {
     public static class QuestionViewModelConverter
     {
+        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+        
         public static Question ToQuestion(QuestionViewModel viewModel)
         {
-            Guard.ArgumentNotNull(viewModel.CategoryId, "QuestionViewModel.CategoryId");
-            
             return new Question
                        {
                            Text = viewModel.Text.Trim(),
@@ -27,6 +30,8 @@ namespace Dilemma.Business.Conversion
 
         public static QuestionViewModel FromQuestion(Question model)
         {
+            var answers = ConverterFactory.ConvertMany<Answer, AnswerViewModel>(model.Answers);
+            
             return new QuestionViewModel
                 {
                     QuestionId = model.QuestionId,
@@ -35,9 +40,12 @@ namespace Dilemma.Business.Conversion
                     ClosesDateTime = model.ClosesDateTime,
                     CategoryId = model.Category.CategoryId,
                     CategoryName = model.Category.Name,
-                    AnswerCount = 1,
-                    MaxAnswers = model.MaxAnswers
+                    AnswerCount = model.AnswerCount,
+                    MaxAnswers = model.MaxAnswers,
+                    Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
                 };
         }
+
+        
     }
 }

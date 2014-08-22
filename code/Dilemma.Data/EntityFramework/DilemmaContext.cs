@@ -9,9 +9,13 @@ namespace Dilemma.Data.EntityFramework
 {
     public class DilemmaContext : DbContext
     {
-        public DilemmaContext() : base("DilemmaContext") {}
+        public DilemmaContext() : base("DilemmaContext")
+        {
+        }
         
         public DbSet<Question> Questions { get; set; }
+        
+        public DbSet<Answer> Answers { get; set; }
 
         public DbSet<SystemConfiguration> SystemConfiguration { get; set; }
 
@@ -23,6 +27,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             modelBuilder.Configurations.Add(new QuestionMap());
+            modelBuilder.Configurations.Add(new AnswerMap());
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new SystemConfigurationMap());
         }

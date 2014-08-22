@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 using Dilemma.Common;
 
@@ -6,7 +8,7 @@ namespace Dilemma.Business.ViewModels
 {
     public class QuestionViewModel
     {
-        public int QuestionId { get; set; }
+        public int? QuestionId { get; set; }
         
         public string Text { get; set; }
 
@@ -21,5 +23,7 @@ namespace Dilemma.Business.ViewModels
         public int? CategoryId { get; set; }
 
         public string CategoryName { get; set; }
+
+        public IList<AnswerViewModel> Answers { get; set; }
     }
 }

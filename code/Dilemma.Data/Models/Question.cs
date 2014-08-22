@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Dilemma.Data.Models
@@ -16,5 +17,9 @@ namespace Dilemma.Data.Models
         public Category Category { get; set; }
 
         public int MaxAnswers { get; set; }
+
+        public int AnswerCount { get; set; }
+
+        public virtual List<Answer> Answers { get; set; }
     }
 }

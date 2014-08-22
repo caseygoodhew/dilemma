@@ -18,7 +18,7 @@ namespace Dilemma.Business
             registrar.Register<IAdministrationService>(() => new AdministrationService());
             registrar.Register<IQuestionService>(() => new QuestionService());
             registrar.Register<ISiteService>(() => new SiteService());
-            
+
             registrar.Register<IValidator<CreateQuestionViewModel>>(() => new CreateQuestionViewModelValidator());
             // keep this here as it will be used when we're out of testing
             //registrar.Register<IValidator<CreateQuestionViewModel>>(() => new DerivativeValidator<CreateQuestionViewModel, QuestionViewModel>());
@@ -27,6 +27,14 @@ namespace Dilemma.Business
             registrar.Register<IValidator<QuestionViewModel>>(() => new QuestionViewModelValidator());
             ConverterFactory.Register<QuestionViewModel, Question>(registrar, QuestionViewModelConverter.ToQuestion);
             ConverterFactory.Register<Question, QuestionViewModel>(registrar, QuestionViewModelConverter.FromQuestion);
+
+            registrar.Register<IValidator<QuestionDetailsViewModel>>(() => new QuestionDetailsViewModelValidator());
+            ConverterFactory.Register<QuestionDetailsViewModel, Question>(registrar, QuestionDetailsViewModelConverter.ToQuestion);
+            ConverterFactory.Register<Question, QuestionDetailsViewModel>(registrar, QuestionDetailsViewModelConverter.FromQuestion);
+
+            registrar.Register<IValidator<AnswerViewModel>>(() => new AnswerViewModelValidator());
+            ConverterFactory.Register<AnswerViewModel, Answer>(registrar, AnswerViewModelConverter.ToAnswer);
+            ConverterFactory.Register<Answer, AnswerViewModel>(registrar, AnswerViewModelConverter.FromAnswer);
             
             registrar.Register<IValidator<SystemConfigurationViewModel>>(() => new SystemConfigurationViewModelValidator());
             ConverterFactory.Register<SystemConfigurationViewModel, SystemConfiguration>(registrar, SystemConfigurationViewModelConverter.ToSystemConfiguration);

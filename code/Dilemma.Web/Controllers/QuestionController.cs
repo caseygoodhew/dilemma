@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
@@ -33,10 +34,31 @@ namespace Dilemma.Web.Controllers
         // GET: /Question/Details
         public ActionResult Details(int id)
         {
-            var model = new QuestionViewModel { QuestionId = id };
-            return View(model);
+            return View(QuestionService.Value.GetQuestion(id));
         }
 
+        //
+        // GET: /Question/AnswerSlot/id
+        public ActionResult AnswerSlot(int id)
+        {
+            return RedirectToAction("Answer", new { questionId = id, answerId = QuestionService.Value.RequestAnswerSlot(id) });
+        }
+
+        [Route("question/answer/{questionId:int:min(1)}/{answerId:int:min(1)}")]
+        public ActionResult Answer(int questionId, int answerId)
+        {
+            var viewModel = QuestionService.Value.GetQuestion(questionId);
+            viewModel.Answer = QuestionService.Value.GetAnswerInProgress(questionId, answerId);
+            
+            return View(viewModel);
+        }
+
+        [Route("question/answer/{questionId:int:min(1)}/{answerId:int:min(1)}")]
+        [HttpPost]
+        public ActionResult Answer(int questionId, int answerId, QuestionDetailsViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
         //
         // POST: /Question/Create
         [HttpPost]

@@ -30,9 +30,27 @@ namespace Dilemma.Web.Views.Question
     using Dilemma.Common;
     using Dilemma.Web;
     
+    #line 1 "..\..\Views\Question\Details.cshtml"
+    using Dilemma.Web.Extensions;
+    
+    #line default
+    #line hidden
+    
+    #line 2 "..\..\Views\Question\Details.cshtml"
+    using Microsoft.Ajax.Utilities;
+    
+    #line default
+    #line hidden
+    
+    #line 3 "..\..\Views\Question\Details.cshtml"
+    using WebGrease.Css.Extensions;
+    
+    #line default
+    #line hidden
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Question/Details.cshtml")]
-    public partial class Details : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.QuestionViewModel>
+    public partial class Details : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.QuestionDetailsViewModel>
     {
         public Details()
         {
@@ -40,24 +58,60 @@ namespace Dilemma.Web.Views.Question
         public override void Execute()
         {
             
-            #line 3 "..\..\Views\Question\Details.cshtml"
+            #line 6 "..\..\Views\Question\Details.cshtml"
   
     ViewBag.Title = "Details";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<h2>Details for ");
+WriteLiteral("\r\n\r\n");
 
             
-            #line 7 "..\..\Views\Question\Details.cshtml"
-           Write(Model.QuestionId);
+            #line 10 "..\..\Views\Question\Details.cshtml"
+Write(Html.DisplayFor(x => x.QuestionViewModel));
 
             
             #line default
             #line hidden
-WriteLiteral("</h2>\r\n\r\n");
+WriteLiteral(";\r\n\r\n");
 
+            
+            #line 12 "..\..\Views\Question\Details.cshtml"
+ if (Model.CanAnswer)
+{
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"row top-buffer-xlg\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"col-md-8 col-md-offset-2\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 16 "..\..\Views\Question\Details.cshtml"
+       Write(Html.ActionLink("Add an answer", "AnswerSlot", new { id = Model.QuestionViewModel.QuestionId }, new { @class = "btn btn-primary" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(";\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 19 "..\..\Views\Question\Details.cshtml"
+}
+
+            
+            #line default
+            #line hidden
         }
     }
 }

@@ -58,6 +58,26 @@ namespace Dilemma.Business.Services
             return QuestionRepository.Value.List<QuestionViewModel>();
         }
 
+        public QuestionDetailsViewModel GetQuestion(int questionId)
+        {
+            return QuestionRepository.Value.Get<QuestionDetailsViewModel>(questionId, GetQuestionAs.FullDetails);
+        }
+
+        public int? RequestAnswerSlot(int questionId)
+        {
+            return QuestionRepository.Value.RequestAnswerSlot(questionId);
+        }
+
+        public AnswerViewModel GetAnswerInProgress(int questionId, int answerId)
+        {
+            return QuestionRepository.Value.GetAnswerInProgress<AnswerViewModel>(questionId, answerId);
+        }
+
+        public void SaveAnswer(int questionId, AnswerViewModel answer)
+        {
+            QuestionRepository.Value.SaveAnswer(questionId, answer);
+        }
+
         private void SetMaxAnswers(SystemConfigurationViewModel systemConfiguration, QuestionViewModel questionViewModel)
         {
             if (systemConfiguration.SystemEnvironment == SystemEnvironment.Production || !questionViewModel.MaxAnswers.HasValue)

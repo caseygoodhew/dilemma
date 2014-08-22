@@ -44,10 +44,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.5\lib\net45\Disposable.Common.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
@@ -184,6 +180,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Question\Answer.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Answer.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Question\Create.generated.cs">
       <AutoGen>True</AutoGen>
@@ -359,6 +360,11 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Details.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Shared\DisplayTemplates\QuestionViewModel.cshtml" />
+    <Content Include="Views\Question\Answer.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Answer.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -370,8 +376,13 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\disposable\code\Disposable.Common\Disposable.Common.csproj">
+      <Project>{1ff2cbdd-7f6e-4dde-91d1-ebd5763e8018}</Project>
+      <Name>Disposable.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dilemma.Business\Dilemma.Business.csproj">
       <Project>{2170e2ea-2976-4186-9b7a-536737139a61}</Project>
       <Name>Dilemma.Business</Name>
