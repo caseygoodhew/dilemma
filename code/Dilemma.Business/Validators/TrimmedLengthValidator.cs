@@ -23,7 +23,7 @@ namespace Dilemma.Business.Validators
         }
     }
 
-    public static class RuleBuilderExtension
+    public static partial class RuleBuilderExtension
     {
         public static IRuleBuilderOptions<T, string> TrimmedLength<T>(this IRuleBuilder<T, string> ruleBuilder, int min, int max)
         {

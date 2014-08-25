@@ -40,7 +40,7 @@ namespace Dilemma.Business.Conversion
                     ClosesDateTime = model.ClosesDateTime,
                     CategoryId = model.Category.CategoryId,
                     CategoryName = model.Category.Name,
-                    AnswerCount = model.AnswerCount,
+                    TotalAnswers = model.TotalAnswers,
                     MaxAnswers = model.MaxAnswers,
                     Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
                 };

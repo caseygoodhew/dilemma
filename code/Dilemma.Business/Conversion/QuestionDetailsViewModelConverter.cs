@@ -41,7 +41,7 @@ namespace Dilemma.Business.Conversion
         {
             var now = TimeSource.Value.Now;
 
-            return model.AnswerCount < model.MaxAnswers && model.ClosesDateTime > now;
+            return model.TotalAnswers < model.MaxAnswers && model.ClosesDateTime > now;
         }
     }
 }

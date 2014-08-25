@@ -19,7 +19,7 @@
 
 @foreach (var item in Model)
 {
-    var answerPercentage = Convert.ToInt32(item.AnswerCount * 100 / item.MaxAnswers);
+    var answerPercentage = Convert.ToInt32(item.TotalAnswers * 100 / item.MaxAnswers);
     
     <tr>
         <td>
@@ -33,17 +33,17 @@
         </td>
         <td>
             <div class="progress" style="margin-bottom: 5px">
-                <div class="progress-bar" role="progressbar" aria-valuenow="@item.AnswerCount" aria-valuemin="0" aria-valuemax="@item.MaxAnswers" style="width: @answerPercentage%; min-width: 0">
-                    <span class="sr-only">@item.AnswerCount out of @item.MaxAnswers</span>
+                <div class="progress-bar" role="progressbar" aria-valuenow="@item.TotalAnswers" aria-valuemin="0" aria-valuemax="@item.MaxAnswers" style="width: @answerPercentage%; min-width: 0">
+                    <span class="sr-only">@item.TotalAnswers out of @item.MaxAnswers</span>
                 </div>
             </div>
-            <div class="text-center"><small>@string.Format(@"( {0} / {1} )", item.AnswerCount, item.MaxAnswers)</small></div>
+            <div class="text-center"><small>@string.Format(@"( {0} / {1} )", item.TotalAnswers, item.MaxAnswers)</small></div>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
         <td>
-            @Html.ActionLink("View", "Details", new { id=item.QuestionId })
+            @Html.ActionLink("View", "Details", new { questionId = item.QuestionId })
             @*Html.ActionLink("Edit", "Edit", new { id=item.QuestionId }) |
             @Html.ActionLink("Details", "Details", new { id=item.QuestionId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.QuestionId })*@

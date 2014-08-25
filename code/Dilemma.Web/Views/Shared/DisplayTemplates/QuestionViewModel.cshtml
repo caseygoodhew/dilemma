@@ -4,7 +4,7 @@
 <h2>Question @Model.QuestionId</h2>
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">@Model.Text</div>
+    <div class="col-md-8 col-md-offset-2"><span class="user-text">@Model.Text</span></div>
 </div>
 
 <div class="row top-buffer">
@@ -20,13 +20,17 @@
     </div>
 </div>
 
+<hr/>
+
 <h3>Answers</h3>
 
 @{ var topBuffer = ""; }
 @foreach (var answer in Model.Answers)
 {
+    <hr/>
+
     <div class="row @topBuffer">
-        <div class="col-md-8 col-md-offset-2">@answer.Text</div>
+        <div class="col-md-8 col-md-offset-2"><span class="user-text">@answer.Text</span></div>
     </div>
     
     <div class="row top-buffer">
@@ -34,6 +38,6 @@
             <small>Created: @answer.CreatedDateTime.ToRelativeText()</small>
         </div>
     </div>
-    
+
     topBuffer = "top-buffer";
 }

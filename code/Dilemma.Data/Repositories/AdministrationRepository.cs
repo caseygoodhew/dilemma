@@ -20,7 +20,7 @@ namespace Dilemma.Data.Repositories
 
             var context = new DilemmaContext();
             context.SystemConfiguration.Update(context, systemConfiguration);
-            context.SaveChanges();
+            context.SaveChangesVerbose();
 
             Cache.Value.Expire<SystemConfiguration>();
         }

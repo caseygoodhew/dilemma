@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
+using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 
@@ -27,7 +28,7 @@ namespace Dilemma.Data.Repositories
             {
                 context.Categories.Attach(question.Category);
                 context.Questions.Add(question);
-                context.SaveChanges();
+                context.SaveChangesVerbose();
             }
         }
 
@@ -52,7 +53,7 @@ namespace Dilemma.Data.Repositories
                             new
                                 {
                                     x.QuestionId,
-                                    AnswerCount = x.Answers.Count,
+                                    TotalAnswer = x.Answers.Count,
                                     x.MaxAnswers,
                                     x.Category,
                                     x.Text,
@@ -65,7 +66,7 @@ namespace Dilemma.Data.Repositories
                             new Question
                                 {
                                     QuestionId = x.QuestionId,
-                                    AnswerCount = x.AnswerCount,
+                                    TotalAnswers = x.TotalAnswer,
                                     MaxAnswers = x.MaxAnswers,
                                     Category = x.Category,
                                     Text = x.Text,
@@ -81,9 +82,16 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
+                var existingAnswer = GetAnswerInProgress(context, questionId);
+
+                if (existingAnswer != null)
+                {
+                    return existingAnswer.AnswerId;
+                }
+                
                 var question = Get<Question>(context, questionId, GetQuestionAs.AnswerCount);
 
-                if (question.AnswerCount >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
+                if (question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
                 {
                     return null;
                 }
@@ -92,28 +100,7 @@ namespace Dilemma.Data.Repositories
                 
                 // TODO: Potential concurrency issue here if two people vie for the slot at the same time.
                 var answer = context.Answers.Add(new Answer { CreatedDateTime = TimeSource.Value.Now, Question = question });
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
-                {
-                    Exception raise = dbEx;
-                    foreach (var validationErrors in dbEx.EntityValidationErrors)
-                    {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                        {
-                            string message = string.Format("{0}:{1}",
-                                validationErrors.Entry.Entity.ToString(),
-                                validationError.ErrorMessage);
-                            // raise a new exception nesting
-                            // the current instance as InnerException
-                            raise = new InvalidOperationException(message, raise);
-                        }
-                    }
-                    throw raise;
-                }
-                
+                context.SaveChangesVerbose();
 
                 return answer.AnswerId;
             }
@@ -123,23 +110,30 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var answer =
-                        context.Answers.Include(x => x.Question)
-                        .Where(x => x.AnswerId == answerId)
-                        .Where(x => x.Question.QuestionId == questionId)
-                        .FirstOrDefault(x => string.IsNullOrEmpty(x.Text));
-
-                return ConverterFactory.ConvertOne<Answer, T>(answer);
+                return ConverterFactory.ConvertOne<Answer, T>(GetAnswerInProgress(context, questionId, answerId));
             }
         }
 
-        public void SaveAnswer<T>(int questionId, T answerType) where T : class
+        public bool CompleteAnswer<T>(int questionId, T answerType) where T : class
         {
-            var answer = ConverterFactory.ConvertOne<T, Answer>(answerType);
-
             using (var context = new DilemmaContext())
             {
-                throw new NotImplementedException();
+                var answer = ConverterFactory.ConvertOne<T, Answer>(answerType);
+
+                var existingAnswer = GetAnswerInProgress(context, questionId, answer.AnswerId);
+
+                if (existingAnswer == null)
+                {
+                    return false;
+                }
+            
+                answer.CreatedDateTime = TimeSource.Value.Now;
+                answer.AnswerType = AnswerType.Completed;
+
+                context.Answers.Update(context, answer);
+                context.SaveChangesVerbose();
+
+                return true;
             }
         }
 
@@ -147,41 +141,62 @@ namespace Dilemma.Data.Repositories
         {
             Question question;
 
-            if (config == GetQuestionAs.AnswerCount)
+            switch (config)
             {
-                question =
-                    context.Questions.Where(x => x.QuestionId == questionId)
-                        .Select(x => new 
-                        {
-                            x.QuestionId,
-                            x.MaxAnswers,
-                            x.ClosesDateTime,
-                            AnswerCount = x.Answers.Count
-                        })
-                        .AsEnumerable()
-                        .Select(x => new Question
-                        {
-                            QuestionId = x.QuestionId,
-                            MaxAnswers = x.MaxAnswers,
-                            ClosesDateTime = x.ClosesDateTime,
-                            AnswerCount = x.AnswerCount
-                        })
-                        .Single();
-            }
-            else if (config == GetQuestionAs.FullDetails)
-            {
-                question =
-                    context.Questions.Where(x => x.QuestionId == questionId)
-                        .Include(x => x.Category)
-                        .Include(x => x.Answers)
-                        .Single();
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
+                case GetQuestionAs.AnswerCount:
+                    question =
+                        context.Questions.Where(x => x.QuestionId == questionId)
+                            .Select(x => new
+                                             {
+                                                 x.QuestionId,
+                                                 x.MaxAnswers,
+                                                 x.ClosesDateTime,
+                                                 TotalAnswers = x.Answers.Count
+                                             })
+                            .AsEnumerable()
+                            .Select(x => new Question
+                                             {
+                                                 QuestionId = x.QuestionId,
+                                                 MaxAnswers = x.MaxAnswers,
+                                                 ClosesDateTime = x.ClosesDateTime,
+                                                 TotalAnswers = x.TotalAnswers
+                                             })
+                            .Single();
+
+                    break;
+                case GetQuestionAs.FullDetails:
+                    question =
+                        context.Questions.Where(x => x.QuestionId == questionId)
+                            .Include(x => x.Category)
+                            .Include(x => x.Answers)
+                            .Single();
+                    
+                    question.TotalAnswers = question.Answers.Count;
+                    question.Answers = question.Answers.Where(x => x.AnswerType == AnswerType.Completed).ToList();
+                    
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             return ConverterFactory.ConvertOne<Question, T>(question);
+        }
+
+        private Answer GetAnswerInProgress(DilemmaContext context, int questionId, int? answerId = null)
+        {
+            var query =
+                context.Answers.AsNoTracking()
+                    .Include(x => x.Question)
+                    .Where(x => x.Question.QuestionId == questionId)
+                    .Where(x => x.AnswerType == AnswerType.ReservedSlot);
+
+            if (answerId.HasValue)
+            {
+                query = query.Where(x => x.AnswerId == answerId);
+            }
+
+            return query.FirstOrDefault();
         }
     }
 }

@@ -17,8 +17,9 @@ namespace Dilemma.Business.Conversion
         {
             return new Answer
                        {
+                           AnswerId = viewModel.AnswerId.GuardedValue(),
                            Text = viewModel.Text.Trim(),
-                           CreatedDateTime = viewModel.CreatedDateTime.GuardedValue("CreatedDateTime"),
+                           CreatedDateTime = viewModel.CreatedDateTime
                        };
         }
 

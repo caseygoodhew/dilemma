@@ -62,7 +62,7 @@ WriteLiteral(";\r\n\r\n");
             #line 9 "..\..\Views\Question\Answer.cshtml"
  if (Model.Answer != null)
 {
-    using (Html.BeginForm("Answer", "Question", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    using (Html.BeginForm("Answer", "Question", new { questionId = Model.QuestionViewModel.QuestionId, answerId = Model.Answer.AnswerId }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
          
             

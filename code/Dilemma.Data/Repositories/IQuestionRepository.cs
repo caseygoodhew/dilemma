@@ -20,6 +20,6 @@ namespace Dilemma.Data.Repositories
 
         T GetAnswerInProgress<T>(int questionId, int answerId) where T : class;
 
-        void SaveAnswer<T>(int questionId, T answerType) where T : class;
+        bool CompleteAnswer<T>(int questionId, T answerType) where T : class;
     }
 }

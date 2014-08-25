@@ -15,6 +15,7 @@ namespace Dilemma.Data
             registrar.Register<ISiteRepository>(() => new SiteRepository());
 
             ConverterFactory.Register<Question>(registrar);
+            ConverterFactory.Register<Answer>(registrar);
             ConverterFactory.Register<Category>(registrar);
             ConverterFactory.Register<SystemConfiguration>(registrar);
 

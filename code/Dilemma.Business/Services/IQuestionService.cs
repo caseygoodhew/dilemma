@@ -22,6 +22,6 @@ namespace Dilemma.Business.Services
 
         AnswerViewModel GetAnswerInProgress(int questionId, int answerId);
 
-        void SaveAnswer(int questionId, AnswerViewModel answer);
+        void CompleteAnswer(int questionId, AnswerViewModel answerViewModel);
     }
 }

@@ -25,6 +25,10 @@
     padding: 15px;
 }
 
+.user-text {
+    white-space: pre-line;
+}
+
 
 /*
 /* Set width on the form input elements since they're 100% wide by default * /

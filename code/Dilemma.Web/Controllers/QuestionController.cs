@@ -9,6 +9,7 @@ using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
 
 using Disposable.Common.Conversion;
+using Disposable.Common.Extensions;
 using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
@@ -32,32 +33,51 @@ namespace Dilemma.Web.Controllers
 
         //
         // GET: /Question/Details
-        public ActionResult Details(int id)
+        [Route("question/{questionId:int:min(1)}")]
+        public ActionResult Details(int questionId)
         {
-            return View(QuestionService.Value.GetQuestion(id));
+            return View(QuestionService.Value.GetQuestion(questionId));
         }
 
         //
         // GET: /Question/AnswerSlot/id
-        public ActionResult AnswerSlot(int id)
+        [Route("question/{questionId:int:min(1)}/answer")]
+        public ActionResult AnswerSlot(int questionId)
         {
-            return RedirectToAction("Answer", new { questionId = id, answerId = QuestionService.Value.RequestAnswerSlot(id) });
+            var answerId = QuestionService.Value.RequestAnswerSlot(questionId);
+            
+            return RedirectToAction("Answer", new { questionId, answerId = answerId ?? 0 });
         }
 
-        [Route("question/answer/{questionId:int:min(1)}/{answerId:int:min(1)}")]
+        [Route("question/{questionId:int:min(1)}/answer/{answerId:int:min(0)}")]
         public ActionResult Answer(int questionId, int answerId)
         {
             var viewModel = QuestionService.Value.GetQuestion(questionId);
-            viewModel.Answer = QuestionService.Value.GetAnswerInProgress(questionId, answerId);
             
+            if (answerId > 0)
+            {
+                viewModel.Answer = QuestionService.Value.GetAnswerInProgress(questionId, answerId);
+            }
+
             return View(viewModel);
         }
 
-        [Route("question/answer/{questionId:int:min(1)}/{answerId:int:min(1)}")]
+        [Route("question/{questionId:int:min(1)}/answer/{answerId:int:min(1)}")]
         [HttpPost]
         public ActionResult Answer(int questionId, int answerId, QuestionDetailsViewModel viewModel)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                viewModel.Answer.AnswerId = answerId;
+                QuestionService.Value.CompleteAnswer(questionId, viewModel.Answer);
+                return RedirectToAction("Details", "Question", new { questionId });
+            }
+
+            var refreshedViewModel = QuestionService.Value.GetQuestion(questionId);
+            refreshedViewModel.Answer = viewModel.Answer;
+            viewModel.Answer.AnswerId = answerId;
+
+            return View(refreshedViewModel);
         }
         //
         // POST: /Question/Create

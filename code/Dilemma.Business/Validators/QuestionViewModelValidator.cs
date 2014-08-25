@@ -8,7 +8,7 @@ namespace Dilemma.Business.Validators
     {
         public QuestionViewModelValidator()
         {
-            RuleFor(x => x.Text).NotNull().TrimmedLength(50, 500);
+            RuleFor(x => x.Text).NotNull().TidiedTrimmedLength(50, 500);
             RuleFor(x => x.CategoryId).NotEmpty();
         }
     }

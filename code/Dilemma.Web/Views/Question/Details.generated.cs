@@ -98,12 +98,12 @@ WriteLiteral("            ");
 
             
             #line 16 "..\..\Views\Question\Details.cshtml"
-       Write(Html.ActionLink("Add an answer", "AnswerSlot", new { id = Model.QuestionViewModel.QuestionId }, new { @class = "btn btn-primary" }));
+       Write(Html.ActionLink("Add an answer", "AnswerSlot", new { questionId = Model.QuestionViewModel.QuestionId }, new { @class = "btn btn-primary" }));
 
             
             #line default
             #line hidden
-WriteLiteral(";\r\n        </div>\r\n    </div>\r\n");
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 19 "..\..\Views\Question\Details.cshtml"

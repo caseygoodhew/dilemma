@@ -8,7 +8,7 @@ namespace Dilemma.Business.Validators
     {
         public AnswerViewModelValidator()
         {
-            RuleFor(x => x.Text).NotNull().TrimmedLength(20, 500);
+            RuleFor(x => x.Text).NotNull().TidiedTrimmedLength(20, 500);
         }
     }
 }

@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityFramework\DbContextExtensions.cs" />
     <Compile Include="EntityFramework\DbSetExtensions.cs" />
     <Compile Include="EntityFramework\FixEfProviderServicesProblem.cs" />
     <Compile Include="EntityFramework\DilemmaContext.cs" />
@@ -81,6 +82,10 @@
     <Compile Include="Migrations\201408221702348_Migration4.Designer.cs">
       <DependentUpon>201408221702348_Migration4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408250729162_Migration5.cs" />
+    <Compile Include="Migrations\201408250729162_Migration5.Designer.cs">
+      <DependentUpon>201408250729162_Migration5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -103,7 +108,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Migrations\HowTo.txt" />
+    <Content Include="Migrations\HowToMigrate.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408151541183_Migration.resx">
@@ -120,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408221702348_Migration4.resx">
       <DependentUpon>201408221702348_Migration4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408250729162_Migration5.resx">
+      <DependentUpon>201408250729162_Migration5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

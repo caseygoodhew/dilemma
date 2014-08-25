@@ -12,6 +12,6 @@ namespace Dilemma.Business.ViewModels
 
         public string Text { get; set; }
 
-        public DateTime? CreatedDateTime { get; set; }
+        public DateTime CreatedDateTime { get; set; }
     }
 }

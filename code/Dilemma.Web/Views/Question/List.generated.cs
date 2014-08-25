@@ -72,7 +72,7 @@ WriteLiteral(">Closes</th>\r\n        <th>Answers</th>\r\n        <th>Category</
             #line 20 "..\..\Views\Question\List.cshtml"
  foreach (var item in Model)
 {
-    var answerPercentage = Convert.ToInt32(item.AnswerCount * 100 / item.MaxAnswers);
+    var answerPercentage = Convert.ToInt32(item.TotalAnswers * 100 / item.MaxAnswers);
     
 
             
@@ -91,14 +91,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral(" \r\n        </td>\r\n        <td>\r\n            <div");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 651), Tuple.Create("\"", 680)
+WriteAttribute("title", Tuple.Create(" title=\"", 652), Tuple.Create("\"", 681)
             
             #line 29 "..\..\Views\Question\List.cshtml"
-, Tuple.Create(Tuple.Create("", 659), Tuple.Create<System.Object, System.Int32>(item.CreatedDateTime
+, Tuple.Create(Tuple.Create("", 660), Tuple.Create<System.Object, System.Int32>(item.CreatedDateTime
             
             #line default
             #line hidden
-, 659), false)
+, 660), false)
 );
 
 WriteLiteral(">");
@@ -112,14 +112,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</div>\r\n        </td>\r\n        <td>\r\n            <div");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 773), Tuple.Create("\"", 801)
+WriteAttribute("title", Tuple.Create(" title=\"", 774), Tuple.Create("\"", 802)
             
             #line 32 "..\..\Views\Question\List.cshtml"
-, Tuple.Create(Tuple.Create("", 781), Tuple.Create<System.Object, System.Int32>(item.ClosesDateTime
+, Tuple.Create(Tuple.Create("", 782), Tuple.Create<System.Object, System.Int32>(item.ClosesDateTime
             
             #line default
             #line hidden
-, 781), false)
+, 782), false)
 );
 
 WriteLiteral(">");
@@ -143,40 +143,40 @@ WriteLiteral(" class=\"progress-bar\"");
 
 WriteLiteral(" role=\"progressbar\"");
 
-WriteAttribute("aria-valuenow", Tuple.Create(" aria-valuenow=\"", 1000), Tuple.Create("\"", 1033)
+WriteAttribute("aria-valuenow", Tuple.Create(" aria-valuenow=\"", 1001), Tuple.Create("\"", 1035)
             
             #line 36 "..\..\Views\Question\List.cshtml"
-, Tuple.Create(Tuple.Create("", 1016), Tuple.Create<System.Object, System.Int32>(item.AnswerCount
+, Tuple.Create(Tuple.Create("", 1017), Tuple.Create<System.Object, System.Int32>(item.TotalAnswers
             
             #line default
             #line hidden
-, 1016), false)
+, 1017), false)
 );
 
 WriteLiteral(" aria-valuemin=\"0\"");
 
-WriteAttribute("aria-valuemax", Tuple.Create(" aria-valuemax=\"", 1052), Tuple.Create("\"", 1084)
+WriteAttribute("aria-valuemax", Tuple.Create(" aria-valuemax=\"", 1054), Tuple.Create("\"", 1086)
             
             #line 36 "..\..\Views\Question\List.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 1068), Tuple.Create<System.Object, System.Int32>(item.MaxAnswers
+                                                 , Tuple.Create(Tuple.Create("", 1070), Tuple.Create<System.Object, System.Int32>(item.MaxAnswers
             
             #line default
             #line hidden
-, 1068), false)
+, 1070), false)
 );
 
-WriteAttribute("style", Tuple.Create(" style=\"", 1085), Tuple.Create("\"", 1132)
-, Tuple.Create(Tuple.Create("", 1093), Tuple.Create("width:", 1093), true)
+WriteAttribute("style", Tuple.Create(" style=\"", 1087), Tuple.Create("\"", 1134)
+, Tuple.Create(Tuple.Create("", 1095), Tuple.Create("width:", 1095), true)
             
             #line 36 "..\..\Views\Question\List.cshtml"
-                                                                               , Tuple.Create(Tuple.Create(" ", 1099), Tuple.Create<System.Object, System.Int32>(answerPercentage
+                                                                                , Tuple.Create(Tuple.Create(" ", 1101), Tuple.Create<System.Object, System.Int32>(answerPercentage
             
             #line default
             #line hidden
-, 1100), false)
-, Tuple.Create(Tuple.Create("", 1117), Tuple.Create("%;", 1117), true)
-, Tuple.Create(Tuple.Create(" ", 1119), Tuple.Create("min-width:", 1120), true)
-, Tuple.Create(Tuple.Create(" ", 1130), Tuple.Create("0", 1131), true)
+, 1102), false)
+, Tuple.Create(Tuple.Create("", 1119), Tuple.Create("%;", 1119), true)
+, Tuple.Create(Tuple.Create(" ", 1121), Tuple.Create("min-width:", 1122), true)
+, Tuple.Create(Tuple.Create(" ", 1132), Tuple.Create("0", 1133), true)
 );
 
 WriteLiteral(">\r\n                    <span");
@@ -187,7 +187,7 @@ WriteLiteral(">");
 
             
             #line 37 "..\..\Views\Question\List.cshtml"
-                                     Write(item.AnswerCount);
+                                     Write(item.TotalAnswers);
 
             
             #line default
@@ -196,7 +196,7 @@ WriteLiteral(" out of ");
 
             
             #line 37 "..\..\Views\Question\List.cshtml"
-                                                              Write(item.MaxAnswers);
+                                                               Write(item.MaxAnswers);
 
             
             #line default
@@ -209,7 +209,7 @@ WriteLiteral("><small>");
 
             
             #line 40 "..\..\Views\Question\List.cshtml"
-                                       Write(string.Format(@"( {0} / {1} )", item.AnswerCount, item.MaxAnswers));
+                                       Write(string.Format(@"( {0} / {1} )", item.TotalAnswers, item.MaxAnswers));
 
             
             #line default
@@ -231,7 +231,7 @@ WriteLiteral("            ");
 
             
             #line 46 "..\..\Views\Question\List.cshtml"
-       Write(Html.ActionLink("View", "Details", new { id=item.QuestionId }));
+       Write(Html.ActionLink("View", "Details", new { questionId = item.QuestionId }));
 
             
             #line default

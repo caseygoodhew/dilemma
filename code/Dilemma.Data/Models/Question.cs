@@ -18,7 +18,7 @@ namespace Dilemma.Data.Models
 
         public int MaxAnswers { get; set; }
 
-        public int AnswerCount { get; set; }
+        public int TotalAnswers { get; set; }
 
         public virtual List<Answer> Answers { get; set; }
     }

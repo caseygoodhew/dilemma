@@ -14,7 +14,7 @@ namespace Dilemma.Business.Validators
     {
         public QuestionDetailsViewModelValidator()
         {
-            // do we need this?
+            RuleFor(x => x.Answer).SetValidator(new AnswerViewModelValidator());
         }
     }
 }

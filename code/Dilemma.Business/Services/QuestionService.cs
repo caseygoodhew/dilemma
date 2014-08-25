@@ -6,6 +6,7 @@ using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
 
+using Disposable.Common.Extensions;
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
 
@@ -50,6 +51,8 @@ namespace Dilemma.Business.Services
             SetMaxAnswers(systemConfiguration, questionViewModel);
             SetTimeframes(systemConfiguration, questionViewModel);
 
+            questionViewModel.Text = questionViewModel.Text.TidyWhiteSpace();
+
             QuestionRepository.Value.Create(questionViewModel);
         }
 
@@ -73,9 +76,10 @@ namespace Dilemma.Business.Services
             return QuestionRepository.Value.GetAnswerInProgress<AnswerViewModel>(questionId, answerId);
         }
 
-        public void SaveAnswer(int questionId, AnswerViewModel answer)
+        public void CompleteAnswer(int questionId, AnswerViewModel answerViewModel)
         {
-            QuestionRepository.Value.SaveAnswer(questionId, answer);
+            answerViewModel.Text = answerViewModel.Text.TidyWhiteSpace();
+            QuestionRepository.Value.CompleteAnswer(questionId, answerViewModel);
         }
 
         private void SetMaxAnswers(SystemConfigurationViewModel systemConfiguration, QuestionViewModel questionViewModel)

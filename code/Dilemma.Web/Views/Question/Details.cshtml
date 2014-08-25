@@ -13,7 +13,7 @@
 {
     <div class="row top-buffer-xlg">
         <div class="col-md-8 col-md-offset-2">
-            @Html.ActionLink("Add an answer", "AnswerSlot", new { id = Model.QuestionViewModel.QuestionId }, new { @class = "btn btn-primary" });
+            @Html.ActionLink("Add an answer", "AnswerSlot", new { questionId = Model.QuestionViewModel.QuestionId }, new { @class = "btn btn-primary" })
         </div>
     </div>
 }
