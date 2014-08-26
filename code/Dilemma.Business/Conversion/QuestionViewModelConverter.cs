@@ -4,18 +4,25 @@ using System.Linq;
 using Dilemma.Business.ViewModels;
 using Dilemma.Data.Models;
 
-using Disposable.Common;
 using Disposable.Common.Conversion;
-using Disposable.Common.ServiceLocator;
 using Disposable.Common.Extensions;
+using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
 
 namespace Dilemma.Business.Conversion
 {
+    /// <summary>
+    /// Converts to and from the <see cref="QuestionViewModel"/>.
+    /// </summary>
     public static class QuestionViewModelConverter
     {
         private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
-        
+
+        /// <summary>
+        /// Converts a <see cref="QuestionViewModel"/> to a <see cref="Question"/>.
+        /// </summary>
+        /// <param name="viewModel">The <see cref="QuestionViewModel"/> to convert.</param>
+        /// <returns>The resultant <see cref="Question"/>.</returns>
         public static Question ToQuestion(QuestionViewModel viewModel)
         {
             return new Question
@@ -28,24 +35,27 @@ namespace Dilemma.Business.Conversion
                        };
         }
 
+        /// <summary>
+        /// Converts a <see cref="Question"/> to a <see cref="QuestionViewModel"/>.
+        /// </summary>
+        /// <param name="model">The <see cref="Question"/> to convert.</param>
+        /// <returns>The resultant <see cref="QuestionViewModel"/>.</returns>
         public static QuestionViewModel FromQuestion(Question model)
         {
             var answers = ConverterFactory.ConvertMany<Answer, AnswerViewModel>(model.Answers);
-            
-            return new QuestionViewModel
-                {
-                    QuestionId = model.QuestionId,
-                    Text = model.Text,
-                    CreatedDateTime = model.CreatedDateTime,
-                    ClosesDateTime = model.ClosesDateTime,
-                    CategoryId = model.Category.CategoryId,
-                    CategoryName = model.Category.Name,
-                    TotalAnswers = model.TotalAnswers,
-                    MaxAnswers = model.MaxAnswers,
-                    Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
-                };
-        }
 
-        
+            return new QuestionViewModel
+                       {
+                           QuestionId = model.QuestionId,
+                           Text = model.Text,
+                           CreatedDateTime = model.CreatedDateTime,
+                           ClosesDateTime = model.ClosesDateTime,
+                           CategoryId = model.Category.CategoryId,
+                           CategoryName = model.Category.Name,
+                           TotalAnswers = model.TotalAnswers,
+                           MaxAnswers = model.MaxAnswers,
+                           Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
+                       };
+        }
     }
 }

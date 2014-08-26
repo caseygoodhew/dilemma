@@ -11,8 +11,15 @@ using FluentValidation;
 
 namespace Dilemma.Business
 {
+    /// <summary>
+    /// Registers business services with the <see cref="ILocator"/> <see cref="IRegistrar"/>.
+    /// </summary>
     public static class Registration
     {
+        /// <summary>
+        /// Registers business services with the <see cref="ILocator"/> <see cref="IRegistrar"/>.
+        /// </summary>
+        /// <param name="registrar">The <see cref="IRegistrar"/> to use.</param>
         public static void Register(IRegistrar registrar)
         {
             registrar.Register<IAdministrationService>(() => new AdministrationService());
@@ -20,8 +27,8 @@ namespace Dilemma.Business
             registrar.Register<ISiteService>(() => new SiteService());
 
             registrar.Register<IValidator<CreateQuestionViewModel>>(() => new CreateQuestionViewModelValidator());
-            // keep this here as it will be used when we're out of testing
-            //registrar.Register<IValidator<CreateQuestionViewModel>>(() => new DerivativeValidator<CreateQuestionViewModel, QuestionViewModel>());
+            //// keep this here as it will be used when we're out of testing
+            //// registrar.Register<IValidator<CreateQuestionViewModel>>(() => new DerivativeValidator<CreateQuestionViewModel, QuestionViewModel>());
             ConverterFactory.Register<CreateQuestionViewModel, Question>(registrar, QuestionViewModelConverter.ToQuestion);
 
             registrar.Register<IValidator<QuestionViewModel>>(() => new QuestionViewModelValidator());

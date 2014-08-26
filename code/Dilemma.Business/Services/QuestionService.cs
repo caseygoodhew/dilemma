@@ -12,6 +12,9 @@ using Disposable.Common.Services;
 
 namespace Dilemma.Business.Services
 {
+    /// <summary>
+    /// Question service provider.
+    /// </summary>
     internal class QuestionService : IQuestionService
     {
         private static readonly Lazy<IAdministrationService> AdministrationService = new Lazy<IAdministrationService>(Locator.Current.Instance<IAdministrationService>);
@@ -22,7 +25,12 @@ namespace Dilemma.Business.Services
         
         private static readonly Lazy<IQuestionRepository> QuestionRepository = new Lazy<IQuestionRepository>(Locator.Current.Instance<IQuestionRepository>);
 
-        public CreateQuestionViewModel InitNew(CreateQuestionViewModel questionViewModel = null)
+        /// <summary>
+        /// Initializes or reinitializes a <see cref="CreateQuestionViewModel"/>. Reinitialization allows a view model to return the correct state on POST validation.
+        /// </summary>
+        /// <param name="questionViewModel">(Optional) The <see cref="CreateQuestionViewModel"/> to reinitialize.</param>
+        /// <returns>The <see cref="CreateQuestionViewModel"/>.</returns>
+        public CreateQuestionViewModel InitNewQuestion(CreateQuestionViewModel questionViewModel = null)
         {
             var systemConfiguration = AdministrationService.Value.GetSystemConfiguration();
             var allowTestingConfiguration = AllowTestingConfiguration(systemConfiguration);
@@ -44,7 +52,11 @@ namespace Dilemma.Business.Services
             return questionViewModel;
         }
 
-        public void SaveNew(CreateQuestionViewModel questionViewModel)
+        /// <summary>
+        /// Saves a new <see cref="CreateQuestionViewModel"/> instance.
+        /// </summary>
+        /// <param name="questionViewModel">The <see cref="CreateQuestionViewModel"/> to save.</param>
+        public void SaveNewQuestion(CreateQuestionViewModel questionViewModel)
         {
             var systemConfiguration = AdministrationService.Value.GetSystemConfiguration();
 
@@ -53,29 +65,54 @@ namespace Dilemma.Business.Services
 
             questionViewModel.Text = questionViewModel.Text.TidyWhiteSpace();
 
-            QuestionRepository.Value.Create(questionViewModel);
+            QuestionRepository.Value.CreateQuestion(questionViewModel);
         }
 
-        public IEnumerable<QuestionViewModel> GetAll()
+        /// <summary>
+        /// Gets all questions as <see cref="QuestionViewModel"/>s.
+        /// </summary>
+        /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
+        public IEnumerable<QuestionViewModel> GetAllQuestions()
         {
-            return QuestionRepository.Value.List<QuestionViewModel>();
+            return QuestionRepository.Value.QuestionList<QuestionViewModel>();
         }
 
+        /// <summary>
+        /// Gets a single <see cref="QuestionDetailsViewModel"/> by id.
+        /// </summary>
+        /// <param name="questionId">The question id.</param>
+        /// <returns>The <see cref="QuestionDetailsViewModel"/>.</returns>
         public QuestionDetailsViewModel GetQuestion(int questionId)
         {
-            return QuestionRepository.Value.Get<QuestionDetailsViewModel>(questionId, GetQuestionAs.FullDetails);
+            return QuestionRepository.Value.GetQuestion<QuestionDetailsViewModel>(questionId, GetQuestionAs.FullDetails);
         }
 
+        /// <summary>
+        /// Requests an an slot for the given question id. If no slot is available, null is returned.
+        /// </summary>
+        /// <param name="questionId">The question id.</param>
+        /// <returns>The answer id if a slot is available or null if it is not available.</returns>
         public int? RequestAnswerSlot(int questionId)
         {
             return QuestionRepository.Value.RequestAnswerSlot(questionId);
         }
 
+        /// <summary>
+        /// Gets an answer in progress by question id and answer id. The provided answer id must be an answer of the question id.
+        /// </summary>
+        /// <param name="questionId">The question id.</param>
+        /// <param name="answerId">The answer id.</param>
+        /// <returns>The <see cref="AnswerViewModel"/>.</returns>
         public AnswerViewModel GetAnswerInProgress(int questionId, int answerId)
         {
             return QuestionRepository.Value.GetAnswerInProgress<AnswerViewModel>(questionId, answerId);
         }
 
+        /// <summary>
+        /// Completes an answer that is in an initial 'Answer slot' state.
+        /// </summary>
+        /// <param name="questionId">The question id.</param>
+        /// <param name="answerViewModel">The <see cref="AnswerViewModel"/> to save.</param>
         public void CompleteAnswer(int questionId, AnswerViewModel answerViewModel)
         {
             answerViewModel.Text = answerViewModel.Text.TidyWhiteSpace();

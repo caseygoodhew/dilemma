@@ -1,3 +1,4 @@
+#region Component Designer generated code
 namespace Dilemma.Data.Migrations
 {
     using System;
@@ -38,7 +39,7 @@ namespace Dilemma.Data.Migrations
                         QuestionLifetime = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
         }
         
         public override void Down()
@@ -51,3 +52,4 @@ namespace Dilemma.Data.Migrations
         }
     }
 }
+#endregion

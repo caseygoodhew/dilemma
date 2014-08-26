@@ -20,14 +20,14 @@ namespace Dilemma.Web.Controllers
 
         public ActionResult List()
         {
-            return View(QuestionService.Value.GetAll());
+            return View(QuestionService.Value.GetAllQuestions());
         }
 
         //
         // GET: /Question/Create
         public ActionResult Create()
         {
-            var model = QuestionService.Value.InitNew();
+            var model = QuestionService.Value.InitNewQuestion();
             return View(model);
         }
 
@@ -86,11 +86,11 @@ namespace Dilemma.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                QuestionService.Value.SaveNew(model);
+                QuestionService.Value.SaveNewQuestion(model);
                 return RedirectToAction("List");
             }
 
-            QuestionService.Value.InitNew(model);
+            QuestionService.Value.InitNewQuestion(model);
             
             return View(model);
         }

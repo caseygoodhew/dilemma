@@ -1,3 +1,4 @@
+#region Component Designer generated code
 namespace Dilemma.Data.Migrations
 {
     using System;
@@ -30,3 +31,4 @@ namespace Dilemma.Data.Migrations
         }
     }
 }
+#endregion

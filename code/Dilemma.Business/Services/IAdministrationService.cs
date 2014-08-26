@@ -2,10 +2,21 @@
 
 namespace Dilemma.Business.Services
 {
+    /// <summary>
+    /// Administration service provider interface.
+    /// </summary>
     public interface IAdministrationService
     {
+        /// <summary>
+        /// Gets the system configuration as a <see cref="SystemConfigurationViewModel"/>.
+        /// </summary>
+        /// <returns>The <see cref="SystemConfigurationViewModel"/>.</returns>
         SystemConfigurationViewModel GetSystemConfiguration();
 
+        /// <summary>
+        /// Sets the system configuration as a <see cref="SystemConfigurationViewModel"/>.
+        /// </summary>
+        /// <param name="viewModel">The <see cref="SystemConfigurationViewModel"/> with the full set of changed and unchanged elements.</param>
         void SetSystemConfiguration(SystemConfigurationViewModel viewModel);
     }
 }

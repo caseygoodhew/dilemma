@@ -20,6 +20,11 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<SystemConfiguration> SystemConfiguration { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public static void Startup()
+        {
+            Database.SetInitializer<DilemmaContext>(null);
+        }
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,11 +35,6 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new AnswerMap());
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new SystemConfigurationMap());
-        }
-
-        public static void Startup()
-        {
-            Database.SetInitializer<DilemmaContext>(null);
         }
     }
 }

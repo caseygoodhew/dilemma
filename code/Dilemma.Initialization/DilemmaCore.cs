@@ -25,13 +25,7 @@ namespace Dilemma.Initialization
                 Business.Registration.Register,
                 Data.Registration.Register,
                 Disposable.Common.Registration.Register,
-                RegisterShared
-            );
-        }
-
-        private static void RegisterShared(IRegistrar registrar)
-        {
-            registrar.Register<IProviderCache>(() => new ProviderCache());
+                RegisterShared);
         }
 
         /// <summary>
@@ -41,6 +35,11 @@ namespace Dilemma.Initialization
         public static bool Initialize()
         {
             return DilemmaCoreInstance.Value != null;
+        }
+
+        private static void RegisterShared(IRegistrar registrar)
+        {
+            registrar.Register<IProviderCache>(() => new ProviderCache());
         }
     }
 }

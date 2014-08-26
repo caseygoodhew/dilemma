@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
@@ -16,11 +13,19 @@ using Disposable.Common.Services;
 
 namespace Dilemma.Data.Repositories
 {
+    /// <summary>
+    /// Question service provider implementation.
+    /// </summary>
     internal class QuestionRepository : IQuestionRepository
     {
         private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
-        
-        public void Create<T>(T questionType) where T : class
+
+        /// <summary>
+        /// Creates a <see cref="Question"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="Question"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to receive.</typeparam>
+        /// <param name="questionType">The convertable instance</param>
+        public void CreateQuestion<T>(T questionType) where T : class
         {
             var question = ConverterFactory.ConvertOne<T, Question>(questionType);
 
@@ -32,15 +37,27 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        public T Get<T>(int questionId, GetQuestionAs config) where T : class
+        /// <summary>
+        /// Gets the <see cref="Question"/> in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to receive.</typeparam>
+        /// <param name="questionId">The id of the question to get.</param>
+        /// <param name="config">Options for what extended data to include.</param>
+        /// <returns>The <see cref="Question"/> converted to type T.</returns>
+        public T GetQuestion<T>(int questionId, GetQuestionAs config) where T : class
         {
             using (var context = new DilemmaContext())
             {
                 return Get<T>(context, questionId, config);
             }
         }
-        
-        public IEnumerable<T> List<T>() where T : class
+
+        /// <summary>
+        /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
+        public IEnumerable<T> QuestionList<T>() where T : class
         {
             // http://stackoverflow.com/questions/2010897/how-to-count-associated-entities-without-fetching-them-in-entity-framework
             using (var context = new DilemmaContext())
@@ -78,6 +95,11 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Requests an an slot for the given question id. If no slot is available, null is returned.
+        /// </summary>
+        /// <param name="questionId">The question id.</param>
+        /// <returns>The answer id if a slot is available or null if it is not available.</returns>
         public int? RequestAnswerSlot(int questionId)
         {
             using (var context = new DilemmaContext())
@@ -106,6 +128,13 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets an answer in progress by question id and answer id. The provided answer id must be an answer of the question id.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <param name="questionId">The question id.</param>
+        /// <param name="answerId">The answer id.</param>
+        /// <returns>The <see cref="Answer"/> converted to type T.</returns>
         public T GetAnswerInProgress<T>(int questionId, int answerId) where T : class
         {
             using (var context = new DilemmaContext())
@@ -114,6 +143,13 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Completes an answer that is in an initial 'Answer slot' state.
+        /// </summary>
+        /// <typeparam name="T">The type to receive.</typeparam>
+        /// <param name="questionId">The question id.</param>
+        /// <param name="answerType">The convertable instance.</param>
+        /// <returns>true if the answer was saved, false if the answer slot was no longer available.</returns>
         public bool CompleteAnswer<T>(int questionId, T answerType) where T : class
         {
             using (var context = new DilemmaContext())
