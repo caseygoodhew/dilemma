@@ -1,5 +1,8 @@
 ﻿namespace Dilemma.Data.EntityFramework
 {
+    /// <summary>
+    /// This class forces the project to find the <see cref="System.Data.Entity.SqlServer.SqlProviderServices.Instance"/> 
+    /// </summary>
     internal static class FixEfProviderServicesProblem
     {
         private static void Fix()

@@ -4,8 +4,14 @@ using Dilemma.Data.Models;
 
 namespace Dilemma.Data.EntityFramework.Maps
 {
+    /// <summary>
+    /// <see cref="Answer"/> entity configuration.
+    /// </summary>
     public class AnswerMap : EntityTypeConfiguration<Answer>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AnswerMap" /> class.
+        /// </summary>
         public AnswerMap()
         {
             HasKey(p => p.AnswerId);

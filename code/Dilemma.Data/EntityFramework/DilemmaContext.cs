@@ -7,25 +7,58 @@ using Dilemma.Data.Models;
 
 namespace Dilemma.Data.EntityFramework
 {
+    /// <summary>
+    /// The standard common context to use for connections to the Dilemma database.
+    /// </summary>
     public class DilemmaContext : DbContext
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DilemmaContext" /> class.
+        /// </summary>
         public DilemmaContext() : base("DilemmaContext")
         {
         }
         
+        /// <summary>
+        /// Gets or sets the <see cref="Question"/> database set.
+        /// </summary>
         public DbSet<Question> Questions { get; set; }
         
+        /// <summary>
+        /// Gets or sets the <see cref="Answer"/> database set;
+        /// </summary>
         public DbSet<Answer> Answers { get; set; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="Answer"/> database set; 
+        /// </summary>
         public DbSet<SystemConfiguration> SystemConfiguration { get; set; }
 
+        /// <summary>
+        /// Gets or sets the <see cref="Answer"/> database set;
+        /// </summary>
         public DbSet<Category> Categories { get; set; }
 
+        /// <summary>
+        /// Called the first that the the DbContext is used in each session.
+        /// </summary>
         public static void Startup()
         {
+            // From: http://msdn.microsoft.com/en-us/library/gg679461(v=vs.113).aspx
+            //      Sets the database initializer to use for the given context type. 
+            //      The database initializer is called when a the given DbContext type is used to access 
+            //      a database for the first time. The default strategy for Code First contexts is an 
+            //      instance of CreateDatabaseIfNotExists<TContext>.
+            // This appears to be broken - if we allow EF6 to initialize the database it seems to 
+            // always / frequently think that the bd is out of date. It throws an exception that a migrate 
+            // needs to be performed, only to not find any differences during the migration generation phase.
             Database.SetInitializer<DilemmaContext>(null);
         }
         
+        /// <summary>
+        /// Configures the <see cref="DbModelBuilder"/> to use our configuration options and entity maps.
+        /// </summary>
+        /// <param name="modelBuilder">The <see cref="DbModelBuilder"/> to configure.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

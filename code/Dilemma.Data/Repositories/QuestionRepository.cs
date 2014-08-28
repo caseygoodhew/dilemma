@@ -48,7 +48,7 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                return Get<T>(context, questionId, config);
+                return GetQuestion<T>(context, questionId, config);
             }
         }
 
@@ -111,7 +111,7 @@ namespace Dilemma.Data.Repositories
                     return existingAnswer.AnswerId;
                 }
                 
-                var question = Get<Question>(context, questionId, GetQuestionAs.AnswerCount);
+                var question = GetQuestion<Question>(context, questionId, GetQuestionAs.AnswerCount);
 
                 if (question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
                 {
@@ -173,7 +173,7 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        private T Get<T>(DilemmaContext context, int questionId, GetQuestionAs config) where T : class
+        private static T GetQuestion<T>(DilemmaContext context, int questionId, GetQuestionAs config) where T : class
         {
             Question question;
 
