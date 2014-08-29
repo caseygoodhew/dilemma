@@ -60,6 +60,10 @@
       <Project>{81e63148-c585-4ad5-88bc-6ab47b6b0b89}</Project>
       <Name>Dilemma.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dilemma.Security\Dilemma.Security.csproj">
+      <Project>{e64d25f6-1211-4a47-8abf-08cf53bddd71}</Project>
+      <Name>Dilemma.Security</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

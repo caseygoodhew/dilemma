@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
+    <Compile Include="Controllers\DilemmaBaseController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\SystemConfigurationController.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
@@ -394,6 +395,10 @@
     <ProjectReference Include="..\Dilemma.Initialization\Dilemma.Initialization.csproj">
       <Project>{23333DCD-40C6-47BC-BCA2-D76F54C4E763}</Project>
       <Name>Dilemma.Initialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dilemma.Security\Dilemma.Security.csproj">
+      <Project>{e64d25f6-1211-4a47-8abf-08cf53bddd71}</Project>
+      <Name>Dilemma.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

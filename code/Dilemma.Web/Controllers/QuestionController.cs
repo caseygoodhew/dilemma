@@ -14,7 +14,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    public class QuestionController : Controller
+    public class QuestionController : DilemmaBaseController
     {
         private static readonly Lazy<IQuestionService> QuestionService = new Lazy<IQuestionService>(Locator.Current.Instance<IQuestionService>);
 

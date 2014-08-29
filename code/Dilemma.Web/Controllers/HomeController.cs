@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Dilemma.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : DilemmaBaseController
     {
         //
         // GET: /Home/

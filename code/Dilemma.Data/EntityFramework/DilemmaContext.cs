@@ -30,14 +30,19 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<Answer> Answers { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Answer"/> database set; 
+        /// Gets or sets the <see cref="SystemConfiguration"/> database set; 
         /// </summary>
         public DbSet<SystemConfiguration> SystemConfiguration { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Answer"/> database set;
+        /// Gets or sets the <see cref="Categories"/> database set;
         /// </summary>
         public DbSet<Category> Categories { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Users"/> database set;
+        /// </summary>
+        public DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Called the first that the the DbContext is used in each session.

@@ -61,6 +61,7 @@
     <Compile Include="EntityFramework\Initialization\CategoryInitialization.cs" />
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
     <Compile Include="EntityFramework\Maps\AnswerMap.cs" />
+    <Compile Include="EntityFramework\Maps\UserMap.cs" />
     <Compile Include="EntityFramework\Maps\SystemConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionMap.cs" />
     <Compile Include="Migrations\201408151541183_Migration.cs" />
@@ -87,6 +88,10 @@
     <Compile Include="Migrations\201408250729162_Migration5.Designer.cs">
       <DependentUpon>201408250729162_Migration5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408290935257_Migration6.cs" />
+    <Compile Include="Migrations\201408290935257_Migration6.Designer.cs">
+      <DependentUpon>201408290935257_Migration6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -94,6 +99,7 @@
     <Compile Include="Models\SystemConfiguration.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Repositories\AdministrationRepository.cs" />
@@ -101,8 +107,10 @@
     <Compile Include="Repositories\ISiteRepository.cs" />
     <Compile Include="Repositories\IAdministrationRepository.cs" />
     <Compile Include="Repositories\IQuestionRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\SiteRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -131,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408250729162_Migration5.resx">
       <DependentUpon>201408250729162_Migration5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408290935257_Migration6.resx">
+      <DependentUpon>201408290935257_Migration6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
