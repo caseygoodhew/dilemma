@@ -55,5 +55,10 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets the list of completed and approved answers for this question.
         /// </summary>
         public IList<AnswerViewModel> Answers { get; set; }
+
+        /// <summary>
+        /// Flag indicating that the current user asked this question.
+        /// </summary>
+        public bool IsMyQuestion { get; set; }
     }
 }

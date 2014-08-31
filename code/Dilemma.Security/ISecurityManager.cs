@@ -7,5 +7,7 @@ namespace Dilemma.Security
         void ConfigureCookieAuthentication(IAppBuilder appBuilder);
         
         void CookieValidation();
+
+        int GetUserId();
     }
 }

@@ -3,23 +3,29 @@
 
 <h2>Question @Model.QuestionId</h2>
 
-<div class="row">
-    <div class="col-md-8 col-md-offset-2"><span class="user-text">@Model.Text</span></div>
-</div>
+@{
+    var questionClass = Model.IsMyQuestion ? "bg-info" : string.Empty;  
+} 
 
-<div class="row top-buffer">
-    <div class="col-md-8 col-md-offset-2 text-muted">
-        <div class="row">
-            <small class="col-md-4">Created: @Model.CreatedDateTime.ToRelativeText()</small>
-            <small class="col-md-4">Closes: @Model.ClosesDateTime.ToRelativeText()</small>
-        </div>
-        <div class="row">
-            <small class="col-md-4">Category: @Model.CategoryName</small>
-            <small class="col-md-4">Max Answers: @Model.MaxAnswers</small>
+
+<div class="@questionClass">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2"><span class="user-text">@Model.Text</span></div>
+    </div>
+
+    <div class="row top-buffer">
+        <div class="col-md-8 col-md-offset-2 text-muted">
+            <div class="row">
+                <small class="col-md-4">Created: @Model.CreatedDateTime.ToRelativeText()</small>
+                <small class="col-md-4">Closes: @Model.ClosesDateTime.ToRelativeText()</small>
+            </div>
+            <div class="row">
+                <small class="col-md-4">Category: @Model.CategoryName</small>
+                <small class="col-md-4">Max Answers: @Model.MaxAnswers</small>
+            </div>
         </div>
     </div>
 </div>
-
 <hr/>
 
 <h3>Answers</h3>
@@ -27,17 +33,20 @@
 @{ var topBuffer = ""; }
 @foreach (var answer in Model.Answers)
 {
-    <hr/>
-
-    <div class="row @topBuffer">
-        <div class="col-md-8 col-md-offset-2"><span class="user-text">@answer.Text</span></div>
-    </div>
+    var answerClass = answer.IsMyAnswer ? "bg-info" : string.Empty;  
     
-    <div class="row top-buffer">
-        <div class="col-md-8 col-md-offset-2 text-muted">
-            <small>Created: @answer.CreatedDateTime.ToRelativeText()</small>
+    <hr/>
+    <div class="@answerClass @topBuffer">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2"><span class="user-text">@answer.Text</span></div>
+        </div>
+    
+        <div class="row top-buffer">
+            <div class="col-md-8 col-md-offset-2 text-muted">
+                <small>Created: @answer.CreatedDateTime.ToRelativeText()</small>
+            </div>
         </div>
     </div>
-
+    
     topBuffer = "top-buffer";
 }

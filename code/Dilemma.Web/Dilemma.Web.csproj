@@ -182,6 +182,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Views\Question\Answer.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -366,6 +367,8 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Answer.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Activity\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

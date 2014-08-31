@@ -33,5 +33,10 @@ namespace Dilemma.Data.Models
         /// Gets or sets the answer type.
         /// </summary>
         public AnswerType AnswerType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user who created the answer.
+        /// </summary>
+        public User User { get; set; }
     }
 }

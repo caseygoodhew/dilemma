@@ -1,0 +1,46 @@
+﻿@using Dilemma.Web.Extensions
+@model Dilemma.Business.ViewModels.QuestionListViewModel
+
+<table class="table">
+    <tr>
+        <th>Question</th>
+        <th style="min-width: 110px">Created</th>
+        <th style="min-width: 110px">Closes</th>
+        <th>Answers</th>
+        <th>Category</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Questions)
+{
+    var answerPercentage = Convert.ToInt32(item.TotalAnswers * 100 / item.MaxAnswers);
+    var rowClass = item.IsMyQuestion ? "bg-info" : string.Empty;
+    
+    <tr class="@rowClass">
+        <td>
+            @Html.DisplayFor(modelItem => item.Text) 
+        </td>
+        <td>
+            <div title="@item.CreatedDateTime">@item.CreatedDateTime.ToRelativeText()</div>
+        </td>
+        <td>
+            <div title="@item.ClosesDateTime">@item.ClosesDateTime.ToRelativeText()</div>
+        </td>
+        <td>
+            <div class="progress" style="margin-bottom: 5px">
+                <div class="progress-bar" role="progressbar" aria-valuenow="@item.TotalAnswers" aria-valuemin="0" aria-valuemax="@item.MaxAnswers" style="width: @answerPercentage%; min-width: 0">
+                    <span class="sr-only">@item.TotalAnswers out of @item.MaxAnswers</span>
+                </div>
+            </div>
+            <div class="text-center"><small>@string.Format(@"( {0} / {1} )", item.TotalAnswers, item.MaxAnswers)</small></div>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.ActionLink("View", "Details", new { questionId = item.QuestionId })
+        </td>
+    </tr>
+}
+
+</table>

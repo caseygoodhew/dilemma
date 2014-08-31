@@ -20,6 +20,8 @@ namespace Dilemma.Security
 {
     internal class SecurityManager : ISecurityManager
     {
+        private const string ClaimsSessionKey = "security-manager-claims";
+        
         private static readonly Lazy<IUserRepository> UserRepository = new Lazy<IUserRepository>(Locator.Current.Instance<IUserRepository>);
         
         public void ConfigureCookieAuthentication(IAppBuilder appBuilder)
@@ -47,8 +49,8 @@ namespace Dilemma.Security
             
             if (!HasCookie(claims))
             {
-                var userSid = CreateAnonymousUser();
-                IssueAnonymousCookie(userSid);
+                var userId = CreateAnonymousUser();
+                IssueAnonymousCookie(userId);
                 return;
             }
 
@@ -70,10 +72,16 @@ namespace Dilemma.Security
             RedirectToLogin();
         }
 
+        public int GetUserId()
+        {
+            return Int32.Parse(ReadClaims().Single(x => x.Type == ClaimTypes.Sid).Value);
+        }
+
         private static IEnumerable<Claim> ReadClaims()
         {
-            var identity = (ClaimsIdentity)HttpContext.Current.User.Identity;
-            return identity.Claims;
+            return HttpContext.Current.Session.Get(
+                ClaimsSessionKey,
+                () => (HttpContext.Current.User.Identity as ClaimsIdentity).Claims);
         }
 
         private static bool HasCookie(IEnumerable<Claim> claims)
@@ -86,12 +94,12 @@ namespace Dilemma.Security
             return UserRepository.Value.CreateAnonymousUser();
         }
 
-        private static void IssueAnonymousCookie(int userSid)
+        private static void IssueAnonymousCookie(int userId)
         {
             var claims = new List<Claim>
                              {
                                  new Claim(ClaimTypes.Anonymous, ClaimTypes.Anonymous),
-                                 new Claim(ClaimTypes.Sid, userSid.ToString(CultureInfo.InvariantCulture))
+                                 new Claim(ClaimTypes.Sid, userId.ToString(CultureInfo.InvariantCulture))
                              };
 
             var id = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
@@ -102,6 +110,8 @@ namespace Dilemma.Security
             var authenticationProperties = new AuthenticationProperties { IsPersistent = true };
 
             authenticationManager.SignIn(authenticationProperties, id);
+
+            HttpContext.Current.Session[ClaimsSessionKey] = claims;
         }
 
         private static bool IsAnonymousCookie(IEnumerable<Claim> claims)

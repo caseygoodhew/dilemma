@@ -33,6 +33,12 @@ namespace Dilemma.Business.Services
         IEnumerable<QuestionViewModel> GetAllQuestions();
 
         /// <summary>
+        /// Gets all questions that the current user has been involved in
+        /// </summary>
+        /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
+        IEnumerable<QuestionViewModel> GetMyActivity();
+
+        /// <summary>
         /// Gets a single <see cref="QuestionDetailsViewModel"/> by id.
         /// </summary>
         /// <param name="questionId">The question id.</param>

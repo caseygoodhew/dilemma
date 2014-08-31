@@ -74,7 +74,7 @@ Write(Html.DisplayFor(x => x.QuestionViewModel));
             
             #line default
             #line hidden
-WriteLiteral(";\r\n\r\n");
+WriteLiteral("\r\n\r\n");
 
             
             #line 12 "..\..\Views\Question\Details.cshtml"

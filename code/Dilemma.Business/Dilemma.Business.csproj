@@ -67,6 +67,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\CreateQuestionViewModel.cs" />
     <Compile Include="ViewModels\QuestionDetailsViewModel.cs" />
+    <Compile Include="ViewModels\QuestionListViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.cs" />
@@ -89,6 +90,10 @@
     <ProjectReference Include="..\Dilemma.Data\Dilemma.Data.csproj">
       <Project>{81E63148-C585-4AD5-88BC-6AB47B6B0B89}</Project>
       <Name>Dilemma.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dilemma.Security\Dilemma.Security.csproj">
+      <Project>{e64d25f6-1211-4a47-8abf-08cf53bddd71}</Project>
+      <Name>Dilemma.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

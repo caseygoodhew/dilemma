@@ -20,7 +20,9 @@ namespace Dilemma.Web.Controllers
 
         public ActionResult List()
         {
-            return View(QuestionService.Value.GetAllQuestions());
+            var viewModel = new QuestionListViewModel { Questions = QuestionService.Value.GetAllQuestions() };
+            
+            return View(viewModel);
         }
 
         //

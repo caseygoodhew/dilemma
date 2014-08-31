@@ -25,5 +25,10 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets the created date time.
         /// </summary>
         public DateTime CreatedDateTime { get; set; }
+
+        /// <summary>
+        /// Flag indicating that the current user added this answer.
+        /// </summary>
+        public bool IsMyAnswer { get; set; }
     }
 }

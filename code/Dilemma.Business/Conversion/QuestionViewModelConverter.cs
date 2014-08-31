@@ -3,11 +3,11 @@ using System.Linq;
 
 using Dilemma.Business.ViewModels;
 using Dilemma.Data.Models;
+using Dilemma.Security;
 
 using Disposable.Common.Conversion;
 using Disposable.Common.Extensions;
 using Disposable.Common.ServiceLocator;
-using Disposable.Common.Services;
 
 namespace Dilemma.Business.Conversion
 {
@@ -16,7 +16,7 @@ namespace Dilemma.Business.Conversion
     /// </summary>
     public static class QuestionViewModelConverter
     {
-        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
 
         /// <summary>
         /// Converts a <see cref="QuestionViewModel"/> to a <see cref="Question"/>.
@@ -43,6 +43,8 @@ namespace Dilemma.Business.Conversion
         public static QuestionViewModel FromQuestion(Question model)
         {
             var answers = ConverterFactory.ConvertMany<Answer, AnswerViewModel>(model.Answers);
+            
+            var userId = SecurityManager.Value.GetUserId();
 
             return new QuestionViewModel
                        {
@@ -54,6 +56,7 @@ namespace Dilemma.Business.Conversion
                            CategoryName = model.Category.Name,
                            TotalAnswers = model.TotalAnswers,
                            MaxAnswers = model.MaxAnswers,
+                           IsMyQuestion = model.User.UserId == userId,
                            Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
                        };
         }

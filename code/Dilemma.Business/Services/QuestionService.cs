@@ -5,6 +5,7 @@ using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
+using Dilemma.Security;
 
 using Disposable.Common.Extensions;
 using Disposable.Common.ServiceLocator;
@@ -24,6 +25,8 @@ namespace Dilemma.Business.Services
         private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
         
         private static readonly Lazy<IQuestionRepository> QuestionRepository = new Lazy<IQuestionRepository>(Locator.Current.Instance<IQuestionRepository>);
+
+        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
 
         /// <summary>
         /// Initializes or reinitializes a <see cref="CreateQuestionViewModel"/>. Reinitialization allows a view model to return the correct state on POST validation.
@@ -65,7 +68,9 @@ namespace Dilemma.Business.Services
 
             questionViewModel.Text = questionViewModel.Text.TidyWhiteSpace();
 
-            QuestionRepository.Value.CreateQuestion(questionViewModel);
+            var userId = SecurityManager.Value.GetUserId();
+            
+            QuestionRepository.Value.CreateQuestion(userId, questionViewModel);
         }
 
         /// <summary>
@@ -74,7 +79,16 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
         public IEnumerable<QuestionViewModel> GetAllQuestions()
         {
-            return QuestionRepository.Value.QuestionList<QuestionViewModel>();
+            return QuestionRepository.Value.QuestionList<QuestionViewModel>(null);
+        }
+
+        /// <summary>
+        /// Gets all questions that the current user has been involved in
+        /// </summary>
+        /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
+        public IEnumerable<QuestionViewModel> GetMyActivity()
+        {
+            return QuestionRepository.Value.QuestionList<QuestionViewModel>(SecurityManager.Value.GetUserId());
         }
 
         /// <summary>
@@ -94,7 +108,8 @@ namespace Dilemma.Business.Services
         /// <returns>The answer id if a slot is available or null if it is not available.</returns>
         public int? RequestAnswerSlot(int questionId)
         {
-            return QuestionRepository.Value.RequestAnswerSlot(questionId);
+            var userId = SecurityManager.Value.GetUserId();
+            return QuestionRepository.Value.RequestAnswerSlot(userId, questionId);
         }
 
         /// <summary>
@@ -105,7 +120,8 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="AnswerViewModel"/>.</returns>
         public AnswerViewModel GetAnswerInProgress(int questionId, int answerId)
         {
-            return QuestionRepository.Value.GetAnswerInProgress<AnswerViewModel>(questionId, answerId);
+            var userId = SecurityManager.Value.GetUserId(); 
+            return QuestionRepository.Value.GetAnswerInProgress<AnswerViewModel>(userId, questionId, answerId);
         }
 
         /// <summary>
@@ -115,8 +131,9 @@ namespace Dilemma.Business.Services
         /// <param name="answerViewModel">The <see cref="AnswerViewModel"/> to save.</param>
         public void CompleteAnswer(int questionId, AnswerViewModel answerViewModel)
         {
+            var userId = SecurityManager.Value.GetUserId(); 
             answerViewModel.Text = answerViewModel.Text.TidyWhiteSpace();
-            QuestionRepository.Value.CompleteAnswer(questionId, answerViewModel);
+            QuestionRepository.Value.CompleteAnswer(userId, questionId, answerViewModel);
         }
 
         private void SetMaxAnswers(SystemConfigurationViewModel systemConfiguration, QuestionViewModel questionViewModel)

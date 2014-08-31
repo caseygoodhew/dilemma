@@ -17,6 +17,8 @@ namespace Dilemma.Data.EntityFramework.Maps
             HasKey(p => p.AnswerId);
             Property(p => p.Text).HasMaxLength(2000);
             Property(p => p.CreatedDateTime).IsRequired();
+
+            HasRequired(p => p.User).WithMany().WillCascadeOnDelete(false);
         }
     }
 }

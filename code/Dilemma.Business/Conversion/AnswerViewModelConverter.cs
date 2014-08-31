@@ -1,7 +1,11 @@
-﻿using Dilemma.Business.ViewModels;
+﻿using System;
+
+using Dilemma.Business.ViewModels;
 using Dilemma.Data.Models;
+using Dilemma.Security;
 
 using Disposable.Common.Extensions;
+using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Business.Conversion
 {
@@ -10,6 +14,8 @@ namespace Dilemma.Business.Conversion
     /// </summary>
     public static class AnswerViewModelConverter
     {
+        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
+
         /// <summary>
         /// Converts an <see cref="AnswerViewModel"/> to an <see cref="Answer"/>.
         /// </summary>
@@ -32,11 +38,14 @@ namespace Dilemma.Business.Conversion
         /// <returns>The resultant <see cref="AnswerViewModel"/>.</returns>
         public static AnswerViewModel FromAnswer(Answer model)
         {
+            var userId = SecurityManager.Value.GetUserId();
+            
             return new AnswerViewModel
                 {
                     AnswerId = model.AnswerId,
                     Text = model.Text,
-                    CreatedDateTime = model.CreatedDateTime
+                    CreatedDateTime = model.CreatedDateTime,
+                    IsMyAnswer = model.User.UserId == userId
                 };
         }
     }

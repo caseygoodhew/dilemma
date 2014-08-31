@@ -146,7 +146,7 @@ WriteLiteral("</li>\r\n                    <li>");
 
             
             #line 25 "..\..\Views\Shared\_Layout.cshtml"
-                   Write(Html.ActionLink("Ask a question", "Create", "Question"));
+                   Write(Html.ActionLink("My activity", "Index", "Activity"));
 
             
             #line default
@@ -155,6 +155,15 @@ WriteLiteral("</li>\r\n                    <li>");
 
             
             #line 26 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("Ask a question", "Create", "Question"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n                    <li>");
+
+            
+            #line 27 "..\..\Views\Shared\_Layout.cshtml"
                    Write(Html.ActionLink("System configuration", "Index", "SystemConfiguration"));
 
             
@@ -182,7 +191,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+            #line 36 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -191,7 +200,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; ");
 
             
-            #line 38 "..\..\Views\Shared\_Layout.cshtml"
+            #line 39 "..\..\Views\Shared\_Layout.cshtml"
                  Write(DateTime.Now.Year);
 
             
@@ -202,7 +211,7 @@ WriteLiteral(" - Dilemma</p>\r\n        </footer>\r\n    </div>\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 42 "..\..\Views\Shared\_Layout.cshtml"
+            #line 43 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -213,7 +222,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+            #line 44 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -224,7 +233,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 44 "..\..\Views\Shared\_Layout.cshtml"
+            #line 45 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

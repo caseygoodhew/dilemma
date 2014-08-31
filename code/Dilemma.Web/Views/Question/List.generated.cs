@@ -38,7 +38,7 @@ namespace Dilemma.Web.Views.Question
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Question/List.cshtml")]
-    public partial class List : System.Web.Mvc.WebViewPage<IEnumerable<Dilemma.Business.ViewModels.QuestionViewModel>>
+    public partial class List : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.QuestionListViewModel>
     {
         public List()
         {
@@ -53,201 +53,16 @@ namespace Dilemma.Web.Views.Question
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<h2>List</h2>\r\n\r\n<table");
-
-WriteLiteral(" class=\"table\"");
-
-WriteLiteral(">\r\n    <tr>\r\n        <th>Question</th>\r\n        <th");
-
-WriteLiteral(" style=\"min-width: 110px\"");
-
-WriteLiteral(">Created</th>\r\n        <th");
-
-WriteLiteral(" style=\"min-width: 110px\"");
-
-WriteLiteral(">Closes</th>\r\n        <th>Answers</th>\r\n        <th>Category</th>\r\n        <th></" +
-"th>\r\n    </tr>\r\n\r\n");
+WriteLiteral("\r\n\r\n<h2>All Questions</h2>\r\n\r\n");
 
             
-            #line 20 "..\..\Views\Question\List.cshtml"
- foreach (var item in Model)
-{
-    var answerPercentage = Convert.ToInt32(item.TotalAnswers * 100 / item.MaxAnswers);
-    
+            #line 10 "..\..\Views\Question\List.cshtml"
+Write(Html.DisplayFor(x => Model));
 
             
             #line default
             #line hidden
-WriteLiteral("    <tr>\r\n        <td>\r\n");
-
-WriteLiteral("            ");
-
-            
-            #line 26 "..\..\Views\Question\List.cshtml"
-       Write(Html.DisplayFor(modelItem => item.Text));
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" \r\n        </td>\r\n        <td>\r\n            <div");
-
-WriteAttribute("title", Tuple.Create(" title=\"", 652), Tuple.Create("\"", 681)
-            
-            #line 29 "..\..\Views\Question\List.cshtml"
-, Tuple.Create(Tuple.Create("", 660), Tuple.Create<System.Object, System.Int32>(item.CreatedDateTime
-            
-            #line default
-            #line hidden
-, 660), false)
-);
-
-WriteLiteral(">");
-
-            
-            #line 29 "..\..\Views\Question\List.cshtml"
-                                          Write(item.CreatedDateTime.ToRelativeText());
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n        </td>\r\n        <td>\r\n            <div");
-
-WriteAttribute("title", Tuple.Create(" title=\"", 774), Tuple.Create("\"", 802)
-            
-            #line 32 "..\..\Views\Question\List.cshtml"
-, Tuple.Create(Tuple.Create("", 782), Tuple.Create<System.Object, System.Int32>(item.ClosesDateTime
-            
-            #line default
-            #line hidden
-, 782), false)
-);
-
-WriteLiteral(">");
-
-            
-            #line 32 "..\..\Views\Question\List.cshtml"
-                                         Write(item.ClosesDateTime.ToRelativeText());
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n        </td>\r\n        <td>\r\n            <div");
-
-WriteLiteral(" class=\"progress\"");
-
-WriteLiteral(" style=\"margin-bottom: 5px\"");
-
-WriteLiteral(">\r\n                <div");
-
-WriteLiteral(" class=\"progress-bar\"");
-
-WriteLiteral(" role=\"progressbar\"");
-
-WriteAttribute("aria-valuenow", Tuple.Create(" aria-valuenow=\"", 1001), Tuple.Create("\"", 1035)
-            
-            #line 36 "..\..\Views\Question\List.cshtml"
-, Tuple.Create(Tuple.Create("", 1017), Tuple.Create<System.Object, System.Int32>(item.TotalAnswers
-            
-            #line default
-            #line hidden
-, 1017), false)
-);
-
-WriteLiteral(" aria-valuemin=\"0\"");
-
-WriteAttribute("aria-valuemax", Tuple.Create(" aria-valuemax=\"", 1054), Tuple.Create("\"", 1086)
-            
-            #line 36 "..\..\Views\Question\List.cshtml"
-                                                 , Tuple.Create(Tuple.Create("", 1070), Tuple.Create<System.Object, System.Int32>(item.MaxAnswers
-            
-            #line default
-            #line hidden
-, 1070), false)
-);
-
-WriteAttribute("style", Tuple.Create(" style=\"", 1087), Tuple.Create("\"", 1134)
-, Tuple.Create(Tuple.Create("", 1095), Tuple.Create("width:", 1095), true)
-            
-            #line 36 "..\..\Views\Question\List.cshtml"
-                                                                                , Tuple.Create(Tuple.Create(" ", 1101), Tuple.Create<System.Object, System.Int32>(answerPercentage
-            
-            #line default
-            #line hidden
-, 1102), false)
-, Tuple.Create(Tuple.Create("", 1119), Tuple.Create("%;", 1119), true)
-, Tuple.Create(Tuple.Create(" ", 1121), Tuple.Create("min-width:", 1122), true)
-, Tuple.Create(Tuple.Create(" ", 1132), Tuple.Create("0", 1133), true)
-);
-
-WriteLiteral(">\r\n                    <span");
-
-WriteLiteral(" class=\"sr-only\"");
-
-WriteLiteral(">");
-
-            
-            #line 37 "..\..\Views\Question\List.cshtml"
-                                     Write(item.TotalAnswers);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" out of ");
-
-            
-            #line 37 "..\..\Views\Question\List.cshtml"
-                                                               Write(item.MaxAnswers);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</span>\r\n                </div>\r\n            </div>\r\n            <div");
-
-WriteLiteral(" class=\"text-center\"");
-
-WriteLiteral("><small>");
-
-            
-            #line 40 "..\..\Views\Question\List.cshtml"
-                                       Write(string.Format(@"( {0} / {1} )", item.TotalAnswers, item.MaxAnswers));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</small></div>\r\n        </td>\r\n        <td>\r\n");
-
-WriteLiteral("            ");
-
-            
-            #line 43 "..\..\Views\Question\List.cshtml"
-       Write(Html.DisplayFor(modelItem => item.CategoryName));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </td>\r\n        <td>\r\n");
-
-WriteLiteral("            ");
-
-            
-            #line 46 "..\..\Views\Question\List.cshtml"
-       Write(Html.ActionLink("View", "Details", new { questionId = item.QuestionId }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            ");
-
-WriteLiteral("\r\n        </td>\r\n    </tr>\r\n");
-
-            
-            #line 52 "..\..\Views\Question\List.cshtml"
-}
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n</table>\r\n");
+WriteLiteral("\r\n");
 
         }
     }

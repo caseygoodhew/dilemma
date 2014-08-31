@@ -14,6 +14,8 @@ namespace Dilemma.Web.Controllers
         protected DilemmaBaseController()
         {
             SecurityManager.Value.CookieValidation();
+            // this will throw an exception if its the first time tat the user has been to the page (the cookie hasn't been sent back to the browser but the claim is being checked).
+            SecurityManager.Value.GetUserId(); 
         }
     }
 }

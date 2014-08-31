@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 
 using Dilemma.Business.ViewModels;
 using Dilemma.Data.Models;
+using Dilemma.Security;
 
 using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
@@ -15,6 +17,8 @@ namespace Dilemma.Business.Conversion
     public static class QuestionDetailsViewModelConverter
     {
         private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+
+        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
 
         /// <summary>
         /// Converts a <see cref="QuestionDetailsViewModel"/> to a <see cref="Question"/>.
@@ -49,9 +53,29 @@ namespace Dilemma.Business.Conversion
 
         private static bool CanAnswer(Question model)
         {
-            var now = TimeSource.Value.Now;
+            if (model.TotalAnswers > model.MaxAnswers)
+            {
+                return false;
+            }
 
-            return model.TotalAnswers < model.MaxAnswers && model.ClosesDateTime > now;
+            if (model.ClosesDateTime < TimeSource.Value.Now)
+            {
+                return false;
+            }
+
+            var userId = SecurityManager.Value.GetUserId();
+            
+            if (model.User.UserId == userId)
+            {
+                return false;
+            }
+
+            if (model.Answers.Any(x => x.User.UserId == userId))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -48,5 +48,10 @@ namespace Dilemma.Data.Models
         /// Gets or sets the list of completed answers against the question.
         /// </summary>
         public virtual List<Answer> Answers { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user who created the question.
+        /// </summary>
+        public User User { get; set; }
     }
 }
