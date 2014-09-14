@@ -35,6 +35,7 @@ namespace Dilemma.Web.Views.Question
     
     #line default
     #line hidden
+    using Disposable.Common.Extensions;
     
     #line 2 "..\..\Views\Question\Details.cshtml"
     using Microsoft.Ajax.Utilities;

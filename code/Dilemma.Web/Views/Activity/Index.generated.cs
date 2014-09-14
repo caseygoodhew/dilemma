@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dilemma.Web.Views.Question
+namespace Dilemma.Web.Views.Activity
 {
     using System;
     using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace Dilemma.Web.Views.Question
     using Dilemma.Common;
     using Dilemma.Web;
     
-    #line 1 "..\..\Views\Question\List.cshtml"
+    #line 1 "..\..\Views\Activity\Index.cshtml"
     using Dilemma.Web.Extensions;
     
     #line default
@@ -38,26 +38,26 @@ namespace Dilemma.Web.Views.Question
     using Disposable.Common.Extensions;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Question/List.cshtml")]
-    public partial class List : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.QuestionListViewModel>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Activity/Index.cshtml")]
+    public partial class Index : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.QuestionListViewModel>
     {
-        public List()
+        public Index()
         {
         }
         public override void Execute()
         {
             
-            #line 4 "..\..\Views\Question\List.cshtml"
+            #line 4 "..\..\Views\Activity\Index.cshtml"
   
     ViewBag.Title = "List";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<h2>All Questions</h2>\r\n\r\n");
+WriteLiteral("\r\n\r\n<h2>My Activity</h2>\r\n\r\n");
 
             
-            #line 10 "..\..\Views\Question\List.cshtml"
+            #line 10 "..\..\Views\Activity\Index.cshtml"
 Write(Html.DisplayFor(x => Model));
 
             

@@ -4,16 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Dilemma.Security;
+
 namespace Dilemma.Web.Controllers
 {
     public class HomeController : DilemmaBaseController
     {
         //
         // GET: /Home/
+        [DilemmaAuthentication]
         public ActionResult Index()
         {
             return View();
             //return RedirectToAction("Create", "Question");
         }
-	}
+    }
 }

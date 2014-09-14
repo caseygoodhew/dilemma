@@ -18,7 +18,14 @@ namespace Dilemma.Business.Validators
         /// <returns>The <see cref="IValidator"/> instance, or null.</returns>
         public override IValidator CreateInstance(Type validatorType)
         {
-            return Locator.Current.Instance(validatorType) as IValidator;
+            object instance;
+
+            if (Locator.Current.TryGetInstance(validatorType, out instance))
+            {
+                return instance as IValidator;
+            }
+
+            return null;
         }
     }
 }

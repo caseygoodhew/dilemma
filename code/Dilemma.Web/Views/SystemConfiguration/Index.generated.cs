@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dilemma.Web.Views.Question
+namespace Dilemma.Web.Views.SystemConfiguration
 {
     using System;
     using System.Collections.Generic;
@@ -28,22 +28,22 @@ namespace Dilemma.Web.Views.Question
     using System.Web.UI;
     using System.Web.WebPages;
     using Dilemma.Common;
+   
     using Dilemma.Web;
-    using Disposable.Common.Extensions;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Question/Create.cshtml")]
-    public partial class Create : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.CreateQuestionViewModel>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/SystemConfiguration/Index.cshtml")]
+    public partial class Index : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.SystemConfigurationViewModel>
     {
-        public Create()
+        public Index()
         {
         }
         public override void Execute()
         {
             
-            #line 2 "..\..\Views\Question\Create.cshtml"
+            #line 3 "..\..\Views\SystemConfiguration\Index.cshtml"
   
-    ViewBag.Title = "Ask a question";
+    ViewBag.Title = "System Configuration";
 
             
             #line default
@@ -51,7 +51,7 @@ namespace Dilemma.Web.Views.Question
 WriteLiteral("\r\n\r\n<h2>");
 
             
-            #line 6 "..\..\Views\Question\Create.cshtml"
+            #line 7 "..\..\Views\SystemConfiguration\Index.cshtml"
 Write(ViewBag.Title);
 
             
@@ -60,22 +60,22 @@ Write(ViewBag.Title);
 WriteLiteral("</h2>\r\n\r\n");
 
             
-            #line 8 "..\..\Views\Question\Create.cshtml"
- using (Html.BeginForm("Create", "Question", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            #line 9 "..\..\Views\SystemConfiguration\Index.cshtml"
+ using (Html.BeginForm("Index", "SystemConfiguration", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     
             
             #line default
             #line hidden
             
-            #line 10 "..\..\Views\Question\Create.cshtml"
+            #line 11 "..\..\Views\SystemConfiguration\Index.cshtml"
 Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 10 "..\..\Views\Question\Create.cshtml"
+            #line 11 "..\..\Views\SystemConfiguration\Index.cshtml"
                             
     
 
@@ -91,23 +91,23 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 13 "..\..\Views\Question\Create.cshtml"
-   Write(Html.LabelFor(x => x.Text, new { @class = "col-md-2 col-sm-3 control-label" }));
+            #line 14 "..\..\Views\SystemConfiguration\Index.cshtml"
+   Write(Html.LabelFor(x => x.MaxAnswers, new { @class = "col-md-2 col-sm-3 control-label" }));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n        <div");
 
-WriteLiteral(" class=\"col-md-10 col-sm-9\"");
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("            ");
 
             
-            #line 15 "..\..\Views\Question\Create.cshtml"
-       Write(Html.TextAreaFor(x => x.Text, new { @class = "form-control", rows="10"}));
+            #line 16 "..\..\Views\SystemConfiguration\Index.cshtml"
+       Write(Html.TextBoxFor(x => x.MaxAnswers, new { @class = "form-control" }));
 
             
             #line default
@@ -117,8 +117,8 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 16 "..\..\Views\Question\Create.cshtml"
-       Write(Html.ValidationMessageFor(x => x.Text));
+            #line 17 "..\..\Views\SystemConfiguration\Index.cshtml"
+       Write(Html.ValidationMessageFor(x => x.MaxAnswers));
 
             
             #line default
@@ -126,7 +126,7 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 19 "..\..\Views\Question\Create.cshtml"
+            #line 20 "..\..\Views\SystemConfiguration\Index.cshtml"
     
 
             
@@ -141,8 +141,8 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 21 "..\..\Views\Question\Create.cshtml"
-   Write(Html.LabelFor(x => x.CategoryId, new { @class = "col-md-2 col-sm-3 control-label" }));
+            #line 22 "..\..\Views\SystemConfiguration\Index.cshtml"
+   Write(Html.LabelFor(x => x.QuestionLifetime, new { @class = "col-md-2 col-sm-3 control-label" }));
 
             
             #line default
@@ -156,8 +156,8 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 23 "..\..\Views\Question\Create.cshtml"
-       Write(Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), string.Empty, new { @class = "form-control" }));
+            #line 24 "..\..\Views\SystemConfiguration\Index.cshtml"
+       Write(Html.EnumDropDownListFor(x => x.QuestionLifetime, new { @class = "form-control" }));
 
             
             #line default
@@ -167,8 +167,8 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 24 "..\..\Views\Question\Create.cshtml"
-       Write(Html.ValidationMessageFor(x => x.CategoryId));
+            #line 25 "..\..\Views\SystemConfiguration\Index.cshtml"
+       Write(Html.ValidationMessageFor(x => x.QuestionLifetime));
 
             
             #line default
@@ -176,110 +176,57 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 27 "..\..\Views\Question\Create.cshtml"
+            #line 28 "..\..\Views\SystemConfiguration\Index.cshtml"
     
-    if (Model.ShowTestingOptions)
-    {
 
             
             #line default
             #line hidden
-WriteLiteral("        <div");
+WriteLiteral("    <div");
 
 WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
+
+            
+            #line 30 "..\..\Views\SystemConfiguration\Index.cshtml"
+   Write(Html.LabelFor(x => x.SystemEnvironment, new { @class = "col-md-2 col-sm-3 control-label" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        <div");
+
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("            ");
 
             
-            #line 31 "..\..\Views\Question\Create.cshtml"
-       Write(Html.LabelFor(x => x.MaxAnswers, new { @class = "col-md-2 col-sm-3 control-label" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            <div");
-
-WriteLiteral(" class=\"col-md-3 col-sm-4\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                ");
-
-            
-            #line 33 "..\..\Views\Question\Create.cshtml"
-           Write(Html.TextBoxFor(x => x.MaxAnswers, new { @class = "form-control" }));
+            #line 32 "..\..\Views\SystemConfiguration\Index.cshtml"
+       Write(Html.EnumDropDownListFor(x => x.SystemEnvironment, new { @class = "form-control" }));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
-
-WriteLiteral("                ");
-
-            
-            #line 34 "..\..\Views\Question\Create.cshtml"
-           Write(Html.ValidationMessageFor(x => x.MaxAnswers));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
-
-            
-            #line 37 "..\..\Views\Question\Create.cshtml"
-    
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <div");
-
-WriteLiteral(" class=\"form-group\"");
-
-WriteLiteral(">\r\n");
 
 WriteLiteral("            ");
 
             
-            #line 39 "..\..\Views\Question\Create.cshtml"
-       Write(Html.LabelFor(x => x.QuestionLifetime, new { @class = "col-md-2 col-sm-3 control-label" }));
+            #line 33 "..\..\Views\SystemConfiguration\Index.cshtml"
+       Write(Html.ValidationMessageFor(x => x.SystemEnvironment));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            <div");
-
-WriteLiteral(" class=\"col-md-3 col-sm-4\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                ");
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 41 "..\..\Views\Question\Create.cshtml"
-           Write(Html.EnumDropDownListFor(x => x.QuestionLifetime, new { @class = "form-control" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("                ");
-
-            
-            #line 42 "..\..\Views\Question\Create.cshtml"
-           Write(Html.ValidationMessageFor(x => x.QuestionLifetime));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
-
-            
-            #line 45 "..\..\Views\Question\Create.cshtml"
-    }
+            #line 36 "..\..\Views\SystemConfiguration\Index.cshtml"
     
 
             
@@ -291,7 +238,7 @@ WriteLiteral(" class=\"form-group\"");
 
 WriteLiteral(">\r\n        <div");
 
-WriteLiteral(" class=\"col-md-12\"");
+WriteLiteral(" class=\"col-md-offset-2 col-md-10\"");
 
 WriteLiteral(">\r\n            <input");
 
@@ -304,7 +251,7 @@ WriteLiteral(" value=\"Submit\"");
 WriteLiteral(" />\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 52 "..\..\Views\Question\Create.cshtml"
+            #line 42 "..\..\Views\SystemConfiguration\Index.cshtml"
 }
 
             
@@ -319,7 +266,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 55 "..\..\Views\Question\Create.cshtml"
+            #line 45 "..\..\Views\SystemConfiguration\Index.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             

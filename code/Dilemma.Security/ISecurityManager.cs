@@ -9,5 +9,9 @@ namespace Dilemma.Security
         void CookieValidation();
 
         int GetUserId();
+
+        void SetUserId(int userId);
+
+        int LoginNewAnonymous();
     }
 }

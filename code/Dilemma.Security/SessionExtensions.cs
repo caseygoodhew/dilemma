@@ -9,6 +9,7 @@ namespace Dilemma.Security
     {
         public static T Get<T>(this HttpSessionState session, string key, Func<T> providerFunc)
         {
+            Guard.ArgumentNotNull(session, "session");
             Guard.ArgumentNotNullOrEmpty(key, "key");
 
             T item;
@@ -16,6 +17,11 @@ namespace Dilemma.Security
 
             if (result == null)
             {
+                if (providerFunc == null)
+                {
+                    return default(T);
+                }
+                
                 item = providerFunc();
                 session[key] = item;
             }

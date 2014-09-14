@@ -10,7 +10,7 @@ namespace Dilemma.Data.EntityFramework.Maps
     public class UserMap : EntityTypeConfiguration<User>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="QuestionMap" /> class.
+        /// Initializes a new instance of the <see cref="UserMap" /> class.
         /// </summary>
         public UserMap()
         {

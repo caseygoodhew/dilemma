@@ -46,10 +46,16 @@
   <ItemGroup>
     <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\AnswerViewModelConverter.cs" />
+    <Compile Include="Conversion\DevelopmentUserViewModelConverter.cs" />
     <Compile Include="Conversion\QuestionDetailsViewModelConverter.cs" />
     <Compile Include="Conversion\SystemConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\QuestionViewModelConverter.cs" />
     <Compile Include="Services\AdministrationService.cs" />
+    <Compile Include="Services\DevelopmentService.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="ViewModels\DevelopmentUserViewModel.cs" />
+    <Compile Include="Services\IDevelopmentService.cs" />
     <Compile Include="Services\SiteService.cs" />
     <Compile Include="Services\ISiteService.cs" />
     <Compile Include="Services\IAdministrationService.cs" />

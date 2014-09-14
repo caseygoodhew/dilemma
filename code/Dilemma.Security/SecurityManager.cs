@@ -9,6 +9,7 @@ using System.Web.Helpers;
 using Dilemma.Data.Repositories;
 
 using Disposable.Common.ServiceLocator;
+using Disposable.Web.Caching;
 
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -20,10 +21,8 @@ namespace Dilemma.Security
 {
     internal class SecurityManager : ISecurityManager
     {
-        private const string ClaimsSessionKey = "security-manager-claims";
-        
         private static readonly Lazy<IUserRepository> UserRepository = new Lazy<IUserRepository>(Locator.Current.Instance<IUserRepository>);
-        
+
         public void ConfigureCookieAuthentication(IAppBuilder appBuilder)
         {
             // Enable the application to use a cookie to store information for the signed in user
@@ -77,11 +76,34 @@ namespace Dilemma.Security
             return Int32.Parse(ReadClaims().Single(x => x.Type == ClaimTypes.Sid).Value);
         }
 
+        public void SetUserId(int userId)
+        {
+            HttpContext.Current.Request.GetOwinContext().Authentication.SignOut();
+            IssueAnonymousCookie(userId);
+        }
+
+        public int LoginNewAnonymous()
+        {
+            var userId = CreateAnonymousUser();
+            IssueAnonymousCookie(userId);
+            return userId;
+        }
+
         private static IEnumerable<Claim> ReadClaims()
         {
-            return HttpContext.Current.Session.Get(
-                ClaimsSessionKey,
-                () => (HttpContext.Current.User.Identity as ClaimsIdentity).Claims);
+            UserClaims userClaims;
+
+            if (!RequestCache.Current.TryGet(out userClaims))
+            {
+                userClaims = RequestCache.Current.Get(
+                    () =>
+                        {
+                            var identity = (ClaimsIdentity)HttpContext.Current.User.Identity;
+                            return new UserClaims(identity.Claims);
+                        });
+            }
+            
+            return userClaims.Claims;
         }
 
         private static bool HasCookie(IEnumerable<Claim> claims)
@@ -111,7 +133,7 @@ namespace Dilemma.Security
 
             authenticationManager.SignIn(authenticationProperties, id);
 
-            HttpContext.Current.Session[ClaimsSessionKey] = claims;
+            RequestCache.Current.Get(() => new UserClaims(claims), true);
         }
 
         private static bool IsAnonymousCookie(IEnumerable<Claim> claims)

@@ -45,6 +45,11 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<User> Users { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="DevelopmentUsers"/> database set;
+        /// </summary>
+        public DbSet<DevelopmentUser> DevelopmentUsers { get; set; }
+        
+        /// <summary>
         /// Called the first that the the DbContext is used in each session.
         /// </summary>
         public static void Startup()
@@ -73,6 +78,8 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new AnswerMap());
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new SystemConfigurationMap());
+            modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new DevelopmentUserMap());
         }
     }
 }
