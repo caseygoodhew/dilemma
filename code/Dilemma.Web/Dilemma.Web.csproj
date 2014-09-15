@@ -216,11 +216,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>List.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\QuickAuthentication\New.generated.cs">
-      <DependentUpon>New.cshtml</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Views\QuickAuthentication\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -439,10 +434,6 @@
       <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Terms\View1.cshtml" />
-    <Content Include="Views\QuickAuthentication\New.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>New.generated.cs</LastGenOutput>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
