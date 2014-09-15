@@ -38,12 +38,6 @@ namespace Dilemma.Web.Controllers
             return View(viewModel);
         }
 
-        [Route("QuickAuthentication/new")]
-        public ActionResult New()
-        {
-            return RedirectToAction("edit", "QuickAuthentication", new { userId = (null as int?) });
-        }
-
         [Route("QuickAuthentication/edit/{userId:int?}")]
         public ActionResult Edit(int? userId)
         {
