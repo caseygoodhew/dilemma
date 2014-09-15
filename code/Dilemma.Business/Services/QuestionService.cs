@@ -18,7 +18,7 @@ namespace Dilemma.Business.Services
     /// </summary>
     internal class QuestionService : IQuestionService
     {
-        private static readonly Lazy<IAdministrationService> AdministrationService = new Lazy<IAdministrationService>(Locator.Current.Instance<IAdministrationService>);
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = new Lazy<IAdministrationRepository>(Locator.Current.Instance<IAdministrationRepository>);
 
         private static readonly Lazy<ISiteService> SiteService = new Lazy<ISiteService>(Locator.Current.Instance<ISiteService>);
         
@@ -35,13 +35,13 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="CreateQuestionViewModel"/>.</returns>
         public CreateQuestionViewModel InitNewQuestion(CreateQuestionViewModel questionViewModel = null)
         {
-            var systemConfiguration = AdministrationService.Value.GetSystemConfiguration();
-            var allowTestingConfiguration = AllowTestingConfiguration(systemConfiguration);
-
+            var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
+            
             if (questionViewModel == null)
             {
                 questionViewModel = new CreateQuestionViewModel();
-                if (allowTestingConfiguration)
+                
+                if (systemConfiguration.IsInternalEnvironment)
                 {
                     questionViewModel.Text = "\n\n\n\nThis text makes it easier to reach the minimum 50 character limit. This text will not show in a production environment.";
                 }
@@ -50,7 +50,7 @@ namespace Dilemma.Business.Services
             questionViewModel.Categories = SiteService.Value.GetCategories();
             questionViewModel.MaxAnswers = systemConfiguration.MaxAnswers;
             questionViewModel.QuestionLifetime = systemConfiguration.QuestionLifetime;
-            questionViewModel.ShowTestingOptions = allowTestingConfiguration;
+            questionViewModel.ShowTestingOptions = systemConfiguration.IsInternalEnvironment;
 
             return questionViewModel;
         }
@@ -61,7 +61,7 @@ namespace Dilemma.Business.Services
         /// <param name="questionViewModel">The <see cref="CreateQuestionViewModel"/> to save.</param>
         public void SaveNewQuestion(CreateQuestionViewModel questionViewModel)
         {
-            var systemConfiguration = AdministrationService.Value.GetSystemConfiguration();
+            var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
 
             SetMaxAnswers(systemConfiguration, questionViewModel);
             SetTimeframes(systemConfiguration, questionViewModel);
@@ -136,7 +136,7 @@ namespace Dilemma.Business.Services
             QuestionRepository.Value.CompleteAnswer(userId, questionId, answerViewModel);
         }
 
-        private void SetMaxAnswers(SystemConfigurationViewModel systemConfiguration, QuestionViewModel questionViewModel)
+        private void SetMaxAnswers(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
         {
             if (systemConfiguration.SystemEnvironment == SystemEnvironment.Production || !questionViewModel.MaxAnswers.HasValue)
             {
@@ -144,7 +144,7 @@ namespace Dilemma.Business.Services
             }
         }
 
-        private void SetTimeframes(SystemConfigurationViewModel systemConfiguration, CreateQuestionViewModel questionViewModel)
+        private void SetTimeframes(SystemConfiguration systemConfiguration, CreateQuestionViewModel questionViewModel)
         {
             var now = TimeSource.Value.Now;
             questionViewModel.CreatedDateTime = now;
@@ -168,15 +168,9 @@ namespace Dilemma.Business.Services
             }
         }
 
-        private QuestionLifetime GetQuestionLifetime(SystemConfigurationViewModel systemConfiguration, CreateQuestionViewModel questionViewModel)
+        private QuestionLifetime GetQuestionLifetime(SystemConfiguration systemConfiguration, CreateQuestionViewModel questionViewModel)
         {
-            return AllowTestingConfiguration(systemConfiguration) ? questionViewModel.QuestionLifetime : systemConfiguration.QuestionLifetime;
-        }
-
-        private bool AllowTestingConfiguration(SystemConfigurationViewModel systemConfiguration)
-        {
-            return systemConfiguration.SystemEnvironment == SystemEnvironment.Development
-                   || systemConfiguration.SystemEnvironment == SystemEnvironment.Testing;
+            return systemConfiguration.IsInternalEnvironment ? questionViewModel.QuestionLifetime : systemConfiguration.QuestionLifetime;
         }
     }
 }

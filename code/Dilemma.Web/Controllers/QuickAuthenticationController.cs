@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
@@ -18,7 +19,7 @@ namespace Dilemma.Web.Controllers
 
         private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
             
-        [Route("quickauth")]
+        [Route("QuickAuthentication")]
         public ActionResult Index()
         {
             var userIds = DevelopmentCookieManager.GetUserIds();
@@ -37,20 +38,13 @@ namespace Dilemma.Web.Controllers
             return View(viewModel);
         }
 
-        [Route("quickauth/edit")]
-        public ActionResult Edit()
+        [Route("QuickAuthentication/new")]
+        public ActionResult New()
         {
-            return Edit(null as int?);
+            return RedirectToAction("edit", "QuickAuthentication", new { userId = (null as int?) });
         }
 
-        [Route("quickauth/edit")]
-        [HttpPost]
-        public ActionResult Edit(DevelopmentUserViewModel viewModel)
-        {
-            return Edit(null, viewModel);
-        }
-
-        [Route("quickauth/edit/{userId:int:min(1)}")]
+        [Route("QuickAuthentication/edit/{userId:int?}")]
         public ActionResult Edit(int? userId)
         {
             var viewModel = userId.HasValue ? DevelopmentService.Value.Get(userId.Value) : new DevelopmentUserViewModel();
@@ -58,7 +52,7 @@ namespace Dilemma.Web.Controllers
             return View(viewModel);
         }
 
-        [Route("quickauth/edit/{userId:int:min(1)}")]
+        [Route("QuickAuthentication/edit/{userId:int?}")]
         [HttpPost]
         public ActionResult Edit(int? userId, DevelopmentUserViewModel viewModel)
         {
@@ -72,7 +66,7 @@ namespace Dilemma.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("quickauth/login/{userId:int:min(1)}")]
+        [Route("QuickAuthentication/login/{userId:int:min(1)}")]
         public ActionResult Login(int userId)
         {
             if (DevelopmentService.Value.CanLogin(userId))

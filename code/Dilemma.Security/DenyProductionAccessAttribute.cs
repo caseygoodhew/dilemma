@@ -2,7 +2,6 @@ using System;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
 
@@ -22,7 +21,7 @@ namespace Dilemma.Security
         {
             var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
 
-            if (systemConfiguration.SystemEnvironment != SystemEnvironment.Development && systemConfiguration.SystemEnvironment != SystemEnvironment.Testing)
+            if (!systemConfiguration.IsInternalEnvironment)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller, action }));
             }

@@ -28,7 +28,7 @@ namespace Dilemma.Security.Development
 
             var userIds = ExtractUserIds(myCookie.Values[UserIds]).Concat(new[] { SecurityManager.Value.GetUserId() }).Distinct().ToList();
 
-            if (IsDevelopmentEnvironment())
+            if (IsInternalEnvironment())
             {
                 myCookie.Values[UserIds] = userIds.Concat(",");
                 myCookie.Expires = DateTime.Now.AddDays(365);
@@ -38,12 +38,9 @@ namespace Dilemma.Security.Development
             return userIds;
         }
 
-        private static bool IsDevelopmentEnvironment()
+        private static bool IsInternalEnvironment()
         {
-            var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
-            var systemEnvironment = systemConfiguration.SystemEnvironment;
-
-            return systemEnvironment == SystemEnvironment.Development || systemEnvironment == SystemEnvironment.Testing;
+            return AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>().IsInternalEnvironment;
         }
 
         private static IEnumerable<int> ExtractUserIds(string userIds)

@@ -39,5 +39,17 @@ namespace Dilemma.Data.Models
         /// Gets or sets the <see cref="SystemEnvironment"/>.
         /// </summary>
         public SystemEnvironment SystemEnvironment { get; set; }
+
+        /// <summary>
+        /// Gets a flag indicating if the <see cref="SystemEnvironment"/> is to Development or Testing.
+        /// </summary>
+        public bool IsInternalEnvironment
+        {
+            get
+            {
+                return SystemEnvironment == SystemEnvironment.Development
+                       || SystemEnvironment == SystemEnvironment.Testing;
+            }
+        }
     }
 }

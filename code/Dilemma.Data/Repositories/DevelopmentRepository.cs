@@ -22,9 +22,8 @@ namespace Dilemma.Data.Repositories
         public DevelopmentRepository()
         {
             var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
-            var systemEnvironment = systemConfiguration.SystemEnvironment;
-
-            if (systemEnvironment != SystemEnvironment.Development && systemEnvironment != SystemEnvironment.Testing)
+            
+            if (!systemConfiguration.IsInternalEnvironment)
             {
                 throw new UnauthorizedAccessException();
             }

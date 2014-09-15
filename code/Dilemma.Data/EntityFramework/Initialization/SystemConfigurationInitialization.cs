@@ -22,7 +22,7 @@ namespace Dilemma.Data.EntityFramework.Initialization
                 {
                     MaxAnswers = 10,
                     QuestionLifetime = QuestionLifetime.OneDay,
-                    SystemEnvironment = SystemEnvironment.Development
+                    SystemEnvironment = SystemEnvironment.Production
                 });
             }
         }

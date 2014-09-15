@@ -49,7 +49,7 @@ WriteLiteral("<h2>Your users</h2>\r\n\r\n<div>\r\n");
 
             
             #line 7 "..\..\Views\QuickAuthentication\Index.cshtml"
-Write(Html.ActionLink("Create New User", "edit"));
+Write(Html.ActionLink("Create New User", "edit", "QuickAuthentication"));
 
             
             #line default
@@ -72,14 +72,14 @@ WriteLiteral(">\r\n    \r\n");
             #line hidden
 WriteLiteral("    <tr");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 353), Tuple.Create("\"", 370)
+WriteAttribute("class", Tuple.Create(" class=\"", 376), Tuple.Create("\"", 393)
             
             #line 16 "..\..\Views\QuickAuthentication\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 361), Tuple.Create<System.Object, System.Int32>(rowClass
+, Tuple.Create(Tuple.Create("", 384), Tuple.Create<System.Object, System.Int32>(rowClass
             
             #line default
             #line hidden
-, 361), false)
+, 384), false)
 );
 
 WriteLiteral(">\r\n        <td");

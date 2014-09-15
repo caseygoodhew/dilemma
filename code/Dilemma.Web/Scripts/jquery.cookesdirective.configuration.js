@@ -3,5 +3,5 @@
         privacyPolicyUri: '/cookies',
         duration: 0,
         backgroundOpacity: ''
-});
+    });
 });
