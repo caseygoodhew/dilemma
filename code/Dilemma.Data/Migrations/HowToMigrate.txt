@@ -6,3 +6,9 @@ From the package manager console:
 
 Add-Migration -ProjectName Dilemma.Data -Name Migration
 Update-Database -ProjectName Dilemma.Data -Verbose
+
+
+RELEASE:
+Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: $InitialDatabase
+
+Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract
