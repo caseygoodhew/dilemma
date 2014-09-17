@@ -4,6 +4,8 @@ using System.Web.Routing;
 
 using Dilemma.Initialization;
 
+using Disposable.Common.ServiceLocator;
+
 namespace Dilemma.Web
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -16,7 +18,7 @@ namespace Dilemma.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             DilemmaCore.Initialize();
-            Registration.Register(null);
+            Registration.Register(Locator.Current as Locator);
         }
     }
 }

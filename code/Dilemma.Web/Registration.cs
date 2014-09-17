@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-using Dilemma.Business.Validators;
+﻿using Dilemma.Business.Validators;
+using Dilemma.Common;
+using Dilemma.Web.Controllers;
 
 using Disposable.Common.ServiceLocator;
 
@@ -20,10 +17,14 @@ namespace Dilemma.Web
         /// Static registration entry point for IOC registration
         /// </summary>
         /// <param name="locator">The locator</param>
-        public static void Register(ILocator locator)
+        public static void Register(Locator locator)
         {
             // TODO: Is this correct? (it's not using the locator)
             FluentValidationModelValidatorProvider.Configure(x => x.ValidatorFactory = new ValidatorFactory());
+
+            locator.Register<INotificationTypeLocator>(() => new NotificationTypeLocator(
+                    NotificationRoute.Create<QuestionController>(NotificationType.Question, x => x.Details(0))
+                ));
         }
     }
 }

@@ -48,6 +48,11 @@ namespace Dilemma.Data.EntityFramework
         /// Gets or sets the <see cref="DevelopmentUsers"/> database set;
         /// </summary>
         public DbSet<DevelopmentUser> DevelopmentUsers { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Notifications"/> database set;
+        /// </summary>
+        public DbSet<Notification> Notifications { get; set; }
         
         /// <summary>
         /// Called the first that the the DbContext is used in each session.
@@ -80,6 +85,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new SystemConfigurationMap());
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new DevelopmentUserMap());
+            modelBuilder.Configurations.Add(new NotificationMap());
         }
     }
 }
