@@ -21,6 +21,8 @@ namespace Dilemma.Data.Repositories
     {
         private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
 
+        private static readonly Lazy<INotificationRepository> NotificationRepository = new Lazy<INotificationRepository>(Locator.Current.Instance<INotificationRepository>);
+
         /// <summary>
         /// Creates a <see cref="Question"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="Question"/>.
         /// </summary>
@@ -193,6 +195,8 @@ namespace Dilemma.Data.Repositories
                 context.Answers.Update(context, answer);
                 context.SaveChangesVerbose();
 
+                NotificationRepository.Value.Raise(existingAnswer.Question.User.UserId, NotificationType.QuestionAnswered, questionId);
+
                 return true;
             }
         }
@@ -253,6 +257,7 @@ namespace Dilemma.Data.Repositories
             var query =
                 context.Answers.AsNoTracking()
                     .Include(x => x.Question)
+                    .Include(x => x.Question.User)
                     .Include(x => x.User)
                     .Where(x => x.Question.QuestionId == questionId)
                     .Where(x => x.User.UserId == userId)

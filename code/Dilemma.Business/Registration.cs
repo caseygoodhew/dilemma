@@ -27,6 +27,7 @@ namespace Dilemma.Business
             registrar.Register<ISiteService>(() => new SiteService());
             registrar.Register<IUserService>(() => new UserService());
             registrar.Register<IDevelopmentService>(() => new DevelopmentService());
+            registrar.Register<INotificationService>(() => new NotificationService());
 
             registrar.Register<IValidator<CreateQuestionViewModel>>(() => new CreateQuestionViewModelValidator());
             //// keep this here as it will be used when we're out of testing
@@ -54,6 +55,8 @@ namespace Dilemma.Business
 
             ConverterFactory.Register<DevelopmentUserViewModel, DevelopmentUser>(registrar, DevelopmentUserViewModelConverter.ToDevelopmentUser);
             ConverterFactory.Register<DevelopmentUser, DevelopmentUserViewModel>(registrar, DevelopmentUserViewModelConverter.FromDevelopmentUser);
+
+            ConverterFactory.Register<Notification, NotificationViewModel>(registrar, NotificationViewModelConverter.FromSystemConfiguration);
         }
     }
 }

@@ -170,6 +170,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="Controllers\DilemmaBaseController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PrelaunchController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuickAuthenticationController.cs" />
@@ -191,6 +192,11 @@
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Views\Notification\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Prelaunch\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -435,6 +441,10 @@
       <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Terms\View1.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

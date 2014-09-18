@@ -45,11 +45,20 @@ namespace Dilemma.Common
                 throw new InvalidOperationException("NotificationRoute only supports methods with zero or one route parameters.");
             }
 
+            var controllerName = methodInfo.DeclaringType.Name;
+
+            if (controllerName.EndsWith("Controller"))
+            {
+                controllerName = controllerName.Substring(0, controllerName.Length - "Controller".Length);
+            }
+
             return new NotificationRoute(
                     notificationType,
-                    methodInfo.DeclaringType.Name,
+                    controllerName,
                     methodInfo.Name,
                     methodInfo.GetParameters().Any() ? methodInfo.GetParameters().First().Name : string.Empty);
         }
+
+        
     }
 }

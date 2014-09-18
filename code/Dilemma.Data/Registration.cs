@@ -22,11 +22,13 @@ namespace Dilemma.Data
             registrar.Register<ISiteRepository>(() => new SiteRepository());
             registrar.Register<IUserRepository>(() => new UserRepository());
             registrar.Register<IDevelopmentRepository>(() => new DevelopmentRepository());
+            registrar.Register<INotificationRepository>(() => new NotificationRepository());
             
             ConverterFactory.Register<Question>(registrar);
             ConverterFactory.Register<Answer>(registrar);
             ConverterFactory.Register<Category>(registrar);
             ConverterFactory.Register<SystemConfiguration>(registrar);
+            ConverterFactory.Register<Notification>(registrar);
 
             EntityFramework.DilemmaContext.Startup();
         }

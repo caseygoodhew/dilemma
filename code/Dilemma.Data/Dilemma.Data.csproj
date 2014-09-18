@@ -79,6 +79,14 @@
     <Compile Include="Migrations\201409170619338_Migration2.Designer.cs">
       <DependentUpon>201409170619338_Migration2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409180501398_Migration3.cs" />
+    <Compile Include="Migrations\201409180501398_Migration3.Designer.cs">
+      <DependentUpon>201409180501398_Migration3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409180620515_Migration4.cs" />
+    <Compile Include="Migrations\201409180620515_Migration4.Designer.cs">
+      <DependentUpon>201409180620515_Migration4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -95,6 +103,7 @@
     <Compile Include="Repositories\DevelopmentRepository.cs" />
     <Compile Include="Repositories\GetQuestionAs.cs" />
     <Compile Include="Repositories\IDevelopmentRepository.cs" />
+    <Compile Include="Repositories\INotificationRepository.cs" />
     <Compile Include="Repositories\ISiteRepository.cs" />
     <Compile Include="Repositories\IAdministrationRepository.cs" />
     <Compile Include="Repositories\IQuestionRepository.cs" />
@@ -132,6 +141,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409170619338_Migration2.resx">
       <DependentUpon>201409170619338_Migration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409180501398_Migration3.resx">
+      <DependentUpon>201409180501398_Migration3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409180620515_Migration4.resx">
+      <DependentUpon>201409180620515_Migration4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

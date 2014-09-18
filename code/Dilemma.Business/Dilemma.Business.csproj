@@ -47,12 +47,15 @@
     <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\AnswerViewModelConverter.cs" />
     <Compile Include="Conversion\DevelopmentUserViewModelConverter.cs" />
+    <Compile Include="Conversion\NotificationViewModelConverter.cs" />
     <Compile Include="Conversion\QuestionDetailsViewModelConverter.cs" />
     <Compile Include="Conversion\SystemConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\QuestionViewModelConverter.cs" />
     <Compile Include="Services\AdministrationService.cs" />
     <Compile Include="Services\DevelopmentService.cs" />
+    <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\DevelopmentUserViewModel.cs" />
     <Compile Include="Services\IDevelopmentService.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="ViewModels\AnswerViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\CreateQuestionViewModel.cs" />
+    <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\QuestionDetailsViewModel.cs" />
     <Compile Include="ViewModels\QuestionListViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
