@@ -57,6 +57,7 @@
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="ViewModels\NEWNotificationViewModel.cs" />
     <Compile Include="ViewModels\DevelopmentUserViewModel.cs" />
     <Compile Include="Services\IDevelopmentService.cs" />
     <Compile Include="Services\SiteService.cs" />
@@ -75,7 +76,7 @@
     <Compile Include="ViewModels\AnswerViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\CreateQuestionViewModel.cs" />
-    <Compile Include="ViewModels\NotificationViewModel.cs" />
+    <Compile Include="ViewModels\NotificationListViewModel.cs" />
     <Compile Include="ViewModels\QuestionDetailsViewModel.cs" />
     <Compile Include="ViewModels\QuestionListViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />

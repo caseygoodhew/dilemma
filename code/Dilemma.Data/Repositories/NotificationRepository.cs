@@ -24,14 +24,16 @@ namespace Dilemma.Data.Repositories
             {
                 var notifications =
                     context.Notifications
-                        .Include(x => x.Question)
+                        .Include(x => x.Answer)
+                        .Include(x => x.Answer.Question)
                         .Where(x => x.ForUser.UserId == forUserId)
                         .Select(x => new
                                          {
                                              x.ActionedDateTime,
                                              x.CreatedDateTime,
                                              x.NotificationType,
-                                             x.Question.QuestionId
+                                             x.Answer.AnswerId,
+                                             x.Answer.Question.QuestionId
                                          })
                         .OrderByDescending(x => x.CreatedDateTime)
                         .ToList()
@@ -40,7 +42,7 @@ namespace Dilemma.Data.Repositories
                                              ActionedDateTime = x.ActionedDateTime,
                                              CreatedDateTime = x.CreatedDateTime,
                                              NotificationType = x.NotificationType,
-                                             Question = new Question { QuestionId = x.QuestionId }
+                                             Answer = new Answer { AnswerId = x.AnswerId, Question = new Question { QuestionId = x.QuestionId } }
                                          })
                         .ToList();
 
@@ -52,32 +54,19 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var notifications =
-                    context.Notifications
-                        .Where(notificationType, id)
-                        .Where(x => x.ActionedDateTime == null)
-                        .Where(x => x.ForUser.UserId == forUserId)
-                        .ToList();
-
-                if (notifications.Any())
-                {
-                    return;
-                }
-
-                var user = new User { UserId = forUserId };
-                context.Users.Attach(user);
-
                 var notification = new Notification
                         {
-                            ForUser = user,
+                            ForUser = new User { UserId = forUserId },
                             CreatedDateTime = TimeSource.Value.Now
                         };
+
+                context.Users.Attach(notification.ForUser);
 
                 switch (notificationType)
                 {
                     case NotificationType.QuestionAnswered:
-                        notification.Question = new Question { QuestionId = id };
-                        context.Questions.Attach(notification.Question);
+                        notification.Answer = new Answer { AnswerId = id };
+                        context.Answers.Attach(notification.Answer);
                         break;
 
                     default:
@@ -85,7 +74,7 @@ namespace Dilemma.Data.Repositories
                 }
 
                 context.Notifications.Add(notification);
-                    
+                
                 context.SaveChangesVerbose();
             }
         }
@@ -141,7 +130,7 @@ namespace Dilemma.Data.Repositories
                     return
                         notification
                             .Where(x => x.NotificationType == notificationType)
-                            .Where(x => x.Question.QuestionId == id);
+                            .Where(x => x.Answer.Question.QuestionId == id);
                 default:
                     throw new ArgumentOutOfRangeException("notificationType");
             }

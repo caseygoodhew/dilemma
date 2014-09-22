@@ -7,11 +7,10 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Business.ViewModels
 {
-    public class NotificationViewModel
+    public class NotificationListViewModel
     {
         private static readonly Lazy<INotificationTypeLocator> NotificationTypeLocator =
             new Lazy<INotificationTypeLocator>(Locator.Current.Instance<INotificationTypeLocator>);
-
         
         private NotificationType notificationType;
 
@@ -32,16 +31,21 @@ namespace Dilemma.Business.ViewModels
         
         public int RouteDataValue { get; set; }
         
-        public DateTime CreatedDateTime { get; set; }
+        public DateTime DateTime { get; set; }
 
-        public DateTime? ActionedDateTime { get; set; }
+        public bool IsActioned { get; set; }
+
+        public int Occurrences { get; set; }
 
         public string GetMessage()
         {
             switch (NotificationType)
             {
                 case NotificationType.QuestionAnswered:
-                    return "x answers have been added to your question";
+                    return Occurrences == 1
+                               ? string.Format("1 answer has been added to your question.")
+                               : string.Format("{0} answers have been added to your question.", Occurrences);
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

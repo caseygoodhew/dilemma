@@ -195,7 +195,7 @@ namespace Dilemma.Data.Repositories
                 context.Answers.Update(context, answer);
                 context.SaveChangesVerbose();
 
-                NotificationRepository.Value.Raise(existingAnswer.Question.User.UserId, NotificationType.QuestionAnswered, questionId);
+                NotificationRepository.Value.Raise(existingAnswer.Question.User.UserId, NotificationType.QuestionAnswered, answer.AnswerId);
 
                 return true;
             }

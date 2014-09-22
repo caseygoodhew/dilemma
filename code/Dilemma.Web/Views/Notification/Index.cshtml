@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dilemma.Business.ViewModels.NotificationViewModel>
+﻿@model IEnumerable<Dilemma.Business.ViewModels.NotificationListViewModel>
 
 @{
     ViewBag.Title = "Notifications";
@@ -8,9 +8,11 @@
 
 @foreach (var viewModel in Model)
 {
+    var rowClass = viewModel.IsActioned ? string.Empty : "bg-info";
+    
     <div class="row">
         <a class="col-md-12" href="@Url.Action(viewModel.NotificationRoute.Action, viewModel.NotificationRoute.Controller, new RouteValueDictionary(viewModel.GetRouteData()), Request.Url.Scheme)">
-            <div class="notification-text">
+            <div class="@rowClass">
                 @viewModel.GetMessage()
             </div>
         </a>

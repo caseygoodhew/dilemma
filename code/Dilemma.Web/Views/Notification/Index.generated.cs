@@ -33,7 +33,7 @@ namespace Dilemma.Web.Views.Notification
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Notification/Index.cshtml")]
-    public partial class Index : System.Web.Mvc.WebViewPage<IEnumerable<Dilemma.Business.ViewModels.NotificationViewModel>>
+    public partial class Index : System.Web.Mvc.WebViewPage<IEnumerable<Dilemma.Business.ViewModels.NotificationListViewModel>>
     {
         public Index()
         {
@@ -54,6 +54,8 @@ WriteLiteral("\r\n\r\n<h2>Notifications</h2>\r\n\r\n");
             #line 9 "..\..\Views\Notification\Index.cshtml"
  foreach (var viewModel in Model)
 {
+    var rowClass = viewModel.IsActioned ? string.Empty : "bg-info";
+    
 
             
             #line default
@@ -66,26 +68,34 @@ WriteLiteral(">\r\n        <a");
 
 WriteLiteral(" class=\"col-md-12\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 235), Tuple.Create("\"", 401)
+WriteAttribute("href", Tuple.Create(" href=\"", 314), Tuple.Create("\"", 480)
             
-            #line 12 "..\..\Views\Notification\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 242), Tuple.Create<System.Object, System.Int32>(Url.Action(viewModel.NotificationRoute.Action, viewModel.NotificationRoute.Controller, new RouteValueDictionary(viewModel.GetRouteData()), Request.Url.Scheme)
+            #line 14 "..\..\Views\Notification\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 321), Tuple.Create<System.Object, System.Int32>(Url.Action(viewModel.NotificationRoute.Action, viewModel.NotificationRoute.Controller, new RouteValueDictionary(viewModel.GetRouteData()), Request.Url.Scheme)
             
             #line default
             #line hidden
-, 242), false)
+, 321), false)
 );
 
 WriteLiteral(">\r\n            <div");
 
-WriteLiteral(" class=\"notification-text\"");
+WriteAttribute("class", Tuple.Create(" class=\"", 500), Tuple.Create("\"", 517)
+            
+            #line 15 "..\..\Views\Notification\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 508), Tuple.Create<System.Object, System.Int32>(rowClass
+            
+            #line default
+            #line hidden
+, 508), false)
+);
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 14 "..\..\Views\Notification\Index.cshtml"
+            #line 16 "..\..\Views\Notification\Index.cshtml"
            Write(viewModel.GetMessage());
 
             
@@ -94,7 +104,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </a>\r\n    </div>\r\n");
 
             
-            #line 18 "..\..\Views\Notification\Index.cshtml"
+            #line 20 "..\..\Views\Notification\Index.cshtml"
 }
             
             #line default

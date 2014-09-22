@@ -16,9 +16,10 @@ namespace Dilemma.Data.EntityFramework.Maps
         {
             HasKey(p => p.NotificationId);
 
-            HasRequired(p => p.ForUser).WithMany().WillCascadeOnDelete(false);
             Property(p => p.NotificationType).IsRequired();
-            HasOptional(p => p.Question).WithMany().WillCascadeOnDelete(false);
+            
+            HasRequired(p => p.ForUser).WithMany().WillCascadeOnDelete(false);
+            HasOptional(p => p.Answer).WithMany().WillCascadeOnDelete(false);
             
             Property(p => p.CreatedDateTime).IsRequired();
             Property(p => p.ActionedDateTime).IsOptional();

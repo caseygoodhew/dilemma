@@ -7,7 +7,7 @@ namespace Dilemma.Business.Services
 {
     public interface INotificationService
     {
-        IEnumerable<NotificationViewModel> GetAll();
+        IEnumerable<NotificationListViewModel> GetAll();
 
         void Mute(NotificationType notificationType, int id);
     }
