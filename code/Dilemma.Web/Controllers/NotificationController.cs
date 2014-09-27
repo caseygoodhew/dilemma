@@ -9,7 +9,7 @@ namespace Dilemma.Web.Controllers
 {
     public class NotificationController : Controller
     {
-        private static readonly Lazy<INotificationService> NotificationService = new Lazy<INotificationService>(Locator.Current.Instance<INotificationService>);
+        private static readonly Lazy<INotificationService> NotificationService = Locator.Lazy<INotificationService>();
         
         //
         // GET: /Notification/

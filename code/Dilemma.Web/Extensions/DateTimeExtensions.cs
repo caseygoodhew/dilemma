@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
@@ -16,7 +13,7 @@ namespace Dilemma.Web.Extensions
         const int Day = 24 * Hour;
         const int Month = 30 * Day;
 
-        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+        private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
         public static string ToRelativeText(this DateTime? dateTime)
         {

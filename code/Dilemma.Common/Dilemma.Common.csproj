@@ -40,7 +40,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnswerType.cs" />
+    <Compile Include="ModerationEntryType.cs" />
+    <Compile Include="ModerationFor.cs" />
     <Compile Include="INotificationTypeLocator.cs" />
+    <Compile Include="ModerationState.cs" />
+    <Compile Include="NotificationLookupBy.cs" />
     <Compile Include="NotificationRoute.cs" />
     <Compile Include="NotificationType.cs" />
     <Compile Include="NotificationTypeLocator.cs" />

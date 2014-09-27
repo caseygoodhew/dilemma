@@ -22,7 +22,7 @@ namespace Dilemma.Business.Validators
         /// </summary>
         public DerivativeValidator()
         {
-            toValidator = Locator.Current.Instance<IValidator<TTo>>();
+            toValidator = Locator.Get<IValidator<TTo>>();
 
             AddRule(
                 new DelegateValidator<TTo>(

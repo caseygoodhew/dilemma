@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
@@ -19,9 +18,11 @@ namespace Dilemma.Data.Repositories
     /// </summary>
     internal class QuestionRepository : IQuestionRepository
     {
-        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+        private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
-        private static readonly Lazy<INotificationRepository> NotificationRepository = new Lazy<INotificationRepository>(Locator.Current.Instance<INotificationRepository>);
+        private static readonly Lazy<INotificationRepository> NotificationRepository = Locator.Lazy<INotificationRepository>();
+
+        private static readonly Lazy<IModerationRepository> ModerationRepository = Locator.Lazy<IModerationRepository>();
 
         /// <summary>
         /// Creates a <see cref="Question"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="Question"/>.
@@ -41,6 +42,8 @@ namespace Dilemma.Data.Repositories
                 context.Categories.Attach(question.Category);
                 context.Questions.Add(question);
                 context.SaveChangesVerbose();
+
+                ModerationRepository.Value.OnQuestionCreated(question);
             }
         }
 
@@ -128,7 +131,7 @@ namespace Dilemma.Data.Repositories
                 
                 var question = GetQuestion<Question>(context, questionId, GetQuestionAs.AnswerCount);
 
-                if (question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
+                if (!question.IsApproved || question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
                 {
                     return null;
                 }
@@ -197,6 +200,8 @@ namespace Dilemma.Data.Repositories
 
                 NotificationRepository.Value.Raise(existingAnswer.Question.User.UserId, NotificationType.QuestionAnswered, answer.AnswerId);
 
+                ModerationRepository.Value.OnAnswerCreated(answer);
+
                 return true;
             }
         }
@@ -239,10 +244,10 @@ namespace Dilemma.Data.Repositories
                             .Include(x => x.Answers)
                             .Include(x => x.Answers.Select(a => a.User))
                             .Single();
-                    
+
                     question.TotalAnswers = question.Answers.Count;
                     question.Answers = question.Answers.Where(x => x.AnswerType == AnswerType.Completed).ToList();
-                    
+
                     break;
 
                 default:

@@ -15,8 +15,7 @@ namespace Dilemma.Data.Repositories
 {
     internal class NotificationRepository : INotificationRepository
     {
-        private static readonly Lazy<ITimeSource> TimeSource =
-            new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+        private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
         public IEnumerable<T> GetAll<T>(int forUserId) where T : class
         {
@@ -79,16 +78,11 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        public void Mute(int forUserId, NotificationType notificationType, int id)
+        public void Mute(int forUserId, NotificationLookupBy notificationLookupBy, int id)
         {
             using (var context = new DilemmaContext())
             {
-                var notifications =
-                    context.Notifications
-                        .Where(notificationType, id)
-                        .Where(x => x.ActionedDateTime == null)
-                        .Where(x => x.ForUser.UserId == forUserId)
-                        .ToList();
+                var notifications = FindNotifications(context, forUserId, notificationLookupBy, id);
 
                 var now = TimeSource.Value.Now;
                 notifications.ForEach(
@@ -102,38 +96,31 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        public void Delete(int forUserId, NotificationType notificationType, int id)
+        public void Delete(int forUserId, NotificationLookupBy notificationLookupBy, int id)
         {
             using (var context = new DilemmaContext())
             {
-                var notifications =
-                    context.Notifications
-                        .Where(notificationType, id)
-                        .Where(x => x.ActionedDateTime == null)
-                        .Where(x => x.ForUser.UserId == forUserId)
-                        .ToList();
+                var notifications = FindNotifications(context, forUserId, notificationLookupBy, id);
 
                 notifications.ForEach(x => context.Entry(x).State = EntityState.Deleted);
 
                 context.SaveChangesVerbose();
             }
         }
+
+        private List<Notification> FindNotifications(DilemmaContext context, int forUserId, NotificationLookupBy notificationLookupBy, int id)
+        {
+            return context.Notifications
+                        .Where(
+                            x =>
+                            notificationLookupBy == NotificationLookupBy.QuestionId
+                            && x.NotificationType == NotificationType.QuestionAnswered
+                            && x.Answer.Question.QuestionId == id)
+                        .Where(x => x.ActionedDateTime == null)
+                        .Where(x => x.ForUser.UserId == forUserId)
+                        .ToList();
+        }
     }
 
-    internal static class NotificationFilterExtensions
-    {
-        public static IQueryable<Notification> Where(this IQueryable<Notification> notification, NotificationType notificationType, int id)
-        {           
-            switch (notificationType)
-            {
-                case NotificationType.QuestionAnswered:
-                    return
-                        notification
-                            .Where(x => x.NotificationType == notificationType)
-                            .Where(x => x.Answer.Question.QuestionId == id);
-                default:
-                    throw new ArgumentOutOfRangeException("notificationType");
-            }
-        }   
-    }
+    
 }

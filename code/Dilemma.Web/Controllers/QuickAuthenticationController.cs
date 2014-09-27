@@ -15,9 +15,9 @@ namespace Dilemma.Web.Controllers
     [DenyProductionAccess]
     public sealed class QuickAuthenticationController : DilemmaBaseController
     {
-        private static readonly Lazy<IDevelopmentService> DevelopmentService = new Lazy<IDevelopmentService>(Locator.Current.Instance<IDevelopmentService>);
+        private static readonly Lazy<IDevelopmentService> DevelopmentService = Locator.Lazy<IDevelopmentService>();
 
-        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
             
         [Route("QuickAuthentication")]
         public ActionResult Index()

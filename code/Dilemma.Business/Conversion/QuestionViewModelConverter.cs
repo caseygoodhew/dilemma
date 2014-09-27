@@ -16,7 +16,7 @@ namespace Dilemma.Business.Conversion
     /// </summary>
     public static class QuestionViewModelConverter
     {
-        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
 
         /// <summary>
         /// Converts a <see cref="QuestionViewModel"/> to a <see cref="Question"/>.

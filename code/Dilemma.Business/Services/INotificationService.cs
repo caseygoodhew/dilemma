@@ -9,6 +9,6 @@ namespace Dilemma.Business.Services
     {
         IEnumerable<NotificationListViewModel> GetAll();
 
-        void Mute(NotificationType notificationType, int id);
+        void Mute(NotificationLookupBy notificationLookupBy, int id);
     }
 }

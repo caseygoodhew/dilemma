@@ -10,7 +10,7 @@ namespace Dilemma.Web.Controllers
 {
     public abstract class DilemmaBaseController : Controller
     {
-        private readonly static Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
+        private readonly static Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
         
         protected DilemmaBaseController()
         {

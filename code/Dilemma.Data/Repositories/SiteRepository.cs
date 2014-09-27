@@ -16,7 +16,7 @@ namespace Dilemma.Data.Repositories
     /// </summary>
     internal class SiteRepository : ISiteRepository
     {
-        private static readonly Lazy<IProviderCache> Cache = new Lazy<IProviderCache>(Locator.Current.Instance<IProviderCache>);
+        private static readonly Lazy<IProviderCache> Cache = Locator.Lazy<IProviderCache>();
 
         /// <summary>
         /// Gets the <see cref="Category"/> list in the specified type. There must be a converter registered between <see cref="Category"/> and <see cref="T"/>.

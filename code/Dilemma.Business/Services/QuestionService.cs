@@ -18,15 +18,17 @@ namespace Dilemma.Business.Services
     /// </summary>
     internal class QuestionService : IQuestionService
     {
-        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = new Lazy<IAdministrationRepository>(Locator.Current.Instance<IAdministrationRepository>);
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
 
-        private static readonly Lazy<ISiteService> SiteService = new Lazy<ISiteService>(Locator.Current.Instance<ISiteService>);
-        
-        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
-        
-        private static readonly Lazy<IQuestionRepository> QuestionRepository = new Lazy<IQuestionRepository>(Locator.Current.Instance<IQuestionRepository>);
+        private static readonly Lazy<ISiteService> SiteService = Locator.Lazy<ISiteService>();
 
-        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
+        private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
+
+        private static readonly Lazy<IQuestionRepository> QuestionRepository = Locator.Lazy<IQuestionRepository>();
+
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
+
+        private static readonly Lazy<INotificationService> NotificationService = Locator.Lazy<INotificationService>();
 
         /// <summary>
         /// Initializes or reinitializes a <see cref="CreateQuestionViewModel"/>. Reinitialization allows a view model to return the correct state on POST validation.
@@ -98,7 +100,14 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="QuestionDetailsViewModel"/>.</returns>
         public QuestionDetailsViewModel GetQuestion(int questionId)
         {
-            return QuestionRepository.Value.GetQuestion<QuestionDetailsViewModel>(questionId, GetQuestionAs.FullDetails);
+            var question = QuestionRepository.Value.GetQuestion<QuestionDetailsViewModel>(questionId, GetQuestionAs.FullDetails);
+            
+            if (question != null)
+            {
+                NotificationService.Value.Mute(NotificationLookupBy.QuestionId, questionId);
+            }
+            
+            return question;
         }
 
         /// <summary>

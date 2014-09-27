@@ -23,7 +23,7 @@ namespace Dilemma.Business.Validators
 
             AddRule(new DelegateValidator<QuestionViewModel>((item, context) =>
             {
-                var result = Locator.Current.Instance<IValidator<QuestionViewModel>>().Validate(item);
+                var result = Locator.Get<IValidator<QuestionViewModel>>().Validate(item);
                 return result.Errors;
             }));
         }

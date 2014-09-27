@@ -10,8 +10,8 @@ namespace Dilemma.Data.Repositories
 
         void Raise(int forUserId, NotificationType notificationType, int id);
 
-        void Mute(int forUserId, NotificationType notificationType, int id);
+        void Mute(int forUserId, NotificationLookupBy notificationLookupBy, int id);
 
-        void Delete(int forUserId, NotificationType notificationType, int id);
+        void Delete(int forUserId, NotificationLookupBy notificationLookupBy, int id);
     }
 }

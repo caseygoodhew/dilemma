@@ -13,9 +13,9 @@ namespace Dilemma.Business.Services
 {
     internal class NotificationService : INotificationService
     {
-        private static readonly Lazy<INotificationRepository> NotificationRepository = new Lazy<INotificationRepository>(Locator.Current.Instance<INotificationRepository>);
+        private static readonly Lazy<INotificationRepository> NotificationRepository = Locator.Lazy<INotificationRepository>();
 
-        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
 
         public IEnumerable<NotificationListViewModel> GetAll()
         {
@@ -31,9 +31,9 @@ namespace Dilemma.Business.Services
             return byQuestions;
         }
 
-        public void Mute(NotificationType notificationType, int id)
+        public void Mute(NotificationLookupBy notificationLookupBy, int id)
         {
-            NotificationRepository.Value.Mute(SecurityManager.Value.GetUserId(), notificationType, id);
+            NotificationRepository.Value.Mute(SecurityManager.Value.GetUserId(), notificationLookupBy, id);
         }
     }
 

@@ -15,7 +15,7 @@ namespace Dilemma.Data.Repositories
     /// </summary>
     internal class AdministrationRepository : IAdministrationRepository
     {
-        private static readonly Lazy<IProviderCache> Cache = new Lazy<IProviderCache>(Locator.Current.Instance<IProviderCache>);
+        private static readonly Lazy<IProviderCache> Cache = Locator.Lazy<IProviderCache>();
 
         /// <summary>
         /// Sets the <see cref="SystemConfiguration"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="SystemConfiguration"/>.

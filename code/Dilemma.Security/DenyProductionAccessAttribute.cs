@@ -11,7 +11,7 @@ namespace Dilemma.Security
 {
     public class DenyProductionAccessAttribute : ActionFilterAttribute
     {
-        private readonly static Lazy<IAdministrationRepository> AdministrationRepository = new Lazy<IAdministrationRepository>(Locator.Current.Instance<IAdministrationRepository>);
+        private readonly static Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
 
         private readonly string controller = "Home";
 

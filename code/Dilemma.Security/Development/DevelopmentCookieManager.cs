@@ -14,9 +14,9 @@ namespace Dilemma.Security.Development
 {
     public static class DevelopmentCookieManager
     {
-        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = new Lazy<IAdministrationRepository>(Locator.Current.Instance<IAdministrationRepository>);
-        
-        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
+
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
        
         private const string CookieName = "Dilemma.Security.Development.Cookie";
 

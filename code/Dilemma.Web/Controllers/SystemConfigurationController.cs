@@ -10,7 +10,7 @@ namespace Dilemma.Web.Controllers
 {
     public class SystemConfigurationController : DilemmaBaseController
     {
-        private static readonly Lazy<IAdministrationService> AdministrationService = new Lazy<IAdministrationService>(Locator.Current.Instance<IAdministrationService>);
+        private static readonly Lazy<IAdministrationService> AdministrationService = Locator.Lazy<IAdministrationService>();
         
         //
         // GET: /SystemConfiguration/

@@ -13,8 +13,7 @@ namespace Dilemma.Business.Services
     /// </summary>
     internal class SiteService : ISiteService
     {
-        private static readonly Lazy<ISiteRepository> SiteRepository =
-            new Lazy<ISiteRepository>(Locator.Current.Instance<ISiteRepository>);
+        private static readonly Lazy<ISiteRepository> SiteRepository = Locator.Lazy<ISiteRepository>();
 
         /// <summary>
         /// Gets a list of <see cref="CategoryViewModel"/>s.

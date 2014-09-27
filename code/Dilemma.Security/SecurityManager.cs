@@ -21,7 +21,7 @@ namespace Dilemma.Security
 {
     internal class SecurityManager : ISecurityManager
     {
-        private static readonly Lazy<IUserRepository> UserRepository = new Lazy<IUserRepository>(Locator.Current.Instance<IUserRepository>);
+        private static readonly Lazy<IUserRepository> UserRepository = Locator.Lazy<IUserRepository>();
 
         public void ConfigureCookieAuthentication(IAppBuilder appBuilder)
         {

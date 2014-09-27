@@ -1,7 +1,7 @@
 ﻿@using Dilemma.Business.Services
 @using Disposable.Common.ServiceLocator
 @{
-    var sysConfig = Locator.Current.Instance<IAdministrationService>().GetSystemConfiguration();
+    var sysConfig = Locator.Get<IAdministrationService>().GetSystemConfiguration();
     var isDevMode = sysConfig.SystemEnvironment == SystemEnvironment.Development || sysConfig.SystemEnvironment == SystemEnvironment.Testing;
 }
 

@@ -11,7 +11,7 @@ namespace Dilemma.Data.Repositories
 {
     internal class UserRepository : IUserRepository
     {
-        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+        private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
         
         public int CreateAnonymousUser()
         {

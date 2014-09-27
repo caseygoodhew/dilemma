@@ -16,7 +16,7 @@ namespace Dilemma.Web.Controllers
 {
     public class QuestionController : DilemmaBaseController
     {
-        private static readonly Lazy<IQuestionService> QuestionService = new Lazy<IQuestionService>(Locator.Current.Instance<IQuestionService>);
+        private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
 
         public ActionResult List()
         {

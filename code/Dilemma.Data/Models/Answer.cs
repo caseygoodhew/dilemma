@@ -38,5 +38,10 @@ namespace Dilemma.Data.Models
         /// Gets or sets the user who created the answer.
         /// </summary>
         public User User { get; set; }
+
+        /// <summary>
+        /// Gets or sets a flag indicating if the answer has been approved via moderation.
+        /// </summary>
+        public bool IsApproved { get; set; }
     }
 }

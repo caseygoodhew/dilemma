@@ -10,7 +10,7 @@ namespace Dilemma.Business.Services
 {
     internal class DevelopmentService : IDevelopmentService
     {
-        private static readonly Lazy<IDevelopmentRepository> DevelopmentRepository = new Lazy<IDevelopmentRepository>(Locator.Current.Instance<IDevelopmentRepository>);
+        private static readonly Lazy<IDevelopmentRepository> DevelopmentRepository = Locator.Lazy<IDevelopmentRepository>();
         
         public void SetUserName(int userId, string name)
         {

@@ -15,9 +15,9 @@ namespace Dilemma.Data.Repositories
 {
     internal class DevelopmentRepository : IDevelopmentRepository
     {
-        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = new Lazy<IAdministrationRepository>(Locator.Current.Instance<IAdministrationRepository>);
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
 
-        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+        private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
         
         public DevelopmentRepository()
         {

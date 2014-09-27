@@ -55,7 +55,7 @@ namespace Dilemma.Web.Views.Shared
             
             #line 3 "..\..\Views\Shared\_Layout.cshtml"
   
-    var sysConfig = Locator.Current.Instance<IAdministrationService>().GetSystemConfiguration();
+    var sysConfig = Locator.Get<IAdministrationService>().GetSystemConfiguration();
     var isDevMode = sysConfig.SystemEnvironment == SystemEnvironment.Development || sysConfig.SystemEnvironment == SystemEnvironment.Testing;
 
             

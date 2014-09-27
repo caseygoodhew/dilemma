@@ -53,7 +53,12 @@ namespace Dilemma.Data.EntityFramework
         /// Gets or sets the <see cref="Notifications"/> database set;
         /// </summary>
         public DbSet<Notification> Notifications { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the <see cref="Moderation"/> database set;
+        /// </summary>
+        public DbSet<Moderation> Moderations { get; set; }
+
         /// <summary>
         /// Called the first that the the DbContext is used in each session.
         /// </summary>
@@ -86,6 +91,8 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new DevelopmentUserMap());
             modelBuilder.Configurations.Add(new NotificationMap());
+            modelBuilder.Configurations.Add(new ModerationMap());
+            modelBuilder.Configurations.Add(new ModerationEntryMap());
         }
     }
 }

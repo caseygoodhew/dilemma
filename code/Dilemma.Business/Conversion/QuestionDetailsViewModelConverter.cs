@@ -16,9 +16,9 @@ namespace Dilemma.Business.Conversion
     /// </summary>
     public static class QuestionDetailsViewModelConverter
     {
-        private static readonly Lazy<ITimeSource> TimeSource = new Lazy<ITimeSource>(Locator.Current.Instance<ITimeSource>);
+        private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
-        private static readonly Lazy<ISecurityManager> SecurityManager = new Lazy<ISecurityManager>(Locator.Current.Instance<ISecurityManager>);
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
 
         /// <summary>
         /// Converts a <see cref="QuestionDetailsViewModel"/> to a <see cref="Question"/>.
@@ -53,6 +53,11 @@ namespace Dilemma.Business.Conversion
 
         private static bool CanAnswer(Question model)
         {
+            if (!model.IsApproved)
+            {
+                return false;
+            }
+            
             if (model.TotalAnswers > model.MaxAnswers)
             {
                 return false;

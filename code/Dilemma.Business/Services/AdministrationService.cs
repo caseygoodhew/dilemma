@@ -12,8 +12,7 @@ namespace Dilemma.Business.Services
     /// </summary>
     internal class AdministrationService : IAdministrationService
     {
-        private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
-            new Lazy<IAdministrationRepository>(Locator.Current.Instance<IAdministrationRepository>);
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
         
         /// <summary>
         /// Gets the system configuration as a <see cref="SystemConfigurationViewModel"/>.

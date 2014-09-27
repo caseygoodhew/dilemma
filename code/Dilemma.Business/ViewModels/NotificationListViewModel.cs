@@ -9,8 +9,7 @@ namespace Dilemma.Business.ViewModels
 {
     public class NotificationListViewModel
     {
-        private static readonly Lazy<INotificationTypeLocator> NotificationTypeLocator =
-            new Lazy<INotificationTypeLocator>(Locator.Current.Instance<INotificationTypeLocator>);
+        private static readonly Lazy<INotificationTypeLocator> NotificationTypeLocator = Locator.Lazy<INotificationTypeLocator>();
         
         private NotificationType notificationType;
 
