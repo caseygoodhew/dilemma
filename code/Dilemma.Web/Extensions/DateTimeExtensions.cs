@@ -46,7 +46,7 @@ namespace Dilemma.Web.Extensions
                     return "in " + ts.Minutes + " minutes";
                 }
 
-                if (delta < 90 * Minute)
+                if (delta < 120 * Minute)
                 {
                     return "in an hour";
                 }
@@ -91,7 +91,7 @@ namespace Dilemma.Web.Extensions
                 return ts.Minutes + " minutes ago";
             }
 
-            if (delta < 90 * Minute)
+            if (delta < 120 * Minute)
             {
                 return "an hour ago";
             }

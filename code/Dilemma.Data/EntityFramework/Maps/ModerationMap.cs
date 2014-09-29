@@ -21,7 +21,6 @@ namespace Dilemma.Data.EntityFramework.Maps
 
             HasRequired(p => p.ForUser).WithMany().WillCascadeOnDelete(false);
             // needs to remain optional for valid insert operation
-            HasOptional(p => p.MostRecentEntry).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Question).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Answer).WithMany().WillCascadeOnDelete(false);
 

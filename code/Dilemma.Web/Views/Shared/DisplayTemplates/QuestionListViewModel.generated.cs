@@ -58,11 +58,11 @@ WriteLiteral(">Created</th>\r\n        <th");
 
 WriteLiteral(" style=\"min-width: 110px\"");
 
-WriteLiteral(">Closes</th>\r\n        <th>Answers</th>\r\n        <th>Category</th>\r\n        <th></" +
-"th>\r\n    </tr>\r\n\r\n");
+WriteLiteral(">Closes</th>\r\n        <th>Answers</th>\r\n        <th>Category</th>\r\n        <th>Ap" +
+"proved</th>\r\n        <th></th>\r\n    </tr>\r\n\r\n");
 
             
-            #line 14 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 15 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
  foreach (var item in Model.Questions)
 {
     var answerPercentage = Convert.ToInt32(item.TotalAnswers * 100 / item.MaxAnswers);
@@ -74,14 +74,14 @@ WriteLiteral(">Closes</th>\r\n        <th>Answers</th>\r\n        <th>Category</
             #line hidden
 WriteLiteral("    <tr");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 547), Tuple.Create("\"", 564)
+WriteAttribute("class", Tuple.Create(" class=\"", 574), Tuple.Create("\"", 591)
             
-            #line 19 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 555), Tuple.Create<System.Object, System.Int32>(rowClass
+            #line 20 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 582), Tuple.Create<System.Object, System.Int32>(rowClass
             
             #line default
             #line hidden
-, 555), false)
+, 582), false)
 );
 
 WriteLiteral(">\r\n        <td>\r\n");
@@ -89,7 +89,7 @@ WriteLiteral(">\r\n        <td>\r\n");
 WriteLiteral("            ");
 
             
-            #line 21 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 22 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
        Write(Html.DisplayFor(modelItem => item.Text));
 
             
@@ -97,20 +97,20 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral(" \r\n        </td>\r\n        <td>\r\n            <div");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 682), Tuple.Create("\"", 711)
+WriteAttribute("title", Tuple.Create(" title=\"", 709), Tuple.Create("\"", 738)
             
-            #line 24 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 690), Tuple.Create<System.Object, System.Int32>(item.CreatedDateTime
+            #line 25 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 717), Tuple.Create<System.Object, System.Int32>(item.CreatedDateTime
             
             #line default
             #line hidden
-, 690), false)
+, 717), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 24 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 25 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
                                           Write(item.CreatedDateTime.ToRelativeText());
 
             
@@ -118,20 +118,20 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</div>\r\n        </td>\r\n        <td>\r\n            <div");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 804), Tuple.Create("\"", 832)
+WriteAttribute("title", Tuple.Create(" title=\"", 831), Tuple.Create("\"", 859)
             
-            #line 27 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 812), Tuple.Create<System.Object, System.Int32>(item.ClosesDateTime
+            #line 28 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 839), Tuple.Create<System.Object, System.Int32>(item.ClosesDateTime
             
             #line default
             #line hidden
-, 812), false)
+, 839), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 27 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 28 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
                                          Write(item.ClosesDateTime.ToRelativeText());
 
             
@@ -149,40 +149,40 @@ WriteLiteral(" class=\"progress-bar\"");
 
 WriteLiteral(" role=\"progressbar\"");
 
-WriteAttribute("aria-valuenow", Tuple.Create(" aria-valuenow=\"", 1031), Tuple.Create("\"", 1065)
+WriteAttribute("aria-valuenow", Tuple.Create(" aria-valuenow=\"", 1058), Tuple.Create("\"", 1092)
             
-            #line 31 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 1047), Tuple.Create<System.Object, System.Int32>(item.TotalAnswers
+            #line 32 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 1074), Tuple.Create<System.Object, System.Int32>(item.TotalAnswers
             
             #line default
             #line hidden
-, 1047), false)
+, 1074), false)
 );
 
 WriteLiteral(" aria-valuemin=\"0\"");
 
-WriteAttribute("aria-valuemax", Tuple.Create(" aria-valuemax=\"", 1084), Tuple.Create("\"", 1116)
+WriteAttribute("aria-valuemax", Tuple.Create(" aria-valuemax=\"", 1111), Tuple.Create("\"", 1143)
             
-            #line 31 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
-                                                 , Tuple.Create(Tuple.Create("", 1100), Tuple.Create<System.Object, System.Int32>(item.MaxAnswers
+            #line 32 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+                                                 , Tuple.Create(Tuple.Create("", 1127), Tuple.Create<System.Object, System.Int32>(item.MaxAnswers
             
             #line default
             #line hidden
-, 1100), false)
+, 1127), false)
 );
 
-WriteAttribute("style", Tuple.Create(" style=\"", 1117), Tuple.Create("\"", 1164)
-, Tuple.Create(Tuple.Create("", 1125), Tuple.Create("width:", 1125), true)
+WriteAttribute("style", Tuple.Create(" style=\"", 1144), Tuple.Create("\"", 1191)
+, Tuple.Create(Tuple.Create("", 1152), Tuple.Create("width:", 1152), true)
             
-            #line 31 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
-                                                                                , Tuple.Create(Tuple.Create(" ", 1131), Tuple.Create<System.Object, System.Int32>(answerPercentage
+            #line 32 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+                                                                                , Tuple.Create(Tuple.Create(" ", 1158), Tuple.Create<System.Object, System.Int32>(answerPercentage
             
             #line default
             #line hidden
-, 1132), false)
-, Tuple.Create(Tuple.Create("", 1149), Tuple.Create("%;", 1149), true)
-, Tuple.Create(Tuple.Create(" ", 1151), Tuple.Create("min-width:", 1152), true)
-, Tuple.Create(Tuple.Create(" ", 1162), Tuple.Create("0", 1163), true)
+, 1159), false)
+, Tuple.Create(Tuple.Create("", 1176), Tuple.Create("%;", 1176), true)
+, Tuple.Create(Tuple.Create(" ", 1178), Tuple.Create("min-width:", 1179), true)
+, Tuple.Create(Tuple.Create(" ", 1189), Tuple.Create("0", 1190), true)
 );
 
 WriteLiteral(">\r\n                    <span");
@@ -192,7 +192,7 @@ WriteLiteral(" class=\"sr-only\"");
 WriteLiteral(">");
 
             
-            #line 32 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 33 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
                                      Write(item.TotalAnswers);
 
             
@@ -201,7 +201,7 @@ WriteLiteral(">");
 WriteLiteral(" out of ");
 
             
-            #line 32 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 33 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
                                                                Write(item.MaxAnswers);
 
             
@@ -214,7 +214,7 @@ WriteLiteral(" class=\"text-center\"");
 WriteLiteral("><small>");
 
             
-            #line 35 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 36 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
                                        Write(string.Format(@"( {0} / {1} )", item.TotalAnswers, item.MaxAnswers));
 
             
@@ -225,7 +225,7 @@ WriteLiteral("</small></div>\r\n        </td>\r\n        <td>\r\n");
 WriteLiteral("            ");
 
             
-            #line 38 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 39 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
        Write(Html.DisplayFor(modelItem => item.CategoryName));
 
             
@@ -233,10 +233,46 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("\r\n        </td>\r\n        <td>\r\n");
 
+            
+            #line 42 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            
+            
+            #line default
+            #line hidden
+            
+            #line 42 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+             if (item.IsApproved)
+            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <span>Y</span>\r\n");
+
+            
+            #line 45 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            }
+            else
+            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                <span>N</span>\r\n");
+
+            
+            #line 49 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        </td>\r\n        <td>\r\n");
+
 WriteLiteral("            ");
 
             
-            #line 41 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 52 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
        Write(Html.ActionLink("View", "Details", new { questionId = item.QuestionId }));
 
             
@@ -245,7 +281,7 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </td>\r\n    </tr>\r\n");
 
             
-            #line 44 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
+            #line 55 "..\..\Views\Shared\DisplayTemplates\QuestionListViewModel.cshtml"
 }
 
             

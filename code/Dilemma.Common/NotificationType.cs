@@ -2,6 +2,7 @@ namespace Dilemma.Common
 {
     public enum NotificationType
     {
-        QuestionAnswered
+        QuestionAnswered,
+        PostRejected
     }
 }

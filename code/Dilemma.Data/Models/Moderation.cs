@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using Dilemma.Common;
@@ -17,8 +18,6 @@ namespace Dilemma.Data.Models
         public Answer Answer { get; set; }
 
         public ModerationState State { get; set; }
-
-        public ModerationEntry MostRecentEntry { get; set; }
 
         public virtual List<ModerationEntry> ModerationEntries { get; set; }
     }

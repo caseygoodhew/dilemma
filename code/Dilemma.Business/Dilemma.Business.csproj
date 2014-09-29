@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\AnswerViewModelConverter.cs" />
+    <Compile Include="Conversion\ModerationEntryViewModelConverter.cs" />
+    <Compile Include="Conversion\ModerationViewModelConverter.cs" />
     <Compile Include="Conversion\DevelopmentUserViewModelConverter.cs" />
     <Compile Include="Conversion\NotificationViewModelConverter.cs" />
     <Compile Include="Conversion\QuestionDetailsViewModelConverter.cs" />
@@ -54,10 +56,14 @@
     <Compile Include="Services\AdministrationService.cs" />
     <Compile Include="Services\DevelopmentService.cs" />
     <Compile Include="Services\INotificationService.cs" />
+    <Compile Include="Services\IModerationService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\ModerationService.cs" />
+    <Compile Include="ViewModels\ModerationEntryViewModel.cs" />
+    <Compile Include="ViewModels\ModerationViewModel.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="ViewModels\NEWNotificationViewModel.cs" />
+    <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\DevelopmentUserViewModel.cs" />
     <Compile Include="Services\IDevelopmentService.cs" />
     <Compile Include="Services\SiteService.cs" />
@@ -84,6 +90,7 @@
     <Compile Include="Registration.cs" />
     <Compile Include="Validators\ValidatorFactory.cs" />
     <Compile Include="Validators\QuestionViewModelValidator.cs" />
+    <Compile Include="ViewModels\RejectModerationViewModel.cs" />
     <Compile Include="ViewModels\SystemConfigurationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

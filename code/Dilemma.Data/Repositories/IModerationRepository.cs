@@ -1,11 +1,11 @@
-using Dilemma.Data.Models;
-
 namespace Dilemma.Data.Repositories
 {
     public interface IModerationRepository
     {
-        void OnQuestionCreated(Question question);
+        T GetNext<T>() where T : class;
 
-        void OnAnswerCreated(Answer answer);
+        void Approve(int userId, int moderationId);
+
+        void Reject(int userId, int moderationId, string message);
     }
 }

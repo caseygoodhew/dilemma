@@ -60,5 +60,10 @@ namespace Dilemma.Business.ViewModels
         /// Flag indicating that the current user asked this question.
         /// </summary>
         public bool IsMyQuestion { get; set; }
+
+        /// <summary>
+        /// Flag indicating that the question is approved.
+        /// </summary>
+        public bool IsApproved { get; set; }
     }
 }

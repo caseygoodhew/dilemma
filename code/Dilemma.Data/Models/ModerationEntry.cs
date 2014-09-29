@@ -15,5 +15,7 @@ namespace Dilemma.Data.Models
         public string Message { get; set; }
 
         public DateTime CreatedDateTime { get; set; }
+
+        public User AddedByUser { get; set; }
     }
 }

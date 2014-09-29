@@ -12,6 +12,8 @@ namespace Dilemma.Data.Models
         
         public NotificationType NotificationType { get; set; }
 
+        public Moderation Moderation { get; set; }
+        
         public Answer Answer { get; set; }
         
         public DateTime CreatedDateTime { get; set; }

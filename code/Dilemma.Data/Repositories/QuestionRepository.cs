@@ -22,7 +22,7 @@ namespace Dilemma.Data.Repositories
 
         private static readonly Lazy<INotificationRepository> NotificationRepository = Locator.Lazy<INotificationRepository>();
 
-        private static readonly Lazy<IModerationRepository> ModerationRepository = Locator.Lazy<IModerationRepository>();
+        private static readonly Lazy<IInternalModerationRepository> ModerationRepository = Locator.Lazy<IInternalModerationRepository>();
 
         /// <summary>
         /// Creates a <see cref="Question"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="Question"/>.
@@ -90,6 +90,7 @@ namespace Dilemma.Data.Repositories
                                     x.ClosesDateTime,
                                     x.CreatedDateTime,
                                     x.User.UserId,
+                                    x.IsApproved,
                                     MostRecentActivity = x.Answers.Where(a => a.AnswerType == AnswerType.Completed).Select(a => a.CreatedDateTime).Concat(new [] { x.CreatedDateTime }).Max()
                                 })
                         .AsEnumerable()
@@ -105,6 +106,7 @@ namespace Dilemma.Data.Repositories
                                     Text = x.Text,
                                     ClosesDateTime = x.ClosesDateTime,
                                     CreatedDateTime = x.CreatedDateTime,
+                                    IsApproved = x.IsApproved,
                                     User = new User { UserId = x.UserId }
                                 });
 
@@ -221,7 +223,8 @@ namespace Dilemma.Data.Repositories
                                                  x.MaxAnswers,
                                                  x.ClosesDateTime,
                                                  x.User.UserId,
-                                                 TotalAnswers = x.Answers.Count
+                                                 TotalAnswers = x.Answers.Count,
+                                                 x.IsApproved
                                              })
                             .AsEnumerable()
                             .Select(x => new Question
@@ -230,7 +233,8 @@ namespace Dilemma.Data.Repositories
                                                  MaxAnswers = x.MaxAnswers,
                                                  ClosesDateTime = x.ClosesDateTime,
                                                  User = new User { UserId = x.UserId },
-                                                 TotalAnswers = x.TotalAnswers
+                                                 TotalAnswers = x.TotalAnswers,
+                                                 IsApproved = x.IsApproved
                                              })
                             .Single();
 

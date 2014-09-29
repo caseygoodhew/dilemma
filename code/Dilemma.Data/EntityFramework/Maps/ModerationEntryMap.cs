@@ -19,6 +19,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             Property(p => p.EntryType).IsRequired();
             Property(p => p.Message).IsOptional();
             Property(p => p.CreatedDateTime).IsRequired();
+            HasRequired(p => p.AddedByUser).WithMany().WillCascadeOnDelete(false);
         }
     }
 }

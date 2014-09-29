@@ -4,6 +4,6 @@ namespace Dilemma.Common
     {
         Queued,
         Approved,
-        SentBack
+        Rejected
     }
 }

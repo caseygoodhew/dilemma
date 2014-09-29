@@ -4,7 +4,7 @@ namespace Dilemma.Common
     {
         Created,
         Approved,
-        SentBack,
+        Rejected,
         PermanentRejection
     }
 }

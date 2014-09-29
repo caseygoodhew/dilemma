@@ -4,7 +4,7 @@ using Dilemma.Common;
 
 namespace Dilemma.Business.ViewModels
 {
-    public class NEWNotificationViewModel
+    public class NotificationViewModel
     {
         public int NotificationId { get; set; }
 
@@ -13,6 +13,8 @@ namespace Dilemma.Business.ViewModels
         public int? QuestionId { get; set; }
 
         public int? AnswerId { get; set; }
+
+        public int? ModerationId { get; set; }
 
         public DateTime CreatedDateTime { get; set; }
 

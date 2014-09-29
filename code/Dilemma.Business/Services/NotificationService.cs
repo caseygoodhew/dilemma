@@ -19,7 +19,7 @@ namespace Dilemma.Business.Services
 
         public IEnumerable<NotificationListViewModel> GetAll()
         {
-            var all = NotificationRepository.Value.GetAll<NEWNotificationViewModel>(SecurityManager.Value.GetUserId()).ToList();
+            var all = NotificationRepository.Value.GetAll<NotificationViewModel>(SecurityManager.Value.GetUserId()).ToList();
             
             var byQuestions = all.Where(x => x.QuestionId != null).GetGroupedQuestions();
 
@@ -39,7 +39,7 @@ namespace Dilemma.Business.Services
 
     internal static class NotificationServiceGroupingExtensions
     {
-        internal static IEnumerable<NotificationListViewModel> GetGroupedQuestions(this IEnumerable<NEWNotificationViewModel> enumerable)
+        internal static IEnumerable<NotificationListViewModel> GetGroupedQuestions(this IEnumerable<NotificationViewModel> enumerable)
         {
             var grouped = enumerable.GroupBy(x => new { QuestionId = x.QuestionId.Value, IsActioned = x.ActionedDateTime != null, x.NotificationType });
 

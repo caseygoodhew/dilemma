@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,5 +43,33 @@ namespace Dilemma.Data.EntityFramework
                 throw new DbEntityValidationException("Repackaged validation errors to InnerException", exception);
             }
         }
+
+        public static TSource EnsureAttached<TSource, TProperty>(this DbContext context, Expression<Func<TSource, TProperty>> propertyLambda, int id) where TSource : class, new()
+        {
+            var propertyInfo = Reflection.GetPropertyInfo(propertyLambda);
+
+            var options = context.ChangeTracker.Entries<TSource>().Where(
+                x =>
+                    {
+                        var test = (int)propertyInfo.GetValue(x.Entity);
+                        return test == id;
+                    }).ToList();
+            
+            if (options.Count == 0)
+            {
+                var entity = new TSource();
+                propertyInfo.SetValue(entity, id);
+                return context.Set<TSource>().Attach(entity);
+            }
+
+            if (options.Count == 1)
+            {
+                return options.Single().Entity; 
+            }
+
+            throw new InvalidOperationException();
+        }
+
+        
     }
 }

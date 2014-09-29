@@ -57,6 +57,7 @@ namespace Dilemma.Business.Conversion
                            TotalAnswers = model.TotalAnswers,
                            MaxAnswers = model.MaxAnswers,
                            IsMyQuestion = model.User.UserId == userId,
+                           IsApproved = model.IsApproved,
                            Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
                        };
         }

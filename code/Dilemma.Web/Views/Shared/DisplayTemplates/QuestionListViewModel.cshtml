@@ -8,6 +8,7 @@
         <th style="min-width: 110px">Closes</th>
         <th>Answers</th>
         <th>Category</th>
+        <th>Approved</th>
         <th></th>
     </tr>
 
@@ -36,6 +37,16 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @if (item.IsApproved)
+            {
+                <span>Y</span>
+            }
+            else
+            {
+                <span>N</span>
+            }
         </td>
         <td>
             @Html.ActionLink("View", "Details", new { questionId = item.QuestionId })

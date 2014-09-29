@@ -69,21 +69,9 @@
     <Compile Include="EntityFramework\Maps\UserMap.cs" />
     <Compile Include="EntityFramework\Maps\SystemConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionMap.cs" />
-    <Compile Include="Migrations\201409220522515_Migration.cs" />
-    <Compile Include="Migrations\201409220522515_Migration.Designer.cs">
-      <DependentUpon>201409220522515_Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409270601412_Migration1.cs" />
-    <Compile Include="Migrations\201409270601412_Migration1.Designer.cs">
-      <DependentUpon>201409270601412_Migration1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409270637010_Migration2.cs" />
-    <Compile Include="Migrations\201409270637010_Migration2.Designer.cs">
-      <DependentUpon>201409270637010_Migration2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409270641039_Migration3.cs" />
-    <Compile Include="Migrations\201409270641039_Migration3.Designer.cs">
-      <DependentUpon>201409270641039_Migration3.cs</DependentUpon>
+    <Compile Include="Migrations\201409291458377_Migration.cs" />
+    <Compile Include="Migrations\201409291458377_Migration.Designer.cs">
+      <DependentUpon>201409291458377_Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -103,6 +91,7 @@
     <Compile Include="Repositories\DevelopmentRepository.cs" />
     <Compile Include="Repositories\GetQuestionAs.cs" />
     <Compile Include="Repositories\IDevelopmentRepository.cs" />
+    <Compile Include="Repositories\IInternalModerationRepository.cs" />
     <Compile Include="Repositories\IModerationRepository.cs" />
     <Compile Include="Repositories\INotificationRepository.cs" />
     <Compile Include="Repositories\ISiteRepository.cs" />
@@ -135,17 +124,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409220522515_Migration.resx">
-      <DependentUpon>201409220522515_Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409270601412_Migration1.resx">
-      <DependentUpon>201409270601412_Migration1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409270637010_Migration2.resx">
-      <DependentUpon>201409270637010_Migration2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409270641039_Migration3.resx">
-      <DependentUpon>201409270641039_Migration3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409291458377_Migration.resx">
+      <DependentUpon>201409291458377_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
