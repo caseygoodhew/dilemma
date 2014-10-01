@@ -21,6 +21,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             HasRequired(p => p.ForUser).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Moderation).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Answer).WithMany().WillCascadeOnDelete(false);
+            HasOptional(p => p.Question).WithMany().WillCascadeOnDelete(false);
             
             Property(p => p.CreatedDateTime).IsRequired();
             Property(p => p.ActionedDateTime).IsOptional();

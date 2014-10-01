@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityFramework\AreNotSameException.cs" />
     <Compile Include="EntityFramework\DbContextExtensions.cs" />
     <Compile Include="EntityFramework\DbSetExtensions.cs" />
     <Compile Include="EntityFramework\FixEfProviderServicesProblem.cs" />
@@ -69,9 +70,9 @@
     <Compile Include="EntityFramework\Maps\UserMap.cs" />
     <Compile Include="EntityFramework\Maps\SystemConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionMap.cs" />
-    <Compile Include="Migrations\201409291458377_Migration.cs" />
-    <Compile Include="Migrations\201409291458377_Migration.Designer.cs">
-      <DependentUpon>201409291458377_Migration.cs</DependentUpon>
+    <Compile Include="Migrations\201409300557391_Migration.cs" />
+    <Compile Include="Migrations\201409300557391_Migration.Designer.cs">
+      <DependentUpon>201409300557391_Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Repositories\GetQuestionAs.cs" />
     <Compile Include="Repositories\IDevelopmentRepository.cs" />
     <Compile Include="Repositories\IInternalModerationRepository.cs" />
+    <Compile Include="Repositories\IInternalNotificationRepository.cs" />
     <Compile Include="Repositories\IModerationRepository.cs" />
     <Compile Include="Repositories\INotificationRepository.cs" />
     <Compile Include="Repositories\ISiteRepository.cs" />
@@ -124,8 +126,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409291458377_Migration.resx">
-      <DependentUpon>201409291458377_Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409300557391_Migration.resx">
+      <DependentUpon>201409300557391_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,12 @@
+using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 
 namespace Dilemma.Data.Repositories
 {
-    internal interface IInternalModerationRepository
+    internal interface IInternalModerationRepository : IModerationRepository
     {
-        void OnQuestionCreated(Question question);
+        void OnQuestionCreated(DilemmaContext context, Question question);
 
-        void OnAnswerCreated(Answer answer);
+        void OnAnswerCreated(DilemmaContext context, Answer answer);
     }
 }

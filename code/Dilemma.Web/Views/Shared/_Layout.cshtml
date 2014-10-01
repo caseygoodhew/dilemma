@@ -28,16 +28,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Question list", "List", "Question")</li>
-                    <li>@Html.ActionLink("My activity", "Index", "Activity")</li>
-                    <li>@Html.ActionLink("Ask a question", "Create", "Question")</li>
-                    <li>@Html.ActionLink("System configuration", "Index", "SystemConfiguration")</li>
+                    <li>@Html.ActionLink("QList", "List", "Question")</li>
+                    <li>@Html.ActionLink("Activity", "Index", "Activity")</li>
+                    <li>@Html.ActionLink("Ask", "Create", "Question")</li>
+                    <li>@Html.ActionLink("SysConfig", "Index", "SystemConfiguration")</li>
+                    <li>@Html.ActionLink("Notification", "Index", "Notification")</li>
+                    <li>@Html.ActionLink("Moderation", "Index", "Moderation")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class=""><a href="/glimpse.axd">Glimpse</a></li>
                     @if (isDevMode)
                     {
-                        <li>@Html.ActionLink("Quick Auth", "Index", "QuickAuthentication")</li>
+                        <li>@Html.ActionLink("Auth", "Index", "QuickAuthentication")</li>
                     }
                 </ul>
             </div>

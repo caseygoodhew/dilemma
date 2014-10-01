@@ -23,12 +23,16 @@ namespace Dilemma.Business.Services
             
             var byQuestions = all.Where(x => x.QuestionId != null).GetGroupedQuestions();
 
-            if (all.Any(x => x.QuestionId == null))
-            {
-                throw new NotImplementedException();
-            }
+            var remaining = all.Where(x => x.ModerationId != null).Select(x => new NotificationListViewModel
+                                                                                 {
+                                                                                     DateTime = x.CreatedDateTime,
+                                                                                     IsActioned = x.ActionedDateTime != null,
+                                                                                     RouteDataValue = x.ModerationId.Value,
+                                                                                     NotificationType = x.NotificationType,
+                                                                                     Occurrences = 1
+                                                                                 });
 
-            return byQuestions;
+            return byQuestions.Concat(remaining).OrderByDescending(x => x.DateTime);
         }
 
         public void Mute(NotificationLookupBy notificationLookupBy, int id)

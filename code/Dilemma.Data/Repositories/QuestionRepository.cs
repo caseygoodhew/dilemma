@@ -36,14 +36,13 @@ namespace Dilemma.Data.Repositories
 
             using (var context = new DilemmaContext())
             {
-                question.User = new User { UserId = userId };
-
-                context.Users.Attach(question.User);
-                context.Categories.Attach(question.Category);
+                question.User = context.EnsureAttached(new User { UserId = userId }, x => x.UserId);
+                context.EnsureAttached(question.Category, x => x.CategoryId);
+                
                 context.Questions.Add(question);
                 context.SaveChangesVerbose();
 
-                ModerationRepository.Value.OnQuestionCreated(question);
+                ModerationRepository.Value.OnQuestionCreated(context, question);
             }
         }
 
@@ -145,8 +144,8 @@ namespace Dilemma.Data.Repositories
                                      User = new User { UserId = userId }
                                  };
                 
-                context.Questions.Attach(question);
-                context.Users.Attach(answer.User);
+                context.EnsureAttached(question, x => x.QuestionId);
+                context.EnsureAttached(answer.User, x => x.UserId);
                 
                 // TODO: Potential concurrency issue here if two people vie for the slot at the same time.
                 // TODO:    (The worst that will happen is that more answer slots will be assigned than allowed)
@@ -193,16 +192,15 @@ namespace Dilemma.Data.Repositories
                 {
                     return false;
                 }
-            
-                answer.CreatedDateTime = TimeSource.Value.Now;
-                answer.AnswerType = AnswerType.Completed;
 
-                context.Answers.Update(context, answer);
+                existingAnswer.CreatedDateTime = TimeSource.Value.Now;
+                existingAnswer.AnswerType = AnswerType.Completed;
+                existingAnswer.Text = answer.Text;
+
+                context.Answers.Update(context, existingAnswer);
                 context.SaveChangesVerbose();
 
-                NotificationRepository.Value.Raise(existingAnswer.Question.User.UserId, NotificationType.QuestionAnswered, answer.AnswerId);
-
-                ModerationRepository.Value.OnAnswerCreated(answer);
+                ModerationRepository.Value.OnAnswerCreated(context, existingAnswer);
 
                 return true;
             }

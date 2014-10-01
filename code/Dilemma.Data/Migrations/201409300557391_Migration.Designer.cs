@@ -13,7 +13,7 @@ namespace Dilemma.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201409291458377_Migration"; }
+            get { return "201409300557391_Migration"; }
         }
         
         string IMigrationMetadata.Source

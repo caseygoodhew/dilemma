@@ -237,19 +237,41 @@ WriteLiteral(">\r\n            <div");
 
 WriteLiteral(" class=\"col-md-8 col-md-offset-2 text-muted\"");
 
-WriteLiteral(">\r\n                <small>Created: ");
+WriteLiteral(">\r\n                <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n                    <small");
+
+WriteLiteral(" class=\"col-md-4\"");
+
+WriteLiteral(">Created: ");
 
             
-            #line 46 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
-                           Write(answer.CreatedDateTime.ToRelativeText());
+            #line 47 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+                                                Write(answer.CreatedDateTime.ToRelativeText());
 
             
             #line default
             #line hidden
-WriteLiteral("</small>\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
+WriteLiteral("</small>\r\n                    <small");
+
+WriteLiteral(" class=\"col-md-4\"");
+
+WriteLiteral(">Approved: ");
 
             
-            #line 50 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 48 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+                                                 Write(answer.IsApproved);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</small>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r" +
+"\n");
+
+            
+            #line 53 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
     
     topBuffer = "top-buffer";
 }

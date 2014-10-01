@@ -4,8 +4,6 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 using Disposable.Common;
 
@@ -44,32 +42,41 @@ namespace Dilemma.Data.EntityFramework
             }
         }
 
-        public static TSource EnsureAttached<TSource, TProperty>(this DbContext context, Expression<Func<TSource, TProperty>> propertyLambda, int id) where TSource : class, new()
+        public static TSource EnsureAttached<TSource, TProperty>(
+            this DbContext context,
+            TSource source,
+            Expression<Func<TSource, TProperty>> propertyLambda,
+            EntityState entityState = EntityState.Unchanged) where TSource : class
         {
             var propertyInfo = Reflection.GetPropertyInfo(propertyLambda);
-
-            var options = context.ChangeTracker.Entries<TSource>().Where(
-                x =>
-                    {
-                        var test = (int)propertyInfo.GetValue(x.Entity);
-                        return test == id;
-                    }).ToList();
+            var id = (TProperty)propertyInfo.GetValue(source);
             
-            if (options.Count == 0)
+            var existingEntity = context.ChangeTracker.Entries<TSource>().Where(
+                x =>
+                {
+                    var propertyValue = (TProperty)propertyInfo.GetValue(x.Entity);
+                    return EqualityComparer<TProperty>.Default.Equals(propertyValue, id);
+                }).SingleOrDefault();
+            
+            if (existingEntity != null)
             {
-                var entity = new TSource();
-                propertyInfo.SetValue(entity, id);
-                return context.Set<TSource>().Attach(entity);
+                if (existingEntity.Entity == source)
+                {
+                    return existingEntity.Entity; 
+                }
+
+                if (existingEntity.State != EntityState.Unchanged)
+                {
+                    throw new AreNotSameException();    
+                }
+
+                existingEntity.State = EntityState.Detached;
             }
 
-            if (options.Count == 1)
-            {
-                return options.Single().Entity; 
-            }
+            context.Set<TSource>().Attach(source);
+            context.Entry(source).State = entityState;
 
-            throw new InvalidOperationException();
+            return source;
         }
-
-        
     }
 }

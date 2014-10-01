@@ -13,7 +13,7 @@ using Disposable.Common.Services;
 
 namespace Dilemma.Data.Repositories
 {
-    internal class NotificationRepository : INotificationRepository
+    internal class NotificationRepository : INotificationRepository, IInternalNotificationRepository
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
@@ -21,75 +21,91 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var notifications =
-                    context.Notifications
-                        .Include(x => x.Answer)
-                        .Include(x => x.Answer.Question)
-                        .Include(x => x.Moderation)
-                        .Include(x => x.Moderation.Question)
-                        .Where(x => x.ForUser.UserId == forUserId)
-                        .Select(x => new
+                var notifications = context.Notifications
+                    .Include(x => x.Answer)
+                    //.Include(x => x.Answer.Question)
+                    .Include(x => x.Question)
+                    .Include(x => x.Moderation)
+                    //.Include(x => x.Moderation.Question)
+                    .Where(x => x.ForUser.UserId == forUserId)
+                    .Select(
+                        x => new
+                                 {
+                                     x.ActionedDateTime,
+                                     x.CreatedDateTime,
+                                     x.NotificationType,
+                                     AnswerId = x.Answer != null ? (int?)x.Answer.AnswerId : null,
+                                     x.Question,
+                                     ModerationId = x.Moderation != null ? (int?)x.Moderation.ModerationId : null
+                                 }).OrderByDescending(x => x.CreatedDateTime).ToList().Select(
+                                     x =>
                                          {
-                                             x.ActionedDateTime,
-                                             x.CreatedDateTime,
-                                             x.NotificationType,
-                                             AnswerId = x.Answer != null ? (int?)x.Answer.AnswerId : null,
-                                             QuestionId = x.Answer != null ? (int?)x.Answer.Question.QuestionId : x.Moderation != null ? (int?)x.Moderation.Question.QuestionId : null,
-                                             ModerationId = x.Moderation != null ? (int?)x.Moderation.ModerationId : null
-                                         })
-                        .OrderByDescending(x => x.CreatedDateTime)
-                        .ToList()
-                        .Select(x => new Notification
-                                         {
-                                             ActionedDateTime = x.ActionedDateTime,
-                                             CreatedDateTime = x.CreatedDateTime,
-                                             NotificationType = x.NotificationType,
-                                             Answer = x.AnswerId.HasValue ? new Answer { AnswerId = x.AnswerId.Value, Question = new Question { QuestionId = x.QuestionId.Value } } : null,
-                                             Moderation = x.ModerationId.HasValue ? new Moderation
-                                                                                        {
-                                                                                            ModerationId = x.ModerationId.Value,
-                                                                                            Question = new Question { QuestionId = x.QuestionId.Value }
-                                                                                        } : null
-                                         })
-                        .ToList();
+                                             var answer = x.AnswerId.HasValue
+                                                              ? new Answer
+                                                                    {
+                                                                        AnswerId = x.AnswerId.Value,
+                                                                        Question = x.Question
+                                                                    }
+                                                              : null;
 
+                                             var moderation = x.ModerationId.HasValue
+                                                                  ? new Moderation
+                                                                        {
+                                                                            ModerationId = x.ModerationId.Value,
+                                                                            Question = x.Question
+                                                                        }
+                                                                  : null;
+
+                                             return new Notification
+                                                        {
+                                                            ActionedDateTime = x.ActionedDateTime,
+                                                            CreatedDateTime = x.CreatedDateTime,
+                                                            NotificationType = x.NotificationType,
+                                                            Answer = answer,
+                                                            Question = x.Question,
+                                                            Moderation = moderation
+                                                        };
+                                         }).ToList();
+            
                 return ConverterFactory.ConvertMany<Notification, T>(notifications);
             }
         }
 
-        public void Raise(int forUserId, NotificationType notificationType, int id)
+        public void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, int id)
         {
-            using (var context = new DilemmaContext())
+            var notification = new Notification
+                    {
+                        ForUser = new User { UserId = forUserId },
+                        NotificationType = notificationType,
+                        CreatedDateTime = TimeSource.Value.Now
+                    };
+
+            context.EnsureAttached(notification.ForUser, x => x.UserId);
+
+            switch (notificationType)
             {
-                var notification = new Notification
-                        {
-                            ForUser = new User { UserId = forUserId },
-                            NotificationType = notificationType,
-                            CreatedDateTime = TimeSource.Value.Now
-                        };
-
-                context.Users.Attach(notification.ForUser);
-
-                switch (notificationType)
-                {
-                    case NotificationType.QuestionAnswered:
-                        notification.Answer = new Answer { AnswerId = id };
-                        context.Answers.Attach(notification.Answer);
-                        break;
-
-                    case NotificationType.PostRejected:
-                        notification.Moderation = new Moderation { ModerationId = id };
-                        context.Moderations.Attach(notification.Moderation);
-                        break;
+                case NotificationType.QuestionAnswered:
+                    var questionId = context.Answers.Where(x => x.AnswerId == id).Select(
+                        x => new
+                                 {
+                                     x.Question.QuestionId
+                                 }).Single().QuestionId;
+                    
+                    notification.Answer = context.EnsureAttached(new Answer { AnswerId = id }, x => x.AnswerId);
+                    notification.Question = context.EnsureAttached(new Question { QuestionId = questionId }, x => x.QuestionId);
+                    break;
                         
-                    default:
-                        throw new ArgumentOutOfRangeException("notificationType");
-                }
-
-                context.Notifications.Add(notification);
-                
-                context.SaveChangesVerbose();
+                case NotificationType.PostRejected:
+                    notification.Moderation = context.EnsureAttached(new Moderation { ModerationId = id }, x => x.ModerationId);
+                    break;
+                        
+                default:
+                    throw new ArgumentOutOfRangeException("notificationType");
             }
+
+            context.Notifications.Add(notification);
+                
+            context.SaveChangesVerbose();
         }
 
         public void Mute(int forUserId, NotificationLookupBy notificationLookupBy, int id)
@@ -110,19 +126,16 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        public void Delete(int forUserId, NotificationLookupBy notificationLookupBy, int id)
+        public void Delete(DilemmaContext context, NotificationLookupBy notificationLookupBy, int id)
         {
-            using (var context = new DilemmaContext())
-            {
-                var notifications = FindNotifications(context, forUserId, notificationLookupBy, id);
+            var notifications = FindNotifications(context, null, notificationLookupBy, id);
 
-                notifications.ForEach(x => context.Entry(x).State = EntityState.Deleted);
+            notifications.ForEach(x => context.Entry(x).State = EntityState.Deleted);
 
-                context.SaveChangesVerbose();
-            }
+            context.SaveChangesVerbose();
         }
 
-        private List<Notification> FindNotifications(DilemmaContext context, int forUserId, NotificationLookupBy notificationLookupBy, int id)
+        private List<Notification> FindNotifications(DilemmaContext context, int? forUserId, NotificationLookupBy notificationLookupBy, int id)
         {
             return context.Notifications
                         .Where(
@@ -140,7 +153,7 @@ namespace Dilemma.Data.Repositories
                             )
                         )
                         .Where(x => x.ActionedDateTime == null)
-                        .Where(x => x.ForUser.UserId == forUserId)
+                        .Where(x => x.ForUser.UserId == (forUserId ?? x.ForUser.UserId))
                         .ToList();
         }
     }

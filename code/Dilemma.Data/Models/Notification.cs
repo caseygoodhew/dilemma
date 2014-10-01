@@ -15,6 +15,8 @@ namespace Dilemma.Data.Models
         public Moderation Moderation { get; set; }
         
         public Answer Answer { get; set; }
+
+        public Question Question { get; set; }
         
         public DateTime CreatedDateTime { get; set; }
 

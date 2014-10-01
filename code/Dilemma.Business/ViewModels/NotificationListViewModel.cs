@@ -44,6 +44,7 @@ namespace Dilemma.Business.ViewModels
                     return Occurrences == 1
                                ? string.Format("1 answer has been added to your question.")
                                : string.Format("{0} answers have been added to your question.", Occurrences);
+                
                 case NotificationType.PostRejected:
                     return "Your post has been rejected.";
 

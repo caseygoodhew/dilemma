@@ -159,7 +159,7 @@ WriteLiteral(">\r\n                    <li>");
 
             
             #line 31 "..\..\Views\Shared\_Layout.cshtml"
-                   Write(Html.ActionLink("Question list", "List", "Question"));
+                   Write(Html.ActionLink("QList", "List", "Question"));
 
             
             #line default
@@ -168,7 +168,7 @@ WriteLiteral("</li>\r\n                    <li>");
 
             
             #line 32 "..\..\Views\Shared\_Layout.cshtml"
-                   Write(Html.ActionLink("My activity", "Index", "Activity"));
+                   Write(Html.ActionLink("Activity", "Index", "Activity"));
 
             
             #line default
@@ -177,7 +177,7 @@ WriteLiteral("</li>\r\n                    <li>");
 
             
             #line 33 "..\..\Views\Shared\_Layout.cshtml"
-                   Write(Html.ActionLink("Ask a question", "Create", "Question"));
+                   Write(Html.ActionLink("Ask", "Create", "Question"));
 
             
             #line default
@@ -186,7 +186,25 @@ WriteLiteral("</li>\r\n                    <li>");
 
             
             #line 34 "..\..\Views\Shared\_Layout.cshtml"
-                   Write(Html.ActionLink("System configuration", "Index", "SystemConfiguration"));
+                   Write(Html.ActionLink("SysConfig", "Index", "SystemConfiguration"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n                    <li>");
+
+            
+            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("Notification", "Index", "Notification"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n                    <li>");
+
+            
+            #line 36 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("Moderation", "Index", "Moderation"));
 
             
             #line default
@@ -206,13 +224,13 @@ WriteLiteral(" href=\"/glimpse.axd\"");
 WriteLiteral(">Glimpse</a></li>\r\n");
 
             
-            #line 38 "..\..\Views\Shared\_Layout.cshtml"
+            #line 40 "..\..\Views\Shared\_Layout.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Views\Shared\_Layout.cshtml"
+            #line 40 "..\..\Views\Shared\_Layout.cshtml"
                      if (isDevMode)
                     {
 
@@ -222,8 +240,8 @@ WriteLiteral(">Glimpse</a></li>\r\n");
 WriteLiteral("                        <li>");
 
             
-            #line 40 "..\..\Views\Shared\_Layout.cshtml"
-                       Write(Html.ActionLink("Quick Auth", "Index", "QuickAuthentication"));
+            #line 42 "..\..\Views\Shared\_Layout.cshtml"
+                       Write(Html.ActionLink("Auth", "Index", "QuickAuthentication"));
 
             
             #line default
@@ -231,7 +249,7 @@ WriteLiteral("                        <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 41 "..\..\Views\Shared\_Layout.cshtml"
+            #line 43 "..\..\Views\Shared\_Layout.cshtml"
                     }
 
             
@@ -246,7 +264,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 47 "..\..\Views\Shared\_Layout.cshtml"
+            #line 49 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -255,7 +273,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; ");
 
             
-            #line 50 "..\..\Views\Shared\_Layout.cshtml"
+            #line 52 "..\..\Views\Shared\_Layout.cshtml"
                  Write(DateTime.Now.Year);
 
             
@@ -266,7 +284,7 @@ WriteLiteral(" - Dilemma</p>\r\n        </footer>\r\n    </div>\r\n\r\n");
 WriteLiteral("    ");
 
             
-            #line 54 "..\..\Views\Shared\_Layout.cshtml"
+            #line 56 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -277,7 +295,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 55 "..\..\Views\Shared\_Layout.cshtml"
+            #line 57 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -288,7 +306,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 56 "..\..\Views\Shared\_Layout.cshtml"
+            #line 58 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -299,7 +317,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 57 "..\..\Views\Shared\_Layout.cshtml"
+            #line 59 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

@@ -8,10 +8,6 @@ namespace Dilemma.Data.Repositories
     {
         IEnumerable<T> GetAll<T>(int forUserId) where T : class;
 
-        void Raise(int forUserId, NotificationType notificationType, int id);
-
         void Mute(int forUserId, NotificationLookupBy notificationLookupBy, int id);
-
-        void Delete(int forUserId, NotificationLookupBy notificationLookupBy, int id);
     }
 }

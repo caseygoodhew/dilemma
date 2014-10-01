@@ -23,6 +23,7 @@ namespace Dilemma.Data
             registrar.Register<IUserRepository>(() => new UserRepository());
             registrar.Register<IDevelopmentRepository>(() => new DevelopmentRepository());
             registrar.Register<INotificationRepository>(() => new NotificationRepository());
+            registrar.Register<IInternalNotificationRepository>(() => new NotificationRepository());
             registrar.Register<IModerationRepository>(() => new ModerationRepository());
             registrar.Register<IInternalModerationRepository>(() => new ModerationRepository());
             

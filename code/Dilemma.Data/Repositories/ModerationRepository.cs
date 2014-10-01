@@ -16,44 +16,39 @@ namespace Dilemma.Data.Repositories
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
-        private static readonly Lazy<INotificationRepository> NotificationRepository = Locator.Lazy<INotificationRepository>();
+        private static readonly Lazy<IInternalNotificationRepository> NotificationRepository = Locator.Lazy<IInternalNotificationRepository>();
         
-        public void OnQuestionCreated(Question question)
+        public void OnQuestionCreated(DilemmaContext context, Question question)
         {
-            using (var context = new DilemmaContext())
-            {
-                context.Questions.Attach(question);
-                context.Users.Attach(question.User);
+            context.EnsureAttached(question, x => x.QuestionId);
+            context.EnsureAttached(question.User, x => x.UserId);
                 
-                OnModerableCreated(
-                    context,
-                    new Moderation
-                        {
-                            ModerationFor = ModerationFor.Question,
-                            Question = question,
-                            ForUser = question.User
-                        },
-                    question.Text);
-            }
+            OnModerableCreated(
+                context,
+                new Moderation
+                    {
+                        ModerationFor = ModerationFor.Question,
+                        Question = question,
+                        ForUser = question.User
+                    },
+                question.Text);
         }
 
-        public void OnAnswerCreated(Answer answer)
+        public void OnAnswerCreated(DilemmaContext context, Answer answer)
         {
-            using (var context = new DilemmaContext())
-            {
-                context.Answers.Attach(answer);
-                context.Users.Attach(answer.User);
+            context.EnsureAttached(answer, x => x.AnswerId);
+            context.EnsureAttached(answer.User, x => x.UserId);
                 
-                OnModerableCreated(
-                    context,
-                    new Moderation
-                        {
-                            ModerationFor = ModerationFor.Answer,
-                            Answer = answer,
-                            ForUser = answer.User
-                        },
-                    answer.Text);
-            }
+            OnModerableCreated(
+                context,
+                new Moderation
+                    {
+                        ModerationFor = ModerationFor.Answer,
+                        Answer = answer,
+                        ForUser = answer.User
+                    },
+                answer.Text);
+            
         }
 
         public T GetNext<T>() where T : class
@@ -87,7 +82,10 @@ namespace Dilemma.Data.Repositories
                 var moderation =
                     context.Moderations
                         .Include(x => x.Question)
+                        .Include(x => x.Question)
                         .Include(x => x.Answer)
+                        .Include(x => x.Answer.Question)
+                        .Include(x => x.Answer.Question.User)
                         .Single(x => x.ModerationId == moderationId);
 
                 if (moderation.State == ModerationState.Approved)
@@ -112,10 +110,14 @@ namespace Dilemma.Data.Repositories
                         throw new ArgumentOutOfRangeException();
                 }
 
-                var user = new User { UserId = userId };
-                context.Users.Attach(user);
+                var user = context.EnsureAttached(new User { UserId = userId }, x => x.UserId);
                 
                 AddModerationEntry(context, moderation, ModerationEntryType.Approved, user, string.Empty);
+
+                if (moderation.ModerationFor == ModerationFor.Answer)
+                {
+                    NotificationRepository.Value.Raise(context, moderation.Answer.Question.User.UserId, NotificationType.QuestionAnswered, moderation.Answer.AnswerId);
+                }
             }
         }
 
@@ -152,11 +154,11 @@ namespace Dilemma.Data.Repositories
                         throw new ArgumentOutOfRangeException();
                 }
 
-                var user = context.EnsureAttached<User, int>(x => x.UserId, userId);
+                var user = context.EnsureAttached(new User { UserId = userId }, x => x.UserId);
                 
                 AddModerationEntry(context, moderation, ModerationEntryType.Rejected, user, message);
 
-                NotificationRepository.Value.Raise(moderation.ForUser.UserId, NotificationType.PostRejected, moderation.ModerationId);
+                NotificationRepository.Value.Raise(context, moderation.ForUser.UserId, NotificationType.PostRejected, moderation.ModerationId);
             }
         }
 

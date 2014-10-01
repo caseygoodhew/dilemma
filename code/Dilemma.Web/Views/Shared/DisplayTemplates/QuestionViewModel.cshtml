@@ -43,7 +43,10 @@
     
         <div class="row top-buffer">
             <div class="col-md-8 col-md-offset-2 text-muted">
-                <small>Created: @answer.CreatedDateTime.ToRelativeText()</small>
+                <div class="row">
+                    <small class="col-md-4">Created: @answer.CreatedDateTime.ToRelativeText()</small>
+                    <small class="col-md-4">Approved: @answer.IsApproved</small>
+                </div>
             </div>
         </div>
     </div>

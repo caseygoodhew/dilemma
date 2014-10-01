@@ -11,7 +11,7 @@ namespace Dilemma.Business.Conversion
                        {
                            NotificationType = model.NotificationType,
                            AnswerId = model.Answer == null ? null : model.Answer.AnswerId as int?,
-                           QuestionId = model.Answer == null ? model.Moderation == null ? null : model.Moderation.ModerationId as int? : model.Answer.Question.QuestionId,
+                           QuestionId = model.Question == null ? null : model.Question.QuestionId as int?,
                            ModerationId = model.Moderation == null ? null : model.Moderation.ModerationId as int?,
                            CreatedDateTime = model.CreatedDateTime,
                            ActionedDateTime = model.ActionedDateTime

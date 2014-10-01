@@ -121,14 +121,17 @@ namespace Dilemma.Data.Migrations
                         Answer_AnswerId = c.Int(),
                         ForUser_UserId = c.Int(nullable: false),
                         Moderation_ModerationId = c.Int(),
+                        Question_QuestionId = c.Int(),
                     })
                 .PrimaryKey(t => t.NotificationId)
                 .ForeignKey("dbo.Answer", t => t.Answer_AnswerId)
                 .ForeignKey("dbo.User", t => t.ForUser_UserId)
                 .ForeignKey("dbo.Moderation", t => t.Moderation_ModerationId)
+                .ForeignKey("dbo.Question", t => t.Question_QuestionId)
                 .Index(t => t.Answer_AnswerId)
                 .Index(t => t.ForUser_UserId)
-                .Index(t => t.Moderation_ModerationId);
+                .Index(t => t.Moderation_ModerationId)
+                .Index(t => t.Question_QuestionId);
             
             CreateTable(
                 "dbo.SystemConfiguration",
@@ -145,6 +148,7 @@ namespace Dilemma.Data.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Notification", "Question_QuestionId", "dbo.Question");
             DropForeignKey("dbo.Notification", "Moderation_ModerationId", "dbo.Moderation");
             DropForeignKey("dbo.Notification", "ForUser_UserId", "dbo.User");
             DropForeignKey("dbo.Notification", "Answer_AnswerId", "dbo.Answer");
@@ -157,6 +161,7 @@ namespace Dilemma.Data.Migrations
             DropForeignKey("dbo.Question", "User_UserId", "dbo.User");
             DropForeignKey("dbo.Question", "Category_CategoryId", "dbo.Category");
             DropForeignKey("dbo.Answer", "Question_QuestionId", "dbo.Question");
+            DropIndex("dbo.Notification", new[] { "Question_QuestionId" });
             DropIndex("dbo.Notification", new[] { "Moderation_ModerationId" });
             DropIndex("dbo.Notification", new[] { "ForUser_UserId" });
             DropIndex("dbo.Notification", new[] { "Answer_AnswerId" });
