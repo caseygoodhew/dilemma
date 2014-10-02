@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Security;
 
@@ -57,7 +58,8 @@ namespace Dilemma.Business.Conversion
                            TotalAnswers = model.TotalAnswers,
                            MaxAnswers = model.MaxAnswers,
                            IsMyQuestion = model.User.UserId == userId,
-                           IsApproved = model.IsApproved,
+                           IsApproved = model.QuestionState == QuestionState.Approved,
+                           IsRejected = model.QuestionState == QuestionState.Rejected,
                            Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
                        };
         }

@@ -17,6 +17,8 @@ namespace Dilemma.Data.Repositories
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
         private static readonly Lazy<IInternalNotificationRepository> NotificationRepository = Locator.Lazy<IInternalNotificationRepository>();
+
+        private static readonly Lazy<IInternalQuestionRepository> QuestionRepository = Locator.Lazy<IInternalQuestionRepository>();
         
         public void OnQuestionCreated(DilemmaContext context, Question question)
         {
@@ -58,18 +60,23 @@ namespace Dilemma.Data.Repositories
                 var moderation =
                     context.Moderations.Include(x => x.ForUser)
                         .Include(x => x.ModerationEntries)
-                        .Where(x => x.State == ModerationState.Queued)
-                        .OrderBy(
-                            x =>
-                            x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime)
-                                .Select(y => y.CreatedDateTime)
-                                .FirstOrDefault())
+                        .Select(x => new {
+                            MostRecentEntry = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).FirstOrDefault(),
+                            x.ModerationEntries,
+                            x.ModerationFor,
+                            x.ModerationId
+                        })
+                        .Where(x => x.MostRecentEntry.State == ModerationState.Queued)
+                        .OrderBy(x => x.MostRecentEntry.CreatedDateTime)
+                        .Take(1)
+                        .ToList()
+                        .Select(x => new Moderation
+                                         {
+                                             ModerationId = x.ModerationId,
+                                             ModerationEntries = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ToList(),
+                                             ModerationFor = x.ModerationFor
+                                         })
                         .FirstOrDefault();
-
-                if (moderation != null)
-                {
-                    moderation.ModerationEntries = moderation.ModerationEntries.OrderBy(x => x.CreatedDateTime).ToList();
-                }
 
                 return ConverterFactory.ConvertOne<Moderation, T>(moderation);
             }
@@ -79,45 +86,7 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var moderation =
-                    context.Moderations
-                        .Include(x => x.Question)
-                        .Include(x => x.Question)
-                        .Include(x => x.Answer)
-                        .Include(x => x.Answer.Question)
-                        .Include(x => x.Answer.Question.User)
-                        .Single(x => x.ModerationId == moderationId);
-
-                if (moderation.State == ModerationState.Approved)
-                {
-                    return;
-                }
-
-                moderation.State = ModerationState.Approved;
-                context.Entry(moderation).State = EntityState.Modified;
-
-                switch (moderation.ModerationFor)
-                {
-                    case ModerationFor.Question:
-                        moderation.Question.IsApproved = true;
-                        context.Entry(moderation.Question).State = EntityState.Modified;
-                        break;
-                    case ModerationFor.Answer:
-                        moderation.Answer.IsApproved = true;
-                        context.Entry(moderation.Answer).State = EntityState.Modified;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-                var user = context.EnsureAttached(new User { UserId = userId }, x => x.UserId);
-                
-                AddModerationEntry(context, moderation, ModerationEntryType.Approved, user, string.Empty);
-
-                if (moderation.ModerationFor == ModerationFor.Answer)
-                {
-                    NotificationRepository.Value.Raise(context, moderation.Answer.Question.User.UserId, NotificationType.QuestionAnswered, moderation.Answer.AnswerId);
-                }
+                UpdateModerationState(context, ModerationState.Approved, userId, moderationId, string.Empty);
             }
         }
 
@@ -125,67 +94,83 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var moderation =
-                    context.Moderations
-                        .Include(x => x.Question)
-                        .Include(x => x.Answer)
-                        .Include(x => x.ForUser)
-                        .Single(x => x.ModerationId == moderationId);
-                
-                if (moderation.State == ModerationState.Rejected)
-                {
-                    return;
-                }
-
-                moderation.State = ModerationState.Rejected;
-                context.Entry(moderation).State = EntityState.Modified;
-                
-                switch (moderation.ModerationFor)
-                {
-                    case ModerationFor.Question:
-                        moderation.Question.IsApproved = false;
-                        context.Entry(moderation.Question).State = EntityState.Modified;
-                        break;
-                    case ModerationFor.Answer:
-                        moderation.Answer.IsApproved = false;
-                        context.Entry(moderation.Answer).State = EntityState.Modified;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-
-                var user = context.EnsureAttached(new User { UserId = userId }, x => x.UserId);
-                
-                AddModerationEntry(context, moderation, ModerationEntryType.Rejected, user, message);
-
-                NotificationRepository.Value.Raise(context, moderation.ForUser.UserId, NotificationType.PostRejected, moderation.ModerationId);
+                UpdateModerationState(context, ModerationState.Rejected, userId, moderationId, message);
             }
         }
 
         private static void OnModerableCreated(DilemmaContext context, Moderation moderation, string message)
         {
-            moderation.State = ModerationState.Queued;
-            
             context.Moderations.Add(moderation);
-            
+
             context.SaveChangesVerbose();
 
-            AddModerationEntry(context, moderation, ModerationEntryType.Created, moderation.ForUser, message);
+            AddModerationEntry(context, moderation.ModerationId, ModerationState.Queued, moderation.ForUser.UserId, message);
+        }
+
+        private void UpdateModerationState(DilemmaContext context, ModerationState state, int userId, int moderationId, string message)
+        {
+            var moderation = context.Moderations
+                    .Where(x => x.ModerationId == moderationId)
+                    .Select(
+                            x => new
+                            {
+                                x.ModerationId,
+                                x.ModerationFor,
+                                ForUserId = x.ForUser.UserId,
+                                AnswerId = x.Answer == null ? -1 : x.Answer.AnswerId,
+                                QuestionId = x.Question == null ? -1 : x.Question.QuestionId,
+                            })
+                     .ToList()
+                     .Select(
+                            x => new Moderation
+                            {
+                                ModerationId = x.ModerationId,
+                                ModerationFor = x.ModerationFor,
+                                ForUser = new User { UserId = x.ForUserId },
+                                Answer = new Answer { AnswerId = x.AnswerId },
+                                Question = new Question { QuestionId = x.QuestionId }
+                            })
+                      .Single();
+            
+            AddModerationEntry(context, moderationId, state, userId, message);
+
+            if (state == ModerationState.Rejected)
+            {
+                NotificationRepository.Value.Raise(
+                    context,
+                    moderation.ForUser.UserId,
+                    NotificationType.PostRejected,
+                    moderation.ModerationId);
+            }
+
+            switch (moderation.ModerationFor)
+            {
+                case ModerationFor.Question:
+                    QuestionRepository.Value.UpdateQuestionState(context, moderation.Question.QuestionId, state);
+                    break;
+                case ModerationFor.Answer:
+                    QuestionRepository.Value.UpdateAnswerState(context, moderation.Answer.AnswerId, state);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private static void AddModerationEntry(
             DilemmaContext context,
-            Moderation moderation,
-            ModerationEntryType entryType,
-            User currentUser,
+            int moderationId,
+            ModerationState state,
+            int currentUserId,
             string message)
         {
-            
+            var moderation = context.EnsureAttached(new Moderation { ModerationId = moderationId }, x => x.ModerationId);
+            var currentUser = context.EnsureAttached(new User { UserId = currentUserId }, x => x.UserId);
+
             var moderationEntry = new ModerationEntry
             {
                 CreatedDateTime = TimeSource.Value.Now,
                 Moderation = moderation,
-                EntryType = entryType,
+                State = state,
                 AddedByUser = currentUser,
                 Message = message
             };

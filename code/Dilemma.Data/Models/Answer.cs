@@ -30,18 +30,13 @@ namespace Dilemma.Data.Models
         public Question Question { get; set; }
 
         /// <summary>
-        /// Gets or sets the answer type.
+        /// Gets or sets the answer state.
         /// </summary>
-        public AnswerType AnswerType { get; set; }
+        public AnswerState AnswerState { get; set; }
 
         /// <summary>
         /// Gets or sets the user who created the answer.
         /// </summary>
         public User User { get; set; }
-
-        /// <summary>
-        /// Gets or sets a flag indicating if the answer has been approved via moderation.
-        /// </summary>
-        public bool IsApproved { get; set; }
     }
 }

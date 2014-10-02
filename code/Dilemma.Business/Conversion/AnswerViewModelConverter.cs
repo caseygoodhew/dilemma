@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Security;
 
@@ -46,7 +47,8 @@ namespace Dilemma.Business.Conversion
                     Text = model.Text,
                     CreatedDateTime = model.CreatedDateTime,
                     IsMyAnswer = model.User.UserId == userId,
-                    IsApproved = model.IsApproved
+                    IsApproved = model.AnswerState == AnswerState.Approved,
+                    IsRejected = model.AnswerState == AnswerState.Rejected
                 };
         }
     }

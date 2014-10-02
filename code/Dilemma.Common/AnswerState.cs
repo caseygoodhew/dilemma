@@ -3,9 +3,11 @@
     /// <summary>
     /// The type or state of an answer.
     /// </summary>
-    public enum AnswerType
+    public enum AnswerState
     {
         ReservedSlot,
-        Completed
+        ReadyForModeration,
+        Approved,
+        Rejected
     }
 }

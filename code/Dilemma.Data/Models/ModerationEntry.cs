@@ -10,7 +10,7 @@ namespace Dilemma.Data.Models
 
         public Moderation Moderation { get; set; }
 
-        public ModerationEntryType EntryType { get; set; }
+        public ModerationState State { get; set; }
 
         public string Message { get; set; }
 

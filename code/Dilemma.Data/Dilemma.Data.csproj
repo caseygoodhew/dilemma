@@ -74,6 +74,10 @@
     <Compile Include="Migrations\201409300557391_Migration.Designer.cs">
       <DependentUpon>201409300557391_Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410020618229_Migration1.cs" />
+    <Compile Include="Migrations\201410020618229_Migration1.Designer.cs">
+      <DependentUpon>201410020618229_Migration1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Repositories\IDevelopmentRepository.cs" />
     <Compile Include="Repositories\IInternalModerationRepository.cs" />
     <Compile Include="Repositories\IInternalNotificationRepository.cs" />
+    <Compile Include="Repositories\IInternalQuestionRepository.cs" />
     <Compile Include="Repositories\IModerationRepository.cs" />
     <Compile Include="Repositories\INotificationRepository.cs" />
     <Compile Include="Repositories\ISiteRepository.cs" />
@@ -128,6 +133,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409300557391_Migration.resx">
       <DependentUpon>201409300557391_Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410020618229_Migration1.resx">
+      <DependentUpon>201410020618229_Migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

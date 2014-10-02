@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using Dilemma.Common;
+
 namespace Dilemma.Data.Models
 {
     /// <summary>
@@ -55,8 +57,8 @@ namespace Dilemma.Data.Models
         public User User { get; set; }
 
         /// <summary>
-        /// Gets or sets a flag indicating if the question has been approved via moderation.
+        /// Gets or sets the question state.
         /// </summary>
-        public bool IsApproved { get; set; }
+        public QuestionState QuestionState { get; set; }
     }
 }

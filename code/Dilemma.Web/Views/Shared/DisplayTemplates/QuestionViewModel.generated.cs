@@ -60,21 +60,40 @@ WriteLiteral("</h2>\r\n\r\n");
             
             #line 6 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
   
-    var questionClass = Model.IsMyQuestion ? "bg-info" : string.Empty;  
+    Func<bool, bool, bool, string> stateClass = (approved, rejected, ismine) =>
+        {
+            if (approved)
+            {
+                if (ismine)
+                {
+                    return "bg-info";
+                }
+
+                return "bg-success";
+            }
+
+            if (rejected)
+            {
+                return "bg-danger";
+            } 
+            
+            // queued or other
+            return "bg-warning";
+        };
 
             
             #line default
             #line hidden
 WriteLiteral(" \r\n\r\n\r\n<div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 216), Tuple.Create("\"", 238)
+WriteAttribute("class", Tuple.Create(" class=\"", 626), Tuple.Create("\"", 701)
             
-            #line 11 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 224), Tuple.Create<System.Object, System.Int32>(questionClass
+            #line 30 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 634), Tuple.Create<System.Object, System.Int32>(stateClass(Model.IsApproved, Model.IsRejected, Model.IsMyQuestion)
             
             #line default
             #line hidden
-, 224), false)
+, 634), false)
 );
 
 WriteLiteral(">\r\n    <div");
@@ -92,7 +111,7 @@ WriteLiteral(" class=\"user-text\"");
 WriteLiteral(">");
 
             
-            #line 13 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 32 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
                                                                  Write(Model.Text);
 
             
@@ -117,7 +136,7 @@ WriteLiteral(" class=\"col-md-4\"");
 WriteLiteral(">Created: ");
 
             
-            #line 19 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 38 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
                                             Write(Model.CreatedDateTime.ToRelativeText());
 
             
@@ -130,7 +149,7 @@ WriteLiteral(" class=\"col-md-4\"");
 WriteLiteral(">Closes: ");
 
             
-            #line 20 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 39 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
                                            Write(Model.ClosesDateTime.ToRelativeText());
 
             
@@ -147,7 +166,7 @@ WriteLiteral(" class=\"col-md-4\"");
 WriteLiteral(">Category: ");
 
             
-            #line 23 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 42 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
                                              Write(Model.CategoryName);
 
             
@@ -160,8 +179,51 @@ WriteLiteral(" class=\"col-md-4\"");
 WriteLiteral(">Max Answers: ");
 
             
-            #line 24 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 43 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
                                                 Write(Model.MaxAnswers);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</small>\r\n            </div>\r\n            <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n                <small");
+
+WriteLiteral(" class=\"col-md-2\"");
+
+WriteLiteral(">Mine: ");
+
+            
+            #line 46 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+                                         Write(Model.IsMyQuestion);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</small>\r\n                <small");
+
+WriteLiteral(" class=\"col-md-2\"");
+
+WriteLiteral(">Approved: ");
+
+            
+            #line 47 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+                                             Write(Model.IsMyQuestion);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</small>\r\n                <small");
+
+WriteLiteral(" class=\"col-md-2\"");
+
+WriteLiteral(">Rejected: ");
+
+            
+            #line 48 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+                                             Write(Model.IsRejected);
 
             
             #line default
@@ -170,7 +232,7 @@ WriteLiteral("</small>\r\n            </div>\r\n        </div>\r\n    </div>\r\n
 "swers</h3>\r\n\r\n");
 
             
-            #line 33 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 57 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
    var topBuffer = ""; 
             
             #line default
@@ -178,11 +240,9 @@ WriteLiteral("</small>\r\n            </div>\r\n        </div>\r\n    </div>\r\n
 WriteLiteral("\r\n");
 
             
-            #line 34 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 58 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
  foreach (var answer in Model.Answers)
 {
-    var answerClass = answer.IsMyAnswer ? "bg-info" : string.Empty;  
-    
 
             
             #line default
@@ -191,21 +251,21 @@ WriteLiteral("    <hr/>\r\n");
 
 WriteLiteral("    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1153), Tuple.Create("\"", 1184)
+WriteAttribute("class", Tuple.Create(" class=\"", 1821), Tuple.Create("\"", 1908)
             
-            #line 39 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
-, Tuple.Create(Tuple.Create("", 1161), Tuple.Create<System.Object, System.Int32>(answerClass
-            
-            #line default
-            #line hidden
-, 1161), false)
-            
-            #line 39 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
-, Tuple.Create(Tuple.Create(" ", 1173), Tuple.Create<System.Object, System.Int32>(topBuffer
+            #line 61 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+, Tuple.Create(Tuple.Create("", 1829), Tuple.Create<System.Object, System.Int32>(stateClass(answer.IsApproved, answer.IsRejected, answer.IsMyAnswer)
             
             #line default
             #line hidden
-, 1174), false)
+, 1829), false)
+            
+            #line 61 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+    , Tuple.Create(Tuple.Create(" ", 1897), Tuple.Create<System.Object, System.Int32>(topBuffer
+            
+            #line default
+            #line hidden
+, 1898), false)
 );
 
 WriteLiteral(">\r\n        <div");
@@ -223,7 +283,7 @@ WriteLiteral(" class=\"user-text\"");
 WriteLiteral(">");
 
             
-            #line 41 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 63 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
                                                                      Write(answer.Text);
 
             
@@ -248,21 +308,51 @@ WriteLiteral(" class=\"col-md-4\"");
 WriteLiteral(">Created: ");
 
             
-            #line 47 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 69 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
                                                 Write(answer.CreatedDateTime.ToRelativeText());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</small>\r\n                </div>\r\n                <div");
+
+WriteLiteral(" class=\"row\"");
+
+WriteLiteral(">\r\n                    <small");
+
+WriteLiteral(" class=\"col-md-2\"");
+
+WriteLiteral(">Mine: ");
+
+            
+            #line 72 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+                                             Write(answer.IsMyAnswer);
 
             
             #line default
             #line hidden
 WriteLiteral("</small>\r\n                    <small");
 
-WriteLiteral(" class=\"col-md-4\"");
+WriteLiteral(" class=\"col-md-2\"");
 
 WriteLiteral(">Approved: ");
 
             
-            #line 48 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 73 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
                                                  Write(answer.IsApproved);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</small>\r\n                    <small");
+
+WriteLiteral(" class=\"col-md-2\"");
+
+WriteLiteral(">Rejected: ");
+
+            
+            #line 74 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+                                                 Write(answer.IsRejected);
 
             
             #line default
@@ -271,7 +361,7 @@ WriteLiteral("</small>\r\n                </div>\r\n            </div>\r\n      
 "\n");
 
             
-            #line 53 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
+            #line 79 "..\..\Views\Shared\DisplayTemplates\QuestionViewModel.cshtml"
     
     topBuffer = "top-buffer";
 }

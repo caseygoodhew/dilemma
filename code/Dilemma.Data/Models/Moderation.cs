@@ -17,8 +17,6 @@ namespace Dilemma.Data.Models
 
         public Answer Answer { get; set; }
 
-        public ModerationState State { get; set; }
-
         public virtual List<ModerationEntry> ModerationEntries { get; set; }
     }
 }

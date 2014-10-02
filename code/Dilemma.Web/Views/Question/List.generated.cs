@@ -29,12 +29,6 @@ namespace Dilemma.Web.Views.Question
     using System.Web.WebPages;
     using Dilemma.Common;
     using Dilemma.Web;
-    
-    #line 1 "..\..\Views\Question\List.cshtml"
-    using Dilemma.Web.Extensions;
-    
-    #line default
-    #line hidden
     using Disposable.Common.Extensions;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
@@ -47,7 +41,7 @@ namespace Dilemma.Web.Views.Question
         public override void Execute()
         {
             
-            #line 4 "..\..\Views\Question\List.cshtml"
+            #line 3 "..\..\Views\Question\List.cshtml"
   
     ViewBag.Title = "List";
 
@@ -57,7 +51,7 @@ namespace Dilemma.Web.Views.Question
 WriteLiteral("\r\n\r\n<h2>All Questions</h2>\r\n\r\n");
 
             
-            #line 10 "..\..\Views\Question\List.cshtml"
+            #line 9 "..\..\Views\Question\List.cshtml"
 Write(Html.DisplayFor(x => Model));
 
             

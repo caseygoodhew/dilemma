@@ -6,7 +6,7 @@ namespace Dilemma.Business.ViewModels
 {
     public class ModerationEntryViewModel
     {
-        public ModerationEntryType EntryTye { get; set; }
+        public ModerationState State { get; set; }
 
         public DateTime CreatedDateTime { get; set; }
 

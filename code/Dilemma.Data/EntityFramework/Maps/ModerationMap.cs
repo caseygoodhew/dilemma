@@ -17,8 +17,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             HasKey(p => p.ModerationId);
 
             Property(p => p.ModerationFor).IsRequired();
-            Property(p => p.State).IsRequired();
-
+            
             HasRequired(p => p.ForUser).WithMany().WillCascadeOnDelete(false);
             // needs to remain optional for valid insert operation
             HasOptional(p => p.Question).WithMany().WillCascadeOnDelete(false);

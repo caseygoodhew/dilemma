@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Security;
 
@@ -53,7 +54,7 @@ namespace Dilemma.Business.Conversion
 
         private static bool CanAnswer(Question model)
         {
-            if (!model.IsApproved)
+            if (model.QuestionState != QuestionState.Approved)
             {
                 return false;
             }

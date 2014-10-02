@@ -4,11 +4,30 @@
 <h2>Question @Model.QuestionId</h2>
 
 @{
-    var questionClass = Model.IsMyQuestion ? "bg-info" : string.Empty;  
+    Func<bool, bool, bool, string> stateClass = (approved, rejected, ismine) =>
+        {
+            if (approved)
+            {
+                if (ismine)
+                {
+                    return "bg-info";
+                }
+
+                return "bg-success";
+            }
+
+            if (rejected)
+            {
+                return "bg-danger";
+            } 
+            
+            // queued or other
+            return "bg-warning";
+        };
 } 
 
 
-<div class="@questionClass">
+<div class="@stateClass(Model.IsApproved, Model.IsRejected, Model.IsMyQuestion)">
     <div class="row">
         <div class="col-md-8 col-md-offset-2"><span class="user-text">@Model.Text</span></div>
     </div>
@@ -23,6 +42,11 @@
                 <small class="col-md-4">Category: @Model.CategoryName</small>
                 <small class="col-md-4">Max Answers: @Model.MaxAnswers</small>
             </div>
+            <div class="row">
+                <small class="col-md-2">Mine: @Model.IsMyQuestion</small>
+                <small class="col-md-2">Approved: @Model.IsMyQuestion</small>
+                <small class="col-md-2">Rejected: @Model.IsRejected</small>
+            </div>
         </div>
     </div>
 </div>
@@ -33,10 +57,8 @@
 @{ var topBuffer = ""; }
 @foreach (var answer in Model.Answers)
 {
-    var answerClass = answer.IsMyAnswer ? "bg-info" : string.Empty;  
-    
     <hr/>
-    <div class="@answerClass @topBuffer">
+    <div class="@stateClass(answer.IsApproved, answer.IsRejected, answer.IsMyAnswer) @topBuffer">
         <div class="row">
             <div class="col-md-8 col-md-offset-2"><span class="user-text">@answer.Text</span></div>
         </div>
@@ -45,7 +67,11 @@
             <div class="col-md-8 col-md-offset-2 text-muted">
                 <div class="row">
                     <small class="col-md-4">Created: @answer.CreatedDateTime.ToRelativeText()</small>
-                    <small class="col-md-4">Approved: @answer.IsApproved</small>
+                </div>
+                <div class="row">
+                    <small class="col-md-2">Mine: @answer.IsMyAnswer</small>
+                    <small class="col-md-2">Approved: @answer.IsApproved</small>
+                    <small class="col-md-2">Rejected: @answer.IsRejected</small>
                 </div>
             </div>
         </div>

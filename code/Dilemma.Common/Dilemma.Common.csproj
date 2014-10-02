@@ -39,17 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnswerType.cs" />
-    <Compile Include="ModerationEntryType.cs" />
+    <Compile Include="AnswerState.cs" />
+    <Compile Include="ModerationState.cs" />
     <Compile Include="ModerationFor.cs" />
     <Compile Include="INotificationTypeLocator.cs" />
-    <Compile Include="ModerationState.cs" />
     <Compile Include="NotificationLookupBy.cs" />
     <Compile Include="NotificationRoute.cs" />
     <Compile Include="NotificationType.cs" />
     <Compile Include="NotificationTypeLocator.cs" />
     <Compile Include="QuestionLifetime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionState.cs" />
     <Compile Include="SystemEnvironment.cs" />
     <Compile Include="UserType.cs" />
   </ItemGroup>

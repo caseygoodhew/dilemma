@@ -18,7 +18,7 @@ namespace Dilemma.Business.Conversion
             return new ModerationEntryViewModel
                        {
                            CreatedDateTime = model.CreatedDateTime,
-                           EntryTye = model.EntryType,
+                           State = model.State,
                            Message = model.Message
                        };
         }

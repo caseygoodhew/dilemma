@@ -35,5 +35,10 @@ namespace Dilemma.Business.ViewModels
         /// Flag indicating that the answer has passed moderation.
         /// </summary>
         public bool IsApproved { get; set; }
+
+        /// <summary>
+        /// Flag indicating that the answer has been rejected.
+        /// </summary>
+        public bool IsRejected { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace Dilemma.Data
         {
             registrar.Register<IAdministrationRepository>(() => new AdministrationRepository());
             registrar.Register<IQuestionRepository>(() => new QuestionRepository());
+            registrar.Register<IInternalQuestionRepository>(() => new QuestionRepository());
             registrar.Register<ISiteRepository>(() => new SiteRepository());
             registrar.Register<IUserRepository>(() => new UserRepository());
             registrar.Register<IDevelopmentRepository>(() => new DevelopmentRepository());

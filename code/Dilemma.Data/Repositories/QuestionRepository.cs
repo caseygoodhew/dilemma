@@ -16,13 +16,13 @@ namespace Dilemma.Data.Repositories
     /// <summary>
     /// Question service provider implementation.
     /// </summary>
-    internal class QuestionRepository : IQuestionRepository
+    internal class QuestionRepository : IQuestionRepository, IInternalQuestionRepository
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
-        private static readonly Lazy<INotificationRepository> NotificationRepository = Locator.Lazy<INotificationRepository>();
-
         private static readonly Lazy<IInternalModerationRepository> ModerationRepository = Locator.Lazy<IInternalModerationRepository>();
+
+        private static readonly Lazy<IInternalNotificationRepository> NotificationRepository = Locator.Lazy<IInternalNotificationRepository>();
 
         /// <summary>
         /// Creates a <see cref="Question"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="Question"/>.
@@ -65,7 +65,7 @@ namespace Dilemma.Data.Repositories
         /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T">The type to get.</typeparam>
-        /// <param name="userId">The id of user to get the activity for. If this is null, all quesitons will be returned.</param>
+        /// <param name="userId">The id of user to get the activity for. If this is null, all questions will be returned.</param>
         /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         public IEnumerable<T> QuestionList<T>(int? userId) where T : class
         {
@@ -82,15 +82,15 @@ namespace Dilemma.Data.Repositories
                             new
                                 {
                                     x.QuestionId,
-                                    TotalAnswer = x.Answers.Count,
+                                    TotalAnswer = x.Answers.Count(y => y.AnswerState != AnswerState.Rejected),
                                     x.MaxAnswers,
                                     x.Category,
                                     x.Text,
                                     x.ClosesDateTime,
                                     x.CreatedDateTime,
                                     x.User.UserId,
-                                    x.IsApproved,
-                                    MostRecentActivity = x.Answers.Where(a => a.AnswerType == AnswerType.Completed).Select(a => a.CreatedDateTime).Concat(new [] { x.CreatedDateTime }).Max()
+                                    x.QuestionState,
+                                    MostRecentActivity = x.Answers.Where(a => a.AnswerState == AnswerState.Approved).Select(a => a.CreatedDateTime).Concat(new [] { x.CreatedDateTime }).Max()
                                 })
                         .AsEnumerable()
                         .OrderByDescending(x => x.MostRecentActivity)
@@ -105,7 +105,7 @@ namespace Dilemma.Data.Repositories
                                     Text = x.Text,
                                     ClosesDateTime = x.ClosesDateTime,
                                     CreatedDateTime = x.CreatedDateTime,
-                                    IsApproved = x.IsApproved,
+                                    QuestionState = x.QuestionState,
                                     User = new User { UserId = x.UserId }
                                 });
 
@@ -132,7 +132,7 @@ namespace Dilemma.Data.Repositories
                 
                 var question = GetQuestion<Question>(context, questionId, GetQuestionAs.AnswerCount);
 
-                if (!question.IsApproved || question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
+                if (question.QuestionState != QuestionState.Approved || question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
                 {
                     return null;
                 }
@@ -194,7 +194,7 @@ namespace Dilemma.Data.Repositories
                 }
 
                 existingAnswer.CreatedDateTime = TimeSource.Value.Now;
-                existingAnswer.AnswerType = AnswerType.Completed;
+                existingAnswer.AnswerState = AnswerState.ReadyForModeration;
                 existingAnswer.Text = answer.Text;
 
                 context.Answers.Update(context, existingAnswer);
@@ -204,6 +204,54 @@ namespace Dilemma.Data.Repositories
 
                 return true;
             }
+        }
+
+        public void UpdateAnswerState(DilemmaContext context, int answerId, ModerationState moderationState)
+        {
+            var answer = context.Answers.Include(x => x.Question).Include(x=> x.Question.User).Single(x => x.AnswerId == answerId);
+
+            switch (moderationState)
+            {
+                case ModerationState.Queued:
+                    answer.AnswerState = AnswerState.ReadyForModeration;
+                    break;
+                case ModerationState.Approved:
+                    answer.AnswerState = AnswerState.Approved;
+                    break;
+                case ModerationState.Rejected:
+                    answer.AnswerState = AnswerState.Rejected;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("moderationState");
+            }
+
+            context.Answers.Update(context, answer);
+            context.SaveChangesVerbose();
+
+            NotificationRepository.Value.Raise(context, answer.Question.User.UserId, NotificationType.QuestionAnswered, answer.AnswerId);
+        }
+
+        public void UpdateQuestionState(DilemmaContext context, int questionId, ModerationState moderationState)
+        {
+            var question = context.Questions.Single(x => x.QuestionId == questionId);
+
+            switch (moderationState)
+            {
+                case ModerationState.Queued:
+                    question.QuestionState = QuestionState.ReadyForModeration;
+                    break;
+                case ModerationState.Approved:
+                    question.QuestionState = QuestionState.Approved;
+                    break;
+                case ModerationState.Rejected:
+                    question.QuestionState = QuestionState.Rejected;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("moderationState");
+            }
+
+            context.Questions.Update(context, question);
+            context.SaveChangesVerbose();
         }
 
         private static T GetQuestion<T>(DilemmaContext context, int questionId, GetQuestionAs config) where T : class
@@ -221,8 +269,8 @@ namespace Dilemma.Data.Repositories
                                                  x.MaxAnswers,
                                                  x.ClosesDateTime,
                                                  x.User.UserId,
-                                                 TotalAnswers = x.Answers.Count,
-                                                 x.IsApproved
+                                                 TotalAnswers = x.Answers.Count(y => y.AnswerState != AnswerState.Rejected),
+                                                 x.QuestionState
                                              })
                             .AsEnumerable()
                             .Select(x => new Question
@@ -232,7 +280,7 @@ namespace Dilemma.Data.Repositories
                                                  ClosesDateTime = x.ClosesDateTime,
                                                  User = new User { UserId = x.UserId },
                                                  TotalAnswers = x.TotalAnswers,
-                                                 IsApproved = x.IsApproved
+                                                 QuestionState = x.QuestionState
                                              })
                             .Single();
 
@@ -248,7 +296,7 @@ namespace Dilemma.Data.Repositories
                             .Single();
 
                     question.TotalAnswers = question.Answers.Count;
-                    question.Answers = question.Answers.Where(x => x.AnswerType == AnswerType.Completed).ToList();
+                    //question.Answers = question.Answers.Where(x => x.AnswerState == AnswerState.Approved).ToList();
 
                     break;
 
@@ -268,7 +316,7 @@ namespace Dilemma.Data.Repositories
                     .Include(x => x.User)
                     .Where(x => x.Question.QuestionId == questionId)
                     .Where(x => x.User.UserId == userId)
-                    .Where(x => x.AnswerType == AnswerType.ReservedSlot);
+                    .Where(x => x.AnswerState == AnswerState.ReservedSlot);
 
             if (answerId.HasValue)
             {
