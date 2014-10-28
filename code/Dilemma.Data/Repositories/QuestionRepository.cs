@@ -14,7 +14,7 @@ using Disposable.Common.Services;
 namespace Dilemma.Data.Repositories
 {
     /// <summary>
-    /// Question service provider implementation.
+    /// Question repository implementation.
     /// </summary>
     internal class QuestionRepository : IQuestionRepository, IInternalQuestionRepository
     {
@@ -36,7 +36,7 @@ namespace Dilemma.Data.Repositories
 
             using (var context = new DilemmaContext())
             {
-                question.User = context.EnsureAttached(new User { UserId = userId }, x => x.UserId);
+                question.User = context.GetOrAttachNew<User, int>(userId, x => x.UserId);
                 context.EnsureAttached(question.Category, x => x.CategoryId);
                 
                 context.Questions.Add(question);
@@ -90,7 +90,7 @@ namespace Dilemma.Data.Repositories
                                     x.CreatedDateTime,
                                     x.User.UserId,
                                     x.QuestionState,
-                                    MostRecentActivity = x.Answers.Where(a => a.AnswerState == AnswerState.Approved).Select(a => a.CreatedDateTime).Concat(new [] { x.CreatedDateTime }).Max()
+                                    MostRecentActivity = x.Answers.Where(a => a.AnswerState == AnswerState.Approved).Select(a => a.CreatedDateTime).Concat(new[] { x.CreatedDateTime }).Max()
                                 })
                         .AsEnumerable()
                         .OrderByDescending(x => x.MostRecentActivity)
@@ -206,9 +206,15 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Updates an <see cref="AnswerState"/> based on the provided <see cref="ModerationState"/>.
+        /// </summary>
+        /// <param name="context">The context to run the queries against.</param>
+        /// <param name="answerId">The id of the answer to update.</param>
+        /// <param name="moderationState">The <see cref="ModerationState"/>.</param>
         public void UpdateAnswerState(DilemmaContext context, int answerId, ModerationState moderationState)
         {
-            var answer = context.Answers.Include(x => x.Question).Include(x=> x.Question.User).Single(x => x.AnswerId == answerId);
+            var answer = context.Answers.Include(x => x.Question).Include(x => x.Question.User).Single(x => x.AnswerId == answerId);
 
             switch (moderationState)
             {
@@ -231,6 +237,12 @@ namespace Dilemma.Data.Repositories
             NotificationRepository.Value.Raise(context, answer.Question.User.UserId, NotificationType.QuestionAnswered, answer.AnswerId);
         }
 
+        /// <summary>
+        /// Updates a <see cref="QuestionState"/> based on the provided <see cref="ModerationState"/>.
+        /// </summary>
+        /// <param name="context">The context to run the queries against.</param>
+        /// <param name="questionId">The id of the question to update.</param>
+        /// <param name="moderationState">The <see cref="ModerationState"/>.</param>
         public void UpdateQuestionState(DilemmaContext context, int questionId, ModerationState moderationState)
         {
             var question = context.Questions.Single(x => x.QuestionId == questionId);
@@ -296,7 +308,6 @@ namespace Dilemma.Data.Repositories
                             .Single();
 
                     question.TotalAnswers = question.Answers.Count;
-                    //question.Answers = question.Answers.Where(x => x.AnswerState == AnswerState.Approved).ToList();
 
                     break;
 

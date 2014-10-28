@@ -13,12 +13,18 @@ using Disposable.Common.Services;
 
 namespace Dilemma.Data.Repositories
 {
+    /// <summary>
+    /// The development repository provides access to internal development only resources.
+    /// </summary>
     internal class DevelopmentRepository : IDevelopmentRepository
     {
         private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
 
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
         
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DevelopmentRepository"/> class.
+        /// </summary>
         public DevelopmentRepository()
         {
             var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
@@ -29,6 +35,11 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Sets the name of the development user.
+        /// </summary>
+        /// <param name="userId">The <see cref="User"/> id to set the name of.</param>
+        /// <param name="name">The name to set.</param>
         public void SetUserName(int userId, string name)
         {
             using (var context = new DilemmaContext())
@@ -55,7 +66,13 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-       public IEnumerable<T> GetList<T>(IEnumerable<int> userIds) where T : class 
+        /// <summary>
+        /// Gets a list of <see cref="T"/> (<see cref="DevelopmentUser"/>) for the corresponding <see cref="userIds"/>.
+        /// </summary>
+        /// <typeparam name="T">The output type to convert to.</typeparam>
+        /// <param name="userIds">The <see cref="User"/> ids to get.</param>
+        /// <returns>The converted <see cref="DevelopmentUser"/>s.</returns>
+        public IEnumerable<T> GetList<T>(IEnumerable<int> userIds) where T : class 
         {
             using (var context = new DilemmaContext())
             {
@@ -76,6 +93,12 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets a single user <see cref="T"/> (<see cref="DevelopmentUser"/>) for the corresponding <see cref="userId"/>.
+        /// </summary>
+        /// <typeparam name="T">The output type to convert to.</typeparam>
+        /// <param name="userId">The <see cref="User"/> id to get.</param>
+        /// <returns>The converted <see cref="DevelopmentUser"/>.</returns>
         public T Get<T>(int userId) where T : class
         {
             using (var context = new DilemmaContext())
@@ -84,7 +107,12 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        public bool CanLogin(int userId)
+        /// <summary>
+        /// Gets a flag indicating if the <see cref="userId"/> is that of a user that could be a <see cref="DevelopmentUser"/>.
+        /// </summary>
+        /// <param name="userId">The <see cref="User"/> id to check.</param>
+        /// <returns>What it says on the box.</returns>
+        public bool CanLoginAs(int userId)
         {
             using (var context = new DilemmaContext())
             {

@@ -9,10 +9,17 @@ using Disposable.Common.Services;
 
 namespace Dilemma.Data.Repositories
 {
+    /// <summary>
+    /// User repository implementation.
+    /// </summary>
     internal class UserRepository : IUserRepository
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
-        
+
+        /// <summary>
+        /// Creates an anonymous user.
+        /// </summary>
+        /// <returns>The id of the new user.</returns>
         public int CreateAnonymousUser()
         {
             using (var context = new DilemmaContext())

@@ -8,6 +8,9 @@ Add-Migration -ProjectName Dilemma.Data -Name Migration
 Update-Database -ProjectName Dilemma.Data -Verbose
 
 
+ROLLBACK
+Update-Database -ProjectName Dilemma.Data -TargetMigration:"Migration1"
+
 RELEASE:
 Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: $InitialDatabase
 

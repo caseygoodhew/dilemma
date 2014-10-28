@@ -12,14 +12,22 @@ using Disposable.Common.Services;
 
 namespace Dilemma.Data.Repositories
 {
-    internal class ModerationRepository : IModerationRepository, IInternalModerationRepository
+    /// <summary>
+    /// Moderation repository implementation.
+    /// </summary>
+    internal class ModerationRepository : IInternalModerationRepository
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
         private static readonly Lazy<IInternalNotificationRepository> NotificationRepository = Locator.Lazy<IInternalNotificationRepository>();
 
         private static readonly Lazy<IInternalQuestionRepository> QuestionRepository = Locator.Lazy<IInternalQuestionRepository>();
-        
+
+        /// <summary>
+        /// To be called when a question is created.
+        /// </summary>
+        /// <param name="context">The context to run the queries against.</param>
+        /// <param name="question">The question that was created.</param>
         public void OnQuestionCreated(DilemmaContext context, Question question)
         {
             context.EnsureAttached(question, x => x.QuestionId);
@@ -36,6 +44,11 @@ namespace Dilemma.Data.Repositories
                 question.Text);
         }
 
+        /// <summary>
+        /// To be called when an answer is created.
+        /// </summary>
+        /// <param name="context">The context to run the queries against.</param>
+        /// <param name="answer">The answer that was created.</param>
         public void OnAnswerCreated(DilemmaContext context, Answer answer)
         {
             context.EnsureAttached(answer, x => x.AnswerId);
@@ -50,9 +63,13 @@ namespace Dilemma.Data.Repositories
                         ForUser = answer.User
                     },
                 answer.Text);
-            
         }
 
+        /// <summary>
+        /// Gets the next item for moderation.
+        /// </summary>
+        /// <typeparam name="T">The type to convert the output to.</typeparam>
+        /// <returns>The converted <see cref="Moderation"/></returns>
         public T GetNext<T>() where T : class
         {
             using (var context = new DilemmaContext())
@@ -60,7 +77,8 @@ namespace Dilemma.Data.Repositories
                 var moderation =
                     context.Moderations.Include(x => x.ForUser)
                         .Include(x => x.ModerationEntries)
-                        .Select(x => new {
+                        .Select(x => new 
+                        {
                             MostRecentEntry = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).FirstOrDefault(),
                             x.ModerationEntries,
                             x.ModerationFor,
@@ -82,6 +100,11 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Approves a moderation.
+        /// </summary>
+        /// <param name="userId">The id of the user approving the moderation.</param>
+        /// <param name="moderationId">The id of the moderation to approve.</param>
         public void Approve(int userId, int moderationId)
         {
             using (var context = new DilemmaContext())
@@ -90,6 +113,12 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Rejects a moderation.
+        /// </summary>
+        /// <param name="userId">The id of the user rejecting the moderation.</param>
+        /// <param name="moderationId">The id of the moderation to reject.</param>
+        /// <param name="message">A message as to why the moderation item is being rejected.</param>
         public void Reject(int userId, int moderationId, string message)
         {
             using (var context = new DilemmaContext())
@@ -107,7 +136,7 @@ namespace Dilemma.Data.Repositories
             AddModerationEntry(context, moderation.ModerationId, ModerationState.Queued, moderation.ForUser.UserId, message);
         }
 
-        private void UpdateModerationState(DilemmaContext context, ModerationState state, int userId, int moderationId, string message)
+        private static void UpdateModerationState(DilemmaContext context, ModerationState state, int userId, int moderationId, string message)
         {
             var moderation = context.Moderations
                     .Where(x => x.ModerationId == moderationId)
@@ -163,8 +192,8 @@ namespace Dilemma.Data.Repositories
             int currentUserId,
             string message)
         {
-            var moderation = context.EnsureAttached(new Moderation { ModerationId = moderationId }, x => x.ModerationId);
-            var currentUser = context.EnsureAttached(new User { UserId = currentUserId }, x => x.UserId);
+            var moderation = context.GetOrAttachNew<Moderation, int>(moderationId, x => x.ModerationId);
+            var currentUser = context.GetOrAttachNew<User, int>(currentUserId, x => x.UserId);
 
             var moderationEntry = new ModerationEntry
             {

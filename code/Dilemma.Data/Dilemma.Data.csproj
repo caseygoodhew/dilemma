@@ -59,10 +59,12 @@
     <Compile Include="EntityFramework\DilemmaContext.cs" />
     <Compile Include="EntityFramework\DilemmaInitializer.cs" />
     <Compile Include="EntityFramework\Initialization\DatabaseInitialization.cs" />
+    <Compile Include="EntityFramework\Initialization\PointConfigurationInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\SystemConfigurationInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\CategoryInitialization.cs" />
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
     <Compile Include="EntityFramework\Maps\AnswerMap.cs" />
+    <Compile Include="EntityFramework\Maps\PointConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\ModerationEntryMap.cs" />
     <Compile Include="EntityFramework\Maps\ModerationMap.cs" />
     <Compile Include="EntityFramework\Maps\NotificationMap.cs" />
@@ -70,17 +72,22 @@
     <Compile Include="EntityFramework\Maps\UserMap.cs" />
     <Compile Include="EntityFramework\Maps\SystemConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionMap.cs" />
-    <Compile Include="Migrations\201409300557391_Migration.cs" />
+    <Compile Include="Migrations\201409300557391_Migration.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\201409300557391_Migration.Designer.cs">
       <DependentUpon>201409300557391_Migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410020618229_Migration1.cs" />
+    <Compile Include="Migrations\201410020618229_Migration1.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Migrations\201410020618229_Migration1.Designer.cs">
       <DependentUpon>201410020618229_Migration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\PointConfiguration.cs" />
     <Compile Include="Models\DevelopmentUser.cs" />
     <Compile Include="Models\Moderation.cs" />
     <Compile Include="Models\ModerationEntry.cs" />
@@ -90,6 +97,7 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Repositories\AdministrationRepository.cs" />

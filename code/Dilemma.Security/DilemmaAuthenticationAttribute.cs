@@ -5,13 +5,20 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Security
 {
+    /// <summary>
+    /// Provides cookie based authentication services.
+    /// </summary>
     public class DilemmaAuthenticationAttribute : ActionFilterAttribute
     {
-        private readonly static Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
-        
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
+
+        /// <summary>
+        /// Called by the ASP.NET MVC framework before the action method executes.
+        /// </summary>
+        /// <param name="filterContext">The filter context.</param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            SecurityManager.Value.CookieValidation();
+            SecurityManager.Value.ValidateCookie();
             base.OnActionExecuting(filterContext);
         }
     }

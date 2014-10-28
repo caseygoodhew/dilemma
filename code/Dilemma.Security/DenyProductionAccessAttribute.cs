@@ -9,14 +9,21 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Security
 {
+    /// <summary>
+    /// Security attribute to deny access to a controller or action in a production environment by redirecting to the home page.
+    /// </summary>
     public class DenyProductionAccessAttribute : ActionFilterAttribute
     {
-        private readonly static Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
 
         private readonly string controller = "Home";
 
         private readonly string action = "Index";
         
+        /// <summary>
+        /// Called by the ASP.NET MVC framework before the action method executes.
+        /// </summary>
+        /// <param name="filterContext">The filter context.</param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
@@ -26,6 +33,5 @@ namespace Dilemma.Security
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller, action }));
             }
         }
-        
     }
 }

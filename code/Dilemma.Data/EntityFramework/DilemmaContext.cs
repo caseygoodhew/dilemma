@@ -65,6 +65,11 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<ModerationEntry> ModerationEntries { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="PointConfiguration"/> database set;
+        /// </summary>
+        public DbSet<PointConfiguration> PointConfiguration { get; set; }
+
+        /// <summary>
         /// Called the first that the the DbContext is used in each session.
         /// </summary>
         public static void Startup()

@@ -13,6 +13,7 @@
         {
             SystemConfigurationInitialization.Seed(context);
             CategoryInitialization.Seed(context);
+            PointConfigurationInitialization.Seed(context);
         }
     }
 }

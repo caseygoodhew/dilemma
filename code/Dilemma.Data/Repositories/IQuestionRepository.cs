@@ -30,7 +30,7 @@ namespace Dilemma.Data.Repositories
         /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T">The type to get.</typeparam>
-        /// <param name="userId">The id of user to get the activity for. If this is null, all quesitons will be returned.</param>
+        /// <param name="userId">The id of user to get the activity for. If this is null, all questions will be returned.</param>
         /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         IEnumerable<T> QuestionList<T>(int? userId) where T : class;
 

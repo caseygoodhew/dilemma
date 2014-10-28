@@ -57,17 +57,17 @@ namespace Dilemma.Business.ViewModels
         public IList<AnswerViewModel> Answers { get; set; }
 
         /// <summary>
-        /// Flag indicating that the current user asked this question.
+        /// Gets or sets a value indicating whether the current user asked this question.
         /// </summary>
         public bool IsMyQuestion { get; set; }
 
         /// <summary>
-        /// Flag indicating that the question is approved.
+        /// Gets or sets a value indicating whether the question is approved.
         /// </summary>
         public bool IsApproved { get; set; }
 
         /// <summary>
-        /// Flag indicating that the question is rejected.
+        /// Gets or sets a value indicating whether the question is rejected.
         /// </summary>
         public bool IsRejected { get; set; }
     }

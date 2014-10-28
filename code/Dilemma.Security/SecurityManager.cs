@@ -19,10 +19,17 @@ using Owin;
 
 namespace Dilemma.Security
 {
+    /// <summary>
+    /// Security manager.
+    /// </summary>
     internal class SecurityManager : ISecurityManager
     {
         private static readonly Lazy<IUserRepository> UserRepository = Locator.Lazy<IUserRepository>();
 
+        /// <summary>
+        /// Configures cookie based authentication in the OWIN pipeline.
+        /// </summary>
+        /// <param name="appBuilder">The OWIN app builder.</param>
         public void ConfigureCookieAuthentication(IAppBuilder appBuilder)
         {
             // Enable the application to use a cookie to store information for the signed in user
@@ -30,10 +37,12 @@ namespace Dilemma.Security
             appBuilder.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                
                 // NOTE: if this is not included then no redirects will take place.
-                //LoginPath = new PathString("/Account/Login"),
+                // LoginPath = new PathString("/Account/Login"),
                 // TODO: change to always in production
                 CookieSecure = CookieSecureOption.SameAsRequest,
+                
                 // 60 days
                 ExpireTimeSpan = new TimeSpan(60, 0, 0, 0, 0),
                 SlidingExpiration = true
@@ -42,7 +51,10 @@ namespace Dilemma.Security
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Sid;
         }
 
-        public void CookieValidation()
+        /// <summary>
+        /// Validates the users security credentials.
+        /// </summary>
+        public void ValidateCookie()
         {
             var claims = ReadClaims().ToList();
             
@@ -71,17 +83,29 @@ namespace Dilemma.Security
             RedirectToLogin();
         }
 
+        /// <summary>
+        /// Gets the current user id.
+        /// </summary>
+        /// <returns>The current user id.</returns>
         public int GetUserId()
         {
-            return Int32.Parse(ReadClaims().Single(x => x.Type == ClaimTypes.Sid).Value);
+            return int.Parse(ReadClaims().Single(x => x.Type == ClaimTypes.Sid).Value);
         }
 
+        /// <summary>
+        /// Sets the current user id.
+        /// </summary>
+        /// <param name="userId">The user id to set.</param>
         public void SetUserId(int userId)
         {
             HttpContext.Current.Request.GetOwinContext().Authentication.SignOut();
             IssueAnonymousCookie(userId);
         }
 
+        /// <summary>
+        /// Logs in the current user as a new anonymous user.
+        /// </summary>
+        /// <returns>The new user id.</returns>
         public int LoginNewAnonymous()
         {
             var userId = CreateAnonymousUser();
@@ -143,8 +167,8 @@ namespace Dilemma.Security
 
         private static bool IsSecureAction()
         {
-            return false;
             // TODO: treat this as NotImplementedException
+            return false;
         }
 
         private static bool IsSecurityStampValid(IEnumerable<Claim> claims)

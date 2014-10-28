@@ -27,17 +27,17 @@ namespace Dilemma.Business.ViewModels
         public DateTime CreatedDateTime { get; set; }
 
         /// <summary>
-        /// Flag indicating that the current user added this answer.
+        /// Gets or sets a value indicating whether the current user added this answer.
         /// </summary>
         public bool IsMyAnswer { get; set; }
 
         /// <summary>
-        /// Flag indicating that the answer has passed moderation.
+        /// Gets or sets a value indicating whether the answer has passed moderation.
         /// </summary>
         public bool IsApproved { get; set; }
 
         /// <summary>
-        /// Flag indicating that the answer has been rejected.
+        /// Gets or sets a value indicating whether the answer has been rejected.
         /// </summary>
         public bool IsRejected { get; set; }
     }

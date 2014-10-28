@@ -59,6 +59,7 @@
     <Compile Include="Services\IModerationService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ModerationService.cs" />
+    <Compile Include="Services\NotificationServiceGroupingExtensions.cs" />
     <Compile Include="ViewModels\ModerationEntryViewModel.cs" />
     <Compile Include="ViewModels\ModerationViewModel.cs" />
     <Compile Include="Services\NotificationService.cs" />

@@ -12,16 +12,24 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Security.Development
 {
+    /// <summary>
+    /// Development Cookie Manager
+    /// </summary>
     public static class DevelopmentCookieManager
     {
-        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
-
-        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
-       
         private const string CookieName = "Dilemma.Security.Development.Cookie";
 
         private const string UserIds = "userids";
 
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
+
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
+       
+        /// <summary>
+        /// Gets the user ids in the user's development cookie and ensures that the current user id 
+        /// is added to the cookie if we're not running in a production environment.
+        /// </summary>
+        /// <returns>The list of user ids in the development cookie.</returns>
         public static IEnumerable<int> GetUserIds()
         {
             var myCookie = HttpContext.Current.Request.Cookies[CookieName] ?? new HttpCookie(CookieName);
