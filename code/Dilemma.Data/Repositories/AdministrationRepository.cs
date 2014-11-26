@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
+using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 
@@ -26,11 +28,13 @@ namespace Dilemma.Data.Repositories
         {
             var systemConfiguration = ConverterFactory.ConvertOne<T, SystemConfiguration>(systemConfigurationType);
 
-            var context = new DilemmaContext();
-            context.SystemConfiguration.Update(context, systemConfiguration);
-            context.SaveChangesVerbose();
+            using (var context = new DilemmaContext())
+            {
+                context.SystemConfiguration.Update(context, systemConfiguration);
+                context.SaveChangesVerbose();
 
-            Cache.Value.Expire<SystemConfiguration>();
+                Cache.Value.Expire<SystemConfiguration>();
+            }
         }
 
         /// <summary>
@@ -43,11 +47,48 @@ namespace Dilemma.Data.Repositories
             var systemConfiguration = Cache.Value.Get(
                 () =>
                     {
-                        var context = new DilemmaContext();
-                        return context.SystemConfiguration.Single();
+                        using (var context = new DilemmaContext())
+                        {
+                            return context.SystemConfiguration.Single();
+                        }
                     });
 
             return ConverterFactory.ConvertOne<SystemConfiguration, T>(systemConfiguration);
+        }
+
+        public void SetPointConfiguration<T>(T pointConfiguration) where T : class
+        {
+            var point = ConverterFactory.ConvertOne<T, PointConfiguration>(pointConfiguration);
+
+            using (var context = new DilemmaContext())
+            {
+                context.PointConfigurations.Update(context, point);
+                context.SaveChangesVerbose();
+
+                Cache.Value.Expire<List<PointConfiguration>>();
+            }
+        }
+
+        public T GetPointConfiguration<T>(PointType pointType) where T : class
+        {
+            return ConverterFactory.ConvertOne<PointConfiguration, T>(GetPointConfigurations().Single(x => x.PointType == pointType)); 
+        }
+
+        public IEnumerable<T> GetPointConfigurations<T>() where T : class
+        {
+            return ConverterFactory.ConvertMany<PointConfiguration, T>(GetPointConfigurations());
+        }
+
+        private IEnumerable<PointConfiguration> GetPointConfigurations() 
+        {
+            return Cache.Value.Get(
+                () =>
+                {
+                    using (var context = new DilemmaContext())
+                    {
+                        return context.PointConfigurations.ToList();
+                    }
+                });
         }
     }
 }

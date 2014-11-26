@@ -51,6 +51,10 @@ namespace Dilemma.Business
             ConverterFactory.Register<SystemConfigurationViewModel, SystemConfiguration>(registrar, SystemConfigurationViewModelConverter.ToSystemConfiguration);
             ConverterFactory.Register<SystemConfiguration, SystemConfigurationViewModel>(registrar, SystemConfigurationViewModelConverter.FromSystemConfiguration);
 
+            registrar.Register<IValidator<PointConfigurationViewModel>>(() => new PointConfigurationViewModelValidator());
+            ConverterFactory.Register<PointConfigurationViewModel, PointConfiguration>(registrar, PointConfigurationViewModelConverter.ToPointConfiguration);
+            ConverterFactory.Register<PointConfiguration, PointConfigurationViewModel>(registrar, PointConfigurationViewModelConverter.FromPointConfiguration);
+            
             ConverterFactory.Register<CategoryViewModel, Category>(registrar, CategoryViewModelConverter.ToCategory);
             ConverterFactory.Register<Category, CategoryViewModel>(registrar, CategoryViewModelConverter.FromCategory);
 

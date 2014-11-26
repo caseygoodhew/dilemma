@@ -6,14 +6,14 @@ namespace Dilemma.Data.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
+    [GeneratedCode("EntityFramework.Migrations", "6.1.2-beta1-30916")]
     public sealed partial class Migration2 : IMigrationMetadata
     {
         private readonly ResourceManager Resources = new ResourceManager(typeof(Migration2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201410280652037_Migration2"; }
+            get { return "201410290620026_Migration2"; }
         }
         
         string IMigrationMetadata.Source

@@ -18,8 +18,7 @@ namespace Dilemma.Data.EntityFramework.Maps
         public PointConfigurationMap()
         {
             HasKey(p => p.Id);
-            Property(p => p.PointType).HasColumnAnnotation(IndexAnnotation.AnnotationName, new IndexAnnotation(new IndexAttribute { IsUnique = true }));
-
+            Property(p => p.PointType);
             Property(p => p.Name).IsRequired();
             Property(p => p.Description).IsRequired();
             Property(p => p.Points).IsRequired();

@@ -29,25 +29,7 @@ namespace Dilemma.Web.Views.Question
     using System.Web.WebPages;
     using Dilemma.Common;
     using Dilemma.Web;
-    
-    #line 1 "..\..\Views\Question\Details.cshtml"
-    using Dilemma.Web.Extensions;
-    
-    #line default
-    #line hidden
     using Disposable.Common.Extensions;
-    
-    #line 2 "..\..\Views\Question\Details.cshtml"
-    using Microsoft.Ajax.Utilities;
-    
-    #line default
-    #line hidden
-    
-    #line 3 "..\..\Views\Question\Details.cshtml"
-    using WebGrease.Css.Extensions;
-    
-    #line default
-    #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Question/Details.cshtml")]
@@ -59,7 +41,7 @@ namespace Dilemma.Web.Views.Question
         public override void Execute()
         {
             
-            #line 6 "..\..\Views\Question\Details.cshtml"
+            #line 3 "..\..\Views\Question\Details.cshtml"
   
     ViewBag.Title = "Details";
 
@@ -69,7 +51,7 @@ namespace Dilemma.Web.Views.Question
 WriteLiteral("\r\n\r\n");
 
             
-            #line 10 "..\..\Views\Question\Details.cshtml"
+            #line 7 "..\..\Views\Question\Details.cshtml"
 Write(Html.DisplayFor(x => x.QuestionViewModel));
 
             
@@ -78,7 +60,7 @@ Write(Html.DisplayFor(x => x.QuestionViewModel));
 WriteLiteral("\r\n\r\n");
 
             
-            #line 12 "..\..\Views\Question\Details.cshtml"
+            #line 9 "..\..\Views\Question\Details.cshtml"
  if (Model.CanAnswer)
 {
 
@@ -98,7 +80,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 16 "..\..\Views\Question\Details.cshtml"
+            #line 13 "..\..\Views\Question\Details.cshtml"
        Write(Html.ActionLink("Add an answer", "AnswerSlot", new { questionId = Model.QuestionViewModel.QuestionId }, new { @class = "btn btn-primary" }));
 
             
@@ -107,7 +89,7 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 19 "..\..\Views\Question\Details.cshtml"
+            #line 16 "..\..\Views\Question\Details.cshtml"
 }
 
             

@@ -10,8 +10,26 @@ namespace Dilemma.Data.Models
     public class PointConfiguration
     {
         private PointType? _pointType;
-        
-        public int Id { get; set; }
+
+        public int Id
+        {
+            get
+            {
+                return (int)PointType;
+            }
+            
+            set
+            {
+                var type = typeof(PointType);
+
+                if (!Enum.IsDefined(type, value))
+                {
+                    throw new InvalidOperationException(string.Format("{0} cannot be mapped to a PointType.", value));
+                }
+
+                PointType = (PointType)Enum.ToObject(type, value);
+            }
+        }
             
         public PointType PointType
         {
@@ -29,7 +47,7 @@ namespace Dilemma.Data.Models
             {
                 if (_pointType.HasValue && _pointType.Value != value)
                 {
-                    throw new InvalidOperationException(string.Format("PointType cannot be changed from {0} to {1}", _pointType, value));
+                    throw new InvalidOperationException(string.Format("PointType cannot be changed from {0} ({1}) to {2} ({3})", _pointType, (int)_pointType, value, (int)value));
                 }
 
                 _pointType = value;

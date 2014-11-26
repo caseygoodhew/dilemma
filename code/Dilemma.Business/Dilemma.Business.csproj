@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\AnswerViewModelConverter.cs" />
+    <Compile Include="Conversion\PointConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\ModerationEntryViewModelConverter.cs" />
     <Compile Include="Conversion\ModerationViewModelConverter.cs" />
     <Compile Include="Conversion\DevelopmentUserViewModelConverter.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ModerationService.cs" />
     <Compile Include="Services\NotificationServiceGroupingExtensions.cs" />
+    <Compile Include="Validators\PointConfigurationViewModelValidator.cs" />
     <Compile Include="ViewModels\ModerationEntryViewModel.cs" />
     <Compile Include="ViewModels\ModerationViewModel.cs" />
     <Compile Include="Services\NotificationService.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\CreateQuestionViewModel.cs" />
     <Compile Include="ViewModels\NotificationListViewModel.cs" />
+    <Compile Include="ViewModels\PointConfigurationViewModel.cs" />
     <Compile Include="ViewModels\QuestionDetailsViewModel.cs" />
     <Compile Include="ViewModels\QuestionListViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />

@@ -1,9 +1,7 @@
 using System;
-using System.CodeDom;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 using Dilemma.Common;
 using Dilemma.Data.Models;
@@ -14,7 +12,7 @@ namespace Dilemma.Data.EntityFramework.Initialization
     {
         internal static void Seed(DilemmaContext context)
         {
-            var pointTypes = Enum.GetValues(typeof(PointType)).Cast<PointType>().Select(
+            var pointTypes = Enum.GetValues(typeof(PointType)).Cast<PointType>().OrderBy(x => (int)x).Select(
                 x =>
                     {
                         var member = x.GetType().GetMember(x.ToString()).Single();
@@ -38,9 +36,9 @@ namespace Dilemma.Data.EntityFramework.Initialization
                                    };
                     });
 
-            foreach (var pointType in pointTypes.Where(pointType => !context.PointConfiguration.Any(x => x.PointType == pointType.PointType)))
+            foreach (var pointType in pointTypes.Where(pointType => !context.PointConfigurations.Any(x => x.PointType == pointType.PointType)))
             {
-                context.PointConfiguration.Add(pointType);
+                context.PointConfigurations.Add(pointType);
             }
         }
     }

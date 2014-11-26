@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 using Dilemma.Data.Repositories;
 
 using Disposable.Common.ServiceLocator;
@@ -30,6 +32,26 @@ namespace Dilemma.Business.Services
         public void SetSystemConfiguration(SystemConfigurationViewModel viewModel)
         {
             AdministrationRepository.Value.SetSystemConfiguration(viewModel);
+        }
+
+        public void SetPointConfiguration(PointConfigurationViewModel viewModel)
+        {
+            AdministrationRepository.Value.SetPointConfiguration(viewModel);
+        }
+
+        public PointConfigurationViewModel GetPointConfiguration(int id)
+        {
+            return GetPointConfiguration((PointType)Enum.ToObject(typeof(PointType), id));
+        }
+
+        public PointConfigurationViewModel GetPointConfiguration(PointType pointType)
+        {
+            return AdministrationRepository.Value.GetPointConfiguration<PointConfigurationViewModel>(pointType);
+        }
+
+        public IEnumerable<PointConfigurationViewModel> GetPointConfigurations()
+        {
+            return AdministrationRepository.Value.GetPointConfigurations<PointConfigurationViewModel>();
         }
     }
 }

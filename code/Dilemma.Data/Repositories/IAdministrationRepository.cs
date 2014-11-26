@@ -1,4 +1,8 @@
-﻿using Dilemma.Data.Models;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+
+using Dilemma.Common;
+using Dilemma.Data.Models;
 
 namespace Dilemma.Data.Repositories
 {
@@ -20,5 +24,11 @@ namespace Dilemma.Data.Repositories
         /// <typeparam name="T">The type to get.</typeparam>
         /// <returns>The <see cref="SystemConfiguration"/> converted to type T.</returns>
         T GetSystemConfiguration<T>() where T : class;
+
+        void SetPointConfiguration<T>(T pointConfiguration) where T : class;
+
+        T GetPointConfiguration<T>(PointType pointType) where T : class;
+
+        IEnumerable<T> GetPointConfigurations<T>() where T : class;
     }
 }
