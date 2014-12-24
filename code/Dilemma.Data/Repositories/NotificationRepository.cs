@@ -87,17 +87,14 @@ namespace Dilemma.Data.Repositories
         /// <param name="id">The id of the object that the notification refers to.</param>
         public void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, int id)
         {
+            var forUser = context.GetOrAttachNew<User, int>(forUserId, x => x.UserId);
+            
             var notification = new Notification
                                    {
-                                       ForUser = new User
-                                                     {
-                                                         UserId = forUserId
-                                                     },
+                                       ForUser = forUser,
                                        NotificationType = notificationType,
                                        CreatedDateTime = TimeSource.Value.Now
                                    };
-
-            context.EnsureAttached(notification.ForUser, x => x.UserId);
 
             switch (notificationType)
             {

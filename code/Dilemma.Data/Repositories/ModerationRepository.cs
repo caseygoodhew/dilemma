@@ -9,6 +9,7 @@ using Dilemma.Data.Models;
 using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
+using Disposable.MessagePipe;
 
 namespace Dilemma.Data.Repositories
 {
@@ -19,43 +20,50 @@ namespace Dilemma.Data.Repositories
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
-        private static readonly Lazy<IInternalNotificationRepository> NotificationRepository = Locator.Lazy<IInternalNotificationRepository>();
-
-        private static readonly Lazy<IInternalQuestionRepository> QuestionRepository = Locator.Lazy<IInternalQuestionRepository>();
-
+        private static readonly Lazy<IMessagePipe<ModerationState>> ModerationMessagePipe = Locator.Lazy<IMessagePipe<ModerationState>>();
+        
         /// <summary>
         /// To be called when a question is created.
         /// </summary>
-        /// <param name="context">The context to run the queries against.</param>
-        /// <param name="question">The question that was created.</param>
-        public void OnQuestionCreated(DilemmaContext context, Question question)
+        /// <param name="messenger">The question <see cref="IMessenger{T}"/>.</param>
+        public void OnQuestionCreated(IMessenger<QuestionDataAction> messenger)
         {
-            context.EnsureAttached(question, x => x.QuestionId);
-            context.EnsureAttached(question.User, x => x.UserId);
-                
+            var messageContext = messenger.GetContext<QuestionMessageContext>(QuestionDataAction.Created);
+            
+            var dataContext = messageContext.DataContext;
+            var question = messageContext.Question;
+            
+            dataContext.EnsureAttached(question, x => x.QuestionId);
+            dataContext.EnsureAttached(question.User, x => x.UserId);
+            
             OnModerableCreated(
-                context,
+                dataContext,
                 new Moderation
-                    {
-                        ModerationFor = ModerationFor.Question,
-                        Question = question,
-                        ForUser = question.User
-                    },
+                {
+                    ModerationFor = ModerationFor.Question,
+                    Question = question,
+                    ForUser = question.User
+                },
                 question.Text);
+
+            messenger.Forward();
         }
 
         /// <summary>
         /// To be called when an answer is created.
         /// </summary>
-        /// <param name="context">The context to run the queries against.</param>
-        /// <param name="answer">The answer that was created.</param>
-        public void OnAnswerCreated(DilemmaContext context, Answer answer)
+        /// <param name="messenger">The answer <see cref="IMessenger{T}"/>.</param>
+        public void OnAnswerCreated(IMessenger<AnswerDataAction> messenger)
         {
-            context.EnsureAttached(answer, x => x.AnswerId);
-            context.EnsureAttached(answer.User, x => x.UserId);
+            var messageContext = messenger.GetContext<AnswerMessageContext>(AnswerDataAction.Created);
+            var dataContext = messageContext.DataContext;
+            var answer = messageContext.Answer;
+
+            dataContext.EnsureAttached(answer, x => x.AnswerId);
+            dataContext.EnsureAttached(answer.User, x => x.UserId);
                 
             OnModerableCreated(
-                context,
+                dataContext,
                 new Moderation
                     {
                         ModerationFor = ModerationFor.Answer,
@@ -161,31 +169,13 @@ namespace Dilemma.Data.Repositories
                             })
                       .Single();
             
-            AddModerationEntry(context, moderationId, state, userId, message);
+            var entry = AddModerationEntry(context, moderationId, state, userId, message);
 
-            if (state == ModerationState.Rejected)
-            {
-                NotificationRepository.Value.Raise(
-                    context,
-                    moderation.ForUser.UserId,
-                    NotificationType.PostRejected,
-                    moderation.ModerationId);
-            }
-
-            switch (moderation.ModerationFor)
-            {
-                case ModerationFor.Question:
-                    QuestionRepository.Value.UpdateQuestionState(context, moderation.Question.QuestionId, state);
-                    break;
-                case ModerationFor.Answer:
-                    QuestionRepository.Value.UpdateAnswerState(context, moderation.Answer.AnswerId, state);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            var messageContext = new ModerationMessageContext(state, context, moderation, entry);
+            ModerationMessagePipe.Value.Announce(messageContext);
         }
 
-        private static void AddModerationEntry(
+        private static ModerationEntry AddModerationEntry(
             DilemmaContext context,
             int moderationId,
             ModerationState state,
@@ -207,6 +197,8 @@ namespace Dilemma.Data.Repositories
             context.ModerationEntries.Add(moderationEntry);
 
             context.SaveChangesVerbose();
+
+            return moderationEntry;
         }
     }
 }

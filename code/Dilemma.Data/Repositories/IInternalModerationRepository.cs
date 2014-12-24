@@ -1,6 +1,8 @@
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 
+using Disposable.MessagePipe;
+
 namespace Dilemma.Data.Repositories
 {
     /// <summary>
@@ -11,15 +13,13 @@ namespace Dilemma.Data.Repositories
         /// <summary>
         /// To be called when a question is created.
         /// </summary>
-        /// <param name="context">The context to run the queries against.</param>
-        /// <param name="question">The question that was created.</param>
-        void OnQuestionCreated(DilemmaContext context, Question question);
+        /// <param name="messenger">The question <see cref="IMessenger{T}"/>.</param>
+        void OnQuestionCreated(IMessenger<QuestionDataAction> messenger);
 
         /// <summary>
         /// To be called when an answer is created.
         /// </summary>
-        /// <param name="context">The context to run the queries against.</param>
-        /// <param name="answer">The answer that was created.</param>
-        void OnAnswerCreated(DilemmaContext context, Answer answer);
+        /// <param name="messenger">The answer <see cref="IMessenger{T}"/>.</param>
+        void OnAnswerCreated(IMessenger<AnswerDataAction> messenger);
     }
 }

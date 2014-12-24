@@ -8,22 +8,24 @@ using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 
 using Disposable.Common.Conversion;
+using Disposable.Common.Extensions;
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
+using Disposable.MessagePipe;
 
 namespace Dilemma.Data.Repositories
 {
     /// <summary>
     /// Question repository implementation.
     /// </summary>
-    internal class QuestionRepository : IQuestionRepository, IInternalQuestionRepository
+    internal class QuestionRepository : IInternalQuestionRepository
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
-        private static readonly Lazy<IInternalModerationRepository> ModerationRepository = Locator.Lazy<IInternalModerationRepository>();
-
-        private static readonly Lazy<IInternalNotificationRepository> NotificationRepository = Locator.Lazy<IInternalNotificationRepository>();
-
+        private static readonly Lazy<IMessagePipe<QuestionDataAction>> QuestionMessagePipe = Locator.Lazy<IMessagePipe<QuestionDataAction>>();
+        
+        private static readonly Lazy<IMessagePipe<AnswerDataAction>> AnswerMessagePipe = Locator.Lazy<IMessagePipe<AnswerDataAction>>();
+        
         /// <summary>
         /// Creates a <see cref="Question"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="Question"/>.
         /// </summary>
@@ -42,7 +44,8 @@ namespace Dilemma.Data.Repositories
                 context.Questions.Add(question);
                 context.SaveChangesVerbose();
 
-                ModerationRepository.Value.OnQuestionCreated(context, question);
+                var messageContext = new QuestionMessageContext(QuestionDataAction.Created, context, question);
+                QuestionMessagePipe.Value.Announce(messageContext);
             }
         }
 
@@ -200,52 +203,76 @@ namespace Dilemma.Data.Repositories
                 context.Answers.Update(context, existingAnswer);
                 context.SaveChangesVerbose();
 
-                ModerationRepository.Value.OnAnswerCreated(context, existingAnswer);
+                var messageContext = new AnswerMessageContext(AnswerDataAction.Created, context, existingAnswer);
+                AnswerMessagePipe.Value.Announce(messageContext);
 
                 return true;
             }
         }
 
         /// <summary>
-        /// Updates an <see cref="AnswerState"/> based on the provided <see cref="ModerationState"/>.
+        /// To be called when the moderation state is updated.
         /// </summary>
-        /// <param name="context">The context to run the queries against.</param>
-        /// <param name="answerId">The id of the answer to update.</param>
-        /// <param name="moderationState">The <see cref="ModerationState"/>.</param>
-        public void UpdateAnswerState(DilemmaContext context, int answerId, ModerationState moderationState)
+        /// <param name="messenger">The messenger.</param>
+        public void OnModerationStateUpdated(IMessenger<ModerationState> messenger)
         {
-            var answer = context.Answers.Include(x => x.Question).Include(x => x.Question.User).Single(x => x.AnswerId == answerId);
+            var messageContext = messenger.GetContext<ModerationMessageContext>(EnumExtensions.GetValues<ModerationState>());
+            var moderation = messageContext.Moderation;
+            var moderationEntry = messageContext.ModerationEntry;
+            var dataContext = messageContext.DataContext;
 
+            switch (moderation.ModerationFor)
+            {
+                case ModerationFor.Question:
+                    UpdateQuestionState(dataContext, moderation.Question.QuestionId, moderationEntry.State);
+                    break;
+                case ModerationFor.Answer:
+                    UpdateAnswerState(dataContext, moderation.Answer.AnswerId, moderationEntry.State);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+
+        }
+
+        private void UpdateAnswerState(DilemmaContext dataContext, int answerId, ModerationState moderationState)
+        {
+            var answer = dataContext.Answers.Include(x => x.Question).Include(x => x.Question.User).Single(x => x.AnswerId == answerId);
+            AnswerState newAnswerState;
+            
+            
             switch (moderationState)
             {
                 case ModerationState.Queued:
-                    answer.AnswerState = AnswerState.ReadyForModeration;
+                    newAnswerState = AnswerState.ReadyForModeration;
                     break;
                 case ModerationState.Approved:
-                    answer.AnswerState = AnswerState.Approved;
+                    newAnswerState = AnswerState.Approved;
                     break;
                 case ModerationState.Rejected:
-                    answer.AnswerState = AnswerState.Rejected;
+                    newAnswerState = AnswerState.Rejected;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("moderationState");
             }
 
-            context.Answers.Update(context, answer);
-            context.SaveChangesVerbose();
+            if (newAnswerState == answer.AnswerState)
+            {
+                return;
+            }
 
-            NotificationRepository.Value.Raise(context, answer.Question.User.UserId, NotificationType.QuestionAnswered, answer.AnswerId);
+            answer.AnswerState = newAnswerState;
+            dataContext.Answers.Update(dataContext, answer);
+            dataContext.SaveChangesVerbose();
+
+            var messageContext = new AnswerMessageContext(AnswerDataAction.StateChanged, dataContext, answer);
+            AnswerMessagePipe.Value.Announce(messageContext);
         }
 
-        /// <summary>
-        /// Updates a <see cref="QuestionState"/> based on the provided <see cref="ModerationState"/>.
-        /// </summary>
-        /// <param name="context">The context to run the queries against.</param>
-        /// <param name="questionId">The id of the question to update.</param>
-        /// <param name="moderationState">The <see cref="ModerationState"/>.</param>
-        public void UpdateQuestionState(DilemmaContext context, int questionId, ModerationState moderationState)
+        private void UpdateQuestionState(DilemmaContext dataContext, int questionId, ModerationState moderationState)
         {
-            var question = context.Questions.Single(x => x.QuestionId == questionId);
+            var question = dataContext.Questions.Single(x => x.QuestionId == questionId);
 
             switch (moderationState)
             {
@@ -262,8 +289,11 @@ namespace Dilemma.Data.Repositories
                     throw new ArgumentOutOfRangeException("moderationState");
             }
 
-            context.Questions.Update(context, question);
-            context.SaveChangesVerbose();
+            dataContext.Questions.Update(dataContext, question);
+            dataContext.SaveChangesVerbose();
+
+            var messageContext = new QuestionMessageContext(QuestionDataAction.StateChanged, dataContext, question);
+            QuestionMessagePipe.Value.Announce(messageContext);
         }
 
         private static T GetQuestion<T>(DilemmaContext context, int questionId, GetQuestionAs config) where T : class

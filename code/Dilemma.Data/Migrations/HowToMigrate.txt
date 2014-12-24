@@ -4,9 +4,11 @@ Enable-Migrations -ProjectName Dilemma.Data -StartUpProjectName Dilemma.Web -Ver
 
 From the package manager console:
 
+CREATE
 Add-Migration -ProjectName Dilemma.Data -Name Migration
-Update-Database -ProjectName Dilemma.Data -Verbose
 
+APPLY
+Update-Database -ProjectName Dilemma.Data -Verbose
 
 ROLLBACK
 Update-Database -ProjectName Dilemma.Data -TargetMigration:"Migration1"

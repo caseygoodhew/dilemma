@@ -1,8 +1,14 @@
-﻿using Dilemma.Data.Models;
+﻿using System;
+
+using Dilemma.Common;
+using Dilemma.Data.EntityFramework;
+using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
 
 using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
+using Disposable.MessagePipe;
+using Disposable.MessagePipe.ServiceLocator;
 
 namespace Dilemma.Data
 {
@@ -25,8 +31,13 @@ namespace Dilemma.Data
             registrar.Register<IDevelopmentRepository>(() => new DevelopmentRepository());
             registrar.Register<INotificationRepository>(() => new NotificationRepository());
             registrar.Register<IInternalNotificationRepository>(() => new NotificationRepository());
+            registrar.Register<IInternalNotificationDistributor>(() => new NotificationDistributor());
             registrar.Register<IModerationRepository>(() => new ModerationRepository());
             registrar.Register<IInternalModerationRepository>(() => new ModerationRepository());
+
+            registrar.CreatePipe<QuestionDataAction>(MessengerType.Stepping, InitiateMessagePipe);
+            registrar.CreatePipe<AnswerDataAction>(MessengerType.Stepping, InitiateMessagePipe);
+            registrar.CreatePipe<ModerationState>(MessengerType.Stepping, InitiateMessagePipe);
             
             ConverterFactory.Register<Question>(registrar);
             ConverterFactory.Register<Answer>(registrar);
@@ -35,7 +46,26 @@ namespace Dilemma.Data
             ConverterFactory.Register<Notification>(registrar);
             ConverterFactory.Register<PointConfiguration>(registrar);
 
-            EntityFramework.DilemmaContext.Startup();
+            DilemmaContext.Startup();
+        }
+
+        private static void InitiateMessagePipe(IMessagePipe<QuestionDataAction> messagePipe)
+        {
+            messagePipe.Locator<QuestionDataAction, IInternalModerationRepository>(QuestionDataAction.Created, x => x.OnQuestionCreated);
+        }
+
+        private static void InitiateMessagePipe(IMessagePipe<AnswerDataAction> messagePipe)
+        {
+            messagePipe.Locator<AnswerDataAction, IInternalModerationRepository>(AnswerDataAction.Created, x => x.OnAnswerCreated);
+            messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.StateChanged, x => x.OnAnswerStateChange);
+        }
+
+        private static void InitiateMessagePipe(IMessagePipe<ModerationState> messagePipe)
+        {
+            messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Approved, x => x.OnModerationStateUpdated);
+
+            messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Rejected, x => x.OnModerationStateUpdated);
+            messagePipe.Locator<ModerationState, IInternalNotificationDistributor>(ModerationState.Rejected, x => x.OnModerationRejected);
         }
     }
 }
