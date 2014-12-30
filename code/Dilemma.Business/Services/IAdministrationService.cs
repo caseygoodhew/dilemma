@@ -22,6 +22,10 @@ namespace Dilemma.Business.Services
         /// <param name="viewModel">The <see cref="SystemConfigurationViewModel"/> with the full set of changed and unchanged elements.</param>
         void SetSystemConfiguration(SystemConfigurationViewModel viewModel);
 
+        TestingConfiguration GetTestingConfiguration();
+
+        void SetTestingConfiguration(TestingConfiguration configuration);
+        
         void SetPointConfiguration(PointConfigurationViewModel viewModel);
 
         PointConfigurationViewModel GetPointConfiguration(int id);

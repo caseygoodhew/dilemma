@@ -34,6 +34,16 @@ namespace Dilemma.Business.Services
             AdministrationRepository.Value.SetSystemConfiguration(viewModel);
         }
 
+        public TestingConfiguration GetTestingConfiguration()
+        {
+            return AdministrationRepository.Value.GetTestingConfiguration();
+        }
+
+        public void SetTestingConfiguration(TestingConfiguration configuration)
+        {
+            AdministrationRepository.Value.SetTestingConfiguration(configuration);
+        }
+
         public void SetPointConfiguration(PointConfigurationViewModel viewModel)
         {
             AdministrationRepository.Value.SetPointConfiguration(viewModel);

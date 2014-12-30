@@ -31,8 +31,9 @@ namespace Dilemma.Data.Repositories
         /// </summary>
         /// <typeparam name="T">The type to receive.</typeparam>
         /// <param name="userId">The id of the user creating the question.</param>
-        /// <param name="questionType">The convertable instance</param>
-        public void CreateQuestion<T>(int userId, T questionType) where T : class
+        /// <param name="questionType">The convertable instance.</param>
+        /// <returns>The new question id.</returns>
+        public int CreateQuestion<T>(int userId, T questionType) where T : class
         {
             var question = ConverterFactory.ConvertOne<T, Question>(questionType);
 
@@ -41,12 +42,16 @@ namespace Dilemma.Data.Repositories
                 question.User = context.GetOrAttachNew<User, int>(userId, x => x.UserId);
                 context.EnsureAttached(question.Category, x => x.CategoryId);
                 
+                question.QuestionState = QuestionState.Approved;
+
                 context.Questions.Add(question);
                 context.SaveChangesVerbose();
 
                 var messageContext = new QuestionMessageContext(QuestionDataAction.Created, context, question);
                 QuestionMessagePipe.Value.Announce(messageContext);
             }
+
+            return question.QuestionId;
         }
 
         /// <summary>
@@ -135,7 +140,7 @@ namespace Dilemma.Data.Repositories
                 
                 var question = GetQuestion<Question>(context, questionId, GetQuestionAs.AnswerCount);
 
-                if (question.QuestionState != QuestionState.Approved || question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
+                if (question.User.UserId == userId || question.QuestionState != QuestionState.Approved || question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
                 {
                     return null;
                 }
@@ -197,7 +202,7 @@ namespace Dilemma.Data.Repositories
                 }
 
                 existingAnswer.CreatedDateTime = TimeSource.Value.Now;
-                existingAnswer.AnswerState = AnswerState.ReadyForModeration;
+                existingAnswer.AnswerState = AnswerState.Approved;
                 existingAnswer.Text = answer.Text;
 
                 context.Answers.Update(context, existingAnswer);

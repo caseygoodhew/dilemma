@@ -32,14 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Disposable.Caching, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Caching.1.0.4\lib\net45\Disposable.Caching.dll</HintPath>
-    </Reference>
-    <Reference Include="Disposable.Web.Caching, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Web.Caching.1.0.3\lib\net45\Disposable.Web.Caching.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -97,9 +89,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CookieAuthenticationManager.cs" />
     <Compile Include="DenyProductionAccessAttribute.cs" />
     <Compile Include="Development\DevelopmentCookieManager.cs" />
     <Compile Include="DilemmaAuthenticationAttribute.cs" />
+    <Compile Include="IAuthenticationManager.cs" />
     <Compile Include="ISecurityManager.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="SecurityManager.cs" />
@@ -110,9 +104,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\disposable\code\Disposable.Caching\Disposable.Caching.csproj">
+      <Project>{A1C82D12-BF98-4E3C-9B61-9F879CAB7CB4}</Project>
+      <Name>Disposable.Caching</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\disposable\code\Disposable.Common\Disposable.Common.csproj">
       <Project>{1ff2cbdd-7f6e-4dde-91d1-ebd5763e8018}</Project>
       <Name>Disposable.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\disposable\code\Disposable.Web.Caching\Disposable.Web.Caching.csproj">
+      <Project>{BCDB871A-0962-4C5C-A710-45D2FE4F4A57}</Project>
+      <Name>Disposable.Web.Caching</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Common\Dilemma.Common.csproj">
       <Project>{9554f188-2ea1-4af5-9c8e-20260652a74c}</Project>

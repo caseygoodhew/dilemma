@@ -25,6 +25,10 @@ namespace Dilemma.Data.Repositories
         /// <returns>The <see cref="SystemConfiguration"/> converted to type T.</returns>
         T GetSystemConfiguration<T>() where T : class;
 
+        void SetTestingConfiguration(TestingConfiguration configuration);
+
+        TestingConfiguration GetTestingConfiguration();
+        
         void SetPointConfiguration<T>(T pointConfiguration) where T : class;
 
         T GetPointConfiguration<T>(PointType pointType) where T : class;

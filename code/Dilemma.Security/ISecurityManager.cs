@@ -8,15 +8,15 @@ namespace Dilemma.Security
     public interface ISecurityManager
     {
         /// <summary>
-        /// Configures cookie based authentication in the OWIN pipeline.
+        /// Configures authentication in the OWIN pipeline using the configured IAuthenticationManager.
         /// </summary>
         /// <param name="appBuilder">The OWIN app builder.</param>
-        void ConfigureCookieAuthentication(IAppBuilder appBuilder);
+        void ConfigureAuthentication(IAppBuilder appBuilder);
         
         /// <summary>
         /// Validates the users security credentials.
         /// </summary>
-        void ValidateCookie();
+        void ValidateClaims();
 
         /// <summary>
         /// Gets the current user id.

@@ -14,6 +14,7 @@ namespace Dilemma.Security
         public static void Register(IRegistrar registrar)
         {
             registrar.Register<ISecurityManager>(() => new SecurityManager());
+            registrar.Register<IAuthenticationManager>(() => new CookieAuthenticationManager());
         }
     }
 }

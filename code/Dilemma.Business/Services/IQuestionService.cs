@@ -24,7 +24,8 @@ namespace Dilemma.Business.Services
         /// Saves a new <see cref="CreateQuestionViewModel"/> instance.
         /// </summary>
         /// <param name="questionViewModel">The <see cref="CreateQuestionViewModel"/> to save.</param>
-        void SaveNewQuestion(CreateQuestionViewModel questionViewModel);
+        /// <returns>The new question id.</returns>
+        int SaveNewQuestion(CreateQuestionViewModel questionViewModel);
 
         /// <summary>
         /// Gets all questions as <see cref="QuestionViewModel"/>s.
@@ -65,6 +66,7 @@ namespace Dilemma.Business.Services
         /// </summary>
         /// <param name="questionId">The question id.</param>
         /// <param name="answerViewModel">The <see cref="AnswerViewModel"/> to save.</param>
-        void CompleteAnswer(int questionId, AnswerViewModel answerViewModel);
+        /// <returns>Flag indicating if the answer was completed.</returns>
+        bool CompleteAnswer(int questionId, AnswerViewModel answerViewModel);
     }
 }

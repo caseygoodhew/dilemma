@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
-using System.Web;
-using System.Web.Helpers;
 
 using Dilemma.Data.Repositories;
 
 using Disposable.Common.ServiceLocator;
 using Disposable.Web.Caching;
-
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
 
 using Owin;
 
@@ -26,39 +20,25 @@ namespace Dilemma.Security
     {
         private static readonly Lazy<IUserRepository> UserRepository = Locator.Lazy<IUserRepository>();
 
+        private static readonly Lazy<IAuthenticationManager> AuthenticationManager = Locator.Lazy<IAuthenticationManager>();
+
         /// <summary>
-        /// Configures cookie based authentication in the OWIN pipeline.
+        /// Configures authentication in the OWIN pipeline using the configured IAuthenticationManager.
         /// </summary>
         /// <param name="appBuilder">The OWIN app builder.</param>
-        public void ConfigureCookieAuthentication(IAppBuilder appBuilder)
+        public void ConfigureAuthentication(IAppBuilder appBuilder)
         {
-            // Enable the application to use a cookie to store information for the signed in user
-            // and to use a cookie to temporarily store information about a user logging in with a third party login provider
-            appBuilder.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                
-                // NOTE: if this is not included then no redirects will take place.
-                // LoginPath = new PathString("/Account/Login"),
-                // TODO: change to always in production
-                CookieSecure = CookieSecureOption.SameAsRequest,
-                
-                // 60 days
-                ExpireTimeSpan = new TimeSpan(60, 0, 0, 0, 0),
-                SlidingExpiration = true
-            });
-
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Sid;
+            AuthenticationManager.Value.Configure(appBuilder);
         }
 
         /// <summary>
         /// Validates the users security credentials.
         /// </summary>
-        public void ValidateCookie()
+        public void ValidateClaims()
         {
             var claims = ReadClaims().ToList();
             
-            if (!HasCookie(claims))
+            if (!HasClaims(claims))
             {
                 var userId = CreateAnonymousUser();
                 IssueAnonymousCookie(userId);
@@ -98,7 +78,7 @@ namespace Dilemma.Security
         /// <param name="userId">The user id to set.</param>
         public void SetUserId(int userId)
         {
-            HttpContext.Current.Request.GetOwinContext().Authentication.SignOut();
+            AuthenticationManager.Value.SignOut();
             IssueAnonymousCookie(userId);
         }
 
@@ -119,18 +99,13 @@ namespace Dilemma.Security
 
             if (!RequestCache.Current.TryGet(out userClaims))
             {
-                userClaims = RequestCache.Current.Get(
-                    () =>
-                        {
-                            var identity = (ClaimsIdentity)HttpContext.Current.User.Identity;
-                            return new UserClaims(identity.Claims);
-                        });
+                userClaims = RequestCache.Current.Get(AuthenticationManager.Value.GetUserClaims);
             }
             
             return userClaims.Claims;
         }
 
-        private static bool HasCookie(IEnumerable<Claim> claims)
+        private static bool HasClaims(IEnumerable<Claim> claims)
         {
             return claims.Any(x => x.Type == ClaimTypes.Sid);
         }
@@ -148,16 +123,11 @@ namespace Dilemma.Security
                                  new Claim(ClaimTypes.Sid, userId.ToString(CultureInfo.InvariantCulture))
                              };
 
-            var id = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+            var userClaims = new UserClaims(claims);
 
-            var ctx = HttpContext.Current.Request.GetOwinContext();
-            var authenticationManager = ctx.Authentication;
+            AuthenticationManager.Value.SignIn(userClaims);
 
-            var authenticationProperties = new AuthenticationProperties { IsPersistent = true };
-
-            authenticationManager.SignIn(authenticationProperties, id);
-
-            RequestCache.Current.Get(() => new UserClaims(claims), true);
+            RequestCache.Current.Get(() => userClaims, true);
         }
 
         private static bool IsAnonymousCookie(IEnumerable<Claim> claims)

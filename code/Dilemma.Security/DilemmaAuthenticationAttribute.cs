@@ -18,7 +18,7 @@ namespace Dilemma.Security
         /// <param name="filterContext">The filter context.</param>
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            SecurityManager.Value.ValidateCookie();
+            SecurityManager.Value.ValidateClaims();
             base.OnActionExecuting(filterContext);
         }
     }

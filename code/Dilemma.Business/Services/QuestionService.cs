@@ -61,7 +61,8 @@ namespace Dilemma.Business.Services
         /// Saves a new <see cref="CreateQuestionViewModel"/> instance.
         /// </summary>
         /// <param name="questionViewModel">The <see cref="CreateQuestionViewModel"/> to save.</param>
-        public void SaveNewQuestion(CreateQuestionViewModel questionViewModel)
+        /// <returns>The new question id.</returns>
+        public int SaveNewQuestion(CreateQuestionViewModel questionViewModel)
         {
             var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
 
@@ -72,7 +73,7 @@ namespace Dilemma.Business.Services
 
             var userId = SecurityManager.Value.GetUserId();
             
-            QuestionRepository.Value.CreateQuestion(userId, questionViewModel);
+            return QuestionRepository.Value.CreateQuestion(userId, questionViewModel);
         }
 
         /// <summary>
@@ -138,11 +139,12 @@ namespace Dilemma.Business.Services
         /// </summary>
         /// <param name="questionId">The question id.</param>
         /// <param name="answerViewModel">The <see cref="AnswerViewModel"/> to save.</param>
-        public void CompleteAnswer(int questionId, AnswerViewModel answerViewModel)
+        /// <returns>Flag indicating if the answer was completed.</returns>
+        public bool CompleteAnswer(int questionId, AnswerViewModel answerViewModel)
         {
             var userId = SecurityManager.Value.GetUserId(); 
             answerViewModel.Text = answerViewModel.Text.TidyWhiteSpace();
-            QuestionRepository.Value.CompleteAnswer(userId, questionId, answerViewModel);
+            return QuestionRepository.Value.CompleteAnswer(userId, questionId, answerViewModel);
         }
 
         private void SetMaxAnswers(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)

@@ -29,22 +29,28 @@ namespace Dilemma.Data.Repositories
         public void OnQuestionCreated(IMessenger<QuestionDataAction> messenger)
         {
             var messageContext = messenger.GetContext<QuestionMessageContext>(QuestionDataAction.Created);
-            
-            var dataContext = messageContext.DataContext;
-            var question = messageContext.Question;
-            
-            dataContext.EnsureAttached(question, x => x.QuestionId);
-            dataContext.EnsureAttached(question.User, x => x.UserId);
-            
-            OnModerableCreated(
-                dataContext,
-                new Moderation
-                {
-                    ModerationFor = ModerationFor.Question,
-                    Question = question,
-                    ForUser = question.User
-                },
-                question.Text);
+
+            if (messageContext.TestingConfigurationProperty(x => x.ManualModeration).Is(ActiveState.Active))
+            {
+                var dataContext = messageContext.DataContext;
+                var question = messageContext.Question;
+
+                dataContext.EnsureAttached(question, x => x.QuestionId);
+                dataContext.EnsureAttached(question.User, x => x.UserId);
+
+                question.QuestionState = QuestionState.ReadyForModeration;
+                dataContext.Entry(question).State = EntityState.Modified;
+
+                OnModerableCreated(
+                    dataContext,
+                    new Moderation
+                        {
+                            ModerationFor = ModerationFor.Question,
+                            Question = question,
+                            ForUser = question.User
+                        },
+                    question.Text);
+            }
 
             messenger.Forward();
         }
@@ -56,21 +62,30 @@ namespace Dilemma.Data.Repositories
         public void OnAnswerCreated(IMessenger<AnswerDataAction> messenger)
         {
             var messageContext = messenger.GetContext<AnswerMessageContext>(AnswerDataAction.Created);
-            var dataContext = messageContext.DataContext;
-            var answer = messageContext.Answer;
 
-            dataContext.EnsureAttached(answer, x => x.AnswerId);
-            dataContext.EnsureAttached(answer.User, x => x.UserId);
+            if (messageContext.TestingConfigurationProperty(x => x.ManualModeration).Is(ActiveState.Active))
+            {
+                var dataContext = messageContext.DataContext;
+                var answer = messageContext.Answer;
+
+                dataContext.EnsureAttached(answer, x => x.AnswerId);
+                dataContext.EnsureAttached(answer.User, x => x.UserId);
+
+                answer.AnswerState = AnswerState.ReadyForModeration;
+                dataContext.Entry(answer).State = EntityState.Modified;
                 
-            OnModerableCreated(
-                dataContext,
-                new Moderation
-                    {
-                        ModerationFor = ModerationFor.Answer,
-                        Answer = answer,
-                        ForUser = answer.User
-                    },
-                answer.Text);
+                OnModerableCreated(
+                    dataContext,
+                    new Moderation
+                        {
+                            ModerationFor = ModerationFor.Answer,
+                            Answer = answer,
+                            ForUser = answer.User
+                        },
+                    answer.Text);
+            }
+
+            messenger.Forward();
         }
 
         /// <summary>

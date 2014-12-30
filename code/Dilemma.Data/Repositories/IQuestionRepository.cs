@@ -14,8 +14,9 @@ namespace Dilemma.Data.Repositories
         /// </summary>
         /// <typeparam name="T">The type to receive.</typeparam>
         /// <param name="userId">The id of the user creating the question.</param>
-        /// <param name="questionType">The convertable instance</param>
-        void CreateQuestion<T>(int userId, T questionType) where T : class;
+        /// <param name="questionType">The convertable instance.</param>
+        /// <returns>The new question id.</returns>
+        int CreateQuestion<T>(int userId, T questionType) where T : class;
 
         /// <summary>
         /// Gets the <see cref="Question"/> in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.

@@ -56,6 +56,16 @@ namespace Dilemma.Data.Repositories
             return ConverterFactory.ConvertOne<SystemConfiguration, T>(systemConfiguration);
         }
 
+        public void SetTestingConfiguration(TestingConfiguration configuration)
+        {
+            Cache.Value.Set<TestingConfiguration>(configuration);
+        }
+
+        public TestingConfiguration GetTestingConfiguration()
+        {
+            return Cache.Value.Get(() => new TestingConfiguration());
+        }
+
         public void SetPointConfiguration<T>(T pointConfiguration) where T : class
         {
             var point = ConverterFactory.ConvertOne<T, PointConfiguration>(pointConfiguration);
