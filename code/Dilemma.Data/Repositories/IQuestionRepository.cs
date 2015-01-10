@@ -22,10 +22,11 @@ namespace Dilemma.Data.Repositories
         /// Gets the <see cref="Question"/> in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T">The type to receive.</typeparam>
+        /// <param name="userId">The user id of the user requesting the question.</param>
         /// <param name="questionId">The id of the question to get.</param>
         /// <param name="config">Options for what extended data to include.</param>
         /// <returns>The <see cref="Question"/> converted to type T.</returns>
-        T GetQuestion<T>(int questionId, GetQuestionAs config) where T : class;
+        T GetQuestion<T>(int userId, int questionId, GetQuestionAs config) where T : class;
 
         /// <summary>
         /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.

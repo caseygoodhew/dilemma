@@ -58,14 +58,15 @@ namespace Dilemma.Data.Repositories
         /// Gets the <see cref="Question"/> in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T">The type to receive.</typeparam>
+        /// <param name="userId">The user id of the user requesting the question.</param>
         /// <param name="questionId">The id of the question to get.</param>
         /// <param name="config">Options for what extended data to include.</param>
         /// <returns>The <see cref="Question"/> converted to type T.</returns>
-        public T GetQuestion<T>(int questionId, GetQuestionAs config) where T : class
+        public T GetQuestion<T>(int userId, int questionId, GetQuestionAs config) where T : class
         {
             using (var context = new DilemmaContext())
             {
-                return GetQuestion<T>(context, questionId, config);
+                return GetQuestion<T>(context, userId, questionId, config);
             }
         }
 
@@ -138,7 +139,7 @@ namespace Dilemma.Data.Repositories
                     return existingAnswer.AnswerId;
                 }
                 
-                var question = GetQuestion<Question>(context, questionId, GetQuestionAs.AnswerCount);
+                var question = GetQuestion<Question>(context, userId, questionId, GetQuestionAs.AnswerCount);
 
                 if (question.User.UserId == userId || question.QuestionState != QuestionState.Approved || question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
                 {
@@ -301,7 +302,7 @@ namespace Dilemma.Data.Repositories
             QuestionMessagePipe.Value.Announce(messageContext);
         }
 
-        private static T GetQuestion<T>(DilemmaContext context, int questionId, GetQuestionAs config) where T : class
+        private static T GetQuestion<T>(DilemmaContext context, int userId, int questionId, GetQuestionAs config) where T : class
         {
             Question question;
 
@@ -334,15 +335,63 @@ namespace Dilemma.Data.Repositories
                     break;
 
                 case GetQuestionAs.FullDetails:
+
                     question =
-                        context.Questions.Where(x => x.QuestionId == questionId)
+                        context.Questions
+                            .Where(x => x.QuestionId == questionId)
+                            .Where(x => x.QuestionState == QuestionState.Approved || x.User.UserId == userId)
                             .Include(x => x.User)
                             .Include(x => x.Category)
                             .Include(x => x.Answers)
                             .Include(x => x.Answers.Select(a => a.User))
-                            .Single();
+                            .Select(
+                                x => new
+                                         {
+                                             x.QuestionId,
+                                             x.Category,
+                                             x.ClosesDateTime,
+                                             x.CreatedDateTime,
+                                             x.MaxAnswers,
+                                             x.QuestionState,
+                                             x.Text,
+                                             TotalAnswers = x.Answers.Count(y => y.AnswerState != AnswerState.Rejected),
+                                             Answers = x.Answers.Where(a => a.AnswerState == AnswerState.Approved || a.User.UserId == userId).Select(
+                                                a => new
+                                                {
+                                                    a.AnswerId,
+                                                    a.AnswerState,
+                                                    a.CreatedDateTime,
+                                                    a.Text,
+                                                    a.User
+                                                }
+                                             ),
+                                             x.User
+                                         })
+                            .AsEnumerable()
+                            .Select(
+                                x => new Question
+                                        {
+                                            Answers = x.Answers.Select(a => new Answer
+                                            {
+                                                AnswerId = a.AnswerId,
+                                                AnswerState = a.AnswerState,
+                                                CreatedDateTime = a.CreatedDateTime,
+                                                Text = a.Text,
+                                                User = a.User
+                                            }).ToList(),
+                                            Category = x.Category,
+                                            ClosesDateTime = x.ClosesDateTime,
+                                            CreatedDateTime = x.ClosesDateTime,
+                                            MaxAnswers = x.MaxAnswers,
+                                            QuestionId = x.QuestionId,
+                                            QuestionState = x.QuestionState,
+                                            Text = x.Text,
+                                            TotalAnswers = x.TotalAnswers,
+                                            User = x.User
+                                        })
+                             .Single();
 
-                    question.TotalAnswers = question.Answers.Count;
+                    question.Answers.ForEach(x => x.Question = question);
 
                     break;
 

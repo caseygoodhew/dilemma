@@ -11,9 +11,9 @@ namespace Dilemma.Business.Services
     /// <summary>
     /// Moderation service.
     /// </summary>
-    internal class ModerationService : IModerationService
+    internal class ManualModerationService : IManualModerationService
     {
-        private static readonly Lazy<IModerationRepository> ModerationRepository = Locator.Lazy<IModerationRepository>();
+        private static readonly Lazy<IManualModerationRepository> ModerationRepository = Locator.Lazy<IManualModerationRepository>();
 
         private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
 
@@ -24,6 +24,16 @@ namespace Dilemma.Business.Services
         public ModerationViewModel GetNext()
         {
             return ModerationRepository.Value.GetNext<ModerationViewModel>();
+        }
+
+        /// <summary>
+        /// Gets the next item to be moderated for the specified user.
+        /// </summary>
+        /// <param name="userId">The user id to get the next moderation for.</param>
+        /// <returns>The <see cref="ModerationViewModel"/> or null.</returns>
+        public ModerationViewModel GetNextForUser(int userId)
+        {
+            return ModerationRepository.Value.GetNextForUser<ModerationViewModel>(userId);
         }
 
         /// <summary>

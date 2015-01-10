@@ -32,8 +32,8 @@ namespace Dilemma.Data
             registrar.Register<INotificationRepository>(() => new NotificationRepository());
             registrar.Register<IInternalNotificationRepository>(() => new NotificationRepository());
             registrar.Register<IInternalNotificationDistributor>(() => new NotificationDistributor());
-            registrar.Register<IModerationRepository>(() => new ModerationRepository());
-            registrar.Register<IInternalModerationRepository>(() => new ModerationRepository());
+            registrar.Register<IManualModerationRepository>(() => new ManualModerationRepository());
+            registrar.Register<IInternalManualModerationRepository>(() => new ManualModerationRepository());
 
             registrar.CreatePipe<QuestionDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<AnswerDataAction>(MessengerType.Stepping, InitiateMessagePipe);
@@ -51,12 +51,12 @@ namespace Dilemma.Data
 
         private static void InitiateMessagePipe(IMessagePipe<QuestionDataAction> messagePipe)
         {
-            messagePipe.Locator<QuestionDataAction, IInternalModerationRepository>(QuestionDataAction.Created, x => x.OnQuestionCreated);
+            messagePipe.Locator<QuestionDataAction, IInternalManualModerationRepository>(QuestionDataAction.Created, x => x.OnQuestionCreated);
         }
 
         private static void InitiateMessagePipe(IMessagePipe<AnswerDataAction> messagePipe)
         {
-            messagePipe.Locator<AnswerDataAction, IInternalModerationRepository>(AnswerDataAction.Created, x => x.OnAnswerCreated);
+            messagePipe.Locator<AnswerDataAction, IInternalManualModerationRepository>(AnswerDataAction.Created, x => x.OnAnswerCreated);
             messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.StateChanged, x => x.OnAnswerStateChange);
         }
 

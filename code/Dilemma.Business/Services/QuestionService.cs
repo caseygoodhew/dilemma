@@ -101,7 +101,7 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="QuestionDetailsViewModel"/>.</returns>
         public QuestionDetailsViewModel GetQuestion(int questionId)
         {
-            var question = QuestionRepository.Value.GetQuestion<QuestionDetailsViewModel>(questionId, GetQuestionAs.FullDetails);
+            var question = QuestionRepository.Value.GetQuestion<QuestionDetailsViewModel>(SecurityManager.Value.GetUserId(), questionId, GetQuestionAs.FullDetails);
             
             if (question != null)
             {

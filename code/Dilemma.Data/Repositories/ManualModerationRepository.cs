@@ -16,7 +16,7 @@ namespace Dilemma.Data.Repositories
     /// <summary>
     /// Moderation repository implementation.
     /// </summary>
-    internal class ModerationRepository : IInternalModerationRepository
+    internal class ManualModerationRepository : IInternalManualModerationRepository
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
@@ -95,32 +95,12 @@ namespace Dilemma.Data.Repositories
         /// <returns>The converted <see cref="Moderation"/></returns>
         public T GetNext<T>() where T : class
         {
-            using (var context = new DilemmaContext())
-            {
-                var moderation =
-                    context.Moderations.Include(x => x.ForUser)
-                        .Include(x => x.ModerationEntries)
-                        .Select(x => new 
-                        {
-                            MostRecentEntry = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).FirstOrDefault(),
-                            x.ModerationEntries,
-                            x.ModerationFor,
-                            x.ModerationId
-                        })
-                        .Where(x => x.MostRecentEntry.State == ModerationState.Queued)
-                        .OrderBy(x => x.MostRecentEntry.CreatedDateTime)
-                        .Take(1)
-                        .ToList()
-                        .Select(x => new Moderation
-                                         {
-                                             ModerationId = x.ModerationId,
-                                             ModerationEntries = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ToList(),
-                                             ModerationFor = x.ModerationFor
-                                         })
-                        .FirstOrDefault();
+            return GetNextForUser<T>(null);
+        }
 
-                return ConverterFactory.ConvertOne<Moderation, T>(moderation);
-            }
+        public T GetNextForUser<T>(int userId) where T : class
+        {
+            return GetNextForUser<T>(userId);
         }
 
         /// <summary>
@@ -157,6 +137,37 @@ namespace Dilemma.Data.Repositories
             context.SaveChangesVerbose();
 
             AddModerationEntry(context, moderation.ModerationId, ModerationState.Queued, moderation.ForUser.UserId, message);
+        }
+
+        private static T GetNextForUser<T>(int? userId) where T : class
+        {
+            using (var context = new DilemmaContext())
+            {
+                var moderation =
+                    context.Moderations.Include(x => x.ForUser)
+                        .Include(x => x.ModerationEntries)
+                        .Where(x => userId == null || x.ForUser.UserId == userId.Value)
+                        .Select(x => new
+                        {
+                            MostRecentEntry = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).FirstOrDefault(),
+                            x.ModerationEntries,
+                            x.ModerationFor,
+                            x.ModerationId
+                        })
+                        .Where(x => x.MostRecentEntry.State == ModerationState.Queued)
+                        .OrderBy(x => x.MostRecentEntry.CreatedDateTime)
+                        .Take(1)
+                        .ToList()
+                        .Select(x => new Moderation
+                        {
+                            ModerationId = x.ModerationId,
+                            ModerationEntries = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ToList(),
+                            ModerationFor = x.ModerationFor
+                        })
+                        .FirstOrDefault();
+
+                return ConverterFactory.ConvertOne<Moderation, T>(moderation);
+            }
         }
 
         private static void UpdateModerationState(DilemmaContext context, ModerationState state, int userId, int moderationId, string message)

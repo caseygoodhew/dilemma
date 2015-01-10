@@ -28,7 +28,7 @@ namespace Dilemma.Business
             registrar.Register<IUserService>(() => new UserService());
             registrar.Register<IDevelopmentService>(() => new DevelopmentService());
             registrar.Register<INotificationService>(() => new NotificationService());
-            registrar.Register<IModerationService>(() => new ModerationService());
+            registrar.Register<IManualModerationService>(() => new ManualModerationService());
 
             registrar.Register<IValidator<CreateQuestionViewModel>>(() => new CreateQuestionViewModelValidator());
             //// keep this here as it will be used when we're out of testing

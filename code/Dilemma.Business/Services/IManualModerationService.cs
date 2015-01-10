@@ -5,7 +5,7 @@ namespace Dilemma.Business.Services
     /// <summary>
     /// Moderation service interface.
     /// </summary>
-    public interface IModerationService
+    public interface IManualModerationService
     {
         /// <summary>
         /// Gets the next item to be moderated.
@@ -13,6 +13,13 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="ModerationViewModel"/> or null.</returns>
         ModerationViewModel GetNext();
 
+        /// <summary>
+        /// Gets the next item to be moderated for the specified user.
+        /// </summary>
+        /// <param name="userId">The user id to get the next moderation for.</param>
+        /// <returns>The <see cref="ModerationViewModel"/> or null.</returns>
+        ModerationViewModel GetNextForUser(int userId);
+        
         /// <summary>
         /// Marks a moderation item as being approved.
         /// </summary>

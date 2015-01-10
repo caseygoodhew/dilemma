@@ -8,7 +8,7 @@ namespace Dilemma.Data.Repositories
     /// <summary>
     /// Moderation repository methods that should not be externally available.
     /// </summary>
-    internal interface IInternalModerationRepository : IModerationRepository
+    internal interface IInternalManualModerationRepository : IManualModerationRepository
     {
         /// <summary>
         /// To be called when a question is created.

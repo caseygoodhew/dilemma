@@ -60,8 +60,9 @@
   <ItemGroup>
     <Compile Include="Domains\Administration.cs" />
     <Compile Include="Domains\Answers.cs" />
+    <Compile Include="Domains\ManualModeration.cs" />
     <Compile Include="Domains\Questions.cs" />
-    <Compile Include="ModerationTest.cs" />
+    <Compile Include="ManualModerationTest.cs" />
     <Compile Include="Support\IntegrationTest.cs" />
     <Compile Include="Domains\ObjectDictionary.cs" />
     <Compile Include="Domains\ObjectType.cs" />
@@ -90,19 +91,19 @@
       <Name>Disposable.Web.Caching</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Business\Dilemma.Business.csproj">
-      <Project>{2170E2EA-2976-4186-9B7A-536737139A61}</Project>
+      <Project>{2170e2ea-2976-4186-9b7a-536737139a61}</Project>
       <Name>Dilemma.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Common\Dilemma.Common.csproj">
-      <Project>{9554F188-2EA1-4AF5-9C8E-20260652A74C}</Project>
+      <Project>{9554f188-2ea1-4af5-9c8e-20260652a74c}</Project>
       <Name>Dilemma.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Initialization\Dilemma.Initialization.csproj">
-      <Project>{23333DCD-40C6-47BC-BCA2-D76F54C4E763}</Project>
+      <Project>{23333dcd-40c6-47bc-bca2-d76f54c4e763}</Project>
       <Name>Dilemma.Initialization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Security\Dilemma.Security.csproj">
-      <Project>{E64D25F6-1211-4A47-8ABF-08CF53BDDD71}</Project>
+      <Project>{e64d25f6-1211-4a47-8abf-08cf53bddd71}</Project>
       <Name>Dilemma.Security</Name>
     </ProjectReference>
   </ItemGroup>

@@ -5,7 +5,7 @@ namespace Dilemma.Data.Repositories
     /// <summary>
     /// Publicly available moderation repository methods.
     /// </summary>
-    public interface IModerationRepository
+    public interface IManualModerationRepository
     {
         /// <summary>
         /// Gets the next item for moderation.
@@ -13,6 +13,14 @@ namespace Dilemma.Data.Repositories
         /// <typeparam name="T">The type to convert the output to.</typeparam>
         /// <returns>The converted <see cref="Moderation"/></returns>
         T GetNext<T>() where T : class;
+
+        /// <summary>
+        /// Gets the next item to be moderated for the specified user.
+        /// </summary>
+        /// <typeparam name="T">The type to convert the output to.</typeparam>
+        /// <param name="userId">The user id to get the next moderation for.</param>
+        /// <returns>The converted <see cref="Moderation"/></returns>
+        T GetNextForUser<T>(int userId) where T : class;
 
         /// <summary>
         /// Approves a moderation.
