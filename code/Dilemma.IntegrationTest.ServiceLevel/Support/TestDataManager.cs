@@ -1,6 +1,7 @@
 using System.IO;
 using System.Web;
 
+using Dilemma.Common;
 using Dilemma.Initialization;
 using Dilemma.IntegrationTest.ServiceLevel.Domains;
 using Dilemma.Security;
@@ -31,6 +32,11 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Support
                 var timeSource = new TimeWarpSource();
                 locator.Register<ITimeSource>(() => timeSource);
                 locator.Register<ITimeWarpSource>(() => timeSource);
+
+                locator.Register<INotificationTypeLocator>(() => new NotificationTypeLocator(
+                    NotificationRoute.Create<NotificationRouterStub>(NotificationType.QuestionAnswered, x => x.OnQuestionAnswered(0)),
+                    NotificationRoute.Create<NotificationRouterStub>(NotificationType.PostRejected, x => x.OnPostRejected(0))
+                ));
 
                 _initialized = true;
             }

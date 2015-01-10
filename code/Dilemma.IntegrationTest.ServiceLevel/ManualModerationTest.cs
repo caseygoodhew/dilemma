@@ -1,13 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.IntegrationTest.ServiceLevel.Domains;
 using Dilemma.IntegrationTest.ServiceLevel.Support;
-
-using Disposable.Common.ServiceLocator;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -16,8 +13,6 @@ namespace Dilemma.IntegrationTest.ServiceLevel
     [TestClass]
     public class ManualModerationTest : Support.IntegrationTest
     {
-        private static readonly Lazy<ITimeWarpSource> TimeWarpSource = Locator.Lazy<ITimeWarpSource>();
-
         public ManualModerationTest() : base(false)
         {
         }
@@ -87,6 +82,23 @@ namespace Dilemma.IntegrationTest.ServiceLevel
         }
 
         [TestMethod]
+        public void OnlyQuestionerCanSeeTheirQuestionWhenAwaitingModeration()
+        {
+            // Questioner
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            var question = Questions.GetQuestion("Question");
+            Assert.IsNotNull(question);
+
+            // Viewer
+            SecurityManager.LoginNewAnonymous("Viewer");
+            question = Questions.GetQuestion("Question");
+            Assert.IsNull(question);
+        }
+
+        [TestMethod]
         public void OnlyAnswererCanSeeTheirAnswerWhenAwaitingModeration()
         {
             // Questioner
@@ -106,6 +118,226 @@ namespace Dilemma.IntegrationTest.ServiceLevel
             SecurityManager.LoginNewAnonymous("Viewer");
             question = Questions.GetQuestion("Question");
             Assert.AreEqual(0, question.QuestionViewModel.Answers.Count);
+        }
+
+        [TestMethod]
+        public void QuestionInModerationCanBeApproved()
+        {
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+            
+            var question = Questions.GetQuestion("Question");
+            Assert.IsFalse(question.QuestionViewModel.IsApproved);
+            Assert.IsFalse(question.QuestionViewModel.IsRejected);
+
+            var moderation = ManualModeration.GetNextForUser("Questioner");
+            ManualModeration.Approve(moderation.ModerationId);
+
+            question = Questions.GetQuestion("Question");
+            Assert.IsTrue(question.QuestionViewModel.IsApproved);
+            Assert.IsFalse(question.QuestionViewModel.IsRejected);
+        }
+
+        [TestMethod]
+        public void QuestionInModerationCanBeRejected()
+        {
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            var question = Questions.GetQuestion("Question");
+            Assert.IsFalse(question.QuestionViewModel.IsApproved);
+            Assert.IsFalse(question.QuestionViewModel.IsRejected);
+
+            var moderation = ManualModeration.GetNextForUser("Questioner");
+            ManualModeration.Reject(moderation.ModerationId, "Rejection Message");
+
+            question = Questions.GetQuestion("Question");
+            Assert.IsFalse(question.QuestionViewModel.IsApproved);
+            Assert.IsTrue(question.QuestionViewModel.IsRejected);
+        }
+
+        [TestMethod]
+        public void AnswerInModerationCanBeApproved()
+        {
+            // Questioner
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Inactive);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            // Answerer
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Answerer");
+            Answers.RequestAnswerSlot("Question", "Answer");
+            Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
+            
+            var answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.Single();
+            Assert.IsFalse(answer.IsApproved);
+            Assert.IsFalse(answer.IsRejected);
+
+            var moderation = ManualModeration.GetNextForUser("Answerer");
+            ManualModeration.Approve(moderation.ModerationId);
+
+            answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.Single();
+            Assert.IsTrue(answer.IsApproved);
+            Assert.IsFalse(answer.IsRejected);
+        }
+
+        [TestMethod]
+        public void AnswerInModerationCanBeRejected()
+        {
+            // Questioner
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Inactive);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            // Answerer
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Answerer");
+            Answers.RequestAnswerSlot("Question", "Answer");
+            Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
+
+            var answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.Single();
+            Assert.IsFalse(answer.IsApproved);
+            Assert.IsFalse(answer.IsRejected);
+
+            var moderation = ManualModeration.GetNextForUser("Answerer");
+            ManualModeration.Reject(moderation.ModerationId, "Rejection Message");
+
+            answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.Single();
+            Assert.IsFalse(answer.IsApproved);
+            Assert.IsTrue(answer.IsRejected);
+        }
+
+        [TestMethod]
+        public void EveryoneCanSeeApprovedQuestion()
+        {
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            var moderation = ManualModeration.GetNextForUser("Questioner");
+            ManualModeration.Approve(moderation.ModerationId);
+
+            var question = Questions.GetQuestion("Question");
+            Assert.IsNotNull(question);
+
+            SecurityManager.LoginNewAnonymous("Viewer");
+            question = Questions.GetQuestion("Question");
+            Assert.IsNotNull(question);
+        }
+        
+        [TestMethod]
+        public void OnlyQuestionerCanSeeRejectedQuestion()
+        {
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            var moderation = ManualModeration.GetNextForUser("Questioner");
+            ManualModeration.Reject(moderation.ModerationId, "Rejection Message");
+
+            var question = Questions.GetQuestion("Question");
+            Assert.IsNotNull(question);
+
+            SecurityManager.LoginNewAnonymous("Viewer");
+            question = Questions.GetQuestion("Question");
+            Assert.IsNull(question);
+        }
+
+        [TestMethod]
+        public void EveryoneCanSeeApprovedAnswer()
+        {
+            // Questioner
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Inactive);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            // Answerer
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Answerer");
+            Answers.RequestAnswerSlot("Question", "Answer");
+            Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
+
+            var moderation = ManualModeration.GetNextForUser("Answerer");
+            ManualModeration.Approve(moderation.ModerationId);
+
+            var answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.SingleOrDefault();
+            Assert.IsNotNull(answer);
+
+            SecurityManager.SetUserId("Questioner");
+            answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.SingleOrDefault();
+            Assert.IsNotNull(answer);
+
+            SecurityManager.LoginNewAnonymous("Viewer");
+            answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.SingleOrDefault();
+            Assert.IsNotNull(answer);
+        }
+
+        [TestMethod]
+        public void OnlyAnswerCanSeeRejectedAnswer()
+        {
+            // Questioner
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Inactive);
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            // Answerer
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            SecurityManager.LoginNewAnonymous("Answerer");
+            Answers.RequestAnswerSlot("Question", "Answer");
+            Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
+
+            var moderation = ManualModeration.GetNextForUser("Answerer");
+            ManualModeration.Reject(moderation.ModerationId, "Rejection Message");
+
+            var answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.SingleOrDefault();
+            Assert.IsNotNull(answer);
+
+            SecurityManager.SetUserId("Questioner");
+            answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.SingleOrDefault();
+            Assert.IsNull(answer);
+
+            SecurityManager.LoginNewAnonymous("Viewer");
+            answer = Questions.GetQuestion("Question").QuestionViewModel.Answers.SingleOrDefault();
+            Assert.IsNull(answer);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void CannotAnswerQuestionWhenAwaitingModeration()
+        {
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void CannotAnswerRejectedQuestion()
+        {
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void QuestionEditReentersModeration()
+        {
+        }
+        
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void AnswerEditReentersModeration()
+        {
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void CannotEditQuestionAfterAnswerHasBeenAdded()
+        {
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void CannotEditAnswerAfterVotesHaveBeenCast()
+        {
         }
     }
 }

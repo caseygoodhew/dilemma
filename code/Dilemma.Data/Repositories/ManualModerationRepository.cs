@@ -100,7 +100,7 @@ namespace Dilemma.Data.Repositories
 
         public T GetNextForUser<T>(int userId) where T : class
         {
-            return GetNextForUser<T>(userId);
+            return GetNextForUser<T>((int?)userId);
         }
 
         /// <summary>

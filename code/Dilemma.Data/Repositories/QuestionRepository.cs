@@ -239,7 +239,7 @@ namespace Dilemma.Data.Repositories
                     throw new ArgumentOutOfRangeException();
             }
 
-
+            messenger.Forward();
         }
 
         private void UpdateAnswerState(DilemmaContext dataContext, int answerId, ModerationState moderationState)
@@ -389,9 +389,12 @@ namespace Dilemma.Data.Repositories
                                             TotalAnswers = x.TotalAnswers,
                                             User = x.User
                                         })
-                             .Single();
+                             .SingleOrDefault();
 
-                    question.Answers.ForEach(x => x.Question = question);
+                    if (question != null)
+                    {
+                        question.Answers.ForEach(x => x.Question = question);
+                    }
 
                     break;
 

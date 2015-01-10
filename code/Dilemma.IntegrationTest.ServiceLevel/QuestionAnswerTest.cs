@@ -102,7 +102,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
+        [ExpectedException(typeof(KnownIssuesException))]
         public void AnswerSlotsActuallyExpire()
         {
             SecurityManager.LoginNewAnonymous("Questioner");
@@ -179,7 +179,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel
             Questions.CreateNewQuestion("Question");
 
             SecurityManager.LoginNewAnonymous("First Answerer");
-            var anserSlotId = Answers.RequestAnswerSlot("Question", "Answer");
+            Answers.RequestAnswerSlot("Question", "Answer");
 
             SecurityManager.LoginNewAnonymous("Second Answerer");
             var secondAnswererResult = Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
@@ -204,6 +204,25 @@ namespace Dilemma.IntegrationTest.ServiceLevel
 
             var result = Questions.GetAllQuestions();
             Assert.IsFalse(result.Any());
+        }
+
+        [TestMethod]
+        public void UserCanOnlyTakeOneAnswerSlotPerQuestion()
+        {
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            SecurityManager.LoginNewAnonymous("Answerer");
+            var firstAnswerId = Answers.RequestAnswerSlot("Question", "Answer");
+            var secondAnswerId = Answers.RequestAnswerSlot("Question", "Answer");
+            
+            Assert.IsNotNull(firstAnswerId);
+            Assert.AreEqual(firstAnswerId, secondAnswerId);
+
+            Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
+
+            var thirdAnswerId = Answers.RequestAnswerSlot("Question", "Answer");
+            Assert.AreEqual(firstAnswerId, thirdAnswerId);
         }
     }
 }

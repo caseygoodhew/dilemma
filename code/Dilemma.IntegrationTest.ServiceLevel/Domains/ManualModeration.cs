@@ -21,6 +21,11 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
             return _manualModerationService.Value.GetNextForUser(userId);
         }
 
+        public static ModerationViewModel GetNextForUser(string reference)
+        {
+            return GetNextForUser(ObjectDictionary.Get<int>(ObjectType.User, reference));
+        }
+
         public static void Approve(int moderationId)
         {
             _manualModerationService.Value.Approve(moderationId);
