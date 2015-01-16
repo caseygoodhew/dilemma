@@ -32,27 +32,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Disposable.Caching">
+      <HintPath>..\packages\Disposable.Caching.1.0.6\lib\net45\Disposable.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Disposable.Common.1.0.10\lib\net45\Disposable.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DilemmaCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.Caching\Disposable.Caching.csproj">
-      <Project>{A1C82D12-BF98-4E3C-9B61-9F879CAB7CB4}</Project>
-      <Name>Disposable.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.Common\Disposable.Common.csproj">
-      <Project>{1ff2cbdd-7f6e-4dde-91d1-ebd5763e8018}</Project>
-      <Name>Disposable.Common</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Dilemma.Business\Dilemma.Business.csproj">
       <Project>{2170e2ea-2976-4186-9b7a-536737139a61}</Project>
       <Name>Dilemma.Business</Name>

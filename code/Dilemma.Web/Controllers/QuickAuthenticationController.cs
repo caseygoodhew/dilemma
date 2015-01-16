@@ -5,6 +5,7 @@ using System.Web.Routing;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 using Dilemma.Security;
 using Dilemma.Security.Development;
 
@@ -12,7 +13,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    [DenyProductionAccess]
+    [DenySystemEnvironment(SystemEnvironment.Development, SystemEnvironment.QuestionSeeder)]
     public sealed class QuickAuthenticationController : DilemmaBaseController
     {
         private static readonly Lazy<IDevelopmentService> DevelopmentService = Locator.Lazy<IDevelopmentService>();
@@ -20,6 +21,7 @@ namespace Dilemma.Web.Controllers
         private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
             
         [Route("QuickAuthentication")]
+        [AllowSystemEnvironment(SystemEnvironment.Development)]
         public ActionResult Index()
         {
             var userIds = DevelopmentCookieManager.GetUserIds();

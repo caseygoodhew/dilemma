@@ -34,6 +34,8 @@ namespace Dilemma.Data.Repositories
                 context.SaveChangesVerbose();
 
                 Cache.Value.Expire<SystemConfiguration>();
+                // always reset the testing configuration as this should be used during integration tests anyway
+                Cache.Value.Expire<TestingConfiguration>();
             }
         }
 
@@ -58,7 +60,7 @@ namespace Dilemma.Data.Repositories
 
         public void SetTestingConfiguration(TestingConfiguration configuration)
         {
-            Cache.Value.Set<TestingConfiguration>(configuration);
+            Cache.Value.Set(configuration);
         }
 
         public TestingConfiguration GetTestingConfiguration()

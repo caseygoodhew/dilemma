@@ -12,6 +12,7 @@ namespace Dilemma.Security
     /// <summary>
     /// Security attribute to deny access to a controller or action in a production environment by redirecting to the home page.
     /// </summary>
+    [Obsolete]
     public class DenyProductionAccessAttribute : ActionFilterAttribute
     {
         private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();

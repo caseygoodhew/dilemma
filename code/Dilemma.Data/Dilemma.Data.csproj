@@ -32,6 +32,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Disposable.Caching">
+      <HintPath>..\packages\Disposable.Caching.1.0.6\lib\net45\Disposable.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Disposable.Common.1.0.10\lib\net45\Disposable.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Disposable.MessagePipe">
+      <HintPath>..\packages\Disposable.MessagePipe.1.0.5\lib\net45\Disposable.MessagePipe.dll</HintPath>
+    </Reference>
+    <Reference Include="Disposable.MessagePipe.ServiceLocator">
+      <HintPath>..\packages\Disposable.MessagePipe.ServiceLocator.1.0.3\lib\net45\Disposable.MessagePipe.ServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Disposable.Web.Caching">
+      <HintPath>..\packages\Disposable.Web.Caching.1.0.6\lib\net45\Disposable.Web.Caching.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2-beta1\lib\net45\EntityFramework.dll</HintPath>
@@ -43,6 +59,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -147,28 +164,6 @@
     <Content Include="Migrations\Manual.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.Caching\Disposable.Caching.csproj">
-      <Project>{A1C82D12-BF98-4E3C-9B61-9F879CAB7CB4}</Project>
-      <Name>Disposable.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.Common\Disposable.Common.csproj">
-      <Project>{1ff2cbdd-7f6e-4dde-91d1-ebd5763e8018}</Project>
-      <Name>Disposable.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.MessagePipe.ServiceLocator\Disposable.MessagePipe.ServiceLocator.csproj">
-      <Project>{7f09b247-18b1-4052-95ea-61e16d0e38af}</Project>
-      <Name>Disposable.MessagePipe.ServiceLocator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.MessagePipe\Disposable.MessagePipe.csproj">
-      <Project>{93984199-cbe6-4641-922b-6c4ee278c7b1}</Project>
-      <Name>Disposable.MessagePipe</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dilemma.Common\Dilemma.Common.csproj">
-      <Project>{9554f188-2ea1-4af5-9c8e-20260652a74c}</Project>
-      <Name>Dilemma.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201409300557391_Migration.resx">
       <DependentUpon>201409300557391_Migration.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,6 +176,12 @@
     <EmbeddedResource Include="Migrations\201412151613485_Migration3.resx">
       <DependentUpon>201412151613485_Migration3.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dilemma.Common\Dilemma.Common.csproj">
+      <Project>{9554F188-2EA1-4AF5-9C8E-20260652A74C}</Project>
+      <Name>Dilemma.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

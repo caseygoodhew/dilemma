@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Disposable.Common.1.0.10\lib\net45\Disposable.Common.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2-beta1\lib\net45\EntityFramework.dll</HintPath>
@@ -487,16 +491,15 @@
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.Common\Disposable.Common.csproj">
-      <Project>{1ff2cbdd-7f6e-4dde-91d1-ebd5763e8018}</Project>
-      <Name>Disposable.Common</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Dilemma.Business\Dilemma.Business.csproj">
-      <Project>{2170e2ea-2976-4186-9b7a-536737139a61}</Project>
+      <Project>{2170E2EA-2976-4186-9B7A-536737139A61}</Project>
       <Name>Dilemma.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Common\Dilemma.Common.csproj">
-      <Project>{9554f188-2ea1-4af5-9c8e-20260652a74c}</Project>
+      <Project>{9554F188-2EA1-4AF5-9C8E-20260652A74C}</Project>
       <Name>Dilemma.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Initialization\Dilemma.Initialization.csproj">
@@ -504,12 +507,9 @@
       <Name>Dilemma.Initialization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Security\Dilemma.Security.csproj">
-      <Project>{e64d25f6-1211-4a47-8abf-08cf53bddd71}</Project>
+      <Project>{E64D25F6-1211-4A47-8ABF-08CF53BDDD71}</Project>
       <Name>Dilemma.Security</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

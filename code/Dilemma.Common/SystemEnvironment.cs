@@ -7,6 +7,8 @@
     {
         Development,
         Testing,
-        Production
+        Production,
+        Administration,
+        QuestionSeeder
     }
 }

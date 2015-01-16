@@ -37,6 +37,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Disposable.Caching">
+      <HintPath>..\packages\Disposable.Caching.1.0.6\lib\net45\Disposable.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Disposable.Common.1.0.10\lib\net45\Disposable.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Disposable.Web.Caching">
+      <HintPath>..\packages\Disposable.Web.Caching.1.0.6\lib\net45\Disposable.Web.Caching.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -58,6 +68,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="PointTest.cs" />
     <Compile Include="Domains\Administration.cs" />
     <Compile Include="Domains\Answers.cs" />
     <Compile Include="Domains\ManualModeration.cs" />
@@ -84,18 +95,6 @@
     <Compile Include="Domains\Users.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.Caching\Disposable.Caching.csproj">
-      <Project>{A1C82D12-BF98-4E3C-9B61-9F879CAB7CB4}</Project>
-      <Name>Disposable.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.Common\Disposable.Common.csproj">
-      <Project>{1FF2CBDD-7F6E-4DDE-91D1-EBD5763E8018}</Project>
-      <Name>Disposable.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\disposable\code\Disposable.Web.Caching\Disposable.Web.Caching.csproj">
-      <Project>{BCDB871A-0962-4C5C-A710-45D2FE4F4A57}</Project>
-      <Name>Disposable.Web.Caching</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Dilemma.Business\Dilemma.Business.csproj">
       <Project>{2170e2ea-2976-4186-9b7a-536737139a61}</Project>
       <Name>Dilemma.Business</Name>

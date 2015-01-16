@@ -1,8 +1,7 @@
 ﻿using System;
 
-using Dilemma.Security;
-
 using Disposable.Caching;
+using Disposable.Common;
 using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Initialization
@@ -26,7 +25,7 @@ namespace Dilemma.Initialization
             locator.Initialize(
                 Business.Registration.Register,
                 Data.Registration.Register,
-                Registration.Register,
+                Security.Registration.Register,
                 Disposable.Common.Registration.Register,
                 RegisterShared);
         }
