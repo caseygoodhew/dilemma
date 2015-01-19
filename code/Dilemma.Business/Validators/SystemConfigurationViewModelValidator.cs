@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Dilemma.Business.ViewModels;
+﻿using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 
 using FluentValidation;
+using FluentValidation.Results;
 
 namespace Dilemma.Business.Validators
 {
@@ -22,7 +18,7 @@ namespace Dilemma.Business.Validators
         {
             RuleFor(x => x.MaxAnswers).InclusiveBetween(1, 10);
             RuleFor(x => x.QuestionLifetime).NotNull();
-            RuleFor(x => x.SystemEnvironment).NotNull();
+            RuleFor(x => x.SystemEnvironment).NotNull().NotEqual(SystemEnvironment.Testing);
         }
     }
 }

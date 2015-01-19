@@ -1,0 +1,37 @@
+Function Get-ProjectReferences ($rootFolder)
+{
+    Write-Host " "
+    Write-Host " "
+    Write-Host " "
+    
+    $projectFiles = Get-ChildItem $rootFolder -Filter *.csproj -Recurse
+    $ns = @{ defaultNamespace = "http://schemas.microsoft.com/developer/msbuild/2003" }
+
+    $projectFiles | ForEach-Object {
+        $projectFile = $_ | Select-Object -ExpandProperty FullName
+        $projectName = $_ | Select-Object -ExpandProperty BaseName
+        $projectXml = [xml](Get-Content $projectFile)
+
+        $projectReferences = $projectXml | Select-Xml '//defaultNamespace:ProjectReference/defaultNamespace:Name' -Namespace $ns | Select-Object -ExpandProperty Node | Select-Object -ExpandProperty "#text"
+
+        $projectReferences | ForEach-Object {
+            "[" + $projectName + "] -> [" + $_ + "]"
+        }
+    }
+    
+    Write-Host " "
+    Write-Host " "
+    Write-Host "http://yuml.me/diagram/scruffy/class/draw"
+    Write-Host " "
+    Write-Host "Done!"
+    Write-Host " "
+    Write-Host " "
+    Write-Host " "
+}
+
+#Get-ProjectReferences "C:\git\dilemma\code" | Out-File "C:\git\dilemma\code\project.references.generated.txt"
+
+Get-ProjectReferences "C:\git\dilemma\code"
+
+
+

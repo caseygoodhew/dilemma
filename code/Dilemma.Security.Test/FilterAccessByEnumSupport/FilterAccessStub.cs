@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 
+using Dilemma.Security.AccessFilters.ByEnum;
+
 namespace Dilemma.Security.Test.FilterAccessByEnumSupport
 {
     public class FilterAccessStub : FilterAccessByEnum<TestEnum>
@@ -22,7 +24,7 @@ namespace Dilemma.Security.Test.FilterAccessByEnumSupport
             LastAnnounced = AllowDeny.Allow;
         }
 
-        protected override void AnnounceDeny(ActionExecutingContext filterContext, FilterAccessByEnum<TestEnum> attribute)
+        protected override void AnnounceDeny(ActionExecutingContext filterContext, FilterAccessByEnum<TestEnum> accessFilter)
         {
             LastAnnounced = AllowDeny.Deny;
         }

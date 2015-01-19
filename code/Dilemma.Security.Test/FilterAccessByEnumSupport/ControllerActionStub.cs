@@ -1,3 +1,5 @@
+using Dilemma.Security.AccessFilters.ByEnum;
+
 namespace Dilemma.Security.Test.FilterAccessByEnumSupport
 {
     public static class ControllerActionStub

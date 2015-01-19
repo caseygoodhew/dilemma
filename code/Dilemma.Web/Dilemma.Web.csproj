@@ -228,6 +228,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Answer.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Question\Seeder.generated.cs">
+      <DependentUpon>Seeder.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Question\Create.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -478,6 +483,10 @@
     <Content Include="Views\PointConfiguration\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Question\Seeder.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Seeder.generated.cs</LastGenOutput>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

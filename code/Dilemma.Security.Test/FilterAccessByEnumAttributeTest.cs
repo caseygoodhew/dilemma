@@ -1,4 +1,5 @@
-﻿using Dilemma.Security.Test.FilterAccessByEnumSupport;
+﻿using Dilemma.Security.AccessFilters.ByEnum;
+using Dilemma.Security.Test.FilterAccessByEnumSupport;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

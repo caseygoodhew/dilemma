@@ -2,15 +2,15 @@ using System;
 using System.Linq;
 
 using Dilemma.Common;
-using Disposable.Common.Extensions;
+using Dilemma.Security.AccessFilters.ByEnum;
 
-namespace Dilemma.Security
+namespace Dilemma.Security.AccessFilters
 {
     /// <summary>
     /// Security attribute to deny access to a controller or action based on the current <see cref="SystemEnvironment"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
-    public sealed class DenySystemEnvironmentAttribute : FilterAccessBySystemEnvironmentAttribute
+    public sealed class DenySystemEnvironmentAttribute : FilterAccessByEnumWrapperAttribute
     {
         /// <summary>
         /// The list of <see cref="SystemEnvironment"/>s that the attribute should allow.
@@ -18,7 +18,7 @@ namespace Dilemma.Security
         /// <param name="systemEnvironment">The system environment to check for.</param>
         /// <param name="additionalSystemEnvironments">Additional system environments to check for.</param>
         public DenySystemEnvironmentAttribute(SystemEnvironment systemEnvironment, params SystemEnvironment[] additionalSystemEnvironments)
-            : base(AllowDeny.Deny, new[] { systemEnvironment }.Concat(additionalSystemEnvironments).ToList())
+            : base(typeof(FilterAccessBySystemEnvironment), AllowDeny.Deny, new[] { systemEnvironment }.Concat(additionalSystemEnvironments).Cast<object>())
         {
         }
 
@@ -30,25 +30,8 @@ namespace Dilemma.Security
         /// <param name="systemEnvironment">The system environment to check for.</param>
         /// <param name="additionalSystemEnvironments">Additional system environments to check for.</param>
         public DenySystemEnvironmentAttribute(string controller, string action, SystemEnvironment systemEnvironment, params SystemEnvironment[] additionalSystemEnvironments)
-            : base(controller, action, AllowDeny.Deny, new[] { systemEnvironment }.Concat(additionalSystemEnvironments).ToList())
+            : base(typeof(FilterAccessBySystemEnvironment), controller, action, AllowDeny.Deny, new[] { systemEnvironment }.Concat(additionalSystemEnvironments).Cast<object>())
         {
         }
     }
-    /*
-    /// <summary>
-    /// Security attribute to deny access to a controller or action based on the current <see cref="SystemEnvironment"/>.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
-    public sealed class DenyExceptSystemEnvironmentAttribute : FilterAccessBySystemEnvironmentAttribute
-    {
-        public DenyExceptSystemEnvironmentAttribute()
-            : base(AllowDeny.Deny, EnumExtensions)
-        {
-        }
-
-        public DenyExceptSystemEnvironmentAttribute(string controller, string action, AllowDeny allowDeny, SystemEnvironment systemEnvironment, params SystemEnvironment[] additionalSystemEnvironments)
-            : base(controller, action, allowDeny, systemEnvironment, additionalSystemEnvironments)
-        {
-        }
-    }*/
 }

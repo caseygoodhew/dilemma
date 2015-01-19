@@ -3,6 +3,7 @@
 @{
     var sysConfig = Locator.Get<IAdministrationService>().GetSystemConfiguration();
     var isDevMode = sysConfig.SystemEnvironment == SystemEnvironment.Development || sysConfig.SystemEnvironment == SystemEnvironment.Testing;
+    var isQuestionSeeder = sysConfig.SystemEnvironment == SystemEnvironment.QuestionSeeder;
 }
 
 <!DOCTYPE html>
@@ -26,23 +27,26 @@
                 </button>
                 @Html.ActionLink("Dilemma", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("QList", "List", "Question")</li>
-                    <li>@Html.ActionLink("Activity", "Index", "Activity")</li>
-                    <li>@Html.ActionLink("Ask", "Create", "Question")</li>
-                    <li>@Html.ActionLink("SysConfig", "Index", "SystemConfiguration")</li>
-                    <li>@Html.ActionLink("Notification", "Index", "Notification")</li>
-                    <li>@Html.ActionLink("Moderation", "Index", "Moderation")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class=""><a href="/glimpse.axd">Glimpse</a></li>
-                    @if (isDevMode)
-                    {
-                        <li>@Html.ActionLink("Auth", "Index", "QuickAuthentication")</li>
-                    }
-                </ul>
-            </div>
+            @if (!isQuestionSeeder)
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("QList", "List", "Question")</li>
+                        <li>@Html.ActionLink("Activity", "Index", "Activity")</li>
+                        <li>@Html.ActionLink("Ask", "Create", "Question")</li>
+                        <li>@Html.ActionLink("SysConfig", "Index", "SystemConfiguration")</li>
+                        <li>@Html.ActionLink("Notification", "Index", "Notification")</li>
+                        <li>@Html.ActionLink("Moderation", "Index", "Moderation")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class=""><a href="/glimpse.axd">Glimpse</a></li>
+                        @if (isDevMode)
+                        {
+                            <li>@Html.ActionLink("Auth", "Index", "QuickAuthentication")</li>
+                        }
+                    </ul>
+                </div>
+            }
         </div>
     </div>
     <div class="container body-content">

@@ -7,6 +7,7 @@ using System.Web.Routing;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
+using Dilemma.Security;
 
 using Disposable.Common.Conversion;
 using Disposable.Common.Extensions;
@@ -17,6 +18,8 @@ namespace Dilemma.Web.Controllers
     public class QuestionController : DilemmaBaseController
     {
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
+
+        private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
 
         public ActionResult List()
         {
@@ -30,6 +33,47 @@ namespace Dilemma.Web.Controllers
         public ActionResult Create()
         {
             var model = QuestionService.Value.InitNewQuestion();
+            return View(model);
+        }
+
+        //
+        // POST: /Question/Create
+        [HttpPost]
+        public ActionResult Create(CreateQuestionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                QuestionService.Value.SaveNewQuestion(model);
+                return RedirectToAction("List");
+            }
+
+            QuestionService.Value.InitNewQuestion(model);
+            
+            return View(model);
+        }
+
+        //
+        // GET: /Question/Seeder
+        public ActionResult Seeder()
+        {
+            SecurityManager.Value.LoginNewAnonymous();
+            return Create();
+        }
+
+        //
+        // POST: /Question/Seeder
+        [HttpPost]
+        public ActionResult Seeder(CreateQuestionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.ShowConfirmation = true;
+                QuestionService.Value.SaveNewQuestion(model);
+                return View(QuestionService.Value.InitNewQuestion());
+            }
+            
+            QuestionService.Value.InitNewQuestion(model);
+
             return View(model);
         }
 
@@ -80,21 +124,6 @@ namespace Dilemma.Web.Controllers
             viewModel.Answer.AnswerId = answerId;
 
             return View(refreshedViewModel);
-        }
-        //
-        // POST: /Question/Create
-        [HttpPost]
-        public ActionResult Create(CreateQuestionViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                QuestionService.Value.SaveNewQuestion(model);
-                return RedirectToAction("List");
-            }
-
-            QuestionService.Value.InitNewQuestion(model);
-            
-            return View(model);
         }
     }
 }

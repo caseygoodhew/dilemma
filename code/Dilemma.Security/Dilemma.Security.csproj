@@ -99,13 +99,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllowSystemEnvironmentAttribute.cs" />
+    <Compile Include="AccessFilters\AllowSystemEnvironmentAttribute.cs" />
+    <Compile Include="AccessFilters\ByEnum\AllowDeny.cs" />
+    <Compile Include="AccessFilters\ByEnum\FilterAccessByEnumWrapperAttribute.cs" />
+    <Compile Include="AccessFilters\ByEnum\FilterAccessBySystemEnvironment.cs" />
+    <Compile Include="AccessFilters\ByEnum\IFilterAccessByEnum.cs" />
     <Compile Include="CookieAuthenticationManager.cs" />
-    <Compile Include="DenyProductionAccessAttribute.cs" />
-    <Compile Include="DenySystemEnvironmentAttribute.cs" />
+    <Compile Include="AccessFilters\DenySystemEnvironmentAttribute.cs" />
     <Compile Include="Development\DevelopmentCookieManager.cs" />
     <Compile Include="DilemmaAuthenticationAttribute.cs" />
-    <Compile Include="FilterAccessBySystemEnvironmentAttribute.cs" />
+    <Compile Include="AccessFilters\ByEnum\FilterAccessByEnum.cs" />
     <Compile Include="IAuthenticationManager.cs" />
     <Compile Include="ISecurityManager.cs" />
     <Compile Include="Registration.cs" />

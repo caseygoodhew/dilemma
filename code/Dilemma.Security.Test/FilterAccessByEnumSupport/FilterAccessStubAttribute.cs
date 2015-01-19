@@ -1,5 +1,7 @@
 using System.Linq;
 
+using Dilemma.Security.AccessFilters.ByEnum;
+
 namespace Dilemma.Security.Test.FilterAccessByEnumSupport
 {
     public class FilterAccessStubAttribute : FilterAccessByEnumWrapperAttribute
