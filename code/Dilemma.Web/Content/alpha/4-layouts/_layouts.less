@@ -1,0 +1,196 @@
+
+
+/*
+
+  Basic layout is mobile first, 
+  with extra layout applied to larger screens
+
+======================================================*/
+
+/*
+ 
+   Key sizes, breakpoints etc hang off these
+ 
+======================================================*/
+    
+  @xs:     0px;
+  @s:    600px;
+  @m:    780px;
+  @l:    960px;
+  @xl:  1280px;
+  @xxl: 1400px;
+
+  // Break points: Mobile first, so
+  @bp-s:   ~"only screen and (min-width: @{s})";
+  @bp-m:   ~"only screen and (min-width: @{m})";
+  @bp-l:   ~"only screen and (min-width: @{l})";
+  @bp-xl:  ~"only screen and (min-width: @{xl})";
+
+  @bp-xs-only:  ~"only screen and (min-width: 0) and (max-width: "(@s  - 1) ~")";
+  @bp-s-only:  ~"only screen and (min-width: @{s}) and (max-width: "(@m  - 1) ~")";
+  @bp-m-only:  ~"only screen and (min-width: @{m}) and (max-width: "(@l  - 1) ~")";
+  @bp-l-only:  ~"only screen and (min-width: @{l}) and (max-width: "(@xl - 1) ~")";
+  @bp-xl-only: ~"only screen and (min-width: @{xl})";
+
+
+/*
+
+  Conditional hiding
+
+======================================================*/
+  .size-s-and-up,
+  .size-m-and-up,
+  .size-l-and-up,
+  .size-xl-and-up {
+    display: none;
+  }
+
+  @media @bp-s  { 
+    .size-xs-only { display: none; }
+    .size-s-and-up { display: block; }
+    .size-s-and-up.inline { display: inline; }
+    .size-s-and-up.inline-block { display: block; } 
+  }
+  @media @bp-m  { 
+    .size-m-and-up { display: block; }
+    .size-m-and-up.inline { display: inline; }
+    .size-m-and-up.inline-block { display: block; } 
+  }
+  @media @bp-l  { 
+    .size-l-and-up { display: block; }
+    .size-l-and-up.inline { display: inline; }
+    .size-l-and-up.inline-block { display: block; } 
+  }
+  @media @bp-xl { 
+    .size-xl-and-up { display: block; }
+    .size-xl-and-up.inline { display: inline; }
+    .size-xl-and-up.inline-block { display: block; }  
+  }
+
+/*
+
+  Header Layout
+
+======================================================*/
+@media @bp-xs-only {
+  .nav-main {
+    .unstyled; 
+    .horizontal; 
+    .line;
+    margin-bottom: 0;
+    li {
+      .gu1of3;
+    }
+    a {
+      display: block;
+      padding: 10px;
+      margin: 1px;
+      text-align: center;
+      background: #000;
+    }
+  } 
+}
+@media @bp-s {
+  .page-logo {
+    .left;
+  }
+  .nav-main {
+    .unstyled; 
+    .horizontal; 
+    .right;
+    a {
+      padding: 10px;
+    }
+  }  
+}
+
+
+
+
+/*
+
+  page width
+
+======================================================*/
+
+
+  .wrap {
+    position: relative; 
+  }
+  // restrict width when we get to xl, otherwise use all of the screen
+  @media @bp-xl {
+    .wrap { 
+      max-width: @xl;
+      margin: 0 auto; 
+    } 
+  }
+
+/*
+
+  3 column layout styles
+
+======================================================*/
+
+
+  /*
+
+    Diagnostic styles
+
+  ======================================================*/
+    // .navigation { background: #eee; }
+    // .profile { background: #ddd; }
+    // .stream { background: #ccc; }
+
+  // column 
+
+
+  // 1 column at the smallest widths e.g. phones
+
+  // 2 columns at smaller widths e.g. phablet / portrait tablet
+  @media @bp-s{
+    .page-bd {
+      min-height: 90vh;
+    }
+    @l-col-width: 220px;
+    .navigation,
+    .profile {
+      width: @l-col-width;
+      display: block;
+      float: left;
+    }
+    .profile {
+      clear: left;
+    }
+    .stream,
+    .js-sticky--offset {
+      margin: 0 0 0 @l-col-width;
+    }
+    .stream .js-sticky--offset {
+      margin-left: 0;
+    }
+  }
+
+  // 3 columns at larger widths e.g. landscape tablet / desktop etc
+  @media @bp-l {
+    @l-col-width: 270px;
+    .navigation,
+    .profile {
+      display: block;
+      width: @l-col-width;
+    }
+    .navigation {
+      float: left;
+    }
+    .profile {
+      float: right;
+      clear: none;
+    }
+    .stream,
+    .js-sticky--offset {
+      margin: 0 @l-col-width + 15px;
+    }
+    .stream .js-sticky--offset {
+      margin-left: 0;
+    }
+  }
+

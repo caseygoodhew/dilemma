@@ -1,0 +1,190 @@
+
+.Card {
+  border: @ui-border-width @ui-border-color solid; 
+  margin: @ui-margin;
+  background: #fff;
+  box-shadow: @ui-shadow;
+  border-radius: @ui-radius;
+  overflow: hidden;
+}
+.Card-section {
+  border-top: @ui-divider-width @ui-border-color solid;
+  &:first-child {
+    border-top: 0 none;
+  }
+  padding: @ui-padding;
+}
+.Card-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  font-weight: 600;
+}
+.Card-label--small {
+  color: @color-text--light;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  font-weight: 500;
+  padding: 3px;
+}
+
+
+.Card-go--container {
+  padding-right: 60px;
+  position: relative;
+}
+.Card-go--trigger {
+  display: block;
+  position: absolute;
+  width: 55px;
+  text-align: center;
+  z-index: 999;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: url(/images/chevron-right.png) center center  no-repeat transparent;
+  &:hover {
+    background-color: #f8f8f8;
+  }
+}
+.Card-menu {
+  ul,
+  &ul { 
+    margin-bottom: 0;
+  }
+  li {
+    border-top: @ui-divider-width @ui-border-color solid;
+    &:first-child {
+      border-top: 0 none;
+    }
+  }
+  a {
+    padding: 10px;
+    display: block;
+    &.is-active,
+    &.is-active:hover {
+      background: @color-accent;
+      color: #fff;
+      font-weight: 700;
+    }
+    &:hover {
+      background: @color-bg-white-hover;
+      text-decoration: none;
+      color: @color-accent;
+    }
+    .glyphicon-refresh {
+      float: right;
+      display: none;
+      color: #fff;
+      font-size: 18px;
+    }
+    &.is-active .glyphicon-refresh {
+      display: inline-block;
+      transition: all 0 linear;
+    }
+    &:hover .glyphicon-refresh {
+      transition: all 16s ease-out;
+      transform:rotateZ(1240deg);
+    }
+  }
+}
+
+
+
+/*
+
+  Notifications
+
+======================================================*/
+
+
+.Notification {
+  padding-left: 70px;
+  position: relative;
+}  
+.Notification-score {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: @color-accent;
+  color: #fff;
+  font-weight: 600;
+  font-size: 24px;
+  div {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: 100%;
+    text-align: center;
+  }
+  .Notification-score-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    display: block;
+  }
+}
+.Notification-summary {
+  margin: 10px 0;
+  max-height: 80px;
+  overflow: hidden;
+}
+
+.profile {
+  .Notification-summary {
+    margin: 0;
+    font-size: 13px;
+    line-height: 17px;
+    padding-bottom: 5px;
+  }
+  .Notification-actions {
+    border-top:1px solid #ddd;
+  }
+  .Notification-action {
+    border-left:1px solid #ddd;
+    margin-left: -1px;
+  }
+  .Notification-summary-text {
+    max-height: 34px;
+    overflow: hidden;
+    margin: -5px 0 0px;
+  }
+  .Notification-summary-link {
+    display: block;
+    background: #fff;
+  }
+}
+
+.number-bubble {
+  background: #fff;
+  width: 90%;
+  padding: 6px 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  margin-left: 5px;
+  color: #666;
+  position: relative;
+  text-align: center;
+  &:after {
+    content: '';
+    border-width: 10px 15px;
+    border-color: rgba(0, 0, 0, 0) #FFF rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    position: absolute;
+    top: 6px;
+    left: -30px;
+  } 
+    &:before {
+    content: '';
+    border-width: 11px 17px;
+    border-color: rgba(0, 0, 0, 0) #ddd rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    position: absolute;
+    top: 5px;
+    left: -34px;
+  }   
+}
