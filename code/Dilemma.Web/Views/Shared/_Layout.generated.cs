@@ -103,46 +103,138 @@ Write(Scripts.Render("~/bundles/modernizr"));
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n</head>\r\n<body>\r\n    <div");
+WriteLiteral("\r\n\r\n</head>\r\n<body>\r\n    <header");
 
-WriteLiteral(" class=\"navbar navbar-inverse navbar-fixed-top\"");
+WriteLiteral(" role=\"banner\"");
+
+WriteLiteral(" class=\"page-hd\"");
 
 WriteLiteral(">\r\n        <div");
 
-WriteLiteral(" class=\"container\"");
+WriteLiteral(" class=\"wrap line\"");
 
-WriteLiteral(">\r\n            <div");
+WriteLiteral(">\r\n            <a");
 
-WriteLiteral(" class=\"navbar-header\"");
+WriteLiteral(" href=\"/\"");
 
-WriteLiteral(">\r\n                <button");
+WriteLiteral(" rel=\"home\"");
 
-WriteLiteral(" type=\"button\"");
+WriteLiteral(" class=\"page-logo\"");
 
-WriteLiteral(" class=\"navbar-toggle\"");
+WriteLiteral("><span>Our</span>Dilemmas</a>\r\n            <ul");
 
-WriteLiteral(" data-toggle=\"collapse\"");
+WriteLiteral(" class=\"nav-main\"");
 
-WriteLiteral(" data-target=\".navbar-collapse\"");
+WriteLiteral(">\r\n");
 
-WriteLiteral(">\r\n                    <span");
+            
+            #line 24 "..\..\Views\Shared\_Layout.cshtml"
+                
+            
+            #line default
+            #line hidden
+            
+            #line 24 "..\..\Views\Shared\_Layout.cshtml"
+                 if (!isQuestionSeeder)
+                {
 
-WriteLiteral(" class=\"icon-bar\"");
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <li>");
 
-WriteLiteral("></span>\r\n                    <span");
+            
+            #line 26 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("QList", "List", "Question"));
 
-WriteLiteral(" class=\"icon-bar\"");
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n");
 
-WriteLiteral("></span>\r\n                    <span");
+WriteLiteral("                    <li>");
 
-WriteLiteral(" class=\"icon-bar\"");
+            
+            #line 27 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("Activity", "Index", "Activity"));
 
-WriteLiteral("></span>\r\n                </button>\r\n");
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n");
+
+WriteLiteral("                    <li>");
+
+            
+            #line 28 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("Ask", "Create", "Question"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n");
+
+WriteLiteral("                    <li>");
+
+            
+            #line 29 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("SysConfig", "Index", "SystemConfiguration"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n");
+
+WriteLiteral("                    <li>");
+
+            
+            #line 30 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("Notification", "Index", "Notification"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n");
+
+WriteLiteral("                    <li>");
+
+            
+            #line 31 "..\..\Views\Shared\_Layout.cshtml"
+                   Write(Html.ActionLink("Moderation", "Index", "Moderation"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</li>\r\n");
+
+            
+            #line 32 "..\..\Views\Shared\_Layout.cshtml"
+                }
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"            </ul>
+        </div>
+    </header>
+    
+    
+    
+    
+    <!--div class=""navbar navbar-inverse navbar-fixed-top"">
+        <div class=""container"">
+            <div class=""navbar-header"">
+                <button type=""button"" class=""navbar-toggle"" data-toggle=""collapse"" data-target="".navbar-collapse"">
+                    <span class=""icon-bar""></span>
+                    <span class=""icon-bar""></span>
+                    <span class=""icon-bar""></span>
+                </button>
+");
 
 WriteLiteral("                ");
 
             
-            #line 28 "..\..\Views\Shared\_Layout.cshtml"
+            #line 48 "..\..\Views\Shared\_Layout.cshtml"
            Write(Html.ActionLink("Dilemma", "Index", "Home", null, new { @class = "navbar-brand" }));
 
             
@@ -151,13 +243,13 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n");
 
             
-            #line 30 "..\..\Views\Shared\_Layout.cshtml"
+            #line 50 "..\..\Views\Shared\_Layout.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 30 "..\..\Views\Shared\_Layout.cshtml"
+            #line 50 "..\..\Views\Shared\_Layout.cshtml"
              if (!isQuestionSeeder)
             {
 
@@ -175,7 +267,7 @@ WriteLiteral(" class=\"nav navbar-nav\"");
 WriteLiteral(">\r\n                        <li>");
 
             
-            #line 34 "..\..\Views\Shared\_Layout.cshtml"
+            #line 54 "..\..\Views\Shared\_Layout.cshtml"
                        Write(Html.ActionLink("QList", "List", "Question"));
 
             
@@ -184,7 +276,7 @@ WriteLiteral(">\r\n                        <li>");
 WriteLiteral("</li>\r\n                        <li>");
 
             
-            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+            #line 55 "..\..\Views\Shared\_Layout.cshtml"
                        Write(Html.ActionLink("Activity", "Index", "Activity"));
 
             
@@ -193,7 +285,7 @@ WriteLiteral("</li>\r\n                        <li>");
 WriteLiteral("</li>\r\n                        <li>");
 
             
-            #line 36 "..\..\Views\Shared\_Layout.cshtml"
+            #line 56 "..\..\Views\Shared\_Layout.cshtml"
                        Write(Html.ActionLink("Ask", "Create", "Question"));
 
             
@@ -202,7 +294,7 @@ WriteLiteral("</li>\r\n                        <li>");
 WriteLiteral("</li>\r\n                        <li>");
 
             
-            #line 37 "..\..\Views\Shared\_Layout.cshtml"
+            #line 57 "..\..\Views\Shared\_Layout.cshtml"
                        Write(Html.ActionLink("SysConfig", "Index", "SystemConfiguration"));
 
             
@@ -211,7 +303,7 @@ WriteLiteral("</li>\r\n                        <li>");
 WriteLiteral("</li>\r\n                        <li>");
 
             
-            #line 38 "..\..\Views\Shared\_Layout.cshtml"
+            #line 58 "..\..\Views\Shared\_Layout.cshtml"
                        Write(Html.ActionLink("Notification", "Index", "Notification"));
 
             
@@ -220,7 +312,7 @@ WriteLiteral("</li>\r\n                        <li>");
 WriteLiteral("</li>\r\n                        <li>");
 
             
-            #line 39 "..\..\Views\Shared\_Layout.cshtml"
+            #line 59 "..\..\Views\Shared\_Layout.cshtml"
                        Write(Html.ActionLink("Moderation", "Index", "Moderation"));
 
             
@@ -241,13 +333,13 @@ WriteLiteral(" href=\"/glimpse.axd\"");
 WriteLiteral(">Glimpse</a></li>\r\n");
 
             
-            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+            #line 63 "..\..\Views\Shared\_Layout.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+            #line 63 "..\..\Views\Shared\_Layout.cshtml"
                          if (isDevMode)
                         {
 
@@ -257,7 +349,7 @@ WriteLiteral(">Glimpse</a></li>\r\n");
 WriteLiteral("                            <li>");
 
             
-            #line 45 "..\..\Views\Shared\_Layout.cshtml"
+            #line 65 "..\..\Views\Shared\_Layout.cshtml"
                            Write(Html.ActionLink("Auth", "Index", "QuickAuthentication"));
 
             
@@ -266,7 +358,7 @@ WriteLiteral("                            <li>");
 WriteLiteral("</li>\r\n");
 
             
-            #line 46 "..\..\Views\Shared\_Layout.cshtml"
+            #line 66 "..\..\Views\Shared\_Layout.cshtml"
                         }
 
             
@@ -275,42 +367,71 @@ WriteLiteral("</li>\r\n");
 WriteLiteral("                    </ul>\r\n                </div>\r\n");
 
             
-            #line 49 "..\..\Views\Shared\_Layout.cshtml"
+            #line 69 "..\..\Views\Shared\_Layout.cshtml"
             }
 
             
             #line default
             #line hidden
-WriteLiteral("        </div>\r\n    </div>\r\n    <div");
+WriteLiteral("        </div>\r\n    </div-->\r\n    <div");
 
-WriteLiteral(" class=\"container body-content\"");
+WriteLiteral(" class=\"page-bd\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"wrap\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"line\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("        ");
+WriteLiteral("                ");
 
             
-            #line 53 "..\..\Views\Shared\_Layout.cshtml"
-   Write(RenderBody());
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        <hr />\r\n        <footer>\r\n            <p>&copy; ");
-
-            
-            #line 56 "..\..\Views\Shared\_Layout.cshtml"
-                 Write(DateTime.Now.Year);
+            #line 75 "..\..\Views\Shared\_Layout.cshtml"
+           Write(RenderBody());
 
             
             #line default
             #line hidden
-WriteLiteral(" - Dilemma</p>\r\n        </footer>\r\n    </div>\r\n\r\n");
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n    \r\n    <footer");
+
+WriteLiteral(" role=\"contentinfo\"");
+
+WriteLiteral(" class=\"page-ft\"");
+
+WriteLiteral(">\r\n        <small>\r\n            <div");
+
+WriteLiteral(" class=\"wrap\"");
+
+WriteLiteral(@">
+                <!--ul class=""unstyled inline with-separators"">
+                    <li><a href=""#"">Privacy Policy</a></li>
+                    <li><a href=""#"">Terms &amp; Conditions</a></li>
+                    <li><a href=""#"">Cookies Policy</a></li>
+                    <li><a href=""#"">Contact Us</a></li>
+                </ul-->
+                <div");
+
+WriteLiteral(" class=\"copyright\"");
+
+WriteLiteral(">&copy; ");
+
+            
+            #line 89 "..\..\Views\Shared\_Layout.cshtml"
+                                         Write(DateTime.Now.Year);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" - Dilemma</div>\r\n            </div>\r\n        </small>\r\n    </footer>\r\n    \r\n");
 
 WriteLiteral("    ");
 
             
-            #line 60 "..\..\Views\Shared\_Layout.cshtml"
+            #line 94 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -321,7 +442,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 61 "..\..\Views\Shared\_Layout.cshtml"
+            #line 95 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -332,7 +453,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 62 "..\..\Views\Shared\_Layout.cshtml"
+            #line 96 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -343,7 +464,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 63 "..\..\Views\Shared\_Layout.cshtml"
+            #line 97 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

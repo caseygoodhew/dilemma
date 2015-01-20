@@ -288,6 +288,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_ViewStart.cshtml</DependentUpon>
     </Compile>
+    <Content Include="Content\alpha-fixes.css" />
+    <Content Include="Content\alpha\css\animate.css" />
+    <Content Include="Content\alpha\main.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
+    <Content Include="Content\alpha\main.min.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap\bootstrap.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
@@ -377,6 +385,30 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\alpha\0-base\_bootstrap-variables.less" />
+    <Content Include="Content\alpha\0-base\_elements.less" />
+    <Content Include="Content\alpha\0-base\_typography-classes.less" />
+    <Content Include="Content\alpha\0-base\_utility-classes.less" />
+    <Content Include="Content\alpha\0-base\_variables.less" />
+    <Content Include="Content\alpha\1-components\_buttons.less" />
+    <Content Include="Content\alpha\1-components\_forms.less" />
+    <Content Include="Content\alpha\1-components\_lists.less" />
+    <Content Include="Content\alpha\1-components\_media-unit.less" />
+    <Content Include="Content\alpha\2-modules\_answer.less" />
+    <Content Include="Content\alpha\2-modules\_card.less" />
+    <Content Include="Content\alpha\2-modules\_dilemma.less" />
+    <Content Include="Content\alpha\2-modules\_modal.less" />
+    <Content Include="Content\alpha\3-themes\_theme-home.less" />
+    <Content Include="Content\alpha\3-themes\_theme.less" />
+    <Content Include="Content\alpha\4-layouts\_layouts.less" />
+    <Content Include="Content\alpha\5-overrides\_animate.less" />
+    <Content Include="Content\alpha\5-overrides\_layout-overrides.less" />
+    <Content Include="Content\alpha\5-overrides\_plugin-conc_ertina.less" />
+    <Content Include="Content\alpha\5-overrides\_plugin-waypoints.less" />
+    <Content Include="Content\alpha\5-overrides\_print.less" />
+    <Content Include="Content\alpha\5-overrides\_shame.less" />
+    <Content Include="Content\alpha\css\animate.css.map" />
+    <Content Include="Content\alpha\main.less" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Testing Server %28i-eb5a63e0%29.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

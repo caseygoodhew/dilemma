@@ -27,8 +27,10 @@ namespace Dilemma.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/alpha/main.css",
+                      "~/Content/alpha-fixes.css"));
+                        //"~/Content/bootstrap/bootstrap.css",
+                      //"~/Content/site.css"));
         }
     }
 }

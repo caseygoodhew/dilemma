@@ -67,12 +67,20 @@ WriteLiteral("</h2>\r\n\r\n");
             
             #line default
             #line hidden
-WriteLiteral("    <div>Thanks for your help!</div>\r\n");
+WriteLiteral("    <div");
 
-WriteLiteral("    <div>Please create text for this page.</div>\r\n");
+WriteLiteral(" class=\"line\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"col-md-12\"");
+
+WriteLiteral(" style=\"margin-top: 20px;\"");
+
+WriteLiteral(">Thanks for your help!</div>\r\n    </div>\r\n");
 
             
-            #line 12 "..\..\Views\Question\Seeder.cshtml"
+            #line 13 "..\..\Views\Question\Seeder.cshtml"
     
 
             
@@ -86,13 +94,15 @@ WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"col-md-12\"");
 
+WriteLiteral(" style=\"margin-top: 40px;\"");
+
 WriteLiteral(">\r\n");
 
 WriteLiteral("            ");
 
             
-            #line 15 "..\..\Views\Question\Seeder.cshtml"
-       Write(Html.ActionLink("I've got something else to ask!", "Create", "Question", new { @class="btn btn-default"}));
+            #line 16 "..\..\Views\Question\Seeder.cshtml"
+       Write(Html.ActionLink("I've got something else to ask!", "Create", "Question", new { @class="btn btn-success btn-large left", style="font-weight: bold"}));
 
             
             #line default
@@ -100,7 +110,7 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 18 "..\..\Views\Question\Seeder.cshtml"
+            #line 19 "..\..\Views\Question\Seeder.cshtml"
 }
 else
 {
@@ -110,18 +120,35 @@ else
             #line hidden
 WriteLiteral("    <div");
 
-WriteLiteral(" class=\"row\"");
+WriteLiteral(" class=\"line\"");
 
 WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"col-md-12\"");
 
-WriteLiteral(">A description of what we\'re doing - emphasise that we can\'t tell who has posted " +
-"which question - a new user is created everytime that someone visits this page s" +
-"o we can\'t even tell if someone asks two questions.</div>\r\n    </div>\r\n");
+WriteLiteral(">Our objective is to populate the site with as many dilemmas as possible for laun" +
+"ch.</div>\r\n    </div>\r\n");
 
             
-            #line 24 "..\..\Views\Question\Seeder.cshtml"
+            #line 25 "..\..\Views\Question\Seeder.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"line\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"col-md-12\"");
+
+WriteLiteral(">We have set this up so there is no means of us knowing who is posting what quest" +
+"ion as they go against system generated dummy users.</div>\r\n    </div>\r\n");
+
+            
+            #line 29 "..\..\Views\Question\Seeder.cshtml"
     
 
             
@@ -130,23 +157,23 @@ WriteLiteral(">A description of what we\'re doing - emphasise that we can\'t tel
 WriteLiteral("    <p>&nbsp;</p>\r\n");
 
             
-            #line 26 "..\..\Views\Question\Seeder.cshtml"
+            #line 31 "..\..\Views\Question\Seeder.cshtml"
     
-    using (Html.BeginForm("Seeder", "Question", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    using (Html.BeginForm("Seeder", "Question", FormMethod.Post, new { @class = "", role = "form" }))
     {
         
             
             #line default
             #line hidden
             
-            #line 29 "..\..\Views\Question\Seeder.cshtml"
+            #line 34 "..\..\Views\Question\Seeder.cshtml"
    Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 29 "..\..\Views\Question\Seeder.cshtml"
+            #line 34 "..\..\Views\Question\Seeder.cshtml"
                                 
     
 
@@ -162,22 +189,22 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 32 "..\..\Views\Question\Seeder.cshtml"
-       Write(Html.LabelFor(x => x.Text, new { @class = "col-md-2 col-sm-3 control-label" }));
+            #line 37 "..\..\Views\Question\Seeder.cshtml"
+       Write(Html.Label("What’s on your mind?", new { @class = "" }));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n            <div");
 
-WriteLiteral(" class=\"col-md-10 col-sm-9\"");
+WriteLiteral(" class=\"\"");
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 34 "..\..\Views\Question\Seeder.cshtml"
+            #line 39 "..\..\Views\Question\Seeder.cshtml"
            Write(Html.TextAreaFor(x => x.Text, new { @class = "form-control", rows="10"}));
 
             
@@ -188,7 +215,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 35 "..\..\Views\Question\Seeder.cshtml"
+            #line 40 "..\..\Views\Question\Seeder.cshtml"
            Write(Html.ValidationMessageFor(x => x.Text));
 
             
@@ -197,7 +224,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
 
             
-            #line 38 "..\..\Views\Question\Seeder.cshtml"
+            #line 43 "..\..\Views\Question\Seeder.cshtml"
     
 
             
@@ -205,49 +232,53 @@ WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
             #line hidden
 WriteLiteral("        <div");
 
+WriteLiteral(" class=\"form-inline\"");
+
+WriteLiteral(">\r\n            <div");
+
 WriteLiteral(" class=\"form-group\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("            ");
-
-            
-            #line 40 "..\..\Views\Question\Seeder.cshtml"
-       Write(Html.LabelFor(x => x.CategoryId, new { @class = "col-md-2 col-sm-3 control-label" }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n            <div");
-
-WriteLiteral(" class=\"col-md-3 col-sm-4\"");
 
 WriteLiteral(">\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 42 "..\..\Views\Question\Seeder.cshtml"
-           Write(Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), string.Empty, new { @class = "form-control" }));
+            #line 46 "..\..\Views\Question\Seeder.cshtml"
+           Write(Html.Label("Which category should your dilemma be placed in?", new { @class = "" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                <div");
+
+WriteLiteral(" class=\"\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 48 "..\..\Views\Question\Seeder.cshtml"
+               Write(Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), string.Empty, new { @class = "form-control", style="min-width: 400px" }));
 
             
             #line default
             #line hidden
 WriteLiteral("\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("                    ");
 
             
-            #line 43 "..\..\Views\Question\Seeder.cshtml"
-           Write(Html.ValidationMessageFor(x => x.CategoryId));
+            #line 49 "..\..\Views\Question\Seeder.cshtml"
+               Write(Html.ValidationMessageFor(x => x.CategoryId));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
+WriteLiteral("\r\n                </div>\r\n            </div>\r\n        </div>\r\n");
 
             
-            #line 46 "..\..\Views\Question\Seeder.cshtml"
+            #line 53 "..\..\Views\Question\Seeder.cshtml"
     
 
             
@@ -255,24 +286,24 @@ WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
             #line hidden
 WriteLiteral("        <div");
 
-WriteLiteral(" class=\"form-group\"");
+WriteLiteral(" class=\"line\"");
 
-WriteLiteral(">\r\n            <div");
+WriteLiteral(" style=\"margin-top: 20px;\"");
 
-WriteLiteral(" class=\"col-md-12\"");
-
-WriteLiteral(">\r\n                <input");
+WriteLiteral(">\r\n            <input");
 
 WriteLiteral(" type=\"submit\"");
 
-WriteLiteral(" class=\"btn btn-default\"");
+WriteLiteral(" class=\"btn btn-success btn-large left\"");
 
-WriteLiteral(" value=\"Submit\"");
+WriteLiteral(" style=\"font-weight: bold\"");
 
-WriteLiteral(" />\r\n            </div>\r\n        </div>\r\n");
+WriteLiteral(" value=\"Add My Dilemma\"");
+
+WriteLiteral(" />\r\n        </div>\r\n");
 
             
-            #line 52 "..\..\Views\Question\Seeder.cshtml"
+            #line 57 "..\..\Views\Question\Seeder.cshtml"
     }
 }
 
@@ -286,7 +317,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 55 "..\..\Views\Question\Seeder.cshtml"
+            #line 60 "..\..\Views\Question\Seeder.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             
