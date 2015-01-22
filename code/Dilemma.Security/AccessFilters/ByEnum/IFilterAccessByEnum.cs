@@ -5,7 +5,7 @@ namespace Dilemma.Security.AccessFilters.ByEnum
 {
     public interface IFilterAccessByEnum
     {
-        void OnActionExecuting(ActionExecutingContext filterContext, IFilterAccessByEnum controllerFilter, IFilterAccessByEnum actionFilter);
+        void OnActionExecuting<T>(ActionExecutingContext filterContext) where T : FilterAccessByEnumWrapperAttribute;
 
         Type GetEnumType();
     }

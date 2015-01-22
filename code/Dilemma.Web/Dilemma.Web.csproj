@@ -409,6 +409,7 @@
     <Content Include="Content\alpha\5-overrides\_shame.less" />
     <Content Include="Content\alpha\css\animate.css.map" />
     <Content Include="Content\alpha\main.less" />
+    <None Include="Properties\PublishProfiles\Dilemma AWS Question Seeder %28i-e00ade11%29.pubxml" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Testing Server %28i-eb5a63e0%29.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

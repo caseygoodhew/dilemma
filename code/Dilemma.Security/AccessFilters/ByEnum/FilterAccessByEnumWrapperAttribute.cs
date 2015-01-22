@@ -31,24 +31,7 @@ namespace Dilemma.Security.AccessFilters.ByEnum
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var targetEnumType = FilterAccessByEnum.GetEnumType();
-            
-            var controllerAttribute =
-                filterContext.ActionDescriptor.ControllerDescriptor
-                    .GetCustomAttributes(typeof(FilterAccessByEnumWrapperAttribute), true)
-                    .Cast<FilterAccessByEnumWrapperAttribute>()
-                    .SingleOrDefault(x => x.FilterAccessByEnum.GetEnumType() == targetEnumType);
-
-            var actionAttribute =
-                filterContext.ActionDescriptor
-                    .GetCustomAttributes(typeof(FilterAccessByEnumWrapperAttribute), true)
-                    .Cast<FilterAccessByEnumWrapperAttribute>()
-                    .SingleOrDefault(x => x.FilterAccessByEnum.GetEnumType() == targetEnumType);
-
-            FilterAccessByEnum.OnActionExecuting(
-                filterContext,
-                controllerAttribute == null ? null : controllerAttribute.FilterAccessByEnum,
-                actionAttribute == null ? null : actionAttribute.FilterAccessByEnum);
+            FilterAccessByEnum.OnActionExecuting<FilterAccessByEnumWrapperAttribute>(filterContext);
         }
     }
 }

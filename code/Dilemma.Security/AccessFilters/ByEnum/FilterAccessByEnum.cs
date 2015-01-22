@@ -33,7 +33,29 @@ namespace Dilemma.Security.AccessFilters.ByEnum
             Action = action;
         }
 
-        public void OnActionExecuting(ActionExecutingContext filterContext, IFilterAccessByEnum controllerFilter, IFilterAccessByEnum actionFilter)
+        public void OnActionExecuting<T>(ActionExecutingContext filterContext) where T : FilterAccessByEnumWrapperAttribute
+        {
+            var targetEnumType = GetEnumType();
+
+            var controllerAttribute =
+                filterContext.ActionDescriptor.ControllerDescriptor
+                    .GetCustomAttributes(typeof(T), true)
+                    .Cast<T>()
+                    .SingleOrDefault(x => x.FilterAccessByEnum.GetEnumType() == targetEnumType);
+
+            var actionAttribute =
+                filterContext.ActionDescriptor
+                    .GetCustomAttributes(typeof(T), true)
+                    .Cast<T>()
+                    .SingleOrDefault(x => x.FilterAccessByEnum.GetEnumType() == targetEnumType);
+
+            OnActionExecuting(
+                filterContext,
+                controllerAttribute == null ? null : controllerAttribute.FilterAccessByEnum,
+                actionAttribute == null ? null : actionAttribute.FilterAccessByEnum);
+        }
+
+        private void OnActionExecuting(ActionExecutingContext filterContext, IFilterAccessByEnum controllerFilter, IFilterAccessByEnum actionFilter)
         {
             var controllerAttribute = (FilterAccessByEnum<TEnum>)controllerFilter;
             var actionAttribute = (FilterAccessByEnum<TEnum>)actionFilter;
@@ -47,7 +69,8 @@ namespace Dilemma.Security.AccessFilters.ByEnum
                     AnnounceDeny(filterContext, attribute);
                     return;
                 }
-                else if (attribute.AllowDeny == AllowDeny.Deny && Check(attribute) == AllowDeny.Deny)
+                
+                if (attribute.AllowDeny == AllowDeny.Deny && Check(attribute) == AllowDeny.Deny)
                 {
                     AnnounceDeny(filterContext, attribute);
                     return;
