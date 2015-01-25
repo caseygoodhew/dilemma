@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Web.Mvc;
 
-namespace Dilemma.Security.Test.FilterAccessByEnumSupport
+namespace Dilemma.Security.Test.FilterAccessSupport
 {
     public class ControllerDescriptorMock : ControllerDescriptor
     {

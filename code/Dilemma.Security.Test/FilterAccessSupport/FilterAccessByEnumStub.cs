@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 using Dilemma.Security.AccessFilters.ByEnum;
 
-namespace Dilemma.Security.Test.FilterAccessByEnumSupport
+namespace Dilemma.Security.Test.FilterAccessSupport
 {
     public class FilterAccessStub : FilterAccessByEnum<TestEnum>
     {

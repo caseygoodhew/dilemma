@@ -99,11 +99,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessFilters\AllowUserRoleAttribute.cs" />
     <Compile Include="AccessFilters\AllowSystemEnvironmentAttribute.cs" />
     <Compile Include="AccessFilters\ByEnum\AllowDeny.cs" />
     <Compile Include="AccessFilters\ByEnum\FilterAccessByEnumWrapperAttribute.cs" />
     <Compile Include="AccessFilters\ByEnum\FilterAccessBySystemEnvironment.cs" />
     <Compile Include="AccessFilters\ByEnum\IFilterAccessByEnum.cs" />
+    <Compile Include="AccessFilters\DenyUserRoleAttribute.cs" />
+    <Compile Include="AccessFilters\ByUserRole\FilterAccessByUserRoleAttribute.cs" />
     <Compile Include="AccessFilters\QuestionSeederAccessFilterAttribute.cs" />
     <Compile Include="CookieAuthenticationManager.cs" />
     <Compile Include="AccessFilters\DenySystemEnvironmentAttribute.cs" />

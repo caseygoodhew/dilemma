@@ -1,4 +1,4 @@
-﻿namespace Dilemma.Security.Test.FilterAccessByEnumSupport
+﻿namespace Dilemma.Security.Test.FilterAccessSupport
 {
     public class TestEnumProvider
     {

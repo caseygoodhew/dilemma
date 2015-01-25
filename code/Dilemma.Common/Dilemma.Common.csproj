@@ -63,7 +63,7 @@
     <Compile Include="SystemEnvironment.cs" />
     <Compile Include="TestingConfiguration.cs" />
     <Compile Include="TestingConfigurationDefaults.cs" />
-    <Compile Include="UserRoles.cs" />
+    <Compile Include="UserRole.cs" />
     <Compile Include="UserType.cs" />
   </ItemGroup>
   <ItemGroup>

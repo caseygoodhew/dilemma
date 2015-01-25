@@ -3,13 +3,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 
-namespace Dilemma.Security.Test.FilterAccessByEnumSupport
+namespace Dilemma.Security.Test.FilterAccessSupport
 {
-    public class Setup : ActionExecutingContext
+    public class SetupEnum : ActionExecutingContext
     {
         private readonly ActionDescriptorMock actionDescriptor;
         
-        private Setup(AllowDenyXYZ controllerAction, AllowDenyXYZ actionAction)
+        private SetupEnum(AllowDenyXYZ controllerAction, AllowDenyXYZ actionAction)
         {
             var controllerDescriptor = new ControllerDescriptorMock(GetMethodExpression(controllerAction));
             actionDescriptor = new ActionDescriptorMock(controllerDescriptor, GetMethodExpression(actionAction));
@@ -50,32 +50,32 @@ namespace Dilemma.Security.Test.FilterAccessByEnumSupport
             }
         }
 
-        public static Setup ControllerAction(AllowDenyXYZ controller, AllowDenyXYZ action)
+        public static SetupEnum ControllerAction(AllowDenyXYZ controller, AllowDenyXYZ action)
         {
-            return new Setup(controller, action);
+            return new SetupEnum(controller, action);
         }
 
-        public static Setup Controller(AllowDenyXYZ controller)
+        public static SetupEnum Controller(AllowDenyXYZ controller)
         {
-            return new Setup(controller, AllowDenyXYZ.NotSet);
+            return new SetupEnum(controller, AllowDenyXYZ.NotSet);
         }
 
-        public static Setup Action(AllowDenyXYZ action)
+        public static SetupEnum Action(AllowDenyXYZ action)
         {
-            return new Setup(AllowDenyXYZ.NotSet, action);
+            return new SetupEnum(AllowDenyXYZ.NotSet, action);
         }
 
-        public FilterAccessStubAttribute ControllerAttribute()
+        public FilterAccessByEnumStubAttribute ControllerAttribute()
         {
-            return actionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof(FilterAccessStubAttribute), true).Cast<FilterAccessStubAttribute>().SingleOrDefault();
+            return actionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof(FilterAccessByEnumStubAttribute), true).Cast<FilterAccessByEnumStubAttribute>().SingleOrDefault();
         }
 
-        public FilterAccessStubAttribute ActionAttribute()
+        public FilterAccessByEnumStubAttribute ActionAttribute()
         {
-            return actionDescriptor.GetCustomAttributes(typeof(FilterAccessStubAttribute), true).Cast<FilterAccessStubAttribute>().SingleOrDefault();
+            return actionDescriptor.GetCustomAttributes(typeof(FilterAccessByEnumStubAttribute), true).Cast<FilterAccessByEnumStubAttribute>().SingleOrDefault();
         }
 
-        public SimulateResult Simulate()
+        public SimulateResult<FilterAccessStub> Simulate()
         {
             var controllerAttribute = ControllerAttribute();
             if (controllerAttribute != null)
@@ -89,7 +89,7 @@ namespace Dilemma.Security.Test.FilterAccessByEnumSupport
                 actionAttribute.OnActionExecuting(this);
             }
 
-            return new SimulateResult(controllerAttribute, actionAttribute);
+            return new SimulateResult<FilterAccessStub>(this, controllerAttribute, actionAttribute);
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace Dilemma.Common
 {
-    public enum UserRoles
+    public enum UserRole
     {
         Administrator
     }

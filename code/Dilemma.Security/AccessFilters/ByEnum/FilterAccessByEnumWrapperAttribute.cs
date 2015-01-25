@@ -5,9 +5,9 @@ using System.Web.Mvc;
 
 namespace Dilemma.Security.AccessFilters.ByEnum
 {
-    public abstract class FilterAccessByEnumWrapperAttribute : ActionFilterAttribute
+    public abstract class FilterAccessByEnumWrapperAttribute : ActionFilterAttribute, IFilterAccessByEnumWrapper
     {
-        public readonly IFilterAccessByEnum FilterAccessByEnum;
+        public IFilterAccessByEnum FilterAccessByEnum { get; private set; }
         
         protected FilterAccessByEnumWrapperAttribute(Type filterAccessByEnumType, AllowDeny allowDeny, IEnumerable<object> comparisonObjects)
         {

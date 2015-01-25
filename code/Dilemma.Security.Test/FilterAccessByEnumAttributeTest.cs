@@ -1,5 +1,5 @@
 ﻿using Dilemma.Security.AccessFilters.ByEnum;
-using Dilemma.Security.Test.FilterAccessByEnumSupport;
+using Dilemma.Security.Test.FilterAccessSupport;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,7 +11,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ControllerDenyXY_ActionAllowX()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.DenyXY, AllowDenyXYZ.AllowX);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.DenyXY, AllowDenyXYZ.AllowX);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
@@ -26,7 +26,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ControllerAllowXY_ActionDenyX()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.AllowXY, AllowDenyXYZ.DenyX);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.AllowXY, AllowDenyXYZ.DenyX);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
@@ -41,7 +41,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ControllerDenyXY_ActionAllowZ()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.DenyXY, AllowDenyXYZ.AllowZ);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.DenyXY, AllowDenyXYZ.AllowZ);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
@@ -56,7 +56,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ControllerAllowXY_ActionDenyZ()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.AllowXY, AllowDenyXYZ.DenyZ);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.AllowXY, AllowDenyXYZ.DenyZ);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
@@ -72,7 +72,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ControllerDenyXY_ActionDenyZ()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.DenyXY, AllowDenyXYZ.DenyZ);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.DenyXY, AllowDenyXYZ.DenyZ);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
@@ -87,7 +87,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ControllerAllowXY_ActionAllowZ()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.AllowXY, AllowDenyXYZ.AllowZ);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.AllowXY, AllowDenyXYZ.AllowZ);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
@@ -102,7 +102,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ControllerDenyX()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.DenyX, AllowDenyXYZ.NotSet);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.DenyX, AllowDenyXYZ.NotSet);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertControllerResult(context.Simulate(), AllowDeny.Deny);
@@ -114,7 +114,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ControllerAllowX()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.AllowX, AllowDenyXYZ.NotSet);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.AllowX, AllowDenyXYZ.NotSet);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertControllerResult(context.Simulate(), AllowDeny.Allow);
@@ -126,7 +126,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ActionDenyX()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.NotSet, AllowDenyXYZ.DenyX);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.NotSet, AllowDenyXYZ.DenyX);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertActionResult(context.Simulate(), AllowDeny.Deny);
@@ -138,7 +138,7 @@ namespace Dilemma.Security.Test
         [TestMethod]
         public void ActionAllowX()
         {
-            var context = Setup.ControllerAction(AllowDenyXYZ.NotSet, AllowDenyXYZ.AllowX);
+            var context = SetupEnum.ControllerAction(AllowDenyXYZ.NotSet, AllowDenyXYZ.AllowX);
 
             TestEnumProvider.Value = TestEnum.X;
             AssertActionResult(context.Simulate(), AllowDeny.Allow);
@@ -147,19 +147,19 @@ namespace Dilemma.Security.Test
             AssertActionResult(context.Simulate(), AllowDeny.Deny);
         }
 
-        private void AssertResult(SimulateResult result, AllowDeny? expectedControllerResult, AllowDeny? expectedActionResult)
+        private void AssertResult(SimulateResult<FilterAccessStub> result, AllowDeny? expectedControllerResult, AllowDeny? expectedActionResult)
         {
             AssertControllerResult(result, expectedControllerResult);
             AssertActionResult(result, expectedActionResult);
         }
 
-        private void AssertControllerResult(SimulateResult result, AllowDeny? expectedResult)
+        private void AssertControllerResult(SimulateResult<FilterAccessStub> result, AllowDeny? expectedResult)
         {
             Assert.IsNotNull(result.Controller);
             Assert.AreEqual(expectedResult, result.Controller.LastAnnounced);
         }
 
-        private void AssertActionResult(SimulateResult result, AllowDeny? expectedResult)
+        private void AssertActionResult(SimulateResult<FilterAccessStub> result, AllowDeny? expectedResult)
         {
             Assert.IsNotNull(result.Action);
             Assert.AreEqual(expectedResult, result.Action.LastAnnounced);

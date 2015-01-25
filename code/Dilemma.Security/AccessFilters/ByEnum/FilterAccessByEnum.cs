@@ -33,7 +33,7 @@ namespace Dilemma.Security.AccessFilters.ByEnum
             Action = action;
         }
 
-        public void OnActionExecuting<T>(ActionExecutingContext filterContext) where T : FilterAccessByEnumWrapperAttribute
+        public void OnActionExecuting<T>(ActionExecutingContext filterContext) where T : IFilterAccessByEnumWrapper
         {
             var targetEnumType = GetEnumType();
 
