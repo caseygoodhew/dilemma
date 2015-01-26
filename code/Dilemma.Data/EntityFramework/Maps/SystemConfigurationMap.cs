@@ -20,4 +20,20 @@ namespace Dilemma.Data.EntityFramework.Maps
             Property(p => p.SystemEnvironment).IsRequired();
         }
     }
+
+    /// <summary>
+    /// <see cref="SystemConfiguration"/> entity configuration.
+    /// </summary>
+    public class ServerConfigurationMap : EntityTypeConfiguration<ServerConfiguration>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemConfigurationMap" /> class.
+        /// </summary>
+        public ServerConfigurationMap()
+        {
+            HasKey(p => p.Id);
+            Property(p => p.Name).IsRequired();
+            Property(p => p.ServerRole).IsRequired();
+        }
+    }
 }

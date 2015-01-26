@@ -1,6 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 using Dilemma.Common;
+
+using Disposable.Common.Extensions;
 
 namespace Dilemma.Data.Models
 {
@@ -47,9 +51,37 @@ namespace Dilemma.Data.Models
         {
             get
             {
+                VerifySystemEnvironments();
+                
                 return SystemEnvironment == SystemEnvironment.Development
                        || SystemEnvironment == SystemEnvironment.Testing;
             }
         }
+
+        private static void VerifySystemEnvironments()
+        {
+            if (systemEnvironmentConfirmed)
+            {
+                return;
+            }
+
+            if (!EnumExtensions.All<SystemEnvironment>()
+                               .OrderBy(x => x)
+                               .SequenceEqual(
+                                    new[]
+                                    {
+                                        SystemEnvironment.Production, 
+                                        SystemEnvironment.Development, 
+                                        SystemEnvironment.Testing,
+                                    }
+                                    .OrderBy(x => x)))
+            {
+                throw new InvalidOperationException("Actual and expected SystemEnvironments do not match");
+            }
+
+            systemEnvironmentConfirmed = true;
+        }
+
+        private static bool systemEnvironmentConfirmed;
     }
 }

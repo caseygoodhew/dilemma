@@ -35,6 +35,11 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<SystemConfiguration> SystemConfiguration { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="ServerConfiguration"/> database set; 
+        /// </summary>
+        public DbSet<ServerConfiguration> ServerConfiguration { get; set; }
+
+        /// <summary>
         /// Gets or sets the <see cref="Categories"/> database set;
         /// </summary>
         public DbSet<Category> Categories { get; set; }

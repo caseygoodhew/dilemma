@@ -60,6 +60,7 @@
     <Compile Include="QuestionLifetime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionState.cs" />
+    <Compile Include="ServerName.cs" />
     <Compile Include="SystemEnvironment.cs" />
     <Compile Include="TestingConfiguration.cs" />
     <Compile Include="TestingConfigurationDefaults.cs" />

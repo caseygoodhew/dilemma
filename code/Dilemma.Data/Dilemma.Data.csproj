@@ -111,9 +111,14 @@
     <Compile Include="Migrations\201412151613485_Migration3.Designer.cs">
       <DependentUpon>201412151613485_Migration3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501260715524_Migration4.cs" />
+    <Compile Include="Migrations\201501260715524_Migration4.Designer.cs">
+      <DependentUpon>201501260715524_Migration4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\ServerConfiguration.cs" />
     <Compile Include="Models\PointConfiguration.cs" />
     <Compile Include="Models\DevelopmentUser.cs" />
     <Compile Include="Models\Moderation.cs" />
@@ -152,6 +157,7 @@
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\SiteRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412151613485_Migration3.resx">
       <DependentUpon>201412151613485_Migration3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501260715524_Migration4.resx">
+      <DependentUpon>201501260715524_Migration4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
