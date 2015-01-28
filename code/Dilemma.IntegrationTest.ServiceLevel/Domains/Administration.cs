@@ -13,14 +13,14 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
     {
         private static readonly Lazy<IAdministrationService> _adminService = Locator.Lazy<IAdministrationService>();
 
-        public static SystemConfigurationViewModel GetSystemConfiguration()
+        public static SystemServerConfigurationViewModel GetSystemServerConfiguration()
         {
-            return _adminService.Value.GetSystemConfiguration();
+            return _adminService.Value.GetSystemServerConfiguration();
         }
 
-        public static void SetSystemConfiguration(SystemConfigurationViewModel viewModel)
+        public static void SetSystemServerConfiguration(SystemServerConfigurationViewModel viewModel)
         {
-            _adminService.Value.SetSystemConfiguration(viewModel);
+            _adminService.Value.SetSystemServerConfiguration(viewModel);
         }
 
         public static TestingConfiguration GetTestingConfiguration()

@@ -22,13 +22,21 @@ namespace Dilemma.IntegrationTest.ServiceLevel
         {
             base.Initialize();
 
-            Administration.SetSystemConfiguration(
-                new SystemConfigurationViewModel
-                {
-                    MaxAnswers = 3,
-                    QuestionLifetime = QuestionLifetime.FiveMinutes,
-                    SystemEnvironment = SystemEnvironment.Testing
-                });
+            Administration.SetSystemServerConfiguration(
+                new SystemServerConfigurationViewModel
+                    {
+                        SystemConfigurationViewModel = new SystemConfigurationViewModel
+                                                           {
+                                                               MaxAnswers = 3,
+                                                               QuestionLifetime = QuestionLifetime.FiveMinutes,
+                                                               SystemEnvironment = SystemEnvironment.Testing
+                                                           },
+                        ServerConfigurationViewModel = new ServerConfigurationViewModel
+                                                           {
+                                                               // TODO: this probably shouldn't be offline
+                                                               ServerRole = ServerRole.Offline
+                                                           }
+                    });
 
             Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
         }
