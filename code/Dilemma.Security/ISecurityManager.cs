@@ -1,4 +1,6 @@
-﻿using Owin;
+﻿using Dilemma.Common;
+
+using Owin;
 
 namespace Dilemma.Security
 {
@@ -35,5 +37,12 @@ namespace Dilemma.Security
         /// </summary>
         /// <returns>The new user id.</returns>
         int LoginNewAnonymous();
+
+        /// <summary>
+        /// Checks if the current user has the specified <see cref="UserRole"/>.
+        /// </summary>
+        /// <param name="userRole">The <see cref="UserRole"/> to check for.</param>
+        /// <returns>Yes or no</returns>
+        bool Is(UserRole userRole);
     }
 }

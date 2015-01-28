@@ -55,7 +55,7 @@ namespace Dilemma.Web.Views.Shared
             
             #line 3 "..\..\Views\Shared\_Layout.cshtml"
   
-    var sysConfig = Locator.Get<IAdministrationService>().GetSystemConfiguration();
+    var sysConfig = Locator.Get<IAdministrationService>().GetSystemServerConfiguration().SystemConfigurationViewModel;
     var isDevMode = sysConfig.SystemEnvironment == SystemEnvironment.Development || sysConfig.SystemEnvironment == SystemEnvironment.Testing;
     var isQuestionSeeder = sysConfig.SystemEnvironment == SystemEnvironment.QuestionSeeder;
 
@@ -178,7 +178,7 @@ WriteLiteral("                    <li>");
 
             
             #line 29 "..\..\Views\Shared\_Layout.cshtml"
-                   Write(Html.ActionLink("SysConfig", "Index", "SystemConfiguration"));
+                   Write(Html.ActionLink("SysConfig", "Index", "SystemServerConfiguration"));
 
             
             #line default

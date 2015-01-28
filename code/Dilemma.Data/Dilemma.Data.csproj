@@ -88,6 +88,7 @@
     <Compile Include="EntityFramework\Maps\ModerationMap.cs" />
     <Compile Include="EntityFramework\Maps\NotificationMap.cs" />
     <Compile Include="EntityFramework\Maps\DevelopmentUserMap.cs" />
+    <Compile Include="EntityFramework\Maps\ServerConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\UserMap.cs" />
     <Compile Include="EntityFramework\Maps\SystemConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionMap.cs" />
@@ -114,6 +115,10 @@
     <Compile Include="Migrations\201501260715524_Migration4.cs" />
     <Compile Include="Migrations\201501260715524_Migration4.Designer.cs">
       <DependentUpon>201501260715524_Migration4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501280625563_Migration5.cs" />
+    <Compile Include="Migrations\201501280625563_Migration5.Designer.cs">
+      <DependentUpon>201501280625563_Migration5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -184,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501260715524_Migration4.resx">
       <DependentUpon>201501260715524_Migration4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501280625563_Migration5.resx">
+      <DependentUpon>201501280625563_Migration5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

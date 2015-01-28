@@ -17,21 +17,26 @@ namespace Dilemma.Business.Services
         private static readonly Lazy<IAdministrationRepository> AdministrationRepository = Locator.Lazy<IAdministrationRepository>();
         
         /// <summary>
-        /// Gets the system configuration as a <see cref="SystemConfigurationViewModel"/>.
+        /// Gets the system configuration as a <see cref="SystemServerConfigurationViewModel"/>.
         /// </summary>
-        /// <returns>The <see cref="SystemConfigurationViewModel"/>.</returns>
-        public SystemConfigurationViewModel GetSystemConfiguration()
+        /// <returns>The <see cref="SystemServerConfigurationViewModel"/>.</returns>
+        public SystemServerConfigurationViewModel GetSystemServerConfiguration()
         {
-            return AdministrationRepository.Value.GetSystemConfiguration<SystemConfigurationViewModel>();
+            return new SystemServerConfigurationViewModel
+                       {
+                           ServerConfigurationViewModel = AdministrationRepository.Value.GetServerConfiguration<ServerConfigurationViewModel>(),
+                           SystemConfigurationViewModel = AdministrationRepository.Value.GetSystemConfiguration<SystemConfigurationViewModel>()
+                       };
         }
 
         /// <summary>
-        /// Sets the system configuration as a <see cref="SystemConfigurationViewModel"/>.
+        /// Sets the system configuration as a <see cref="SystemServerConfigurationViewModel"/>.
         /// </summary>
-        /// <param name="viewModel">The <see cref="SystemConfigurationViewModel"/> with the full set of changed and unchanged elements.</param>
-        public void SetSystemConfiguration(SystemConfigurationViewModel viewModel)
+        /// <param name="viewModel">The <see cref="SystemServerConfigurationViewModel"/> with the full set of changed and unchanged elements.</param>
+        public void SetSystemServerConfiguration(SystemServerConfigurationViewModel viewModel)
         {
-            AdministrationRepository.Value.SetSystemConfiguration(viewModel);
+            AdministrationRepository.Value.SetSystemConfiguration(viewModel.SystemConfigurationViewModel);
+            AdministrationRepository.Value.SetServerConfiguration(viewModel.ServerConfigurationViewModel);
         }
 
         public TestingConfiguration GetTestingConfiguration()

@@ -33,9 +33,7 @@ namespace Dilemma.Data.Repositories
                 context.SystemConfiguration.Update(context, systemConfiguration);
                 context.SaveChangesVerbose();
 
-                Cache.Value.Expire<SystemConfiguration>();
-                // always reset the testing configuration as this should be used during integration tests anyway
-                Cache.Value.Expire<TestingConfiguration>();
+                ExpireCache();
             }
         }
 
@@ -56,6 +54,37 @@ namespace Dilemma.Data.Repositories
                     });
 
             return ConverterFactory.ConvertOne<SystemConfiguration, T>(systemConfiguration);
+        }
+
+        public void SetServerConfiguration<T>(T serverConfigurationType) where T : class
+        {
+            var systemConfiguration = ConverterFactory.ConvertOne<T, ServerConfiguration>(serverConfigurationType);
+            
+            using (var context = new DilemmaContext())
+            {
+                systemConfiguration.Name = ServerName.Get();
+                systemConfiguration.Id = GetServerConfigurationId(context, systemConfiguration.Name);
+                context.ServerConfiguration.Update(context, systemConfiguration);
+                context.SaveChangesVerbose();
+
+                ExpireCache();
+            }
+        }
+
+        public T GetServerConfiguration<T>() where T : class
+        {
+            var serverName = ServerName.Get();
+            
+            var serverConfiguration = Cache.Value.Get(
+                () =>
+                {
+                    using (var context = new DilemmaContext())
+                    {
+                        return context.ServerConfiguration.Single(x => x.Name == serverName);
+                    }
+                });
+
+            return ConverterFactory.ConvertOne<ServerConfiguration, T>(serverConfiguration);
         }
 
         public void SetTestingConfiguration(TestingConfiguration configuration)
@@ -101,6 +130,20 @@ namespace Dilemma.Data.Repositories
                         return context.PointConfigurations.ToList();
                     }
                 });
+        }
+
+        private static void ExpireCache()
+        {
+            Cache.Value.Expire<SystemConfiguration>();
+            
+            Cache.Value.Expire<TestingConfiguration>();
+
+            Cache.Value.Expire<ServerConfiguration>();
+        }
+
+        private static int GetServerConfigurationId(DilemmaContext context, string serverName)
+        {
+            return context.ServerConfiguration.Where(x => x.Name == serverName).Select(x => x.Id).Single();
         }
     }
 }

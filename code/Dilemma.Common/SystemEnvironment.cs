@@ -11,11 +11,4 @@
         Administration,
         QuestionSeeder
     }
-
-    public enum ServerRole
-    {
-        NonProduction,
-        Offline,
-        
-    }
 }

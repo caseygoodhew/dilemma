@@ -37,7 +37,7 @@ namespace Dilemma.Data
                 var serverConfiguration = new ServerConfiguration
                                               {
                                                   Name = serverName,
-                                                  ServerRole = ServerRole.NonProduction
+                                                  ServerRole = ServerRole.Offline
                                               };
 
                 context.ServerConfiguration.Add(serverConfiguration);

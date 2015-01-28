@@ -1,7 +1,7 @@
 ﻿@using Dilemma.Business.Services
 @using Disposable.Common.ServiceLocator
 @{
-    var sysConfig = Locator.Get<IAdministrationService>().GetSystemConfiguration();
+    var sysConfig = Locator.Get<IAdministrationService>().GetSystemServerConfiguration().SystemConfigurationViewModel;
     var isDevMode = sysConfig.SystemEnvironment == SystemEnvironment.Development || sysConfig.SystemEnvironment == SystemEnvironment.Testing;
     var isQuestionSeeder = sysConfig.SystemEnvironment == SystemEnvironment.QuestionSeeder;
 }
@@ -26,7 +26,7 @@
                     <li>@Html.ActionLink("QList", "List", "Question")</li>
                     <li>@Html.ActionLink("Activity", "Index", "Activity")</li>
                     <li>@Html.ActionLink("Ask", "Create", "Question")</li>
-                    <li>@Html.ActionLink("SysConfig", "Index", "SystemConfiguration")</li>
+                    <li>@Html.ActionLink("SysConfig", "Index", "SystemServerConfiguration")</li>
                     <li>@Html.ActionLink("Notification", "Index", "Notification")</li>
                     <li>@Html.ActionLink("Moderation", "Index", "Moderation")</li>
                 }

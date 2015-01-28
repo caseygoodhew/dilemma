@@ -180,7 +180,7 @@
     <Compile Include="Controllers\PrelaunchController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuickAuthenticationController.cs" />
-    <Compile Include="Controllers\SystemConfigurationController.cs" />
+    <Compile Include="Controllers\SystemServerConfigurationController.cs" />
     <Compile Include="Controllers\TermsController.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
@@ -278,7 +278,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_Layout.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SystemConfiguration\Index.generated.cs">
+    <Compile Include="Views\SystemServerConfiguration\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
@@ -463,7 +463,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>List.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\SystemConfiguration\Index.cshtml">
+    <Content Include="Views\SystemServerConfiguration\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>

@@ -103,6 +103,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new AnswerMap());
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new SystemConfigurationMap());
+            modelBuilder.Configurations.Add(new ServerConfigurationMap());
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new DevelopmentUserMap());
             modelBuilder.Configurations.Add(new NotificationMap());

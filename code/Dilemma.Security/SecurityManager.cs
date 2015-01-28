@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 
+using Dilemma.Common;
+using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
 
 using Disposable.Common.ServiceLocator;
@@ -20,6 +22,9 @@ namespace Dilemma.Security
     {
         private static readonly Lazy<IUserRepository> UserRepository = Locator.Lazy<IUserRepository>();
 
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
+            Locator.Lazy<IAdministrationRepository>();
+        
         private static readonly Lazy<IAuthenticationManager> AuthenticationManager = Locator.Lazy<IAuthenticationManager>();
 
         /// <summary>
@@ -91,6 +96,19 @@ namespace Dilemma.Security
             var userId = CreateAnonymousUser();
             IssueAnonymousCookie(userId);
             return userId;
+        }
+
+        public bool Is(UserRole userRole)
+        {
+            var serverConfiguration = AdministrationRepository.Value.GetServerConfiguration<ServerConfiguration>();
+
+            switch (userRole)
+            {
+                case UserRole.Administrator:
+                    return serverConfiguration.ServerRole == ServerRole.Administration;
+                default:
+                    throw new ArgumentOutOfRangeException("userRole");
+            }
         }
 
         private static IEnumerable<Claim> ReadClaims()

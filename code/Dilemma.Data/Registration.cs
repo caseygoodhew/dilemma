@@ -43,6 +43,7 @@ namespace Dilemma.Data
             ConverterFactory.Register<Answer>(registrar);
             ConverterFactory.Register<Category>(registrar);
             ConverterFactory.Register<SystemConfiguration>(registrar);
+            ConverterFactory.Register<ServerConfiguration>(registrar);
             ConverterFactory.Register<Notification>(registrar);
             ConverterFactory.Register<PointConfiguration>(registrar);
 

@@ -11,16 +11,16 @@ namespace Dilemma.Business.Services
     public interface IAdministrationService
     {
         /// <summary>
-        /// Gets the system configuration as a <see cref="SystemConfigurationViewModel"/>.
+        /// Gets the system configuration as a <see cref="SystemServerConfigurationViewModel"/>.
         /// </summary>
-        /// <returns>The <see cref="SystemConfigurationViewModel"/>.</returns>
-        SystemConfigurationViewModel GetSystemConfiguration();
+        /// <returns>The <see cref="SystemServerConfigurationViewModel"/>.</returns>
+        SystemServerConfigurationViewModel GetSystemServerConfiguration();
 
         /// <summary>
-        /// Sets the system configuration as a <see cref="SystemConfigurationViewModel"/>.
+        /// Sets the system configuration as a <see cref="SystemServerConfigurationViewModel"/>.
         /// </summary>
-        /// <param name="viewModel">The <see cref="SystemConfigurationViewModel"/> with the full set of changed and unchanged elements.</param>
-        void SetSystemConfiguration(SystemConfigurationViewModel viewModel);
+        /// <param name="viewModel">The <see cref="SystemServerConfigurationViewModel"/> with the full set of changed and unchanged elements.</param>
+        void SetSystemServerConfiguration(SystemServerConfigurationViewModel viewModel);
 
         TestingConfiguration GetTestingConfiguration();
 
