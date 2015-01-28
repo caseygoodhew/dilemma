@@ -73,6 +73,8 @@ namespace Dilemma.Data.Models
                                         SystemEnvironment.Production, 
                                         SystemEnvironment.Development, 
                                         SystemEnvironment.Testing,
+                                        Common.SystemEnvironment.QuestionSeeder,
+                                        Common.SystemEnvironment.Administration
                                     }
                                     .OrderBy(x => x)))
             {

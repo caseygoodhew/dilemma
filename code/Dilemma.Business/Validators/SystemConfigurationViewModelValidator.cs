@@ -2,7 +2,6 @@
 using Dilemma.Common;
 
 using FluentValidation;
-using FluentValidation.Results;
 
 namespace Dilemma.Business.Validators
 {

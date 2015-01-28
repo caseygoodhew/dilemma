@@ -44,5 +44,7 @@ namespace Dilemma.Security
         /// <param name="userRole">The <see cref="UserRole"/> to check for.</param>
         /// <returns>Yes or no</returns>
         bool Is(UserRole userRole);
+
+        bool IsValidAccessKey(string accessKey);
     }
 }

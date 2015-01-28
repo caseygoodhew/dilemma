@@ -336,6 +336,56 @@ WriteLiteral("    <div");
 
 WriteLiteral(" class=\"form-group\"");
 
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
+
+            
+            #line 54 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+   Write(Html.LabelFor(x => x.AccessKey, new { @class = "col-md-2 col-sm-3 control-label" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        <div");
+
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 56 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+       Write(Html.TextBoxFor(x => x.AccessKey, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 57 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+       Write(Html.ValidationMessageFor(x => x.AccessKey));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 60 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
 WriteLiteral(">\r\n        <div");
 
 WriteLiteral(" class=\"col-md-offset-2 col-md-10\"");
@@ -351,7 +401,7 @@ WriteLiteral(" value=\"Submit\"");
 WriteLiteral(" />\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 58 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+            #line 66 "..\..\Views\SystemServerConfiguration\Index.cshtml"
 }
 
             
@@ -366,7 +416,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 61 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+            #line 69 "..\..\Views\SystemServerConfiguration\Index.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             

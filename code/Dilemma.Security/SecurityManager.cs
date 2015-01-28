@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
+using System.Web.Configuration;
 
 using Dilemma.Common;
 using Dilemma.Data.Models;
@@ -109,6 +110,12 @@ namespace Dilemma.Security
                 default:
                     throw new ArgumentOutOfRangeException("userRole");
             }
+        }
+
+        public bool IsValidAccessKey(string accessKey)
+        {
+            var validAccessKey = WebConfigurationManager.AppSettings["AdministrationAccessKey"];
+            return accessKey == validAccessKey;
         }
 
         private static IEnumerable<Claim> ReadClaims()
