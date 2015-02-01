@@ -1,9 +1,10 @@
 ﻿@using Dilemma.Business.Services
 @using Disposable.Common.ServiceLocator
 @{
-    var sysConfig = Locator.Get<IAdministrationService>().GetSystemServerConfiguration().SystemConfigurationViewModel;
-    var isDevMode = sysConfig.SystemEnvironment == SystemEnvironment.Development || sysConfig.SystemEnvironment == SystemEnvironment.Testing;
-    var isQuestionSeeder = sysConfig.SystemEnvironment == SystemEnvironment.QuestionSeeder;
+    var systemServerConfiguration = Locator.Get<IAdministrationService>().GetSystemServerConfiguration();
+
+    var isDevMode = systemServerConfiguration.SystemConfigurationViewModel.SystemEnvironment == SystemEnvironment.Development;
+    var isQuestionSeeder = systemServerConfiguration.ServerConfigurationViewModel.ServerRole == ServerRole.QuestionSeeder;
 }
 
 <!DOCTYPE html>

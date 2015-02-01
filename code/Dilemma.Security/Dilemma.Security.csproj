@@ -99,12 +99,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessFilters\AdministrationAccessFilterAttribute.cs" />
+    <Compile Include="AccessFilters\ModerationAccessFilterAttribute.cs" />
     <Compile Include="AccessFilters\AllowUserRoleAttribute.cs" />
     <Compile Include="AccessFilters\AllowSystemEnvironmentAttribute.cs" />
     <Compile Include="AccessFilters\ByEnum\AllowDeny.cs" />
     <Compile Include="AccessFilters\ByEnum\FilterAccessByEnumWrapperAttribute.cs" />
-    <Compile Include="AccessFilters\ByEnum\FilterAccessBySystemEnvironment.cs" />
+    <Compile Include="AccessFilters\ByEnum\FilterAccessByServerRole.cs" />
     <Compile Include="AccessFilters\ByEnum\IFilterAccessByEnum.cs" />
     <Compile Include="AccessFilters\ByUserRole\RoleMap.cs" />
     <Compile Include="AccessFilters\DenyUserRoleAttribute.cs" />

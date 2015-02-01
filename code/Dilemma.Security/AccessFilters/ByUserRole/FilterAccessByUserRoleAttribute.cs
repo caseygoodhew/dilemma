@@ -13,9 +13,9 @@ namespace Dilemma.Security.AccessFilters.ByUserRole
         
         protected FilterAccessByUserRoleAttribute(AllowDeny allowDeny, params UserRole[] userRoles)
         {
-            FilterAccessByEnum = new FilterAccessBySystemEnvironment(
+            FilterAccessByEnum = new FilterAccessByServerRole(
                 allowDeny,
-                MapToSystemEnvironment(allowDeny, userRoles).Cast<object>());
+                MapToServerRole(allowDeny, userRoles).Cast<object>());
         }
 
         protected FilterAccessByUserRoleAttribute(
@@ -24,11 +24,11 @@ namespace Dilemma.Security.AccessFilters.ByUserRole
             AllowDeny allowDeny,
             params UserRole[] userRoles)
         {
-            FilterAccessByEnum = new FilterAccessBySystemEnvironment(
+            FilterAccessByEnum = new FilterAccessByServerRole(
                 controller,
                 action,
                 allowDeny,
-                MapToSystemEnvironment(allowDeny, userRoles).Cast<object>());
+                MapToServerRole(allowDeny, userRoles).Cast<object>());
         }
         
         public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -36,7 +36,7 @@ namespace Dilemma.Security.AccessFilters.ByUserRole
             FilterAccessByEnum.OnActionExecuting<FilterAccessByUserRoleAttribute>(filterContext);
         }
 
-        private static IEnumerable<SystemEnvironment> MapToSystemEnvironment(AllowDeny allowDeny, IEnumerable<UserRole> userRoles)
+        private static IEnumerable<ServerRole> MapToServerRole(AllowDeny allowDeny, IEnumerable<UserRole> userRoles)
         {
             return userRoles.SelectMany(userRole => RoleMap.Instance.Get(userRole, allowDeny));
         }

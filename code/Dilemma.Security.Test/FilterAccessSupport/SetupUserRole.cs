@@ -70,7 +70,7 @@ namespace Dilemma.Security.Test.FilterAccessSupport
             return actionDescriptor.GetCustomAttributes(typeof(FilterAccessByUserRoleAttribute), true).Cast<FilterAccessByUserRoleAttribute>().SingleOrDefault();
         }
 
-        public SimulateResult<FilterAccessBySystemEnvironment> Simulate()
+        public SimulateResult<FilterAccessByServerRole> Simulate()
         {
             Result = null;
             
@@ -86,7 +86,7 @@ namespace Dilemma.Security.Test.FilterAccessSupport
                 actionAttribute.OnActionExecuting(this);
             }
 
-            return new SimulateResult<FilterAccessBySystemEnvironment>(this, controllerAttribute, actionAttribute);
+            return new SimulateResult<FilterAccessByServerRole>(this, controllerAttribute, actionAttribute);
         }
     }
 }

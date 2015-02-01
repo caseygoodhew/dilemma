@@ -3,7 +3,8 @@ namespace Dilemma.Common
     public enum ServerRole
     {
         Offline,
-        Administration,
+        Moderation,
+        Public,
         QuestionSeeder
     }
 }

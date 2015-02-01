@@ -11,17 +11,17 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Security.AccessFilters.ByEnum
 {
-    public class FilterAccessBySystemEnvironment : FilterAccessByEnum<SystemEnvironment>
+    public class FilterAccessByServerRole : FilterAccessByEnum<ServerRole>
     {
         private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
             Locator.Lazy<IAdministrationRepository>();
         
-        public FilterAccessBySystemEnvironment(AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
+        public FilterAccessByServerRole(AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
             : base(allowDeny, comparisonEnums)
         {
         }
 
-        public FilterAccessBySystemEnvironment(string controller, string action, AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
+        public FilterAccessByServerRole(string controller, string action, AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
             : base(controller, action, allowDeny, comparisonEnums)
         {
         }
@@ -31,7 +31,7 @@ namespace Dilemma.Security.AccessFilters.ByEnum
             // do nothing
         }
 
-        protected override void AnnounceDeny(ActionExecutingContext filterContext, FilterAccessByEnum<SystemEnvironment> accessFilter)
+        protected override void AnnounceDeny(ActionExecutingContext filterContext, FilterAccessByEnum<ServerRole> accessFilter)
         {
             filterContext.Result = new RedirectToRouteResult(
                 new RouteValueDictionary(
@@ -42,9 +42,9 @@ namespace Dilemma.Security.AccessFilters.ByEnum
                         }));
         }
 
-        protected override SystemEnvironment GetComparisonValue()
+        protected override ServerRole GetComparisonValue()
         {
-            return AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>().SystemEnvironment;
+            return AdministrationRepository.Value.GetServerConfiguration<ServerConfiguration>().ServerRole;
         }
     }
 }

@@ -38,14 +38,18 @@ namespace Dilemma.Security.AccessFilters
             this.serverRole = serverRole;
             this.controller = controller;
             this.action = action;
-            unlockKey = WebConfigurationManager.AppSettings[configurationKey];
+
+            if (!string.IsNullOrEmpty(configurationKey))
+            {
+                unlockKey = WebConfigurationManager.AppSettings[configurationKey];
+            }
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var currentServerRole = AdministrationRepository.Value.GetServerConfiguration<ServerConfiguration>().ServerRole;
 
-            if (Unlocker.HasKey(filterContext.HttpContext.Request, unlockKey))
+            if (!String.IsNullOrEmpty(unlockKey) && Unlocker.HasKey(filterContext.HttpContext.Request, unlockKey))
             {
                 return;
             }

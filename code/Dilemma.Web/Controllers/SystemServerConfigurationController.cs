@@ -12,7 +12,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    [AdministrationAccessFilter]
+    [ModerationAccessFilter]
     public class SystemServerConfigurationController : DilemmaBaseController
     {
         private static readonly Lazy<IAdministrationService> AdministrationService = Locator.Lazy<IAdministrationService>();

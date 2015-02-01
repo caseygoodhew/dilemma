@@ -101,7 +101,8 @@ namespace Dilemma.Security
 
         public bool Is(UserRole userRole)
         {
-            var serverConfiguration = AdministrationRepository.Value.GetServerConfiguration<ServerConfiguration>();
+            throw new NotImplementedException();
+            /*var serverConfiguration = AdministrationRepository.Value.GetServerConfiguration<ServerConfiguration>();
 
             switch (userRole)
             {
@@ -109,7 +110,7 @@ namespace Dilemma.Security
                     return serverConfiguration.ServerRole == ServerRole.Administration;
                 default:
                     throw new ArgumentOutOfRangeException("userRole");
-            }
+            }*/
         }
 
         public bool IsValidAccessKey(string accessKey)

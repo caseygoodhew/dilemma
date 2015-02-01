@@ -21,18 +21,18 @@ namespace Dilemma.Security.Test
     [TestClass]
     public class FilterAccessByUserRoleAttributeTest
     {
-        private static SystemConfiguration systemConfiguration;
+        private static ServerConfiguration serverConfiguration;
         
         [TestInitialize]
         public void Initialize()
         {
-            if (systemConfiguration == null)
+            if (serverConfiguration == null)
             {
-                systemConfiguration = new SystemConfiguration();
+                serverConfiguration = new ServerConfiguration();
                 
                 var administrationRepositoryMock = new Mock<IAdministrationRepository>(MockBehavior.Strict);
-                administrationRepositoryMock.Setup(x => x.GetSystemConfiguration<SystemConfiguration>())
-                    .Returns(() => systemConfiguration);
+                administrationRepositoryMock.Setup(x => x.GetServerConfiguration<ServerConfiguration>())
+                    .Returns(() => serverConfiguration);
                 
                 var locator = Locator.Current as Locator;
                 locator.Register(() => administrationRepositoryMock.Object);
@@ -44,28 +44,25 @@ namespace Dilemma.Security.Test
         {
             var context = SetupUserRole.ControllerAction(AllowDenyRole.AllowAdministrator, AllowDenyRole.AllowAdministrator);
 
-            ForEachSystemEnvironment(
-                systemEnvironment =>
+            ForEachServerRole(
+                serverRole =>
                     {
-                        switch (systemEnvironment)
+                        switch (serverRole)
                         {
-                            case SystemEnvironment.Development:
-                                AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
-                                break;
-                            case SystemEnvironment.Testing:
+                            case ServerRole.Offline:
                                 AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
                                 break;
-                            case SystemEnvironment.Production:
-                                AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
-                                break;
-                            case SystemEnvironment.Administration:
+                            case ServerRole.Moderation:
                                 AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
                                 break;
-                            case SystemEnvironment.QuestionSeeder:
+                            case ServerRole.Public:
+                                AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
+                                break;
+                            case ServerRole.QuestionSeeder:
                                 AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
                                 break;
                             default:
-                                throw new ArgumentOutOfRangeException("systemEnvironment");
+                                throw new ArgumentOutOfRangeException("serverRole");
                         }
                     });
         }
@@ -75,28 +72,25 @@ namespace Dilemma.Security.Test
         {
             var context = SetupUserRole.ControllerAction(AllowDenyRole.AllowAdministrator, AllowDenyRole.DenyAdministrator);
 
-            ForEachSystemEnvironment(
-                systemEnvironment =>
+            ForEachServerRole(
+                serverRole =>
                 {
-                    switch (systemEnvironment)
+                    switch (serverRole)
                     {
-                        case SystemEnvironment.Development:
-                            AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Testing:
+                        case ServerRole.Offline:
                             AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
                             break;
-                        case SystemEnvironment.Production:
+                        case ServerRole.Moderation:
                             AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
                             break;
-                        case SystemEnvironment.Administration:
+                        case ServerRole.Public:
                             AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
                             break;
-                        case SystemEnvironment.QuestionSeeder:
+                        case ServerRole.QuestionSeeder:
                             AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException("systemEnvironment");
+                            throw new ArgumentOutOfRangeException("serverRole");
                     }
                 });
         }
@@ -106,28 +100,25 @@ namespace Dilemma.Security.Test
         {
             var context = SetupUserRole.ControllerAction(AllowDenyRole.DenyAdministrator, AllowDenyRole.AllowAdministrator);
 
-            ForEachSystemEnvironment(
-                systemEnvironment =>
+            ForEachServerRole(
+                serverRole =>
                 {
-                    switch (systemEnvironment)
+                    switch (serverRole)
                     {
-                        case SystemEnvironment.Development:
+                        case ServerRole.Offline:
+                            AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
+                            break;
+                        case ServerRole.Moderation:
                             AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
                             break;
-                        case SystemEnvironment.Testing:
+                        case ServerRole.Public:
                             AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
                             break;
-                        case SystemEnvironment.Production:
-                            AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Administration:
-                            AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.QuestionSeeder:
+                        case ServerRole.QuestionSeeder:
                             AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException("systemEnvironment");
+                            throw new ArgumentOutOfRangeException("serverRole");
                     }
                 });
         }
@@ -137,28 +128,25 @@ namespace Dilemma.Security.Test
         {
             var context = SetupUserRole.ControllerAction(AllowDenyRole.DenyAdministrator, AllowDenyRole.DenyAdministrator);
 
-            ForEachSystemEnvironment(
-                systemEnvironment =>
+            ForEachServerRole(
+                serverRole =>
                 {
-                    switch (systemEnvironment)
+                    switch (serverRole)
                     {
-                        case SystemEnvironment.Development:
-                            AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Testing:
-                            AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Production:
-                            AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Administration:
+                        case ServerRole.Offline:
                             AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
                             break;
-                        case SystemEnvironment.QuestionSeeder:
+                        case ServerRole.Moderation:
+                            AssertResult(context.Simulate(), AllowDeny.Deny, AllowDeny.Deny);
+                            break;
+                        case ServerRole.Public:
+                            AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
+                            break;
+                        case ServerRole.QuestionSeeder:
                             AssertResult(context.Simulate(), AllowDeny.Allow, AllowDeny.Allow);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException("systemEnvironment");
+                            throw new ArgumentOutOfRangeException("serverRole");
                     }
                 });
         }
@@ -168,28 +156,25 @@ namespace Dilemma.Security.Test
         {
             var context = SetupUserRole.ControllerAction(AllowDenyRole.AllowAdministrator, AllowDenyRole.NotSet);
 
-            ForEachSystemEnvironment(
-                systemEnvironment =>
+            ForEachServerRole(
+                serverRole =>
                 {
-                    switch (systemEnvironment)
+                    switch (serverRole)
                     {
-                        case SystemEnvironment.Development:
-                            AssertControllerResult(context.Simulate(), AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Testing:
+                        case ServerRole.Offline:
                             AssertControllerResult(context.Simulate(), AllowDeny.Deny);
                             break;
-                        case SystemEnvironment.Production:
-                            AssertControllerResult(context.Simulate(), AllowDeny.Deny);
-                            break;
-                        case SystemEnvironment.Administration:
+                        case ServerRole.Moderation:
                             AssertControllerResult(context.Simulate(), AllowDeny.Allow);
                             break;
-                        case SystemEnvironment.QuestionSeeder:
+                        case ServerRole.Public:
+                            AssertControllerResult(context.Simulate(), AllowDeny.Deny);
+                            break;
+                        case ServerRole.QuestionSeeder:
                             AssertControllerResult(context.Simulate(), AllowDeny.Deny);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException("systemEnvironment");
+                            throw new ArgumentOutOfRangeException("serverRole");
                     }
                 });
         }
@@ -199,28 +184,25 @@ namespace Dilemma.Security.Test
         {
             var context = SetupUserRole.ControllerAction(AllowDenyRole.DenyAdministrator, AllowDenyRole.NotSet);
 
-            ForEachSystemEnvironment(
-                systemEnvironment =>
+            ForEachServerRole(
+                serverRole =>
                 {
-                    switch (systemEnvironment)
+                    switch (serverRole)
                     {
-                        case SystemEnvironment.Development:
-                            AssertControllerResult(context.Simulate(), AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Testing:
-                            AssertControllerResult(context.Simulate(), AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Production:
-                            AssertControllerResult(context.Simulate(), AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Administration:
+                        case ServerRole.Offline:
                             AssertControllerResult(context.Simulate(), AllowDeny.Deny);
                             break;
-                        case SystemEnvironment.QuestionSeeder:
+                        case ServerRole.Moderation:
+                            AssertControllerResult(context.Simulate(), AllowDeny.Deny);
+                            break;
+                        case ServerRole.Public:
+                            AssertControllerResult(context.Simulate(), AllowDeny.Allow);
+                            break;
+                        case ServerRole.QuestionSeeder:
                             AssertControllerResult(context.Simulate(), AllowDeny.Allow);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException("systemEnvironment");
+                            throw new ArgumentOutOfRangeException("serverRole");
                     }
                 });
         }
@@ -230,28 +212,25 @@ namespace Dilemma.Security.Test
         {
             var context = SetupUserRole.ControllerAction(AllowDenyRole.NotSet, AllowDenyRole.AllowAdministrator);
 
-            ForEachSystemEnvironment(
-                systemEnvironment =>
+            ForEachServerRole(
+                serverRole =>
                 {
-                    switch (systemEnvironment)
+                    switch (serverRole)
                     {
-                        case SystemEnvironment.Development:
-                            AssertActionResult(context.Simulate(), AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Testing:
+                        case ServerRole.Offline:
                             AssertActionResult(context.Simulate(), AllowDeny.Deny);
                             break;
-                        case SystemEnvironment.Production:
-                            AssertActionResult(context.Simulate(), AllowDeny.Deny);
-                            break;
-                        case SystemEnvironment.Administration:
+                        case ServerRole.Moderation:
                             AssertActionResult(context.Simulate(), AllowDeny.Allow);
                             break;
-                        case SystemEnvironment.QuestionSeeder:
+                        case ServerRole.Public:
+                            AssertActionResult(context.Simulate(), AllowDeny.Deny);
+                            break;
+                        case ServerRole.QuestionSeeder:
                             AssertActionResult(context.Simulate(), AllowDeny.Deny);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException("systemEnvironment");
+                            throw new ArgumentOutOfRangeException("serverRole");
                     }
                 });
         }
@@ -261,62 +240,59 @@ namespace Dilemma.Security.Test
         {
             var context = SetupUserRole.ControllerAction(AllowDenyRole.NotSet, AllowDenyRole.DenyAdministrator);
 
-            ForEachSystemEnvironment(
-                systemEnvironment =>
+            ForEachServerRole(
+                serverRole =>
                 {
-                    switch (systemEnvironment)
+                    switch (serverRole)
                     {
-                        case SystemEnvironment.Development:
-                            AssertActionResult(context.Simulate(), AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Testing:
-                            AssertActionResult(context.Simulate(), AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Production:
-                            AssertActionResult(context.Simulate(), AllowDeny.Allow);
-                            break;
-                        case SystemEnvironment.Administration:
+                        case ServerRole.Offline:
                             AssertActionResult(context.Simulate(), AllowDeny.Deny);
                             break;
-                        case SystemEnvironment.QuestionSeeder:
+                        case ServerRole.Moderation:
+                            AssertActionResult(context.Simulate(), AllowDeny.Deny);
+                            break;
+                        case ServerRole.Public:
+                            AssertActionResult(context.Simulate(), AllowDeny.Allow);
+                            break;
+                        case ServerRole.QuestionSeeder:
                             AssertActionResult(context.Simulate(), AllowDeny.Allow);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException("systemEnvironment");
+                            throw new ArgumentOutOfRangeException("serverRole");
                     }
                 });
         }
 
-        private void ForEachSystemEnvironment(Action<SystemEnvironment> action)
+        private void ForEachServerRole(Action<ServerRole> action)
         {
-            EnumExtensions.All<SystemEnvironment>().ToList().ForEach(
-                systemEnvironment =>
+            EnumExtensions.All<ServerRole>().ToList().ForEach(
+                serverRole =>
                     {
-                        systemConfiguration.SystemEnvironment = systemEnvironment;
-                        action(systemEnvironment);
+                        serverConfiguration.ServerRole = serverRole;
+                        action(serverRole);
                     });
         }
-        
-        private void AssertResult(SimulateResult<FilterAccessBySystemEnvironment> result, AllowDeny? expectedControllerResult, AllowDeny? expectedActionResult)
+
+        private void AssertResult(SimulateResult<FilterAccessByServerRole> result, AllowDeny? expectedControllerResult, AllowDeny? expectedActionResult)
         {
             AssertControllerResult(result, expectedControllerResult);
             AssertActionResult(result, expectedActionResult);
         }
 
-        private void AssertControllerResult(SimulateResult<FilterAccessBySystemEnvironment> result, AllowDeny? expectedResult)
+        private void AssertControllerResult(SimulateResult<FilterAccessByServerRole> result, AllowDeny? expectedResult)
         {
             Assert.IsNotNull(result.Controller);
             AssertFilterContextResult(result, expectedResult);
         }
 
-        private void AssertActionResult(SimulateResult<FilterAccessBySystemEnvironment> result, AllowDeny? expectedResult)
+        private void AssertActionResult(SimulateResult<FilterAccessByServerRole> result, AllowDeny? expectedResult)
         {
             Assert.IsNotNull(result.Action);
             AssertFilterContextResult(result, expectedResult);
         }
 
         private void AssertFilterContextResult(
-            SimulateResult<FilterAccessBySystemEnvironment> result,
+            SimulateResult<FilterAccessByServerRole> result,
             AllowDeny? expectedResult)
         {
             switch (expectedResult)
