@@ -18,7 +18,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel
     {
         private static readonly Lazy<ITimeWarpSource> TimeWarpSource = Locator.Lazy<ITimeWarpSource>();
 
-        public QuestionAnswerTest() : base(true)
+        public QuestionAnswerTest() : base(false)
         {
         }
 

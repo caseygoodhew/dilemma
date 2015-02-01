@@ -6,60 +6,60 @@ using System.Web.Routing;
 using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
-using Dilemma.Security.AccessFilters.ByEnum;
 
 using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Security.AccessFilters
 {
-    public abstract class UnlockableAccessFilterAttribute : ActionFilterAttribute
+    public class UnlockableAccessFilterAttribute : ActionFilterAttribute
     {
-        private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
+        protected static readonly Lazy<IAdministrationRepository> AdministrationRepository =
             Locator.Lazy<IAdministrationRepository>();
-
-        private readonly AllowDeny allowDeny;
-        
-        private readonly ServerRole serverRole;
         
         private readonly string controller;
 
         private readonly string action;
 
         private readonly string unlockKey;
+
+        private readonly bool unlockDevelopment;
         
-        protected UnlockableAccessFilterAttribute(AllowDeny allowDeny, ServerRole serverRole, string controller, string action, string configurationKey)
+        public UnlockableAccessFilterAttribute(string configurationKey, string controller, string action) : this(configurationKey, controller, action, true)
         {
-            if (allowDeny != AllowDeny.Allow && allowDeny != AllowDeny.Deny)
-            {
-                throw new ArgumentException("Only Allow or Deny can be used.");
-            }
-            
-            this.allowDeny = allowDeny;
-            this.serverRole = serverRole;
+        }
+
+        protected UnlockableAccessFilterAttribute(
+            string configurationKey,
+            string controller,
+            string action,
+            bool unlockDevelopment)
+        {
             this.controller = controller;
             this.action = action;
+            unlockKey = WebConfigurationManager.AppSettings[configurationKey];
 
-            if (!string.IsNullOrEmpty(configurationKey))
+            if (string.IsNullOrEmpty(unlockKey))
             {
-                unlockKey = WebConfigurationManager.AppSettings[configurationKey];
+                throw new InvalidOperationException(string.Format(@"Could not find unlock key ""{0}""", configurationKey));
             }
+
+            this.unlockDevelopment = unlockDevelopment;
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var currentServerRole = AdministrationRepository.Value.GetServerConfiguration<ServerConfiguration>().ServerRole;
-
-            if (!String.IsNullOrEmpty(unlockKey) && Unlocker.HasKey(filterContext.HttpContext.Request, unlockKey))
+            if (unlockDevelopment)
             {
-                return;
+                var systemEnvironment =
+                    AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>().SystemEnvironment;
+
+                if (systemEnvironment == SystemEnvironment.Development)
+                {
+                    return;
+                }
             }
 
-            if (allowDeny == AllowDeny.Allow && currentServerRole == serverRole)
-            {
-                return;
-            }
-
-            if (allowDeny == AllowDeny.Deny && currentServerRole != serverRole)
+            if (Unlocker.HasKey(filterContext.HttpContext.Request, unlockKey))
             {
                 return;
             }
@@ -78,7 +78,5 @@ namespace Dilemma.Security.AccessFilters
                             }));
             }
         }
-
-
     }
 }

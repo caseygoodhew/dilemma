@@ -99,7 +99,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessFilters\ModerationAccessFilterAttribute.cs" />
     <Compile Include="AccessFilters\AllowUserRoleAttribute.cs" />
     <Compile Include="AccessFilters\AllowSystemEnvironmentAttribute.cs" />
     <Compile Include="AccessFilters\ByEnum\AllowDeny.cs" />

@@ -8,6 +8,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
+    
     public class ActivityController : Controller
     {
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();

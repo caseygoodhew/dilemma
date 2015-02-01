@@ -34,13 +34,18 @@ namespace Dilemma.Security.AccessFilters.ByUserRole
             EnumExtensions.All<UserRole>().ToList().ForEach(
                 userRole =>
                     {
+                        Set(userRole, AllowDeny.Allow, ServerRole.Public, ServerRole.QuestionSeeder);
                         Set(userRole, AllowDeny.Deny, ServerRole.Offline);
                         
                         switch (userRole)
                         {
+                            // for now, administrators and moderators are the same thing
                             case UserRole.Administrator:
+                            case UserRole.Moderator:
                                 Set(userRole, AllowDeny.Allow, ServerRole.Moderation);
                                 Set(userRole, AllowDeny.Deny, ServerRole.Moderation);
+                                break;
+                            case UserRole.Public:
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException("userRole");

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Web.Configuration;
 using System.Web.Mvc;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
-using Dilemma.Common;
 using Dilemma.Security;
 using Dilemma.Security.AccessFilters;
 
@@ -12,7 +10,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    [ModerationAccessFilter]
+    [UnlockableAccessFilter("AdministrationUnlockKey", "Home", "Index")]
     public class SystemServerConfigurationController : DilemmaBaseController
     {
         private static readonly Lazy<IAdministrationService> AdministrationService = Locator.Lazy<IAdministrationService>();
