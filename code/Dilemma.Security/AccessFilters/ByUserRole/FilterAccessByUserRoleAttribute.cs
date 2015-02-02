@@ -18,19 +18,6 @@ namespace Dilemma.Security.AccessFilters.ByUserRole
                 MapToServerRole(allowDeny, userRoles).Cast<object>());
         }
 
-        protected FilterAccessByUserRoleAttribute(
-            string controller,
-            string action,
-            AllowDeny allowDeny,
-            params UserRole[] userRoles)
-        {
-            FilterAccessByEnum = new FilterAccessByServerRole(
-                controller,
-                action,
-                allowDeny,
-                MapToServerRole(allowDeny, userRoles).Cast<object>());
-        }
-        
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             FilterAccessByEnum.OnActionExecuting<FilterAccessByUserRoleAttribute>(filterContext);

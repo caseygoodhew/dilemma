@@ -17,12 +17,7 @@ namespace Dilemma.Security.AccessFilters.ByUserRole
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new RoleMap();
-                }
-
-                return instance;
+                return instance ?? (instance = new RoleMap());
             }
         }
 
@@ -34,7 +29,6 @@ namespace Dilemma.Security.AccessFilters.ByUserRole
             EnumExtensions.All<UserRole>().ToList().ForEach(
                 userRole =>
                     {
-                        Set(userRole, AllowDeny.Allow, ServerRole.Public, ServerRole.QuestionSeeder);
                         Set(userRole, AllowDeny.Deny, ServerRole.Offline);
                         
                         switch (userRole)
@@ -46,6 +40,8 @@ namespace Dilemma.Security.AccessFilters.ByUserRole
                                 Set(userRole, AllowDeny.Deny, ServerRole.Moderation);
                                 break;
                             case UserRole.Public:
+                                Set(userRole, AllowDeny.Allow, ServerRole.Public, ServerRole.QuestionSeeder);
+                                Set(userRole, AllowDeny.Deny, ServerRole.Public);
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException("userRole");

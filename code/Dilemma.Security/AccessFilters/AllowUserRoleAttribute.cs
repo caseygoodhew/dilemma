@@ -14,10 +14,5 @@ namespace Dilemma.Security.AccessFilters
             : base(AllowDeny.Allow, new[] { userRole }.Concat(userRoles).ToArray())
         {
         }
-
-        public AllowUserRoleAttribute(string controller, string action, params UserRole[] userRoles)
-            : base(controller, action, AllowDeny.Allow, userRoles)
-        {
-        }
     }
 }

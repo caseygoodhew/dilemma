@@ -18,7 +18,7 @@ namespace Dilemma.Security.AccessFilters
         /// <param name="systemEnvironment">The system environment to check for.</param>
         /// <param name="additionalSystemEnvironments">Additional system environments to check for.</param>
         public AllowSystemEnvironmentAttribute(SystemEnvironment systemEnvironment, params SystemEnvironment[] additionalSystemEnvironments)
-            : base(typeof(FilterAccessByServerRole), AllowDeny.Allow, new[] { systemEnvironment }.Concat(additionalSystemEnvironments).Cast<object>())
+            : base(typeof(FilterAccessBySystemEnvironment), AllowDeny.Allow, new[] { systemEnvironment }.Concat(additionalSystemEnvironments).Cast<object>())
         {
         }
 
@@ -30,7 +30,7 @@ namespace Dilemma.Security.AccessFilters
         /// <param name="systemEnvironment">The system environment to check for.</param>
         /// <param name="additionalSystemEnvironments">Additional system environments to check for.</param>
         public AllowSystemEnvironmentAttribute(string controller, string action, SystemEnvironment systemEnvironment, params SystemEnvironment[] additionalSystemEnvironments)
-            : base(typeof(FilterAccessByServerRole), controller, action, AllowDeny.Allow, new[] { systemEnvironment }.Concat(additionalSystemEnvironments).Cast<object>())
+            : base(typeof(FilterAccessBySystemEnvironment), controller, action, AllowDeny.Allow, new[] { systemEnvironment }.Concat(additionalSystemEnvironments).Cast<object>())
         {
         }
     }

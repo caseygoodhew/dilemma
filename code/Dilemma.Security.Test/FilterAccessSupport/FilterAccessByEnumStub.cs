@@ -12,11 +12,6 @@ namespace Dilemma.Security.Test.FilterAccessSupport
         {
         }
 
-        public FilterAccessStub(string controller, string action, AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
-            : base(controller, action, allowDeny, comparisonEnums)
-        {
-        }
-
         public AllowDeny? LastAnnounced { get; private set; }
         
         protected override void AnnounceAllow(ActionExecutingContext filterContext)

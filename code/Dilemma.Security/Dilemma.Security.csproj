@@ -104,8 +104,10 @@
     <Compile Include="AccessFilters\ByEnum\AllowDeny.cs" />
     <Compile Include="AccessFilters\ByEnum\FilterAccessByEnumWrapperAttribute.cs" />
     <Compile Include="AccessFilters\ByEnum\FilterAccessByServerRole.cs" />
+    <Compile Include="AccessFilters\ByEnum\FilterAccessBySystemEnvironment.cs" />
     <Compile Include="AccessFilters\ByEnum\IFilterAccessByEnum.cs" />
     <Compile Include="AccessFilters\ByUserRole\RoleMap.cs" />
+    <Compile Include="AccessFilters\ServerRoleControllerAction.cs" />
     <Compile Include="AccessFilters\DenyUserRoleAttribute.cs" />
     <Compile Include="AccessFilters\ByUserRole\FilterAccessByUserRoleAttribute.cs" />
     <Compile Include="AccessFilters\QuestionSeederAccessFilterAttribute.cs" />

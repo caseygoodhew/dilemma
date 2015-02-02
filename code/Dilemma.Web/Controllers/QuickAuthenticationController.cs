@@ -15,6 +15,7 @@ using Disposable.Common.ServiceLocator;
 namespace Dilemma.Web.Controllers
 {
     [AllowSystemEnvironment(SystemEnvironment.Development)]
+    [AllowUserRole(UserRole.Public)]
     public sealed class QuickAuthenticationController : DilemmaBaseController
     {
         private static readonly Lazy<IDevelopmentService> DevelopmentService = Locator.Lazy<IDevelopmentService>();

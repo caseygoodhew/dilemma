@@ -7,7 +7,9 @@ using System.Web.Routing;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 using Dilemma.Security;
+using Dilemma.Security.AccessFilters;
 
 using Disposable.Common.Conversion;
 using Disposable.Common.Extensions;
@@ -15,6 +17,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
+    [AllowUserRole(UserRole.Public)]
     public class QuestionController : DilemmaBaseController
     {
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
@@ -54,6 +57,7 @@ namespace Dilemma.Web.Controllers
 
         //
         // GET: /Question/Seeder
+        [DenyUserRole(UserRole.Public, UserRole.Moderator)]
         public ActionResult Seeder()
         {
             SecurityManager.Value.LoginNewAnonymous();
@@ -63,6 +67,7 @@ namespace Dilemma.Web.Controllers
         //
         // POST: /Question/Seeder
         [HttpPost]
+        [DenyUserRole(UserRole.Public, UserRole.Moderator)]
         public ActionResult Seeder(CreateQuestionViewModel model)
         {
             if (ModelState.IsValid)

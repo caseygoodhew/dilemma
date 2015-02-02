@@ -6,18 +6,17 @@ using System.Web.Routing;
 using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
-using Dilemma.Security.AccessFilters.ByUserRole;
 
 using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Security.AccessFilters.ByEnum
 {
-    public class FilterAccessByServerRole : FilterAccessByEnum<ServerRole>
+    public class FilterAccessBySystemEnvironment : FilterAccessByEnum<SystemEnvironment>
     {
         private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
             Locator.Lazy<IAdministrationRepository>();
-        
-        public FilterAccessByServerRole(AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
+
+        public FilterAccessBySystemEnvironment(AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
             : base(allowDeny, comparisonEnums)
         {
         }
@@ -27,22 +26,20 @@ namespace Dilemma.Security.AccessFilters.ByEnum
             // do nothing
         }
 
-        protected override void AnnounceDeny(ActionExecutingContext filterContext, FilterAccessByEnum<ServerRole> accessFilter)
+        protected override void AnnounceDeny(ActionExecutingContext filterContext, FilterAccessByEnum<SystemEnvironment> accessFilter)
         {
-            var controllerAction = ServerRoleControllerAction.GetControllerAction(GetComparisonValue());
-            
             filterContext.Result = new RedirectToRouteResult(
                 new RouteValueDictionary(
                     new
                         {
-                            controller = controllerAction.Controller,
-                            action = controllerAction.Action
+                            controller = "Home",
+                            action = "Index"
                         }));
         }
 
-        protected override ServerRole GetComparisonValue()
+        protected override SystemEnvironment GetComparisonValue()
         {
-            return AdministrationRepository.Value.GetServerConfiguration<ServerConfiguration>().ServerRole;
+            return AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>().SystemEnvironment;
         }
     }
 }

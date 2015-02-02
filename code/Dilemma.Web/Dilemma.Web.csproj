@@ -176,8 +176,8 @@
     <Compile Include="Controllers\DilemmaBaseController.cs" />
     <Compile Include="Controllers\ModerationController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\OfflineController.cs" />
     <Compile Include="Controllers\PointConfigurationController.cs" />
-    <Compile Include="Controllers\PrelaunchController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\QuickAuthenticationController.cs" />
     <Compile Include="Controllers\SystemServerConfigurationController.cs" />
@@ -214,11 +214,6 @@
       <DependentUpon>Edit.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\PointConfiguration\Index.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Prelaunch\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
@@ -487,10 +482,6 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>QuestionListViewModel.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Prelaunch\Index.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Index.generated.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\QuickAuthentication\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
@@ -499,7 +490,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Terms\View1.cshtml" />
+    <Content Include="Views\Terms\Cookies.cshtml" />
     <Content Include="Views\Notification\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
@@ -521,6 +512,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Seeder.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Offline\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

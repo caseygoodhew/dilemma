@@ -5,15 +5,25 @@ using System.Web.Mvc;
 
 namespace Dilemma.Security.AccessFilters.ByEnum
 {
+    public struct ControllerAction
+    {
+        public readonly string Controller;
+
+        public readonly string Action;
+
+        public ControllerAction(string controller, string action)
+            : this()
+        {
+            Controller = controller;
+            Action = action;
+        }
+    }
+    
     public abstract class FilterAccessByEnum<TEnum> : IFilterAccessByEnum
     {
         internal readonly AllowDeny AllowDeny;
 
         internal readonly IList<TEnum> ComparisonEnums;
-
-        internal readonly string Controller = "Home";
-
-        internal readonly string Action = "Index";
 
         protected FilterAccessByEnum(AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
         {
@@ -24,13 +34,6 @@ namespace Dilemma.Security.AccessFilters.ByEnum
 
             AllowDeny = allowDeny;
             ComparisonEnums = comparisonEnums.Cast<TEnum>().ToList();
-        }
-
-        protected FilterAccessByEnum(string controller, string action, AllowDeny allowDeny, IEnumerable<object> comparisonEnums)
-            : this(allowDeny, comparisonEnums)
-        {
-            Controller = controller;
-            Action = action;
         }
 
         public void OnActionExecuting<T>(ActionExecutingContext filterContext) where T : IFilterAccessByEnumWrapper
