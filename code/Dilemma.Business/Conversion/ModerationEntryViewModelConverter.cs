@@ -23,4 +23,24 @@ namespace Dilemma.Business.Conversion
                        };
         }
     }
+
+    /// <summary>
+    /// Converts to and from the <see cref="UserViewModel"/>.
+    /// </summary>
+    public static class UserViewModelConverter
+    {
+        /// <summary>
+        /// Converts an <see cref="User"/> to an <see cref="UserViewModel"/>.
+        /// </summary>
+        /// <param name="model">The <see cref="User"/> to convert.</param>
+        /// <returns>The resultant <see cref="UserViewModel"/>.</returns>
+        public static UserViewModel FromUser(User model)
+        {
+            return new UserViewModel
+            {
+                UserId = model.UserId,
+                Points = model.TotalPoints
+            };
+        }
+    }
 }

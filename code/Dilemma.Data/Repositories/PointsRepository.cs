@@ -14,10 +14,12 @@ namespace Dilemma.Data.Repositories
         
         public void AwardPoints(DilemmaContext context, int forUserId, PointType pointType)
         {
+            throw new NotImplementedException();
+            
             var points = context.PointConfigurations.Where(x => x.PointType == pointType).Select(x => new { x.Points }).Single();
 
             var user = context.Users.Single(x => x.UserId == forUserId);
-            user.Points += points.Points;
+            user.HistoricPoints += points.Points;
 
             context.Users.Update(context, user);
 

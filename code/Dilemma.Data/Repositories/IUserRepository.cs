@@ -1,4 +1,6 @@
-﻿namespace Dilemma.Data.Repositories
+﻿using System.Data.Entity;
+
+namespace Dilemma.Data.Repositories
 {
     /// <summary>
     /// Public user repository methods.

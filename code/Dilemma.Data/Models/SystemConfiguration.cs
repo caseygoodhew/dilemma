@@ -43,45 +43,5 @@ namespace Dilemma.Data.Models
         /// Gets or sets the <see cref="SystemEnvironment"/>.
         /// </summary>
         public SystemEnvironment SystemEnvironment { get; set; }
-
-        /// <summary>
-        /// Gets a flag indicating if the <see cref="SystemEnvironment"/> is to Development or Testing.
-        /// </summary>
-        public bool IsInternalEnvironment
-        {
-            get
-            {
-                VerifySystemEnvironments();
-                
-                return SystemEnvironment == SystemEnvironment.Development
-                       || SystemEnvironment == SystemEnvironment.Testing;
-            }
-        }
-
-        private static void VerifySystemEnvironments()
-        {
-            if (systemEnvironmentConfirmed)
-            {
-                return;
-            }
-
-            if (!EnumExtensions.All<SystemEnvironment>()
-                               .OrderBy(x => x)
-                               .SequenceEqual(
-                                    new[]
-                                    {
-                                        SystemEnvironment.Production, 
-                                        SystemEnvironment.Development, 
-                                        SystemEnvironment.Testing
-                                    }
-                                    .OrderBy(x => x)))
-            {
-                throw new InvalidOperationException("Actual and expected SystemEnvironments do not match");
-            }
-
-            systemEnvironmentConfirmed = true;
-        }
-
-        private static bool systemEnvironmentConfirmed;
     }
 }

@@ -55,8 +55,9 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Support
             Locator.Get<IAuthenticationManager>().SignOut();
             Locator.Get<ITimeWarpSource>().DoThe(TimeWarpTo.TheHereAndNow);
             
-
             RequestCache.Current.ExpireAll();
+
+            Data.Startup.ValidateServerName();
         }
     }
 }

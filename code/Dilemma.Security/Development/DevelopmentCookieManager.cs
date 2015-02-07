@@ -48,7 +48,8 @@ namespace Dilemma.Security.Development
 
         private static bool IsInternalEnvironment()
         {
-            return AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>().IsInternalEnvironment;
+            var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
+            return SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment);
         }
 
         private static IEnumerable<int> ExtractUserIds(string userIds)

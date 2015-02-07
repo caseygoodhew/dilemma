@@ -42,7 +42,7 @@
     </Reference>
     <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.10\lib\net45\Disposable.Common.dll</HintPath>
+      <HintPath>..\packages\Disposable.Common.1.0.11\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="Disposable.Web.Caching">
       <HintPath>..\packages\Disposable.Web.Caching.1.0.6\lib\net45\Disposable.Web.Caching.dll</HintPath>
@@ -102,6 +102,10 @@
     <ProjectReference Include="..\Dilemma.Common\Dilemma.Common.csproj">
       <Project>{9554f188-2ea1-4af5-9c8e-20260652a74c}</Project>
       <Name>Dilemma.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dilemma.Data\Dilemma.Data.csproj">
+      <Project>{81e63148-c585-4ad5-88bc-6ab47b6b0b89}</Project>
+      <Name>Dilemma.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Initialization\Dilemma.Initialization.csproj">
       <Project>{23333dcd-40c6-47bc-bca2-d76f54c4e763}</Project>

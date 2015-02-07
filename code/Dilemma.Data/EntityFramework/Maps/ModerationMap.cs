@@ -24,7 +24,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             HasOptional(p => p.Question).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Answer).WithMany().WillCascadeOnDelete(false);
 
-            HasMany(x => x.ModerationEntries).WithRequired(x => x.Moderation);
+            HasMany(x => x.ModerationEntries).WithRequired(x => x.Moderation).WillCascadeOnDelete(false);
         }
     }
 }

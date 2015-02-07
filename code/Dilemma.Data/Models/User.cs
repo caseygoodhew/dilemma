@@ -25,8 +25,13 @@ namespace Dilemma.Data.Models
         public UserType UserType { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of points that the user has.
+        /// Gets or sets the number of total points that the user has.
         /// </summary>
-        public int Points { get; set; }
+        public int TotalPoints { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the number of historic points that the user has.
+        /// </summary>
+        public int HistoricPoints { get; set; }
     }
 }

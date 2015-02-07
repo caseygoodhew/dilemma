@@ -14,13 +14,12 @@ namespace Dilemma.Data.Migrations
                         AnswerId = c.Int(nullable: false, identity: true),
                         Text = c.String(maxLength: 2000),
                         CreatedDateTime = c.DateTime(nullable: false),
-                        AnswerType = c.Int(nullable: false),
-                        IsApproved = c.Boolean(nullable: false),
+                        AnswerState = c.Int(nullable: false),
                         Question_QuestionId = c.Int(nullable: false),
                         User_UserId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.AnswerId)
-                .ForeignKey("dbo.Question", t => t.Question_QuestionId, cascadeDelete: true)
+                .ForeignKey("dbo.Question", t => t.Question_QuestionId)
                 .ForeignKey("dbo.User", t => t.User_UserId)
                 .Index(t => t.Question_QuestionId)
                 .Index(t => t.User_UserId);
@@ -34,7 +33,7 @@ namespace Dilemma.Data.Migrations
                         CreatedDateTime = c.DateTime(nullable: false),
                         ClosesDateTime = c.DateTime(nullable: false),
                         MaxAnswers = c.Int(nullable: false),
-                        IsApproved = c.Boolean(nullable: false),
+                        QuestionState = c.Int(nullable: false),
                         Category_CategoryId = c.Int(nullable: false),
                         User_UserId = c.Int(nullable: false),
                     })
@@ -60,6 +59,7 @@ namespace Dilemma.Data.Migrations
                         UserId = c.Int(nullable: false, identity: true),
                         CreatedDateTime = c.DateTime(nullable: false),
                         UserType = c.Int(nullable: false),
+                        HistoricPoints = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.UserId);
             
@@ -79,7 +79,7 @@ namespace Dilemma.Data.Migrations
                 c => new
                     {
                         ModerationEntryId = c.Int(nullable: false, identity: true),
-                        EntryType = c.Int(nullable: false),
+                        State = c.Int(nullable: false),
                         Message = c.String(),
                         CreatedDateTime = c.DateTime(nullable: false),
                         AddedByUser_UserId = c.Int(nullable: false),
@@ -87,7 +87,7 @@ namespace Dilemma.Data.Migrations
                     })
                 .PrimaryKey(t => t.ModerationEntryId)
                 .ForeignKey("dbo.User", t => t.AddedByUser_UserId)
-                .ForeignKey("dbo.Moderation", t => t.Moderation_ModerationId, cascadeDelete: true)
+                .ForeignKey("dbo.Moderation", t => t.Moderation_ModerationId)
                 .Index(t => t.AddedByUser_UserId)
                 .Index(t => t.Moderation_ModerationId);
             
@@ -97,7 +97,6 @@ namespace Dilemma.Data.Migrations
                     {
                         ModerationId = c.Int(nullable: false, identity: true),
                         ModerationFor = c.Int(nullable: false),
-                        State = c.Int(nullable: false),
                         Answer_AnswerId = c.Int(),
                         ForUser_UserId = c.Int(nullable: false),
                         Question_QuestionId = c.Int(),
@@ -134,6 +133,28 @@ namespace Dilemma.Data.Migrations
                 .Index(t => t.Question_QuestionId);
             
             CreateTable(
+                "dbo.PointConfiguration",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        PointType = c.Int(nullable: false),
+                        Name = c.String(),
+                        Description = c.String(),
+                        Points = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ServerConfiguration",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 100),
+                        ServerRole = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.SystemConfiguration",
                 c => new
                     {
@@ -144,10 +165,29 @@ namespace Dilemma.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id);
             
+            CreateTable(
+                "dbo.UserPoint",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        PointType = c.Int(nullable: false),
+                        PointsAwarded = c.Int(nullable: false),
+                        CreatedDateTime = c.DateTime(nullable: false),
+                        ForUser_UserId = c.Int(nullable: false),
+                        RelatedQuestion_QuestionId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.User", t => t.ForUser_UserId)
+                .ForeignKey("dbo.Question", t => t.RelatedQuestion_QuestionId)
+                .Index(t => t.ForUser_UserId)
+                .Index(t => t.RelatedQuestion_QuestionId);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.UserPoint", "RelatedQuestion_QuestionId", "dbo.Question");
+            DropForeignKey("dbo.UserPoint", "ForUser_UserId", "dbo.User");
             DropForeignKey("dbo.Notification", "Question_QuestionId", "dbo.Question");
             DropForeignKey("dbo.Notification", "Moderation_ModerationId", "dbo.Moderation");
             DropForeignKey("dbo.Notification", "ForUser_UserId", "dbo.User");
@@ -161,6 +201,8 @@ namespace Dilemma.Data.Migrations
             DropForeignKey("dbo.Question", "User_UserId", "dbo.User");
             DropForeignKey("dbo.Question", "Category_CategoryId", "dbo.Category");
             DropForeignKey("dbo.Answer", "Question_QuestionId", "dbo.Question");
+            DropIndex("dbo.UserPoint", new[] { "RelatedQuestion_QuestionId" });
+            DropIndex("dbo.UserPoint", new[] { "ForUser_UserId" });
             DropIndex("dbo.Notification", new[] { "Question_QuestionId" });
             DropIndex("dbo.Notification", new[] { "Moderation_ModerationId" });
             DropIndex("dbo.Notification", new[] { "ForUser_UserId" });
@@ -174,7 +216,10 @@ namespace Dilemma.Data.Migrations
             DropIndex("dbo.Question", new[] { "Category_CategoryId" });
             DropIndex("dbo.Answer", new[] { "User_UserId" });
             DropIndex("dbo.Answer", new[] { "Question_QuestionId" });
+            DropTable("dbo.UserPoint");
             DropTable("dbo.SystemConfiguration");
+            DropTable("dbo.ServerConfiguration");
+            DropTable("dbo.PointConfiguration");
             DropTable("dbo.Notification");
             DropTable("dbo.Moderation");
             DropTable("dbo.ModerationEntry");

@@ -23,6 +23,13 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
             _adminService.Value.SetSystemServerConfiguration(viewModel);
         }
 
+        public static void UpdateSystemEnvironment(SystemEnvironment systemEnvironment)
+        {
+            var ssc = GetSystemServerConfiguration();
+            ssc.SystemConfigurationViewModel.SystemEnvironment = systemEnvironment;
+            SetSystemServerConfiguration(ssc);
+        }
+
         public static TestingConfiguration GetTestingConfiguration()
         {
             return _adminService.Value.GetTestingConfiguration();

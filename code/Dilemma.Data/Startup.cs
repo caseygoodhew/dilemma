@@ -18,34 +18,58 @@ namespace Dilemma.Data
                 throw new InvalidOperationException("Already initialized");
             }
 
-            var serverName = ServerName.Get();
+            ValidateServerName();
 
-            if (String.IsNullOrEmpty(serverName))
-            {
-                InitializeServerName();
-            }
-            
             isInitialized = true;
         }
 
-        private static void InitializeServerName()
+        internal static void ValidateServerName()
         {
+            var registryName = ServerName.Get();
+
             using (var context = new DilemmaContext())
             {
-                var serverName = ServerName.GetNext(context.ServerConfiguration.Select(x => x.Name));
+                if (!string.IsNullOrEmpty(registryName))
+                {
+                    var dbName =
+                        context.ServerConfiguration.Where(x => x.Name == registryName)
+                            .Select(x => x.Name)
+                            .SingleOrDefault();
 
-                var serverConfiguration = new ServerConfiguration
-                                              {
-                                                  Name = serverName,
-                                                  ServerRole = ServerRole.Offline
-                                              };
+                    // if we have a regName and a dbName, we're good
+                    // if we have a regName and no dbName, it's a new db instance
+                    if (string.IsNullOrEmpty(dbName))
+                    {
+                        RegisterSeverName(context, registryName, false);
+                    }
+                }
+                    // if we don't have a regName, it's a new server
+                else
+                {
+                    RegisterSeverName(
+                        context,
+                        ServerName.GetNext(context.ServerConfiguration.Select(x => x.Name)),
+                        true);
+                }
+            }
+        }
 
-                context.ServerConfiguration.Add(serverConfiguration);
+        private static void RegisterSeverName(DilemmaContext context, string serverName, bool updateRegistry)
+        {
+            var serverConfiguration = new ServerConfiguration
+            {
+                Name = serverName,
+                ServerRole = ServerRole.Offline
+            };
 
-                context.SaveChangesVerbose();
+            context.ServerConfiguration.Add(serverConfiguration);
 
+            if (updateRegistry)
+            {
                 ServerName.Set(serverName);
             }
+
+            context.SaveChangesVerbose();
         }
     }
 }

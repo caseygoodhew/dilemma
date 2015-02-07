@@ -29,7 +29,7 @@ namespace Dilemma.Data.Repositories
         {
             var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
             
-            if (!systemConfiguration.IsInternalEnvironment)
+            if (!SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment))
             {
                 throw new UnauthorizedAccessException();
             }

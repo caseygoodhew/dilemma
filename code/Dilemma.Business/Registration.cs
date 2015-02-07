@@ -70,6 +70,7 @@ namespace Dilemma.Business
             ConverterFactory.Register<Notification, NotificationViewModel>(registrar, NotificationViewModelConverter.FromNotification);
             ConverterFactory.Register<Moderation, ModerationViewModel>(registrar, ModerationViewModelConverter.FromModeration);
             ConverterFactory.Register<ModerationEntry, ModerationEntryViewModel>(registrar, ModerationEntryViewModelConverter.FromModerationEntry);
+            ConverterFactory.Register<User, UserViewModel>(registrar, UserViewModelConverter.FromUser);
         }
     }
 }

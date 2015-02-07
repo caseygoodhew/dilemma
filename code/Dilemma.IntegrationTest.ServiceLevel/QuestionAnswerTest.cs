@@ -7,6 +7,7 @@ using Dilemma.Common;
 using Dilemma.IntegrationTest.ServiceLevel.Domains;
 using Dilemma.IntegrationTest.ServiceLevel.Support;
 
+using Disposable.Common.Extensions;
 using Disposable.Common.ServiceLocator;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -38,8 +39,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel
                     },
                     ServerConfigurationViewModel = new ServerConfigurationViewModel
                     {
-                        // TODO: this probably shouldn't be offline
-                        ServerRole = ServerRole.Offline
+                        ServerRole = ServerRole.Public
                     }
                 });
 
@@ -203,15 +203,26 @@ namespace Dilemma.IntegrationTest.ServiceLevel
         }
 
         [TestMethod]
-        public void OnlyAdminsCanGetAllQuestions()
+        public void GetAllQuestionsOnlyInInternalEnvironment()
         {
             SecurityManager.LoginNewAnonymous("Questioner");
             Questions.CreateNewQuestion("Question");
-
             SecurityManager.LoginNewAnonymous("Somebody Else");
 
-            var result = Questions.GetAllQuestions();
-            Assert.IsFalse(result.Any());
+            EnumExtensions.All<SystemEnvironment>().ToList().ForEach(
+                systemEnvironment =>
+                    {
+                        Administration.UpdateSystemEnvironment(systemEnvironment);
+                        var systemConfiguration =
+                            Administration.GetSystemServerConfiguration().SystemConfigurationViewModel;
+
+                        Assert.AreEqual(systemEnvironment, systemConfiguration.SystemEnvironment);
+
+                        var result = Questions.GetAllQuestions();
+                        
+                        // we should only get results for internal system environments
+                        Assert.AreEqual(SystemEnvironmentValidation.IsInternalEnvironment(systemEnvironment), result.Any());
+                    });
         }
 
         [TestMethod]

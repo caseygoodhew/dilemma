@@ -33,8 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.10\lib\net45\Disposable.Common.dll</HintPath>
+      <HintPath>..\packages\Disposable.Common.1.0.11\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.5.4.0.0\lib\Net40\FluentValidation.dll</HintPath>
@@ -106,6 +105,7 @@
     <Compile Include="ViewModels\ServerConfigurationViewModel.cs" />
     <Compile Include="ViewModels\SystemConfigurationViewModel.cs" />
     <Compile Include="ViewModels\SystemServerConfigurationViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

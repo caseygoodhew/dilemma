@@ -42,8 +42,8 @@ namespace Dilemma.Business.Services
             if (questionViewModel == null)
             {
                 questionViewModel = new CreateQuestionViewModel();
-                
-                if (systemConfiguration.IsInternalEnvironment)
+
+                if (SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment))
                 {
                     questionViewModel.Text = "\n\n\n\nThis text makes it easier to reach the minimum 50 character limit. This text will not show in a production environment.";
                 }
@@ -52,7 +52,7 @@ namespace Dilemma.Business.Services
             questionViewModel.Categories = SiteService.Value.GetCategories();
             questionViewModel.MaxAnswers = systemConfiguration.MaxAnswers;
             questionViewModel.QuestionLifetime = systemConfiguration.QuestionLifetime;
-            questionViewModel.ShowTestingOptions = systemConfiguration.IsInternalEnvironment;
+            questionViewModel.ShowTestingOptions = SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment);
 
             return questionViewModel;
         }
@@ -179,9 +179,11 @@ namespace Dilemma.Business.Services
             }
         }
 
-        private QuestionLifetime GetQuestionLifetime(SystemConfiguration systemConfiguration, CreateQuestionViewModel questionViewModel)
+        private static QuestionLifetime GetQuestionLifetime(SystemConfiguration systemConfiguration, CreateQuestionViewModel questionViewModel)
         {
-            return systemConfiguration.IsInternalEnvironment ? questionViewModel.QuestionLifetime : systemConfiguration.QuestionLifetime;
+            return SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment)
+                       ? questionViewModel.QuestionLifetime
+                       : systemConfiguration.QuestionLifetime;
         }
     }
 }

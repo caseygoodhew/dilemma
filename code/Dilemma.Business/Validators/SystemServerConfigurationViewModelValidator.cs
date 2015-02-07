@@ -30,7 +30,8 @@ namespace Dilemma.Business.Validators
                         {
                             var currentSettings = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
 
-                            if (currentSettings.IsInternalEnvironment)
+                            
+                            if (SystemEnvironmentValidation.IsInternalEnvironment(currentSettings.SystemEnvironment))
                             {
                                 return Enumerable.Empty<ValidationFailure>();
                             }

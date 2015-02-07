@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.10\lib\net45\Disposable.Common.dll</HintPath>
+      <HintPath>..\packages\Disposable.Common.1.0.11\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -63,6 +63,7 @@
     <Compile Include="ServerName.cs" />
     <Compile Include="ServerRole.cs" />
     <Compile Include="SystemEnvironment.cs" />
+    <Compile Include="SystemEnvironmentValidation.cs" />
     <Compile Include="TestingConfiguration.cs" />
     <Compile Include="TestingConfigurationDefaults.cs" />
     <Compile Include="UserRole.cs" />

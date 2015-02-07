@@ -22,10 +22,15 @@ namespace Dilemma.Data.Repositories
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
+        private static readonly Lazy<IInternalUserRepository> UserRepository = Locator.Lazy<IInternalUserRepository>();
+        
         private static readonly Lazy<IMessagePipe<QuestionDataAction>> QuestionMessagePipe = Locator.Lazy<IMessagePipe<QuestionDataAction>>();
         
         private static readonly Lazy<IMessagePipe<AnswerDataAction>> AnswerMessagePipe = Locator.Lazy<IMessagePipe<AnswerDataAction>>();
-        
+
+        private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
+            Locator.Lazy<IAdministrationRepository>();
+
         /// <summary>
         /// Creates a <see cref="Question"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="Question"/>.
         /// </summary>
@@ -78,6 +83,15 @@ namespace Dilemma.Data.Repositories
         /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         public IEnumerable<T> QuestionList<T>(int? userId) where T : class
         {
+            // Only allow unrestricted "GetAll" when we're on an internal environment. 
+            // The production environment could burn with a long running blocking query.
+            var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
+
+            if (!SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment))
+            {
+                return Enumerable.Empty<T>();
+            }
+            
             using (var context = new DilemmaContext())
             {
                 var questions =
@@ -393,7 +407,22 @@ namespace Dilemma.Data.Repositories
 
                     if (question != null)
                     {
-                        question.Answers.ForEach(x => x.Question = question);
+                        // get all users involved
+                        var users = question.Answers.Select(x => x.User).Add(question.User).ToList();
+                        
+                        var userTotalPoints = UserRepository.Value.GetTotalUserPoints(context, users.Select(x => x.UserId));
+
+                        // set the total points for each of the answer users
+                        users.ForEach(
+                            x =>
+                                { x.TotalPoints = userTotalPoints[x.UserId]; });
+                        
+                        // set the question for each answer
+                        question.Answers.ForEach(
+                            x =>
+                                {
+                                    x.Question = question;
+                                });
                     }
 
                     break;
@@ -424,4 +453,6 @@ namespace Dilemma.Data.Repositories
             return query.FirstOrDefault();
         }
     }
+
+    
 }

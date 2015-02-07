@@ -25,54 +25,59 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<Question> Questions { get; set; }
         
         /// <summary>
-        /// Gets or sets the <see cref="Answer"/> database set;
+        /// Gets or sets the <see cref="Answer"/> database set.
         /// </summary>
         public DbSet<Answer> Answers { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="SystemConfiguration"/> database set; 
+        /// Gets or sets the <see cref="SystemConfiguration"/> database set. 
         /// </summary>
         public DbSet<SystemConfiguration> SystemConfiguration { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="ServerConfiguration"/> database set; 
+        /// Gets or sets the <see cref="ServerConfiguration"/> database set. 
         /// </summary>
         public DbSet<ServerConfiguration> ServerConfiguration { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Categories"/> database set;
+        /// Gets or sets the <see cref="Categories"/> database set.
         /// </summary>
         public DbSet<Category> Categories { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Users"/> database set;
+        /// Gets or sets the <see cref="Users"/> database set.
         /// </summary>
         public DbSet<User> Users { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="DevelopmentUsers"/> database set;
+        /// Gets or sets the <see cref="DevelopmentUsers"/> database set.
         /// </summary>
         public DbSet<DevelopmentUser> DevelopmentUsers { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Notifications"/> database set;
+        /// Gets or sets the <see cref="Notifications"/> database set.
         /// </summary>
         public DbSet<Notification> Notifications { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Moderation"/> database set;
+        /// Gets or sets the <see cref="Moderation"/> database set.
         /// </summary>
         public DbSet<Moderation> Moderations { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="ModerationEntry"/> database set;
+        /// Gets or sets the <see cref="ModerationEntry"/> database set.
         /// </summary>
         public DbSet<ModerationEntry> ModerationEntries { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="PointConfigurations"/> database set;
+        /// Gets or sets the <see cref="PointConfigurations"/> database set.
         /// </summary>
         public DbSet<PointConfiguration> PointConfigurations { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="UserPoint"/> database set.
+        /// </summary>
+        public DbSet<UserPoint> UserPoints { get; set; }
 
         /// <summary>
         /// Called the first that the the DbContext is used in each session.
@@ -109,6 +114,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new NotificationMap());
             modelBuilder.Configurations.Add(new ModerationMap());
             modelBuilder.Configurations.Add(new ModerationEntryMap());
+            modelBuilder.Configurations.Add(new UserPointMap());
         }
     }
 }

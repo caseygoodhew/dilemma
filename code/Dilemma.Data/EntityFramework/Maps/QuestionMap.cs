@@ -22,7 +22,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             Property(p => p.ClosesDateTime).IsRequired();
             
             HasRequired(x => x.Category).WithMany().WillCascadeOnDelete(false);
-            HasMany(x => x.Answers).WithRequired(x => x.Question);
+            HasMany(x => x.Answers).WithRequired(x => x.Question).WillCascadeOnDelete(false);
 
             HasRequired(p => p.User).WithMany().WillCascadeOnDelete(false);
 

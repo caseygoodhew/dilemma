@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.10\lib\net45\Disposable.Common.dll</HintPath>
+      <HintPath>..\packages\Disposable.Common.1.0.11\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="Disposable.MessagePipe">
       <HintPath>..\packages\Disposable.MessagePipe.1.0.5\lib\net45\Disposable.MessagePipe.dll</HintPath>
@@ -83,6 +83,12 @@
     <Compile Include="EntityFramework\Initialization\CategoryInitialization.cs" />
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
     <Compile Include="EntityFramework\Maps\AnswerMap.cs" />
+    <Compile Include="EntityFramework\Maps\UserPointMap.cs" />
+    <Compile Include="Migrations\201502060552490_Migration.cs" />
+    <Compile Include="Migrations\201502060552490_Migration.Designer.cs">
+      <DependentUpon>201502060552490_Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserPoint.cs" />
     <Compile Include="EntityFramework\Maps\PointConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\ModerationEntryMap.cs" />
     <Compile Include="EntityFramework\Maps\ModerationMap.cs" />
@@ -92,34 +98,6 @@
     <Compile Include="EntityFramework\Maps\UserMap.cs" />
     <Compile Include="EntityFramework\Maps\SystemConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionMap.cs" />
-    <Compile Include="Migrations\201409300557391_Migration.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Migrations\201409300557391_Migration.Designer.cs">
-      <DependentUpon>201409300557391_Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410020618229_Migration1.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Migrations\201410020618229_Migration1.Designer.cs">
-      <DependentUpon>201410020618229_Migration1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410290620026_Migration2.cs" />
-    <Compile Include="Migrations\201410290620026_Migration2.Designer.cs">
-      <DependentUpon>201410290620026_Migration2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412151613485_Migration3.cs" />
-    <Compile Include="Migrations\201412151613485_Migration3.Designer.cs">
-      <DependentUpon>201412151613485_Migration3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501260715524_Migration4.cs" />
-    <Compile Include="Migrations\201501260715524_Migration4.Designer.cs">
-      <DependentUpon>201501260715524_Migration4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501280625563_Migration5.cs" />
-    <Compile Include="Migrations\201501280625563_Migration5.Designer.cs">
-      <DependentUpon>201501280625563_Migration5.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -142,6 +120,7 @@
     <Compile Include="Registration.cs" />
     <Compile Include="Repositories\AdministrationRepository.cs" />
     <Compile Include="Repositories\IInternalNotificationDistributor.cs" />
+    <Compile Include="Repositories\IInternalUserRepository.cs" />
     <Compile Include="Repositories\IPointsRepository.cs" />
     <Compile Include="Repositories\DevelopmentRepository.cs" />
     <Compile Include="Repositories\GetQuestionAs.cs" />
@@ -175,30 +154,15 @@
     <Content Include="Migrations\Manual.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409300557391_Migration.resx">
-      <DependentUpon>201409300557391_Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410020618229_Migration1.resx">
-      <DependentUpon>201410020618229_Migration1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410290620026_Migration2.resx">
-      <DependentUpon>201410290620026_Migration2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412151613485_Migration3.resx">
-      <DependentUpon>201412151613485_Migration3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501260715524_Migration4.resx">
-      <DependentUpon>201501260715524_Migration4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501280625563_Migration5.resx">
-      <DependentUpon>201501280625563_Migration5.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Dilemma.Common\Dilemma.Common.csproj">
       <Project>{9554F188-2EA1-4AF5-9C8E-20260652A74C}</Project>
       <Name>Dilemma.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502060552490_Migration.resx">
+      <DependentUpon>201502060552490_Migration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

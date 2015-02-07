@@ -24,6 +24,7 @@ namespace Dilemma.Web.Controllers
 
         private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
 
+        [AllowUserRole(UserRole.Administrator)]
         public ActionResult List()
         {
             var viewModel = new QuestionListViewModel { Questions = QuestionService.Value.GetAllQuestions() };
