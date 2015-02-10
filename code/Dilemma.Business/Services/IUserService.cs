@@ -1,4 +1,6 @@
-﻿namespace Dilemma.Business.Services
+﻿using Dilemma.Business.ViewModels;
+
+namespace Dilemma.Business.Services
 {
     /// <summary>
     /// The user service interface.
@@ -10,5 +12,17 @@
         /// </summary>
         /// <returns>The id of the new user.</returns>
         int CreateAnonymousUser();
+
+        /// <summary>
+        /// Gets the current user.
+        /// </summary>
+        UserViewModel GetCurrentUser();
+        
+        /// <summary>
+        /// Gets a user
+        /// </summary>
+        /// <param name="userId">The user id to get.</param>
+        /// <returns>The user view model.</returns>
+        UserViewModel GetUser(int userId);
     }
 }

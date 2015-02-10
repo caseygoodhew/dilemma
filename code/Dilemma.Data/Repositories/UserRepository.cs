@@ -6,6 +6,7 @@ using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 
+using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
 
@@ -41,11 +42,39 @@ namespace Dilemma.Data.Repositories
         }
 
         /// <summary>
+        /// Gets the <see cref="User"/> in the specified type. There must be a converter registered between <see cref="User"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to receive.</typeparam>
+        /// <param name="userId">The user id to retrieve.</param>
+        /// <returns>The <see cref="User"/> converted to type T.</returns>
+        public T GetUser<T>(int userId) where T : class
+        {
+            using (var context = new DilemmaContext())
+            {
+                var user = context.Users.Single(x => x.UserId == userId);
+                user.TotalPoints = GetTotalUserPoints(context, userId);
+                return ConverterFactory.ConvertOne<User, T>(user);
+            }
+        }
+
+        /// <summary>
+        /// Gets the total number of points for a user.
+        /// </summary>
+        /// <param name="context">The <see cref="DilemmaContext"/>.</param>
+        /// <param name="userId">The user id to get the points for.</param>
+        /// <returns>A dictionary of {UserId, TotalPoints}</returns>
+        public int GetTotalUserPoints(DilemmaContext context, int userId)
+        {
+            return GetTotalUserPoints(context, new[] { userId })[userId];
+        }
+
+        /// <summary>
         /// Gets the total number of points against a set of user ids.
         /// </summary>
         /// <param name="context">The <see cref="DilemmaContext"/>.</param>
         /// <param name="userIds">The user ids to get the points for.</param>
         /// <returns>A dictionary of {UserId, TotalPoints}</returns>
+        /// <remarks>This dictionary result will always have all userIds as keys.</remarks>
         public IDictionary<int, int> GetTotalUserPoints(DilemmaContext context, IEnumerable<int> userIds)
         {
             var userIdList = userIds as IList<int> ?? userIds.ToList();

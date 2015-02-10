@@ -12,7 +12,7 @@ using Disposable.Common.ServiceLocator;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Dilemma.IntegrationTest.ServiceLevel
+namespace Dilemma.IntegrationTest.ServiceLevel.Primary
 {
     [TestClass]
     public class QuestionAnswerTest : Support.IntegrationTest

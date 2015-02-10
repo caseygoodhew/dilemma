@@ -4,7 +4,7 @@ using Dilemma.IntegrationTest.ServiceLevel.Domains;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Dilemma.IntegrationTest.ServiceLevel
+namespace Dilemma.IntegrationTest.ServiceLevel.Primary
 {
     [TestClass]
     public class UserTest : Support.IntegrationTest

@@ -1,14 +1,10 @@
-using System;
-using System.Linq;
-
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.IntegrationTest.ServiceLevel.Domains;
-using Dilemma.IntegrationTest.ServiceLevel.Support;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Dilemma.IntegrationTest.ServiceLevel
+namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
 {
     [TestClass]
     public class PointTest : Support.IntegrationTest
@@ -33,17 +29,27 @@ namespace Dilemma.IntegrationTest.ServiceLevel
                     },
                     ServerConfigurationViewModel = new ServerConfigurationViewModel
                     {
-                        // TODO: this probably shouldn't be offline
-                        ServerRole = ServerRole.Offline
+                        ServerRole = ServerRole.Public
                     }
                 });
 
             Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Active);
+            Administration.UpdateTestingConfiguration(x => x.GetAnyUser = ActiveState.Active);
+            Administration.UpdateTestingConfiguration(x => x.UseTestingPoints = ActiveState.Active);
         }
 
         [TestMethod]
-        public void PointsAwardedOnQuestionAsked()
+        public void PointsAwardedOnQuestionAskedWithNoModeration()
         {
+            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Inactive);
+            SecurityManager.LoginNewAnonymous("Questioner");
+
+            var user = Users.GetUser("Questioner");
+            Assert.AreEqual(0, user.Points);
+            
+            Questions.CreateNewQuestion("Question");
+            user = Users.GetUser("Questioner");
+            Assert.AreEqual(Points.For(PointType.QuestionAsked), user.Points);
         }
     }
 }

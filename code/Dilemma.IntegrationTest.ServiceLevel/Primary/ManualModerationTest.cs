@@ -8,7 +8,7 @@ using Dilemma.IntegrationTest.ServiceLevel.Support;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Dilemma.IntegrationTest.ServiceLevel
+namespace Dilemma.IntegrationTest.ServiceLevel.Primary
 {
     [TestClass]
     public class ManualModerationTest : Support.IntegrationTest
@@ -33,8 +33,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel
                     },
                     ServerConfigurationViewModel = new ServerConfigurationViewModel
                     {
-                        // TODO: this probably shouldn't be offline
-                        ServerRole = ServerRole.Offline
+                        ServerRole = ServerRole.Public
                     }
                 });
 

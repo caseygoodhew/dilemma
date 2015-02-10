@@ -100,13 +100,26 @@ namespace Dilemma.Data.Repositories
         public void SetPointConfiguration<T>(T pointConfiguration) where T : class
         {
             var point = ConverterFactory.ConvertOne<T, PointConfiguration>(pointConfiguration);
+            
+            var systemConfiguration = GetSystemConfiguration<SystemConfiguration>();
+            var testingConfiguration = GetTestingConfiguration();
 
-            using (var context = new DilemmaContext())
+            if (
+                TestingConfiguration.NaturalComparison(
+                    new TestingConfigurationContext(systemConfiguration.SystemEnvironment, testingConfiguration),
+                    x => x.UseTestingPoints).Is(ActiveState.Active))
             {
-                context.PointConfigurations.Update(context, point);
-                context.SaveChangesVerbose();
+                testingConfiguration.PointDictionary[point.PointType] = point.Points;
+            }
+            else
+            {
+                using (var context = new DilemmaContext())
+                {
+                    context.PointConfigurations.Update(context, point);
+                    context.SaveChangesVerbose();
 
-                Cache.Value.Expire<List<PointConfiguration>>();
+                    Cache.Value.Expire<List<PointConfiguration>>();
+                }    
             }
         }
 
@@ -122,7 +135,7 @@ namespace Dilemma.Data.Repositories
 
         private IEnumerable<PointConfiguration> GetPointConfigurations() 
         {
-            return Cache.Value.Get(
+            var pointConfiguration = Cache.Value.Get(
                 () =>
                 {
                     using (var context = new DilemmaContext())
@@ -130,6 +143,24 @@ namespace Dilemma.Data.Repositories
                         return context.PointConfigurations.ToList();
                     }
                 });
+
+            var systemConfiguration = GetSystemConfiguration<SystemConfiguration>();
+            var testingConfiguration = GetTestingConfiguration();
+            
+            if (
+                TestingConfiguration.NaturalComparison(
+                    new TestingConfigurationContext(systemConfiguration.SystemEnvironment, testingConfiguration),
+                    x => x.UseTestingPoints).Is(ActiveState.Active))
+            {
+                pointConfiguration.ForEach(
+                    x =>
+                        {
+                            x.Points = testingConfiguration.PointDictionary[x.PointType];
+                        });
+            }
+            
+            
+            return pointConfiguration;
         }
 
         private static void ExpireCache()

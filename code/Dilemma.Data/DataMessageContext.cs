@@ -1,5 +1,4 @@
 using System;
-using System.CodeDom;
 
 using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
@@ -42,14 +41,7 @@ namespace Dilemma.Data
 
         public NaturalComparison<T> TestingConfigurationProperty<T>(Func<ITestingConfiguration, T> settingLocator) where T : IComparable
         {
-            ITestingConfiguration instance = TestingConfigurationDefaults.Instance;
-            
-            if (SystemConfiguration.SystemEnvironment == SystemEnvironment.Testing)
-            {
-                instance = TestingConfiguration;
-            }
-
-            return new NaturalComparison<T>(settingLocator.Invoke(instance));
+            return TestingConfiguration.NaturalComparison(new TestingConfigurationContext(SystemConfiguration.SystemEnvironment, TestingConfiguration), settingLocator);
         }
     }
 }

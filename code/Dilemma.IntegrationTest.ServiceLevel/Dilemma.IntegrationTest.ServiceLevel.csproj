@@ -68,14 +68,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="PointTest.cs" />
+    <Compile Include="Domains\Points.cs" />
+    <Compile Include="Secondary\PointTest.cs" />
     <Compile Include="Domains\Administration.cs" />
     <Compile Include="Domains\Answers.cs" />
     <Compile Include="Domains\ManualModeration.cs" />
     <Compile Include="Domains\Notifications.cs" />
     <Compile Include="Domains\Questions.cs" />
-    <Compile Include="ManualModerationTest.cs" />
-    <Compile Include="NotificationTest.cs" />
+    <Compile Include="Primary\ManualModerationTest.cs" />
+    <Compile Include="Secondary\NotificationTest.cs" />
     <Compile Include="Support\IntegrationTest.cs" />
     <Compile Include="Domains\ObjectDictionary.cs" />
     <Compile Include="Domains\ObjectType.cs" />
@@ -89,8 +90,8 @@
     <Compile Include="Support\TestNotWrittenException.cs" />
     <Compile Include="Support\TimeWarpSource.cs" />
     <Compile Include="Support\TimeWarpTo.cs" />
-    <Compile Include="QuestionAnswerTest.cs" />
-    <Compile Include="UserTest.cs" />
+    <Compile Include="Primary\QuestionAnswerTest.cs" />
+    <Compile Include="Primary\UserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domains\Users.cs" />
   </ItemGroup>
