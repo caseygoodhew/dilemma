@@ -35,6 +35,8 @@ namespace Dilemma.Data
             registrar.Register<IInternalNotificationDistributor>(() => new NotificationDistributor());
             registrar.Register<IManualModerationRepository>(() => new ManualModerationRepository());
             registrar.Register<IInternalManualModerationRepository>(() => new ManualModerationRepository());
+            registrar.Register<IInternalPointsRepository>(() => new PointsRepository());
+            registrar.Register<IInternalPointDistributor>(() => new PointDistributor());
 
             registrar.CreatePipe<QuestionDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<AnswerDataAction>(MessengerType.Stepping, InitiateMessagePipe);
@@ -65,6 +67,7 @@ namespace Dilemma.Data
         private static void InitiateMessagePipe(IMessagePipe<ModerationState> messagePipe)
         {
             messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Approved, x => x.OnModerationStateUpdated);
+            messagePipe.Locator<ModerationState, IInternalPointDistributor>(ModerationState.Approved, x => x.OnModerationApproved);
 
             messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Rejected, x => x.OnModerationStateUpdated);
             messagePipe.Locator<ModerationState, IInternalNotificationDistributor>(ModerationState.Rejected, x => x.OnModerationRejected);

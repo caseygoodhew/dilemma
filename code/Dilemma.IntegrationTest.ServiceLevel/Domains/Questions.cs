@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using Dilemma.Business.Services;
@@ -33,6 +34,14 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
         public static int CreateNewQuestion(string reference)
         {
             return SaveNewQuestion(reference, FillDefaults(InitNewQuestion()));
+        }
+
+        public static int CreateAndApproveQuestion(string reference)
+        {
+            var questionId = SaveNewQuestion(reference, FillDefaults(InitNewQuestion()));
+            var moderation = ManualModeration.GetNextForUser(SecurityManager.GetUserId());
+            ManualModeration.Approve(moderation.ModerationId);
+            return questionId;
         }
 
         public static IEnumerable<QuestionViewModel> GetAllQuestions()

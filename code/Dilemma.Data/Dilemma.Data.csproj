@@ -120,8 +120,10 @@
     <Compile Include="Registration.cs" />
     <Compile Include="Repositories\AdministrationRepository.cs" />
     <Compile Include="Repositories\IInternalNotificationDistributor.cs" />
+    <Compile Include="Repositories\IInternalPointDistributor.cs" />
     <Compile Include="Repositories\IInternalUserRepository.cs" />
-    <Compile Include="Repositories\IPointsRepository.cs" />
+    <Compile Include="Repositories\PointDistributor.cs" />
+    <Compile Include="Repositories\IInternalPointsRepository.cs" />
     <Compile Include="Repositories\DevelopmentRepository.cs" />
     <Compile Include="Repositories\GetQuestionAs.cs" />
     <Compile Include="Repositories\IDevelopmentRepository.cs" />
@@ -137,7 +139,7 @@
     <Compile Include="Repositories\ManualModerationRepository.cs" />
     <Compile Include="Repositories\NotificationDistributor.cs" />
     <Compile Include="Repositories\NotificationRepository.cs" />
-    <Compile Include="Repositories\PointsRepository.cs" />
+    <Compile Include="Repositories\InternalPointsRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\SiteRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

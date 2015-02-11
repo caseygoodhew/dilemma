@@ -9,7 +9,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
     [TestClass]
     public class PointTest : Support.IntegrationTest
     {
-        public PointTest() : base(false)
+        public PointTest() : base(true)
         {
         }
 
@@ -41,13 +41,13 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
         [TestMethod]
         public void PointsAwardedOnQuestionAskedWithNoModeration()
         {
-            Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Inactive);
             SecurityManager.LoginNewAnonymous("Questioner");
 
             var user = Users.GetUser("Questioner");
             Assert.AreEqual(0, user.Points);
             
-            Questions.CreateNewQuestion("Question");
+            Questions.CreateAndApproveQuestion("Question");
+
             user = Users.GetUser("Questioner");
             Assert.AreEqual(Points.For(PointType.QuestionAsked), user.Points);
         }
