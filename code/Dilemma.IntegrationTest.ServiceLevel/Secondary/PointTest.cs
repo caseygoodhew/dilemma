@@ -1,6 +1,7 @@
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.IntegrationTest.ServiceLevel.Domains;
+using Dilemma.IntegrationTest.ServiceLevel.Support;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -50,6 +51,48 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
 
             user = Users.GetUser("Questioner");
             Assert.AreEqual(Points.For(PointType.QuestionAsked), user.Points);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void PointsAwardedOnQuestionAnsweredWithNoModeration()
+        {
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void PointsAwardedOnGettingStarVote()
+        {
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void PointsAwardedOnVoting()
+        {
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void PointsAwardedOnPopularVote()
+        {
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void PointsAwardedOnComingBackToTheSite()
+        {
+            
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void PointsAwardedOnRegularContributor()
+        {
+            
         }
     }
 }
