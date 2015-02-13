@@ -9,5 +9,7 @@ namespace Dilemma.Data.Repositories
     internal interface IInternalPointsRepository
     {
         void AwardPoints(DilemmaContext context, int forUserId, PointType pointType, int? referenceId = null);
+
+        void RemovePoints(DilemmaContext dataContext, int userId, PointType voteRegistered, int questionId);
     }
 }

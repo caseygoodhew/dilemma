@@ -28,6 +28,8 @@ namespace Dilemma.Data.Repositories
         
         private static readonly Lazy<IMessagePipe<AnswerDataAction>> AnswerMessagePipe = Locator.Lazy<IMessagePipe<AnswerDataAction>>();
 
+        private static readonly Lazy<IMessagePipe<VotingDataAction>> VotingMessagePipe = Locator.Lazy<IMessagePipe<VotingDataAction>>();
+
         private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
             Locator.Lazy<IAdministrationRepository>();
 
@@ -227,6 +229,96 @@ namespace Dilemma.Data.Repositories
                 AnswerMessagePipe.Value.Announce(messageContext);
 
                 return true;
+            }
+        }
+
+        /// <summary>
+        /// Registers a users vote for an answer.
+        /// </summary>
+        /// <param name="userId">The user id of the user that is voting.</param>
+        /// <param name="answerId">The answer to register the vote against.</param>
+        public void RegisterVote(int userId, int answerId)
+        {
+            using (var context = new DilemmaContext())
+            {
+                var existingVote =
+                    context.Vote.Where(x => x.User.UserId == userId).SingleOrDefault(x => x.Answer.AnswerId == answerId);
+
+                if (existingVote != null)
+                {
+                    return;
+                }
+                
+                var votingMessageContext =
+                    context.Answers.Where(x => x.AnswerId == answerId)
+                        .Select(
+                            x =>
+                            new VotingMessageContext(
+                                VotingDataAction.VoteRegistered,
+                                context,
+                                userId,
+                                x.Question.QuestionId,
+                                x.Question.User.UserId,
+                                answerId,
+                                x.User.UserId))
+                        .Single();
+
+                var vote = new Vote
+                                   {
+                                       CreatedDateTime = TimeSource.Value.Now,
+                                       User = context.GetOrAttachNew<User, int>(userId, x => x.UserId),
+                                       Question = context.GetOrAttachNew<Question, int>(votingMessageContext.QuestionId, x => x.QuestionId),
+                                       Answer = context.GetOrAttachNew<Answer, int>(answerId, x => x.AnswerId)
+                                   };
+
+                context.Vote.Add(vote);
+
+                context.SaveChangesVerbose();
+
+                VotingMessagePipe.Value.Announce(votingMessageContext);
+            }
+        }
+
+        /// <summary>
+        /// Deregisters a users vote for an answer.
+        /// </summary>
+        /// <param name="userId">The user id of the user that is deregistering their vote.</param>
+        /// <param name="answerId">The answer to deregister the vote against.</param>
+        public void DeregisterVote(int userId, int answerId)
+        {
+            using (var context = new DilemmaContext())
+            {
+                var result =
+                    context.Vote.Where(x => x.User.UserId == userId)
+                        .Where(x => x.Answer.AnswerId == answerId)
+                        .Select(
+                            x => new
+                                     {
+                                         VoteId = x.Id,
+                                         VotingMessageContext =
+                                             new VotingMessageContext(
+                                                 VotingDataAction.VoteDeregistered,
+                                                 context,
+                                                 x.User.UserId,
+                                                 x.Question.QuestionId,
+                                                 x.Question.User.UserId,
+                                                 x.Answer.AnswerId,
+                                                 x.Answer.User.UserId)
+                                     }).SingleOrDefault();
+                    
+
+                if (result == null)
+                {
+                    return;
+                }
+
+                var vote = context.GetOrAttachNew<Vote, int>(result.VoteId, x => x.Id);
+
+                context.Vote.Remove(vote);
+
+                context.SaveChangesVerbose();
+
+                VotingMessagePipe.Value.Announce(result.VotingMessageContext);
             }
         }
 

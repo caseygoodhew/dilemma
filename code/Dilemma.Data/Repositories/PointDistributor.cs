@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 using Dilemma.Common;
 
@@ -26,13 +27,45 @@ namespace Dilemma.Data.Repositories
                     break;
                 case ModerationFor.Answer:
                     pointType = PointType.AnswerProvided;
-                    referenceId = messageContext.Moderation.Question.QuestionId;
+                    var answerId = messageContext.Moderation.Answer.AnswerId;
+                    referenceId =
+                        messageContext.DataContext.Answers
+                            .Where(x => x.AnswerId == answerId)
+                            .Select(x => x.Question.QuestionId)
+                            .Single();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
             PointsRepository.Value.AwardPoints(messageContext.DataContext, messageContext.Moderation.ForUser.UserId, pointType, referenceId);
+
+            messenger.Forward();
+        }
+
+        public void OnVoteRegistered(IMessenger<VotingDataAction> messenger)
+        {
+            var messageContext = messenger.GetContext<VotingMessageContext>(VotingDataAction.VoteRegistered);
+
+            PointsRepository.Value.AwardPoints(messageContext.DataContext, messageContext.UserId, PointType.VoteRegistered, messageContext.QuestionId);
+            
+            messenger.Forward();
+        }
+
+        public void OnVoteDeregistered(IMessenger<VotingDataAction> messenger)
+        {
+            var messageContext = messenger.GetContext<VotingMessageContext>(VotingDataAction.VoteDeregistered);
+
+            PointsRepository.Value.RemovePoints(messageContext.DataContext, messageContext.UserId, PointType.VoteRegistered, messageContext.QuestionId);
+            
+            messenger.Forward();
+        }
+
+        public void OnStarVoteRegistered(IMessenger<VotingDataAction> messenger)
+        {
+            var messageContext = messenger.GetContext<VotingMessageContext>(VotingDataAction.StarVoteRegistered);
+
+            PointsRepository.Value.AwardPoints(messageContext.DataContext, messageContext.AnswerUserId, PointType.StarVoteReceived, messageContext.QuestionId);
 
             messenger.Forward();
         }

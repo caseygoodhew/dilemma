@@ -1,3 +1,5 @@
+using System;
+
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.IntegrationTest.ServiceLevel.Domains;
@@ -10,7 +12,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
     [TestClass]
     public class PointTest : Support.IntegrationTest
     {
-        public PointTest() : base(true)
+        public PointTest() : base(false)
         {
         }
 
@@ -40,36 +42,70 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
         }
 
         [TestMethod]
-        public void PointsAwardedOnQuestionAskedWithNoModeration()
+        public void PointsAwardedOnQuestionAskedAfterModeration()
         {
             SecurityManager.LoginNewAnonymous("Questioner");
 
-            var user = Users.GetUser("Questioner");
-            Assert.AreEqual(0, user.Points);
+            AssertUserPoints("Questioner", 0);
             
+            Questions.CreateNewQuestion("Question");
+
+            AssertUserPoints("Questioner", 0);
+
+            var moderation = ManualModeration.GetNextForUser("Questioner");
+            ManualModeration.Approve(moderation.ModerationId);
+            
+            AssertUserPoints("Questioner", Points.For(PointType.QuestionAsked));
+        }
+
+        [TestMethod]
+        public void PointsAwardedOnQuestionAnsweredAfterModeration()
+        {
+            SecurityManager.LoginNewAnonymous("Questioner");
             Questions.CreateAndApproveQuestion("Question");
+            AssertUserPoints("Questioner", Points.For(PointType.QuestionAsked));
 
-            user = Users.GetUser("Questioner");
-            Assert.AreEqual(Points.For(PointType.QuestionAsked), user.Points);
-        }
+            // verify one answer is added correctly
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            AssertUserPoints("Answerer One", 0);
 
-        [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
-        public void PointsAwardedOnQuestionAnsweredWithNoModeration()
-        {
+            Answers.RequestAnswerSlot("Question", "Answer One");
+            Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer One"));
+            AssertUserPoints("Answerer One", 0);
+
+            ManualModeration.Approve(ManualModeration.GetNextForUser("Answerer One").ModerationId);
+            AssertUserPoints("Answerer One", Points.For(PointType.AnswerProvided));
+
+            // verify points are awarded to correct users
+            Action<string, string> setupAnswer = (userReference, answerReference) =>
+                {
+                    SecurityManager.LoginNewAnonymous(userReference);
+                    Answers.RequestAnswerSlot("Question", answerReference);
+                    Answers.CompleteAnswer("Question", Answers.FillDefaults(answerReference));
+                    AssertUserPoints(userReference, 0);
+                };
+
+            setupAnswer("Answerer Two", "Answer Two");
+            setupAnswer("Answerer Three", "Answer Three");
             
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
-        public void PointsAwardedOnGettingStarVote()
-        {
+            ManualModeration.Approve(ManualModeration.GetNextForUser("Answerer Two").ModerationId);
             
+            AssertUserPoints("Questioner", Points.For(PointType.QuestionAsked));
+            AssertUserPoints("Answerer One", Points.For(PointType.AnswerProvided));
+            AssertUserPoints("Answerer Two", Points.For(PointType.AnswerProvided));
+            AssertUserPoints("Answerer Three", 0);
         }
 
         [TestMethod]
         [ExpectedException(typeof(TestNotWrittenException))]
         public void PointsAwardedOnVoting()
+        {
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void PointsAwardedOnGettingStarVote()
         {
             
         }
@@ -93,6 +129,12 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
         public void PointsAwardedOnRegularContributor()
         {
             
+        }
+
+        private static void AssertUserPoints(string userReference, int points)
+        {
+            var user = Users.GetUser(userReference);
+            Assert.AreEqual(points, user.Points);
         }
     }
 }

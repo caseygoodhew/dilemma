@@ -63,5 +63,19 @@ namespace Dilemma.Data.Repositories
         /// <param name="answerType">The convertable instance.</param>
         /// <returns>true if the answer was saved, false if the answer slot was no longer available.</returns>
         bool CompleteAnswer<T>(int userId, int questionId, T answerType) where T : class;
+
+        /// <summary>
+        /// Registers a users vote for an answer.
+        /// </summary>
+        /// <param name="userId">The user id of the user that is voting.</param>
+        /// <param name="answerId">The answer to register the vote against.</param>
+        void RegisterVote(int userId, int answerId);
+
+        /// <summary>
+        /// Deregisters a users vote for an answer.
+        /// </summary>
+        /// <param name="userId">The user id of the user that is deregistering their vote.</param>
+        /// <param name="answerId">The answer to deregister the vote against.</param>
+        void DeregisterVote(int userId, int answerId);
     }
 }

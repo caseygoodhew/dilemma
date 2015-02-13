@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 
 using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
@@ -19,8 +20,18 @@ namespace Dilemma.Data
             }
 
             ValidateServerName();
+            InitializeData();
 
             isInitialized = true;
+        }
+
+        private static void InitializeData()
+        {
+            using (var context = new DilemmaContext())
+            {
+                DilemmaInitializer.Seeder(context);
+                context.SaveChangesVerbose();
+            }
         }
 
         internal static void ValidateServerName()

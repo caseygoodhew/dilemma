@@ -41,6 +41,7 @@ namespace Dilemma.Data
             registrar.CreatePipe<QuestionDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<AnswerDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<ModerationState>(MessengerType.Stepping, InitiateMessagePipe);
+            registrar.CreatePipe<VotingDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             
             ConverterFactory.Register<Question>(registrar);
             ConverterFactory.Register<Answer>(registrar);
@@ -71,6 +72,13 @@ namespace Dilemma.Data
 
             messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Rejected, x => x.OnModerationStateUpdated);
             messagePipe.Locator<ModerationState, IInternalNotificationDistributor>(ModerationState.Rejected, x => x.OnModerationRejected);
+        }
+
+        private static void InitiateMessagePipe(IMessagePipe<VotingDataAction> messagePipe)
+        {
+            messagePipe.Locator<VotingDataAction, IInternalPointDistributor>(VotingDataAction.VoteRegistered, x => x.OnVoteRegistered);
+            messagePipe.Locator<VotingDataAction, IInternalPointDistributor>(VotingDataAction.VoteDeregistered, x => x.OnVoteDeregistered);
+            messagePipe.Locator<VotingDataAction, IInternalPointDistributor>(VotingDataAction.StarVoteRegistered, x => x.OnStarVoteRegistered);
         }
     }
 }

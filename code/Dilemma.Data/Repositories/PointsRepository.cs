@@ -52,5 +52,10 @@ namespace Dilemma.Data.Repositories
 
             context.SaveChangesVerbose();
         }
+
+        public void RemovePoints(DilemmaContext dataContext, int userId, PointType voteRegistered, int questionId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

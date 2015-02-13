@@ -84,9 +84,14 @@
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
     <Compile Include="EntityFramework\Maps\AnswerMap.cs" />
     <Compile Include="EntityFramework\Maps\UserPointMap.cs" />
+    <Compile Include="EntityFramework\Maps\VoteMap.cs" />
     <Compile Include="Migrations\201502060552490_Migration.cs" />
     <Compile Include="Migrations\201502060552490_Migration.Designer.cs">
       <DependentUpon>201502060552490_Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502130707588_Migration1.cs" />
+    <Compile Include="Migrations\201502130707588_Migration1.Designer.cs">
+      <DependentUpon>201502130707588_Migration1.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\UserPoint.cs" />
     <Compile Include="EntityFramework\Maps\PointConfigurationMap.cs" />
@@ -112,6 +117,7 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Vote.cs" />
     <Compile Include="ModerationMessageContext.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,11 +145,13 @@
     <Compile Include="Repositories\ManualModerationRepository.cs" />
     <Compile Include="Repositories\NotificationDistributor.cs" />
     <Compile Include="Repositories\NotificationRepository.cs" />
-    <Compile Include="Repositories\InternalPointsRepository.cs" />
+    <Compile Include="Repositories\PointsRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\SiteRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="VotingDataAction.cs" />
+    <Compile Include="VotingMessageContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -164,6 +172,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201502060552490_Migration.resx">
       <DependentUpon>201502060552490_Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502130707588_Migration1.resx">
+      <DependentUpon>201502130707588_Migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

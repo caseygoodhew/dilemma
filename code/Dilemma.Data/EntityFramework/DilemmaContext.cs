@@ -80,6 +80,11 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<UserPoint> UserPoints { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="Vote"/> database set.
+        /// </summary>
+        public DbSet<Vote> Vote { get; set; }
+
+        /// <summary>
         /// Called the first that the the DbContext is used in each session.
         /// </summary>
         public static void Startup()
@@ -90,7 +95,7 @@ namespace Dilemma.Data.EntityFramework
             //      a database for the first time. The default strategy for Code First contexts is an 
             //      instance of CreateDatabaseIfNotExists<TContext>.
             // This appears to be broken - if we allow EF6 to initialize the database it seems to 
-            // always / frequently think that the bd is out of date. It throws an exception that a migrate 
+            // always / frequently think that the db is out of date. It throws an exception that a migrate 
             // needs to be performed, only to not find any differences during the migration generation phase.
             Database.SetInitializer<DilemmaContext>(null);
         }
@@ -115,6 +120,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new ModerationMap());
             modelBuilder.Configurations.Add(new ModerationEntryMap());
             modelBuilder.Configurations.Add(new UserPointMap());
+            modelBuilder.Configurations.Add(new VoteMap());
         }
     }
 }

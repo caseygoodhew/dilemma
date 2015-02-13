@@ -11,5 +11,11 @@ namespace Dilemma.Data.Repositories
         /// </summary>
         /// <param name="messenger">The <see cref="IMessenger{ModerationState}"/>.</param>
         void OnModerationApproved(IMessenger<ModerationState> messenger);
+
+        void OnVoteRegistered(IMessenger<VotingDataAction> messenger);
+
+        void OnVoteDeregistered(IMessenger<VotingDataAction> messenger);
+
+        void OnStarVoteRegistered(IMessenger<VotingDataAction> messenger);
     }
 }
