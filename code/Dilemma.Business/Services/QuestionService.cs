@@ -147,6 +147,34 @@ namespace Dilemma.Business.Services
             return QuestionRepository.Value.CompleteAnswer(userId, questionId, answerViewModel);
         }
 
+        /// <summary>
+        /// Registers a users vote for an answer.
+        /// </summary>
+        /// <param name="answerId">The answer to register the vote against.</param>
+        public void RegisterVote(int answerId)
+        {
+            var userId = SecurityManager.Value.GetUserId();
+            QuestionRepository.Value.RegisterVote(userId, answerId);
+        }
+
+        /// <summary>
+        /// Deregisters a users vote for an answer.
+        /// </summary>
+        /// <param name="answerId">The answer to deregister the vote against.</param>
+        public void DeregisterVote(int answerId)
+        {
+            var userId = SecurityManager.Value.GetUserId();
+            var questionOwnerUserId = QuestionRepository.Value.GetQuestionUserIdByAnswerId(answerId);
+
+            // cannot remove star vote
+            if (userId == questionOwnerUserId)
+            {
+                return;
+            }
+
+            QuestionRepository.Value.DeregisterVote(userId, answerId);
+        }
+
         private void SetMaxAnswers(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
         {
             if (systemConfiguration.SystemEnvironment == SystemEnvironment.Production || !questionViewModel.MaxAnswers.HasValue)

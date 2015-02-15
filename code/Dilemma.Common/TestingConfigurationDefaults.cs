@@ -22,20 +22,24 @@ namespace Dilemma.Common
         private TestingConfigurationDefaults()
         {
             var random = new Random();
-            var value1 = 0;
-            var value2 = 1;
-
-            // set the values as a fibonacci sequence to reduce the possibility of confusing duplicate point assignment as a single value (1, 2, 3, 4...)
-            // randomize the order that the dictionary is generated in to reduce repeatability and error masking
+            var values = new[] { 0, 1, 2 };
+            
+            // Set the values as a fibonacci sequence to reduce the possibility of confusing duplicate point assignment as a single value (1, 2, 3, 4...).
+            // Use every other value in sequence to futher reduce.
+            // Randomize the order that the dictionary is generated in to reduce repeatability and error masking.
             PointDictionary =
                 new ReadOnlyDictionary<PointType, int>(
                     EnumExtensions.All<PointType>().OrderBy(order => random.Next()).ToDictionary(
                         x => x,
                         x =>
                             {
-                                var result = value1 + value2;
-                                value1 = value2;
-                                return value2 = result;
+                                var result = values[1] + values[2];
+                                
+                                values[0] = values[2];
+                                values[1] = result;
+                                values[2] = values[0] + values[1];
+                                
+                                return result;
                             }));
         }
 

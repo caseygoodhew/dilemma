@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -261,8 +262,13 @@ namespace Dilemma.Data.Repositories
                                 x.Question.User.UserId,
                                 answerId,
                                 x.User.UserId))
-                        .Single();
+                        .SingleOrDefault();
 
+                if (votingMessageContext == null)
+                {
+                    return;
+                }
+                
                 var vote = new Vote
                                    {
                                        CreatedDateTime = TimeSource.Value.Now,
@@ -319,6 +325,22 @@ namespace Dilemma.Data.Repositories
                 context.SaveChangesVerbose();
 
                 VotingMessagePipe.Value.Announce(result.VotingMessageContext);
+            }
+        }
+
+        /// <summary>
+        /// Gets the user id of the user who posted the question.
+        /// </summary>
+        /// <param name="answerId">The answer id of the question to find.</param>
+        /// <returns>The user id of the user who posted the questions.</returns>
+        public int GetQuestionUserIdByAnswerId(int answerId)
+        {
+            using (var context = new DilemmaContext())
+            {
+                return
+                    context.Answers.Where(x => x.AnswerId == answerId)
+                        .Select(x => x.Question.User.UserId)
+                        .SingleOrDefault();
             }
         }
 
@@ -503,16 +525,24 @@ namespace Dilemma.Data.Repositories
                         var users = question.Answers.Select(x => x.User).Add(question.User).ToList();
                         
                         var userTotalPoints = UserRepository.Value.GetTotalUserPoints(context, users.Select(x => x.UserId));
-
+                        
                         // set the total points for each of the answer users
                         users.ForEach(
                             x =>
-                                { x.TotalPoints = userTotalPoints[x.UserId]; });
+                                {
+                                    x.TotalPoints = userTotalPoints[x.UserId];
+                                });
+
+                        var voteCounts = GetVoteCountsForQuestion(context, questionId);
                         
                         // set the question for each answer
                         question.Answers.ForEach(
                             x =>
                                 {
+                                    x.UserVotes = voteCounts.ContainsKey(x.AnswerId)
+                                                      ? voteCounts[x.AnswerId]
+                                                      : new List<int>();
+
                                     x.Question = question;
                                 });
                     }
@@ -524,6 +554,16 @@ namespace Dilemma.Data.Repositories
             }
 
             return ConverterFactory.ConvertOne<Question, T>(question);
+        }
+
+        private static IDictionary<int, List<int>> GetVoteCountsForQuestion(DilemmaContext context, int questionId)
+        {
+            return context.Vote.Where(x => x.Question.QuestionId == questionId).Select(
+                x => new
+                         {
+                             x.Answer.AnswerId,
+                             x.User.UserId
+                         }).GroupBy(x => x.AnswerId).ToDictionary(g => g.Key, g => g.Select(x => x.UserId).ToList());
         }
 
         private static Answer GetAnswerInProgress(DilemmaContext context, int userId, int questionId, int? answerId)

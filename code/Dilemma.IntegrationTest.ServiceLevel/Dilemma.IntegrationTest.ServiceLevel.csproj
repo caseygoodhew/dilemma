@@ -69,6 +69,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Domains\Points.cs" />
+    <Compile Include="Primary\VotingTest.cs" />
     <Compile Include="Secondary\PointTest.cs" />
     <Compile Include="Domains\Administration.cs" />
     <Compile Include="Domains\Answers.cs" />

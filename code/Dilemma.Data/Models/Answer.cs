@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Dilemma.Common;
 
@@ -38,5 +39,10 @@ namespace Dilemma.Data.Models
         /// Gets or sets the user who created the answer.
         /// </summary>
         public User User { get; set; }
+
+        /// <summary>
+        /// Gets or sets a list of users who have voted for this answer.
+        /// </summary>
+        public IList<int> UserVotes { get; set; }
     }
 }

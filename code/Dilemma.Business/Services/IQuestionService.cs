@@ -68,5 +68,17 @@ namespace Dilemma.Business.Services
         /// <param name="answerViewModel">The <see cref="AnswerViewModel"/> to save.</param>
         /// <returns>Flag indicating if the answer was completed.</returns>
         bool CompleteAnswer(int questionId, AnswerViewModel answerViewModel);
+
+        /// <summary>
+        /// Registers a users vote for an answer.
+        /// </summary>
+        /// <param name="answerId">The answer to register the vote against.</param>
+        void RegisterVote(int answerId);
+
+        /// <summary>
+        /// Deregisters a users vote for an answer.
+        /// </summary>
+        /// <param name="answerId">The answer to deregister the vote against.</param>
+        void DeregisterVote(int answerId);
     }
 }

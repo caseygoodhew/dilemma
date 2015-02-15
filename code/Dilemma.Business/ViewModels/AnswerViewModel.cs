@@ -40,5 +40,15 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets a value indicating whether the answer has been rejected.
         /// </summary>
         public bool IsRejected { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vote count for the answer.
+        /// </summary>
+        public int VoteCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the current user has voted for this answer.
+        /// </summary>
+        public bool HasMyVote { get; set; }
     }
 }

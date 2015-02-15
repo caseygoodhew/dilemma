@@ -77,5 +77,12 @@ namespace Dilemma.Data.Repositories
         /// <param name="userId">The user id of the user that is deregistering their vote.</param>
         /// <param name="answerId">The answer to deregister the vote against.</param>
         void DeregisterVote(int userId, int answerId);
+
+        /// <summary>
+        /// Gets the user id of the user who posted the question.
+        /// </summary>
+        /// <param name="answerId">The answer id of the question to find.</param>
+        /// <returns>The user id of the user who posted the questions.</returns>
+        int GetQuestionUserIdByAnswerId(int answerId);
     }
 }

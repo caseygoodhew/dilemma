@@ -50,6 +50,20 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
                 answerViewModel);
         }
 
+        public static int? RequestAndCompleteAnswer(string questionReference, string answerReference)
+        {
+            var answerId = RequestAnswerSlot(
+                ObjectDictionary.Get<int>(ObjectType.Question, questionReference),
+                answerReference);
+
+            if (answerId.HasValue)
+            {
+                CompleteAnswer(questionReference, FillDefaults(answerReference));
+            }
+
+            return answerId;
+        }
+
         public static AnswerViewModel FillDefaults(string reference)
         {
             return FillDefaults(new AnswerViewModel
@@ -63,6 +77,26 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
             viewModel.Text = "Integration testing answer";
 
             return viewModel;
+        }
+
+        public static void RegisterVote(string reference)
+        {
+            RegisterVote(ObjectDictionary.Get<int>(ObjectType.Answer, reference));
+        }
+
+        public static void RegisterVote(int answerId)
+        {
+            _questionService.Value.RegisterVote(answerId);
+        }
+
+        public static void DeregisterVote(string reference)
+        {
+            DeregisterVote(ObjectDictionary.Get<int>(ObjectType.Answer, reference));
+        }
+
+        public static void DeregisterVote(int answerId)
+        {
+            _questionService.Value.DeregisterVote(answerId);
         }
     }
 }

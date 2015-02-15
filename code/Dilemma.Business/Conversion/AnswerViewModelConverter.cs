@@ -48,7 +48,9 @@ namespace Dilemma.Business.Conversion
                     CreatedDateTime = model.CreatedDateTime,
                     IsMyAnswer = model.User.UserId == userId,
                     IsApproved = model.AnswerState == AnswerState.Approved,
-                    IsRejected = model.AnswerState == AnswerState.Rejected
+                    IsRejected = model.AnswerState == AnswerState.Rejected,
+                    VoteCount = model.UserVotes.Count,
+                    HasMyVote = model.UserVotes.Contains(userId)
                 };
         }
     }
