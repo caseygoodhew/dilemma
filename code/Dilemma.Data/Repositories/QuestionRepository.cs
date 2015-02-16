@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Xml;
 
 using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
@@ -242,33 +243,45 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var existingVote =
-                    context.Vote.Where(x => x.User.UserId == userId).SingleOrDefault(x => x.Answer.AnswerId == answerId);
-
-                if (existingVote != null)
-                {
-                    return;
-                }
-                
-                var votingMessageContext =
-                    context.Answers.Where(x => x.AnswerId == answerId)
-                        .Select(
-                            x =>
-                            new VotingMessageContext(
-                                VotingDataAction.VoteRegistered,
-                                context,
-                                userId,
-                                x.Question.QuestionId,
-                                x.Question.User.UserId,
-                                answerId,
-                                x.User.UserId))
-                        .SingleOrDefault();
+                var votingMessageContext = context.Answers.Where(x => x.AnswerId == answerId).Select(
+                    x => new
+                             {
+                                 VotingUserId = userId,
+                                 QuestionId = x.Question.QuestionId,
+                                 QuestionUserId = x.Question.User.UserId,
+                                 AnswerId = answerId,
+                                 AnswerUserId = x.User.UserId
+                             })
+                    .ToList()
+                    .Select(
+                        x =>
+                        new VotingMessageContext(
+                            VotingDataAction.VoteRegistered,
+                            context,
+                            x.VotingUserId,
+                            x.QuestionId,
+                            x.QuestionUserId,
+                            x.AnswerId,
+                            x.AnswerUserId))
+                    .SingleOrDefault();
 
                 if (votingMessageContext == null)
                 {
                     return;
                 }
-                
+
+                var existingVote =
+                    context.Vote.Where(x => x.User.UserId == userId)
+                        .Where(
+                            x =>
+                               x.Answer.AnswerId == votingMessageContext.AnswerId
+                            || x.Question.QuestionId == votingMessageContext.QuestionId);
+
+                if (existingVote.Any())
+                {
+                    return;
+                }
+
                 var vote = new Vote
                                    {
                                        CreatedDateTime = TimeSource.Value.Now,
@@ -301,24 +314,32 @@ namespace Dilemma.Data.Repositories
                             x => new
                                      {
                                          VoteId = x.Id,
-                                         VotingMessageContext =
-                                             new VotingMessageContext(
-                                                 VotingDataAction.VoteDeregistered,
-                                                 context,
-                                                 x.User.UserId,
-                                                 x.Question.QuestionId,
-                                                 x.Question.User.UserId,
-                                                 x.Answer.AnswerId,
-                                                 x.Answer.User.UserId)
-                                     }).SingleOrDefault();
-                    
-
+                                         VotingUserId = userId,
+                                         QuestionId = x.Question.QuestionId,
+                                         QuestionUserId = x.Question.User.UserId,
+                                         AnswerId = answerId,
+                                         AnswerUserId = x.User.UserId
+                                     }).ToList().Select(
+                                         x => new
+                                                  {
+                                                      VoteId = x.VoteId,
+                                                      VotingMessageContext =
+                                                          new VotingMessageContext(
+                                                              VotingDataAction.VoteRegistered,
+                                                              context,
+                                                              x.VotingUserId,
+                                                              x.QuestionId,
+                                                              x.QuestionUserId,
+                                                              x.AnswerId,
+                                                              x.AnswerUserId)
+                                                  }).SingleOrDefault();
+                
                 if (result == null)
                 {
                     return;
                 }
 
-                var vote = context.GetOrAttachNew<Vote, int>(result.VoteId, x => x.Id);
+                var vote = context.Vote.Single(x => x.Id == result.VoteId);
 
                 context.Vote.Remove(vote);
 

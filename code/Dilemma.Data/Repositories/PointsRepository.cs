@@ -33,6 +33,8 @@ namespace Dilemma.Data.Repositories
                 {
                     case PointType.QuestionAsked:
                     case PointType.AnswerProvided:
+                    case PointType.VoteRegistered:
+                    case PointType.StarVoteReceived:
                         relatedQuestion = context.GetOrAttachNew<Question, int>(referenceId.Value, x => x.QuestionId);
                         break;
                     default:

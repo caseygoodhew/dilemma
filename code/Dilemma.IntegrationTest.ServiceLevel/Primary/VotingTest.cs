@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.IntegrationTest.ServiceLevel.Domains;
@@ -25,7 +28,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
                     {
                         SystemConfigurationViewModel = new SystemConfigurationViewModel
                                                            {
-                                                               MaxAnswers = 3,
+                                                               MaxAnswers = 5,
                                                                QuestionLifetime = QuestionLifetime.FiveMinutes,
                                                                SystemEnvironment = SystemEnvironment.Testing
                                                            },
@@ -41,61 +44,287 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
         public void QuestionerCanAddStarVote()
         {
+            /*** CREATE QUESTION ***/
             SecurityManager.LoginNewAnonymous("Questioner");
             Questions.CreateNewQuestion("Question");
+
+            /*** ADD ANSWERS ***/
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            var answerOneId = Answers.RequestAndCompleteAnswer("Question", "Answer One").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Two");
+            var answerTwoId = Answers.RequestAndCompleteAnswer("Question", "Answer Two").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Three");
+            var answerThreeId = Answers.RequestAndCompleteAnswer("Question", "Answer Three").Value;
+
+            /*** REGISTER VOTE ***/
+            SecurityManager.SetUserId("Questioner");
+            Answers.RegisterVote(answerTwoId);
+
+            /*** ASSERT ***/
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+            
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerOneId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerOneId).HasMyVote);
+
+            Assert.AreEqual(1, question.Answers.Single(x => x.AnswerId == answerTwoId).VoteCount);
+            Assert.IsTrue(question.Answers.Single(x => x.AnswerId == answerTwoId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerThreeId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerThreeId).HasMyVote);
+        }
+
+        [TestMethod]
+        public void QuestionerCannotRemoveStarVote()
+        {
+            /*** CREATE QUESTION ***/
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            /*** ADD ANSWER ***/
             SecurityManager.LoginNewAnonymous("Answerer");
             Answers.RequestAndCompleteAnswer("Question", "Answer");
 
+            /*** REGISTER VOTE ***/
             SecurityManager.SetUserId("Questioner");
             Answers.RegisterVote("Answer");
 
-            var question = Questions.GetQuestion("Question");
-            int y = 0;
+            /*** ASSERT ***/
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+
+            Assert.AreEqual(1, question.Answers.Single().VoteCount);
+            Assert.IsTrue(question.Answers.Single().HasMyVote);
+
+            // this should have no effect
+            Answers.DeregisterVote("Answer");
+
+            Assert.AreEqual(1, question.Answers.Single().VoteCount);
+            Assert.IsTrue(question.Answers.Single().HasMyVote);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
-        public void QuestionerCannotRemoveStarVote()
-        {
-
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
         public void QuestionerCannotAddTwoStarVotes()
         {
+            /*** CREATE QUESTION ***/
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
 
+            /*** ADD ANSWERS ***/
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            var answerOneId = Answers.RequestAndCompleteAnswer("Question", "Answer One").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Two");
+            var answerTwoId = Answers.RequestAndCompleteAnswer("Question", "Answer Two").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Three");
+            var answerThreeId = Answers.RequestAndCompleteAnswer("Question", "Answer Three").Value;
+
+            /*** REGISTER VOTE ***/
+            SecurityManager.SetUserId("Questioner");
+            Answers.RegisterVote(answerTwoId);
+            Answers.RegisterVote(answerThreeId);
+
+            /*** ASSERT ***/
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerOneId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerOneId).HasMyVote);
+
+            Assert.AreEqual(1, question.Answers.Single(x => x.AnswerId == answerTwoId).VoteCount);
+            Assert.IsTrue(question.Answers.Single(x => x.AnswerId == answerTwoId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerThreeId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerThreeId).HasMyVote);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
         public void AnswererCanVoteOnTheirOwnAnswer()
         {
+            /*** CREATE QUESTION ***/
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
 
+            /*** ADD ANSWERS ***/
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            var answerOneId = Answers.RequestAndCompleteAnswer("Question", "Answer One").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Two");
+            var answerTwoId = Answers.RequestAndCompleteAnswer("Question", "Answer Two").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Three");
+            var answerThreeId = Answers.RequestAndCompleteAnswer("Question", "Answer Three").Value;
+
+            /*** REGISTER VOTE ***/
+            SecurityManager.SetUserId("Answerer Two");
+            Answers.RegisterVote(answerTwoId);
+
+            /*** ASSERT ***/
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerOneId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerOneId).HasMyVote);
+
+            Assert.AreEqual(1, question.Answers.Single(x => x.AnswerId == answerTwoId).VoteCount);
+            Assert.IsTrue(question.Answers.Single(x => x.AnswerId == answerTwoId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerThreeId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerThreeId).HasMyVote);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
         public void AnswererCanVoteOnAnotherAnswer()
         {
+            /*** CREATE QUESTION ***/
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
 
+            /*** ADD ANSWERS ***/
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            var answerOneId = Answers.RequestAndCompleteAnswer("Question", "Answer One").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Two");
+            var answerTwoId = Answers.RequestAndCompleteAnswer("Question", "Answer Two").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Three");
+            var answerThreeId = Answers.RequestAndCompleteAnswer("Question", "Answer Three").Value;
+
+            /*** REGISTER VOTE ***/
+            SecurityManager.SetUserId("Answerer Two");
+            Answers.RegisterVote(answerOneId);
+
+            /*** ASSERT ***/
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+
+            Assert.AreEqual(1, question.Answers.Single(x => x.AnswerId == answerOneId).VoteCount);
+            Assert.IsTrue(question.Answers.Single(x => x.AnswerId == answerOneId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerTwoId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerTwoId).HasMyVote);
+            
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerThreeId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerThreeId).HasMyVote);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
         public void ViewerCanVoteOnAnswers()
         {
+            /*** CREATE QUESTION ***/
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
 
+            /*** ADD ANSWERS ***/
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            var answerOneId = Answers.RequestAndCompleteAnswer("Question", "Answer One").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Two");
+            var answerTwoId = Answers.RequestAndCompleteAnswer("Question", "Answer Two").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Three");
+            var answerThreeId = Answers.RequestAndCompleteAnswer("Question", "Answer Three").Value;
+
+            /*** REGISTER VOTE ***/
+            SecurityManager.LoginNewAnonymous("Viewer");
+            Answers.RegisterVote(answerOneId);
+
+            /*** ASSERT ***/
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+
+            Assert.AreEqual(1, question.Answers.Single(x => x.AnswerId == answerOneId).VoteCount);
+            Assert.IsTrue(question.Answers.Single(x => x.AnswerId == answerOneId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerTwoId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerTwoId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerThreeId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerThreeId).HasMyVote);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
         public void ViewerCanRecastTheirVote()
         {
+            /*** CREATE QUESTION ***/
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
 
+            /*** ADD ANSWERS ***/
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            var answerOneId = Answers.RequestAndCompleteAnswer("Question", "Answer One").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Two");
+            var answerTwoId = Answers.RequestAndCompleteAnswer("Question", "Answer Two").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Three");
+            var answerThreeId = Answers.RequestAndCompleteAnswer("Question", "Answer Three").Value;
+
+            /*** REGISTER VOTE ***/
+            SecurityManager.LoginNewAnonymous("Viewer");
+            Answers.RegisterVote(answerOneId);
+
+            /*** ASSERT ***/
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+
+            Assert.AreEqual(1, question.Answers.Single(x => x.AnswerId == answerOneId).VoteCount);
+            Assert.IsTrue(question.Answers.Single(x => x.AnswerId == answerOneId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerTwoId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerTwoId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerThreeId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerThreeId).HasMyVote);
+
+            /*** RECAST VOTE ***/
+            Answers.DeregisterVote(answerOneId);
+            Answers.RegisterVote(answerTwoId);
+
+            /*** ASSERT ***/
+            question = Questions.GetQuestion("Question").QuestionViewModel;
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerOneId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerOneId).HasMyVote);
+
+            Assert.AreEqual(1, question.Answers.Single(x => x.AnswerId == answerTwoId).VoteCount);
+            Assert.IsTrue(question.Answers.Single(x => x.AnswerId == answerTwoId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerThreeId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerThreeId).HasMyVote);
+        }
+
+        [TestMethod]
+        public void ViewerCannotRegisterMultipleVotes()
+        {
+            /*** CREATE QUESTION ***/
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question");
+
+            /*** ADD ANSWERS ***/
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            var answerOneId = Answers.RequestAndCompleteAnswer("Question", "Answer One").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Two");
+            var answerTwoId = Answers.RequestAndCompleteAnswer("Question", "Answer Two").Value;
+
+            SecurityManager.LoginNewAnonymous("Answerer Three");
+            var answerThreeId = Answers.RequestAndCompleteAnswer("Question", "Answer Three").Value;
+
+            /*** REGISTER VOTE ***/
+            SecurityManager.LoginNewAnonymous("Viewer");
+            Answers.RegisterVote(answerOneId);
+            Answers.RegisterVote(answerTwoId);
+
+            /*** ASSERT ***/
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+
+            Assert.AreEqual(1, question.Answers.Single(x => x.AnswerId == answerOneId).VoteCount);
+            Assert.IsTrue(question.Answers.Single(x => x.AnswerId == answerOneId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerTwoId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerTwoId).HasMyVote);
+
+            Assert.AreEqual(0, question.Answers.Single(x => x.AnswerId == answerThreeId).VoteCount);
+            Assert.IsFalse(question.Answers.Single(x => x.AnswerId == answerThreeId).HasMyVote);
         }
 
         [TestMethod]

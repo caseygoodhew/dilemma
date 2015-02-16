@@ -93,6 +93,14 @@
     <Compile Include="Migrations\201502130707588_Migration1.Designer.cs">
       <DependentUpon>201502130707588_Migration1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502160713157_Migration2.cs" />
+    <Compile Include="Migrations\201502160713157_Migration2.Designer.cs">
+      <DependentUpon>201502160713157_Migration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502160714266_Migration3.cs" />
+    <Compile Include="Migrations\201502160714266_Migration3.Designer.cs">
+      <DependentUpon>201502160714266_Migration3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserPoint.cs" />
     <Compile Include="EntityFramework\Maps\PointConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\ModerationEntryMap.cs" />
@@ -175,6 +183,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502130707588_Migration1.resx">
       <DependentUpon>201502130707588_Migration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502160713157_Migration2.resx">
+      <DependentUpon>201502160713157_Migration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502160714266_Migration3.resx">
+      <DependentUpon>201502160714266_Migration3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
