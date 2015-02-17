@@ -83,6 +83,7 @@
     <Compile Include="EntityFramework\Initialization\CategoryInitialization.cs" />
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
     <Compile Include="EntityFramework\Maps\AnswerMap.cs" />
+    <Compile Include="EntityFramework\Maps\QuestionRetirementMap.cs" />
     <Compile Include="EntityFramework\Maps\UserPointMap.cs" />
     <Compile Include="EntityFramework\Maps\VoteMap.cs" />
     <Compile Include="Migrations\201502060552490_Migration.cs" />
@@ -101,6 +102,11 @@
     <Compile Include="Migrations\201502160714266_Migration3.Designer.cs">
       <DependentUpon>201502160714266_Migration3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502170655100_Migration4.cs" />
+    <Compile Include="Migrations\201502170655100_Migration4.Designer.cs">
+      <DependentUpon>201502170655100_Migration4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestionRetirement.cs" />
     <Compile Include="Models\UserPoint.cs" />
     <Compile Include="EntityFramework\Maps\PointConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\ModerationEntryMap.cs" />
@@ -189,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502160714266_Migration3.resx">
       <DependentUpon>201502160714266_Migration3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502170655100_Migration4.resx">
+      <DependentUpon>201502170655100_Migration4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

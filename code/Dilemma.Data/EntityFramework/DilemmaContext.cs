@@ -121,6 +121,9 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new ModerationEntryMap());
             modelBuilder.Configurations.Add(new UserPointMap());
             modelBuilder.Configurations.Add(new VoteMap());
+            modelBuilder.Configurations.Add(new QuestionRetirementMap());
+            modelBuilder.Configurations.Add(new ModerationRetirementMap());
+            modelBuilder.Configurations.Add(new UserPointRetirementMap());
         }
     }
 }
