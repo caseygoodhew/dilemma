@@ -243,5 +243,12 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
             var thirdAnswerId = Answers.RequestAnswerSlot("Question", "Answer");
             Assert.AreEqual(firstAnswerId, thirdAnswerId);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
+        public void QuestionsExpire()
+        {
+            Administration.RetireOldQuestions();
+        }
     }
 }

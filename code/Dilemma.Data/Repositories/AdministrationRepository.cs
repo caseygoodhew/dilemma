@@ -5,6 +5,7 @@ using System.Linq;
 using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
+using Dilemma.Data.Models.Virtual;
 
 using Disposable.Caching;
 using Disposable.Common.Conversion;
@@ -131,6 +132,15 @@ namespace Dilemma.Data.Repositories
         public IEnumerable<T> GetPointConfigurations<T>() where T : class
         {
             return ConverterFactory.ConvertMany<PointConfiguration, T>(GetPointConfigurations());
+        }
+
+        public void RetireOldQuestions()
+        {
+            using (var context = new DilemmaContext())
+            {
+                // we don't expect a result, but if we don't ToList then the query doesn't execute
+                var result = context.Database.SqlQuery<RetireOldQuestions>("RetireOldQuestions").ToList();
+            }
         }
 
         private IEnumerable<PointConfiguration> GetPointConfigurations() 

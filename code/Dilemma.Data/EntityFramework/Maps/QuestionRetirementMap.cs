@@ -1,6 +1,7 @@
 using System.Data.Entity.ModelConfiguration;
 
 using Dilemma.Data.Models;
+using Dilemma.Data.Models.Virtual;
 
 namespace Dilemma.Data.EntityFramework.Maps
 {

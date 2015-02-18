@@ -43,5 +43,10 @@ namespace Dilemma.Data.Models
         /// Gets or sets the <see cref="SystemEnvironment"/>.
         /// </summary>
         public SystemEnvironment SystemEnvironment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of days until a question is retired (deleted) after it is scheduled to close.
+        /// </summary>
+        public int RetireQuestionAfterDays { get; set; }
     }
 }

@@ -22,7 +22,8 @@ namespace Dilemma.Data.EntityFramework.Initialization
                 {
                     MaxAnswers = 10,
                     QuestionLifetime = QuestionLifetime.OneDay,
-                    SystemEnvironment = SystemEnvironment.Production
+                    SystemEnvironment = SystemEnvironment.Production,
+                    RetireQuestionAfterDays = 14
                 });
             }
         }

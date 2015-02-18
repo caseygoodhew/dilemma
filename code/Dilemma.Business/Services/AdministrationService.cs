@@ -68,5 +68,10 @@ namespace Dilemma.Business.Services
         {
             return AdministrationRepository.Value.GetPointConfigurations<PointConfigurationViewModel>();
         }
+
+        public void RetireOldQuestions()
+        {
+            AdministrationRepository.Value.RetireOldQuestions();
+        }
     }
 }

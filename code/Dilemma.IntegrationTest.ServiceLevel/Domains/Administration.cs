@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
+using Dilemma.Data.Repositories;
 
 using Disposable.Common.ServiceLocator;
 
@@ -65,6 +66,11 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
         public static PointConfigurationViewModel GetPointConfiguration(PointType pointType)
         {
             throw new NotImplementedException();
+        }
+
+        public static void RetireOldQuestions()
+        {
+            _adminService.Value.RetireOldQuestions();
         }
     }
 }

@@ -106,7 +106,13 @@
     <Compile Include="Migrations\201502170655100_Migration4.Designer.cs">
       <DependentUpon>201502170655100_Migration4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuestionRetirement.cs" />
+    <Compile Include="Migrations\201502180649315_Migration5.cs" />
+    <Compile Include="Migrations\201502180649315_Migration5.Designer.cs">
+      <DependentUpon>201502180649315_Migration5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Virtual\ModerationRetirement.cs" />
+    <Compile Include="Models\Virtual\QuestionRetirement.cs" />
+    <Compile Include="Models\Virtual\RetireOldQuestions.cs" />
     <Compile Include="Models\UserPoint.cs" />
     <Compile Include="EntityFramework\Maps\PointConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\ModerationEntryMap.cs" />
@@ -131,6 +137,7 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Virtual\UserPointRetirement.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="ModerationMessageContext.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -199,7 +206,11 @@
     <EmbeddedResource Include="Migrations\201502170655100_Migration4.resx">
       <DependentUpon>201502170655100_Migration4.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502180649315_Migration5.resx">
+      <DependentUpon>201502180649315_Migration5.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

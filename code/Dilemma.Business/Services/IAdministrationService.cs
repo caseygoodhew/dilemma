@@ -33,5 +33,7 @@ namespace Dilemma.Business.Services
         PointConfigurationViewModel GetPointConfiguration(PointType pointType);
 
         IEnumerable<PointConfigurationViewModel> GetPointConfigurations();
+
+        void RetireOldQuestions();
     }
 }
