@@ -12,6 +12,40 @@ GO
 
 
 
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF OBJECT_ID ( 'CloseQuestions', 'P' ) IS NOT NULL 
+    DROP PROCEDURE CloseQuestions;
+GO
+
+CREATE PROCEDURE CloseQuestions
+AS
+    UPDATE Question
+       SET ClosedDateTime = GETDATE()
+     WHERE QuestionId IN (
+        SELECT q.QuestionId
+          FROM Question q, (
+            SELECT Question_QuestionId QuestionId, COUNT(*) AnswerCount
+              FROM Answer
+             WHERE AnswerState = 2 -- Approved Answer
+             GROUP BY Question_QuestionId
+          ) a
+         WHERE q.QuestionId = a.QuestionId
+           AND q.QuestionState = 1 -- Approved Question
+           AND q.ClosedDateTime IS NULL
+           AND (q.MaxAnswers = a.AnswerCount OR q.ClosesDateTime < GETDATE()))
+GO
+
+
+
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -30,7 +64,8 @@ AS
     (QuestionId)
     SELECT q.QuestionId
       FROM Question q, SystemConfiguration sc
-     WHERE DATEADD(dd, sc.RetireQuestionAfterDays, q.ClosesDateTime) < GETDATE()
+     WHERE q.ClosedDateTime IS NOT NULL
+	   AND DATEADD(dd, sc.RetireQuestionAfterDays, q.ClosedDateTime) < GETDATE()
 
     INSERT INTO UserPointRetirement
     (UserId, TotalPoints)
@@ -94,3 +129,7 @@ AS
     DELETE FROM QuestionRetirement
 
 GO
+
+
+
+

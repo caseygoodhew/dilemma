@@ -246,6 +246,13 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
 
         [TestMethod]
         [ExpectedException(typeof(TestNotWrittenException))]
+        public void CloseQuestions()
+        {
+            Administration.CloseQuestions();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TestNotWrittenException))]
         public void QuestionsExpire()
         {
             Administration.RetireOldQuestions();

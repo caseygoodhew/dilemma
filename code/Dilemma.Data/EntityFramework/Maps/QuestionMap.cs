@@ -20,6 +20,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             Property(p => p.MaxAnswers).IsRequired();
             Property(p => p.CreatedDateTime).IsRequired();
             Property(p => p.ClosesDateTime).IsRequired();
+            Property(p => p.ClosedDateTime).IsOptional();
             
             HasRequired(x => x.Category).WithMany().WillCascadeOnDelete(false);
             HasMany(x => x.Answers).WithRequired(x => x.Question).WillCascadeOnDelete(false);

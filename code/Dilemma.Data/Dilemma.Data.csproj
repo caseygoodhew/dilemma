@@ -110,6 +110,14 @@
     <Compile Include="Migrations\201502180649315_Migration5.Designer.cs">
       <DependentUpon>201502180649315_Migration5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502190614582_Migration6.cs" />
+    <Compile Include="Migrations\201502190614582_Migration6.Designer.cs">
+      <DependentUpon>201502190614582_Migration6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502190616099_Migration7.cs" />
+    <Compile Include="Migrations\201502190616099_Migration7.Designer.cs">
+      <DependentUpon>201502190616099_Migration7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Virtual\ModerationRetirement.cs" />
     <Compile Include="Models\Virtual\QuestionRetirement.cs" />
     <Compile Include="Models\Virtual\RetireOldQuestions.cs" />
@@ -208,6 +216,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502180649315_Migration5.resx">
       <DependentUpon>201502180649315_Migration5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502190614582_Migration6.resx">
+      <DependentUpon>201502190614582_Migration6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502190616099_Migration7.resx">
+      <DependentUpon>201502190616099_Migration7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -21,6 +21,11 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets the system environment.
         /// </summary>
         public SystemEnvironment SystemEnvironment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of days that a question retires after it closes.
+        /// </summary>
+        public int RetireQuestionAfterDays { get; set; }
     }
 }
 

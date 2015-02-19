@@ -72,5 +72,10 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
         {
             _adminService.Value.RetireOldQuestions();
         }
+
+        public static void CloseQuestions()
+        {
+            _adminService.Value.CloseQuestions();
+        }
     }
 }

@@ -19,7 +19,8 @@ namespace Dilemma.Business.Conversion
                        {
                            MaxAnswers = viewModel.MaxAnswers,
                            QuestionLifetime = viewModel.QuestionLifetime,
-                           SystemEnvironment = viewModel.SystemEnvironment
+                           SystemEnvironment = viewModel.SystemEnvironment,
+                           RetireQuestionAfterDays = viewModel.RetireQuestionAfterDays
                        };
         }
 
@@ -34,7 +35,8 @@ namespace Dilemma.Business.Conversion
                        {
                            MaxAnswers = model.MaxAnswers,
                            QuestionLifetime = model.QuestionLifetime,
-                           SystemEnvironment = model.SystemEnvironment
+                           SystemEnvironment = model.SystemEnvironment,
+                           RetireQuestionAfterDays = model.RetireQuestionAfterDays
                        };
         }
     }

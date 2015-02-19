@@ -32,6 +32,11 @@ namespace Dilemma.Data.Models
         public DateTime ClosesDateTime { get; set; }
 
         /// <summary>
+        /// Gets or sets the question closing date time.
+        /// </summary>
+        public DateTime? ClosedDateTime { get; set; }
+        
+        /// <summary>
         /// Gets or sets the question <see cref="Category"/>.
         /// </summary>
         public Category Category { get; set; }

@@ -14,7 +14,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Support
 
         protected IntegrationTest(bool doCommit)
         {
-            DoCommit = doCommit;
+            DoCommit = doCommit||true;
         }
 
         [TestInitialize]
