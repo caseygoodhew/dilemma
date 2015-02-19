@@ -143,6 +143,15 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        public void CloseQuestions()
+        {
+            using (var context = new DilemmaContext())
+            {
+                // we don't expect a result, but if we don't ToList then the query doesn't execute
+                var result = context.Database.SqlQuery<CloseQuestions>("CloseQuestions").ToList();
+            }
+        }
+
         private IEnumerable<PointConfiguration> GetPointConfigurations() 
         {
             var pointConfiguration = Cache.Value.Get(

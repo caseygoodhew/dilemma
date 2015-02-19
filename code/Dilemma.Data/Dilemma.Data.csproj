@@ -118,6 +118,7 @@
     <Compile Include="Migrations\201502190616099_Migration7.Designer.cs">
       <DependentUpon>201502190616099_Migration7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Virtual\CloseQuestions.cs" />
     <Compile Include="Models\Virtual\ModerationRetirement.cs" />
     <Compile Include="Models\Virtual\QuestionRetirement.cs" />
     <Compile Include="Models\Virtual\RetireOldQuestions.cs" />
