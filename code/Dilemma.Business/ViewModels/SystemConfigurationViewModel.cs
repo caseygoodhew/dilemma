@@ -26,6 +26,11 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets the number of days that a question retires after it closes.
         /// </summary>
         public int RetireQuestionAfterDays { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of minutes until an answer slot is expired (deleted) after it was last touched.
+        /// </summary>
+        public int ExpireAnswerSlotsAfterMinutes { get; set; }
     }
 }
 

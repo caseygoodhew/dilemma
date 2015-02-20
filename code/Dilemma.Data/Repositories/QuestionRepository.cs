@@ -167,6 +167,7 @@ namespace Dilemma.Data.Repositories
                 var answer = new Answer
                                  {
                                      CreatedDateTime = TimeSource.Value.Now,
+                                     LastTouchedDateTime = TimeSource.Value.Now,
                                      Question = question,
                                      User = new User { UserId = userId }
                                  };
@@ -200,6 +201,32 @@ namespace Dilemma.Data.Repositories
         }
 
         /// <summary>
+        /// Touches an answer so that the answer slot does not expire.
+        /// </summary>
+        /// <param name="userId">The user who is touching the answer.</param>
+        /// <param name="answerId">The id of the answer to touch.</param>
+        public void TouchAnswer(int userId, int answerId)
+        {
+            using (var context = new DilemmaContext())
+            {
+                var answer =
+                    context.Answers
+                            .Where(x => x.User.UserId == userId)
+                            .SingleOrDefault(x => x.AnswerId == answerId);
+
+                if (answer == null)
+                {
+                    return;
+                }
+
+                answer.LastTouchedDateTime = TimeSource.Value.Now;
+
+                context.Answers.Update(context, answer);
+                context.SaveChangesVerbose();
+            }
+        }
+
+        /// <summary>
         /// Completes an answer that is in an initial 'Answer slot' state.
         /// </summary>
         /// <typeparam name="T">The type to receive.</typeparam>
@@ -220,7 +247,7 @@ namespace Dilemma.Data.Repositories
                     return false;
                 }
 
-                existingAnswer.CreatedDateTime = TimeSource.Value.Now;
+                existingAnswer.LastTouchedDateTime = TimeSource.Value.Now;
                 existingAnswer.AnswerState = AnswerState.Approved;
                 existingAnswer.Text = answer.Text;
 

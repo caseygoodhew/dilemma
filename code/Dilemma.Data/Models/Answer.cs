@@ -26,6 +26,11 @@ namespace Dilemma.Data.Models
         public DateTime CreatedDateTime { get; set; }
 
         /// <summary>
+        /// Gets or sets the answer last touched date time.
+        /// </summary>
+        public DateTime LastTouchedDateTime { get; set; }
+
+        /// <summary>
         /// Gets or sets the question that the answer belongs to.
         /// </summary>
         public Question Question { get; set; }

@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.11\lib\net45\Disposable.Common.dll</HintPath>
+      <HintPath>..\packages\Disposable.Common.1.0.12\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="Disposable.Web.Caching">
       <HintPath>..\packages\Disposable.Web.Caching.1.0.6\lib\net45\Disposable.Web.Caching.dll</HintPath>

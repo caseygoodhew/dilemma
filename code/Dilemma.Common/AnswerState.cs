@@ -8,6 +8,7 @@
         ReservedSlot,
         ReadyForModeration,
         Approved,
-        Rejected
+        Rejected,
+        Expired
     }
 }

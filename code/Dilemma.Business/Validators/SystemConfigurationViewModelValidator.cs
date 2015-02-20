@@ -18,7 +18,8 @@ namespace Dilemma.Business.Validators
             RuleFor(x => x.MaxAnswers).InclusiveBetween(1, 10);
             RuleFor(x => x.QuestionLifetime).NotNull();
             RuleFor(x => x.SystemEnvironment).NotNull().NotEqual(SystemEnvironment.Testing);
-            RuleFor(x => x.RetireQuestionAfterDays).NotNull().GreaterThan(7);
+            RuleFor(x => x.RetireQuestionAfterDays).NotNull().GreaterThanOrEqualTo(7);
+            RuleFor(x => x.ExpireAnswerSlotsAfterMinutes).NotNull().GreaterThanOrEqualTo(10);
         }
     }
 }

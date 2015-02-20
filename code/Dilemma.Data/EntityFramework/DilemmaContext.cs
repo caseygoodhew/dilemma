@@ -85,6 +85,11 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<Vote> Vote { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="LastRunLog"/> database set.
+        /// </summary>
+        public DbSet<LastRunLog> LastRunLog { get; set; }
+
+        /// <summary>
         /// Called the first that the the DbContext is used in each session.
         /// </summary>
         public static void Startup()
@@ -124,6 +129,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new QuestionRetirementMap());
             modelBuilder.Configurations.Add(new ModerationRetirementMap());
             modelBuilder.Configurations.Add(new UserPointRetirementMap());
+            modelBuilder.Configurations.Add(new LastRunLogMap());
         }
     }
 }

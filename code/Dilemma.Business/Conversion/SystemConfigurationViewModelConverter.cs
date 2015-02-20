@@ -20,7 +20,8 @@ namespace Dilemma.Business.Conversion
                            MaxAnswers = viewModel.MaxAnswers,
                            QuestionLifetime = viewModel.QuestionLifetime,
                            SystemEnvironment = viewModel.SystemEnvironment,
-                           RetireQuestionAfterDays = viewModel.RetireQuestionAfterDays
+                           RetireQuestionAfterDays = viewModel.RetireQuestionAfterDays,
+                           ExpireAnswerSlotsAfterMinutes = viewModel.ExpireAnswerSlotsAfterMinutes
                        };
         }
 
@@ -36,7 +37,8 @@ namespace Dilemma.Business.Conversion
                            MaxAnswers = model.MaxAnswers,
                            QuestionLifetime = model.QuestionLifetime,
                            SystemEnvironment = model.SystemEnvironment,
-                           RetireQuestionAfterDays = model.RetireQuestionAfterDays
+                           RetireQuestionAfterDays = model.RetireQuestionAfterDays,
+                           ExpireAnswerSlotsAfterMinutes = model.ExpireAnswerSlotsAfterMinutes
                        };
         }
     }

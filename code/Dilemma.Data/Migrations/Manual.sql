@@ -21,6 +21,35 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+IF OBJECT_ID ( 'ExpireAnswerSlots', 'P' ) IS NOT NULL 
+    DROP PROCEDURE ExpireAnswerSlots;
+GO
+
+CREATE PROCEDURE ExpireAnswerSlots
+AS
+	UPDATE Answer
+	   SET AnswerState = 4
+	 WHERE AnswerId IN (	
+		SELECT AnswerId
+		  FROM Answer a, SystemConfiguration sc
+		 WHERE a.AnswerState = 0 
+		   AND DATEADD("mi", sc.ExpireAnswerSlotsAfterMinutes, a.LastTouchedDateTime) < GETUTCDATE())
+
+	UPDATE LastRunLog SET ExpireAnswerSlots = GETUTCDATE();
+GO
+
+
+
+
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
 IF OBJECT_ID ( 'CloseQuestions', 'P' ) IS NOT NULL 
     DROP PROCEDURE CloseQuestions;
 GO
@@ -28,7 +57,7 @@ GO
 CREATE PROCEDURE CloseQuestions
 AS
     UPDATE Question
-       SET ClosedDateTime = GETDATE()
+       SET ClosedDateTime = GETUTCDATE()
      WHERE QuestionId IN (
         SELECT q.QuestionId
           FROM Question q, (
@@ -40,8 +69,12 @@ AS
          WHERE q.QuestionId = a.QuestionId
            AND q.QuestionState = 1 -- Approved Question
            AND q.ClosedDateTime IS NULL
-           AND (q.MaxAnswers = a.AnswerCount OR q.ClosesDateTime < GETDATE()))
+           AND (q.MaxAnswers = a.AnswerCount OR q.ClosesDateTime < GETUTCDATE()))
+
+	UPDATE LastRunLog SET CloseQuestions = GETUTCDATE();
 GO
+
+
 
 
 
@@ -65,7 +98,7 @@ AS
     SELECT q.QuestionId
       FROM Question q, SystemConfiguration sc
      WHERE q.ClosedDateTime IS NOT NULL
-	   AND DATEADD(dd, sc.RetireQuestionAfterDays, q.ClosedDateTime) < GETDATE()
+	   AND DATEADD(dd, sc.RetireQuestionAfterDays, q.ClosedDateTime) < GETUTCDATE()
 
     INSERT INTO UserPointRetirement
     (UserId, TotalPoints)
@@ -128,6 +161,7 @@ AS
     DELETE FROM UserPointRetirement
     DELETE FROM QuestionRetirement
 
+	UPDATE LastRunLog SET RetireOldQuestions = GETUTCDATE();
 GO
 
 

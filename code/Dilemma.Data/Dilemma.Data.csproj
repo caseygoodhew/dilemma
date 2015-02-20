@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.11\lib\net45\Disposable.Common.dll</HintPath>
+      <HintPath>..\packages\Disposable.Common.1.0.12\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="Disposable.MessagePipe">
       <HintPath>..\packages\Disposable.MessagePipe.1.0.5\lib\net45\Disposable.MessagePipe.dll</HintPath>
@@ -78,11 +78,13 @@
     <Compile Include="EntityFramework\DilemmaContext.cs" />
     <Compile Include="EntityFramework\DilemmaInitializer.cs" />
     <Compile Include="EntityFramework\Initialization\DatabaseInitialization.cs" />
+    <Compile Include="EntityFramework\Initialization\LastRunLogInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\PointConfigurationInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\SystemConfigurationInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\CategoryInitialization.cs" />
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
     <Compile Include="EntityFramework\Maps\AnswerMap.cs" />
+    <Compile Include="EntityFramework\Maps\LastRunLogMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionRetirementMap.cs" />
     <Compile Include="EntityFramework\Maps\UserPointMap.cs" />
     <Compile Include="EntityFramework\Maps\VoteMap.cs" />
@@ -118,6 +120,19 @@
     <Compile Include="Migrations\201502190616099_Migration7.Designer.cs">
       <DependentUpon>201502190616099_Migration7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502200611235_Migration8.cs" />
+    <Compile Include="Migrations\201502200611235_Migration8.Designer.cs">
+      <DependentUpon>201502200611235_Migration8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502200631404_Migration9.cs" />
+    <Compile Include="Migrations\201502200631404_Migration9.Designer.cs">
+      <DependentUpon>201502200631404_Migration9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502200700054_Migration10.cs" />
+    <Compile Include="Migrations\201502200700054_Migration10.Designer.cs">
+      <DependentUpon>201502200700054_Migration10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LastRunLog.cs" />
     <Compile Include="Models\Virtual\CloseQuestions.cs" />
     <Compile Include="Models\Virtual\ModerationRetirement.cs" />
     <Compile Include="Models\Virtual\QuestionRetirement.cs" />
@@ -223,6 +238,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502190616099_Migration7.resx">
       <DependentUpon>201502190616099_Migration7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502200611235_Migration8.resx">
+      <DependentUpon>201502200611235_Migration8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502200631404_Migration9.resx">
+      <DependentUpon>201502200631404_Migration9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502200700054_Migration10.resx">
+      <DependentUpon>201502200700054_Migration10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

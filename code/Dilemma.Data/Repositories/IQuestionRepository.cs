@@ -55,6 +55,13 @@ namespace Dilemma.Data.Repositories
         T GetAnswerInProgress<T>(int userId, int questionId, int answerId) where T : class;
 
         /// <summary>
+        /// Touches an answer so that the answer slot does not expire.
+        /// </summary>
+        /// <param name="userId">The user who is touching the answer.</param>
+        /// <param name="answerId">The id of the answer to touch.</param>
+        void TouchAnswer(int userId, int answerId);
+        
+        /// <summary>
         /// Completes an answer that is in an initial 'Answer slot' state.
         /// </summary>
         /// <typeparam name="T">The type to receive.</typeparam>
