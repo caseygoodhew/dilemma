@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\AnswerViewModelConverter.cs" />
+    <Compile Include="Conversion\LastRunLogViewModelConverter.cs" />
     <Compile Include="Conversion\ServerConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\PointConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\ModerationEntryViewModelConverter.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Validators\PointConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\ServerConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\SystemServerConfigurationViewModelValidator.cs" />
+    <Compile Include="ViewModels\LastRunLogViewModel.cs" />
     <Compile Include="ViewModels\ModerationEntryViewModel.cs" />
     <Compile Include="ViewModels\ModerationViewModel.cs" />
     <Compile Include="Services\NotificationService.cs" />

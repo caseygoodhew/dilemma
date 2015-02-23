@@ -110,7 +110,6 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         }
 
         [TestMethod]
-        [ExpectedException(typeof(KnownIssuesException))]
         public void AnswerSlotsActuallyExpire()
         {
             SecurityManager.LoginNewAnonymous("Questioner");
@@ -119,12 +118,15 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
 
             SecurityManager.LoginNewAnonymous("Answerer");
 
-            Answers.RequestAnswerSlot("Question", "Answer");
+            var answerId = Answers.RequestAnswerSlot("Question", "Answer");
+
+            Assert.IsNotNull(answerId);
 
             TimeWarpSource.Value.DoThe(TimeWarpTo.TenYearsFromNow);
 
-            // this method is expected to fail 
-            Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
+            Administration.ExpireAnswerSlots();
+            
+            Assert.IsFalse(Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer")));
         }
 
         [TestMethod]

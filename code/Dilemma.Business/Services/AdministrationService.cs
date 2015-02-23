@@ -69,6 +69,11 @@ namespace Dilemma.Business.Services
             return AdministrationRepository.Value.GetPointConfigurations<PointConfigurationViewModel>();
         }
 
+        public void ExpireAnswerSlots()
+        {
+            AdministrationRepository.Value.ExpireAnswerSlots();
+        }
+        
         public void RetireOldQuestions()
         {
             AdministrationRepository.Value.RetireOldQuestions();
@@ -77,6 +82,11 @@ namespace Dilemma.Business.Services
         public void CloseQuestions()
         {
             AdministrationRepository.Value.CloseQuestions();
+        }
+
+        public LastRunLogViewModel GetLastRunLog()
+        {
+            return AdministrationRepository.Value.GetLastRunLog<LastRunLogViewModel>();
         }
     }
 }

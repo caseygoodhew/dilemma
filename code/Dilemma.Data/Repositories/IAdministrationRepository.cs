@@ -39,8 +39,12 @@ namespace Dilemma.Data.Repositories
 
         IEnumerable<T> GetPointConfigurations<T>() where T : class;
 
+        void ExpireAnswerSlots();
+        
         void RetireOldQuestions();
 
         void CloseQuestions();
+
+        T GetLastRunLog<T>() where T : class;
     }
 }

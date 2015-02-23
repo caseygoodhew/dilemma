@@ -134,6 +134,15 @@ namespace Dilemma.Data.Repositories
             return ConverterFactory.ConvertMany<PointConfiguration, T>(GetPointConfigurations());
         }
 
+        public void ExpireAnswerSlots()
+        {
+            using (var context = new DilemmaContext())
+            {
+                // we don't expect a result, but if we don't ToList then the query doesn't execute
+                var result = context.Database.SqlQuery<ExpireAnswerSlots>("ExpireAnswerSlots").ToList();
+            }
+        }
+        
         public void RetireOldQuestions()
         {
             using (var context = new DilemmaContext())
@@ -149,6 +158,15 @@ namespace Dilemma.Data.Repositories
             {
                 // we don't expect a result, but if we don't ToList then the query doesn't execute
                 var result = context.Database.SqlQuery<CloseQuestions>("CloseQuestions").ToList();
+            }
+        }
+
+        public T GetLastRunLog<T>() where T : class
+        {
+            using (var context = new DilemmaContext())
+            {
+                var result = context.LastRunLog.SingleOrDefault();
+                return ConverterFactory.ConvertOne<LastRunLog, T>(result);  
             }
         }
 

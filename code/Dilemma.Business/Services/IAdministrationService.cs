@@ -34,8 +34,12 @@ namespace Dilemma.Business.Services
 
         IEnumerable<PointConfigurationViewModel> GetPointConfigurations();
 
+        void ExpireAnswerSlots();
+        
         void RetireOldQuestions();
 
         void CloseQuestions();
+
+        LastRunLogViewModel GetLastRunLog();
     }
 }

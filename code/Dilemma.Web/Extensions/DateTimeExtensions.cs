@@ -15,9 +15,9 @@ namespace Dilemma.Web.Extensions
 
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
-        public static string ToRelativeText(this DateTime? dateTime)
+        public static string ToRelativeText(this DateTime? dateTime, string whenNull = "")
         {
-            return dateTime.HasValue ? dateTime.Value.ToRelativeText() : string.Empty;
+            return dateTime.HasValue ? dateTime.Value.ToRelativeText() : whenNull;
         }
         
         public static string ToRelativeText(this DateTime dateTime)

@@ -27,6 +27,22 @@
     </div>
     
     <div class="form-group">
+        @Html.LabelFor(x => x.SystemConfigurationViewModel.RetireQuestionAfterDays, new { @class = "col-md-2 col-sm-3 control-label" })
+        <div class="col-md-3 col-sm-4">
+            @Html.TextBoxFor(x => x.SystemConfigurationViewModel.RetireQuestionAfterDays, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.SystemConfigurationViewModel.RetireQuestionAfterDays)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(x => x.SystemConfigurationViewModel.ExpireAnswerSlotsAfterMinutes, new { @class = "col-md-2 col-sm-3 control-label" })
+        <div class="col-md-3 col-sm-4">
+            @Html.TextBoxFor(x => x.SystemConfigurationViewModel.ExpireAnswerSlotsAfterMinutes, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.SystemConfigurationViewModel.ExpireAnswerSlotsAfterMinutes)
+        </div>
+    </div>
+    
+    <div class="form-group">
         @Html.LabelFor(x => x.SystemConfigurationViewModel.SystemEnvironment, new { @class = "col-md-2 col-sm-3 control-label" })
         <div class="col-md-3 col-sm-4">
             @Html.EnumDropDownListFor(x => x.SystemConfigurationViewModel.SystemEnvironment, new { @class = "form-control" })

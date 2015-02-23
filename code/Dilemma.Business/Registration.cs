@@ -71,6 +71,7 @@ namespace Dilemma.Business
             ConverterFactory.Register<Moderation, ModerationViewModel>(registrar, ModerationViewModelConverter.FromModeration);
             ConverterFactory.Register<ModerationEntry, ModerationEntryViewModel>(registrar, ModerationEntryViewModelConverter.FromModerationEntry);
             ConverterFactory.Register<User, UserViewModel>(registrar, UserViewModelConverter.FromUser);
+            ConverterFactory.Register<LastRunLog, LastRunLogViewModel>(registrar, LastRunLogViewModelConverter.FromLastRunLog);
         }
     }
 }

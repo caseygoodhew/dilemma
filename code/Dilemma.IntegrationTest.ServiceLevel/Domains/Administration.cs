@@ -68,6 +68,11 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
             throw new NotImplementedException();
         }
 
+        public static void ExpireAnswerSlots()
+        {
+            _adminService.Value.ExpireAnswerSlots();
+        }
+        
         public static void RetireOldQuestions()
         {
             _adminService.Value.RetireOldQuestions();
