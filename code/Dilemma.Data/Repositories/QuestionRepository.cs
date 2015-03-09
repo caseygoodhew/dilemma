@@ -492,6 +492,7 @@ namespace Dilemma.Data.Repositories
                                                  x.QuestionId,
                                                  x.MaxAnswers,
                                                  x.ClosesDateTime,
+                                                 x.ClosedDateTime,
                                                  x.User.UserId,
                                                  TotalAnswers = x.Answers.Count(y => y.AnswerState != AnswerState.Rejected),
                                                  x.QuestionState
@@ -502,6 +503,7 @@ namespace Dilemma.Data.Repositories
                                                  QuestionId = x.QuestionId,
                                                  MaxAnswers = x.MaxAnswers,
                                                  ClosesDateTime = x.ClosesDateTime,
+                                                 ClosedDateTime = x.ClosedDateTime,
                                                  User = new User { UserId = x.UserId },
                                                  TotalAnswers = x.TotalAnswers,
                                                  QuestionState = x.QuestionState
@@ -527,6 +529,7 @@ namespace Dilemma.Data.Repositories
                                              x.Category,
                                              x.ClosesDateTime,
                                              x.CreatedDateTime,
+                                             x.ClosedDateTime,
                                              x.MaxAnswers,
                                              x.QuestionState,
                                              x.Text,
@@ -558,6 +561,7 @@ namespace Dilemma.Data.Repositories
                                             Category = x.Category,
                                             ClosesDateTime = x.ClosesDateTime,
                                             CreatedDateTime = x.ClosesDateTime,
+                                            ClosedDateTime = x.ClosedDateTime,
                                             MaxAnswers = x.MaxAnswers,
                                             QuestionId = x.QuestionId,
                                             QuestionState = x.QuestionState,

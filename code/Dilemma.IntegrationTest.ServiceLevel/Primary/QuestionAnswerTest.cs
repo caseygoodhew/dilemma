@@ -19,7 +19,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
     {
         private static readonly Lazy<ITimeWarpSource> TimeWarpSource = Locator.Lazy<ITimeWarpSource>();
 
-        public QuestionAnswerTest() : base(false)
+        public QuestionAnswerTest() : base(true)
         {
         }
 
@@ -59,16 +59,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         [TestMethod]
         public void CanAnswerQuestion()
         {
-            SecurityManager.LoginNewAnonymous("Questioner");
-
-            Questions.CreateNewQuestion("Question");
-
-            SecurityManager.LoginNewAnonymous("Answerer");
-
-            var answerId = Answers.RequestAnswerSlot("Question", "Answer");
-
-            Assert.IsNotNull(answerId);
-            Assert.IsTrue(answerId > 0);
+            SetupQuestionWithAnswer();
 
             Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
         }
@@ -110,33 +101,10 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         }
 
         [TestMethod]
-        public void AnswerSlotsActuallyExpire()
-        {
-            SecurityManager.LoginNewAnonymous("Questioner");
-
-            Questions.CreateNewQuestion("Question");
-
-            SecurityManager.LoginNewAnonymous("Answerer");
-
-            var answerId = Answers.RequestAnswerSlot("Question", "Answer");
-
-            Assert.IsNotNull(answerId);
-
-            TimeWarpSource.Value.DoThe(TimeWarpTo.TenYearsFromNow);
-
-            Administration.ExpireAnswerSlots();
-            
-            Assert.IsFalse(Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer")));
-        }
-
-        [TestMethod]
         public void QuestionAndAnswersDoNotEnterModerationUsingTestConfiguration()
         {
-            SecurityManager.LoginNewAnonymous("Questioner");
-            Questions.CreateNewQuestion("Question");
+            SetupQuestionWithAnswer();
 
-            SecurityManager.LoginNewAnonymous("Answerer");
-            Answers.RequestAnswerSlot("Question", "Answer");
             Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer"));
 
             var question = Questions.GetQuestion("Question");
@@ -214,7 +182,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
             EnumExtensions.All<SystemEnvironment>().ToList().ForEach(
                 systemEnvironment =>
                     {
-                        Administration.UpdateSystemEnvironment(systemEnvironment);
+                        Administration.UpdateSystemConfiguration(x => x.SystemEnvironment = systemEnvironment);
                         var systemConfiguration =
                             Administration.GetSystemServerConfiguration().SystemConfigurationViewModel;
 
@@ -247,10 +215,94 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         }
 
         [TestMethod]
-        [ExpectedException(typeof(TestNotWrittenException))]
+        public void AnswerSlotsActuallyExpire()
+        {
+            SetupQuestionWithAnswer();
+
+            TimeWarpSource.Value.DoThe(TimeWarpTo.TenYearsFromNow);
+            
+            Administration.ExpireAnswerSlots();
+
+            Assert.IsFalse(Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer")));
+        }
+
+        [TestMethod]
+        public void ActiveAnswerSlotsDoNotExpire()
+        {
+            SetupQuestionWithAnswer();
+
+            TimeWarpSource.Value.DoThe(TimeWarpTo.TenYearsFromNow);
+            
+            Answers.TouchAnswer("Answer");
+
+            Administration.ExpireAnswerSlots();
+
+            Assert.IsTrue(Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer")));;
+        }
+
+        [TestMethod]
+        public void TouchingAnotherUsersAnswerHasNoEffect()
+        {
+            SetupQuestionWithAnswer();
+
+            TimeWarpSource.Value.DoThe(TimeWarpTo.TenYearsFromNow);
+
+            SecurityManager.LoginNewAnonymous("Somebody Else");
+            Answers.TouchAnswer("Answer");
+            SecurityManager.SetUserId("Answerer");
+            
+            Administration.ExpireAnswerSlots();
+
+            Assert.IsFalse(Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer")));
+        }
+
+        [TestMethod]
+        public void OnlyExpectedAnswersExpire()
+        {
+            Administration.UpdateSystemConfiguration(x => x.QuestionLifetime = QuestionLifetime.OneDay);
+            
+            SetupQuestionWithAnswer();
+
+            TimeWarpSource.Value.DoThe(TimeWarpTo.TenMinutesFromNow);
+
+            SecurityManager.LoginNewAnonymous("Somebody Else");
+            var answerId = Answers.RequestAnswerSlot("Question", "Another Answer");
+            Assert.IsNotNull(answerId);
+
+            SecurityManager.SetUserId("Answerer");
+            
+            Administration.ExpireAnswerSlots();
+
+            Assert.IsFalse(Answers.CompleteAnswer("Question", Answers.FillDefaults("Answer")));
+            
+            SecurityManager.SetUserId("Somebody Else");
+            Assert.IsTrue(Answers.CompleteAnswer("Question", Answers.FillDefaults("Another Answer")));
+        }
+
+        [TestMethod]
         public void CloseQuestions()
         {
+            SetupQuestionWithAnswer();
+            SecurityManager.LoginNewAnonymous("Another User");
+            
             Administration.CloseQuestions();
+            var question = Questions.GetQuestion("Question").QuestionViewModel;
+            Assert.IsTrue(question.IsOpen);
+            Assert.IsFalse(question.IsClosed);
+
+            TimeWarpSource.Value.FreezeTime(question.ClosesDateTime);
+
+            Administration.CloseQuestions();
+            question = Questions.GetQuestion("Question").QuestionViewModel;
+            Assert.IsTrue(question.IsOpen);
+            Assert.IsFalse(question.IsClosed);
+
+            TimeWarpSource.Value.FreezeTime(question.ClosesDateTime.Value.AddSeconds(1));
+
+            Administration.CloseQuestions();
+            question = Questions.GetQuestion("Question").QuestionViewModel;
+            Assert.IsFalse(question.IsOpen);
+            Assert.IsTrue(question.IsClosed);
         }
 
         [TestMethod]
@@ -258,6 +310,19 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         public void QuestionsExpire()
         {
             Administration.RetireOldQuestions();
+        }
+
+        private static void SetupQuestionWithAnswer()
+        {
+            SecurityManager.LoginNewAnonymous("Questioner");
+
+            Questions.CreateNewQuestion("Question");
+
+            SecurityManager.LoginNewAnonymous("Answerer");
+
+            var answerId = Answers.RequestAnswerSlot("Question", "Answer");
+
+            Assert.IsNotNull(answerId);
         }
     }
 }

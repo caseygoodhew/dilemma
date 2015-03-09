@@ -60,6 +60,8 @@ namespace Dilemma.Business.Conversion
                            IsMyQuestion = model.User.UserId == userId,
                            IsApproved = model.QuestionState == QuestionState.Approved,
                            IsRejected = model.QuestionState == QuestionState.Rejected,
+                           IsOpen = model.QuestionState == QuestionState.Approved && !model.ClosedDateTime.HasValue,
+                           IsClosed = model.ClosedDateTime.HasValue,
                            Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
                        };
         }

@@ -62,6 +62,12 @@ namespace Dilemma.Business.Services
         AnswerViewModel GetAnswerInProgress(int questionId, int answerId);
 
         /// <summary>
+        /// Touches an answer so that the answer slot does not expire.
+        /// </summary>
+        /// <param name="answerId">The id of the answer to touch.</param>
+        void TouchAnswer(int answerId);
+        
+        /// <summary>
         /// Completes an answer that is in an initial 'Answer slot' state.
         /// </summary>
         /// <param name="questionId">The question id.</param>

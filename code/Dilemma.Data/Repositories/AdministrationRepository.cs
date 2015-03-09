@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 using Dilemma.Common;
@@ -10,6 +11,7 @@ using Dilemma.Data.Models.Virtual;
 using Disposable.Caching;
 using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
+using Disposable.Common.Services;
 
 namespace Dilemma.Data.Repositories
 {
@@ -19,6 +21,8 @@ namespace Dilemma.Data.Repositories
     internal class AdministrationRepository : IAdministrationRepository
     {
         private static readonly Lazy<IProviderCache> Cache = Locator.Lazy<IProviderCache>();
+
+        private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
         /// <summary>
         /// Sets the <see cref="SystemConfiguration"/> from the specified type. There must be a converter registered between <see cref="T"/> and <see cref="SystemConfiguration"/>.
@@ -138,8 +142,11 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
+                var nowParameter = new SqlParameter("@DateTimeNow", TimeSource.Value.Now);
                 // we don't expect a result, but if we don't ToList then the query doesn't execute
-                var result = context.Database.SqlQuery<ExpireAnswerSlots>("ExpireAnswerSlots").ToList();
+                var result = context.Database.SqlQuery<ExpireAnswerSlots>("ExpireAnswerSlots @DateTimeNow", nowParameter).ToList();
+                
+                context.SaveChangesVerbose();
             }
         }
         
@@ -147,8 +154,11 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
+                var nowParameter = new SqlParameter("@DateTimeNow", TimeSource.Value.Now);
                 // we don't expect a result, but if we don't ToList then the query doesn't execute
-                var result = context.Database.SqlQuery<RetireOldQuestions>("RetireOldQuestions").ToList();
+                var result = context.Database.SqlQuery<RetireOldQuestions>("RetireOldQuestions @DateTimeNow", nowParameter).ToList();
+                
+                context.SaveChangesVerbose();
             }
         }
 
@@ -156,8 +166,11 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
+                var nowParameter = new SqlParameter("@DateTimeNow", TimeSource.Value.Now);
                 // we don't expect a result, but if we don't ToList then the query doesn't execute
-                var result = context.Database.SqlQuery<CloseQuestions>("CloseQuestions").ToList();
+                var result = context.Database.SqlQuery<CloseQuestions>("CloseQuestions @DateTimeNow", nowParameter).ToList();
+                
+                context.SaveChangesVerbose();
             }
         }
 
@@ -204,8 +217,6 @@ namespace Dilemma.Data.Repositories
         {
             Cache.Value.Expire<SystemConfiguration>();
             
-            Cache.Value.Expire<TestingConfiguration>();
-
             Cache.Value.Expire<ServerConfiguration>();
         }
 

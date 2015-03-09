@@ -24,10 +24,10 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
             _adminService.Value.SetSystemServerConfiguration(viewModel);
         }
 
-        public static void UpdateSystemEnvironment(SystemEnvironment systemEnvironment)
+        public static void UpdateSystemConfiguration(Action<SystemConfigurationViewModel> action)
         {
             var ssc = GetSystemServerConfiguration();
-            ssc.SystemConfigurationViewModel.SystemEnvironment = systemEnvironment;
+            action.Invoke(ssc.SystemConfigurationViewModel);
             SetSystemServerConfiguration(ssc);
         }
 

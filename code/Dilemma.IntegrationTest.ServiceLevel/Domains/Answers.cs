@@ -98,5 +98,15 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
         {
             _questionService.Value.DeregisterVote(answerId);
         }
+
+        public static void TouchAnswer(string reference)
+        {
+            TouchAnswer(ObjectDictionary.Get<int>(ObjectType.Answer, reference));
+        }
+        
+        public static void TouchAnswer(int answerId)
+        {
+            _questionService.Value.TouchAnswer(answerId);
+        }
     }
 }

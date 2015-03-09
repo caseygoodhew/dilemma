@@ -135,6 +135,16 @@ namespace Dilemma.Business.Services
         }
 
         /// <summary>
+        /// Touches an answer so that the answer slot does not expire.
+        /// </summary>
+        /// <param name="answerId">The id of the answer to touch.</param>
+        public void TouchAnswer(int answerId)
+        {
+            var userId = SecurityManager.Value.GetUserId();
+            QuestionRepository.Value.TouchAnswer(userId, answerId);
+        }
+
+        /// <summary>
         /// Completes an answer that is in an initial 'Answer slot' state.
         /// </summary>
         /// <param name="questionId">The question id.</param>

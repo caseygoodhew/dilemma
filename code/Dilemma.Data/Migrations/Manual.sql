@@ -11,8 +11,29 @@ CREATE UNIQUE INDEX IX_UniqueVote ON Vote (User_UserId, Question_QuestionId);
 GO
 
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
+IF OBJECT_ID ( 'TimeSourceNow', 'FN' ) IS NOT NULL 
+    DROP FUNCTION TimeSourceNow;
+GO
 
+CREATE FUNCTION TimeSourceNow
+	(@DateTimeNow datetime2 = null)
+RETURNS datetime2
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+	IF @DateTimeNow IS NULL OR NOT EXISTS (SELECT * FROM dbo.SystemConfiguration WHERE SystemEnvironment = 1) -- check for testing environment
+	BEGIN
+		SET @DateTimeNow = GETUTCDATE()
+	END
+
+	RETURN (@DateTimeNow)
+END
+GO
 
 
 
@@ -26,16 +47,19 @@ IF OBJECT_ID ( 'ExpireAnswerSlots', 'P' ) IS NOT NULL
 GO
 
 CREATE PROCEDURE ExpireAnswerSlots
+	@DateTimeNow datetime2 = null
 AS
+	SET @DateTimeNow = dbo.TimeSourceNow(@DateTimeNow)
+	
 	UPDATE Answer
 	   SET AnswerState = 4
 	 WHERE AnswerId IN (	
 		SELECT AnswerId
 		  FROM Answer a, SystemConfiguration sc
 		 WHERE a.AnswerState = 0 
-		   AND DATEADD("mi", sc.ExpireAnswerSlotsAfterMinutes, a.LastTouchedDateTime) < GETUTCDATE())
+		   AND DATEADD("mi", sc.ExpireAnswerSlotsAfterMinutes, a.LastTouchedDateTime) < @DateTimeNow)
 
-	UPDATE LastRunLog SET ExpireAnswerSlots = GETUTCDATE();
+	UPDATE LastRunLog SET ExpireAnswerSlots = @DateTimeNow;
 GO
 
 
@@ -55,23 +79,33 @@ IF OBJECT_ID ( 'CloseQuestions', 'P' ) IS NOT NULL
 GO
 
 CREATE PROCEDURE CloseQuestions
+	@DateTimeNow datetime2 = null
 AS
-    UPDATE Question
-       SET ClosedDateTime = GETUTCDATE()
-     WHERE QuestionId IN (
-        SELECT q.QuestionId
-          FROM Question q, (
-            SELECT Question_QuestionId QuestionId, COUNT(*) AnswerCount
-              FROM Answer
-             WHERE AnswerState = 2 -- Approved Answer
-             GROUP BY Question_QuestionId
-          ) a
-         WHERE q.QuestionId = a.QuestionId
-           AND q.QuestionState = 1 -- Approved Question
-           AND q.ClosedDateTime IS NULL
-           AND (q.MaxAnswers = a.AnswerCount OR q.ClosesDateTime < GETUTCDATE()))
+	SET @DateTimeNow = dbo.TimeSourceNow(@DateTimeNow)
 
-	UPDATE LastRunLog SET CloseQuestions = GETUTCDATE();
+    UPDATE Question
+       SET ClosedDateTime = @DateTimeNow
+     WHERE QuestionId IN (
+        SELECT questionId
+		  FROM Question
+		 WHERE QuestionState = 1 -- Approved Question
+		   AND ClosedDateTime IS NULL
+		   AND ClosesDateTime < @DateTimeNow
+		 UNION 
+		SELECT q.QuestionId
+		  FROM Question q, (
+			SELECT Question_QuestionId QuestionId, COUNT(*) AnswerCount
+			  FROM Answer
+			 WHERE AnswerState = 2 -- Approved Answer
+			 GROUP BY Question_QuestionId
+			) a
+		 WHERE q.QuestionId = a.QuestionId
+		   AND q.QuestionState = 1 -- Approved Question
+		   AND q.ClosedDateTime IS NULL
+		   AND (q.MaxAnswers = a.AnswerCount)
+	)
+
+	UPDATE LastRunLog SET CloseQuestions = @DateTimeNow;
 GO
 
 
@@ -89,16 +123,18 @@ IF OBJECT_ID ( 'RetireOldQuestions', 'P' ) IS NOT NULL
 GO
 
 CREATE PROCEDURE RetireOldQuestions
+	@DateTimeNow datetime2 = null
 AS
- 
-    SET NOCOUNT ON;
+    SET @DateTimeNow = dbo.TimeSourceNow(@DateTimeNow)
+	
+	SET NOCOUNT ON;
 
     INSERT INTO QuestionRetirement
     (QuestionId)
     SELECT q.QuestionId
       FROM Question q, SystemConfiguration sc
      WHERE q.ClosedDateTime IS NOT NULL
-	   AND DATEADD(dd, sc.RetireQuestionAfterDays, q.ClosedDateTime) < GETUTCDATE()
+	   AND DATEADD(dd, sc.RetireQuestionAfterDays, q.ClosedDateTime) < @DateTimeNow
 
     INSERT INTO UserPointRetirement
     (UserId, TotalPoints)
@@ -161,7 +197,7 @@ AS
     DELETE FROM UserPointRetirement
     DELETE FROM QuestionRetirement
 
-	UPDATE LastRunLog SET RetireOldQuestions = GETUTCDATE();
+	UPDATE LastRunLog SET RetireOldQuestions = @DateTimeNow;
 GO
 
 

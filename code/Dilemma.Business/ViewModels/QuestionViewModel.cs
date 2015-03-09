@@ -70,5 +70,15 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets a value indicating whether the question is rejected.
         /// </summary>
         public bool IsRejected { get; set; }
+        
+        /// <summary>
+        /// Gets or sets a value indicating whether the question is open.
+        /// </summary>
+        public bool IsOpen { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the question is closed.
+        /// </summary>
+        public bool IsClosed { get; set; }
     }
 }
