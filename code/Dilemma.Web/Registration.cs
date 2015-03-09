@@ -23,8 +23,8 @@ namespace Dilemma.Web
             FluentValidationModelValidatorProvider.Configure(x => x.ValidatorFactory = new ValidatorFactory());
 
             locator.Register<INotificationTypeLocator>(() => new NotificationTypeLocator(
-                    NotificationRoute.Create<QuestionController>(NotificationType.QuestionAnswered, x => x.Details(0)),
-                    NotificationRoute.Create<ModerationController>(NotificationType.PostRejected, x => x.Details(0))
+                    //NotificationRoute.Create<QuestionController>(NotificationType.QuestionAnswered, x => x.Details(0)),
+                    //NotificationRoute.Create<ModerationController>(NotificationType.PostRejected, x => x.Details(0))
                 ));
         }
     }
