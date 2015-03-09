@@ -43,7 +43,6 @@ namespace ASP
             
             #line 1 "..\..\Views\_ViewStart.cshtml"
   
-    var bob = 1;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
             
