@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dilemma.Web.Views
+namespace ASP
 {
     using System;
     using System.Collections.Generic;
@@ -27,13 +27,15 @@ namespace Dilemma.Web.Views
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Dilemma.Common;
     using Dilemma.Web;
+    using Disposable.Common.Extensions;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/_ViewStart.cshtml")]
-    public partial class ViewStart : System.Web.Mvc.ViewStartPage
+    public partial class _Views__ViewStart_cshtml : System.Web.Mvc.ViewStartPage
     {
-        public ViewStart()
+        public _Views__ViewStart_cshtml()
         {
         }
         public override void Execute()
@@ -41,6 +43,7 @@ namespace Dilemma.Web.Views
             
             #line 1 "..\..\Views\_ViewStart.cshtml"
   
+    var bob = 1;
     Layout = "~/Views/Shared/_Layout.cshtml";
 
             
