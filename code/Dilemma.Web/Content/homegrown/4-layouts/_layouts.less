@@ -1,0 +1,257 @@
+
+
+/*
+
+  Basic layout is mobile first, 
+  with extra layout applied to larger screens
+
+======================================================*/
+
+/*
+ 
+   Key sizes, breakpoints etc hang off these
+ 
+======================================================*/
+    
+  @xs:     0px;
+  @s:    600px;
+  @m:    780px;
+  @l:    960px;
+  @xl:  1280px;
+  @xxl: 1400px;
+
+  // Break points: Mobile first, so
+  @bp-s:   ~"only screen and (min-width: @{s})";
+  @bp-m:   ~"only screen and (min-width: @{m})";
+  @bp-l:   ~"only screen and (min-width: @{l})";
+  @bp-xl:  ~"only screen and (min-width: @{xl})";
+
+  @bp-xs-only: ~"only screen and (min-width: 0)    and (max-width: "(@s  - 1) ~")";
+  @bp-s-only:  ~"only screen and (min-width: @{s}) and (max-width: "(@m  - 1) ~")";
+  @bp-m-only:  ~"only screen and (min-width: @{m}) and (max-width: "(@l  - 1) ~")";
+  @bp-l-only:  ~"only screen and (min-width: @{l}) and (max-width: "(@xl - 1) ~")";
+  @bp-xl-only: ~"only screen and (min-width: @{xl})";
+
+
+/*
+
+  Conditional hiding
+
+======================================================*/
+  .size-s-and-up,
+  .size-m-and-up,
+  .size-l-and-up,
+  .size-xl-and-up {
+    display: none;
+  }
+
+  @media @bp-s  { 
+    .size-xs-only { display: none; }
+    .size-s-and-up { display: block; }
+    .size-s-and-up.inline { display: inline; }
+    .size-s-and-up.inline-block { display: block; } 
+  }
+  @media @bp-m  { 
+    .size-m-and-up { display: block; }
+    .size-m-and-up.inline { display: inline; }
+    .size-m-and-up.inline-block { display: block; } 
+  }
+  @media @bp-l  { 
+    .size-l-and-up { display: block; }
+    .size-l-and-up.inline { display: inline; }
+    .size-l-and-up.inline-block { display: block; } 
+  }
+  @media @bp-xl { 
+    .size-xl-and-up { display: block; }
+    .size-xl-and-up.inline { display: inline; }
+    .size-xl-and-up.inline-block { display: block; }  
+  }
+
+
+
+html, body {
+  min-height: 100%;
+  background: #e6e9ed;
+}
+html {
+  overflow-y: scroll;
+}
+
+
+/*
+
+  Z-index 
+
+======================================================*/
+
+@z-page-under:      0;
+@z-page-default:    1;
+@z-page-over:      10;
+@z-body-mask:      20;
+@z-body-over:      30;
+@z-header-footer:  40;
+@z-dropdown:       50;
+@z-modal:          60;
+
+.page-hd,
+.page-ft {
+  position: relative;
+  z-index: @z-header-footer;
+}
+
+/*
+
+  Header Layout
+
+======================================================*/
+
+
+
+
+
+
+
+
+/*
+
+  page width
+
+======================================================*/
+
+  .wrap {
+    position: relative; 
+    padding: 0;
+  }
+  .js-sticky--offset { 
+    padding: 0 16px; 
+  }
+  // restrict width when we get to xl, otherwise use all of the screen
+  @media @bp-m {
+    .wrap { 
+      padding: 0 10px; 
+    } 
+    .stuck .js-sticky--offset { 
+      padding: 0 28px; 
+    } 
+  }
+  @media @bp-l {
+    .wrap,
+    .stuck .js-sticky--offset { 
+      max-width: 1100px;
+      margin: 0 auto; 
+    } 
+  }
+  .js-sticky--offset {
+
+  }
+
+/*
+
+  Main layout styles
+
+======================================================*/
+  .sidebar, 
+  .page-ft {
+    display: none;
+  }
+  .page-bd {
+    padding-bottom: 100px;
+  }
+  @media @bp-m {
+    @l-col-width: 316px;
+    .page-ft {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    .sidebar {
+      display: block;
+      width: @l-col-width;
+    }
+    // .navigation {
+    //   float: left;
+    //   display: block;
+    // }
+    .sidebar {
+      float: right;
+      clear: none;
+      display: block;
+    }
+    .main {
+      margin: 0 @l-col-width + 15px 0 0;
+    }
+  }
+
+.page-hd .navbar .navbar-nav a {
+  padding: 10px 20px;
+}
+.dropdown-menu {
+  min-width: 300px;
+}
+
+
+.page-hd .navbar .dropdown-menu {
+  left: 0;
+  right: auto;
+}
+
+
+
+.page-profile .sidebar .Notification,
+.page-profile .Card-section--notification,
+.page-ask .Card--sidebar-ask {
+  display: none;
+}
+
+/*
+
+  Profile page styles
+
+======================================================*/
+
+.Rank {
+  max-width: 288px;
+  margin: 0 auto;
+}
+.user-is-level-1 .Image-ometer-amount {
+  width: 20%;
+}
+.user-is-level-2 .Image-ometer-amount {
+  width: 40%;
+}
+.user-is-level-3 .Image-ometer-amount {
+  width: 60%;
+}
+.user-is-level-4 .Image-ometer-amount {
+  width: 80%;
+}
+.user-is-level-5 .Image-ometer-amount {
+  width: 100%;
+}
+@media only screen and (min-width: @xs) and (max-width: @m)  {
+  .page-profile .sidebar {
+    display: block;
+  }
+  .Card-section--notification,
+  .Card--sidebar-ask {
+    display: none;
+  }
+}
+@media only screen and (min-width: @s) and (max-width: @m)  {
+  .Rank {
+    width: 50%;
+    float: left;
+  }
+  .Rank-table {
+    width: 50%;
+    float: right;
+  }
+  .Rank-image img { 
+    width: 40px;
+  }
+  tr:first-child .Rank-score, 
+  tr:first-child .Rank-facet {
+    border-top:0 none;
+  }
+}

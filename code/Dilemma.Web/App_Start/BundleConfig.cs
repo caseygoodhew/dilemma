@@ -23,12 +23,19 @@ namespace Dilemma.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                        "~/Scripts/bootstrap.js",
+                        "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/homegrown").Include(
+                        "~/Scripts/plugins/waypoints.js",
+                        "~/Scripts/plugins/waypoints-sticky.js",
+                        "~/Scripts/plugins/jquery.cycle2.min.js",
+                        "~/Scripts/plugins/jquery.cycle2.swipe.min.js",
+                        "~/Scripts/main.js"));
+            
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/alpha/main.css",
-                      "~/Content/alpha-fixes.css"));
+                      "~/Content/homegrown/main.css"));
+                      //"~/Content/alpha-fixes.css"));
                         //"~/Content/bootstrap/bootstrap.css",
                       //"~/Content/site.css"));
         }

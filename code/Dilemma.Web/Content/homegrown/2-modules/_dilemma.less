@@ -1,0 +1,99 @@
+.Dilemmas {}
+.Dilemma-state {}//heading
+
+.Dilemma {}
+
+
+.Dilemma-question {
+  position: relative;
+}
+  // .Dilemma-questioner {
+  //   width: 20%;
+  //   max-width: 90px;
+  // }
+  // .Questioner-avatar {}
+  // .Questioner-rank {
+  //   background: #c00;
+  //   color:#fff;
+  //   text-align: center;
+  //   padding: 5px;
+  // }
+
+
+.Dilemma-text {
+  font-size: 13px;
+  line-height: 18px;
+  height: 65px;
+  overflow: hidden;
+  box-sizing: content-box !important;
+  padding: 10px 5px  50px;
+
+  // &:before {
+  //   content: "“";
+  //   font-size: 48px;
+  //   float: left;
+  //   color: #AAA;
+  //   margin-top: 17px;
+  //   line-height: 0;
+  //   padding-right: 4px;
+  // }
+  .Dilemma-text-toggle-less {
+    display: none;
+  }
+}
+.Dilemma-text.is-active {
+  .Dilemma-text-toggle-less {
+    display: block;
+  }
+  .Dilemma-text-toggle-more {
+    display: none;
+  }
+}
+.Dilemma-text-toggle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  display: block;
+  padding: 10px 8px 10px;
+  font-weight: 500;
+  &:hover {
+    background-color: @color-bg-white-hover;
+  }
+}
+.Dilemma-respondents {
+  line-height: 20px;
+  .unstyled;
+  .horizontal;
+  margin-bottom: 0;
+}
+.Dilemma-respondent {
+  margin-left: 1%;
+  width: 9%;
+  img {
+    overflow: hidden;
+  }
+}
+.Dilemma-respondent--next {
+
+}
+.Dilemma-respondent--empty img {
+  background: #ddd;
+    border-radius: 50%;
+}
+.Dilemma-actions > div {
+  padding-left: 4px;
+  &:first-child {
+    padding-left: 0;
+  }
+}
+.Card-section 
+  .Dilemma-action--bookmark {}
+  .Dilemma-action--flag {}
+  .Dilemma-action--vote {}
+  .Dilemma-action--answer {}
+
+.Dilemma-timeRemaining {
+}
+

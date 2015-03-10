@@ -1,0 +1,44 @@
+.js-sticky {
+  transition: all 0.4s easeOut;
+}
+
+.js-sticky.stuck {
+  margin: 0;
+  padding: 10px 0;
+  background: @color-answer;  
+  color: #fff; 
+  position:fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  z-index: @z-header-footer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  .image-light {
+    display: inline-block;
+  }
+}
+.js-sticky--vote.stuck {
+  background: @color-vote;
+}
+.js-sticky--offset {
+  // more styles for this in /stylesheets/less/4-layouts/_layouts.less
+  display: block;
+}
+.js-sticky img {
+  position: relative;
+  top: -2px;
+}
+.js-sticky--vote img {
+  top: -4px;
+}
+
+.page-profile h2.js-sticky {
+  color:#000;
+  display: block;
+  text-transform: uppercase;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.5);
+  img {
+    opacity: 0.5;
+  }
+}

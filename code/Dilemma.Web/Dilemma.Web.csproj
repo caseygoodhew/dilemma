@@ -206,14 +206,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_ViewStart.cshtml</DependentUpon>
     </Compile>
-    <Content Include="Content\alpha-fixes.css" />
-    <Content Include="Content\alpha\css\animate.css" />
-    <Content Include="Content\alpha\main.css">
-      <DependentUpon>main.less</DependentUpon>
-    </Content>
-    <Content Include="Content\alpha\main.min.css">
-      <DependentUpon>main.less</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap\bootstrap.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
@@ -221,7 +213,17 @@
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\fonts\MuseoSansRounded-100.svg" />
+    <Content Include="Content\fonts\MuseoSansRounded-300.svg" />
+    <Content Include="Content\fonts\MuseoSansRounded-500.svg" />
+    <Content Include="Content\fonts\MuseoSansRounded-700.svg" />
+    <Content Include="Content\homegrown\css\animate.css" />
+    <Content Include="Content\homegrown\main.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
+    <Content Include="Content\homegrown\main.min.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -229,30 +231,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap\bootstrap.less" />
-    <Content Include="Content\alpha\0-base\_bootstrap-variables.less" />
-    <Content Include="Content\alpha\0-base\_elements.less" />
-    <Content Include="Content\alpha\0-base\_typography-classes.less" />
-    <Content Include="Content\alpha\0-base\_utility-classes.less" />
-    <Content Include="Content\alpha\0-base\_variables.less" />
-    <Content Include="Content\alpha\1-components\_buttons.less" />
-    <Content Include="Content\alpha\1-components\_forms.less" />
-    <Content Include="Content\alpha\1-components\_lists.less" />
-    <Content Include="Content\alpha\1-components\_media-unit.less" />
-    <Content Include="Content\alpha\2-modules\_answer.less" />
-    <Content Include="Content\alpha\2-modules\_card.less" />
-    <Content Include="Content\alpha\2-modules\_dilemma.less" />
-    <Content Include="Content\alpha\2-modules\_modal.less" />
-    <Content Include="Content\alpha\3-themes\_theme-home.less" />
-    <Content Include="Content\alpha\3-themes\_theme.less" />
-    <Content Include="Content\alpha\4-layouts\_layouts.less" />
-    <Content Include="Content\alpha\5-overrides\_animate.less" />
-    <Content Include="Content\alpha\5-overrides\_layout-overrides.less" />
-    <Content Include="Content\alpha\5-overrides\_plugin-conc_ertina.less" />
-    <Content Include="Content\alpha\5-overrides\_plugin-waypoints.less" />
-    <Content Include="Content\alpha\5-overrides\_print.less" />
-    <Content Include="Content\alpha\5-overrides\_shame.less" />
-    <Content Include="Content\alpha\css\animate.css.map" />
-    <Content Include="Content\alpha\main.less" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -326,12 +304,59 @@
     <Content Include="Content\bootstrap\breadcrumbs.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\homegrown\0-base\_bootstrap-variables.less" />
+    <Content Include="Content\homegrown\0-base\_elements.less" />
+    <Content Include="Content\homegrown\0-base\_typography-classes.less" />
+    <Content Include="Content\homegrown\0-base\_utility-classes.less" />
+    <Content Include="Content\homegrown\0-base\_variables.less" />
+    <Content Include="Content\homegrown\1-components\_buttons.less" />
+    <Content Include="Content\homegrown\1-components\_forms.less" />
+    <Content Include="Content\homegrown\1-components\_lists.less" />
+    <Content Include="Content\homegrown\1-components\_media-unit.less" />
+    <Content Include="Content\homegrown\2-modules\_answer.less" />
+    <Content Include="Content\homegrown\2-modules\_card.less" />
+    <Content Include="Content\homegrown\2-modules\_dilemma.less" />
+    <Content Include="Content\homegrown\2-modules\_modal.less" />
+    <Content Include="Content\homegrown\3-themes\_theme-home.less" />
+    <Content Include="Content\homegrown\3-themes\_theme.less" />
+    <Content Include="Content\homegrown\4-layouts\_layouts-nav.less" />
+    <Content Include="Content\homegrown\4-layouts\_layouts.less" />
+    <Content Include="Content\homegrown\5-overrides\_animate.less" />
+    <Content Include="Content\homegrown\5-overrides\_layout-overrides.less" />
+    <Content Include="Content\homegrown\5-overrides\_plugin-conc_ertina.less" />
+    <Content Include="Content\homegrown\5-overrides\_plugin-waypoints.less" />
+    <Content Include="Content\homegrown\5-overrides\_print.less" />
+    <Content Include="Content\homegrown\5-overrides\_shame.less" />
+    <Content Include="Content\homegrown\css\animate.css.map" />
+    <Content Include="Content\homegrown\main.less" />
+    <Content Include="Content\fonts\MuseoSansRounded-100.eot" />
+    <Content Include="Content\fonts\MuseoSansRounded-100.ttf" />
+    <Content Include="Content\fonts\MuseoSansRounded-100.woff" />
+    <Content Include="Content\fonts\MuseoSansRounded-300.eot" />
+    <Content Include="Content\fonts\MuseoSansRounded-300.ttf" />
+    <Content Include="Content\fonts\MuseoSansRounded-300.woff" />
+    <Content Include="Content\fonts\MuseoSansRounded-500.eot" />
+    <Content Include="Content\fonts\MuseoSansRounded-500.ttf" />
+    <Content Include="Content\fonts\MuseoSansRounded-500.woff" />
+    <Content Include="Content\fonts\MuseoSansRounded-700.eot" />
+    <Content Include="Content\fonts\MuseoSansRounded-700.ttf" />
+    <Content Include="Content\fonts\MuseoSansRounded-700.woff" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Question Seeder %28i-e00ade11%29.pubxml" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Testing Server %28i-eb5a63e0%29.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.1.3-vsdoc.js" />
+    <Content Include="Scripts\homegrown\ie.js" />
+    <Content Include="Scripts\homegrown\main-min.js" />
+    <Content Include="Scripts\homegrown\main.js" />
+    <Content Include="Scripts\homegrown\plugins\console-safe.js" />
+    <Content Include="Scripts\homegrown\plugins\jquery.cycle2.min.js" />
+    <Content Include="Scripts\homegrown\plugins\jquery.cycle2.swipe.min.js" />
+    <Content Include="Scripts\homegrown\plugins\navigation.js" />
+    <Content Include="Scripts\homegrown\plugins\skip-link-focus-fix.js" />
+    <Content Include="Scripts\homegrown\plugins\waypoints-sticky.js" />
+    <Content Include="Scripts\homegrown\plugins\waypoints.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery.cookesdirective.configuration.js" />
@@ -343,7 +368,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\TwitterBootstrapMvcJs.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
