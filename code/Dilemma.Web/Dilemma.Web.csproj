@@ -476,6 +476,7 @@
     </Content>
     <Content Include="Views\Dilemmas\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\QuestionSummary.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Sidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

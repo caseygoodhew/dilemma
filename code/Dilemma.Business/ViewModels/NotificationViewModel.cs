@@ -43,5 +43,10 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets the date and time that this notification was actioned.
         /// </summary>
         public DateTime? ActionedDateTime { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the number of points associated with the action.
+        /// </summary>
+        public int? PointsAwarded { get; set; }
     }
 }

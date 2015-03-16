@@ -109,6 +109,8 @@
     <Compile Include="ViewModels\ServerConfigurationViewModel.cs" />
     <Compile Include="ViewModels\SystemConfigurationViewModel.cs" />
     <Compile Include="ViewModels\SystemServerConfigurationViewModel.cs" />
+    <Compile Include="ViewModels\UserRankViewModel.cs" />
+    <Compile Include="ViewModels\UserStatsViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
