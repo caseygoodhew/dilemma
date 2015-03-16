@@ -53,6 +53,7 @@ namespace Dilemma.Business.Conversion
                            Text = model.Text,
                            CreatedDateTime = model.CreatedDateTime,
                            ClosesDateTime = model.ClosesDateTime,
+                           ClosedDateTime = model.ClosedDateTime,
                            CategoryId = model.Category.CategoryId,
                            CategoryName = model.Category.Name,
                            TotalAnswers = model.TotalAnswers,

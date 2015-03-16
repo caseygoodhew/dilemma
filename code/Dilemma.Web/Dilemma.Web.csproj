@@ -44,9 +44,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.12\lib\net45\Disposable.Common.dll</HintPath>
+    <Reference Include="Disposable.Common">
+      <HintPath>..\packages\Disposable.Common.1.0.13\lib\net45\Disposable.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Disposable.Web.Common">
+      <HintPath>..\packages\Disposable.Web.Common.1.0.0\lib\net45\Disposable.Web.Common.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -191,6 +193,7 @@
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\DilemmasViewModel.cs" />
     <Compile Include="Views\Shared\Error.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -224,6 +227,79 @@
     <Content Include="Content\homegrown\main.min.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
+    <Content Include="Content\images\ads\160x600_uap.gif" />
+    <Content Include="Content\images\ads\180x150_uap.gif" />
+    <Content Include="Content\images\ads\300x250_uap.gif" />
+    <Content Include="Content\images\ads\300x250_uap.png" />
+    <Content Include="Content\images\ads\728x90_uap.gif" />
+    <Content Include="Content\images\Avatar-placeholder-300x300.png" />
+    <Content Include="Content\images\chevron-right.png" />
+    <Content Include="Content\images\device.png" />
+    <Content Include="Content\images\gradient-overlay-basic.png" />
+    <Content Include="Content\images\gradient-overlay-glossy.png" />
+    <Content Include="Content\images\gradient-overlay-strong.png" />
+    <Content Include="Content\images\icons\add.png" />
+    <Content Include="Content\images\icons\answer.png" />
+    <Content Include="Content\images\icons\ask.png" />
+    <Content Include="Content\images\icons\bookmark-filled.png" />
+    <Content Include="Content\images\icons\bookmark.png" />
+    <Content Include="Content\images\icons\cog.png" />
+    <Content Include="Content\images\icons\conversation.png" />
+    <Content Include="Content\images\icons\dark-add.png" />
+    <Content Include="Content\images\icons\dark-answer.png" />
+    <Content Include="Content\images\icons\dark-ask.png" />
+    <Content Include="Content\images\icons\dark-bookmark-filled.png" />
+    <Content Include="Content\images\icons\dark-bookmark.png" />
+    <Content Include="Content\images\icons\dark-cog.png" />
+    <Content Include="Content\images\icons\dark-conversation-2.png" />
+    <Content Include="Content\images\icons\dark-conversation.png" />
+    <Content Include="Content\images\icons\dark-flag.png" />
+    <Content Include="Content\images\icons\dark-notification.png" />
+    <Content Include="Content\images\icons\dark-quote.png" />
+    <Content Include="Content\images\icons\dark-speech.png" />
+    <Content Include="Content\images\icons\dark-star-filled.png" />
+    <Content Include="Content\images\icons\dark-star.png" />
+    <Content Include="Content\images\icons\dark-user-circle.png" />
+    <Content Include="Content\images\icons\dark-user.png" />
+    <Content Include="Content\images\icons\dark-vote.png" />
+    <Content Include="Content\images\icons\flag.png" />
+    <Content Include="Content\images\icons\notification.png" />
+    <Content Include="Content\images\icons\OURDILEMMAS.png" />
+    <Content Include="Content\images\icons\red-add.png" />
+    <Content Include="Content\images\icons\red-answer.png" />
+    <Content Include="Content\images\icons\red-ask.png" />
+    <Content Include="Content\images\icons\red-bookmark-filled.png" />
+    <Content Include="Content\images\icons\red-bookmark.png" />
+    <Content Include="Content\images\icons\red-cog.png" />
+    <Content Include="Content\images\icons\red-conversation-2.png" />
+    <Content Include="Content\images\icons\red-conversation.png" />
+    <Content Include="Content\images\icons\red-flag.png" />
+    <Content Include="Content\images\icons\red-notification.png" />
+    <Content Include="Content\images\icons\red-speech.png" />
+    <Content Include="Content\images\icons\red-star-filled.png" />
+    <Content Include="Content\images\icons\red-star.png" />
+    <Content Include="Content\images\icons\red-user-circle.png" />
+    <Content Include="Content\images\icons\red-user.png" />
+    <Content Include="Content\images\icons\red-vote.png" />
+    <Content Include="Content\images\icons\speech.png" />
+    <Content Include="Content\images\icons\star-filled.png" />
+    <Content Include="Content\images\icons\star.png" />
+    <Content Include="Content\images\icons\user-circle.png" />
+    <Content Include="Content\images\icons\user.png" />
+    <Content Include="Content\images\icons\vote.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\placeholder-bubble-left.png" />
+    <Content Include="Content\images\placeholder-bubble-right.png" />
+    <Content Include="Content\images\placeholder.png" />
+    <Content Include="Content\images\slide-1.jpg" />
+    <Content Include="Content\images\slide-2.jpg" />
+    <Content Include="Content\images\slide-3.jpg" />
+    <Content Include="Content\images\user-guru-30.png" />
+    <Content Include="Content\images\user-owl-30.png" />
+    <Content Include="Content\images\user-teacher-30.jpg" />
+    <Content Include="Content\images\user-teacher-30.png" />
+    <Content Include="Content\images\vertical-divider.png" />
+    <Content Include="Content\images\wise-ometer.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -341,6 +417,10 @@
     <Content Include="Content\fonts\MuseoSansRounded-700.eot" />
     <Content Include="Content\fonts\MuseoSansRounded-700.ttf" />
     <Content Include="Content\fonts\MuseoSansRounded-700.woff" />
+    <Content Include="Content\images\bubble.psd" />
+    <Content Include="Content\images\chevron-right.psd" />
+    <Content Include="Content\images\gradient-overlay-strong.psd" />
+    <Content Include="Content\images\wise-ometer.psd" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Question Seeder %28i-e00ade11%29.pubxml" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Testing Server %28i-eb5a63e0%29.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -395,6 +475,7 @@
       <LastGenOutput>Error.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Dilemmas\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\QuestionSummary.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -405,7 +486,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Shared\DisplayTemplates\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>

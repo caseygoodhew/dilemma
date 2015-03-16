@@ -66,14 +66,26 @@ WriteLiteral(" charset=\"utf-8\"");
 
 WriteLiteral(" />\r\n    <meta");
 
+WriteLiteral(" http-equiv=\"X-UA-Compatible\"");
+
+WriteLiteral(" content=\"IE=edge\"");
+
+WriteLiteral(">\r\n    <meta");
+
 WriteLiteral(" name=\"viewport\"");
 
 WriteLiteral(" content=\"width=device-width, initial-scale=1.0\"");
 
-WriteLiteral(">\r\n    <title>");
+WriteLiteral("/>\r\n    <meta");
+
+WriteLiteral(" name=\"description\"");
+
+WriteLiteral(" content=\"\"");
+
+WriteLiteral(">\r\n\r\n    <title>");
 
             
-            #line 12 "..\..\Views\Shared\_Layout.cshtml"
+            #line 15 "..\..\Views\Shared\_Layout.cshtml"
       Write(ViewBag.Title);
 
             
@@ -84,7 +96,7 @@ WriteLiteral(" - Dilemma</title>\r\n");
 WriteLiteral("    ");
 
             
-            #line 13 "..\..\Views\Shared\_Layout.cshtml"
+            #line 16 "..\..\Views\Shared\_Layout.cshtml"
 Write(Styles.Render("~/Content/css"));
 
             
@@ -95,29 +107,402 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 14 "..\..\Views\Shared\_Layout.cshtml"
+            #line 17 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/modernizr"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n</head>\r\n<body>\r\n");
+WriteLiteral("\r\n    \r\n    <!--icons-->\r\n    <link");
 
-WriteLiteral("    ");
+WriteLiteral(" rel=\"shortcut icon\"");
+
+WriteLiteral(" href=\"/Content/images/icons/favicon.png\"");
+
+WriteLiteral(" type=\"image/x-icon\"");
+
+WriteLiteral("/>\r\n    <link");
+
+WriteLiteral(" rel=\"apple-touch-icon-precomposed\"");
+
+WriteLiteral(" href=\"/Content/images/icons/apple-touch-icon-precomposed.png\"");
+
+WriteLiteral(" type=\"image/png\"");
+
+WriteLiteral("/>\r\n\r\n    <!-- send jquery to the foot of the page -->\r\n    <script");
+
+WriteLiteral(" type=\'text/javascript\'");
+
+WriteLiteral(">window.q = []; window.$ = function (f) { q.push(f) }</script>\r\n\r\n</head>\r\n<body>" +
+"\r\n    <a");
+
+WriteLiteral(" class=\"skip-link screen-reader-text\"");
+
+WriteLiteral(" href=\"#content\"");
+
+WriteLiteral(">Skip to content</a>\r\n    \r\n    <header");
+
+WriteLiteral(" role=\"banner\"");
+
+WriteLiteral(" class=\"page-hd\"");
+
+WriteLiteral(">\r\n        <nav");
+
+WriteLiteral(" class=\"navbar navbar-default navbar-inverse\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"container-fluid\"");
+
+WriteLiteral(">\r\n                <div");
+
+WriteLiteral(" class=\"wrap\"");
+
+WriteLiteral(">\r\n                    <div");
+
+WriteLiteral(" class=\"navbar-header\"");
+
+WriteLiteral(">\r\n                        <a");
+
+WriteLiteral(" href=\"/dilemmas?category=all\"");
+
+WriteLiteral(" rel=\"home\"");
+
+WriteLiteral(" class=\"page-logo\"");
+
+WriteLiteral(">\r\n                            <img");
+
+WriteLiteral(" src=\"/Content/images/device.png\"");
+
+WriteLiteral(" alt=\"\"");
+
+WriteLiteral(" width=\"60\"");
+
+WriteLiteral(" style=\"position: absolute;top: -5px; margin-right: 5px;\"");
+
+WriteLiteral(">\r\n                            <img");
+
+WriteLiteral(" src=\"/Content/images/logo.png\"");
+
+WriteLiteral(" alt=\"\"");
+
+WriteLiteral(" width=\"200\"");
+
+WriteLiteral(" style=\" margin: 10px 0 0 70px;\"");
+
+WriteLiteral(">\r\n                        </a>\r\n                    </div>\r\n\r\n                  " +
+"  <ul");
+
+WriteLiteral(" class=\"nav navbar-nav right\"");
+
+WriteLiteral(">\r\n                        <li");
+
+WriteLiteral(" class=\"dropdown nav-level-1\"");
+
+WriteLiteral(">\r\n                            <a");
+
+WriteLiteral(" href=\"/dilemmas\"");
+
+WriteLiteral(" class=\"dropdown-toggle nav-level-1-link js-nav-level-2-menu-trigger\"");
+
+WriteLiteral(" role=\"button\"");
+
+WriteLiteral(" aria-expanded=\"false\"");
+
+WriteLiteral(">\r\n                                <img");
+
+WriteLiteral(" src=\"/Content/images/icons/conversation.png\"");
+
+WriteLiteral(" alt=\"\"");
+
+WriteLiteral(" width=\"30\"");
+
+WriteLiteral(">\r\n                                <span");
+
+WriteLiteral(" class=\"nav-level-1-text\"");
+
+WriteLiteral(">\r\n                                    Advise &amp; Vote \r\n                      " +
+"              <span");
+
+WriteLiteral(" class=\"caret\"");
+
+WriteLiteral("></span>\r\n                                </span>\r\n                \r\n            " +
+"                </a>\r\n                            <ul");
+
+WriteLiteral(" class=\"nav-level-2-menu\"");
+
+WriteLiteral(" role=\"menu\"");
+
+WriteLiteral(">\r\n                                <li");
+
+WriteLiteral(" class=\"nav-level-2 in-category-1\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteLiteral(" href=\"/dilemmas?category=all\"");
+
+WriteLiteral(" class=\"nav-level-2-link\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></span>\r\n                                        All Categories\r\n               " +
+"                     </a>\r\n                                </li>\r\n              " +
+"                  <li");
+
+WriteLiteral(" class=\"nav-level-2 in-category-2\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteLiteral(" href=\"/dilemmas?category=bookmarks\"");
+
+WriteLiteral(" class=\"nav-level-2-link\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></span>\r\n                                        My Bookmarks\r\n                 " +
+"                   </a>\r\n                                </li>\r\n                " +
+"                <li");
+
+WriteLiteral(" class=\"nav-level-2 in-category-3\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteLiteral(" href=\"/dilemmas?category=personal\"");
+
+WriteLiteral(" class=\"nav-level-2-link\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></span>\r\n                                        Personal\r\n                     " +
+"               </a>\r\n                                </li>\r\n                    " +
+"            <li");
+
+WriteLiteral(" class=\"nav-level-2 is-page-current in-category-4\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteLiteral(" href=\"/dilemmas?category=family\"");
+
+WriteLiteral(" class=\"nav-level-2-link\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></span>\r\n                                        Family\r\n                       " +
+"             </a>\r\n                                </li>\r\n                      " +
+"          <li");
+
+WriteLiteral(" class=\"nav-level-2 in-category-5\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteLiteral(" href=\"/dilemmas?category=relationships\"");
+
+WriteLiteral(" class=\"nav-level-2-link\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></span>\r\n                                        Relationships\r\n                " +
+"                    </a>\r\n                                </li>\r\n               " +
+"                 <li");
+
+WriteLiteral(" class=\"nav-level-2 in-category-6\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteLiteral(" href=\"/dilemmas?category=work\"");
+
+WriteLiteral(" class=\"nav-level-2-link\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></span>\r\n                                        Work\r\n                         " +
+"           </a>\r\n                                </li>\r\n                        " +
+"        <li");
+
+WriteLiteral(" class=\"nav-level-2 in-category-7\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteLiteral(" href=\"/dilemmas?category=sex\"");
+
+WriteLiteral(" class=\"nav-level-2-link\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></span>\r\n                                        Sex\r\n                          " +
+"          </a>\r\n                                </li>\r\n                         " +
+"       <li");
+
+WriteLiteral(" class=\"nav-level-2 in-category-8\"");
+
+WriteLiteral(">\r\n                                    <a");
+
+WriteLiteral(" href=\"/dilemmas?category=teenage\"");
+
+WriteLiteral(" class=\"nav-level-2-link\"");
+
+WriteLiteral(">\r\n                                        <span");
+
+WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
+
+WriteLiteral(" aria-hidden=\"true\"");
+
+WriteLiteral("></span>\r\n                                        Teenage\r\n                      " +
+"              </a>\r\n                                </li>\r\n                     " +
+"       </ul>\r\n                        </li>\r\n                        <li");
+
+WriteLiteral(" class=\"nav-level-1\"");
+
+WriteLiteral(">\r\n                            <!-- <a href=\"#\" data-toggle=\"modal\" data-target=\"" +
+"#modal-ask\"> -->\r\n                            <a");
+
+WriteLiteral(" href=\"/ask\"");
+
+WriteLiteral(" class=\"nav-level-1-link\"");
+
+WriteLiteral(">\r\n                                <img");
+
+WriteLiteral(" src=\"/Content/images/icons/ask.png\"");
+
+WriteLiteral(" alt=\"\"");
+
+WriteLiteral(" width=\"30\"");
+
+WriteLiteral(">\r\n                                <span");
+
+WriteLiteral(" class=\"nav-level-1-text\"");
+
+WriteLiteral(">Ask</span>\r\n                            </a>\r\n                        </li>\r\n   " +
+"                     <li");
+
+WriteLiteral(" class=\"nav-level-1\"");
+
+WriteLiteral(">\r\n                            <a");
+
+WriteLiteral(" href=\"/profile\"");
+
+WriteLiteral(" class=\"nav-level-1-link\"");
+
+WriteLiteral(">\r\n                                <img");
+
+WriteLiteral(" src=\"/Content/images/icons/user.png\"");
+
+WriteLiteral(" alt=\"\"");
+
+WriteLiteral(" width=\"26\"");
+
+WriteLiteral(">\r\n                                <span");
+
+WriteLiteral(" class=\"nav-level-1-text\"");
+
+WriteLiteral(">Profile</span>\r\n                                <!--?php $unread_notifications =" +
+" 99; ?-->\r\n                                <!--?php if ($unread_notifications > " +
+"0) { ?-->\r\n                                <span");
+
+WriteLiteral(" class=\"nav-unread-notifications\"");
+
+WriteLiteral(@">
+                                    <!--?=$unread_notifications?-->
+                                    $unread_notifications
+                                </span>
+                                <!--?php } ?-->
+                            </a>
+                        </li>
+                    </ul>          
+                </div><!-- wrap -->
+            </div>
+        </nav>
+
+    </header>
+    <!-- banner-->
+    
+    <!--?php require '_ask-modal.php'; ?-->
+    
+    <div");
+
+WriteLiteral(" class=\"page-bd\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
 
             
-            #line 18 "..\..\Views\Shared\_Layout.cshtml"
-Write(RenderBody());
+            #line 133 "..\..\Views\Shared\_Layout.cshtml"
+   Write(RenderBody());
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    \r\n");
+WriteLiteral("\r\n    </div>\r\n    \r\n    <footer");
+
+WriteLiteral(" role=\"contentinfo\"");
+
+WriteLiteral(" class=\"page-ft\"");
+
+WriteLiteral(">\r\n        <small>\r\n            <div");
+
+WriteLiteral(" class=\"wrap\"");
+
+WriteLiteral(">\r\n                <ul");
+
+WriteLiteral(" class=\"unstyled inline with-separators\"");
+
+WriteLiteral(">\r\n                    <li><a");
+
+WriteLiteral(" href=\"#\"");
+
+WriteLiteral(">Privacy Policy</a></li>\r\n                    <li><a");
+
+WriteLiteral(" href=\"#\"");
+
+WriteLiteral(">Terms &amp; Conditions</a></li>\r\n                    <li><a");
+
+WriteLiteral(" href=\"#\"");
+
+WriteLiteral(">Cookies Policy</a></li>\r\n                    <li><a");
+
+WriteLiteral(" href=\"#\"");
+
+WriteLiteral(">Contact Us</a></li>\r\n                </ul>\r\n                <div");
+
+WriteLiteral(" class=\"copyright\"");
+
+WriteLiteral(">&copy;&#160;Our Dilemmas&#160;2015&#160;All&#160;rights&#160;reserved</div>\r\n   " +
+"         </div><!-- wrap-->\r\n        </small>\r\n    </footer><!-- contentinfo-->\r" +
+"\n\r\n    \r\n");
 
 WriteLiteral("    ");
 
             
-            #line 20 "..\..\Views\Shared\_Layout.cshtml"
+            #line 151 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -128,7 +513,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 21 "..\..\Views\Shared\_Layout.cshtml"
+            #line 152 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -139,7 +524,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 22 "..\..\Views\Shared\_Layout.cshtml"
+            #line 153 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -150,13 +535,28 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 23 "..\..\Views\Shared\_Layout.cshtml"
+            #line 154 "..\..\Views\Shared\_Layout.cshtml"
+Write(Scripts.Render("~/bundles/homegrown"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n    \r\n    \r\n");
+
+WriteLiteral("    ");
+
+            
+            #line 157 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n</body>\r\n</html>\r\n");
+WriteLiteral("\r\n    \r\n    <script");
+
+WriteLiteral(" type=\"text/javascript\"");
+
+WriteLiteral(">$.each(q, function (i, f) { $(f); })</script>\r\n</body>\r\n</html>\r\n");
 
         }
     }

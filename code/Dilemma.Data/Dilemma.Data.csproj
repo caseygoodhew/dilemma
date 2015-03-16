@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="Disposable.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Disposable.Common.1.0.12\lib\net45\Disposable.Common.dll</HintPath>
+      <HintPath>..\packages\Disposable.Common.1.0.13\lib\net45\Disposable.Common.dll</HintPath>
     </Reference>
     <Reference Include="Disposable.MessagePipe">
       <HintPath>..\packages\Disposable.MessagePipe.1.0.5\lib\net45\Disposable.MessagePipe.dll</HintPath>

@@ -1,7 +1,45 @@
-﻿
+﻿@using Dilemma.Web.Extensions
+@using Disposable.Web.Common
+@model Dilemma.Web.ViewModels.DilemmasViewModel
 @{
     ViewBag.Title = "Index";
 }
+<div class="wrap">
+<h1 class="js-sticky">
+    <span class="js-sticky--offset">
+        <img src="/Content/images/icons/red-answer.png" alt="" width="40">
+        Advise
+    </span>
+</h1>
 
-<h2>Index</h2>
+    <div class="line">
 
+        <aside class="sidebar">
+            <!--?php require '_profile-summary.php'; ?-->
+        </aside><!-- sidebar -->
+
+        <main role="main" class="main">
+            <div class="Dilemmas">
+
+                @Html.DisplayForList(x => x.DilemmasToAnswer, "QuestionSummary")
+                
+                <h2 class="js-sticky h1 js-sticky--vote">
+                    <span class="js-sticky--offset">
+                        <img src="/Content/images/icons/red-vote.png" alt="" width="40">
+                        Vote
+                    </span>
+                </h2>
+          
+                @Html.DisplayForList(x => x.DilemmasToVote, "QuestionSummary")
+            </div>
+        </main><!-- main-->  
+    </div>
+</div><!-- .wrap -->
+
+
+
+@section scripts {
+    <script type="text/javascript">
+        document.getElementsByTagName('body')[0].className+=' page-dilemmas';
+    </script>
+}

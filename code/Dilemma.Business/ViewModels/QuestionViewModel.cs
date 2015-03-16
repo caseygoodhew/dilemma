@@ -32,6 +32,11 @@ namespace Dilemma.Business.ViewModels
         public DateTime? ClosesDateTime { get; set; }
 
         /// <summary>
+        /// Gets or sets the date and time that the question closes.
+        /// </summary>
+        public DateTime? ClosedDateTime { get; set; }
+
+        /// <summary>
         /// Gets or sets the total number of (non-discarded) answers against this question. This value may not match the number of items in the <see cref="Answers"/> list.
         /// </summary>
         public int TotalAnswers { get; set; }
