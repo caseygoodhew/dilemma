@@ -29,13 +29,7 @@ namespace Dilemma.Web.Controllers
         [Route("dilemmas/{category:alpha}")]
         public ActionResult Index(string category)
         {
-            if (!string.IsNullOrEmpty(category))
-            {
-                throw new NotImplementedException();
-            }
-            
-            ViewBag.CategoryNumber = "";
-            ViewBag.CategoryName = "";
+            ViewBag.Category = string.IsNullOrEmpty(category) ? "all" : category;
             
             return View(GetDilemmasViewModel());
         }
@@ -58,6 +52,42 @@ namespace Dilemma.Web.Controllers
                                     DilemmasToVote = questions.Where(x => x.IsClosed).OrderBy(x => x.ClosedDateTime),
                                     SidebarViewModel = GetSidebarViewModel()
                                 };
+        }
+
+        private static IEnumerable<CategoryViewModel> GetCategories()
+        {
+            var rand = new Random();
+
+            return new[] { new CategoryViewModel
+                               {
+                                   CategoryId = rand.Next(100),
+                                   Name = "Personal"
+                               },
+                           new CategoryViewModel
+                               {
+                                   CategoryId = rand.Next(100),
+                                   Name = "Family"
+                               },
+                           new CategoryViewModel
+                               {
+                                   CategoryId = rand.Next(100),
+                                   Name = "Relationships"
+                               },
+                           new CategoryViewModel
+                               {
+                                   CategoryId = rand.Next(100),
+                                   Name = "Work"
+                               },
+                           new CategoryViewModel
+                               {
+                                   CategoryId = rand.Next(100),
+                                   Name = "Sex"
+                               },
+                           new CategoryViewModel
+                               {
+                                   CategoryId = rand.Next(100),
+                                   Name = "Teenage"
+                               } };
         }
 
         private static SidebarViewModel GetSidebarViewModel()

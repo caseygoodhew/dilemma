@@ -17,6 +17,12 @@ namespace ASP
     using System.Linq;
     using System.Net;
     using System.Text;
+    
+    #line 1 "..\..\Views\Shared\_Layout.cshtml"
+    using System.Text.RegularExpressions;
+    
+    #line default
+    #line hidden
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
@@ -28,8 +34,14 @@ namespace ASP
     using System.Web.UI;
     using System.Web.WebPages;
     
-    #line 1 "..\..\Views\Shared\_Layout.cshtml"
+    #line 2 "..\..\Views\Shared\_Layout.cshtml"
     using Dilemma.Business.Services;
+    
+    #line default
+    #line hidden
+    
+    #line 3 "..\..\Views\Shared\_Layout.cshtml"
+    using Dilemma.Business.ViewModels;
     
     #line default
     #line hidden
@@ -37,7 +49,7 @@ namespace ASP
     using Dilemma.Web;
     using Disposable.Common.Extensions;
     
-    #line 2 "..\..\Views\Shared\_Layout.cshtml"
+    #line 4 "..\..\Views\Shared\_Layout.cshtml"
     using Disposable.Common.ServiceLocator;
     
     #line default
@@ -53,9 +65,13 @@ namespace ASP
         public override void Execute()
         {
             
-            #line 3 "..\..\Views\Shared\_Layout.cshtml"
+            #line 5 "..\..\Views\Shared\_Layout.cshtml"
   
-    
+    var tidyRegex = new Regex("[^a-zA-Z]");
+    Func<string, string> formatCategoryUrl = (x) => tidyRegex.Replace(x, string.Empty).ToLower();
+    var counter = 3;
+    Func<int> getNextCounter = () => { return counter++; };
+    Func<string, string> getMenuClass = (x) => x == ViewBag.Category ? "is-page-current" : string.Empty;
 
             
             #line default
@@ -85,7 +101,7 @@ WriteLiteral(" content=\"\"");
 WriteLiteral(">\r\n\r\n    <title>");
 
             
-            #line 15 "..\..\Views\Shared\_Layout.cshtml"
+            #line 21 "..\..\Views\Shared\_Layout.cshtml"
       Write(ViewBag.Title);
 
             
@@ -96,7 +112,7 @@ WriteLiteral(" - Dilemma</title>\r\n");
 WriteLiteral("    ");
 
             
-            #line 16 "..\..\Views\Shared\_Layout.cshtml"
+            #line 22 "..\..\Views\Shared\_Layout.cshtml"
 Write(Styles.Render("~/Content/css"));
 
             
@@ -107,7 +123,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 17 "..\..\Views\Shared\_Layout.cshtml"
+            #line 23 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/modernizr"));
 
             
@@ -235,11 +251,22 @@ WriteLiteral(" role=\"menu\"");
 
 WriteLiteral(">\r\n                                <li");
 
-WriteLiteral(" class=\"nav-level-2 in-category-1\"");
+WriteAttribute("class", Tuple.Create(" class=\"", 2758), Tuple.Create("\"", 2830)
+, Tuple.Create(Tuple.Create("", 2766), Tuple.Create("nav-level-2", 2766), true)
+, Tuple.Create(Tuple.Create(" ", 2777), Tuple.Create("in-category-1", 2778), true)
+, Tuple.Create(Tuple.Create(" ", 2791), Tuple.Create("js-categories-all", 2792), true)
+            
+            #line 58 "..\..\Views\Shared\_Layout.cshtml"
+      , Tuple.Create(Tuple.Create(" ", 2809), Tuple.Create<System.Object, System.Int32>(getMenuClass("all")
+            
+            #line default
+            #line hidden
+, 2810), false)
+);
 
 WriteLiteral(">\r\n                                    <a");
 
-WriteLiteral(" href=\"/dilemmas?category=all\"");
+WriteLiteral(" href=\"/dilemmas\"");
 
 WriteLiteral(" class=\"nav-level-2-link\"");
 
@@ -253,11 +280,22 @@ WriteLiteral("></span>\r\n                                        All Categories
 "                     </a>\r\n                                </li>\r\n              " +
 "                  <li");
 
-WriteLiteral(" class=\"nav-level-2 in-category-2\"");
+WriteAttribute("class", Tuple.Create(" class=\"", 3199), Tuple.Create("\"", 3283)
+, Tuple.Create(Tuple.Create("", 3207), Tuple.Create("nav-level-2", 3207), true)
+, Tuple.Create(Tuple.Create(" ", 3218), Tuple.Create("in-category-2", 3219), true)
+, Tuple.Create(Tuple.Create(" ", 3232), Tuple.Create("js-categories-bookmarks", 3233), true)
+            
+            #line 64 "..\..\Views\Shared\_Layout.cshtml"
+            , Tuple.Create(Tuple.Create(" ", 3256), Tuple.Create<System.Object, System.Int32>(getMenuClass("bookmarks")
+            
+            #line default
+            #line hidden
+, 3257), false)
+);
 
 WriteLiteral(">\r\n                                    <a");
 
-WriteLiteral(" href=\"/dilemmas?category=bookmarks\"");
+WriteLiteral(" href=\"/dilemmas/bookmarks\"");
 
 WriteLiteral(" class=\"nav-level-2-link\"");
 
@@ -268,116 +306,87 @@ WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
 WriteLiteral(" aria-hidden=\"true\"");
 
 WriteLiteral("></span>\r\n                                        My Bookmarks\r\n                 " +
-"                   </a>\r\n                                </li>\r\n                " +
-"                <li");
+"                   </a>\r\n                                </li>\r\n");
 
-WriteLiteral(" class=\"nav-level-2 in-category-3\"");
+            
+            #line 70 "..\..\Views\Shared\_Layout.cshtml"
+                                
+            
+            #line default
+            #line hidden
+            
+            #line 70 "..\..\Views\Shared\_Layout.cshtml"
+                                 foreach (CategoryViewModel category in ViewBag.Categories)
+                                {
 
-WriteLiteral(">\r\n                                    <a");
+            
+            #line default
+            #line hidden
+WriteLiteral("                                    <li");
 
-WriteLiteral(" href=\"/dilemmas?category=personal\"");
+WriteAttribute("class", Tuple.Create(" class=\"", 3792), Tuple.Create("\"", 3889)
+, Tuple.Create(Tuple.Create("", 3800), Tuple.Create("nav-level-2", 3800), true)
+, Tuple.Create(Tuple.Create(" ", 3811), Tuple.Create("in-category-", 3812), true)
+            
+            #line 72 "..\..\Views\Shared\_Layout.cshtml"
+, Tuple.Create(Tuple.Create("", 3824), Tuple.Create<System.Object, System.Int32>(getNextCounter()
+            
+            #line default
+            #line hidden
+, 3824), false)
+            
+            #line 72 "..\..\Views\Shared\_Layout.cshtml"
+        , Tuple.Create(Tuple.Create(" ", 3841), Tuple.Create<System.Object, System.Int32>(getMenuClass(formatCategoryUrl(category.Name))
+            
+            #line default
+            #line hidden
+, 3842), false)
+);
+
+WriteLiteral(">\r\n                                        <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 3935), Tuple.Create("\"", 3985)
+, Tuple.Create(Tuple.Create("", 3942), Tuple.Create("/dilemmas/", 3942), true)
+            
+            #line 73 "..\..\Views\Shared\_Layout.cshtml"
+, Tuple.Create(Tuple.Create("", 3952), Tuple.Create<System.Object, System.Int32>(formatCategoryUrl(category.Name)
+            
+            #line default
+            #line hidden
+, 3952), false)
+);
 
 WriteLiteral(" class=\"nav-level-2-link\"");
 
-WriteLiteral(">\r\n                                        <span");
+WriteLiteral(">\r\n                                            <span");
 
 WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
 
 WriteLiteral(" aria-hidden=\"true\"");
 
-WriteLiteral("></span>\r\n                                        Personal\r\n                     " +
-"               </a>\r\n                                </li>\r\n                    " +
-"            <li");
+WriteLiteral("></span>\r\n");
 
-WriteLiteral(" class=\"nav-level-2 is-page-current in-category-4\"");
+WriteLiteral("                                            ");
 
-WriteLiteral(">\r\n                                    <a");
+            
+            #line 75 "..\..\Views\Shared\_Layout.cshtml"
+                                       Write(category.Name);
 
-WriteLiteral(" href=\"/dilemmas?category=family\"");
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        </a>\r\n                                 " +
+"   </li>\r\n");
 
-WriteLiteral(" class=\"nav-level-2-link\"");
+            
+            #line 78 "..\..\Views\Shared\_Layout.cshtml"
+                                }
 
-WriteLiteral(">\r\n                                        <span");
-
-WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
-
-WriteLiteral(" aria-hidden=\"true\"");
-
-WriteLiteral("></span>\r\n                                        Family\r\n                       " +
-"             </a>\r\n                                </li>\r\n                      " +
-"          <li");
-
-WriteLiteral(" class=\"nav-level-2 in-category-5\"");
-
-WriteLiteral(">\r\n                                    <a");
-
-WriteLiteral(" href=\"/dilemmas?category=relationships\"");
-
-WriteLiteral(" class=\"nav-level-2-link\"");
-
-WriteLiteral(">\r\n                                        <span");
-
-WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
-
-WriteLiteral(" aria-hidden=\"true\"");
-
-WriteLiteral("></span>\r\n                                        Relationships\r\n                " +
-"                    </a>\r\n                                </li>\r\n               " +
-"                 <li");
-
-WriteLiteral(" class=\"nav-level-2 in-category-6\"");
-
-WriteLiteral(">\r\n                                    <a");
-
-WriteLiteral(" href=\"/dilemmas?category=work\"");
-
-WriteLiteral(" class=\"nav-level-2-link\"");
-
-WriteLiteral(">\r\n                                        <span");
-
-WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
-
-WriteLiteral(" aria-hidden=\"true\"");
-
-WriteLiteral("></span>\r\n                                        Work\r\n                         " +
-"           </a>\r\n                                </li>\r\n                        " +
-"        <li");
-
-WriteLiteral(" class=\"nav-level-2 in-category-7\"");
-
-WriteLiteral(">\r\n                                    <a");
-
-WriteLiteral(" href=\"/dilemmas?category=sex\"");
-
-WriteLiteral(" class=\"nav-level-2-link\"");
-
-WriteLiteral(">\r\n                                        <span");
-
-WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
-
-WriteLiteral(" aria-hidden=\"true\"");
-
-WriteLiteral("></span>\r\n                                        Sex\r\n                          " +
-"          </a>\r\n                                </li>\r\n                         " +
-"       <li");
-
-WriteLiteral(" class=\"nav-level-2 in-category-8\"");
-
-WriteLiteral(">\r\n                                    <a");
-
-WriteLiteral(" href=\"/dilemmas?category=teenage\"");
-
-WriteLiteral(" class=\"nav-level-2-link\"");
-
-WriteLiteral(">\r\n                                        <span");
-
-WriteLiteral(" class=\"glyphicon glyphicon-refresh\"");
-
-WriteLiteral(" aria-hidden=\"true\"");
-
-WriteLiteral("></span>\r\n                                        Teenage\r\n                      " +
-"              </a>\r\n                                </li>\r\n                     " +
-"       </ul>\r\n                        </li>\r\n                        <li");
+            
+            #line default
+            #line hidden
+WriteLiteral("                            </ul>\r\n                        </li>\r\n               " +
+"         <li");
 
 WriteLiteral(" class=\"nav-level-1\"");
 
@@ -455,7 +464,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 133 "..\..\Views\Shared\_Layout.cshtml"
+            #line 112 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -502,7 +511,7 @@ WriteLiteral(">&copy;&#160;Our Dilemmas&#160;2015&#160;All&#160;rights&#160;rese
 WriteLiteral("    ");
 
             
-            #line 151 "..\..\Views\Shared\_Layout.cshtml"
+            #line 130 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -513,7 +522,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 152 "..\..\Views\Shared\_Layout.cshtml"
+            #line 131 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -524,7 +533,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 153 "..\..\Views\Shared\_Layout.cshtml"
+            #line 132 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -535,7 +544,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 154 "..\..\Views\Shared\_Layout.cshtml"
+            #line 133 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/homegrown"));
 
             
@@ -546,7 +555,7 @@ WriteLiteral("\r\n    \r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 157 "..\..\Views\Shared\_Layout.cshtml"
+            #line 136 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

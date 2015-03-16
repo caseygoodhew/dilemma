@@ -1,7 +1,13 @@
-﻿@using Dilemma.Business.Services
+﻿@using System.Text.RegularExpressions
+@using Dilemma.Business.Services
+@using Dilemma.Business.ViewModels
 @using Disposable.Common.ServiceLocator
 @{
-    
+    var tidyRegex = new Regex("[^a-zA-Z]");
+    Func<string, string> formatCategoryUrl = (x) => tidyRegex.Replace(x, string.Empty).ToLower();
+    var counter = 3;
+    Func<int> getNextCounter = () => { return counter++; };
+    Func<string, string> getMenuClass = (x) => x == ViewBag.Category ? "is-page-current" : string.Empty;
 }
 
 <!DOCTYPE html>
@@ -49,54 +55,27 @@
                 
                             </a>
                             <ul class="nav-level-2-menu" role="menu">
-                                <li class="nav-level-2 in-category-1">
-                                    <a href="/dilemmas?category=all" class="nav-level-2-link">
+                                <li class="nav-level-2 in-category-1 js-categories-all @getMenuClass("all")">
+                                    <a href="/dilemmas" class="nav-level-2-link">
                                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                                         All Categories
                                     </a>
                                 </li>
-                                <li class="nav-level-2 in-category-2">
-                                    <a href="/dilemmas?category=bookmarks" class="nav-level-2-link">
+                                <li class="nav-level-2 in-category-2 js-categories-bookmarks @getMenuClass("bookmarks")">
+                                    <a href="/dilemmas/bookmarks" class="nav-level-2-link">
                                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                                         My Bookmarks
                                     </a>
                                 </li>
-                                <li class="nav-level-2 in-category-3">
-                                    <a href="/dilemmas?category=personal" class="nav-level-2-link">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        Personal
-                                    </a>
-                                </li>
-                                <li class="nav-level-2 is-page-current in-category-4">
-                                    <a href="/dilemmas?category=family" class="nav-level-2-link">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        Family
-                                    </a>
-                                </li>
-                                <li class="nav-level-2 in-category-5">
-                                    <a href="/dilemmas?category=relationships" class="nav-level-2-link">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        Relationships
-                                    </a>
-                                </li>
-                                <li class="nav-level-2 in-category-6">
-                                    <a href="/dilemmas?category=work" class="nav-level-2-link">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        Work
-                                    </a>
-                                </li>
-                                <li class="nav-level-2 in-category-7">
-                                    <a href="/dilemmas?category=sex" class="nav-level-2-link">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        Sex
-                                    </a>
-                                </li>
-                                <li class="nav-level-2 in-category-8">
-                                    <a href="/dilemmas?category=teenage" class="nav-level-2-link">
-                                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                                        Teenage
-                                    </a>
-                                </li>
+                                @foreach (CategoryViewModel category in ViewBag.Categories)
+                                {
+                                    <li class="nav-level-2 in-category-@getNextCounter() @getMenuClass(formatCategoryUrl(category.Name))">
+                                        <a href="/dilemmas/@formatCategoryUrl(category.Name)" class="nav-level-2-link">
+                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                            @category.Name
+                                        </a>
+                                    </li>
+                                }
                             </ul>
                         </li>
                         <li class="nav-level-1">
