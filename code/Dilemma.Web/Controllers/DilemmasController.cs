@@ -39,6 +39,7 @@ namespace Dilemma.Web.Controllers
         [Route("dilemmas/{questionId:int:min(1)}")]
         public ActionResult Index(int questionId)
         {
+            // Not implemented
             return View();
         }
 
