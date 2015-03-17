@@ -181,28 +181,16 @@ namespace Dilemma.Web.Controllers
                                };
                 };
 
-            return new[]
-                    {
-                        factory("this is a question"), 
-                        factory("this is a question"), 
-                        factory("this is a question"),
-                        factory("this is a question"), 
-                        factory("this is a question"), 
-                        factory("this is a question"),
-                        factory("this is a question"), 
-                        factory("this is a question"), 
-                        factory("this is a question"),
-                        factory("this is a question"), 
-                        factory("this is a question"), 
-                        factory("this is a question"),
-                        factory("this is a question"), 
-                        factory("this is a question"), 
-                        factory("this is a question"),
-                        factory("this is a question"), 
-                        factory("this is a question"), 
-                        factory("this is a question"),
-                        factory("this is a question"),
-                    };
+            var questionText =
+@"So I'm confused about my relationship. I've been dating this guy for about 2 months now, and I go back and forth on if he's truly that into me. To begin with, he's older than me. I'm 18, he's 22, so there's automatically a lot of judgement that comes along with that, which might have to do with some of my concerns.
+
+Basically, he says he likes me, drives about a half hour both ways in order to see me, pays for everything when we go out, texts me almost daily, finds excuses to touch me, seems interested in learning about me, and came on a trip to Vermont with my family.
+
+However, he never asks to Skype or call anymore, hasn't told his parents about me, doesn't want to hang out at my house if my parents are there, I'm the one who asks to hangout (however I usually ask pretty far in advance), and when I talked about being official, he avoided the conversation.
+
+My friends and family all refer to him as my boyfriend, but I don't know. I recently had sex with him and it was amazing, but I worry that I shouldn't have because we aren't technically official. He's said he's not messing around, but I still worry because he doesn't want to flat out say we're boyfriend and girlfriend. Am I being silly in my insecurities?";
+
+            return Enumerable.Repeat(string.Empty, rand.Next(20)).Select(x => factory(questionText));
         }
     }
 }

@@ -7580,7 +7580,7 @@ input[type=button] {
   top: 0;
   bottom: 0;
   right: 0;
-  background: url(/images/chevron-right.png) center center no-repeat transparent;
+  background: url("/content/images/chevron-right.png") center center no-repeat transparent;
 }
 .Card-go--trigger:hover {
   background-color: #f8f8f8;
@@ -7795,7 +7795,7 @@ input[type=button] {
   position: relative;
 }
 .Answer:before {
-  content: url(../../images/user-teacher-30.png);
+  content: url("/content/images/user-teacher-30.png");
   position: absolute;
   width: 30px;
   height: 30px;

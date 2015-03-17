@@ -185,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
+    <Compile Include="Controllers\AskController.cs" />
     <Compile Include="Controllers\DilemmaBaseController.cs" />
     <Compile Include="Controllers\DilemmasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -230,7 +231,6 @@
     <Content Include="Content\images\ads\160x600_uap.gif" />
     <Content Include="Content\images\ads\180x150_uap.gif" />
     <Content Include="Content\images\ads\300x250_uap.gif" />
-    <Content Include="Content\images\ads\300x250_uap.png" />
     <Content Include="Content\images\ads\728x90_uap.gif" />
     <Content Include="Content\images\Avatar-placeholder-300x300.png" />
     <Content Include="Content\images\chevron-right.png" />
@@ -477,6 +477,9 @@
     <Content Include="Views\Dilemmas\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\QuestionSummary.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Sidebar.cshtml" />
+    <Content Include="Views\Shared\Modals.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -486,6 +489,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Ask\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>

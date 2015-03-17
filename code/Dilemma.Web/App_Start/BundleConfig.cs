@@ -27,11 +27,11 @@ namespace Dilemma.Web
                         "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/homegrown").Include(
-                        "~/Scripts/plugins/waypoints.js",
-                        "~/Scripts/plugins/waypoints-sticky.js",
-                        "~/Scripts/plugins/jquery.cycle2.min.js",
-                        "~/Scripts/plugins/jquery.cycle2.swipe.min.js",
-                        "~/Scripts/main.js"));
+                        "~/Scripts/homegrown/plugins/waypoints.js",
+                        "~/Scripts/homegrown/plugins/waypoints-sticky.js",
+                        "~/Scripts/homegrown/plugins/jquery.cycle2.min.js",
+                        "~/Scripts/homegrown/plugins/jquery.cycle2.swipe.min.js",
+                        "~/Scripts/homegrown/main.js"));
             
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/homegrown/main.css"));
