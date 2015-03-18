@@ -481,6 +481,7 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Ask\Index.cshtml" />
+    <Content Include="Views\Ask\Partial1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

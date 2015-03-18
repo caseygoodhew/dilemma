@@ -15,32 +15,15 @@
         </aside><!-- sidebar -->
 
         <main role="main" class="main">
-
-            <form action="" class="Card ">
+            
+            @using (Html.BeginForm(FormMethod.Post, new { @class="Card" }))
+            { 
+            <form action="post" class="Card ">
 
                 <div class="Card-section Card-divider pa10" style="background: #f9f9f9;">
-                    <div class="form-group">
-                        <label for="dilemma_text" class="h3 pv10">What's on your mind?</label>
-                        <p class="info">Ask your question in complete anonymity. All questions disapear within a couple of weeks.</p>
-                        <textarea name="dilemma_text" id="dilemma_text" cols="30" rows="10" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        @Html.DropDownListFor(x => x.Categories, Model.Categories, "")
-                        
-                        
-                        <label for="dilemma_category" class="h3 pv10">Which best describes your dilemma?</label>
-                        
-                        
-                        <select id="dilemma_category" name="dilemma_category" class="form-control">
-                            <option value="">Choose Category</option>
-                            <option value="">Personal</option>
-                            <option value="">Family</option>
-                            <option value="">Relationships</option>
-                            <option value="">Work</option>
-                            <option value="">Sex</option>
-                            <option value="">Teenage</option>
-                        </select>
-                    </div>
+                    
+                    @Html.EditorFor(x => x.Question)
+
                     <div class="form-group">
                         <button type="button" class="Button--ask">
                             <img src="/images/icons/dark-ask.png" alt="" width="22">
@@ -49,7 +32,7 @@
                     </div>
       
                 </div>
-            </form><!-- Card -->
+            }
 
         </main>
     
