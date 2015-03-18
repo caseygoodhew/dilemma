@@ -6,7 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="">
 
-    <title>@ViewBag.Title - Dilemma</title>
+    <title>
+        @if (string.IsNullOrEmpty(ViewBag.Title))
+        {
+            <text>OurDilemmas</text>
+        }
+        else
+        {
+            <text>OurDilemmas - </text> @ViewBag.Title;
+        }
+    </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     

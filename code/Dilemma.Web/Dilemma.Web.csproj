@@ -480,6 +480,7 @@
     <Content Include="Views\Shared\Modals.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Ask\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -489,7 +490,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ask\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>

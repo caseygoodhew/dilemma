@@ -51,7 +51,7 @@ namespace Dilemma.Web.Controllers
                                 {
                                     DilemmasToAnswer = questions.Where(x => x.IsOpen).OrderBy(x => x.CreatedDateTime),
                                     DilemmasToVote = questions.Where(x => x.IsClosed).OrderBy(x => x.ClosedDateTime),
-                                    SidebarViewModel = GetSidebarViewModel()
+                                    Sidebar = GetSidebarViewModel()
                                 };
         }
 

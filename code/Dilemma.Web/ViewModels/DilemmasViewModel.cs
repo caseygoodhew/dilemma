@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 
 namespace Dilemma.Web.ViewModels
 {
@@ -10,7 +11,7 @@ namespace Dilemma.Web.ViewModels
 
         public IEnumerable<QuestionViewModel> DilemmasToVote;
 
-        public SidebarViewModel SidebarViewModel;
+        public SidebarViewModel Sidebar;
     }
 
     public class SidebarViewModel
@@ -18,5 +19,14 @@ namespace Dilemma.Web.ViewModels
         public UserStatsViewModel UserStatsViewModel;
 
         public IEnumerable<NotificationViewModel> Notifications;
+    }
+
+    public class AskViewModel
+    {
+        public QuestionViewModel Question;
+
+        public IEnumerable<CategoryViewModel> Categories;
+
+        public SidebarViewModel Sidebar;
     }
 }

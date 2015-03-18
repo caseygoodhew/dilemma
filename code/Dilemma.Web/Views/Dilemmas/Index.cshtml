@@ -2,7 +2,7 @@
 @using Disposable.Web.Common
 @model Dilemma.Web.ViewModels.DilemmasViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "";
 }
 <div class="wrap">
 <h1 class="js-sticky">
@@ -15,7 +15,7 @@
     <div class="line">
 
         <aside class="sidebar">
-            @Html.DisplayFor(x => x.SidebarViewModel, "Sidebar")
+            @Html.DisplayFor(x => x.Sidebar, "Sidebar")
         </aside><!-- sidebar -->
 
         <main role="main" class="main">

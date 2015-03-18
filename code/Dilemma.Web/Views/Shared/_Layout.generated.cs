@@ -62,21 +62,70 @@ WriteLiteral(" name=\"description\"");
 
 WriteLiteral(" content=\"\"");
 
-WriteLiteral(">\r\n\r\n    <title>");
+WriteLiteral(">\r\n\r\n    <title>\r\n");
 
             
-            #line 9 "..\..\Views\Shared\_Layout.cshtml"
-      Write(ViewBag.Title);
+            #line 10 "..\..\Views\Shared\_Layout.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 10 "..\..\Views\Shared\_Layout.cshtml"
+         if (string.IsNullOrEmpty(ViewBag.Title))
+        {
 
             
             #line default
             #line hidden
-WriteLiteral(" - Dilemma</title>\r\n");
+WriteLiteral("            ");
+
+WriteLiteral("OurDilemmas");
+
+WriteLiteral("\r\n");
+
+            
+            #line 13 "..\..\Views\Shared\_Layout.cshtml"
+        }
+        else
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            ");
+
+WriteLiteral("OurDilemmas - ");
+
+WriteLiteral(" ");
+
+            
+            #line 16 "..\..\Views\Shared\_Layout.cshtml"
+                                        
+            
+            #line default
+            #line hidden
+            
+            #line 16 "..\..\Views\Shared\_Layout.cshtml"
+                                   Write(ViewBag.Title);
+
+            
+            #line default
+            #line hidden
+            
+            #line 16 "..\..\Views\Shared\_Layout.cshtml"
+                                                      ;
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    </title>\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 10 "..\..\Views\Shared\_Layout.cshtml"
+            #line 19 "..\..\Views\Shared\_Layout.cshtml"
 Write(Styles.Render("~/Content/css"));
 
             
@@ -87,7 +136,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 11 "..\..\Views\Shared\_Layout.cshtml"
+            #line 20 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/modernizr"));
 
             
@@ -125,7 +174,7 @@ WriteLiteral(">Skip to content</a>\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 24 "..\..\Views\Shared\_Layout.cshtml"
+            #line 33 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Header"));
 
             
@@ -136,7 +185,7 @@ WriteLiteral("\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 26 "..\..\Views\Shared\_Layout.cshtml"
+            #line 35 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Modals"));
 
             
@@ -151,7 +200,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 29 "..\..\Views\Shared\_Layout.cshtml"
+            #line 38 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -162,7 +211,7 @@ WriteLiteral("\r\n    </div>\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 32 "..\..\Views\Shared\_Layout.cshtml"
+            #line 41 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Footer"));
 
             
@@ -173,7 +222,7 @@ WriteLiteral("\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 34 "..\..\Views\Shared\_Layout.cshtml"
+            #line 43 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -184,7 +233,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+            #line 44 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -195,7 +244,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 36 "..\..\Views\Shared\_Layout.cshtml"
+            #line 45 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -206,7 +255,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 37 "..\..\Views\Shared\_Layout.cshtml"
+            #line 46 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/homegrown"));
 
             
@@ -217,7 +266,7 @@ WriteLiteral("\r\n    \r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 40 "..\..\Views\Shared\_Layout.cshtml"
+            #line 49 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

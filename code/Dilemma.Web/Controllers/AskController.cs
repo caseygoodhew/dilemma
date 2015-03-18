@@ -4,34 +4,39 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
+
+using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    public class AskController : Controller
+    public class AskController : DilemmaBaseController
     {
+        private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
+        
         //
         // GET: /Ask/
         public ActionResult Index()
         {
-            return View();
+            var model = QuestionService.Value.InitNewQuestion();
+            return View(model);
         }
 
         //
         // POST: /Ask/Create
         [HttpPost]
-        public ActionResult Index(CreateQuestionViewModel question)
+        public ActionResult Index(CreateQuestionViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                QuestionService.Value.SaveNewQuestion(model);
+                return RedirectToAction("Index", "Dilemmas");
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            QuestionService.Value.InitNewQuestion(model);
+
+            return View(model);
         }
     }
 }

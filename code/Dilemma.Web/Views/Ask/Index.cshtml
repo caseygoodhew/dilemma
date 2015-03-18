@@ -1,8 +1,65 @@
-﻿@model Dilemma.Business.ViewModels.CreateQuestionViewModel
+﻿@using Dilemma.Web.Extensions
+@model Dilemma.Web.ViewModels.AskViewModel
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewBag.Title = "Ask";
 }
 
-<h2>title</h2>
+<div class="wrap">
+   
+    <h1 class="pb10 mh15"><img src="/Content/images/icons/red-ask.png" alt="" width="40"> Ask</h1>
+    <div class="line">
+
+        <aside class="sidebar">
+            @Html.DisplayFor(x => x.Sidebar, "Sidebar")
+        </aside><!-- sidebar -->
+
+        <main role="main" class="main">
+
+            <form action="" class="Card ">
+
+                <div class="Card-section Card-divider pa10" style="background: #f9f9f9;">
+                    <div class="form-group">
+                        <label for="dilemma_text" class="h3 pv10">What's on your mind?</label>
+                        <p class="info">Ask your question in complete anonymity. All questions disapear within a couple of weeks.</p>
+                        <textarea name="dilemma_text" id="dilemma_text" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownListFor(x => x.Categories, Model.Categories, "")
+                        
+                        
+                        <label for="dilemma_category" class="h3 pv10">Which best describes your dilemma?</label>
+                        
+                        
+                        <select id="dilemma_category" name="dilemma_category" class="form-control">
+                            <option value="">Choose Category</option>
+                            <option value="">Personal</option>
+                            <option value="">Family</option>
+                            <option value="">Relationships</option>
+                            <option value="">Work</option>
+                            <option value="">Sex</option>
+                            <option value="">Teenage</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="Button--ask">
+                            <img src="/images/icons/dark-ask.png" alt="" width="22">
+                            Share My Dilemma
+                        </button>               
+                    </div>
+      
+                </div>
+            </form><!-- Card -->
+
+        </main>
+    
+    </div><!-- line -->
+
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        document.getElementsByTagName('body')[0].className+=' page-ask';
+    </script>
+}
