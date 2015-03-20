@@ -88,14 +88,12 @@
     <Compile Include="Validators\AnswerViewModelValidator.cs" />
     <Compile Include="Validators\RuleBuilderExtension.cs" />
     <Compile Include="Validators\TidiedTrimmedLengthValidator.cs" />
-    <Compile Include="Validators\CreateQuestionViewModelValidator.cs" />
     <Compile Include="Validators\DerivativeValidator.cs" />
     <Compile Include="Validators\QuestionDetailsViewModelValidator.cs" />
     <Compile Include="Validators\SystemConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\TrimmedLengthValidator.cs" />
     <Compile Include="ViewModels\AnswerViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
-    <Compile Include="ViewModels\CreateQuestionViewModel.cs" />
     <Compile Include="ViewModels\NotificationListViewModel.cs" />
     <Compile Include="ViewModels\PointConfigurationViewModel.cs" />
     <Compile Include="ViewModels\QuestionDetailsViewModel.cs" />

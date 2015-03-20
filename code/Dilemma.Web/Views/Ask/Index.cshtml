@@ -1,5 +1,4 @@
-﻿@using Dilemma.Web.Extensions
-@model Dilemma.Web.ViewModels.AskViewModel
+﻿@model Dilemma.Web.ViewModels.AskViewModel
 
 @{
     ViewBag.Title = "Ask";
@@ -12,23 +11,35 @@
 
         <aside class="sidebar">
             @Html.DisplayFor(x => x.Sidebar, "Sidebar")
-        </aside><!-- sidebar -->
+        </aside>
 
         <main role="main" class="main">
             
-            @using (Html.BeginForm(FormMethod.Post, new { @class="Card" }))
+            @using (Html.BeginForm("Index", "Ask", FormMethod.Post, new { @class = "Card", role = "form" }))
             { 
-            <form action="post" class="Card ">
+                @Html.AntiForgeryToken()
 
                 <div class="Card-section Card-divider pa10" style="background: #f9f9f9;">
                     
-                    @Html.EditorFor(x => x.Question)
-
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Question.Text, "What's on your mind?", new { @class = "h3 pv10" })
+                        <p class="info">Ask your question in complete anonymity. All questions disapear within a couple of weeks.</p>
+                        @Html.TextAreaFor(x => x.Question.Text, new { @class = "form-control", cols="30", rows="10"})
+                        @Html.ValidationMessageFor(x => x.Question.Text)
+                    </div>
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Question.CategoryId, "Which best describes your dilemma?", new { @class = "h3 pv10" })
+                        @Html.DropDownListFor(x => x.Question.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Question.CategoryId)
+                    </div>
+                    
                     <div class="form-group">
                         <button type="button" class="Button--ask">
-                            <img src="/images/icons/dark-ask.png" alt="" width="22">
+                            <img src="/Content/images/icons/dark-ask.png" alt="" width="22">
                             Share My Dilemma
-                        </button>               
+                        </button>   
+                        <input type="submit" class="btn btn-default" value="Temp - Submit" />            
                     </div>
       
                 </div>

@@ -30,11 +30,6 @@ namespace Dilemma.Business
             registrar.Register<INotificationService>(() => new NotificationService());
             registrar.Register<IManualModerationService>(() => new ManualModerationService());
 
-            registrar.Register<IValidator<CreateQuestionViewModel>>(() => new CreateQuestionViewModelValidator());
-            //// keep this here as it will be used when we're out of testing
-            //// registrar.Register<IValidator<CreateQuestionViewModel>>(() => new DerivativeValidator<CreateQuestionViewModel, QuestionViewModel>());
-            ConverterFactory.Register<CreateQuestionViewModel, Question>(registrar, QuestionViewModelConverter.ToQuestion);
-
             registrar.Register<IValidator<QuestionViewModel>>(() => new QuestionViewModelValidator());
             ConverterFactory.Register<QuestionViewModel, Question>(registrar, QuestionViewModelConverter.ToQuestion);
             ConverterFactory.Register<Question, QuestionViewModel>(registrar, QuestionViewModelConverter.FromQuestion);

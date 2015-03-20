@@ -14,18 +14,11 @@ namespace Dilemma.Business.Services
     public interface IQuestionService
     {
         /// <summary>
-        /// Initializes or reinitializes a <see cref="CreateQuestionViewModel"/>. Reinitialization allows a view model to return the correct state on POST validation.
-        /// </summary>
-        /// <param name="questionViewModel">(Optional) The <see cref="CreateQuestionViewModel"/> to reinitialize.</param>
-        /// <returns>The <see cref="CreateQuestionViewModel"/>.</returns>
-        CreateQuestionViewModel InitNewQuestion(CreateQuestionViewModel questionViewModel = null);
-        
-        /// <summary>
         /// Saves a new <see cref="CreateQuestionViewModel"/> instance.
         /// </summary>
-        /// <param name="questionViewModel">The <see cref="CreateQuestionViewModel"/> to save.</param>
+        /// <param name="questionViewModel">The <see cref="QuestionViewModel"/> to save.</param>
         /// <returns>The new question id.</returns>
-        int SaveNewQuestion(CreateQuestionViewModel questionViewModel);
+        int SaveNewQuestion(QuestionViewModel questionViewModel);
 
         /// <summary>
         /// Gets all questions as <see cref="QuestionViewModel"/>s.

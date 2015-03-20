@@ -1,9 +1,12 @@
 ﻿using Dilemma.Business.Validators;
 using Dilemma.Common;
 using Dilemma.Web.Controllers;
+using Dilemma.Web.Validators;
+using Dilemma.Web.ViewModels;
 
 using Disposable.Common.ServiceLocator;
 
+using FluentValidation;
 using FluentValidation.Mvc;
 
 namespace Dilemma.Web
@@ -26,6 +29,8 @@ namespace Dilemma.Web
                     //NotificationRoute.Create<QuestionController>(NotificationType.QuestionAnswered, x => x.Details(0)),
                     //NotificationRoute.Create<ModerationController>(NotificationType.PostRejected, x => x.Details(0))
                 ));
+
+            locator.Register<IValidator<AskViewModel>>(() => new AskViewModelValidator());
         }
     }
 }

@@ -189,12 +189,16 @@
     <Compile Include="Controllers\DilemmaBaseController.cs" />
     <Compile Include="Controllers\DilemmasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestData.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Validators\AskViewModelValidator.cs" />
+    <Compile Include="ViewModels\AskViewModel.cs" />
     <Compile Include="ViewModels\DilemmasViewModel.cs" />
+    <Compile Include="ViewModels\SidebarViewModel.cs" />
     <Compile Include="Views\Shared\Error.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -481,7 +485,6 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Ask\Index.cshtml" />
-    <Content Include="Views\Ask\Partial1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

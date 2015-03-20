@@ -31,38 +31,11 @@ namespace Dilemma.Business.Services
         private static readonly Lazy<INotificationService> NotificationService = Locator.Lazy<INotificationService>();
 
         /// <summary>
-        /// Initializes or reinitializes a <see cref="CreateQuestionViewModel"/>. Reinitialization allows a view model to return the correct state on POST validation.
+        /// Saves a new <see cref="QuestionViewModel"/> instance.
         /// </summary>
-        /// <param name="questionViewModel">(Optional) The <see cref="CreateQuestionViewModel"/> to reinitialize.</param>
-        /// <returns>The <see cref="CreateQuestionViewModel"/>.</returns>
-        public CreateQuestionViewModel InitNewQuestion(CreateQuestionViewModel questionViewModel = null)
-        {
-            var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
-            
-            if (questionViewModel == null)
-            {
-                questionViewModel = new CreateQuestionViewModel();
-
-                if (SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment))
-                {
-                    questionViewModel.Text = "\n\n\n\nThis text makes it easier to reach the minimum 50 character limit. This text will not show in a production environment.";
-                }
-            }
-
-            questionViewModel.Categories = SiteService.Value.GetCategories();
-            questionViewModel.MaxAnswers = systemConfiguration.MaxAnswers;
-            questionViewModel.QuestionLifetime = systemConfiguration.QuestionLifetime;
-            questionViewModel.ShowTestingOptions = SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment);
-
-            return questionViewModel;
-        }
-
-        /// <summary>
-        /// Saves a new <see cref="CreateQuestionViewModel"/> instance.
-        /// </summary>
-        /// <param name="questionViewModel">The <see cref="CreateQuestionViewModel"/> to save.</param>
+        /// <param name="questionViewModel">The <see cref="QuestionViewModel"/> to save.</param>
         /// <returns>The new question id.</returns>
-        public int SaveNewQuestion(CreateQuestionViewModel questionViewModel)
+        public int SaveNewQuestion(QuestionViewModel questionViewModel)
         {
             var systemConfiguration = AdministrationRepository.Value.GetSystemConfiguration<SystemConfiguration>();
 
@@ -193,12 +166,12 @@ namespace Dilemma.Business.Services
             }
         }
 
-        private void SetTimeframes(SystemConfiguration systemConfiguration, CreateQuestionViewModel questionViewModel)
+        private void SetTimeframes(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
         {
             var now = TimeSource.Value.Now;
             questionViewModel.CreatedDateTime = now;
 
-            switch (GetQuestionLifetime(systemConfiguration, questionViewModel))
+            switch (systemConfiguration.QuestionLifetime)
             {
                 case QuestionLifetime.OneMinute:
                     questionViewModel.ClosesDateTime = now.AddMinutes(1);
@@ -215,13 +188,6 @@ namespace Dilemma.Business.Services
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private static QuestionLifetime GetQuestionLifetime(SystemConfiguration systemConfiguration, CreateQuestionViewModel questionViewModel)
-        {
-            return SystemEnvironmentValidation.IsInternalEnvironment(systemConfiguration.SystemEnvironment)
-                       ? questionViewModel.QuestionLifetime
-                       : systemConfiguration.QuestionLifetime;
         }
     }
 }

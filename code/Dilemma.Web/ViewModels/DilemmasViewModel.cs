@@ -13,20 +13,4 @@ namespace Dilemma.Web.ViewModels
 
         public SidebarViewModel Sidebar;
     }
-
-    public class SidebarViewModel
-    {
-        public UserStatsViewModel UserStatsViewModel;
-
-        public IEnumerable<NotificationViewModel> Notifications;
-    }
-
-    public class AskViewModel
-    {
-        public QuestionViewModel Question;
-
-        public IEnumerable<CategoryViewModel> Categories;
-
-        public SidebarViewModel Sidebar;
-    }
 }

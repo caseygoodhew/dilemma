@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
+using Dilemma.Web.ViewModels;
 
 using Disposable.Common.ServiceLocator;
 
@@ -19,22 +20,22 @@ namespace Dilemma.Web.Controllers
         // GET: /Ask/
         public ActionResult Index()
         {
-            var model = QuestionService.Value.InitNewQuestion();
+            var model = TestData.InitNewQuestion();
             return View(model);
         }
 
         //
         // POST: /Ask/Create
         [HttpPost]
-        public ActionResult Index(CreateQuestionViewModel model)
+        public ActionResult Index(AskViewModel model)
         {
             if (ModelState.IsValid)
             {
-                QuestionService.Value.SaveNewQuestion(model);
+                //QuestionService.Value.SaveNewQuestion(model.Question);
                 return RedirectToAction("Index", "Dilemmas");
             }
 
-            QuestionService.Value.InitNewQuestion(model);
+            TestData.InitNewQuestion(model);
 
             return View(model);
         }
