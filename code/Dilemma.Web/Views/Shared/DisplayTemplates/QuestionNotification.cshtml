@@ -1,0 +1,18 @@
+﻿@model Dilemma.Business.ViewModels.QuestionViewModel
+
+<div class="Card Notification Card-go--container">
+    <a href="/answer.php" class="Card-go--trigger"></a>
+    <div class="Notification-score">
+        <div><img src="@String.Format(@"/Content/images/icons/{0}.png", Model.IsMyQuestion ? "ask" : "answer")" alt="" width="30"></div>
+    </div>
+    <div class="Notification-summary">
+        <div class="Card-label--small">@Model.CreatedDateTime</div>
+        <div class="Notification-summary-text">
+            @Model.Text          
+        </div>
+        <a href="#" class="Notification-summary-link">
+            View Details
+        </a> 
+    </div><!-- Notification-summary -->
+</div><!-- Card -->
+

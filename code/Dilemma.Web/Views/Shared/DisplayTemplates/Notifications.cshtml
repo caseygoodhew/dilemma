@@ -1,0 +1,28 @@
+﻿@model Dilemma.Business.ViewModels.NotificationViewModel
+
+<div class="Card Notification Card-go--container">
+    <a href="/answer.php" class="Card-go--trigger"></a>
+    <div class="Notification-score">
+        @if (Model.PointsAwarded == null || Model.PointsAwarded == 0)
+        {
+            <div>
+                <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
+            </div>
+        }
+        else
+        {
+            <div>@string.Format("{0}{1}", Model.PointsAwarded > 0 ? "+" : string.Empty, Model.PointsAwarded)
+                <span class="Notification-score-label">Points</span>
+            </div>
+        }
+    </div>
+    <div class="Notification-summary">
+        <div class="Card-label--small">@Model.CreatedDateTime.ToRelativeText()</div>
+        <div class="Notification-summary-text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis praesentium, officiis omnis voluptatibus!
+        </div>
+        <a href="#" class="Notification-summary-link">
+            View Details
+        </a> 
+    </div><!-- Notification-summary -->
+</div>

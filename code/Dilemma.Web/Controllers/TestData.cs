@@ -11,6 +11,7 @@ using Dilemma.Web.ViewModels;
 using Disposable.Common.Extensions;
 using Disposable.Common.ServiceLocator;
 
+using WebGrease.Css.Extensions;
 
 namespace Dilemma.Web.Controllers
 {
@@ -52,6 +53,26 @@ namespace Dilemma.Web.Controllers
                 DilemmasToVote = questions.Where(x => x.IsClosed).OrderBy(x => x.ClosedDateTime),
                 Sidebar = GetSidebarViewModel()
             };
+        }
+
+        public static MyProfileViewModel GetMyProfileViewModel()
+        {
+            var questions = (GetQuestions() ?? Enumerable.Empty<QuestionViewModel>()).ToList();
+
+            var sidebar = GetSidebarViewModel();
+
+            var result = new MyProfileViewModel
+            {
+                Dilemmas = questions.Where(x => x.IsOpen).OrderBy(x => x.CreatedDateTime),
+                Answers = questions.Where(x => x.IsClosed).OrderBy(x => x.ClosedDateTime),
+                Notifications = sidebar.Notifications,
+                Sidebar = sidebar
+            };
+
+            result.Dilemmas.ForEach(x => x.IsMyQuestion = true);
+            result.Answers.ForEach(x => x.IsMyQuestion = false);
+
+            return result;
         }
 
         public static IEnumerable<CategoryViewModel> GetCategories()

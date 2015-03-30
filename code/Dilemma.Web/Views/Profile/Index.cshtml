@@ -1,0 +1,59 @@
+﻿@model Dilemma.Web.ViewModels.MyProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="wrap">
+
+    <h1 class="mb0 mh15 pb0"><img src="/Content/images/icons/red-user.png" alt="" width="40"> My Profile</h1>
+
+    <h2 class="js-sticky h3">
+        <span class="js-sticky--offset">
+            <!-- <img src="/images/icons/dark-ask.png" alt="" width="30"> -->
+            My Current Dilemmas
+        </span>
+    </h2>
+
+    <div class="line">
+
+        <aside class="sidebar">
+            @Html.DisplayFor(x => x.Sidebar, "Sidebar", new { HideNotifications = true })
+        </aside><!-- sidebar -->
+        
+        <main role="main" class="main">
+
+            <div class="Dilemmas">
+
+                @Html.DisplayForList(x => x.Dilemmas, "QuestionNotification")
+
+                <h2 class="js-sticky h3">
+                    <span class="js-sticky--offset">
+                        <!-- <img src="/images/icons/dark-answer.png" alt="" width="30"> -->
+                        My Current Answers
+                    </span>
+                </h2>
+
+                @Html.DisplayForList(x => x.Answers, "QuestionNotification")
+                
+                <h2 class="js-sticky h3">
+                    <span class="js-sticky--offset">
+                        <!-- <img src="/images/icons/dark-notification.png" alt="" width="30"> -->
+                        Other notifications
+                    </span>
+                </h2>
+
+                @Html.DisplayForList(x => x.Notifications, "Notifications")
+                
+            </div>
+
+        </main><!-- main-->   
+
+    </div>     
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        document.getElementsByTagName('body')[0].className += ' page-profile';
+    </script>
+}

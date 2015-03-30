@@ -1,5 +1,9 @@
-﻿@using Dilemma.Web.Extensions
+﻿
 @model Dilemma.Web.ViewModels.SidebarViewModel
+
+@{
+    var showNotifications = ViewBag.HideNotifications == null || !ViewBag.HideNotifications;
+}
 
 <div class="Card Card--sidebar-ask">
 
@@ -13,7 +17,7 @@
         <a href="/ask" class="Button--ask">
             <img src="/Content/images/icons/dark-ask.png" alt="" width="20">
             Share Your Dilemma
-        </a>            
+        </a>
     </div>
 </div>
         
@@ -59,56 +63,34 @@
             </tr>
         </table> 
     </div>  <!-- Rank -->         
-
-    <a class="Card-section Card-section--notification Card-go--container" href="/notifications">
-        <span class="Card-go--trigger"></span>
-        <div style="width:60px;overflow:hidden;float:left;">
-            <!-- <div class="disc-label right">99</div> -->
-            <div class="disc-label right">
-                <img src="/Content/images/icons/notification.png" alt="" width="25" style="position: relative; top: -1px; left: -2px; ">
+    @if (showNotifications)
+    {
+        <a class="Card-section Card-section--notification Card-go--container" href="/profile">
+            <span class="Card-go--trigger"></span>
+            <div style="width: 60px; overflow: hidden; float: left;">
+                <!-- <div class="disc-label right">99</div> -->
+                <div class="disc-label right">
+                    <img src="/Content/images/icons/notification.png" alt="" width="25" style="position: relative; top: -1px; left: -2px;">
+                </div>
             </div>
-        </div>
-            
-        <div>
-            <div class="Card-label--small">You have @Model.UserStatsViewModel.UnreadNotifications new</div>
             <div>
-                Notifications              
+                <div class="Card-label--small">You have @Model.UserStatsViewModel.UnreadNotifications new</div>
+                <div>
+                    Notifications              
+                </div>
             </div>
-        </div>
-    </a>
+        </a>
+    }
 </div>
 
 <div class="featured-content">
     <img src="/Content/images/ads/300x250_uap.gif" width="300" height="250" >
 </div>
 
-@foreach (var notification in Model.Notifications)
+@if (showNotifications)
 {
-    <div class="Card Notification Card-go--container">
-        <a href="/answer.php" class="Card-go--trigger"></a>
-        <div class="Notification-score">
-            @if (notification.PointsAwarded == null || notification.PointsAwarded == 0)
-            {
-                <div>
-                    <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
-                </div>
-            }
-            else
-            {
-                <div>@string.Format("{0}{1}", notification.PointsAwarded > 0 ? "+" : string.Empty, notification.PointsAwarded)
-                    <span class="Notification-score-label">Points</span>
-                </div>
-            }
-        </div>
-        <div class="Notification-summary">
-            <div class="Card-label--small">@notification.CreatedDateTime.ToRelativeText()</div>
-            <div class="Notification-summary-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis praesentium, officiis omnis voluptatibus!
-            </div>
-            <a href="#" class="Notification-summary-link">
-                View Details
-            </a> 
-        </div><!-- Notification-summary -->
+    <div>
+        @Html.DisplayForList(x => x.Notifications, "Notifications")
     </div>
-    <!-- Card -->
 }
+

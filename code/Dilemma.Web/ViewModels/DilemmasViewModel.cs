@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
 using Dilemma.Business.ViewModels;
-using Dilemma.Common;
 
 namespace Dilemma.Web.ViewModels
 {
