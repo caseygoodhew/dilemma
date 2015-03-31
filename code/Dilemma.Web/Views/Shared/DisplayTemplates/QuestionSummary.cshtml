@@ -45,14 +45,14 @@
         <div class="u-2of5">
             @if (Model.IsOpen)
             {
-                <a href="/advise/@Model.QuestionId" class="Button--answer">
+                <a href="@Url.Action("Index", "Answers", new { Model.QuestionId })" class="Button--answer">
                     <img src="/Content/images/icons/dark-answer.png" alt="" width="20">
                     <span class="Button-label">Answer</span>
                 </a>
             }
             else if (Model.IsClosed)
             {
-                <a href="/advise/@Model.QuestionId"  class="Button--vote ">
+                <a href="@Url.Action("Index", "Answers", new { Model.QuestionId })"  class="Button--vote ">
                     <img src="/Content/images/icons/dark-vote.png" alt="" width="16">
                     <span class="Button-label">Vote</span>
                 </a>

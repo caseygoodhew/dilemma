@@ -31,6 +31,7 @@ namespace Dilemma.Web
                 ));
 
             locator.Register<IValidator<AskViewModel>>(() => new AskViewModelValidator());
+            locator.Register<IValidator<DilemmaDetailsViewModel>>(() => new DilemmaDetailsViewModelValidator());
         }
     }
 }

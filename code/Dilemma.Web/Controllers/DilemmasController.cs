@@ -35,8 +35,6 @@ namespace Dilemma.Web.Controllers
             var selectedCategory =
                 categories.FirstOrDefault(
                     x => string.Equals(x.Name, category, StringComparison.CurrentCultureIgnoreCase));
-
-            
             
             ViewBag.Category = selectedCategory == null ? "all" : selectedCategory.Name;
 
@@ -45,8 +43,8 @@ namespace Dilemma.Web.Controllers
             return View(
                 new DilemmasViewModel
                     {
-                        DilemmasToAnswer = questions.Where(x => x.IsOpen),
-                        DilemmasToVote = questions.Where(x => x.IsClosed),
+                        DilemmasToAnswer = questions.Where(x => x.IsOpen).OrderByDescending(x => x.CreatedDateTime),
+                        DilemmasToVote = questions.Where(x => x.IsClosed).OrderByDescending(x => x.ClosedDateTime),
                         Sidebar = XTestData.GetSidebarViewModel()
                     });
         }

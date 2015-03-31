@@ -91,7 +91,7 @@ namespace Dilemma.Web.Controllers
                                                  {
                                                      QuestionViewModel = question,
                                                      CanAnswer = question.TotalAnswers < question.MaxAnswers,
-                                                     Answer = new AnswerViewModel()
+                                                     //Answer = new AnswerViewModel()
                                                  },
                            Sidebar = GetSidebarViewModel()
                        };

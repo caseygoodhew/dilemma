@@ -89,7 +89,6 @@
     <Compile Include="Validators\RuleBuilderExtension.cs" />
     <Compile Include="Validators\TidiedTrimmedLengthValidator.cs" />
     <Compile Include="Validators\DerivativeValidator.cs" />
-    <Compile Include="Validators\QuestionDetailsViewModelValidator.cs" />
     <Compile Include="Validators\SystemConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\TrimmedLengthValidator.cs" />
     <Compile Include="ViewModels\AnswerViewModel.cs" />

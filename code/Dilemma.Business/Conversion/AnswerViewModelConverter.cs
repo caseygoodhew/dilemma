@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
@@ -40,7 +41,9 @@ namespace Dilemma.Business.Conversion
         public static AnswerViewModel FromAnswer(Answer model)
         {
             var userId = SecurityManager.Value.GetUserId();
-            
+
+            var userVotes = model.UserVotes ?? new List<int>();
+
             return new AnswerViewModel
                 {
                     AnswerId = model.AnswerId,
@@ -49,8 +52,8 @@ namespace Dilemma.Business.Conversion
                     IsMyAnswer = model.User.UserId == userId,
                     IsApproved = model.AnswerState == AnswerState.Approved,
                     IsRejected = model.AnswerState == AnswerState.Rejected,
-                    VoteCount = model.UserVotes.Count,
-                    HasMyVote = model.UserVotes.Contains(userId)
+                    VoteCount = userVotes.Count,
+                    HasMyVote = userVotes.Contains(userId)
                 };
         }
     }

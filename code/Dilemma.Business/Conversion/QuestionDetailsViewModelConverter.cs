@@ -28,14 +28,14 @@ namespace Dilemma.Business.Conversion
         /// <returns>The resultant <see cref="Question"/>.</returns>
         public static Question ToQuestion(QuestionDetailsViewModel viewModel)
         {
-            var question = ConverterFactory.ConvertOne<QuestionViewModel, Question>(viewModel.QuestionViewModel);
+            return ConverterFactory.ConvertOne<QuestionViewModel, Question>(viewModel.QuestionViewModel);
 
-            if (viewModel.Answer != null && viewModel.Answer.AnswerId != null)
+            /*if (viewModel.Answer != null && viewModel.Answer.AnswerId != null)
             {
                 question.Answers.Add(ConverterFactory.ConvertOne<AnswerViewModel, Answer>(viewModel.Answer));
             }
 
-            return question;
+            return question;*/
         }
 
         /// <summary>

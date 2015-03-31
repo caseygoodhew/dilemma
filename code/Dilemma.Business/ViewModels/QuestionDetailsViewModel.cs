@@ -21,11 +21,6 @@ namespace Dilemma.Business.ViewModels
         /// </summary>
         public bool CanAnswer { get; set; }
 
-        /// <summary>
-        /// Gets or sets the answer that the user is adding.
-        /// </summary>
-        public AnswerViewModel Answer { get; set; }
-
         public bool CanVote { get; set; }
     }
 }
