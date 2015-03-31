@@ -114,6 +114,7 @@ namespace Dilemma.Data.Repositories
                                     x.Category,
                                     x.Text,
                                     x.ClosesDateTime,
+                                    x.ClosedDateTime,
                                     x.CreatedDateTime,
                                     x.User.UserId,
                                     x.QuestionState,
@@ -131,6 +132,7 @@ namespace Dilemma.Data.Repositories
                                     Category = x.Category,
                                     Text = x.Text,
                                     ClosesDateTime = x.ClosesDateTime,
+                                    ClosedDateTime = x.ClosedDateTime,
                                     CreatedDateTime = x.CreatedDateTime,
                                     QuestionState = x.QuestionState,
                                     User = new User { UserId = x.UserId }
@@ -150,13 +152,18 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
+                if (HasUserAnsweredQuestion(context, userId, questionId))
+                {
+                    return null;
+                }
+                
                 var existingAnswer = GetAnswerInProgress(context, userId, questionId, null);
 
                 if (existingAnswer != null)
                 {
                     return existingAnswer.AnswerId;
                 }
-                
+
                 var question = GetQuestion<Question>(context, userId, questionId, GetQuestionAs.AnswerCount);
 
                 if (question.User.UserId == userId || question.QuestionState != QuestionState.Approved || question.TotalAnswers >= question.MaxAnswers || question.ClosesDateTime < TimeSource.Value.Now)
@@ -616,6 +623,15 @@ namespace Dilemma.Data.Repositories
                              x.Answer.AnswerId,
                              x.User.UserId
                          }).GroupBy(x => x.AnswerId).ToDictionary(g => g.Key, g => g.Select(x => x.UserId).ToList());
+        }
+
+        private static bool HasUserAnsweredQuestion(DilemmaContext context, int userId, int questionId)
+        {
+            return
+                context.Answers.AsNoTracking()
+                    .Where(x => x.Question.QuestionId == questionId)
+                    .Where(x => x.User.UserId == userId)
+                    .Any(x => x.AnswerState != AnswerState.ReservedSlot);
         }
 
         private static Answer GetAnswerInProgress(DilemmaContext context, int userId, int questionId, int? answerId)

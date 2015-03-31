@@ -15,14 +15,46 @@
     var isMyQuestion = (bool?)ViewBag.IsMyQuestion == true;
 }
 <div class="Card Answer is-mine user-level-@Model.UserLevel">
-    <div class="Card-section Card-info">
-        <img src="/Content/images/icons/user.png" alt="" width="20">
-        Your answer
-    </div>
+        
+    @if (Model.IsMyAnswer)
+    { 
+        <div class="Card-section Card-info">
+            <img src="/Content/images/icons/user.png" alt="" width="20">
+            Your answer
+        </div>
+    }
+    else if (Model.IsStarVote)
+    {
+        <div class="Card-section Card-info">
+            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+            Best Answer as voted by the Questioner
+        </div>
+    }
+    else if (Model.IsPopularVote)
+    {
+        <div class="Card-section Card-info">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            Most popular answer
+        </div>
+    }
+
     <div class="Dilemma-question Card-section">
         <div class="Answer-text">
-            @Model.Text
+            <p style="white-space: pre">@Model.Text</p>
         </div><!-- Dilemma-text -->
+        @if (!Model.IsApproved && Model.IsMyAnswer)
+        {
+            <div style="margin-top: 15px; color: #999; font-style: italic; font-size: 0.8em">
+                @if (Model.IsRejected)
+                {
+                    <text>This answer didn't pass moderation. Check you notifications to find out why. Remember to always follow the guidelines and be respectful!</text>
+                }
+                else
+                {
+                    <text>You're the only one who can see this answer until its been approved by a moderator.</text>
+                }
+            </div>
+        }
     </div><!-- Dilemma-question Card-section -->
 
     <div class="Dilemma-actions Card-section line">
@@ -49,7 +81,6 @@
         </div>
         <div class="u-1of5">
             <div class="number-bubble">
-                @Model.HasMyVote
                 <span class="number-bubble--number">@Model.VoteCount</span>
                 <span class="size-s-and-up inline Card-label--small">@votesText</span>
             </div>

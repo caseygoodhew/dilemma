@@ -1,0 +1,39 @@
+﻿@using Disposable.Common.Extensions
+@model System.Collections.Generic.IEnumerable<Dilemma.Business.ViewModels.DevelopmentUserViewModel>
+
+<h2>Your users</h2>
+
+<div>
+@Html.ActionLink("Create New User", "edit", "QuickAuthentication")
+</div>
+
+<table class="table">
+    
+@foreach (var item in Model)
+{
+    var rowClass = item.IsCurrent ? "bg-info" : "";
+    
+    <tr class="@rowClass">
+        <td style="padding-top: 5px;">
+            @item.UserId
+        </td>
+        <td>
+            @item.Name.Default("(anonymous)")
+        </td>
+        <td width="50">
+            @Html.ActionLink("Edit", "Edit", new { userId = item.UserId })
+        </td>
+        <td width="50">    
+            @if (!item.IsCurrent)
+            {
+                @Html.ActionLink("Login", "login", new { userId = item.UserId })
+            }
+        </td>
+    </tr>
+}
+
+</table>
+
+
+
+

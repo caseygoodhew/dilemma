@@ -183,6 +183,11 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        public void ExpireCachedSystemServerConfiguration()
+        {
+            ExpireCache();
+        }
+
         private IEnumerable<PointConfiguration> GetPointConfigurations() 
         {
             var pointConfiguration = Cache.Value.Get(

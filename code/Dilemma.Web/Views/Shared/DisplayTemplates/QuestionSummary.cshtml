@@ -1,5 +1,9 @@
 ﻿@model Dilemma.Business.ViewModels.QuestionViewModel
 
+@{
+    var isDilemmaViewPage = ViewBag.IsDilemmaViewPage == true;
+}
+
 <article class="Dilemma Card in-category-@Model.CategoryId">
 
     <div class="Card-section Card-info">
@@ -31,7 +35,7 @@
 
             <!-- <a href="/answer.php" class="Card-go- -trigger"></a> -->
             <div class="Dilemma-text ">
-                <p>@Model.Text</p>
+                <p style="white-space: pre">@Model.Text</p>
                 <a href="#" class="Dilemma-text-toggle">
                     <span class="Dilemma-text-toggle-more">&hellip; continue reading</span>
                     <span class="Dilemma-text-toggle-less">&hellip; show less</span>
@@ -40,38 +44,52 @@
         </div>  
 
     </div><!--  Card-section -->
+    
+    @if (!Model.IsMyQuestion || !isDilemmaViewPage)
+    {
+        <div class="Dilemma-actions Card-section line">
+            <div class="u-2of5">
+                @if (Model.IsOpen && !isDilemmaViewPage)
+                {
+                    <a href="@Url.Action("Index", "Answers", new
+                                                                 {
+                                                                     Model.QuestionId
+                                                                 })" class="Button--answer">
+                        <img src="/Content/images/icons/dark-answer.png" alt="" width="20">
+                        <span class="Button-label">@(Model.IsMyQuestion ? "View" : "Answer")</span>
+                    </a>
+                }
+                else if (Model.IsClosed && !Model.IsMyQuestion && !isDilemmaViewPage)
+                {
+                    <a href="@Url.Action("Index", "Answers", new
+                                                                 {
+                                                                     Model.QuestionId
+                                                                 })"  class="Button--vote ">
+                        <img src="/Content/images/icons/dark-vote.png" alt="" width="16">
+                        <span class="Button-label">Vote</span>
+                    </a>
+                }
+            </div>
+            @if (!Model.IsMyQuestion)
+            {
+                <div class="u-2of5">
+                    <button type="button" class="Button--bookmark js-bookmark-button">
+                        <img src="/Content/images/icons/dark-bookmark.png" alt="" width="13">
+                        <span class="Button-label is-inactive">Bookmark</span>
+                        <span class="Button-label is-active">Bookmarked</span>
+                    </button>                  
+                </div>
+                <div class="u-1of5 right">
+                    <button type="button" class="Button--flag js-flag-button " title="Flag this answer for the attention of the moderator" data-toggle="modal" data-target="#modal-flag">
+                        <img src="/Content/images/icons/dark-flag.png" alt="" width="13">
+                        <span class="Button-label is-inactive">Flag</span>
+                        <span class="Button-label is-active">Flagged</span>
+                    </button>                               
+                </div>
+            }
 
-    <div class="Dilemma-actions Card-section line">
-        <div class="u-2of5">
-            @if (Model.IsOpen)
-            {
-                <a href="@Url.Action("Index", "Answers", new { Model.QuestionId })" class="Button--answer">
-                    <img src="/Content/images/icons/dark-answer.png" alt="" width="20">
-                    <span class="Button-label">Answer</span>
-                </a>
-            }
-            else if (Model.IsClosed)
-            {
-                <a href="@Url.Action("Index", "Answers", new { Model.QuestionId })"  class="Button--vote ">
-                    <img src="/Content/images/icons/dark-vote.png" alt="" width="16">
-                    <span class="Button-label">Vote</span>
-                </a>
-            }
         </div>
-        <div class="u-2of5">
-            <button type="button" class="Button--bookmark js-bookmark-button">
-                <img src="/Content/images/icons/dark-bookmark.png" alt="" width="13">
-                <span class="Button-label is-inactive">Bookmark</span>
-                <span class="Button-label is-active">Bookmarked</span>
-            </button>                  
-        </div>
-        <div class="u-1of5">
-            <button type="button" class="Button--flag js-flag-button" title="Flag this answer for the attention of the moderator" data-toggle="modal" data-target="#modal-flag">
-                <img src="/Content/images/icons/dark-flag.png" alt="" width="13">
-                <span class="Button-label is-inactive">Flag</span>
-                <span class="Button-label is-active">Flagged</span>
-            </button>                               
-        </div>
-    </div><!-- Dilemma-actions -->
+        <!-- Dilemma-actions -->
+    }
 </article>
 

@@ -88,5 +88,16 @@ namespace Dilemma.Business.Services
         {
             return AdministrationRepository.Value.GetLastRunLog<LastRunLogViewModel>();
         }
+
+        public bool IsOnline()
+        {
+            return AdministrationRepository.Value.GetServerConfiguration<ServerConfigurationViewModel>().ServerRole
+                   != ServerRole.Offline;
+        }
+
+        public void ExpireCachedSystemServerConfiguration()
+        {
+            AdministrationRepository.Value.ExpireCachedSystemServerConfiguration();
+        }
     }
 }

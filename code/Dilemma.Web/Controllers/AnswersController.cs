@@ -3,12 +3,15 @@ using System.Web.Mvc;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
+using Dilemma.Security.AccessFilters;
 using Dilemma.Web.ViewModels;
 
 using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
+    [AllowUserRole(UserRole.Public)]
     public class AnswersController : DilemmaBaseController
     {
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
@@ -40,7 +43,7 @@ namespace Dilemma.Web.Controllers
             {
                 viewModel.MyAnswer = QuestionService.Value.GetAnswerInProgress(questionId, answerId.Value);
             }
-
+            
             return View(viewModel);
         }
 

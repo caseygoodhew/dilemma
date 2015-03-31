@@ -28,6 +28,14 @@ namespace Dilemma.Web.Controllers
         }
 
         //
+        // GET: /SystemConfiguration/
+        public ActionResult RefreshCache()
+        {
+            AdministrationService.Value.ExpireCachedSystemServerConfiguration();
+            return RedirectToAction("index");
+        }
+
+        //
         // POST: /SystemConfiguration/
         [HttpPost]
         public ActionResult Index(SystemServerConfigurationViewModel systemServerConfiguration)

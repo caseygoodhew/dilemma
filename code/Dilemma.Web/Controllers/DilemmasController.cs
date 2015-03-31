@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
+using Dilemma.Security.AccessFilters;
 using Dilemma.Web.ViewModels;
 
 using Disposable.Common.Extensions;
@@ -13,6 +14,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
+    [AllowUserRole(UserRole.Public)]
     public class DilemmasController : DilemmaBaseController
     {
         private static readonly Lazy<ISiteService> SiteService = Locator.Lazy<ISiteService>();

@@ -191,23 +191,27 @@ WriteLiteral("\r\n    \r\n    <div");
 
 WriteLiteral(" class=\"page-bd\"");
 
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"wrap\"");
+
 WriteLiteral(">\r\n");
 
-WriteLiteral("        ");
+WriteLiteral("            ");
 
             
-            #line 36 "..\..\Views\Shared\_Layout.cshtml"
-   Write(RenderBody());
+            #line 37 "..\..\Views\Shared\_Layout.cshtml"
+       Write(RenderBody());
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    </div>\r\n    \r\n");
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n    \r\n");
 
 WriteLiteral("    ");
 
             
-            #line 39 "..\..\Views\Shared\_Layout.cshtml"
+            #line 41 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Footer"));
 
             
@@ -218,7 +222,7 @@ WriteLiteral("\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 41 "..\..\Views\Shared\_Layout.cshtml"
+            #line 43 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -229,7 +233,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 42 "..\..\Views\Shared\_Layout.cshtml"
+            #line 44 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -240,7 +244,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+            #line 45 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -251,7 +255,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 44 "..\..\Views\Shared\_Layout.cshtml"
+            #line 46 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/homegrown"));
 
             
@@ -262,7 +266,7 @@ WriteLiteral("\r\n    \r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 47 "..\..\Views\Shared\_Layout.cshtml"
+            #line 49 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

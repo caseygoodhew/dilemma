@@ -54,5 +54,7 @@ namespace Dilemma.Business.ViewModels
         public int UserLevel { get; set; }
 
         public bool IHaveFlagged { get; set; }
+        public bool IsStarVote { get; set; }
+        public bool IsPopularVote { get; set; }
     }
 }

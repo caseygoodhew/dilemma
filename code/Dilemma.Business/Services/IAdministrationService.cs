@@ -41,5 +41,9 @@ namespace Dilemma.Business.Services
         void CloseQuestions();
 
         LastRunLogViewModel GetLastRunLog();
+
+        bool IsOnline();
+
+        void ExpireCachedSystemServerConfiguration();
     }
 }

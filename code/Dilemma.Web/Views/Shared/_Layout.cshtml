@@ -33,7 +33,9 @@
     @Html.Partial("Modals")
     
     <div class="page-bd">
-        @RenderBody()
+        <div class="wrap">
+            @RenderBody()
+        </div>
     </div>
     
     @Html.Partial("Footer")
