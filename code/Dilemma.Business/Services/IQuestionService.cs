@@ -27,6 +27,13 @@ namespace Dilemma.Business.Services
         IEnumerable<QuestionViewModel> GetAllQuestions();
 
         /// <summary>
+        /// Gets questions as <see cref="QuestionViewModel"/>s.
+        /// </summary>
+        /// <param name="category">The category of questions to get, or null for 'all'.</param>
+        /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
+        IEnumerable<QuestionViewModel> GetQuestions(CategoryViewModel category);
+
+        /// <summary>
         /// Gets all questions that the current user has been involved in
         /// </summary>
         /// <returns>The <see cref="QuestionViewModel"/>s.</returns>

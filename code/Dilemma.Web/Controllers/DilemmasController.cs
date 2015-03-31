@@ -15,10 +15,11 @@ namespace Dilemma.Web.Controllers
 {
     public class DilemmasController : DilemmaBaseController
     {
-        private static readonly Lazy<ISiteService> SiteService =
-            Locator.Lazy<ISiteService>();
+        private static readonly Lazy<ISiteService> SiteService = Locator.Lazy<ISiteService>();
 
-        
+        private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
+
+        [Route("dilemmas")]
         public ActionResult Index()
         {
             return Index(string.Empty);
@@ -29,18 +30,25 @@ namespace Dilemma.Web.Controllers
         [Route("dilemmas/{category:alpha}")]
         public ActionResult Index(string category)
         {
-            ViewBag.Category = string.IsNullOrEmpty(category) ? "all" : category;
-            
-            return View(TestData.GetDilemmasViewModel());
-        }
+            var categories = SiteService.Value.GetCategories();
 
-        //
-        // GET: /Dilemmas/QuestionId
-        [Route("dilemmas/{questionId:int:min(1)}")]
-        public ActionResult Index(int questionId)
-        {
-            // Not implemented
-            return View();
+            var selectedCategory =
+                categories.FirstOrDefault(
+                    x => string.Equals(x.Name, category, StringComparison.CurrentCultureIgnoreCase));
+
+            
+            
+            ViewBag.Category = selectedCategory == null ? "all" : selectedCategory.Name;
+
+            var questions = QuestionService.Value.GetQuestions(selectedCategory);
+
+            return View(
+                new DilemmasViewModel
+                    {
+                        DilemmasToAnswer = questions.Where(x => x.IsOpen),
+                        DilemmasToVote = questions.Where(x => x.IsClosed),
+                        Sidebar = XTestData.GetSidebarViewModel()
+                    });
         }
     }
 }

@@ -29,7 +29,9 @@ namespace ASP
     using System.Web.WebPages;
     using Dilemma.Common;
     using Dilemma.Web;
+    using Dilemma.Web.Extensions;
     using Disposable.Common.Extensions;
+    using Disposable.Web.Common;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/_Layout.cshtml")]
@@ -163,18 +165,12 @@ WriteLiteral("/>\r\n\r\n    <!-- send jquery to the foot of the page -->\r\n    
 WriteLiteral(" type=\'text/javascript\'");
 
 WriteLiteral(">window.q = []; window.$ = function (f) { q.push(f) }</script>\r\n\r\n</head>\r\n<body>" +
-"\r\n    <a");
-
-WriteLiteral(" class=\"skip-link screen-reader-text\"");
-
-WriteLiteral(" href=\"#content\"");
-
-WriteLiteral(">Skip to content</a>\r\n    \r\n");
+"\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 33 "..\..\Views\Shared\_Layout.cshtml"
+            #line 31 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Header"));
 
             
@@ -185,7 +181,7 @@ WriteLiteral("\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+            #line 33 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Modals"));
 
             
@@ -200,7 +196,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 38 "..\..\Views\Shared\_Layout.cshtml"
+            #line 36 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
@@ -211,7 +207,7 @@ WriteLiteral("\r\n    </div>\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 41 "..\..\Views\Shared\_Layout.cshtml"
+            #line 39 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Footer"));
 
             
@@ -222,7 +218,7 @@ WriteLiteral("\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+            #line 41 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -233,7 +229,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 44 "..\..\Views\Shared\_Layout.cshtml"
+            #line 42 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -244,7 +240,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 45 "..\..\Views\Shared\_Layout.cshtml"
+            #line 43 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -255,7 +251,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 46 "..\..\Views\Shared\_Layout.cshtml"
+            #line 44 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/homegrown"));
 
             
@@ -266,7 +262,7 @@ WriteLiteral("\r\n    \r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 49 "..\..\Views\Shared\_Layout.cshtml"
+            #line 47 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

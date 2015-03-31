@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 using Dilemma.Business.Services;
@@ -14,14 +11,15 @@ namespace Dilemma.Web.Controllers
 {
     public class AskController : DilemmaBaseController
     {
+        private static readonly Lazy<ISiteService> SiteService = Locator.Lazy<ISiteService>();
+        
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
         
         //
         // GET: /Ask/
         public ActionResult Index()
         {
-            var model = TestData.InitNewQuestion();
-            return View(model);
+            return View(InitNewQuestion());
         }
 
         //
@@ -31,13 +29,27 @@ namespace Dilemma.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //QuestionService.Value.SaveNewQuestion(model.Question);
+                QuestionService.Value.SaveNewQuestion(model.Question);
                 return RedirectToAction("Index", "Dilemmas");
             }
 
-            TestData.InitNewQuestion(model);
+            return View(InitNewQuestion(model));
+        }
 
-            return View(model);
+        private static AskViewModel InitNewQuestion(AskViewModel questionViewModel = null)
+        {
+            if (questionViewModel == null)
+            {
+                questionViewModel = new AskViewModel
+                {
+                    Question = new QuestionViewModel()
+                };
+            }
+
+            questionViewModel.Categories = SiteService.Value.GetCategories();
+            questionViewModel.Sidebar = XTestData.GetSidebarViewModel();
+
+            return questionViewModel;
         }
     }
 }

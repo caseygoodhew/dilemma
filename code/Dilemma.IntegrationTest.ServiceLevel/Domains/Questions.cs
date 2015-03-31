@@ -18,12 +18,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
 
         private static readonly Random Random = new Random();
 
-        public static CreateQuestionViewModel InitNewQuestion(CreateQuestionViewModel questionViewModel = null)
-        {
-            return _questionService.Value.InitNewQuestion(questionViewModel);
-        }
-
-        public static int SaveNewQuestion(string reference, CreateQuestionViewModel questionViewModel)
+        public static int SaveNewQuestion(string reference, QuestionViewModel questionViewModel)
         {
             return ObjectDictionary.Get(
                 ObjectType.Question,
@@ -33,12 +28,12 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
 
         public static int CreateNewQuestion(string reference)
         {
-            return SaveNewQuestion(reference, FillDefaults(InitNewQuestion()));
+            return SaveNewQuestion(reference, FillDefaults(new QuestionViewModel()));
         }
 
         public static int CreateAndApproveQuestion(string reference)
         {
-            var questionId = SaveNewQuestion(reference, FillDefaults(InitNewQuestion()));
+            var questionId = SaveNewQuestion(reference, FillDefaults(new QuestionViewModel()));
             var moderation = ManualModeration.GetNextForUser(SecurityManager.GetUserId());
             ManualModeration.Approve(moderation.ModerationId);
             return questionId;

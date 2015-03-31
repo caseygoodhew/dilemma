@@ -15,7 +15,7 @@ using WebGrease.Css.Extensions;
 
 namespace Dilemma.Web.Controllers
 {
-    public static class TestData
+    public static class XTestData
     {
         private static readonly Lazy<ISiteService> SiteService =
              Locator.Lazy<ISiteService>();
@@ -73,6 +73,56 @@ namespace Dilemma.Web.Controllers
             result.Answers.ForEach(x => x.IsMyQuestion = false);
 
             return result;
+        }
+
+        public static DilemmaDetailsViewModel GetDilemmaDetails()
+        {
+            var question = GetQuestions().FirstOrDefault();
+            while (question == null)
+            {
+                question = GetQuestions().FirstOrDefault();
+            }
+
+            FillAnswers(question);
+
+            return new DilemmaDetailsViewModel
+                       {
+                           QuestionDetails = new QuestionDetailsViewModel
+                                                 {
+                                                     QuestionViewModel = question,
+                                                     CanAnswer = question.TotalAnswers < question.MaxAnswers,
+                                                     Answer = new AnswerViewModel()
+                                                 },
+                           Sidebar = GetSidebarViewModel()
+                       };
+        }
+
+        private static void FillAnswers(QuestionViewModel question)
+        {
+            var rand = new Random();
+            
+            question.Answers = Enumerable.Repeat(0, question.TotalAnswers).ToList().Select(x => GetAnswer(rand)).ToList();
+        }
+
+        private static AnswerViewModel GetAnswer(Random rand)
+        {
+            var now = DateTime.Now;
+
+            return new AnswerViewModel
+                       {
+                           CreatedDateTime = now.AddHours(-1 * rand.Next(8 * 24)),
+                           HasMyVote = rand.Next(1, 5) == 1,
+                           IHaveFlagged = rand.Next(1, 5) == 1,
+                           IsApproved = true,
+                           IsMyAnswer = false,
+                           IsRejected = false,
+                           Text = @"
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur tempore deserunt reprehenderit facilis, molestias tempora et! Odio distinctio, eos, officiis, vitae iusto perferendis facilis at corporis vel molestias, debitis quod.
+
+Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nulla vitae elit libero, a pharetra augue. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.",
+                           UserLevel = rand.Next(1, 5),
+                           VoteCount = rand.Next(1, 500)
+                       };
         }
 
         public static IEnumerable<CategoryViewModel> GetCategories()

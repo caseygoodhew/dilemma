@@ -198,9 +198,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Validators\AskViewModelValidator.cs" />
     <Compile Include="ViewModels\AskViewModel.cs" />
+    <Compile Include="ViewModels\DilemmaDetailsViewModel.cs" />
     <Compile Include="ViewModels\DilemmasViewModel.cs" />
     <Compile Include="ViewModels\MyProfileViewModel.cs" />
     <Compile Include="ViewModels\SidebarViewModel.cs" />
+    <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Views\Shared\Error.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -490,6 +492,8 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Notifications.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\QuestionNotification.cshtml" />
+    <Content Include="Views\Answers\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Answer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

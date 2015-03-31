@@ -58,6 +58,12 @@ namespace Dilemma.Business.Services
             return QuestionRepository.Value.QuestionList<QuestionViewModel>(null);
         }
 
+        public IEnumerable<QuestionViewModel> GetQuestions(CategoryViewModel category)
+        {
+            // TODO: This is incorrect!!!
+            return GetAllQuestions();
+        }
+
         /// <summary>
         /// Gets all questions that the current user has been involved in
         /// </summary>

@@ -1,0 +1,62 @@
+﻿@model Dilemma.Web.ViewModels.DilemmaDetailsViewModel
+@{
+    ViewBag.Title = "title";
+}
+
+<div class="wrap">
+    <h2 class="section-label js-sticky">
+        <span class="js-sticky--offset">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            Answer this dilemma
+        </span>
+    </h2>
+
+    <div class="line">
+
+        <aside class="sidebar">
+            @Html.DisplayFor(x => x.Sidebar, "Sidebar")
+        </aside>
+
+
+        <main role="main" class="main">
+            <div class="Answers">
+
+                @Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel, "QuestionSummary")
+          
+                <!--?php include '_answer-mine.php'; ?>
+
+                <?php include '_answer-star.php'; ?>
+
+                <?php include '_answer-upvoted.php'; ?-->
+          
+                @foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
+                {
+                    @Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion })
+                }
+
+                <hr  style="margin-left: 60px;">
+                <div class="Card Answer align-center">
+                    <div class="pa30">
+                        <h2 class="section-label pt0 pl0">Your Answer</h2>
+                        <h3 class="mt10 mb20">What do you think?</h3>
+                        
+                        <a href="@Html.Action("Add")" class="Button--ask btn-success">
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 
+                            Answer Now
+                        </a>                 
+                    </div><!-- pa30 -->
+                </div><!-- Card --> 
+
+
+            </div>
+
+        </main><!-- main-->   
+
+    </div>    
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        document.getElementsByTagName('body')[0].className+=' page-answer';
+    </script>
+}

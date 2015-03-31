@@ -1,0 +1,67 @@
+﻿@model Dilemma.Business.ViewModels.AnswerViewModel
+
+@{
+    var canVote = (bool?)ViewBag.CanVote != false;
+    var canFlag = !Model.IHaveFlagged;
+    
+    var voteClass = Model.HasMyVote ? "is-active" : String.Empty;
+    
+    var flaggedClass = Model.IHaveFlagged ? "is-active" : String.Empty;
+
+    var votesText = Model.VoteCount == 1 ? "Vote" : "Votes";
+
+    var disabled = "disabled=disabled";
+
+    var isMyQuestion = (bool?)ViewBag.IsMyQuestion == true;
+}
+<div class="Card Answer is-mine user-level-@Model.UserLevel">
+    <div class="Card-section Card-info">
+        <img src="/Content/images/icons/user.png" alt="" width="20">
+        Your answer
+    </div>
+    <div class="Dilemma-question Card-section">
+        <div class="Answer-text">
+            @Model.Text
+        </div><!-- Dilemma-text -->
+    </div><!-- Dilemma-question Card-section -->
+
+    <div class="Dilemma-actions Card-section line">
+        <div class="u-2of5">
+            <button type="button" class="Button--vote js-voting-button @voteClass" @(canVote ? String.Empty : disabled)>
+                @if (isMyQuestion)
+                {
+                    <span class="Button-label is-inactive">
+                        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                        Best <span class="size-m-and-up inline"> Answer</span>
+                    </span>
+                    <span class="Button-label is-active">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        Your Best <span class="size-m-and-up inline"> Answer</span>
+                    </span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    <span class="Button-label is-inactive">Vote</span>
+                    <span class="Button-label is-active">Voted</span>
+                }
+            </button>                
+        </div>
+        <div class="u-1of5">
+            <div class="number-bubble">
+                @Model.HasMyVote
+                <span class="number-bubble--number">@Model.VoteCount</span>
+                <span class="size-s-and-up inline Card-label--small">@votesText</span>
+            </div>
+                  
+        </div>
+        <div class="u-1of5 right">
+            <button type="button" class="Button--flag js-flag-button @flaggedClass" title="Flag this answer for the attention of the moderator" data-toggle="modal" data-target="#modal-flag" @(canFlag ? String.Empty : disabled)>
+                <span class="glyphicon glyphicon-flag"></span> 
+                <span class="Button-label is-inactive">Flag</span>
+                <span class="Button-label is-active">Flagged</span>
+            </button>                 
+        </div>
+    </div><!-- Dilemma-actions -->
+</div>
+

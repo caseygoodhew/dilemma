@@ -50,5 +50,9 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets a value indicating whether the current user has voted for this answer.
         /// </summary>
         public bool HasMyVote { get; set; }
+
+        public int UserLevel { get; set; }
+
+        public bool IHaveFlagged { get; set; }
     }
 }

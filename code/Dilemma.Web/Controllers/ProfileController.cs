@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace Dilemma.Web.Controllers
 {
@@ -8,7 +9,7 @@ namespace Dilemma.Web.Controllers
         // GET: /Profile/
         public ActionResult Index()
         {
-            return View(TestData.GetMyProfileViewModel());
+            return View(XTestData.GetMyProfileViewModel());
         }
     }
 }
