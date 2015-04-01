@@ -1,13 +1,12 @@
 ﻿@model Dilemma.Business.ViewModels.NotificationViewModel
 
 <div class="Card Notification Card-go--container">
-    @*Html.ActionLink(String.Empty, "Index", "Answer", new { @class = "Card-go--trigger" })*@
-    <a href="/answer.php" class="Card-go--trigger"></a>
+    <a href="#" class="Card-go--trigger"></a>
     <div class="Notification-score">
         @if (Model.PointsAwarded == null || Model.PointsAwarded == 0)
         {
             <div>
-                <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
+                <span data-icon="notification"></span>
             </div>
         }
         else

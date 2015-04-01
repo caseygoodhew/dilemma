@@ -1,16 +1,22 @@
+.Answers {
+  padding-left: 60px;
+}
 .Answer {
-  margin-left: 60px;
   overflow: visible;
   position: relative;
   &:before {
-    content:url("@{imagepath}/user-teacher-30.png");
+    font-family: "dilemmasregular";
+    font-size: 40px;
     position: absolute;
     width: 30px;
     height: 30px;
-    background: #aaa;
+    background: @color-accent;
+    color: #fff;
     border-radius: 50%;
-    top: 25px;
+    top: 38px;
     left: -52px;
+    text-align: center;
+    line-height: 28px;
   }
   &:after {
     content: '';
@@ -18,10 +24,194 @@
     border-color: transparent #fff transparent transparent;
     border-style: solid;
     position: absolute;
-    top: 20px;
+    top: 33px;
     left: -60px;
-  }  
+  }
+  &.user-level-1:before { content: @user-level-1-unicode; line-height: 25px; }
+  &.user-level-2:before { content: @user-level-2-unicode; }
+  &.user-level-3:before { content: @user-level-3-unicode; }
+  &.user-level-4:before { content: @user-level-4-unicode; line-height: 22px; }
+  &.user-level-5:before { content: @user-level-5-unicode; }   
+}
 
+@media @bp-xs-only {
+  .Answers {
+    padding-left: 0;
+  }
+  .Answer:before {
+    float: left;
+    position: relative;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    margin: 10px 7px 0;
+  }
+  .Answer:after {
+    display: none;
+  }
+  .Card.is-mine:before,
+  .Card.is-star:before,
+  .Card.is-upvoted:before,
+  .Answer--window:before { 
+    margin: 6px 7px 0;
+  }
+}
+
+
+.Answer--window {
+  background: #F7F7F7;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.35);
+  .Card-section {
+    position: relative;
+  }
+  textarea {
+    width: 100%; 
+    margin: 0;
+    height: 48px;
+    resize: vertical;
+  }
+  textarea.is-active {
+    width: 100%; 
+    margin: 0;
+    height: 200px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .textarea-wrap {
+    margin: 0 127px 0 0;
+  }
+  .Button--answer {
+    width: 120px; 
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+  }
+  @media (max-width:450px) {
+    [data-icon] { display: none;}
+    .Button--answer { width: 70px; }
+    .textarea-wrap { margin: 0 78px 0 0; }
+  }
+}
+
+
+
+.user-is-level-1 [data-icon="user-level"]:before { content: @user-level-1-unicode; }
+.user-is-level-2 [data-icon="user-level"]:before { content: @user-level-2-unicode; }
+.user-is-level-3 [data-icon="user-level"]:before { content: @user-level-3-unicode; }
+.user-is-level-4 [data-icon="user-level"]:before { content: @user-level-4-unicode; }
+.user-is-level-5 [data-icon="user-level"]:before { content: @user-level-5-unicode; }
+
+
+
+.number-bubble {
+  background: #fff;
+  //width: 90%;
+  padding: 0 8px;
+  line-height: 42px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  margin-left: 5px;
+  color: #666;
+  position: relative;
+  text-align: left;
+  display: inline-block;
+  &:after {
+    content: '';
+    border-width: 10px 15px;
+    border-color: rgba(0, 0, 0, 0) #FFF rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    position: absolute;
+    top: 12px;
+    left: -30px;
+  } 
+    &:before {
+    content: '';
+    border-width: 11px 17px;
+    border-color: rgba(0, 0, 0, 0) #ddd rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    position: absolute;
+    top: 11px;
+    left: -34px;
+  }
+  .Card-label--small {
+    padding: 3px 0;
+  }  
+}
+
+.Card.is-mine,
+.Card.is-star,
+.Card.is-upvoted,
+.Answer--window{ 
+  .Card-info {
+    background: #222;
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    padding: 7px 7px 5px;
+  }  
+}
+@answer-badge: 100px;
+.Answer.is-mine .Answer-text:before,
+.Answer.is-star .Answer-text:before,
+.Answer.is-upvoted .Answer-text:before {
+  font-family: "dilemmasregular";
+  font-size: @answer-badge;
+  height: @answer-badge;
+  width: @answer-badge;
+  line-height: .45;
+  float: right;
+  display: block;
+  padding: 0 10px 30px;
+  background: #EEE;
+  border-radius: 50%;
+  padding: 20px;
+  margin: 10px;
+}
+.Answer.is-mine .Answer-text:before { 
+  background: @color-accent; 
+  color: #fff; 
+  content: "\E011"; 
+}
+.Answer.is-star .Answer-text:before { 
+  background: @color-answer; 
+  content: "\E00F"; 
+  padding: 22px;
+}
+.Answer.is-upvoted .Answer-text:before { 
+  background: @color-vote;
+  content: "\E005";
+}
+
+.Answer.is-mine .Answer-text,
+.Answer.is-star .Answer-text,
+.Answer.is-upvoted .Answer-text {
+    min-height: 110px;
+}
+
+
+.Answer.user-is-questioner .number-bubble {
+  background: transparent;
+  border: 0 none;
+  line-height: 44px;
+  padding: 0 0 0 42px;
+  position: relative;
+  text-align: left;
+  &:before {
+    content: '\E005';
+    font-family: "dilemmasregular";
+    border: 0 none;
+    font-size: 32px;
+    top: 11px;
+    left: 10px;
+    line-height: 0.6;
+  }
+  &:after {
+    display: none;
+  }
 }
 form.Answer {
     &:before {

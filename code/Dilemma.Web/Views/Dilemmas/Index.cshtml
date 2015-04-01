@@ -1,11 +1,14 @@
-﻿@model Dilemma.Web.ViewModels.DilemmasViewModel
+﻿@using Dilemma.Data.Models
+@model Dilemma.Web.ViewModels.DilemmasViewModel
 @{
     ViewBag.Title = "";
+
+    var isAllCategories = ViewBag.Category == "all";
 }
     
     <h1 class="js-sticky">
         <span class="js-sticky--offset">
-            <img src="/Content/images/icons/red-answer.png" alt="" width="40">
+            <span data-icon="advise"></span>
             Advise
         </span>
     </h1>
@@ -19,16 +22,82 @@
         <main role="main" class="main">
             <div class="Dilemmas">
 
-                @Html.DisplayForList(x => x.DilemmasToAnswer, "QuestionSummary")
-                
+                @if (Model.DilemmasToAnswer.Any())
+                {
+                    @Html.DisplayForList(x => x.DilemmasToAnswer, "QuestionSummary")
+                }
+                else
+                {
+                    <div class="Card Dilemmas-empty">
+                        @if (isAllCategories)
+                        {
+                            <h2>Oh no! there are no dilemmas to answer right now!</h2>
+                            <p>Maybe you want to share your Dilemma?</p>
+                        }
+                        else
+                        {
+                            <h2>Oh no! there are no dilemmas in this category right now!</h2>
+                            <p>Maybe you want to share your Dilemma? Or take a lucky dip!</p>
+                        }
+
+                        <div class="line">
+                            <a href="@Url.Action("Index", "Ask")" class="Button--ask mb20">
+                                <span data-icon="ask"></span> 
+                                Share Your Dilemma
+                            </a>                
+                            @if (!isAllCategories)
+                            {
+                                <span>&nbsp;&nbsp;&nbsp;</span>
+                                <a href="/" class="Button--ask">
+                                    <span data-icon="refresh"></span> 
+                                    Lucky Dip
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+
                 <h2 class="js-sticky h1 js-sticky--vote">
                     <span class="js-sticky--offset">
-                        <img src="/Content/images/icons/red-vote.png" alt="" width="40">
+                        <span data-icon="vote"></span>
                         Vote
                     </span>
                 </h2>
           
-                @Html.DisplayForList(x => x.DilemmasToVote, "QuestionSummary")
+                @if (Model.DilemmasToVote.Any())
+                {
+                    @Html.DisplayForList(x => x.DilemmasToVote, "QuestionSummary")
+                }
+                else
+                {
+                    <div class="Card Dilemmas-empty">
+                        @if (isAllCategories)
+                        {
+                            <h2>Oh no! there are no dilemmas to vote on right now!</h2>
+                            <p>Maybe you want to share your Dilemma?</p>
+                        }
+                        else
+                        {
+                            <h2>Oh no! there are no dilemmas in this category right now!</h2>
+                            <p>Maybe you want to share your Dilemma? Or take a lucky dip!</p>
+                        }
+
+                        <div class="line">
+                            <a href="@Url.Action("Index", "Ask")" class="Button--ask mb20">
+                                <span data-icon="ask"></span> 
+                                Share Your Dilemma
+                            </a>                
+                            @if (!isAllCategories)
+                            {
+                                <span>&nbsp;&nbsp;&nbsp;</span>
+                                <a href="/" class="Button--ask">
+                                    <span data-icon="refresh"></span> 
+                                    Lucky Dip
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
             </div>
         </main><!-- main-->  
     </div>

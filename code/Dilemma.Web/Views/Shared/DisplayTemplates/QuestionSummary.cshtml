@@ -8,11 +8,11 @@
 
     <div class="Card-section Card-info">
         <div class="line align-center">
-            <div class="Card-label--small right">
+            <div class="Card-label--small">
                 @Model.ClosesDateTime.ToRelativeText()
             </div>
             <ol 
-                class="Dilemma-respondents horizontal line left" 
+                class="Dilemma-respondents horizontal line" 
                 title="Posted in @Model.CategoryName, @Model.TotalAnswers answers so far">
                 @for (var i = 0; i < @Model.MaxAnswers; i++)
                 {
@@ -56,7 +56,7 @@
                                                                      Model.QuestionId
                                                                  })" class="Button--answer">
                         <img src="/Content/images/icons/dark-answer.png" alt="" width="20">
-                        <span class="Button-label">@(Model.IsMyQuestion ? "View" : "Answer")</span>
+                        <span class="Button-label">@(Model.IsMyQuestion ? "View" : "Advise")</span>
                     </a>
                 }
                 else if (Model.IsClosed && !Model.IsMyQuestion && !isDilemmaViewPage)
@@ -65,7 +65,7 @@
                                                                  {
                                                                      Model.QuestionId
                                                                  })"  class="Button--vote ">
-                        <img src="/Content/images/icons/dark-vote.png" alt="" width="16">
+                        <span data-icon="vote"></span>
                         <span class="Button-label">Vote</span>
                     </a>
                 }
@@ -74,14 +74,14 @@
             {
                 <div class="u-2of5">
                     <button type="button" class="Button--bookmark js-bookmark-button">
-                        <img src="/Content/images/icons/dark-bookmark.png" alt="" width="13">
+                        <span data-icon="bookmark"></span>
                         <span class="Button-label is-inactive">Bookmark</span>
                         <span class="Button-label is-active">Bookmarked</span>
                     </button>                  
                 </div>
                 <div class="u-1of5 right">
-                    <button type="button" class="Button--flag js-flag-button " title="Flag this answer for the attention of the moderator" data-toggle="modal" data-target="#modal-flag">
-                        <img src="/Content/images/icons/dark-flag.png" alt="" width="13">
+                    <button type="button" class="Button--flag js-flag-button " title="Report an issue with this question" data-toggle="modal" data-target="#modal-flag">
+                        <span data-icon="flag"></span>
                         <span class="Button-label is-inactive">Flag</span>
                         <span class="Button-label is-active">Flagged</span>
                     </button>                               

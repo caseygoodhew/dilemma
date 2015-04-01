@@ -13,15 +13,15 @@
 /
 ======================================================*/
 
-  /*
+  /* 
   
     Config
   
   ======================================================*/
-    // Path to Bootstrap LESS files
+    // Pathing variables
     @bootstrap: "../bootstrap";
-    // Path to image files
-    @imagepath: "/content/images"; 
+    @imagepath: "/content/images";
+    @fontpath: "../fonts";
 
 /*=====================================================
 \
@@ -112,8 +112,10 @@
 
   @import "1-components/_media-unit.less";  
   @import "1-components/_lists.less"; 
+  @import "1-components/_dilemmicons.less";
   @import "1-components/_forms.less";
   @import "1-components/_buttons.less";
+  @import "1-components/_rank.less";
 
   @import "2-modules/_card.less";
   @import "2-modules/_dilemma.less";
@@ -134,25 +136,6 @@
   
   // this should be empty, a place for emergency fixes
   @import "5-overrides/_shame.less";
-
-
-
-
-
-
-.placeholder {
-  background: #ccc;
-}
-.Questioner-avatar .placeholder {
-  background: gold;
-}
-
-.disapears {  
-  animation-duration: 5s;  
-  animation-delay: 10s;  
-  animation-iteration-count: infinite; 
-}  
-
 
 
 

@@ -66,7 +66,7 @@
     .size-xl-and-up.inline { display: inline; }
     .size-xl-and-up.inline-block { display: block; }  
   }
-
+ 
 
 
 html, body {
@@ -177,25 +177,12 @@ html {
       float: right;
       clear: none;
       display: block;
+      position: relative;
     }
     .main {
       margin: 0 @l-col-width + 15px 0 0;
     }
   }
-
-.page-hd .navbar .navbar-nav a {
-  padding: 10px 20px;
-}
-.dropdown-menu {
-  min-width: 300px;
-}
-
-
-.page-hd .navbar .dropdown-menu {
-  left: 0;
-  right: auto;
-}
-
 
 
 .page-profile .sidebar .Notification,
@@ -203,32 +190,19 @@ html {
 .page-ask .Card--sidebar-ask {
   display: none;
 }
+@media @bp-m {
+  .page-profile .Card--sidebar-ask {
+    margin-top: 398px;
+  }
+  .page-profile .Card--sidebar-profile{
+    position: absolute;
+    top: 48px;
+    width: 300px;
+  }  
+}
 
-/*
 
-  Profile page styles
 
-======================================================*/
-
-.Rank {
-  max-width: 288px;
-  margin: 0 auto;
-}
-.user-is-level-1 .Image-ometer-amount {
-  width: 20%;
-}
-.user-is-level-2 .Image-ometer-amount {
-  width: 40%;
-}
-.user-is-level-3 .Image-ometer-amount {
-  width: 60%;
-}
-.user-is-level-4 .Image-ometer-amount {
-  width: 80%;
-}
-.user-is-level-5 .Image-ometer-amount {
-  width: 100%;
-}
 @media only screen and (min-width: @xs) and (max-width: @m)  {
   .page-profile .sidebar {
     display: block;

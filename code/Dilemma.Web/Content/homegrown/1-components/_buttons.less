@@ -9,6 +9,7 @@
     padding-left: 0;
     padding-right: 0;
     margin: 0 auto;  
+    width: 100%;
   }
 }
 .Dilemma-actions {
@@ -24,162 +25,201 @@ input[type=button]  {
   transition: all 0.25s;
 }
 
+button,
+[class='Button'],
+[class^='Button--'],
+[class*=' Button--'] {
 
+  display: inline-block;
+  max-width: 290px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0 10px;
+  border-bottom-width: 2px;
 
-  [class^='Button--'],
-  [class*=' Button--'] {
+  border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.5);
+  //background-image: none;
+  background: #fff;
+  margin-bottom: 0;
 
-    display: inline-block;
-    width: 100%;
-    max-width: 290px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    padding: 6px 12px;
-    border-bottom-width: 2px;
+  font-size: 14px;
+  line-height: 45px;
+  min-height: 45px;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
 
-    border-radius: 4px;
-    box-shadow: inset 0 1px 2px rgba(255,255,255,0.5);
-    //background-image: none;
-    background: #fff;
-    margin-bottom: 0;
+  cursor: pointer;  
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
-    font-size: 14px;
-    line-height: 1.42857143;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    white-space: nowrap;
-    font-weight: normal;
-    text-align: center;
-    vertical-align: middle;
+  &:hover {
     text-decoration: none;
-
-    cursor: pointer;  
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;  
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    &:hover {
-      text-decoration: none;
-      border-color: rgba(0, 0, 0, 0.3);
-    }
-
-    &:active {
-      border-bottom-width: 1px;
-      border-top-width: 2px;
-    }
+    border-color: rgba(0, 0, 0, 0.3);
   }
 
-  .Button--answer {
+  &:active {
+    border-bottom-width: 1px;
+    border-top-width: 2px;
+  }
+}
+
+.Button--answer {
+  color: @color-text;
+  background-color: @color-answer;
+  border-color: saturate(darken(@color-answer,15%), 5%);
+  &:hover,
+  &:active,
+  &:focus {
     color: @color-text;
-    background-color: @color-answer;
-    border-color: saturate(darken(@color-answer,15%), 5%);
-    &:hover,
-    &:active,
-    &:focus {
-      color: @color-text;
-      @color-answer-hover: darken(spin(@color-answer,5), 10%);
-      background-color: saturate(@color-answer-hover,10%);
-      border-color: darken(@color-answer-hover,10%);
-    }
+    @color-answer-hover: darken(spin(@color-answer,5), 10%);
+    background-color: saturate(@color-answer-hover,10%);
+    border-color: darken(@color-answer-hover,10%);
   }
+}
 
-  .Button--vote {
+.Button--vote {
+  color: #fff;
+  background-color: @color-vote;
+  border-color: saturate(darken(@color-vote,15%), 5%);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);
+  &:hover,
+  &:active,
+  &:focus {
     color: #fff;
-    background-color: @color-vote;
-    border-color: saturate(darken(@color-vote,15%), 5%);
-    &:hover,
-    &:active,
-    &:focus {
-      color: #fff;
-      @color-vote-hover: darken(spin(@color-vote,5), 10%);
-      background-color: saturate(@color-vote-hover,10%);
-      border-color: darken(@color-vote-hover,10%);
-    }
+    @color-vote-hover: darken(spin(@color-vote,5), 10%);
+    background-color: saturate(@color-vote-hover,10%);
+    border-color: darken(@color-vote-hover,10%);
   }
+}
 
 
-  .Button--ask {
-    color: @color-text;
-    background-color: @color-ask;
-    border-color: saturate(darken(@color-ask,15%), 5%);
-    &:hover,
-    &:active,
-    &:focus {
-      color: #fff;
-      @color-ask-hover: darken(spin(@color-ask,5), 10%);
-      background-color: saturate(@color-ask-hover,10%);
-      border-color: darken(@color-ask-hover,10%);
-    }
-  }
-
-  .Button--red {
+.Button--ask {
+  color: @color-text;
+  background-color: @color-ask;
+  border-color: saturate(darken(@color-ask,15%), 5%);
+  &:hover,
+  &:active,
+  &:focus {
     color: #fff;
-    background-color: @color-accent;
-    border-color: saturate(darken(@color-accent,15%), 5%);
-    &:hover,
-    &:active,
-    &:focus {
-      color: #fff;
-      @color-accent-hover: darken(spin(@color-accent,5), 10%);
-      background-color: saturate(@color-accent-hover,10%);
-      border-color: darken(@color-accent-hover,10%);
-    }
+    @color-ask-hover: darken(spin(@color-ask,5), 10%);
+    background-color: saturate(@color-ask-hover,10%);
+    border-color: darken(@color-ask-hover,10%);
   }
+}
 
-  .Button--flag {
-    opacity: 0.4;
-    &:hover {
-      opacity: 1;
-    }
+.Button--red {
+  color: #fff;
+  background-color: @color-accent;
+  border-color: saturate(darken(@color-accent,20%), 5%);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.2);
+  &:hover,
+  &:active,
+  &:focus {
+    color: #fff;
+    @color-accent-hover: darken(spin(@color-accent,1), 6%);
+    background-color: saturate(@color-accent-hover,10%);
+    border-color: darken(@color-accent-hover,10%);
   }
+}
 
-  [class^='Button'],
-  [class*=' Button'] {
-    &.disabled, 
-    &[disabled],
-    &.disabled:hover, 
-    &[disabled]:hover,
-    &.disabled:active, 
-    &[disabled]:active,
-    &.is-active {
-      color: #777 !important;
-      background-color: #ccc !important;
-      border-color: #ccc !important;
-      border-radius: 4px;
-      &.is-active {
-        color: @color-cta !important;
-        background: #444 !important;
-        border-color: #444 !important;
-        opacity: 1 !important;
-      }
-    }
+.Button--flag {
+  opacity: 0.4;
+  &:hover {
+    opacity: 1;
   }
+}
 
-
-
-  // Button components
-  .Button-label {
-    //display: block;
-    font-size: 12px;
-    line-height: 15px;
-    .glyphicon {
-      margin-top: 2px;
-    }
-    &.is-active {
-      display: none;
-    }
+[class^='Button'],
+[class*=' Button'] {
+  &.disabled, 
+  &[disabled],
+  &.disabled:hover, 
+  &[disabled]:hover,
+  &.disabled:active, 
+  &[disabled]:active {
+    color: #777 !important;
+    background-color: #ccc !important;
+    border-color: #ccc !important;
+    border-radius: 4px;
   }
-
-  [class^='Button'],
-  [class*=' Button'] {
-    &.is-active .Button-label.is-active {
-      display: inline-block;
-    }
-    &.is-active .Button-label.is-inactive {
-      display: none;
-    }
+  &.is-active {
+    opacity: 1 !important;
+    background: #fff;
+    color: darken(@color-vote,10%);
+    border-color: @color-vote;
+    [data-icon="bookmark"]:before  { content: "\E00B"; }
+    [data-icon="flag"]:before      { content: "\E00D"; }
   }
+}
+
+
+// Button components
+.Button-label {
+  //display: block;
+  font-size: 12px;
+  line-height: 15px;
+  .glyphicon {
+    margin-top: 2px;
+  }
+  &.is-active {
+    display: none;
+  }
+}
+
+[class^='Button'],
+[class*=' Button'] {
+  &.is-active .Button-label.is-active {
+    display: inline;
+  }
+  &.is-active .Button-label.is-inactive {
+    display: none;
+  }
+}
+
+.Button--bookmark {
+  [data-icon] { 
+    top: 5px;
+    left: 1px;
+    font-size: 29px;
+  }
+  @media (max-width:500px) {
+    width: 50%;
+    .Button-label {display: none !important;}
+  }
+}
+.Button--flag .Button-label {
+  display: none;
+}
+
+
+
+
+.Button-danger {
+  color: #FFF;
+  background-color: #D9534F;
+  border-color: #D43F3A;
+  [data-icon] { 
+    // top: 5px;
+    // left: 1px;
+    font-size: 29px;
+  }
+}
+
+
+
+
+
+
+
 
 

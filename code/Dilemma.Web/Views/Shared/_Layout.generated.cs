@@ -56,9 +56,10 @@ WriteLiteral(">\r\n    <meta");
 
 WriteLiteral(" name=\"viewport\"");
 
-WriteLiteral(" content=\"width=device-width, initial-scale=1.0\"");
+WriteLiteral(" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\"" +
+"");
 
-WriteLiteral("/>\r\n    <meta");
+WriteLiteral(">\r\n    <meta");
 
 WriteLiteral(" name=\"description\"");
 

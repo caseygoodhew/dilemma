@@ -4,59 +4,77 @@
     ViewBag.IsDilemmaViewPage = true;
 
     var userHasAnswered = Model.QuestionDetails.QuestionViewModel.Answers.Any(x => x.IsMyAnswer);
+
+    var showAnswerNow = !Model.QuestionDetails.QuestionViewModel.IsMyQuestion 
+        && !userHasAnswered 
+        && Model.QuestionDetails.QuestionViewModel.TotalAnswers < Model.QuestionDetails.QuestionViewModel.MaxAnswers;
+                
 }
 
-    <h2 class="section-label js-sticky">
+    <h1 class="section-label js-sticky">
         <span class="js-sticky--offset">
-            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            <span data-icon="advise"></span>
             Answer this dilemma
         </span>
-    </h2>
+    </h1>
 
-    <div class="line">
+<div class="line">
 
-        <aside class="sidebar">
-            @Html.DisplayFor(x => x.Sidebar, "Sidebar")
-        </aside>
+    <aside class="sidebar">
+        @Html.DisplayFor(x => x.Sidebar, "Sidebar")
+    </aside>
 
-
-        <main role="main" class="main">
-            <div class="Answers">
-
-                @Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel, "QuestionSummary")
+    <main role="main" class="main">
+    
+        @Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel, "QuestionSummary")
           
-                <!--?php include '_answer-mine.php'; ?>
-
-                <?php include '_answer-star.php'; ?>
-
-                <?php include '_answer-upvoted.php'; ?-->
-          
-                @foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
-                {
-                    @Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion })
-                }
-                
-                @if (!Model.QuestionDetails.QuestionViewModel.IsMyQuestion && !userHasAnswered && Model.QuestionDetails.QuestionViewModel.TotalAnswers < Model.QuestionDetails.QuestionViewModel.MaxAnswers)
-                { 
-                    <hr  style="margin-left: 60px;">
-                    <div class="Card Answer align-center">
-                        <div class="pa30">
-                            <h2 class="section-label pt0 pl0">Your Answer</h2>
-                            <h3 class="mt10 mb20">What do you think?</h3>
-                        
-                            <a href="@Url.Action("Answer")" class="Button--ask btn-success">
-                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 
-                                Answer Now
-                            </a>                 
-                        </div><!-- pa30 -->
+        @if (showAnswerNow)
+        {
+            <form class="Card Answer--window" action="">
+                <div class="Card-section Card-info">
+                    Post your advice
+                </div>
+                <div class="Card-section line">
+                    <button type="submit" class="Button Button--answer">
+                        <span data-icon="advise"></span>
+                        <span class="Button-label">Advise</span>
+                    </button>
+                    <div class="textarea-wrap">
+                        <textarea name="answer" id="" cols="30" rows="2" class="form-control js-activate-answer-form" placeholder="Greg, Clint - Paul and I prefer the 'Post Your Advice' box up here and it tested better with users in Pauls's testing. This isn't wired in yet, so let me know what you think."></textarea>
                     </div>
-                }
+                </div><!-- Dilemma-actions -->
+            </form>
+        }
+
+        <div class="Answers">
+            
+            @foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
+            {
+                @Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion })
+            }
                 
-            </div>
+            @if (showAnswerNow)
+            { 
+                <hr  style="margin-left: 60px;" />
+                <div class="Card align-center">
+                    <div class="pa30">
+                        <h2 class="section-label pt0 pl0">Your Answer</h2>
+                        <h3 class="mt10 mb20">What do you think?</h3>
+                        
+                        <a href="@Url.Action("Answer")" class="Button--ask btn-success">
+                            <span data-icon="advise"></span>
+                            Answer Now
+                        </a>                 
+                    </div><!-- pa30 -->
+                </div>
+            }
+                
+        </div>
 
-        </main><!-- main-->   
+    </main><!-- main-->   
 
-    </div>    
+</div>
+
 
 @section scripts {
     <script type="text/javascript">

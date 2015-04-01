@@ -1,5 +1,7 @@
+// when we display the menu on small screens hide the rest of the page under an opaque layer as it looks less cluttered. Don't bother on desktop as it seems weird.
+
 @media only screen and (min-width: @xs) and (max-width: @m)  {
-  #mask {
+  #nav-mask {
     display: none;
     position: fixed;
     top:0; left:0; right:0; bottom:0;
@@ -7,6 +9,9 @@
     z-index: @z-body-mask;
   }
 }
+
+
+
 // LEVEL 1
 
 .nav-level-1 {
@@ -15,33 +20,62 @@
     border-top: 0 none;
   }
 }
+.page-hd .nav-level-1-link {
+  padding: 7px 8px 7px 22px;
+}
+.nav [data-icon] {
+  color: #fff;
+  font-size: 50px;
+  height: 31px;
+  width: 30px;
+}
 .nav-level-1.is-page-current .nav-level-1-link,
 .nav-level-1.is-page-current .nav-level-1-link:hover {
-  color:@color-accent;
+  color:#fff;
+  [data-icon] {
+    color:@color-accent;
+  }
 }
 .nav-level-1.is-active .nav-level-1-link {
-  background: #000  !important;
-  color: #fff;
+  background: #fff  !important;
+  color: #222 !important;
+  [data-icon] {
+    color: #222;
+  }
+  &:hover {
+    color: @color-accent;
+  }
 }
 .nav-unread-notifications {
   display: none;
 }
+
+
+.nav-level-1-text {
+  display: inline-block;
+  position: relative;
+  top: -7px;
+}
+
+
+
 @media @bp-xs-only {
   .page-hd .navbar-nav {
     box-shadow: 0 -2px 2px rgba(0,0,0, 0.2);
   }
   .nav-level-1-link {
-    padding: 10px 5px 0 !important;
+    padding: 10px 0 0 !important;
     font-size: 12px !important;
-    height: 65px;
+    height: 70px;
   }
+
   .nav-level-1-text {
     display: block;
     padding-top: 3px;
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    right: 0;
+    // position: absolute;
+    // bottom: 5px;
+    // left: 0;
+    // right: 0;
   }
   .nav-unread-notifications {
     display: inline-block;
@@ -52,6 +86,8 @@
     color: #FFF;
     border-radius: 50%;
     padding-left: 1px;
+    position: relative;
+    top: -10px;
   }
   .nav-level-1.is-page-current .nav-unread-notifications {
     background:@color-accent;
@@ -76,9 +112,12 @@
 .nav-level-2-menu {
   position: absolute;
   z-index: @z-dropdown;
+  left: 0;
+  right: auto;
   margin: 0;
   padding: 0;
   min-width: 320px;
+  max-width: 400px;
   box-shadow: 0 10px 10px rgba(0,0,0,0.5);
 
   max-height: 0;
@@ -92,10 +131,16 @@
 .lte-ie9 .nav-level-2-menu {
   display: none;
 }
-.nav-level-1:hover .nav-level-2-menu,
+@dropdown-max-height: 400px;// if the menu gets longer increase this value
+.nav-level-1:hover .nav-level-2-menu {
+  max-height: @dropdown-max-height; 
+  @media only screen and (min-width: @xs) and (max-width: @m)  {
+    max-height: 0; // dont hover at mobile sizes
+  }
+}
+// click to stick at all sizes
 .nav-level-1.is-active .nav-level-2-menu {
-  max-height: 400px;
-
+  max-height: @dropdown-max-height; 
   @media only screen and (min-width: @xs) and (max-width: @m)  {
     position: static;
     bottom: 65px;

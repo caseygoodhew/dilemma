@@ -9,29 +9,30 @@
 
     <div class="Card-section">
         <h2 class="pv10 h2 align-center">
-            <img src="/Content/images/icons/red-ask.png" alt="" width="30"> Ask
+            <span data-icon="ask"></span>
+            Ask
         </h2>
     </div>
     <div class="Card-section">
         <h3 class="h4 info pt10 pb20 align-center">What's on your mind?</h3>
         <a href="/ask" class="Button--ask">
-            <img src="/Content/images/icons/dark-ask.png" alt="" width="20">
+            <span data-icon="ask"></span>
             Share Your Dilemma
         </a>
     </div>
 </div>
         
 <div class="Card Card--sidebar-profile">
-    <div class="Card-section Rank">
+    <div class="Card-section Rank user-is-level-@Model.UserStatsViewModel.UserRank.Level">
 
         <div class="Rank-image">
-            <img src="/Content/images/user-guru-30.png" alt="" class="placeholder" width="75" height="75">
+            <span data-icon="user-level"></span>
             <div class="Rank-text">
-                @Model.UserStatsViewModel.UserRank.Name
+                Your rank: @Model.UserStatsViewModel.UserRank.Name
             </div>
         </div><!-- Rank-image -->
 
-        <div class="Rank-ometer-container user-is-level-@Model.UserStatsViewModel.UserRank.Level">
+        <div class="Rank-ometer-container">
             <div class="Rank-ometer">
                 <div class="Rank-ometer-amount" style="width:@Model.UserStatsViewModel.UserRank.Percentage%"></div>
             </div> 
@@ -70,7 +71,7 @@
             <div style="width: 60px; overflow: hidden; float: left;">
                 <!-- <div class="disc-label right">99</div> -->
                 <div class="disc-label right">
-                    <img src="/Content/images/icons/notification.png" alt="" width="25" style="position: relative; top: -1px; left: -2px;">
+                    <span data-icon="notification"></span>
                 </div>
             </div>
             <div>

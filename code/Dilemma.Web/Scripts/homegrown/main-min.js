@@ -13274,8 +13274,8 @@ function win_resize() {
 
   if (win_resized_width < 780) {
     $('.nav-level-2-menu').css('width',win_resized_width - 14);
-    if ($('#mask').length < 1 ){
-      $('body').append('<div id="mask"/>')
+    if ($('#nav-mask').length < 1 ){
+      $('body').append('<div id="nav-mask"/>')
     }
   }
 };
@@ -13297,6 +13297,12 @@ $(document).ready(function() {
   if (ie < 10){
     $('html').addClass('lte-ie9 ie-' + ie);
   }
+
+
+  $('.js-activate-answer-form').on('click', function() {
+    $(this).addClass('is-active');
+    //$(this).closest('.Answer--window').toggleClass('is-active');
+  });
 
 
   // crude navigation highlighter for testing purposes  TODO - replace
@@ -13321,7 +13327,7 @@ $(document).ready(function() {
     e.preventDefault();
     e.stopImmediatePropagation();
     $(this).parent().toggleClass('is-active');
-    $('.page-bd #mask').toggle();
+    $("#nav-mask").toggle();
     //$(this).closest('.Dilemma-text').toggleClass('is-active');
   });
 
@@ -13330,7 +13336,7 @@ $(document).ready(function() {
 
 
   // get the original height from the css 
-  var Dilemma_text_height = $('Dilemma-text'[0]).height();
+  var Dilemma_text_height = $('.Dilemma-text:first').height();
 
   $('.Dilemma-text-toggle').on('click', function(e) {
     e.preventDefault();
@@ -13338,12 +13344,7 @@ $(document).ready(function() {
     var el = $(this).closest('.Dilemma-text');
     var curHeight = el.height();
     var autoHeight = el.css('height', 'auto').height();
-    console.log('curHeight = ' + curHeight);
-    console.log('autoHeight = ' + autoHeight);
-  
     el.css('height', curHeight);
-
-    // el.toggleClass('is-active');
     if (curHeight == autoHeight) { // the box is open
       console.log('open');
       el.
@@ -13359,7 +13360,6 @@ $(document).ready(function() {
         .toggleClass('is-active')
       ;
     }
-
   });
 
 
@@ -13472,6 +13472,31 @@ $(document).ready(function() {
     e.stopImmediatePropagation();
     $('.nav-dilemmas-mobile').toggle();
   });
+
+
+
+
+  /*
+
+    In-page scrolling
+
+  ======================================================*/
+
+    $('a[href^=#]')
+    .on('click', function(e){
+      e.preventDefault();
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          $('html,body').animate({
+            scrollTop: target.offset().top
+          }, 500);
+          return false;
+        }
+      }
+    })
+  ; 
 
 
 }); // $(document).ready(function()

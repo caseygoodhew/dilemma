@@ -53,7 +53,9 @@ namespace Dilemma.Business.Conversion
                     IsApproved = model.AnswerState == AnswerState.Approved,
                     IsRejected = model.AnswerState == AnswerState.Rejected,
                     VoteCount = userVotes.Count,
-                    HasMyVote = userVotes.Contains(userId)
+                    HasMyVote = userVotes.Contains(userId),
+                    // TODO: this shouldn't be hardcoded
+                    UserLevel = 1
                 };
         }
     }

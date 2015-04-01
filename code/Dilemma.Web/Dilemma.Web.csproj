@@ -230,6 +230,13 @@
     <Content Include="Content\bootstrap\bootstrap.min.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-demo.html" />
+    <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.svg" />
+    <Content Include="Content\fonts\dilemmicons\generator_config.txt" />
+    <Content Include="Content\fonts\dilemmicons\specimen_files\easytabs.js" />
+    <Content Include="Content\fonts\dilemmicons\specimen_files\grid_12-825-55-15.css" />
+    <Content Include="Content\fonts\dilemmicons\specimen_files\specimen_stylesheet.css" />
+    <Content Include="Content\fonts\dilemmicons\stylesheet.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\MuseoSansRounded-100.svg" />
     <Content Include="Content\fonts\MuseoSansRounded-300.svg" />
@@ -245,13 +252,17 @@
     <Content Include="Content\images\ads\160x600_uap.gif" />
     <Content Include="Content\images\ads\180x150_uap.gif" />
     <Content Include="Content\images\ads\300x250_uap.gif" />
+    <Content Include="Content\images\ads\300x250_uap.png" />
     <Content Include="Content\images\ads\728x90_uap.gif" />
     <Content Include="Content\images\Avatar-placeholder-300x300.png" />
+    <Content Include="Content\images\border-line.png" />
     <Content Include="Content\images\chevron-right.png" />
     <Content Include="Content\images\device.png" />
     <Content Include="Content\images\gradient-overlay-basic.png" />
     <Content Include="Content\images\gradient-overlay-glossy.png" />
     <Content Include="Content\images\gradient-overlay-strong.png" />
+    <Content Include="Content\images\hero.jpg" />
+    <Content Include="Content\images\icon-large.png" />
     <Content Include="Content\images\icons\add.png" />
     <Content Include="Content\images\icons\answer.png" />
     <Content Include="Content\images\icons\ask.png" />
@@ -302,6 +313,14 @@
     <Content Include="Content\images\icons\user.png" />
     <Content Include="Content\images\icons\vote.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\pattern-a.png" />
+    <Content Include="Content\images\pattern-a_%402X.jpg" />
+    <Content Include="Content\images\pattern-b.png" />
+    <Content Include="Content\images\pattern-b_%402X.png" />
+    <Content Include="Content\images\pattern-c.png" />
+    <Content Include="Content\images\pattern-c_%402X.png" />
+    <Content Include="Content\images\pattern-d.png" />
+    <Content Include="Content\images\pattern-d_%402X.png" />
     <Content Include="Content\images\placeholder-bubble-left.png" />
     <Content Include="Content\images\placeholder-bubble-right.png" />
     <Content Include="Content\images\placeholder.png" />
@@ -321,10 +340,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap\bootstrap.less" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap\wells.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\utilities.less" />
@@ -400,9 +415,11 @@
     <Content Include="Content\homegrown\0-base\_utility-classes.less" />
     <Content Include="Content\homegrown\0-base\_variables.less" />
     <Content Include="Content\homegrown\1-components\_buttons.less" />
+    <Content Include="Content\homegrown\1-components\_dilemmicons.less" />
     <Content Include="Content\homegrown\1-components\_forms.less" />
     <Content Include="Content\homegrown\1-components\_lists.less" />
     <Content Include="Content\homegrown\1-components\_media-unit.less" />
+    <Content Include="Content\homegrown\1-components\_rank.less" />
     <Content Include="Content\homegrown\2-modules\_answer.less" />
     <Content Include="Content\homegrown\2-modules\_card.less" />
     <Content Include="Content\homegrown\2-modules\_dilemma.less" />
@@ -419,6 +436,16 @@
     <Content Include="Content\homegrown\5-overrides\_shame.less" />
     <Content Include="Content\homegrown\css\animate.css.map" />
     <Content Include="Content\homegrown\main.less" />
+    <Content Include="Content\fonts\dilemmicons\.DS_Store" />
+    <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.eot" />
+    <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.ttf" />
+    <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.woff" />
+    <Content Include="Content\fonts\dilemmicons\_production\dilemmas-Regular.otf" />
+    <Content Include="Content\fonts\dilemmicons\_production\dilemmas.glyphs" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Content\fonts\MuseoSansRounded-100.eot" />
     <Content Include="Content\fonts\MuseoSansRounded-100.ttf" />
     <Content Include="Content\fonts\MuseoSansRounded-100.woff" />
@@ -431,10 +458,6 @@
     <Content Include="Content\fonts\MuseoSansRounded-700.eot" />
     <Content Include="Content\fonts\MuseoSansRounded-700.ttf" />
     <Content Include="Content\fonts\MuseoSansRounded-700.woff" />
-    <Content Include="Content\images\bubble.psd" />
-    <Content Include="Content\images\chevron-right.psd" />
-    <Content Include="Content\images\gradient-overlay-strong.psd" />
-    <Content Include="Content\images\wise-ometer.psd" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Question Seeder %28i-e00ade11%29.pubxml" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Testing Server %28i-eb5a63e0%29.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

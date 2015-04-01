@@ -20,19 +20,50 @@
 .Media--valign {
   display: table;
 }
-.Media--valign > .Media-img,
-.Media--valign > .Media-text {
-  display: table-cell;
-  vertical-align: middle;
-}
-.Media--valign > .Media-img { 
-  float: none; 
-}
-.Media--valign > .Media-text { 
-  width: 100%; 
-}
+  .Media--valign > .Media-img,
+  .Media--valign > .Media-text {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .Media--valign > .Media-img { 
+    float: none; 
+  }
+  .Media--valign > .Media-text { 
+    width: 100%; 
+  }
 
 .Media--stacked img {
   width: 100%;
   height: auto; 
 }
+
+.Media-to-stack {
+  text-align: left;
+  [data-icon] {
+    margin-right: 20px;
+  }
+  [data-icon="advise"]{ top: -20px; }
+  [data-icon="ask"]{ top: -20px; }
+}
+
+@media @bp-xs-only {
+.Media-to-stack {
+    .Media-text,
+    .Media-img {
+      display: block;
+      width: auto;
+      float: none;
+      clear: both;
+      text-align: center;
+      margin: 0;
+    }
+    [data-icon] {
+      margin: 0;
+    }
+  }
+}
+
+
+
+
+

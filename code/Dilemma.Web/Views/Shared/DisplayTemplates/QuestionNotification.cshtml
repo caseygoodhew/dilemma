@@ -1,9 +1,9 @@
 ﻿@model Dilemma.Business.ViewModels.QuestionViewModel
 
 <div class="Card Notification Card-go--container">
-    <a href="/answer.php" class="Card-go--trigger"></a>
+    <a href="@Url.Action("Index", "Answers", new { questionId = Model.QuestionId })" class="Card-go--trigger"></a>
     <div class="Notification-score">
-        <div><img src="@String.Format(@"/Content/images/icons/{0}.png", Model.IsMyQuestion ? "ask" : "answer")" alt="" width="30"></div>
+        <div><span data-icon="@(Model.IsMyQuestion ? "ask" : "advise")"></span></div>
     </div>
     <div class="Notification-summary">
         <div class="Card-label--small">@Model.CreatedDateTime</div>
@@ -14,5 +14,6 @@
             View Details
         </a> 
     </div><!-- Notification-summary -->
-</div><!-- Card -->
+</div>
+
 

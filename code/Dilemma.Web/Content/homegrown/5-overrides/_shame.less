@@ -12,106 +12,17 @@
 
 
 
-
-.Card.is-mine {
-  border: 2px solid #000;
-  .Card-info {
-    background: #000;
-    .Card-label--small {
-      color: #fff;
-    }
-  }
-}
-
-.Card-section--notification {
-  &:hover,
-  div,
-  div:hover {
-    text-decoration: none;
-    color: #888;
-  }
-}
-.disc-label {
-  background: @color-accent;
-  height: 40px;
-  line-height: 42px;
-  width: 40px;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0 10px 5px 0;
+.featured-content {
+  margin: 8px;
   text-align: center;
+}
+
+
+.page-home .navbar-nav {
+  display: none;
 } 
 
-/*
 
-  Component to be filed: Rank
-
-======================================================*/
-
-  .Rank{
-    padding-top: 10px;
-    text-align: center;
-  }
-  .Rank-image img {
-    display: inline-block;
-    border-radius: 50%;
-  }
-      
-  // inset general ui settings
-  .Rank-ometer {
-    margin: 8px 8px 0;
-    width: auto;
-    height: 10px;
-    overflow: hidden;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    .Rank-ometer-amount {
-      background: @color-accent;
-      height: 20px;
-      width: 20%;
-    }
-  }
-  .Rank-table table {
-    width: 100%;
-  }
-  .Rank-score,
-  .Rank-facet {
-    border-top: solid @ui-divider-width @ui-border-color;
-  }
-  .Rank-score {
-    width: 65px;
-    font-size: 24px;
-    line-height: 24px;
-    padding: 5px 10px 5px 0;
-    text-align: right;
-    font-weight: 600;
-  }
-  .Rank-facet {
-    font-weight: 400;
-    line-height: 24px;
-    padding: 5px 5px 5px 0;
-    color: @color-text--light;
-  }
-
-
-.Image-ometer {
-  position: relative;
-  background: #ddd;
-  img {
-    width: 100%;
-    position: relative;
-    z-index: 10;
-  }
-  .Image-ometer-amount {
-    position: absolute;
-    top: 0; left: 0;bottom: 0;    
-    background: @color-accent;
-    z-index: 0;
-  }
-
-}
 
 /*
 
@@ -172,16 +83,3 @@
 }
 
 
-.Answers {
-  // background: url("@{imagepath}/vertical-divider.png") 20px 0 repeat-y;
-}
-
-.featured-content {
-  margin: 8px;
-  text-align: center;
-}
-
-
-.page-home .navbar-nav {
-  display: none;
-}

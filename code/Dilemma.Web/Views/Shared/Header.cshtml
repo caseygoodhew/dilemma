@@ -9,6 +9,8 @@
     Func<string, string> getMenuClass = (x) => x == ViewBag.Category ? "is-page-current" : string.Empty;
     
     var isOffline = ViewBag.Offline == true;
+
+    var unreadNotifications = 99;
 }
 
 
@@ -27,7 +29,7 @@
                     <ul class="nav navbar-nav right">
                         <li class="dropdown nav-level-1">
                             <a href="/dilemmas" class="dropdown-toggle nav-level-1-link js-nav-level-2-menu-trigger" role="button" aria-expanded="false">
-                                <img src="/Content/images/icons/conversation.png" alt="" width="30">
+                                <span data-icon="advise"></span>
                                 <span class="nav-level-1-text">
                                     Advise &amp; Vote 
                                     <span class="caret"></span>
@@ -61,21 +63,20 @@
                         <li class="nav-level-1">
                             <!-- <a href="#" data-toggle="modal" data-target="#modal-ask"> -->
                             <a href="/ask" class="nav-level-1-link">
-                                <img src="/Content/images/icons/ask.png" alt="" width="30">
+                                <span data-icon="ask"></span>
                                 <span class="nav-level-1-text">Ask</span>
                             </a>
                         </li>
                         <li class="nav-level-1">
                             <a href="/profile" class="nav-level-1-link">
-                                <img src="/Content/images/icons/user.png" alt="" width="26">
+                                <span data-icon="user"></span>
+                                @if (unreadNotifications > 0)
+                                {
+                                    <span class="nav-unread-notifications">
+                                        @unreadNotifications
+                                    </span>
+                                }
                                 <span class="nav-level-1-text">Profile</span>
-                                <!--?php $unread_notifications = 99; ?-->
-                                <!--?php if ($unread_notifications > 0) { ?-->
-                                <span class="nav-unread-notifications">
-                                    <!--?=$unread_notifications?-->
-                                    $unread_notifications
-                                </span>
-                                <!--?php } ?-->
                             </a>
                         </li>
                     </ul>

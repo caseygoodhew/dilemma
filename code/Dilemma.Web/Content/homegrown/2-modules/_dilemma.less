@@ -2,7 +2,33 @@
 .Dilemma-state {}//heading
 
 .Dilemma {}
-
+.Dilemmas-empty {
+  padding: 20px 10px 30px;
+  text-align: center;
+  margin: 7px 7px 30px;
+  h2 {
+    padding: 10px 0 20px;
+  }
+  p {
+    font-size: 21px;
+    line-height: 30px;
+    color:#888;
+    margin: 0  0 1em 0;
+  }
+  [class^='Button--'],
+  [class*=' Button--'] {
+    width: 48%;
+    display: inline-block;
+  }
+  @media (max-width: 650px) {
+    [class^='Button--'],
+    [class*=' Button--'] {
+      display: block;
+      clear: both;
+      width: 90%;
+    }
+  }
+}
 
 .Dilemma-question {
   position: relative;
@@ -96,4 +122,11 @@
 
 .Dilemma-timeRemaining {
 }
-
+.Dilemma--complete {
+  .Card-info {  background: #222; }
+  .Card-label--small {
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+}
