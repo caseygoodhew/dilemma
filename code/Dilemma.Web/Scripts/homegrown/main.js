@@ -210,15 +210,28 @@ $(document).ready(function() {
         function() {
           window.countdownElement.text('Voting in ' + (seconds - second));
           if (second >= seconds) {
-            _this.addClass('is-active');
-            _current_vote_displayed = _this.closest('.Dilemma-actions').find('.number-bubble--number');
-            _current_vote_number = parseInt(_current_vote_displayed.text());
-            _current_vote_displayed.text(_current_vote_number + 1);
-            // all buttons of this type can now be disabled
-            $('.stream .js-voting-button').attr('disabled','disabled');
-            clearInterval(window.interval);
-            // replace with correct action
-            alert('[user would never see this] — action launched');
+              clearInterval(window.interval);
+
+              $.ajax({
+                url: '/ajax/vote',
+                type: 'POST',
+                data: JSON.stringify({ answerId: _this.data('answer-id') }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    _this.addClass('is-active');
+                    _current_vote_displayed = _this.closest('.Dilemma-actions').find('.number-bubble--number');
+                    _current_vote_number = parseInt(_current_vote_displayed.text());
+                    _current_vote_displayed.text(_current_vote_number + 1);
+                    // all buttons of this type can now be disabled
+                    $('.js-voting-button').attr('disabled', 'disabled');
+                    _this.removeAttr('disabled');
+                    
+                    $('.js-voting-button:not([disabled])').off('click');
+                },
+                error: function () {
+                    
+                }
+            });
           }
           second++;
         }, 

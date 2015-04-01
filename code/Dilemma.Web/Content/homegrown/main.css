@@ -12,8 +12,7 @@
       * to make it easier to turn off Bootstrap components as desired
 /
 ======================================================*/
-/* 
-  
+/*
     Config
   
   ======================================================*/
@@ -7850,7 +7849,7 @@ button:active,
   width: 65px;
   font-size: 24px;
   line-height: 24px;
-  padding: 5px 10px 5px 0;
+  padding: 5px 10px 5px 5px;
   text-align: right;
   font-weight: 600;
 }
@@ -8390,7 +8389,6 @@ button:active,
 .Answer.is-mine .Answer-text,
 .Answer.is-star .Answer-text,
 .Answer.is-upvoted .Answer-text {
-  background-color: red;
   min-height: 110px;
 }
 .Answer.user-is-questioner .number-bubble {

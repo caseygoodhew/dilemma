@@ -1,5 +1,4 @@
-﻿@using Dilemma.Data.Models
-@model Dilemma.Web.ViewModels.DilemmasViewModel
+﻿@model Dilemma.Web.ViewModels.DilemmasViewModel
 @{
     ViewBag.Title = "";
 
@@ -48,7 +47,7 @@
                             @if (!isAllCategories)
                             {
                                 <span>&nbsp;&nbsp;&nbsp;</span>
-                                <a href="/" class="Button--ask">
+                                <a href="@Url.Action("Index", "Dilemmas")" class="Button--ask">
                                     <span data-icon="refresh"></span> 
                                     Lucky Dip
                                 </a>
@@ -90,7 +89,7 @@
                             @if (!isAllCategories)
                             {
                                 <span>&nbsp;&nbsp;&nbsp;</span>
-                                <a href="/" class="Button--ask">
+                                <a href="@Url.Action("Index", "Dilemmas")" class="Button--ask">
                                     <span data-icon="refresh"></span> 
                                     Lucky Dip
                                 </a>

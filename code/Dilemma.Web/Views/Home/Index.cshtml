@@ -1,0 +1,137 @@
+﻿@model Dilemma.Web.ViewModels.DilemmasViewModel
+@{
+    ViewBag.Title = "";
+}
+
+<div class="layout-home">
+
+    <section class="section-style-1">
+        <div class="hero-wrap">
+            <img src="/Content/images/hero.jpg" width="1080" height="390" class="hero" alt="">
+        </div>
+      
+        <div class="wrap">
+            <h1><img class="brand-logo" src="/Content/images/logo.png" width="600" alt=""></h1>
+            <h2>
+                <span class="animated anim-message-1  brand-1-of-3">
+                    <span data-icon="ask"></span> 
+                    Ask 
+                </span>
+                <span class="animated anim-message-2 brand-1-of-3">
+                    <span data-icon="advise"></span>
+                    Advise 
+                </span>
+                <span class="animated anim-message-3 brand-1-of-3">
+                    <span data-icon="vote"></span> 
+                    Vote 
+                </span>
+                <span class="animated anim-message-4">
+                    In Complete Anonymity        
+                </span>
+            </h2>
+
+            <a href="@Url.Action("Index", "Dilemmas")" class="Button Button--red mv25 animated anim-tada">Get Started</a>
+            <p>
+                <a href="#more-info" class="scroll-down-for-more">
+                    Or scroll down to learn more
+                    <br><span data-icon="down-circle" style="font-size: 90px;margin-top: 30px;"></span>
+                </a>
+            </p>        
+        </div><!-- .wrap -->
+    </section>
+
+    <section id="more-info" class="section-style-2">  
+      
+        <div class="wrap">
+            <img src="/Content/images/icon-large.png" width="140" height="140" class="ma20" alt="">
+            <h2 class="h1">What is Our Dilemmas?</h2>
+            <p class="text-large">OUR DILEMMAS is a safe online space to ask personal or difficult questions in complete anonymity</p>
+            <ul class="unstyled inline h4">
+                <li><a href="#anonymity">Anonymity</a></li>
+                <li><a href="#ask">Ask</a></li>
+                <li><a href="#advise">Advise</a></li>
+                <li><a href="#vote">Vote</a></li>
+            </ul>        
+        </div><!-- .wrap -->
+    </section>
+    
+    <section class="section-style-3" id="anonymity">
+        <div class="wrap">        
+            <div class="Media Media-to-stack">
+                <div class="Media-img">
+                    <span data-icon="user-2" class="dilemmicon-massive"></span>
+                </div>
+                <div class="Media-text">
+                    <h2>Anonymity</h2>
+                    <p>Questions and Answers disapear in 15 days</p>  
+                    <p>Your account is completely anonymous. None of your details are stored on our servers. Your account is stored in an encrypted cookie on your phone or PC, which you can easily remove by deleting your cookies.</p>
+                </div>
+            </div><!-- Media Media-to-stack -->
+        </div><!-- .wrap -->
+    </section>
+
+    <section class="section-style-4" id="ask">
+        <div class="wrap">
+            <div class="Media Media-to-stack">
+                <div class="Media-img">
+                    <span data-icon="ask" class="dilemmicon-massive"></span>
+                </div>
+                <div class="Media-text">
+                    <h2>Ask</h2>
+                    <p>Don’t struggle alone — share your dilemma.</p><p>Get advice, and learn from the experience of others.</p>  
+                    <p>Dilemmas are divided into 6 categories: Personal, Family, Relationships, Work, Sex and Teenage. </p>            
+                </div>
+            </div><!-- Media Media-to-stack -->
+        
+     
+        </div><!-- .wrap -->
+    </section>
+
+
+    <section class="section-style-5" id="advise">
+        <div class="wrap">
+            <div class="Media Media-to-stack">
+                <div class="Media-img">
+                    <span data-icon="advise" class="dilemmicon-massive"></span>
+                </div>
+                <div class="Media-text">
+                    <h2>Advise</h2>
+                    <p>You’ve been there? Give questioners the benefit of your knowledge and experience. </p>
+                    <p>Get reputation points when people vote your answers up. Can you attain the rank of guru?</p>             
+                </div>
+            </div><!-- Media Media-to-stack -->
+        </div><!-- .wrap -->
+    </section>
+
+    <section class="section-style-6" id="vote">
+        <div class="wrap">
+            <div class="Media Media-to-stack">
+                <div class="Media-img">
+                    <span data-icon="vote" class="dilemmicon-massive"></span>
+                </div>
+                <div class="Media-text">
+                    <h2>Vote</h2>
+                    <p>Whose advice is the best? What would you do in that situation?</p>
+                    <p>Browse through dilemmas and vote for the best answers.</p>     
+                    <p>More votes = more points for you.</p>               
+                </div>
+            </div><!-- Media Media-to-stack -->
+        
+
+        </div><!-- .wrap -->
+    </section>
+
+    <section class="section-style-7">
+        <div class="wrap">
+            <h2>Ask * Advise * Vote</h2>
+            <a href="@Url.Action("Index", "Dilemmas")" class="Button Button--red">Get Started</a>        
+        </div><!-- .wrap -->
+    </section>
+
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        document.getElementsByTagName('body')[0].className+=' page-home';
+    </script>
+}

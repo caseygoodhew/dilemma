@@ -165,8 +165,8 @@ WriteLiteral("/>\r\n\r\n    <!-- send jquery to the foot of the page -->\r\n    
 
 WriteLiteral(" type=\'text/javascript\'");
 
-WriteLiteral(">window.q = []; window.$ = function (f) { q.push(f) }</script>\r\n\r\n</head>\r\n<body>" +
-"\r\n");
+WriteLiteral(">window.q = []; window.$ = function (f) { q.push(f); }</script>\r\n\r\n</head>\r\n<body" +
+">\r\n");
 
 WriteLiteral("    ");
 
@@ -188,31 +188,73 @@ Write(Html.Partial("Modals"));
             
             #line default
             #line hidden
-WriteLiteral("\r\n    \r\n    <div");
+WriteLiteral("\r\n    \r\n");
+
+            
+            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+    
+            
+            #line default
+            #line hidden
+            
+            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+     if (ViewBag.SuppressPageBd == true)
+    {
+        
+            
+            #line default
+            #line hidden
+            
+            #line 37 "..\..\Views\Shared\_Layout.cshtml"
+   Write(RenderBody());
+
+            
+            #line default
+            #line hidden
+            
+            #line 37 "..\..\Views\Shared\_Layout.cshtml"
+                     
+    }
+    else
+    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
 
 WriteLiteral(" class=\"page-bd\"");
 
-WriteLiteral(">\r\n        <div");
+WriteLiteral(">\r\n            <div");
 
 WriteLiteral(" class=\"wrap\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("            ");
+WriteLiteral("                ");
 
             
-            #line 37 "..\..\Views\Shared\_Layout.cshtml"
-       Write(RenderBody());
+            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+           Write(RenderBody());
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </div>\r\n    </div>\r\n    \r\n");
+WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
+
+            
+            #line 46 "..\..\Views\Shared\_Layout.cshtml"
+    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n\r\n    \r\n");
 
 WriteLiteral("    ");
 
             
-            #line 41 "..\..\Views\Shared\_Layout.cshtml"
+            #line 50 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Footer"));
 
             
@@ -223,7 +265,7 @@ WriteLiteral("\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+            #line 52 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -234,7 +276,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 44 "..\..\Views\Shared\_Layout.cshtml"
+            #line 53 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -245,7 +287,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 45 "..\..\Views\Shared\_Layout.cshtml"
+            #line 54 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -256,7 +298,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 46 "..\..\Views\Shared\_Layout.cshtml"
+            #line 55 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/homegrown"));
 
             
@@ -267,7 +309,7 @@ WriteLiteral("\r\n    \r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 49 "..\..\Views\Shared\_Layout.cshtml"
+            #line 58 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             

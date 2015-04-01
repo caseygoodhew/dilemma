@@ -9,7 +9,15 @@
     <div class="Card-section Card-info">
         <div class="line align-center">
             <div class="Card-label--small">
-                @Model.ClosesDateTime.ToRelativeText()
+                @if (Model.IsClosed)
+                {
+                    <text>Closed @Model.ClosedDateTime.ToRelativeText()</text>
+                }
+                else
+                {
+                    <text>Closes @Model.ClosesDateTime.ToRelativeText()</text>
+                }
+                
             </div>
             <ol 
                 class="Dilemma-respondents horizontal line" 
@@ -33,7 +41,6 @@
     <div class="Card-section">
         <div class="Dilemma-question">
 
-            <!-- <a href="/answer.php" class="Card-go- -trigger"></a> -->
             <div class="Dilemma-text ">
                 <p style="white-space: pre">@Model.Text</p>
                 <a href="#" class="Dilemma-text-toggle">

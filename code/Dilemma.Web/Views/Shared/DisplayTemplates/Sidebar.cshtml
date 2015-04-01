@@ -15,7 +15,7 @@
     </div>
     <div class="Card-section">
         <h3 class="h4 info pt10 pb20 align-center">What's on your mind?</h3>
-        <a href="/ask" class="Button--ask">
+        <a href="@Url.Action("Index", "Ask")" class="Button--ask">
             <span data-icon="ask"></span>
             Share Your Dilemma
         </a>
@@ -66,7 +66,7 @@
     </div>  <!-- Rank -->         
     @if (showNotifications)
     {
-        <a class="Card-section Card-section--notification Card-go--container" href="/profile">
+        <a class="Card-section Card-section--notification Card-go--container" href="@Url.Action("Index", "Profile")">
             <span class="Card-go--trigger"></span>
             <div style="width: 60px; overflow: hidden; float: left;">
                 <!-- <div class="disc-label right">99</div> -->

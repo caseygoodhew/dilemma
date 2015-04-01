@@ -24,7 +24,7 @@
     <link rel="apple-touch-icon-precomposed" href="/Content/images/icons/apple-touch-icon-precomposed.png" type="image/png"/>
 
     <!-- send jquery to the foot of the page -->
-    <script type='text/javascript'>window.q = []; window.$ = function (f) { q.push(f) }</script>
+    <script type='text/javascript'>window.q = []; window.$ = function (f) { q.push(f); }</script>
 
 </head>
 <body>
@@ -32,11 +32,20 @@
     
     @Html.Partial("Modals")
     
-    <div class="page-bd">
-        <div class="wrap">
-            @RenderBody()
+    @if (ViewBag.SuppressPageBd == true)
+    {
+        @RenderBody()
+    }
+    else
+    {
+        <div class="page-bd">
+            <div class="wrap">
+                @RenderBody()
+            </div>
         </div>
-    </div>
+    }
+
+
     
     @Html.Partial("Footer")
     

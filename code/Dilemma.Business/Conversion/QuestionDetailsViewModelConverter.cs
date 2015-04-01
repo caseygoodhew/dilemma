@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Dilemma.Business.ViewModels;
@@ -48,13 +49,19 @@ namespace Dilemma.Business.Conversion
             return new QuestionDetailsViewModel
                        {
                            QuestionViewModel = ConverterFactory.ConvertOne<Question, QuestionViewModel>(model),
-                           CanAnswer = CanAnswer(model)
+                           CanAnswer = CanAnswer(model),
+                           CanVote = CanVote(model)
                        };
         }
 
         private static bool CanAnswer(Question model)
         {
             if (model.QuestionState != QuestionState.Approved)
+            {
+                return false;
+            }
+
+            if (model.ClosedDateTime.HasValue)
             {
                 return false;
             }
@@ -77,6 +84,28 @@ namespace Dilemma.Business.Conversion
             }
 
             if (model.Answers.Any(x => x.User.UserId == userId))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static bool CanVote(Question model)
+        {
+            if (model.QuestionState != QuestionState.Approved)
+            {
+                return false;
+            }
+
+            if (!model.ClosedDateTime.HasValue)
+            {
+                return false;
+            }
+
+            var userId = SecurityManager.Value.GetUserId();
+            
+            if (model.Answers.Where(x => x.UserVotes != null).SelectMany(x => x.UserVotes).Any(x => x == userId))
             {
                 return false;
             }
