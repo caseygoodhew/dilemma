@@ -21,6 +21,18 @@ namespace Dilemma.Data.EntityFramework.Maps
         }
     }
 
+    public class VoteCountMap : EntityTypeConfiguration<VoteCount>
+    {
+        public VoteCountMap()
+        {
+            HasKey(p => p.Id);
+
+            Property(p => p.QuestionId).IsRequired();
+            Property(p => p.AnswerId).IsRequired();
+            Property(p => p.Votes).IsRequired();
+        }
+    }
+
     /// <summary>
     /// <see cref="UserPointRetirement"/> entity configuration.
     /// </summary>

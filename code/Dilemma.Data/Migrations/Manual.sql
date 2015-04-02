@@ -136,7 +136,57 @@ AS
      WHERE q.ClosedDateTime IS NOT NULL
 	   AND DATEADD(dd, sc.RetireQuestionAfterDays, q.ClosedDateTime) < @DateTimeNow
 
-    INSERT INTO UserPointRetirement
+    UPDATE u
+	   SET u.HistoricStarVotes = u.HistoricStarVotes + r.StarVoteCount
+	  FROM [User] u
+	 INNER JOIN (
+			SELECT a.User_UserId UserId, COUNT(*) StarVoteCount
+			  FROM QuestionRetirement qr, Question q, Answer a, Vote v
+			 WHERE qr.QuestionId = q.QuestionId
+			   AND q.QuestionId = a.Question_QuestionId
+			   AND a.Question_QuestionId = v.Question_QuestionId
+			   AND a.AnswerId = v.Answer_AnswerId
+			   AND q.User_UserId = v.User_UserId
+			   AND a.AnswerState = 2 -- approved
+			 GROUP BY a.User_UserId) r
+	         ON u.UserId = r.UserId
+
+	INSERT INTO VoteCount
+	(QuestionId, AnswerId, Votes)
+	SELECT r.QuestionId, r.AnswerId, r.VoteCount
+	  FROM (
+		SELECT qr.QuestionId, a.AnswerId, COUNT(*) VoteCount
+		  FROM QuestionRetirement qr, Answer a, Vote v
+		 WHERE qr.QuestionId = a.Question_QuestionId
+		   AND a.Question_QuestionId = v.Question_QuestionId
+		   AND a.AnswerId = v.Answer_AnswerId
+		   AND a.AnswerState = 2 -- approved
+		 GROUP BY qr.QuestionId, a.AnswerId
+		 ) r
+	 WHERE r.VoteCount >= 10 -- you need at least 10 votes to be popular
+		 
+	 DELETE FROM VoteCount
+	  WHERE Id NOT IN (
+			SELECT a.Id
+			  FROM VoteCount a, (
+					SELECT QuestionId, MAX(Votes) MaxVotes
+					  FROM VoteCount
+					 GROUP BY QuestionId) b
+			 WHERE a.QuestionId = b.QuestionId
+			   AND a.Votes = b.MaxVotes)
+	
+	UPDATE u
+	   SET u.HistoricPopularVotes = u.HistoricPopularVotes + r.PopularVoteCount
+	  FROM [User] u
+	  INNER JOIN (
+			SELECT a.User_UserId UserId, COUNT(*) PopularVoteCount
+			  FROM VoteCount vc, Answer a
+			 WHERE vc.QuestionId = a.Question_QuestionId
+			   AND vc.AnswerId = a.AnswerId
+			 GROUP BY a.User_UserId) r
+	         ON u.UserId = r.UserId
+	
+	INSERT INTO UserPointRetirement
     (UserId, TotalPoints)
     SELECT up.ForUser_UserId, SUM(up.PointsAwarded)
       FROM UserPoint up, QuestionRetirement qr
@@ -154,7 +204,7 @@ AS
      WHERE a.Question_QuestionId = qr.QuestionId
        AND m.Answer_AnswerId = a.AnswerId
    
-    -- UPDATE USR POINTS
+    -- UPDATE USER POINTS
     UPDATE u
        SET u.HistoricPoints = u.HistoricPoints + upr.TotalPoints
       FROM [User] u

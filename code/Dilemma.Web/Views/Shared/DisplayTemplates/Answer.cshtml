@@ -18,21 +18,15 @@
 }
 <div class="Card Answer @cardClass user-level-@Model.UserLevel">
         
-    @if (Model.IsMyAnswer)
-    { 
-        <div class="Card-section Card-info">
-            <img src="/Content/images/icons/user.png" alt="" width="20">
-            Your answer
-        </div>
-    }
-    else if (Model.IsStarVote)
+    @if (Model.IsStarVote)
     {
         <div class="Card-section Card-info">
             <span data-icon="star"></span>
             Best Answer as voted by the Questioner
         </div>
     }
-    else if (Model.IsPopularVote)
+    
+    @if (Model.IsPopularVote)
     {
         <div class="Card-section Card-info">
             <span data-icon="vote"></span>
@@ -40,6 +34,14 @@
         </div>
     }
 
+    @if (Model.IsMyAnswer)
+    { 
+        <div class="Card-section Card-info">
+            <img src="/Content/images/icons/user.png" alt="" width="20">
+            Your answer
+        </div>
+    }
+    
     <div class="Dilemma-question Card-section">
         <div class="Answer-text">
             <p style="white-space: pre">@Model.Text</p>

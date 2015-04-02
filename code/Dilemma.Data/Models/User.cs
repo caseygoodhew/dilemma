@@ -33,5 +33,11 @@ namespace Dilemma.Data.Models
         /// Gets or sets the number of historic points that the user has.
         /// </summary>
         public int HistoricPoints { get; set; }
+
+        public int HistoricAnswers { get; set; }
+
+        public int HistoricStarVotes { get; set; }
+
+        public int HistoricPopularVotes { get; set; }
     }
 }

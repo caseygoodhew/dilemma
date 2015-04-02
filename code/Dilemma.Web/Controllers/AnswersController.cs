@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 using Dilemma.Business.Services;
@@ -21,9 +23,21 @@ namespace Dilemma.Web.Controllers
         [Route("view/{questionId:int:min(1)}")]
         public ActionResult Index(int questionId)
         {
+            var questionDetails = QuestionService.Value.GetQuestion(questionId);
+
+            var answers = questionDetails.QuestionViewModel.Answers;
+            var otherAnswers = answers.Where(x => !x.IsStarVote && !x.IsPopularVote && !x.IsMyAnswer);
+
+            questionDetails.QuestionViewModel.Answers = new List<AnswerViewModel>
+                                     {
+                                         answers.SingleOrDefault(x => x.IsStarVote),
+                                         answers.SingleOrDefault(x => x.IsPopularVote),
+                                         answers.SingleOrDefault(x => x.IsMyAnswer)
+                                     }.Concat(otherAnswers.OrderByDescending(x => x.VoteCount)).Where(x => x != null).Distinct().ToList();
+
             return View(new DilemmaDetailsViewModel
                                 {
-                                    QuestionDetails = QuestionService.Value.GetQuestion(questionId),
+                                    QuestionDetails = questionDetails,
                                     Sidebar = XTestData.GetSidebarViewModel()
                                 });
         }

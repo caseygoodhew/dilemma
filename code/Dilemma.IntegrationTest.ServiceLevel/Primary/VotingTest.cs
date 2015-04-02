@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.IntegrationTest.ServiceLevel.Domains;
 using Dilemma.IntegrationTest.ServiceLevel.Support;
+
+using Disposable.Common.Extensions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,7 +17,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
     public class VotingTest : Support.IntegrationTest
     {
         public VotingTest()
-            : base(false)
+            : base(true)
         {
         }
 
@@ -43,6 +46,58 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
             Administration.UpdateTestingConfiguration(x => x.UseTestingPoints = ActiveState.Active);
         }
 
+        [TestMethod]
+        public void LotsOfVotes()
+        {
+            var allAnswers = new List<int?>();
+            
+            SecurityManager.LoginNewAnonymous("Questioner");
+            Questions.CreateNewQuestion("Question One");
+            Questions.CreateNewQuestion("Question Two");
+            Questions.CreateNewQuestion("Question Three");
+
+            SecurityManager.LoginNewAnonymous("Answerer One");
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", "Question One Best"));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", Guid.NewGuid().ToString()));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", "Question Three Best"));
+
+            SecurityManager.LoginNewAnonymous("Answerer Two");
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", Guid.NewGuid().ToString()));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", Guid.NewGuid().ToString()));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", Guid.NewGuid().ToString()));
+
+            SecurityManager.LoginNewAnonymous("Answerer Three");
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", Guid.NewGuid().ToString()));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", Guid.NewGuid().ToString()));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", Guid.NewGuid().ToString()));
+
+            SecurityManager.LoginNewAnonymous("Answerer Four");
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", Guid.NewGuid().ToString()));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", "Question Two Best"));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", Guid.NewGuid().ToString()));
+
+            SecurityManager.LoginNewAnonymous("Answerer Five");
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", Guid.NewGuid().ToString()));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", Guid.NewGuid().ToString()));
+            allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", Guid.NewGuid().ToString()));
+
+            SecurityManager.SetUserId("Questioner");
+            Answers.RegisterVote("Question One Best");
+            Answers.RegisterVote("Question Two Best");
+            Answers.RegisterVote("Question Three Best");
+
+            var rand = new Random();
+            var validAnswers = allAnswers.Where(x => x.HasValue).Select(x => x.Value).ToList();
+
+            Assert.AreEqual(allAnswers.Count, validAnswers.Count);
+
+            for (var i = 0; i < 1000; i++)
+            {
+                SecurityManager.LoginNewAnonymous(Guid.NewGuid().ToString());
+                Answers.RegisterVote(validAnswers.RandomUsing(rand));
+            }
+        }
+        
         [TestMethod]
         public void QuestionerCanAddStarVote()
         {

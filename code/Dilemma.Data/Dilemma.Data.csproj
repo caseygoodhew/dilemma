@@ -131,6 +131,18 @@
     <Compile Include="Migrations\201502200700054_Migration10.Designer.cs">
       <DependentUpon>201502200700054_Migration10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504020425057_Migration11.cs" />
+    <Compile Include="Migrations\201504020425057_Migration11.Designer.cs">
+      <DependentUpon>201504020425057_Migration11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504020457436_Migration12.cs" />
+    <Compile Include="Migrations\201504020457436_Migration12.Designer.cs">
+      <DependentUpon>201504020457436_Migration12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504020606483_Migration13.cs" />
+    <Compile Include="Migrations\201504020606483_Migration13.Designer.cs">
+      <DependentUpon>201504020606483_Migration13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\LastRunLog.cs" />
     <Compile Include="Models\Virtual\CloseQuestions.cs" />
     <Compile Include="Models\Virtual\ExpireAnswerSlots.cs" />
@@ -247,6 +259,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502200700054_Migration10.resx">
       <DependentUpon>201502200700054_Migration10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504020425057_Migration11.resx">
+      <DependentUpon>201504020425057_Migration11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504020457436_Migration12.resx">
+      <DependentUpon>201504020457436_Migration12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504020606483_Migration13.resx">
+      <DependentUpon>201504020606483_Migration13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

@@ -47,7 +47,7 @@ namespace Dilemma.Business.Conversion
             
             var userId = SecurityManager.Value.GetUserId();
 
-            return new QuestionViewModel
+            var questionViewModel = new QuestionViewModel
                        {
                            QuestionId = model.QuestionId,
                            Text = model.Text,
@@ -65,6 +65,39 @@ namespace Dilemma.Business.Conversion
                            IsClosed = model.ClosedDateTime.HasValue,
                            Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
                        };
+
+            if (model.Answers == null)
+            {
+                return questionViewModel;
+            }
+
+            var approvedAnswers = model.Answers.Where(x => x.AnswerState == AnswerState.Approved).ToList();
+            
+            if (!approvedAnswers.Any())
+            {
+                return questionViewModel;
+            }
+
+            var lookup = approvedAnswers.Where(x => x.UserVotes.Any()).ToDictionary(x => x.AnswerId, x => x.UserVotes);
+            
+            if (!lookup.Any())
+            {
+                return questionViewModel;
+            }
+            
+            var starAnswerId = lookup.Where(x => x.Value.Contains(model.User.UserId)).Select(x => (int?)x.Key).SingleOrDefault();
+            if (starAnswerId.HasValue)
+            {
+                questionViewModel.Answers.Single(x => x.AnswerId == starAnswerId).IsStarVote = true;
+            }
+
+            var maxVotes = lookup.Max(x => x.Value.Count);
+            if (maxVotes >= 10)
+            {
+                questionViewModel.Answers.Where(x => x.VoteCount == maxVotes).ToList().ForEach(x => x.IsPopularVote = true);
+            }
+            
+            return questionViewModel;
         }
     }
 }
