@@ -246,6 +246,7 @@ AS
     DELETE FROM ModerationRetirement
     DELETE FROM UserPointRetirement
     DELETE FROM QuestionRetirement
+	DELETE FROM VoteCount;
 
 	UPDATE LastRunLog SET RetireOldQuestions = @DateTimeNow;
 GO
