@@ -18,7 +18,7 @@
     </div>
     <div class="Card-section">
         <h3 class="h4 info pt10 pb20 align-center">What's on your mind?</h3>
-        <a href="@Url.Action("Index", "Ask")" class="Button--ask">
+        <a href="@Url.ActionWithCategory("Index", "Ask", (string)ViewBag.Category, true)" class="Button--ask">
             <span data-icon="ask"></span>
             Share Your Dilemma
         </a>

@@ -22,7 +22,7 @@
     }
 
     <div class="line">
-        <a href="@Url.Action("Index", "Ask")" class="Button--ask mb20">
+        <a href="@Url.ActionWithCategory("Index", "Ask", (string)ViewBag.Category, true)" class="Button--ask mb20">
             <span data-icon="ask"></span> 
             Share Your Dilemma
         </a>                

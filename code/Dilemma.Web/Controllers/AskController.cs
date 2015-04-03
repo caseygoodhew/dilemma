@@ -5,6 +5,7 @@ using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.Security.AccessFilters;
+using Dilemma.Web.Extensions;
 using Dilemma.Web.ViewModels;
 
 using Disposable.Common.ServiceLocator;
@@ -18,11 +19,18 @@ namespace Dilemma.Web.Controllers
         
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
         
-        //
-        // GET: /Ask/
+        [Route("ask")]
         public ActionResult Index()
         {
-            return View(InitNewQuestion());
+            return Index(string.Empty);
+        }
+
+        //
+        // GET: /Dilemmas/
+        [Route("ask/{category:alpha}")]
+        public ActionResult Index(string category)
+        {
+            return View(InitNewQuestion(CategoryHelper.GetCategory(category)));
         }
 
         //
@@ -39,7 +47,23 @@ namespace Dilemma.Web.Controllers
             return View(InitNewQuestion(model));
         }
 
-        private static AskViewModel InitNewQuestion(AskViewModel questionViewModel = null)
+        private static AskViewModel InitNewQuestion(CategoryViewModel category)
+        {
+            var questionViewModel = new QuestionViewModel();
+
+            if (category != null)
+            {
+                questionViewModel.CategoryId = category.CategoryId;
+                questionViewModel.CategoryName = category.Name;
+            }
+            
+            return InitNewQuestion(new AskViewModel
+            {
+                Question = questionViewModel
+            });
+        }
+
+        private static AskViewModel InitNewQuestion(AskViewModel questionViewModel)
         {
             if (questionViewModel == null)
             {

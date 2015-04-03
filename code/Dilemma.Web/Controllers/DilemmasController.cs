@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.Security.AccessFilters;
+using Dilemma.Web.Extensions;
 using Dilemma.Web.ViewModels;
 
 using Disposable.Common.Extensions;
@@ -32,15 +34,24 @@ namespace Dilemma.Web.Controllers
         [Route("dilemmas/{category:alpha}")]
         public ActionResult Index(string category)
         {
-            var categories = SiteService.Value.GetCategories();
+            ICollection<QuestionViewModel> questions;
 
-            var selectedCategory =
-                categories.FirstOrDefault(
-                    x => string.Equals(x.Name, category, StringComparison.CurrentCultureIgnoreCase));
+            category = CategoryHelper.ValidateCategory(category);
             
-            ViewBag.Category = selectedCategory == null ? "all" : selectedCategory.Name;
+            if (category.Equals("bookmarks", StringComparison.CurrentCultureIgnoreCase))
+            {
+                questions = QuestionService.Value.GetBookmarkedQuestions().ToList();
+            }
+            else
+            {
+                var selectedCategory = CategoryHelper.GetCategory(category);
 
-            var questions = QuestionService.Value.GetQuestions(selectedCategory);
+                questions = (selectedCategory == null
+                                 ? QuestionService.Value.GetAllQuestions().ToList()
+                                 : QuestionService.Value.GetQuestions(selectedCategory).ToList());
+            }
+
+            ViewBag.Category = category;
 
             return View(
                 new DilemmasViewModel

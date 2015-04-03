@@ -32,6 +32,8 @@ namespace Dilemma.Business.Services
         /// <param name="category">The category of questions to get, or null for 'all'.</param>
         /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
         IEnumerable<QuestionViewModel> GetQuestions(CategoryViewModel category);
+        
+        IEnumerable<QuestionViewModel> GetBookmarkedQuestions();
 
         /// <summary>
         /// Gets all questions that the current user has been involved in

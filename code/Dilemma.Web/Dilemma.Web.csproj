@@ -198,6 +198,7 @@
     <Compile Include="Controllers\SystemServerConfigurationController.cs" />
     <Compile Include="DataTransferObjects\BookmarkDto.cs" />
     <Compile Include="DataTransferObjects\VoteDto.cs" />
+    <Compile Include="Extensions\CategoryHelper.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />

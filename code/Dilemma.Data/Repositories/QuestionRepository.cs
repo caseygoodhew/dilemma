@@ -79,6 +79,86 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        public IEnumerable<T> QuestionList<T>(int maximum) where T : class
+        {
+            using (var context = new DilemmaContext())
+            {
+                return QuestionList<T>(context.Questions, maximum);
+            }
+        }
+
+        public IEnumerable<T> QuestionList<T>(int userId, int maximum) where T : class
+        {
+            using (var context = new DilemmaContext())
+            {
+                return
+                    QuestionList<T>(
+                        context.Questions.Where(
+                            x =>
+                            x.User.UserId == userId
+                            || x.Answers.Any(a => a.User.UserId == userId && a.AnswerState != AnswerState.Rejected)),
+                        maximum);
+            }
+        }
+
+        public IEnumerable<T> QuestionList<T, TC>(TC category, int maximum) where T : class where TC : class
+        {
+            var categoryId = ConverterFactory.ConvertOne<TC, Category>(category).CategoryId;
+            
+            using (var context = new DilemmaContext())
+            {
+                return QuestionList<T>(context.Questions.Where(x => x.Category.CategoryId == categoryId), maximum);
+            }
+        }
+
+        public IEnumerable<T> QuestionList<T>(IEnumerable<int> questionIds, int maximum) where T : class
+        {
+            using (var context = new DilemmaContext())
+            {
+                return QuestionList<T>(context.Questions.Where(x => questionIds.Contains(x.QuestionId)), maximum);
+            }
+        }
+
+        private static IEnumerable<T> QuestionList<T>(IQueryable<Question> baseQuery, int maximum) where T : class
+        {
+            var questions = baseQuery.Where(x => x.QuestionState != QuestionState.Rejected)
+                .OrderByDescending(x => Guid.NewGuid())
+                .Take(maximum)
+                .Select(
+                    x => new
+                             {
+                                 x.QuestionId,
+                                 TotalAnswer = x.Answers.Count(y => y.AnswerState != AnswerState.Rejected),
+                                 x.MaxAnswers,
+                                 x.Category,
+                                 x.Text,
+                                 x.ClosesDateTime,
+                                 x.ClosedDateTime,
+                                 x.CreatedDateTime,
+                                 x.User.UserId,
+                                 x.QuestionState,
+                                 MostRecentActivity = x.Answers.Where(a => a.AnswerState == AnswerState.Approved).Select(a => a.CreatedDateTime).Concat(new[] { x.CreatedDateTime }).Max()
+                             })
+                .AsEnumerable()
+                .OrderByDescending(x => x.MostRecentActivity)
+                .Select(
+                    x => new Question
+                            {
+                                QuestionId = x.QuestionId,
+                                TotalAnswers = x.TotalAnswer,
+                                MaxAnswers = x.MaxAnswers,
+                                Category = x.Category,
+                                Text = x.Text,
+                                ClosesDateTime = x.ClosesDateTime,
+                                ClosedDateTime = x.ClosedDateTime,
+                                CreatedDateTime = x.CreatedDateTime,
+                                QuestionState = x.QuestionState,
+                                User = new User { UserId = x.UserId }
+                            });
+
+            return ConverterFactory.ConvertMany<Question, T>(questions.ToList());
+        }
+
         /// <summary>
         /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
         /// </summary>

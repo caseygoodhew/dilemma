@@ -9,8 +9,6 @@
     Func<string, string> getMenuClass = (x) => x == tidyString(ViewBag.Category ?? string.Empty) ? " is-page-current " : string.Empty;
     
     var isOffline = ViewBag.Offline == true;
-
-    var dilemmasPath = Url.Action("Index", "Dilemmas");
 }
 
 
@@ -28,7 +26,7 @@
                 {
                     <ul class="nav navbar-nav right">
                         <li class="dropdown nav-level-1">
-                            <a href="@dilemmasPath" class="dropdown-toggle nav-level-1-link js-nav-level-2-menu-trigger" role="button" aria-expanded="false">
+                            <a href="javascript://click" class="dropdown-toggle nav-level-1-link js-nav-level-2-menu-trigger" role="button" aria-expanded="false">
                                 <span data-icon="advise"></span>
                                 <span class="nav-level-1-text">
                                     Advise &amp; Vote 
@@ -38,13 +36,13 @@
                             </a>
                             <ul class="nav-level-2-menu" role="menu">
                                 <li class="nav-level-2 in-category-1 js-categories-all @getMenuClass("all")">
-                                    <a href="@dilemmasPath" class="nav-level-2-link">
+                                    <a href="@Url.Action("Index", "Dilemmas")" class="nav-level-2-link">
                                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                                         All Categories
                                     </a>
                                 </li>
                                 <li class="nav-level-2 in-category-2 js-categories-bookmarks @getMenuClass("bookmarks")">
-                                    <a href="@dilemmasPath/bookmarks" class="nav-level-2-link">
+                                    <a href="@Url.ActionWithCategory("Index", "Dilemmas", "bookmarks")" class="nav-level-2-link">
                                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                                         My Bookmarks
                                     </a>
@@ -52,7 +50,7 @@
                                 @foreach (CategoryViewModel category in ViewBag.Categories)
                                 {
                                     <li class="nav-level-2 in-category-@getNextCounter() @getMenuClass(tidyString(category.Name))">
-                                        <a href="@dilemmasPath/@tidyString(category.Name)" class="nav-level-2-link">
+                                        <a href="@Url.ActionWithCategory("Index", "Dilemmas", tidyString(category.Name))" class="nav-level-2-link">
                                             <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                                             @category.Name
                                         </a>
@@ -62,7 +60,7 @@
                         </li>
                         <li class="nav-level-1">
                             <!-- <a href="#" data-toggle="modal" data-target="#modal-ask"> -->
-                            <a href="@Url.Action("Index", "Ask")" class="nav-level-1-link">
+                            <a href="@Url.ActionWithCategory("Index", "Ask", (string)ViewBag.Category, true)" class="nav-level-1-link">
                                 <span data-icon="ask"></span>
                                 <span class="nav-level-1-text">Ask</span>
                             </a>

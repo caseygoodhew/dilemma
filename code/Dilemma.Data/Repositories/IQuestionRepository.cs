@@ -32,9 +32,37 @@ namespace Dilemma.Data.Repositories
         /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T">The type to get.</typeparam>
-        /// <param name="userId">The id of user to get the activity for. If this is null, all questions will be returned.</param>
+        /// <param name="maximum">The maximum number of questions to return.</param>
         /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
-        IEnumerable<T> QuestionList<T>(int? userId) where T : class;
+        IEnumerable<T> QuestionList<T>(int maximum) where T : class;
+
+        /// <summary>
+        /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <param name="maximum">The maximum number of questions to return.</param>
+        /// <param name="userId">The id of user to get the questions for.</param>
+        /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
+        IEnumerable<T> QuestionList<T>(int userId, int maximum) where T : class;
+
+        /// <summary>
+        /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <typeparam name="TC">The <see cref="category"/> type.</typeparam>
+        /// <param name="maximum">The maximum number of questions to return.</param>
+        /// <param name="category">The category of question to get.</param>
+        /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
+        IEnumerable<T> QuestionList<T, TC>(TC category, int maximum) where T : class where TC : class;
+
+        /// <summary>
+        /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <param name="maximum">The maximum number of questions to return.</param>
+        /// <param name="questionIds">The ids of question to get.</param>
+        /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
+        IEnumerable<T> QuestionList<T>(IEnumerable<int> questionIds, int maximum) where T : class;
 
         /// <summary>
         /// Requests an an slot for the given question id. If no slot is available, null is returned.

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Web;
@@ -21,6 +20,24 @@ namespace Dilemma.Web.Extensions
             object selectedValue)
         {
             return null;
+        }
+
+        public static string ActionWithCategory(
+            this UrlHelper url,
+            string actionName,
+            string controllerName,
+            string categoryName,
+            bool excludeVirtualCategories = false)
+        {
+            var result = url.Action(actionName, controllerName);
+            var category = CategoryHelper.ValidateCategory(categoryName, excludeVirtualCategories);
+
+            if (string.IsNullOrEmpty(category))
+            {
+                return result;
+            }
+
+            return string.Format("{0}/{1}", result, category);
         }
     }
 }

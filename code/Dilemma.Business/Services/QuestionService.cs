@@ -56,13 +56,18 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
         public IEnumerable<QuestionViewModel> GetAllQuestions()
         {
-            return MarkBookmarks(QuestionRepository.Value.QuestionList<QuestionViewModel>(null));
+            return MarkBookmarks(QuestionRepository.Value.QuestionList<QuestionViewModel>(10));
         }
 
         public IEnumerable<QuestionViewModel> GetQuestions(CategoryViewModel category)
         {
-            // TODO: This is incorrect!!!
-            return GetAllQuestions();
+            return MarkBookmarks(QuestionRepository.Value.QuestionList<QuestionViewModel, CategoryViewModel>(category, 10));
+        }
+
+        public IEnumerable<QuestionViewModel> GetBookmarkedQuestions()
+        {
+            var bookmarks = QuestionRepository.Value.GetBookmarkedQuestionIds(SecurityManager.Value.GetUserId()).ToList();
+            return MarkBookmarks(bookmarks, QuestionRepository.Value.QuestionList<QuestionViewModel>(bookmarks, 50));
         }
 
         /// <summary>
@@ -71,7 +76,7 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
         public IEnumerable<QuestionViewModel> GetMyActivity()
         {
-            return MarkBookmarks(QuestionRepository.Value.QuestionList<QuestionViewModel>(SecurityManager.Value.GetUserId()));
+            return MarkBookmarks(QuestionRepository.Value.QuestionList<QuestionViewModel>(SecurityManager.Value.GetUserId(), 50));
         }
 
         /// <summary>
@@ -221,6 +226,11 @@ namespace Dilemma.Business.Services
         private static IEnumerable<QuestionViewModel> MarkBookmarks(IEnumerable<QuestionViewModel> questions)
         {
             var bookmarks = QuestionRepository.Value.GetBookmarkedQuestionIds(SecurityManager.Value.GetUserId()).ToList();
+            return MarkBookmarks(bookmarks, questions);
+        }
+
+        private static IEnumerable<QuestionViewModel> MarkBookmarks(ICollection<int> bookmarks, IEnumerable<QuestionViewModel> questions)
+        {
             var questionList = questions.ToList();
 
             foreach (var question in questionList.Where(x => x != null && x.QuestionId.HasValue))

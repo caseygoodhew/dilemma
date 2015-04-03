@@ -52,13 +52,13 @@ namespace ASP
             #line hidden
 WriteLiteral("\r\n\r\n<article");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 137), Tuple.Create("\"", 187)
+WriteAttribute("class", Tuple.Create(" class=\"", 137), Tuple.Create("\"", 191)
 , Tuple.Create(Tuple.Create("", 145), Tuple.Create("Dilemma", 145), true)
 , Tuple.Create(Tuple.Create(" ", 152), Tuple.Create("Card", 153), true)
 , Tuple.Create(Tuple.Create(" ", 157), Tuple.Create("in-category-", 158), true)
             
             #line 7 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create("", 170), Tuple.Create<System.Object, System.Int32>(Model.CategoryId
+, Tuple.Create(Tuple.Create("", 170), Tuple.Create<System.Object, System.Int32>(Model.CategoryId+2
             
             #line default
             #line hidden
@@ -139,27 +139,27 @@ WriteLiteral("                \r\n            </div>\r\n            <ol");
 
 WriteLiteral(" \r\n                class=\"Dilemma-respondents horizontal line\"");
 
-WriteAttribute("title", Tuple.Create(" \r\n                title=\"", 732), Tuple.Create("\"", 823)
-, Tuple.Create(Tuple.Create("", 758), Tuple.Create("Posted", 758), true)
-, Tuple.Create(Tuple.Create(" ", 764), Tuple.Create("in", 765), true)
+WriteAttribute("title", Tuple.Create(" \r\n                title=\"", 736), Tuple.Create("\"", 827)
+, Tuple.Create(Tuple.Create("", 762), Tuple.Create("Posted", 762), true)
+, Tuple.Create(Tuple.Create(" ", 768), Tuple.Create("in", 769), true)
             
             #line 24 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create(" ", 767), Tuple.Create<System.Object, System.Int32>(Model.CategoryName
+, Tuple.Create(Tuple.Create(" ", 771), Tuple.Create<System.Object, System.Int32>(Model.CategoryName
             
             #line default
             #line hidden
-, 768), false)
-, Tuple.Create(Tuple.Create("", 787), Tuple.Create(",", 787), true)
+, 772), false)
+, Tuple.Create(Tuple.Create("", 791), Tuple.Create(",", 791), true)
             
             #line 24 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create(" ", 788), Tuple.Create<System.Object, System.Int32>(Model.TotalAnswers
+, Tuple.Create(Tuple.Create(" ", 792), Tuple.Create<System.Object, System.Int32>(Model.TotalAnswers
             
             #line default
             #line hidden
-, 789), false)
-, Tuple.Create(Tuple.Create(" ", 808), Tuple.Create("answers", 809), true)
-, Tuple.Create(Tuple.Create(" ", 816), Tuple.Create("so", 817), true)
-, Tuple.Create(Tuple.Create(" ", 819), Tuple.Create("far", 820), true)
+, 793), false)
+, Tuple.Create(Tuple.Create(" ", 812), Tuple.Create("answers", 813), true)
+, Tuple.Create(Tuple.Create(" ", 820), Tuple.Create("so", 821), true)
+, Tuple.Create(Tuple.Create(" ", 823), Tuple.Create("far", 824), true)
 );
 
 WriteLiteral(">\r\n");
@@ -292,17 +292,17 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2140), Tuple.Create("\"", 2406)
+WriteAttribute("href", Tuple.Create(" href=\"", 2144), Tuple.Create("\"", 2410)
             
             #line 61 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create("", 2147), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
+, Tuple.Create(Tuple.Create("", 2151), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
                                                                  {
                                                                      Model.QuestionId
                                                                  })
             
             #line default
             #line hidden
-, 2147), false)
+, 2151), false)
 );
 
 WriteLiteral(" class=\"Button--answer\"");
@@ -341,17 +341,17 @@ WriteLiteral("</span>\r\n                    </a>\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2800), Tuple.Create("\"", 3066)
+WriteAttribute("href", Tuple.Create(" href=\"", 2804), Tuple.Create("\"", 3070)
             
             #line 71 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create("", 2807), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
+, Tuple.Create(Tuple.Create("", 2811), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
                                                                  {
                                                                      Model.QuestionId
                                                                  })
             
             #line default
             #line hidden
-, 2807), false)
+, 2811), false)
 );
 
 WriteLiteral("  class=\"Button--vote \"");
@@ -397,16 +397,16 @@ WriteLiteral(">\r\n                    <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3411), Tuple.Create("\"", 3505)
-, Tuple.Create(Tuple.Create("", 3419), Tuple.Create("Button--bookmark", 3419), true)
-, Tuple.Create(Tuple.Create(" ", 3435), Tuple.Create("js-bookmark-button", 3436), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 3415), Tuple.Create("\"", 3509)
+, Tuple.Create(Tuple.Create("", 3423), Tuple.Create("Button--bookmark", 3423), true)
+, Tuple.Create(Tuple.Create(" ", 3439), Tuple.Create("js-bookmark-button", 3440), true)
             
             #line 83 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-     , Tuple.Create(Tuple.Create(" ", 3454), Tuple.Create<System.Object, System.Int32>(Model.IsBookmarked ? "is-active" : string.Empty
+     , Tuple.Create(Tuple.Create(" ", 3458), Tuple.Create<System.Object, System.Int32>(Model.IsBookmarked ? "is-active" : string.Empty
             
             #line default
             #line hidden
-, 3455), false)
+, 3459), false)
 );
 
 WriteLiteral(" data-question-id=\"");
