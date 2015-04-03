@@ -13,6 +13,12 @@ namespace ASP
 {
     using System;
     using System.Collections.Generic;
+    
+    #line 2 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+    using System.Globalization;
+    
+    #line default
+    #line hidden
     using System.IO;
     using System.Linq;
     using System.Net;
@@ -45,9 +51,11 @@ namespace ASP
 WriteLiteral("\r\n");
 
             
-            #line 4 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 5 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
   
     var showNotifications = ViewBag.HideNotifications == null || !ViewBag.HideNotifications;
+
+    var notificationCount = Model.Notifications.Count();
 
             
             #line default
@@ -78,14 +86,14 @@ WriteLiteral(" class=\"h4 info pt10 pb20 align-center\"");
 
 WriteLiteral(">What\'s on your mind?</h3>\r\n        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 477), Tuple.Create("\"", 511)
+WriteAttribute("href", Tuple.Create(" href=\"", 566), Tuple.Create("\"", 600)
             
-            #line 18 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-, Tuple.Create(Tuple.Create("", 484), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Ask")
+            #line 21 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+, Tuple.Create(Tuple.Create("", 573), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Ask")
             
             #line default
             #line hidden
-, 484), false)
+, 573), false)
 );
 
 WriteLiteral(" class=\"Button--ask\"");
@@ -101,17 +109,17 @@ WriteLiteral(" class=\"Card Card--sidebar-profile\"");
 
 WriteLiteral(">\r\n    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 704), Tuple.Create("\"", 784)
-, Tuple.Create(Tuple.Create("", 712), Tuple.Create("Card-section", 712), true)
-, Tuple.Create(Tuple.Create(" ", 724), Tuple.Create("Rank", 725), true)
-, Tuple.Create(Tuple.Create(" ", 729), Tuple.Create("user-is-level-", 730), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 793), Tuple.Create("\"", 873)
+, Tuple.Create(Tuple.Create("", 801), Tuple.Create("Card-section", 801), true)
+, Tuple.Create(Tuple.Create(" ", 813), Tuple.Create("Rank", 814), true)
+, Tuple.Create(Tuple.Create(" ", 818), Tuple.Create("user-is-level-", 819), true)
             
-            #line 26 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-, Tuple.Create(Tuple.Create("", 744), Tuple.Create<System.Object, System.Int32>(Model.UserStatsViewModel.UserRank.Level
+            #line 29 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+, Tuple.Create(Tuple.Create("", 833), Tuple.Create<System.Object, System.Int32>(Model.UserStatsViewModel.UserRank.Level
             
             #line default
             #line hidden
-, 744), false)
+, 833), false)
 );
 
 WriteLiteral(">\r\n\r\n        <div");
@@ -129,7 +137,7 @@ WriteLiteral(" class=\"Rank-text\"");
 WriteLiteral(">\r\n                Your rank: ");
 
             
-            #line 31 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 34 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
                       Write(Model.UserStatsViewModel.UserRank.Name);
 
             
@@ -147,16 +155,16 @@ WriteLiteral(">\r\n                <div");
 
 WriteLiteral(" class=\"Rank-ometer-amount\"");
 
-WriteAttribute("style", Tuple.Create(" style=\"", 1167), Tuple.Create("\"", 1227)
-, Tuple.Create(Tuple.Create("", 1175), Tuple.Create("width:", 1175), true)
+WriteAttribute("style", Tuple.Create(" style=\"", 1256), Tuple.Create("\"", 1316)
+, Tuple.Create(Tuple.Create("", 1264), Tuple.Create("width:", 1264), true)
             
-            #line 37 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-, Tuple.Create(Tuple.Create("", 1181), Tuple.Create<System.Object, System.Int32>(Model.UserStatsViewModel.UserRank.Percentage
+            #line 40 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+, Tuple.Create(Tuple.Create("", 1270), Tuple.Create<System.Object, System.Int32>(Model.UserStatsViewModel.UserRank.Percentage
             
             #line default
             #line hidden
-, 1181), false)
-, Tuple.Create(Tuple.Create("", 1226), Tuple.Create("%", 1226), true)
+, 1270), false)
+, Tuple.Create(Tuple.Create("", 1315), Tuple.Create("%", 1315), true)
 );
 
 WriteLiteral("></div>\r\n            </div> \r\n            <div");
@@ -183,7 +191,7 @@ WriteLiteral(" class=\"Rank-score\"");
 WriteLiteral(">");
 
             
-            #line 50 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 53 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
                                   Write(Model.UserStatsViewModel.TotalQuestions);
 
             
@@ -200,7 +208,7 @@ WriteLiteral(" class=\"Rank-score\"");
 WriteLiteral(">");
 
             
-            #line 54 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 57 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
                                   Write(Model.UserStatsViewModel.TotalAnswers);
 
             
@@ -217,7 +225,7 @@ WriteLiteral(" class=\"Rank-score\"");
 WriteLiteral(">");
 
             
-            #line 58 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 61 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
                                   Write(Model.UserStatsViewModel.TotalStarVotes);
 
             
@@ -234,7 +242,7 @@ WriteLiteral(" class=\"Rank-score\"");
 WriteLiteral(">");
 
             
-            #line 62 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 65 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
                                   Write(Model.UserStatsViewModel.TotalPopularVotes);
 
             
@@ -248,69 +256,81 @@ WriteLiteral(">Up-votes</th>\r\n            </tr>\r\n        </table> \r\n    </
 "       \r\n");
 
             
-            #line 67 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 70 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 67 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 70 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
      if (showNotifications)
     {
+        if (notificationCount > 0)
+        {
 
             
             #line default
             #line hidden
-WriteLiteral("        <a");
+WriteLiteral("            <a");
 
 WriteLiteral(" class=\"Card-section Card-section--notification Card-go--container\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2423), Tuple.Create("\"", 2461)
+WriteAttribute("href", Tuple.Create(" href=\"", 2563), Tuple.Create("\"", 2601)
             
-            #line 69 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-    , Tuple.Create(Tuple.Create("", 2430), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
+            #line 74 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+        , Tuple.Create(Tuple.Create("", 2570), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
             
             #line default
             #line hidden
-, 2430), false)
+, 2570), false)
 );
 
-WriteLiteral(">\r\n            <span");
+WriteLiteral(">\r\n                <span");
 
 WriteLiteral(" class=\"Card-go--trigger\"");
 
-WriteLiteral("></span>\r\n            <div");
+WriteLiteral("></span>\r\n");
 
-WriteLiteral(" style=\"width: 60px; overflow: hidden; float: left;\"");
-
-WriteLiteral(">\r\n                <!-- <div class=\"disc-label right\">99</div> -->\r\n             " +
-"   <div");
-
-WriteLiteral(" class=\"disc-label right\"");
-
-WriteLiteral(">\r\n                    <span");
-
-WriteLiteral(" data-icon=\"notification\"");
-
-WriteLiteral("></span>\r\n                </div>\r\n            </div>\r\n            <div>\r\n        " +
-"        <div");
-
-WriteLiteral(" class=\"Card-label--small\"");
-
-WriteLiteral(">You have ");
+WriteLiteral("                ");
 
             
-            #line 78 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                                   Write(Model.Notifications.Count());
+            #line 76 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+           Write(Html.DisplayFor(x => x.Notifications, "SidebarNotificationSummary"));
 
             
             #line default
             #line hidden
-WriteLiteral(" new</div>\r\n                <div>\r\n                    Notifications             " +
-" \r\n                </div>\r\n            </div>\r\n        </a>\r\n");
+WriteLiteral("\r\n            </a>\r\n");
+
+            
+            #line 78 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+        }
+        else
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <div");
+
+WriteLiteral(" class=\"Card-section Card-section--notification\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                ");
+
+            
+            #line 82 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+           Write(Html.DisplayFor(x => x.Notifications, "SidebarNotificationSummary"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n");
 
             
             #line 84 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+        }
     }
 
             
@@ -331,7 +351,7 @@ WriteLiteral(" height=\"250\"");
 WriteLiteral(" >\r\n</div>\r\n\r\n");
 
             
-            #line 91 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 92 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
  if (showNotifications)
 {
 
@@ -343,7 +363,7 @@ WriteLiteral("    <div>\r\n");
 WriteLiteral("        ");
 
             
-            #line 94 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 95 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
    Write(Html.DisplayForList(x => x.Notifications, "Notifications"));
 
             
@@ -352,7 +372,7 @@ WriteLiteral("        ");
 WriteLiteral("\r\n    </div>\r\n");
 
             
-            #line 96 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
+            #line 97 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
 }
 
             

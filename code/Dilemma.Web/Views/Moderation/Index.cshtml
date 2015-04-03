@@ -5,14 +5,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<div>
-    <h4>ModerationViewModel</h4>
-    <hr />
+<div style="padding-top: 50px">
     @if (Model == null)
     {
-        <div>Nothing left to moderate.</div>
+        <div class="dl-horizontal">Nothing left to moderate.</div>
     }
     else
     {

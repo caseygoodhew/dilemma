@@ -19,10 +19,20 @@
     <div class="Notification-summary">
         <div class="Card-label--small">@Model.CreatedDateTime.ToRelativeText()</div>
         <div class="Notification-summary-text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis praesentium, officiis omnis voluptatibus!
+            @switch (Model.NotificationType)
+            {
+                case NotificationType.QuestionAnswered:
+                    <text>You have new advice for your dilemma!</text>
+                    break;
+                case NotificationType.PostRejected:
+                    <text>One of your posts has been rejected by a moderator. Find out why.</text>
+                    break;
+                case NotificationType.PointsAwarded:
+                    <text>POINTS AWARDED</text>
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         </div>
-        <a href="#" class="Notification-summary-link">
-            View Details
-        </a> 
     </div><!-- Notification-summary -->
 </div>

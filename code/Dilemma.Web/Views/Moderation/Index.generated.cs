@@ -55,26 +55,34 @@ namespace ASP
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<h2>Index</h2>\r\n\r\n<div>\r\n    <h4>ModerationViewModel</h4>\r\n    <hr />\r\n");
+WriteLiteral("\r\n\r\n<div");
+
+WriteLiteral(" style=\"padding-top: 50px\"");
+
+WriteLiteral(">\r\n");
 
             
-            #line 13 "..\..\Views\Moderation\Index.cshtml"
+            #line 9 "..\..\Views\Moderation\Index.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 13 "..\..\Views\Moderation\Index.cshtml"
+            #line 9 "..\..\Views\Moderation\Index.cshtml"
      if (Model == null)
     {
 
             
             #line default
             #line hidden
-WriteLiteral("        <div>Nothing left to moderate.</div>\r\n");
+WriteLiteral("        <div");
+
+WriteLiteral(" class=\"dl-horizontal\"");
+
+WriteLiteral(">Nothing left to moderate.</div>\r\n");
 
             
-            #line 16 "..\..\Views\Moderation\Index.cshtml"
+            #line 12 "..\..\Views\Moderation\Index.cshtml"
     }
     else
     {
@@ -93,7 +101,7 @@ WriteLiteral(">\r\n            <dt>\r\n                CreatedDateTime\r\n      
 WriteLiteral("                ");
 
             
-            #line 26 "..\..\Views\Moderation\Index.cshtml"
+            #line 22 "..\..\Views\Moderation\Index.cshtml"
            Write(Model.ModerationEntries.First().CreatedDateTime.ToRelativeText());
 
             
@@ -108,7 +116,7 @@ WriteLiteral(" style=\"white-space: pre\"");
 WriteLiteral(">");
 
             
-            #line 34 "..\..\Views\Moderation\Index.cshtml"
+            #line 30 "..\..\Views\Moderation\Index.cshtml"
                                           Write(Model.ModerationEntries.First().Message);
 
             
@@ -117,7 +125,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n            </dd>\r\n        </dl>\r\n");
 
             
-            #line 37 "..\..\Views\Moderation\Index.cshtml"
+            #line 33 "..\..\Views\Moderation\Index.cshtml"
 
 
             
@@ -130,13 +138,13 @@ WriteLiteral(" id=\"approve-wrapper\"");
 WriteLiteral(">\r\n");
 
             
-            #line 39 "..\..\Views\Moderation\Index.cshtml"
+            #line 35 "..\..\Views\Moderation\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Moderation\Index.cshtml"
+            #line 35 "..\..\Views\Moderation\Index.cshtml"
              using (Html.BeginForm("Approve", "Moderation", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 
@@ -144,28 +152,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 41 "..\..\Views\Moderation\Index.cshtml"
+            #line 37 "..\..\Views\Moderation\Index.cshtml"
            Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 41 "..\..\Views\Moderation\Index.cshtml"
+            #line 37 "..\..\Views\Moderation\Index.cshtml"
                                         
                 
             
             #line default
             #line hidden
             
-            #line 42 "..\..\Views\Moderation\Index.cshtml"
+            #line 38 "..\..\Views\Moderation\Index.cshtml"
            Write(Html.HiddenFor(x => x.ModerationId));
 
             
             #line default
             #line hidden
             
-            #line 42 "..\..\Views\Moderation\Index.cshtml"
+            #line 38 "..\..\Views\Moderation\Index.cshtml"
                                                     
 
 
@@ -201,7 +209,7 @@ WriteLiteral(" value=\"Reject\"");
 WriteLiteral(" />\r\n                    </div>\r\n                </div>\r\n");
 
             
-            #line 50 "..\..\Views\Moderation\Index.cshtml"
+            #line 46 "..\..\Views\Moderation\Index.cshtml"
             }
 
             
@@ -210,7 +218,7 @@ WriteLiteral(" />\r\n                    </div>\r\n                </div>\r\n");
 WriteLiteral("        </div>\r\n");
 
             
-            #line 52 "..\..\Views\Moderation\Index.cshtml"
+            #line 48 "..\..\Views\Moderation\Index.cshtml"
         
 
             
@@ -225,13 +233,13 @@ WriteLiteral(" class=\"hidden\"");
 WriteLiteral(">\r\n");
 
             
-            #line 54 "..\..\Views\Moderation\Index.cshtml"
+            #line 50 "..\..\Views\Moderation\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 54 "..\..\Views\Moderation\Index.cshtml"
+            #line 50 "..\..\Views\Moderation\Index.cshtml"
              using (Html.BeginForm("Reject", "Moderation", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 
@@ -239,42 +247,42 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Moderation\Index.cshtml"
+            #line 52 "..\..\Views\Moderation\Index.cshtml"
            Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Moderation\Index.cshtml"
+            #line 52 "..\..\Views\Moderation\Index.cshtml"
                                         
                 
             
             #line default
             #line hidden
             
-            #line 57 "..\..\Views\Moderation\Index.cshtml"
+            #line 53 "..\..\Views\Moderation\Index.cshtml"
            Write(Html.HiddenFor(x => x.ModerationId));
 
             
             #line default
             #line hidden
             
-            #line 57 "..\..\Views\Moderation\Index.cshtml"
+            #line 53 "..\..\Views\Moderation\Index.cshtml"
                                                     
                 
             
             #line default
             #line hidden
             
-            #line 58 "..\..\Views\Moderation\Index.cshtml"
+            #line 54 "..\..\Views\Moderation\Index.cshtml"
            Write(Html.TextArea("Message", new { @class = "form-control", rows="10"}));
 
             
             #line default
             #line hidden
             
-            #line 58 "..\..\Views\Moderation\Index.cshtml"
+            #line 54 "..\..\Views\Moderation\Index.cshtml"
                                                                                     
 
 
@@ -310,7 +318,7 @@ WriteLiteral(" value=\"Cancel\"");
 WriteLiteral(" />\r\n                    </div>\r\n                </div>\r\n");
 
             
-            #line 66 "..\..\Views\Moderation\Index.cshtml"
+            #line 62 "..\..\Views\Moderation\Index.cshtml"
             }
 
             
@@ -319,7 +327,7 @@ WriteLiteral(" />\r\n                    </div>\r\n                </div>\r\n");
 WriteLiteral("        </div>\r\n");
 
             
-            #line 68 "..\..\Views\Moderation\Index.cshtml"
+            #line 64 "..\..\Views\Moderation\Index.cshtml"
     }
 
             

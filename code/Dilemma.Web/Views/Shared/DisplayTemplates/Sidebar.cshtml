@@ -1,8 +1,11 @@
 ﻿
+@using System.Globalization
 @model Dilemma.Web.ViewModels.SidebarViewModel
 
 @{
     var showNotifications = ViewBag.HideNotifications == null || !ViewBag.HideNotifications;
+
+    var notificationCount = Model.Notifications.Count();
 }
 
 <div class="Card Card--sidebar-ask">
@@ -66,21 +69,19 @@
     </div>  <!-- Rank -->         
     @if (showNotifications)
     {
-        <a class="Card-section Card-section--notification Card-go--container" href="@Url.Action("Index", "Profile")">
-            <span class="Card-go--trigger"></span>
-            <div style="width: 60px; overflow: hidden; float: left;">
-                <!-- <div class="disc-label right">99</div> -->
-                <div class="disc-label right">
-                    <span data-icon="notification"></span>
-                </div>
+        if (notificationCount > 0)
+        {
+            <a class="Card-section Card-section--notification Card-go--container" href="@Url.Action("Index", "Profile")">
+                <span class="Card-go--trigger"></span>
+                @Html.DisplayFor(x => x.Notifications, "SidebarNotificationSummary")
+            </a>
+        }
+        else
+        {
+            <div class="Card-section Card-section--notification">
+                @Html.DisplayFor(x => x.Notifications, "SidebarNotificationSummary")
             </div>
-            <div>
-                <div class="Card-label--small">You have @Model.Notifications.Count() new</div>
-                <div>
-                    Notifications              
-                </div>
-            </div>
-        </a>
+        }
     }
 </div>
 

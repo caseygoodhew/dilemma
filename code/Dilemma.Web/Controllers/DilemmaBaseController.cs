@@ -29,7 +29,7 @@ namespace Dilemma.Web.Controllers
                        {
                            UserStatsViewModel = UserService.Value.GetUserStatistics(),
                            NewNotificationsCount = NotificationService.Value.CountNewNotifications(),
-                           Notifications = NotificationService.Value.GetAll()
+                           Notifications = NotificationService.Value.GetTopUnread(2)
                        };
         }
     }

@@ -1,0 +1,20 @@
+﻿
+@using System.Globalization
+@model IEnumerable<Dilemma.Business.ViewModels.NotificationListViewModel>
+
+@{
+    var notificationCount = Model.Count();
+}
+
+<div style="width: 60px; overflow: hidden; float: left;">
+    <div class="disc-label right">
+        <span data-icon="notification"></span>
+    </div>
+</div>
+<div>
+    <div class="Card-label--small">You have @(notificationCount == 0 ? "no" : notificationCount.ToString(CultureInfo.CurrentCulture)) new</div>
+    <div>
+        @(notificationCount == 1 ? "Notification" : "Notifications")          
+    </div>
+</div>
+ 

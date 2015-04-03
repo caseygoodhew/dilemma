@@ -275,6 +275,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Answer.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\DisplayTemplates\SidebarNotificationSummary.generated.cs">
+      <DependentUpon>SidebarNotificationSummary.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Views\Shared\DisplayTemplates\Notifications.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -700,6 +705,10 @@
     <Content Include="Views\Home\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\DisplayTemplates\SidebarNotificationSummary.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SidebarNotificationSummary.generated.cs</LastGenOutput>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
