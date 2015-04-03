@@ -16,4 +16,4 @@ Update-Database -ProjectName Dilemma.Data -TargetMigration:"Migration1"
 RELEASE:
 Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: $InitialDatabase
 
-Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract
+Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: 201502200700054_Migration10 -TargetMigration: AddPostAbstract

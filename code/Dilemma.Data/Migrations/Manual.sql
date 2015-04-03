@@ -374,7 +374,10 @@ AS
     DELETE FROM Answer
      WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
  
-    DELETE From Question
+    DELETE FROM Bookmark
+	 WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
+	
+	DELETE From Question
      WHERE QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
  
     -- CLEAN UP TEMPORARY DATA

@@ -277,6 +277,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Answer.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\DisplayTemplates\NoDilemmas.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoDilemmas.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\DisplayTemplates\SidebarNotificationSummary.generated.cs">
       <DependentUpon>SidebarNotificationSummary.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -746,7 +751,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>SidebarNotificationSummary.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Shared\DisplayTemplates\NoDilemmas.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NoDilemmas.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NoDilemmas.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
