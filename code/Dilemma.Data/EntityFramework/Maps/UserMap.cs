@@ -20,6 +20,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             Property(p => p.CreatedDateTime).IsRequired();
             Property(p => p.UserType).IsRequired();
             Property(p => p.HistoricPoints).IsRequired();
+            Property(p => p.HistoricQuestions).IsRequired();
             Property(p => p.HistoricAnswers).IsRequired();
             Property(p => p.HistoricStarVotes).IsRequired();
             Property(p => p.HistoricPopularVotes).IsRequired();

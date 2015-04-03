@@ -18,7 +18,7 @@ namespace Dilemma.Web.Controllers
     {
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
         
-            //
+        //
         // GET: /advise/QuestionId
         [Route("view/{questionId:int:min(1)}")]
         public ActionResult Index(int questionId)
@@ -38,7 +38,7 @@ namespace Dilemma.Web.Controllers
             return View(new DilemmaDetailsViewModel
                                 {
                                     QuestionDetails = questionDetails,
-                                    Sidebar = XTestData.GetSidebarViewModel()
+                                    Sidebar = GetSidebarViewModel()
                                 });
         }
 
@@ -50,7 +50,7 @@ namespace Dilemma.Web.Controllers
             var viewModel = new DilemmaDetailsViewModel
                                 {
                                     QuestionDetails = QuestionService.Value.GetQuestion(questionId),
-                                    Sidebar = XTestData.GetSidebarViewModel()
+                                    Sidebar = GetSidebarViewModel()
                                 };
             
             if (answerId.HasValue)
@@ -78,7 +78,7 @@ namespace Dilemma.Web.Controllers
             {
                 QuestionDetails = QuestionService.Value.GetQuestion(questionId),
                 MyAnswer = viewModel.MyAnswer,
-                Sidebar = XTestData.GetSidebarViewModel()
+                Sidebar = GetSidebarViewModel()
             };
 
             return View(refreshedViewModel);

@@ -47,19 +47,19 @@
     <div class="Rank-table">
         <table>
             <tr>
-                <td class="Rank-score">@Model.UserStatsViewModel.DilemmasPosted</td>
+                <td class="Rank-score">@Model.UserStatsViewModel.TotalQuestions</td>
                 <th class="Rank-facet">Dilemmas posed</th>
             </tr>
             <tr>
-                <td class="Rank-score">@Model.UserStatsViewModel.AnswersPosted</td>
+                <td class="Rank-score">@Model.UserStatsViewModel.TotalAnswers</td>
                 <th class="Rank-facet">Answers given</th>
             </tr>
             <tr>
-                <td class="Rank-score">@Model.UserStatsViewModel.BestAnswersAwarded</td>
+                <td class="Rank-score">@Model.UserStatsViewModel.TotalStarVotes</td>
                 <th class="Rank-facet">Best answers</th>
             </tr>
             <tr>
-                <td class="Rank-score">@Model.UserStatsViewModel.UpVotesAwarded</td>
+                <td class="Rank-score">@Model.UserStatsViewModel.TotalPopularVotes</td>
                 <th class="Rank-facet">Up-votes</th>
             </tr>
         </table> 
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div>
-                <div class="Card-label--small">You have @Model.UserStatsViewModel.UnreadNotifications new</div>
+                <div class="Card-label--small">You have @Model.Notifications.Count() new</div>
                 <div>
                     Notifications              
                 </div>

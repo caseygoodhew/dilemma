@@ -50,7 +50,7 @@ namespace Dilemma.Web.Controllers
             }
 
             questionViewModel.Categories = SiteService.Value.GetCategories();
-            questionViewModel.Sidebar = XTestData.GetSidebarViewModel();
+            questionViewModel.Sidebar = GetSidebarViewModel();
 
             return questionViewModel;
         }

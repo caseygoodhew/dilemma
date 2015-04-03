@@ -130,7 +130,8 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new ModerationRetirementMap());
             modelBuilder.Configurations.Add(new UserPointRetirementMap());
             modelBuilder.Configurations.Add(new LastRunLogMap());
-            modelBuilder.Configurations.Add(new VoteCountMap());
+            modelBuilder.Configurations.Add(new VoteCountRetirementMap());
+            modelBuilder.Configurations.Add(new UserStatisticsMap());
         }
     }
 }

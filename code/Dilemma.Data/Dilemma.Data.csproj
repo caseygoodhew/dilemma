@@ -86,6 +86,7 @@
     <Compile Include="EntityFramework\Maps\LastRunLogMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionRetirementMap.cs" />
     <Compile Include="EntityFramework\Maps\UserPointMap.cs" />
+    <Compile Include="EntityFramework\Maps\UserStatisticsMap.cs" />
     <Compile Include="EntityFramework\Maps\VoteMap.cs" />
     <Compile Include="Migrations\201502060552490_Migration.cs" />
     <Compile Include="Migrations\201502060552490_Migration.Designer.cs">
@@ -143,6 +144,14 @@
     <Compile Include="Migrations\201504020606483_Migration13.Designer.cs">
       <DependentUpon>201504020606483_Migration13.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504030445260_Migration14.cs" />
+    <Compile Include="Migrations\201504030445260_Migration14.Designer.cs">
+      <DependentUpon>201504030445260_Migration14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504030452571_Migration15.cs" />
+    <Compile Include="Migrations\201504030452571_Migration15.Designer.cs">
+      <DependentUpon>201504030452571_Migration15.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\LastRunLog.cs" />
     <Compile Include="Models\Virtual\CloseQuestions.cs" />
     <Compile Include="Models\Virtual\ExpireAnswerSlots.cs" />
@@ -174,6 +183,7 @@
     </Compile>
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Virtual\UserPointRetirement.cs" />
+    <Compile Include="Models\Virtual\UserStatistics.cs" />
     <Compile Include="Models\Vote.cs" />
     <Compile Include="ModerationMessageContext.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -268,6 +278,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504020606483_Migration13.resx">
       <DependentUpon>201504020606483_Migration13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504030445260_Migration14.resx">
+      <DependentUpon>201504030445260_Migration14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504030452571_Migration15.resx">
+      <DependentUpon>201504030452571_Migration15.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

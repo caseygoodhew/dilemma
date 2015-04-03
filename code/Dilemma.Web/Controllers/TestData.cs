@@ -38,7 +38,7 @@ namespace Dilemma.Web.Controllers
             questionViewModel.Question.Text = "X - " + questionViewModel.Question.Text;
             
             questionViewModel.Categories = GetCategories();
-            questionViewModel.Sidebar = GetSidebarViewModel();
+            questionViewModel.Sidebar = null;
             
             return questionViewModel;
         }
@@ -51,7 +51,7 @@ namespace Dilemma.Web.Controllers
             {
                 DilemmasToAnswer = questions.Where(x => x.IsOpen).OrderBy(x => x.CreatedDateTime),
                 DilemmasToVote = questions.Where(x => x.IsClosed).OrderBy(x => x.ClosedDateTime),
-                Sidebar = GetSidebarViewModel()
+                Sidebar = null
             };
         }
 
@@ -59,7 +59,7 @@ namespace Dilemma.Web.Controllers
         {
             var questions = (GetQuestions() ?? Enumerable.Empty<QuestionViewModel>()).ToList();
 
-            var sidebar = GetSidebarViewModel();
+            var sidebar = new SidebarViewModel();
 
             var result = new MyProfileViewModel
             {
@@ -93,7 +93,7 @@ namespace Dilemma.Web.Controllers
                                                      CanAnswer = question.TotalAnswers < question.MaxAnswers,
                                                      //Answer = new AnswerViewModel()
                                                  },
-                           Sidebar = GetSidebarViewModel()
+                           Sidebar = null//GetSidebarViewModel()
                        };
         }
 
@@ -159,39 +159,7 @@ Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit no
                                } };
         }
 
-        public static SidebarViewModel GetSidebarViewModel()
-        {
-            return new SidebarViewModel
-            {
-                Notifications = GetNotifications(),
-                UserStatsViewModel = GetUserStatsVieWModel()
-            };
-        }
-
-        public static UserStatsViewModel GetUserStatsVieWModel()
-        {
-            var rand = new Random();
-
-            var level = rand.Next(1, 5);
-
-            return new UserStatsViewModel
-            {
-                AnswersPosted = rand.Next(40000),
-                BestAnswersAwarded = rand.Next(40),
-                DilemmasPosted = rand.Next(1000),
-                UnreadNotifications = rand.Next(40),
-                UpVotesAwarded = rand.Next(100),
-                UserRank = new UserRankViewModel
-                {
-                    IconFileName = "user-guru-30.png",
-                    Id = rand.Next(100),
-                    Name = new[] { "Guru", "Newbie", "Contributor" }.RandomUsing(rand),
-                    Level = level,
-                    Percentage = rand.Next(0, 25) + (25 * (level - 1))
-                }
-            };
-        }
-
+        
         public static IEnumerable<NotificationViewModel> GetNotifications()
         {
             var rand = new Random();

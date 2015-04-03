@@ -3,6 +3,7 @@ using Dilemma.Business.Services;
 using Dilemma.Business.Validators;
 using Dilemma.Business.ViewModels;
 using Dilemma.Data.Models;
+using Dilemma.Data.Models.Virtual;
 
 using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
@@ -66,6 +67,7 @@ namespace Dilemma.Business
             ConverterFactory.Register<ModerationEntry, ModerationEntryViewModel>(registrar, ModerationEntryViewModelConverter.FromModerationEntry);
             ConverterFactory.Register<User, UserViewModel>(registrar, UserViewModelConverter.FromUser);
             ConverterFactory.Register<LastRunLog, LastRunLogViewModel>(registrar, LastRunLogViewModelConverter.FromLastRunLog);
+            ConverterFactory.Register<UserStatistics, UserStatisticsViewModel>(registrar, UserStatisticsViewModelConverter.FromUserStatistics);
         }
     }
 }

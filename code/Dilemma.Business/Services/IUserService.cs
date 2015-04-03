@@ -24,5 +24,7 @@ namespace Dilemma.Business.Services
         /// <param name="userId">The user id to get.</param>
         /// <returns>The user view model.</returns>
         UserViewModel GetUser(int userId);
+
+        UserStatisticsViewModel GetUserStatistics();
     }
 }

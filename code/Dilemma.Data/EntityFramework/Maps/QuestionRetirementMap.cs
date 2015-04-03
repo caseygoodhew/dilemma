@@ -21,9 +21,9 @@ namespace Dilemma.Data.EntityFramework.Maps
         }
     }
 
-    public class VoteCountMap : EntityTypeConfiguration<VoteCount>
+    public class VoteCountRetirementMap : EntityTypeConfiguration<VoteCountRetirement>
     {
-        public VoteCountMap()
+        public VoteCountRetirementMap()
         {
             HasKey(p => p.Id);
 

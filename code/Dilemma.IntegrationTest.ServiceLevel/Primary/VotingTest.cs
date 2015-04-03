@@ -50,38 +50,47 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         public void LotsOfVotes()
         {
             var allAnswers = new List<int?>();
+
+            var firstUser = SecurityManager.LoginNewAnonymous("A");
+            SecurityManager.LoginNewAnonymous("B");
+            SecurityManager.LoginNewAnonymous("C");
+            SecurityManager.LoginNewAnonymous("D");
+            SecurityManager.LoginNewAnonymous("E");
+            SecurityManager.LoginNewAnonymous("F");
+
+            var baseUserId = firstUser;
             
-            SecurityManager.LoginNewAnonymous("Questioner");
+            SecurityManager.SetUserId(baseUserId + 5);
             Questions.CreateNewQuestion("Question One");
             Questions.CreateNewQuestion("Question Two");
             Questions.CreateNewQuestion("Question Three");
 
-            SecurityManager.LoginNewAnonymous("Answerer One");
+            SecurityManager.SetUserId(baseUserId + 4);
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", "Question One Best"));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", Guid.NewGuid().ToString()));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", "Question Three Best"));
 
-            SecurityManager.LoginNewAnonymous("Answerer Two");
+            SecurityManager.SetUserId(baseUserId + 3);
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", Guid.NewGuid().ToString()));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", Guid.NewGuid().ToString()));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", Guid.NewGuid().ToString()));
 
-            SecurityManager.LoginNewAnonymous("Answerer Three");
+            SecurityManager.SetUserId(baseUserId + 2);
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", Guid.NewGuid().ToString()));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", Guid.NewGuid().ToString()));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", Guid.NewGuid().ToString()));
 
-            SecurityManager.LoginNewAnonymous("Answerer Four");
+            SecurityManager.SetUserId(baseUserId + 1);
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", Guid.NewGuid().ToString()));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", "Question Two Best"));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", Guid.NewGuid().ToString()));
 
-            SecurityManager.LoginNewAnonymous("Answerer Five");
+            SecurityManager.SetUserId(baseUserId);
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question One", Guid.NewGuid().ToString()));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Two", Guid.NewGuid().ToString()));
             allAnswers.Add(Answers.RequestAndCompleteAnswer("Question Three", Guid.NewGuid().ToString()));
 
-            SecurityManager.SetUserId("Questioner");
+            SecurityManager.SetUserId(baseUserId + 5);
             Answers.RegisterVote("Question One Best");
             Answers.RegisterVote("Question Two Best");
             Answers.RegisterVote("Question Three Best");

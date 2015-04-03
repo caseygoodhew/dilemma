@@ -184,7 +184,7 @@ WriteLiteral(">");
 
             
             #line 50 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                  Write(Model.UserStatsViewModel.DilemmasPosted);
+                                  Write(Model.UserStatsViewModel.TotalQuestions);
 
             
             #line default
@@ -201,7 +201,7 @@ WriteLiteral(">");
 
             
             #line 54 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                  Write(Model.UserStatsViewModel.AnswersPosted);
+                                  Write(Model.UserStatsViewModel.TotalAnswers);
 
             
             #line default
@@ -218,7 +218,7 @@ WriteLiteral(">");
 
             
             #line 58 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                  Write(Model.UserStatsViewModel.BestAnswersAwarded);
+                                  Write(Model.UserStatsViewModel.TotalStarVotes);
 
             
             #line default
@@ -235,7 +235,7 @@ WriteLiteral(">");
 
             
             #line 62 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                  Write(Model.UserStatsViewModel.UpVotesAwarded);
+                                  Write(Model.UserStatsViewModel.TotalPopularVotes);
 
             
             #line default
@@ -265,14 +265,14 @@ WriteLiteral("        <a");
 
 WriteLiteral(" class=\"Card-section Card-section--notification Card-go--container\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2425), Tuple.Create("\"", 2463)
+WriteAttribute("href", Tuple.Create(" href=\"", 2423), Tuple.Create("\"", 2461)
             
             #line 69 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-    , Tuple.Create(Tuple.Create("", 2432), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
+    , Tuple.Create(Tuple.Create("", 2430), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
             
             #line default
             #line hidden
-, 2432), false)
+, 2430), false)
 );
 
 WriteLiteral(">\r\n            <span");
@@ -301,7 +301,7 @@ WriteLiteral(">You have ");
 
             
             #line 78 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                                   Write(Model.UserStatsViewModel.UnreadNotifications);
+                                                   Write(Model.Notifications.Count());
 
             
             #line default

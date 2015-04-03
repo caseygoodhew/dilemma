@@ -61,5 +61,10 @@ namespace Dilemma.Business.Services
 
             throw new UnauthorizedAccessException("Permission denied retrieving the user with id " + userId);
         }
+
+        public UserStatisticsViewModel GetUserStatistics()
+        {
+            return UserRepository.Value.GetUserStatistics<UserStatisticsViewModel>(SecurityManager.Value.GetUserId());
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Spatial;
 
 using Dilemma.Common;
 
@@ -34,10 +35,14 @@ namespace Dilemma.Data.Models
         /// </summary>
         public int HistoricPoints { get; set; }
 
+        public int HistoricQuestions { get; set; }
+
         public int HistoricAnswers { get; set; }
 
         public int HistoricStarVotes { get; set; }
 
         public int HistoricPopularVotes { get; set; }
+        
+        
     }
 }

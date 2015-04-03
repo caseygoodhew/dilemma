@@ -11,6 +11,12 @@ CREATE UNIQUE INDEX IX_UniqueVote ON Vote (User_UserId, Question_QuestionId);
 GO
 
 
+
+
+
+
+
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -34,6 +40,35 @@ BEGIN
 	RETURN (@DateTimeNow)
 END
 GO
+
+
+
+
+
+
+
+IF OBJECT_ID ( 'FlushRetirementTables', 'P' ) IS NOT NULL 
+    DROP PROCEDURE FlushRetirementTables;
+GO
+
+CREATE PROCEDURE FlushRetirementTables
+	@ForceFlush bit = null 
+AS
+BEGIN
+	-- check for development or testing environment
+	IF @ForceFlush = 1 OR NOT EXISTS (SELECT * FROM dbo.SystemConfiguration WHERE SystemEnvironment in (0, 1)) 
+	BEGIN
+		DELETE FROM ModerationRetirement
+		DELETE FROM UserPointRetirement
+		DELETE FROM QuestionRetirement
+		DELETE FROM VoteCountRetirement
+	END
+END
+GO
+
+
+
+
 
 
 
@@ -118,6 +153,65 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+IF OBJECT_ID ( 'UserStatistics', 'P' ) IS NOT NULL 
+    DROP PROCEDURE UserStatistics;
+GO
+
+CREATE PROCEDURE UserStatistics
+	@userId int
+AS
+	SELECT u.UserId, 
+		   u.HistoricQuestions + ISNULL(q.QuestionCount, 0) TotalQuestions, 
+		   u.HistoricAnswers + ISNULL(a.AnswerCount, 0) TotalAnswers,
+		   u.HistoricPoints + ISNULL(p.PointsAwarded, 0) TotalPoints,
+		   u.HistoricStarVotes + ISNULL(s.StarVoteCount, 0) TotalStarVotes,
+		   u.HistoricPopularVotes TotalPopularVotes
+	  FROM [User] u
+	  LEFT JOIN (
+			SELECT User_UserId UserId, COUNT(*) QuestionCount
+			  FROM Question
+			 WHERE QuestionState = 1 -- approved
+			   AND User_UserId = @userId
+			 GROUP BY User_UserId) q
+				ON u.UserId = q.UserId
+	  LEFT JOIN (
+			SELECT User_UserId UserId, COUNT(*) AnswerCount
+			  FROM Answer
+			 WHERE AnswerState = 2 -- approved
+			   AND User_UserId = @userId
+			 GROUP BY User_UserId) a
+				ON u.UserId = a.UserId
+	  LEFT JOIN (
+			SELECT ForUser_UserId UserId, SUM(PointsAwarded) PointsAwarded
+			  FROM UserPoint
+			 WHERE ForUser_UserId = @userId
+			 GROUP BY ForUser_UserId) p
+				ON u.UserId = p.UserId
+	  LEFT JOIN (
+			SELECT a.User_UserId UserId, COUNT(*) StarVoteCount
+			  FROM Question q, Answer a, Vote v
+			 WHERE q.QuestionId = a.Question_QuestionId
+			   AND a.Question_QuestionId = v.Question_QuestionId
+			   AND a.AnswerId = v.Answer_AnswerId
+			   AND q.User_UserId = v.User_UserId
+			   AND a.AnswerState = 2 -- approved
+			   AND a.User_UserId = @userId
+			 GROUP BY a.User_UserId) s
+				ON u.UserId = s.UserId
+	 WHERE u.UserId = @userId
+GO
+
+
+
+
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
 IF OBJECT_ID ( 'RetireOldQuestions', 'P' ) IS NOT NULL 
     DROP PROCEDURE RetireOldQuestions;
 GO
@@ -129,14 +223,93 @@ AS
 	
 	SET NOCOUNT ON;
 
-    INSERT INTO QuestionRetirement
+	-- CLEAN UP TEMPORARY DATA
+    EXEC FlushRetirementTables
+	
+	/********************************************************/
+	/* BUILD CACHE DATA										*/
+	/********************************************************/
+    
+	-- get the questions to retire
+	INSERT INTO QuestionRetirement
     (QuestionId)
     SELECT q.QuestionId
       FROM Question q, SystemConfiguration sc
      WHERE q.ClosedDateTime IS NOT NULL
 	   AND DATEADD(dd, sc.RetireQuestionAfterDays, q.ClosedDateTime) < @DateTimeNow
+	
+	-- grab all of the votes
+	INSERT INTO VoteCountRetirement
+	(QuestionId, AnswerId, Votes)
+	SELECT r.QuestionId, r.AnswerId, r.VoteCount
+	  FROM (
+		SELECT qr.QuestionId, a.AnswerId, COUNT(*) VoteCount
+		  FROM QuestionRetirement qr, Answer a, Vote v
+		 WHERE qr.QuestionId = a.Question_QuestionId
+		   AND a.Question_QuestionId = v.Question_QuestionId
+		   AND a.AnswerId = v.Answer_AnswerId
+		   AND a.AnswerState = 2 -- approved
+		 GROUP BY qr.QuestionId, a.AnswerId
+		 ) r
+	 WHERE r.VoteCount >= 10 -- you need at least 10 votes to be popular
+	
+	-- remove any votes that aren't significant to us
+	DELETE FROM VoteCountRetirement
+	 WHERE Id NOT IN (
+			SELECT a.Id
+			  FROM VoteCountRetirement a, (
+					SELECT QuestionId, MAX(Votes) MaxVotes
+					  FROM VoteCountRetirement
+					 GROUP BY QuestionId) b
+			 WHERE a.QuestionId = b.QuestionId
+			   AND a.Votes = b.MaxVotes)
 
+	-- collect user points for questions being retired
+	INSERT INTO UserPointRetirement
+    (UserId, TotalPoints)
+    SELECT up.ForUser_UserId, SUM(up.PointsAwarded)
+      FROM UserPoint up, QuestionRetirement qr
+     WHERE up.RelatedQuestion_QuestionId = qr.QuestionId
+     GROUP BY up.ForUser_UserId
+
+	-- collect moderation items that are being retired
+    INSERT INTO ModerationRetirement
+    (ModerationId)
+    SELECT m.ModerationId
+      FROM Moderation m, QuestionRetirement qr
+     WHERE m.Question_QuestionId = qr.QuestionId
+     UNION 
+    SELECT m.ModerationId
+      FROM Moderation m, QuestionRetirement qr, Answer a
+     WHERE a.Question_QuestionId = qr.QuestionId
+       AND m.Answer_AnswerId = a.AnswerId
+
+	/********************************************************/
+	/* UPDATE USER RECORDS									*/
+	/********************************************************/
     UPDATE u
+	   SET u.HistoricQuestions = u.HistoricQuestions + r.QuestionCount
+	  FROM [User] u
+	 INNER JOIN (
+			SELECT q.User_UserId UserId, COUNT(*) QuestionCount
+			  FROM QuestionRetirement qr, Question q
+			 WHERE qr.QuestionId = q.QuestionId
+			   AND q.QuestionState = 1 -- approved
+			 GROUP BY q.User_UserId) r
+			 ON u.UserId = r.UserId
+	
+	UPDATE u
+	   SET u.HistoricAnswers = u.HistoricAnswers + r.AnswerCount
+	  FROM [User] u
+	 INNER JOIN (
+			SELECT a.User_UserId UserId, COUNT(*) AnswerCount
+			  FROM QuestionRetirement qr, Answer a
+			 WHERE qr.QuestionId = a.Question_QuestionId
+			   AND a.AnswerState = 2 -- approved
+			 GROUP BY a.User_UserId) r
+			 ON u.UserId = r.UserId
+
+	UPDATE u
 	   SET u.HistoricStarVotes = u.HistoricStarVotes + r.StarVoteCount
 	  FROM [User] u
 	 INNER JOIN (
@@ -151,67 +324,29 @@ AS
 			 GROUP BY a.User_UserId) r
 	         ON u.UserId = r.UserId
 
-	INSERT INTO VoteCount
-	(QuestionId, AnswerId, Votes)
-	SELECT r.QuestionId, r.AnswerId, r.VoteCount
-	  FROM (
-		SELECT qr.QuestionId, a.AnswerId, COUNT(*) VoteCount
-		  FROM QuestionRetirement qr, Answer a, Vote v
-		 WHERE qr.QuestionId = a.Question_QuestionId
-		   AND a.Question_QuestionId = v.Question_QuestionId
-		   AND a.AnswerId = v.Answer_AnswerId
-		   AND a.AnswerState = 2 -- approved
-		 GROUP BY qr.QuestionId, a.AnswerId
-		 ) r
-	 WHERE r.VoteCount >= 10 -- you need at least 10 votes to be popular
-		 
-	 DELETE FROM VoteCount
-	  WHERE Id NOT IN (
-			SELECT a.Id
-			  FROM VoteCount a, (
-					SELECT QuestionId, MAX(Votes) MaxVotes
-					  FROM VoteCount
-					 GROUP BY QuestionId) b
-			 WHERE a.QuestionId = b.QuestionId
-			   AND a.Votes = b.MaxVotes)
-	
 	UPDATE u
 	   SET u.HistoricPopularVotes = u.HistoricPopularVotes + r.PopularVoteCount
 	  FROM [User] u
 	  INNER JOIN (
 			SELECT a.User_UserId UserId, COUNT(*) PopularVoteCount
-			  FROM VoteCount vc, Answer a
+			  FROM VoteCountRetirement vc, Answer a
 			 WHERE vc.QuestionId = a.Question_QuestionId
 			   AND vc.AnswerId = a.AnswerId
+			   AND a.AnswerState = 2 -- approved
 			 GROUP BY a.User_UserId) r
 	         ON u.UserId = r.UserId
 	
-	INSERT INTO UserPointRetirement
-    (UserId, TotalPoints)
-    SELECT up.ForUser_UserId, SUM(up.PointsAwarded)
-      FROM UserPoint up, QuestionRetirement qr
-     WHERE up.RelatedQuestion_QuestionId = qr.QuestionId
-     GROUP BY up.ForUser_UserId
-
-    INSERT INTO ModerationRetirement
-    (ModerationId)
-    SELECT m.ModerationId
-      FROM Moderation m, QuestionRetirement qr
-     WHERE m.Question_QuestionId = qr.QuestionId
-     UNION 
-    SELECT m.ModerationId
-      FROM Moderation m, QuestionRetirement qr, Answer a
-     WHERE a.Question_QuestionId = qr.QuestionId
-       AND m.Answer_AnswerId = a.AnswerId
-   
-    -- UPDATE USER POINTS
     UPDATE u
        SET u.HistoricPoints = u.HistoricPoints + upr.TotalPoints
       FROM [User] u
      INNER JOIN UserPointRetirement upr
         ON u.UserId = upr.UserId
     
-    DELETE FROM UserPoint
+    /********************************************************/
+	/* RETIRE DATA											*/
+	/********************************************************/
+
+	DELETE FROM UserPoint
      WHERE RelatedQuestion_QuestionId IN (SELECT QuestionId FROM QuestionRetirement) 
 
     -- CLEAN UP RELATIONSHIPS
@@ -243,14 +378,8 @@ AS
      WHERE QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
  
     -- CLEAN UP TEMPORARY DATA
-    DELETE FROM ModerationRetirement
-    DELETE FROM UserPointRetirement
-    DELETE FROM QuestionRetirement
-	DELETE FROM VoteCount;
+    EXEC FlushRetirementTables TRUE
 
 	UPDATE LastRunLog SET RetireOldQuestions = @DateTimeNow;
 GO
-
-
-
 

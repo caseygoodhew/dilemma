@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
+using Dilemma.Data.Models.Virtual;
 
 using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
@@ -99,6 +101,16 @@ namespace Dilemma.Data.Repositories
             return users.ToDictionary(
                 x => x.UserId,
                 x => x.HistoricPoints + (points.ContainsKey(x.UserId) ? points[x.UserId] : 0));
+        }
+
+        public T GetUserStatistics<T>(int userId) where T : class
+        {
+            using (var context = new DilemmaContext())
+            {
+                var userIdParameter = new SqlParameter("@userId", userId);
+                var userStatistics = context.Database.SqlQuery<UserStatistics>("UserStatistics @userId", userIdParameter).Single();
+                return ConverterFactory.ConvertOne<UserStatistics, T>(userStatistics);
+            }
         }
     }
 }

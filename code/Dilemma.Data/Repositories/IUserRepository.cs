@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 
 using Dilemma.Data.Models;
+using Dilemma.Data.Models.Virtual;
 
 namespace Dilemma.Data.Repositories
 {
@@ -22,5 +23,7 @@ namespace Dilemma.Data.Repositories
         /// <param name="userId">The user id to retrieve.</param>
         /// <returns>The <see cref="User"/> converted to type T.</returns>
         T GetUser<T>(int userId) where T : class;
+
+        T GetUserStatistics<T>(int userId)  where T : class;
     }
 }

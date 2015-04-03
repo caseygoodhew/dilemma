@@ -19,7 +19,7 @@ namespace Dilemma.Data.Models.Virtual
     /// <summary>
     /// Helper table to retire questions. Managed by EF but used by stored procedures.
     /// </summary>
-    public class VoteCount
+    public class VoteCountRetirement
     {
         /// <summary>
         /// Get or sets the Id.
