@@ -147,21 +147,153 @@ Write(Scripts.Render("~/bundles/modernizr"));
             #line hidden
 WriteLiteral("\r\n    \r\n    <!--icons-->\r\n    <link");
 
-WriteLiteral(" rel=\"shortcut icon\"");
+WriteLiteral(" rel=\"apple-touch-icon\"");
 
-WriteLiteral(" href=\"/Content/images/icons/favicon.png\"");
+WriteLiteral(" sizes=\"57x57\"");
 
-WriteLiteral(" type=\"image/x-icon\"");
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-57x57.png\"");
 
-WriteLiteral("/>\r\n    <link");
+WriteLiteral(">\r\n    <link");
 
-WriteLiteral(" rel=\"apple-touch-icon-precomposed\"");
+WriteLiteral(" rel=\"apple-touch-icon\"");
 
-WriteLiteral(" href=\"/Content/images/icons/apple-touch-icon-precomposed.png\"");
+WriteLiteral(" sizes=\"60x60\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-60x60.png\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"apple-touch-icon\"");
+
+WriteLiteral(" sizes=\"72x72\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-72x72.png\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"apple-touch-icon\"");
+
+WriteLiteral(" sizes=\"76x76\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-76x76.png\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"apple-touch-icon\"");
+
+WriteLiteral(" sizes=\"114x114\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-114x114.png\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"apple-touch-icon\"");
+
+WriteLiteral(" sizes=\"120x120\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-120x120.png\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"apple-touch-icon\"");
+
+WriteLiteral(" sizes=\"144x144\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-144x144.png\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"apple-touch-icon\"");
+
+WriteLiteral(" sizes=\"152x152\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-152x152.png\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"apple-touch-icon\"");
+
+WriteLiteral(" sizes=\"180x180\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/apple-touch-icon-180x180.png\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"icon\"");
 
 WriteLiteral(" type=\"image/png\"");
 
-WriteLiteral("/>\r\n\r\n    <!-- send jquery to the foot of the page -->\r\n    <script");
+WriteLiteral(" href=\"/Content/images/icons/fav/favicon-32x32.png\"");
+
+WriteLiteral(" sizes=\"32x32\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"icon\"");
+
+WriteLiteral(" type=\"image/png\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/android-chrome-192x192.png\"");
+
+WriteLiteral(" sizes=\"192x192\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"icon\"");
+
+WriteLiteral(" type=\"image/png\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/favicon-96x96.png\"");
+
+WriteLiteral(" sizes=\"96x96\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"icon\"");
+
+WriteLiteral(" type=\"image/png\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/favicon-16x16.png\"");
+
+WriteLiteral(" sizes=\"16x16\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"manifest\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/manifest.json\"");
+
+WriteLiteral(">\r\n    <link");
+
+WriteLiteral(" rel=\"shortcut icon\"");
+
+WriteLiteral(" href=\"/Content/images/icons/fav/favicon.ico\"");
+
+WriteLiteral(">\r\n    <meta");
+
+WriteLiteral(" name=\"msapplication-TileColor\"");
+
+WriteLiteral(" content=\"#da532c\"");
+
+WriteLiteral(">\r\n    <meta");
+
+WriteLiteral(" name=\"msapplication-TileImage\"");
+
+WriteLiteral(" content=\"/Content/images/icons/fav/mstile-144x144.png\"");
+
+WriteLiteral(">\r\n    <meta");
+
+WriteLiteral(" name=\"msapplication-config\"");
+
+WriteLiteral(" content=\"/Content/images/icons/fav/browserconfig.xml\"");
+
+WriteLiteral(">\r\n    <meta");
+
+WriteLiteral(" name=\"theme-color\"");
+
+WriteLiteral(" content=\"#000000\"");
+
+WriteLiteral(">\r\n\r\n\r\n    <!-- send jquery to the foot of the page -->\r\n    <script");
 
 WriteLiteral(" type=\'text/javascript\'");
 
@@ -171,7 +303,7 @@ WriteLiteral(">window.q = []; window.$ = function (f) { q.push(f); }</script>\r\
 WriteLiteral("    ");
 
             
-            #line 31 "..\..\Views\Shared\_Layout.cshtml"
+            #line 49 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Header"));
 
             
@@ -182,7 +314,7 @@ WriteLiteral("\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 33 "..\..\Views\Shared\_Layout.cshtml"
+            #line 51 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Modals"));
 
             
@@ -191,13 +323,13 @@ Write(Html.Partial("Modals"));
 WriteLiteral("\r\n    \r\n");
 
             
-            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+            #line 53 "..\..\Views\Shared\_Layout.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Views\Shared\_Layout.cshtml"
+            #line 53 "..\..\Views\Shared\_Layout.cshtml"
      if (ViewBag.SuppressPageBd == true)
     {
         
@@ -205,14 +337,14 @@ WriteLiteral("\r\n    \r\n");
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Shared\_Layout.cshtml"
+            #line 55 "..\..\Views\Shared\_Layout.cshtml"
    Write(RenderBody());
 
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Views\Shared\_Layout.cshtml"
+            #line 55 "..\..\Views\Shared\_Layout.cshtml"
                      
     }
     else
@@ -234,7 +366,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 43 "..\..\Views\Shared\_Layout.cshtml"
+            #line 61 "..\..\Views\Shared\_Layout.cshtml"
            Write(RenderBody());
 
             
@@ -243,7 +375,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </div>\r\n");
 
             
-            #line 46 "..\..\Views\Shared\_Layout.cshtml"
+            #line 64 "..\..\Views\Shared\_Layout.cshtml"
     }
 
             
@@ -254,7 +386,7 @@ WriteLiteral("\r\n\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 50 "..\..\Views\Shared\_Layout.cshtml"
+            #line 68 "..\..\Views\Shared\_Layout.cshtml"
 Write(Html.Partial("Footer"));
 
             
@@ -265,7 +397,7 @@ WriteLiteral("\r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 52 "..\..\Views\Shared\_Layout.cshtml"
+            #line 70 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/jquery"));
 
             
@@ -276,7 +408,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 53 "..\..\Views\Shared\_Layout.cshtml"
+            #line 71 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/cookiedirective"));
 
             
@@ -287,7 +419,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 54 "..\..\Views\Shared\_Layout.cshtml"
+            #line 72 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/bootstrap"));
 
             
@@ -298,7 +430,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 55 "..\..\Views\Shared\_Layout.cshtml"
+            #line 73 "..\..\Views\Shared\_Layout.cshtml"
 Write(Scripts.Render("~/bundles/homegrown"));
 
             
@@ -309,7 +441,7 @@ WriteLiteral("\r\n    \r\n    \r\n");
 WriteLiteral("    ");
 
             
-            #line 58 "..\..\Views\Shared\_Layout.cshtml"
+            #line 76 "..\..\Views\Shared\_Layout.cshtml"
 Write(RenderSection("scripts", required: false));
 
             
