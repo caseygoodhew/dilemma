@@ -22,5 +22,21 @@ namespace Dilemma.Web.Controllers
             
             return Json(new { success = true });
         }
-	}
+
+        [HttpPost]
+        public JsonResult AddBookmark(BookmarkDto bookmark)
+        {
+            QuestionService.Value.AddBookmark(bookmark.QuestionId);
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public JsonResult RemoveBookmark(BookmarkDto bookmark)
+        {
+            QuestionService.Value.RemoveBookmark(bookmark.QuestionId);
+
+            return Json(new { success = true });
+        }
+    }
 }

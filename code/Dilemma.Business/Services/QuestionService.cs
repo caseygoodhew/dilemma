@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
@@ -55,7 +56,7 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
         public IEnumerable<QuestionViewModel> GetAllQuestions()
         {
-            return QuestionRepository.Value.QuestionList<QuestionViewModel>(null);
+            return MarkBookmarks(QuestionRepository.Value.QuestionList<QuestionViewModel>(null));
         }
 
         public IEnumerable<QuestionViewModel> GetQuestions(CategoryViewModel category)
@@ -70,7 +71,7 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="QuestionViewModel"/>s.</returns>
         public IEnumerable<QuestionViewModel> GetMyActivity()
         {
-            return QuestionRepository.Value.QuestionList<QuestionViewModel>(SecurityManager.Value.GetUserId());
+            return MarkBookmarks(QuestionRepository.Value.QuestionList<QuestionViewModel>(SecurityManager.Value.GetUserId()));
         }
 
         /// <summary>
@@ -81,13 +82,13 @@ namespace Dilemma.Business.Services
         public QuestionDetailsViewModel GetQuestion(int questionId)
         {
             var question = QuestionRepository.Value.GetQuestion<QuestionDetailsViewModel>(SecurityManager.Value.GetUserId(), questionId, GetQuestionAs.FullDetails);
-            
+
             if (question != null)
             {
                 NotificationService.Value.Mute(NotificationLookupBy.QuestionId, questionId);
             }
             
-            return question;
+            return MarkBookmarks(question);
         }
 
         /// <summary>
@@ -164,7 +165,17 @@ namespace Dilemma.Business.Services
             QuestionRepository.Value.DeregisterVote(userId, answerId);
         }
 
-        private void SetMaxAnswers(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
+        public void AddBookmark(int questionId)
+        {
+            QuestionRepository.Value.AddBookmark(SecurityManager.Value.GetUserId(), questionId);
+        }
+
+        public void RemoveBookmark(int questionId)
+        {
+            QuestionRepository.Value.RemoveBookmark(SecurityManager.Value.GetUserId(), questionId);
+        }
+
+        private static void SetMaxAnswers(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
         {
             if (systemConfiguration.SystemEnvironment == SystemEnvironment.Production || !questionViewModel.MaxAnswers.HasValue)
             {
@@ -172,7 +183,7 @@ namespace Dilemma.Business.Services
             }
         }
 
-        private void SetTimeframes(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
+        private static void SetTimeframes(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
         {
             var now = TimeSource.Value.Now;
             questionViewModel.CreatedDateTime = now;
@@ -194,6 +205,30 @@ namespace Dilemma.Business.Services
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private static QuestionDetailsViewModel MarkBookmarks(QuestionDetailsViewModel question)
+        {
+            MarkBookmarks(question.QuestionViewModel);
+            return question;
+        }
+
+        private static QuestionViewModel MarkBookmarks(QuestionViewModel question)
+        {
+            return MarkBookmarks(new [] { question }).Single();
+        }
+
+        private static IEnumerable<QuestionViewModel> MarkBookmarks(IEnumerable<QuestionViewModel> questions)
+        {
+            var bookmarks = QuestionRepository.Value.GetBookmarkedQuestionIds(SecurityManager.Value.GetUserId()).ToList();
+            var questionList = questions.ToList();
+
+            foreach (var question in questionList.Where(x => x != null && x.QuestionId.HasValue))
+            {
+                question.IsBookmarked = bookmarks.Contains(question.QuestionId.Value);
+            }
+
+            return questionList;
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Dilemma.Data.Repositories
                 {
                     using (var context = new DilemmaContext())
                     {
-                        return context.Rank.ToList().OrderBy(x => x.PointsRequired).Select(
+                        return context.Ranks.ToList().OrderBy(x => x.PointsRequired).Select(
                             (x, i) =>
                             {
                                 x.Level = i + 1;

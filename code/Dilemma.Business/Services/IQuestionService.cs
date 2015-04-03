@@ -14,7 +14,7 @@ namespace Dilemma.Business.Services
     public interface IQuestionService
     {
         /// <summary>
-        /// Saves a new <see cref="CreateQuestionViewModel"/> instance.
+        /// Saves a new <see cref="QuestionViewModel"/> instance.
         /// </summary>
         /// <param name="questionViewModel">The <see cref="QuestionViewModel"/> to save.</param>
         /// <returns>The new question id.</returns>
@@ -86,5 +86,17 @@ namespace Dilemma.Business.Services
         /// </summary>
         /// <param name="answerId">The answer to deregister the vote against.</param>
         void DeregisterVote(int answerId);
+
+        /// <summary>
+        /// Bookmarks a question
+        /// </summary>
+        /// <param name="questionId">The question to bookmark.</param>
+        void AddBookmark(int questionId);
+
+        /// <summary>
+        /// Removes a question bookmark
+        /// </summary>
+        /// <param name="questionId">The question to remove the bookmark from.</param>
+        void RemoveBookmark(int questionId);
     }
 }

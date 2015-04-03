@@ -80,7 +80,7 @@
             @if (!Model.IsMyQuestion)
             {
                 <div class="u-2of5">
-                    <button type="button" class="Button--bookmark js-bookmark-button">
+                    <button type="button" class="Button--bookmark js-bookmark-button @(Model.IsBookmarked ? "is-active" : string.Empty)" data-question-id="@Model.QuestionId">
                         <span data-icon="bookmark"></span>
                         <span class="Button-label is-inactive">Bookmark</span>
                         <span class="Button-label is-active">Bookmarked</span>

@@ -91,5 +91,21 @@ namespace Dilemma.Data.Repositories
         /// <param name="answerId">The answer id of the question to find.</param>
         /// <returns>The user id of the user who posted the questions.</returns>
         int GetQuestionUserIdByAnswerId(int answerId);
+
+        /// <summary>
+        /// Bookmarks a question
+        /// </summary>
+        /// <param name="userId">The user id of the user that is bookmarking.</param>
+        /// <param name="questionId">The question to bookmark.</param>
+        void AddBookmark(int userId, int questionId);
+
+        /// <summary>
+        /// Removes a question bookmark
+        /// </summary>
+        /// <param name="userId">The user id of the user that is removing the bookmark.</param>
+        /// <param name="questionId">The question to remove the bookmark from.</param>
+        void RemoveBookmark(int userId, int questionId);
+
+        IEnumerable<int> GetBookmarkedQuestionIds(int userId);
     }
 }

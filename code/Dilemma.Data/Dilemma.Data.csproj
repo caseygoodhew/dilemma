@@ -82,6 +82,7 @@
     <Compile Include="EntityFramework\Initialization\RankInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\SystemConfigurationInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\CategoryInitialization.cs" />
+    <Compile Include="EntityFramework\Maps\BookmarkMap.cs" />
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
     <Compile Include="EntityFramework\Maps\AnswerMap.cs" />
     <Compile Include="EntityFramework\Maps\LastRunLogMap.cs" />
@@ -161,6 +162,11 @@
     <Compile Include="Migrations\201504031108144_Migration17.Designer.cs">
       <DependentUpon>201504031108144_Migration17.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504031318593_Migration18.cs" />
+    <Compile Include="Migrations\201504031318593_Migration18.Designer.cs">
+      <DependentUpon>201504031318593_Migration18.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\LastRunLog.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Virtual\CloseQuestions.cs" />
@@ -300,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504031108144_Migration17.resx">
       <DependentUpon>201504031108144_Migration17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504031318593_Migration18.resx">
+      <DependentUpon>201504031318593_Migration18.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

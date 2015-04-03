@@ -10,8 +10,6 @@
     
     var isOffline = ViewBag.Offline == true;
 
-    var unreadNotifications = 99;
-
     var dilemmasPath = Url.Action("Index", "Dilemmas");
 }
 
@@ -72,12 +70,6 @@
                         <li class="nav-level-1">
                             <a href="@Url.Action("Index", "Profile")" class="nav-level-1-link">
                                 <span data-icon="user"></span>
-                                @if (unreadNotifications > 0)
-                                {
-                                    <span class="nav-unread-notifications">
-                                        @unreadNotifications
-                                    </span>
-                                }
                                 <span class="nav-level-1-text">Profile</span>
                             </a>
                         </li>

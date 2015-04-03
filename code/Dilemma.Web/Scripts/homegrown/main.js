@@ -252,8 +252,19 @@ $(document).ready(function() {
   
   
   $('.js-bookmark-button:not([disabled])').on('click', function() {
-    $(this).toggleClass('is-active');
-    alert('[user would never see this] — Bookmarking action');
+    var isAdd = $(this).toggleClass('is-active').hasClass('is-active');
+    $.ajax({
+        url: isAdd ? '/ajax/addbookmark' : '/ajax/removebookmark',
+        type: 'POST',
+        data: JSON.stringify({ questionId: $(this).data('question-id') }),
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            
+        },
+        error: function () {
+
+        }
+    });
   });
 
 

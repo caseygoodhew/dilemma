@@ -67,8 +67,6 @@ WriteLiteral("\r\n");
     
     var isOffline = ViewBag.Offline == true;
 
-    var unreadNotifications = 99;
-
     var dilemmasPath = Url.Action("Index", "Dilemmas");
 
             
@@ -98,14 +96,14 @@ WriteLiteral(" class=\"navbar-header\"");
 
 WriteLiteral(">\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 814), Tuple.Create("\"", 853)
+WriteAttribute("href", Tuple.Create(" href=\"", 777), Tuple.Create("\"", 816)
             
-            #line 24 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 821), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
+            #line 22 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 784), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
             
             #line default
             #line hidden
-, 821), false)
+, 784), false)
 );
 
 WriteLiteral(" rel=\"home\"");
@@ -135,13 +133,13 @@ WriteLiteral(" style=\" margin: 10px 0 0 70px;\"");
 WriteLiteral(">\r\n                    </a>\r\n                </div>\r\n");
 
             
-            #line 29 "..\..\Views\Shared\Header.cshtml"
+            #line 27 "..\..\Views\Shared\Header.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 29 "..\..\Views\Shared\Header.cshtml"
+            #line 27 "..\..\Views\Shared\Header.cshtml"
                  if (!isOffline)
                 {
 
@@ -158,14 +156,14 @@ WriteLiteral(" class=\"dropdown nav-level-1\"");
 
 WriteLiteral(">\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1385), Tuple.Create("\"", 1405)
+WriteAttribute("href", Tuple.Create(" href=\"", 1348), Tuple.Create("\"", 1368)
             
-            #line 33 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 1392), Tuple.Create<System.Object, System.Int32>(dilemmasPath
+            #line 31 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 1355), Tuple.Create<System.Object, System.Int32>(dilemmasPath
             
             #line default
             #line hidden
-, 1392), false)
+, 1355), false)
 );
 
 WriteLiteral(" class=\"dropdown-toggle nav-level-1-link js-nav-level-2-menu-trigger\"");
@@ -196,29 +194,29 @@ WriteLiteral(" role=\"menu\"");
 
 WriteLiteral(">\r\n                                <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 1965), Tuple.Create("\"", 2037)
-, Tuple.Create(Tuple.Create("", 1973), Tuple.Create("nav-level-2", 1973), true)
-, Tuple.Create(Tuple.Create(" ", 1984), Tuple.Create("in-category-1", 1985), true)
-, Tuple.Create(Tuple.Create(" ", 1998), Tuple.Create("js-categories-all", 1999), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 1928), Tuple.Create("\"", 2000)
+, Tuple.Create(Tuple.Create("", 1936), Tuple.Create("nav-level-2", 1936), true)
+, Tuple.Create(Tuple.Create(" ", 1947), Tuple.Create("in-category-1", 1948), true)
+, Tuple.Create(Tuple.Create(" ", 1961), Tuple.Create("js-categories-all", 1962), true)
             
-            #line 42 "..\..\Views\Shared\Header.cshtml"
-      , Tuple.Create(Tuple.Create(" ", 2016), Tuple.Create<System.Object, System.Int32>(getMenuClass("all")
+            #line 40 "..\..\Views\Shared\Header.cshtml"
+      , Tuple.Create(Tuple.Create(" ", 1979), Tuple.Create<System.Object, System.Int32>(getMenuClass("all")
             
             #line default
             #line hidden
-, 2017), false)
+, 1980), false)
 );
 
 WriteLiteral(">\r\n                                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2079), Tuple.Create("\"", 2099)
+WriteAttribute("href", Tuple.Create(" href=\"", 2042), Tuple.Create("\"", 2062)
             
-            #line 43 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 2086), Tuple.Create<System.Object, System.Int32>(dilemmasPath
+            #line 41 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 2049), Tuple.Create<System.Object, System.Int32>(dilemmasPath
             
             #line default
             #line hidden
-, 2086), false)
+, 2049), false)
 );
 
 WriteLiteral(" class=\"nav-level-2-link\"");
@@ -233,30 +231,30 @@ WriteLiteral("></span>\r\n                                        All Categories
 "                     </a>\r\n                                </li>\r\n              " +
 "                  <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2410), Tuple.Create("\"", 2494)
-, Tuple.Create(Tuple.Create("", 2418), Tuple.Create("nav-level-2", 2418), true)
-, Tuple.Create(Tuple.Create(" ", 2429), Tuple.Create("in-category-2", 2430), true)
-, Tuple.Create(Tuple.Create(" ", 2443), Tuple.Create("js-categories-bookmarks", 2444), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2373), Tuple.Create("\"", 2457)
+, Tuple.Create(Tuple.Create("", 2381), Tuple.Create("nav-level-2", 2381), true)
+, Tuple.Create(Tuple.Create(" ", 2392), Tuple.Create("in-category-2", 2393), true)
+, Tuple.Create(Tuple.Create(" ", 2406), Tuple.Create("js-categories-bookmarks", 2407), true)
             
-            #line 48 "..\..\Views\Shared\Header.cshtml"
-            , Tuple.Create(Tuple.Create(" ", 2467), Tuple.Create<System.Object, System.Int32>(getMenuClass("bookmarks")
+            #line 46 "..\..\Views\Shared\Header.cshtml"
+            , Tuple.Create(Tuple.Create(" ", 2430), Tuple.Create<System.Object, System.Int32>(getMenuClass("bookmarks")
             
             #line default
             #line hidden
-, 2468), false)
+, 2431), false)
 );
 
 WriteLiteral(">\r\n                                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2536), Tuple.Create("\"", 2566)
+WriteAttribute("href", Tuple.Create(" href=\"", 2499), Tuple.Create("\"", 2529)
             
-            #line 49 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 2543), Tuple.Create<System.Object, System.Int32>(dilemmasPath
+            #line 47 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 2506), Tuple.Create<System.Object, System.Int32>(dilemmasPath
             
             #line default
             #line hidden
-, 2543), false)
-, Tuple.Create(Tuple.Create("", 2556), Tuple.Create("/bookmarks", 2556), true)
+, 2506), false)
+, Tuple.Create(Tuple.Create("", 2519), Tuple.Create("/bookmarks", 2519), true)
 );
 
 WriteLiteral(" class=\"nav-level-2-link\"");
@@ -271,13 +269,13 @@ WriteLiteral("></span>\r\n                                        My Bookmarks\r
 "                   </a>\r\n                                </li>\r\n");
 
             
-            #line 54 "..\..\Views\Shared\Header.cshtml"
+            #line 52 "..\..\Views\Shared\Header.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 54 "..\..\Views\Shared\Header.cshtml"
+            #line 52 "..\..\Views\Shared\Header.cshtml"
                                  foreach (CategoryViewModel category in ViewBag.Categories)
                                 {
 
@@ -286,43 +284,43 @@ WriteLiteral("></span>\r\n                                        My Bookmarks\r
             #line hidden
 WriteLiteral("                                    <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3007), Tuple.Create("\"", 3097)
-, Tuple.Create(Tuple.Create("", 3015), Tuple.Create("nav-level-2", 3015), true)
-, Tuple.Create(Tuple.Create(" ", 3026), Tuple.Create("in-category-", 3027), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2970), Tuple.Create("\"", 3060)
+, Tuple.Create(Tuple.Create("", 2978), Tuple.Create("nav-level-2", 2978), true)
+, Tuple.Create(Tuple.Create(" ", 2989), Tuple.Create("in-category-", 2990), true)
             
-            #line 56 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 3039), Tuple.Create<System.Object, System.Int32>(getNextCounter()
-            
-            #line default
-            #line hidden
-, 3039), false)
-            
-            #line 56 "..\..\Views\Shared\Header.cshtml"
-        , Tuple.Create(Tuple.Create(" ", 3056), Tuple.Create<System.Object, System.Int32>(getMenuClass(tidyString(category.Name))
+            #line 54 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 3002), Tuple.Create<System.Object, System.Int32>(getNextCounter()
             
             #line default
             #line hidden
-, 3057), false)
+, 3002), false)
+            
+            #line 54 "..\..\Views\Shared\Header.cshtml"
+        , Tuple.Create(Tuple.Create(" ", 3019), Tuple.Create<System.Object, System.Int32>(getMenuClass(tidyString(category.Name))
+            
+            #line default
+            #line hidden
+, 3020), false)
 );
 
 WriteLiteral(">\r\n                                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3143), Tuple.Create("\"", 3190)
+WriteAttribute("href", Tuple.Create(" href=\"", 3106), Tuple.Create("\"", 3153)
             
-            #line 57 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 3150), Tuple.Create<System.Object, System.Int32>(dilemmasPath
-            
-            #line default
-            #line hidden
-, 3150), false)
-, Tuple.Create(Tuple.Create("", 3163), Tuple.Create("/", 3163), true)
-            
-            #line 57 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 3164), Tuple.Create<System.Object, System.Int32>(tidyString(category.Name)
+            #line 55 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 3113), Tuple.Create<System.Object, System.Int32>(dilemmasPath
             
             #line default
             #line hidden
-, 3164), false)
+, 3113), false)
+, Tuple.Create(Tuple.Create("", 3126), Tuple.Create("/", 3126), true)
+            
+            #line 55 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 3127), Tuple.Create<System.Object, System.Int32>(tidyString(category.Name)
+            
+            #line default
+            #line hidden
+, 3127), false)
 );
 
 WriteLiteral(" class=\"nav-level-2-link\"");
@@ -338,7 +336,7 @@ WriteLiteral("></span>\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 59 "..\..\Views\Shared\Header.cshtml"
+            #line 57 "..\..\Views\Shared\Header.cshtml"
                                        Write(category.Name);
 
             
@@ -348,7 +346,7 @@ WriteLiteral("\r\n                                        </a>\r\n              
 "   </li>\r\n");
 
             
-            #line 62 "..\..\Views\Shared\Header.cshtml"
+            #line 60 "..\..\Views\Shared\Header.cshtml"
                                 }
 
             
@@ -362,14 +360,14 @@ WriteLiteral(" class=\"nav-level-1\"");
 WriteLiteral(">\r\n                            <!-- <a href=\"#\" data-toggle=\"modal\" data-target=\"" +
 "#modal-ask\"> -->\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3759), Tuple.Create("\"", 3793)
+WriteAttribute("href", Tuple.Create(" href=\"", 3722), Tuple.Create("\"", 3756)
             
-            #line 67 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 3766), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Ask")
+            #line 65 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 3729), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Ask")
             
             #line default
             #line hidden
-, 3766), false)
+, 3729), false)
 );
 
 WriteLiteral(" class=\"nav-level-1-link\"");
@@ -389,14 +387,14 @@ WriteLiteral(" class=\"nav-level-1\"");
 
 WriteLiteral(">\r\n                            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4105), Tuple.Create("\"", 4143)
+WriteAttribute("href", Tuple.Create(" href=\"", 4068), Tuple.Create("\"", 4106)
             
-            #line 73 "..\..\Views\Shared\Header.cshtml"
-, Tuple.Create(Tuple.Create("", 4112), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
+            #line 71 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 4075), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
             
             #line default
             #line hidden
-, 4112), false)
+, 4075), false)
 );
 
 WriteLiteral(" class=\"nav-level-1-link\"");
@@ -405,47 +403,7 @@ WriteLiteral(">\r\n                                <span");
 
 WriteLiteral(" data-icon=\"user\"");
 
-WriteLiteral("></span>\r\n");
-
-            
-            #line 75 "..\..\Views\Shared\Header.cshtml"
-                                
-            
-            #line default
-            #line hidden
-            
-            #line 75 "..\..\Views\Shared\Header.cshtml"
-                                 if (unreadNotifications > 0)
-                                {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                    <span");
-
-WriteLiteral(" class=\"nav-unread-notifications\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                                        ");
-
-            
-            #line 78 "..\..\Views\Shared\Header.cshtml"
-                                   Write(unreadNotifications);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                    </span>\r\n");
-
-            
-            #line 80 "..\..\Views\Shared\Header.cshtml"
-                                }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <span");
+WriteLiteral("></span>\r\n                                <span");
 
 WriteLiteral(" class=\"nav-level-1-text\"");
 
@@ -453,7 +411,7 @@ WriteLiteral(">Profile</span>\r\n                            </a>\r\n           
 "\n                    </ul>\r\n");
 
             
-            #line 85 "..\..\Views\Shared\Header.cshtml"
+            #line 77 "..\..\Views\Shared\Header.cshtml"
                 }         
 
             

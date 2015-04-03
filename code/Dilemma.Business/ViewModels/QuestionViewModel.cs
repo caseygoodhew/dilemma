@@ -85,5 +85,7 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets a value indicating whether the question is closed.
         /// </summary>
         public bool IsClosed { get; set; }
+
+        public bool IsBookmarked { get; set; }
     }
 }

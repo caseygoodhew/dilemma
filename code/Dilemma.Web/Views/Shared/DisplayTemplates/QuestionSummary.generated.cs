@@ -397,7 +397,28 @@ WriteLiteral(">\r\n                    <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteLiteral(" class=\"Button--bookmark js-bookmark-button\"");
+WriteAttribute("class", Tuple.Create(" class=\"", 3411), Tuple.Create("\"", 3505)
+, Tuple.Create(Tuple.Create("", 3419), Tuple.Create("Button--bookmark", 3419), true)
+, Tuple.Create(Tuple.Create(" ", 3435), Tuple.Create("js-bookmark-button", 3436), true)
+            
+            #line 83 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+     , Tuple.Create(Tuple.Create(" ", 3454), Tuple.Create<System.Object, System.Int32>(Model.IsBookmarked ? "is-active" : string.Empty
+            
+            #line default
+            #line hidden
+, 3455), false)
+);
+
+WriteLiteral(" data-question-id=\"");
+
+            
+            #line 83 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+                                                                                                                                                      Write(Model.QuestionId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"");
 
 WriteLiteral(">\r\n                        <span");
 

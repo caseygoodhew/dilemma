@@ -400,6 +400,68 @@ namespace Dilemma.Data.Repositories
         }
 
         /// <summary>
+        /// Bookmarks a question
+        /// </summary>
+        /// <param name="userId">The user id of the user that is bookmarking.</param>
+        /// <param name="questionId">The question to bookmark.</param>
+        public void AddBookmark(int userId, int questionId)
+        {
+            using (var context = new DilemmaContext())
+            {
+                var result = context.Bookmarks.Where(x => x.User.UserId == userId)
+                    .FirstOrDefault(x => x.Question.QuestionId == questionId);
+
+                if (result != null)
+                {
+                    return;
+                }
+
+                var bookmark = new Bookmark
+                        {
+                            Question = new Question { QuestionId = questionId },
+                            User = new User { UserId = userId },
+                            CreatedDateTime = TimeSource.Value.Now
+                        };
+
+                context.EnsureAttached(bookmark.Question, x => x.QuestionId);
+                context.EnsureAttached(bookmark.User, x => x.UserId);
+
+                context.Bookmarks.Add(bookmark);
+
+                context.SaveChangesVerbose();
+            }
+        }
+
+        /// <summary>
+        /// Removes a question bookmark
+        /// </summary>
+        /// <param name="userId">The user id of the user that is removing the bookmark.</param>
+        /// <param name="questionId">The question to remove the bookmark from.</param>
+        public void RemoveBookmark(int userId, int questionId)
+        {
+            using (var context = new DilemmaContext())
+            {
+                var result =
+                    context.Bookmarks
+                        .Where(x => x.User.UserId == userId)
+                        .Where(x => x.Question.QuestionId == questionId)
+                        .ToList();
+
+                context.Bookmarks.RemoveRange(result);
+
+                context.SaveChangesVerbose();
+            }
+        }
+
+        public IEnumerable<int> GetBookmarkedQuestionIds(int userId)
+        {
+            using (var context = new DilemmaContext())
+            {
+                return context.Bookmarks.Where(x => x.User.UserId == userId).Select(x => x.Question.QuestionId).ToList();
+            }
+        }
+
+        /// <summary>
         /// To be called when the moderation state is updated.
         /// </summary>
         /// <param name="messenger">The messenger.</param>
