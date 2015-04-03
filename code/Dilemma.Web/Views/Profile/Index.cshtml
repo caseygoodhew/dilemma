@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Profile";
+    ViewBag.DontPanic = true;
 }
 
 
@@ -26,7 +27,14 @@
 
             <div class="Dilemmas">
 
-                @Html.DisplayForList(x => x.Dilemmas, "QuestionNotification")
+                @if (Model.Dilemmas.Any())
+                {
+                    @Html.DisplayForList(x => x.Dilemmas, "QuestionNotification")
+                }
+                else
+                {
+                    @Html.Partial("DisplayTemplates/NoDilemmas")
+                }
 
                 <h2 class="js-sticky h3">
                     <span class="js-sticky--offset">
@@ -34,7 +42,23 @@
                     </span>
                 </h2>
 
-                @Html.DisplayForList(x => x.Answers, "QuestionNotification")
+                @if (Model.Answers.Any())
+                {
+                    @Html.DisplayForList(x => x.Answers, "QuestionNotification")
+                }
+                else
+                {
+                    <div class="Card Dilemmas-empty">
+                        <p>Looks like it's time to give some advice!</p>
+                        <div class="line">
+                            <span>&nbsp;&nbsp;&nbsp;</span>
+                            <a href="@Url.Action("Index", "Dilemmas")" class="Button--ask">
+                                <span data-icon="discuss-2"></span> 
+                                Start Advising Now
+                            </a>
+                        </div>
+                    </div>
+                }
                 
                 <h2 class="js-sticky h3">
                     <span class="js-sticky--offset">

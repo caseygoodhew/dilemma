@@ -89,7 +89,7 @@ WriteLiteral(">");
 
             
             #line 9 "..\..\Views\Shared\DisplayTemplates\QuestionNotification.cshtml"
-                                  Write(Model.CreatedDateTime);
+                                  Write(Model.CreatedDateTime.ToRelativeText());
 
             
             #line default
@@ -109,14 +109,8 @@ WriteLiteral("            ");
             
             #line default
             #line hidden
-WriteLiteral("          \r\n        </div>\r\n        <a");
-
-WriteLiteral(" href=\"#\"");
-
-WriteLiteral(" class=\"Notification-summary-link\"");
-
-WriteLiteral(">\r\n            View Details\r\n        </a> \r\n    </div><!-- Notification-summary -" +
-"->\r\n</div>\r\n\r\n\r\n");
+WriteLiteral("          \r\n        </div>\r\n    </div><!-- Notification-summary -->\r\n</div>\r\n\r\n\r\n" +
+"");
 
         }
     }

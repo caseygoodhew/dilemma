@@ -100,10 +100,10 @@ namespace Dilemma.Data.Repositories
             {
                 var questions =
                     context.Questions.Include(x => x.Category)
-                        .Where(
-                            x =>
-                            !userId.HasValue || x.User.UserId == userId.Value
-                            || x.Answers.Any(a => a.User.UserId == userId.Value))
+                        .Where(x => !userId.HasValue 
+                            || x.User.UserId == userId.Value
+                            || x.Answers.Any(a => a.User.UserId == userId.Value && a.AnswerState != AnswerState.Rejected))
+                        .Where(x => x.QuestionState != QuestionState.Rejected)
                         .Select(
                             x =>
                             new

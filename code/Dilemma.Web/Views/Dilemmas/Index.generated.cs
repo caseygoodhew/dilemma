@@ -47,7 +47,7 @@ namespace ASP
   
     ViewBag.Title = "";
 
-    var isAllCategories = ViewBag.Category == "all";
+    ViewBag.ShowLuckyDip = ViewBag.Category != "all";
 
             
             #line default
@@ -122,130 +122,20 @@ WriteLiteral(">\r\n\r\n");
                 }
                 else
                 {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    <div");
-
-WriteLiteral(" class=\"Card Dilemmas-empty\"");
-
-WriteLiteral(">\r\n");
-
-            
-            #line 31 "..\..\Views\Dilemmas\Index.cshtml"
-                        
+                    
             
             #line default
             #line hidden
             
-            #line 31 "..\..\Views\Dilemmas\Index.cshtml"
-                         if (isAllCategories)
-                        {
+            #line 30 "..\..\Views\Dilemmas\Index.cshtml"
+               Write(Html.Partial("DisplayTemplates/NoDilemmas"));
 
             
             #line default
             #line hidden
-WriteLiteral("                            <h2>Oh no! there are no dilemmas to answer right now!" +
-"</h2>\r\n");
-
-WriteLiteral("                            <p>Maybe you want to share your Dilemma?</p>\r\n");
-
             
-            #line 35 "..\..\Views\Dilemmas\Index.cshtml"
-                        }
-                        else
-                        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            <h2>Oh no! there are no dilemmas in this category rig" +
-"ht now!</h2>\r\n");
-
-WriteLiteral("                            <p>Maybe you want to share your Dilemma? Or take a lu" +
-"cky dip!</p>\r\n");
-
-            
-            #line 40 "..\..\Views\Dilemmas\Index.cshtml"
-                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                        <div");
-
-WriteLiteral(" class=\"line\"");
-
-WriteLiteral(">\r\n                            <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 1425), Tuple.Create("\"", 1459)
-            
-            #line 43 "..\..\Views\Dilemmas\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1432), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Ask")
-            
-            #line default
-            #line hidden
-, 1432), false)
-);
-
-WriteLiteral(" class=\"Button--ask mb20\"");
-
-WriteLiteral(">\r\n                                <span");
-
-WriteLiteral(" data-icon=\"ask\"");
-
-WriteLiteral("></span> \r\n                                Share Your Dilemma\r\n                  " +
-"          </a>                \r\n");
-
-            
-            #line 47 "..\..\Views\Dilemmas\Index.cshtml"
-                            
-            
-            #line default
-            #line hidden
-            
-            #line 47 "..\..\Views\Dilemmas\Index.cshtml"
-                             if (!isAllCategories)
-                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <span>&nbsp;&nbsp;&nbsp;</span>\r\n");
-
-WriteLiteral("                                <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 1836), Tuple.Create("\"", 1875)
-            
-            #line 50 "..\..\Views\Dilemmas\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1843), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
-            
-            #line default
-            #line hidden
-, 1843), false)
-);
-
-WriteLiteral(" class=\"Button--ask\"");
-
-WriteLiteral(">\r\n                                    <span");
-
-WriteLiteral(" data-icon=\"refresh\"");
-
-WriteLiteral("></span> \r\n                                    Lucky Dip\r\n                       " +
-"         </a>\r\n");
-
-            
-            #line 54 "..\..\Views\Dilemmas\Index.cshtml"
-                            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        </div>\r\n                    </div>\r\n");
-
-            
-            #line 57 "..\..\Views\Dilemmas\Index.cshtml"
+            #line 30 "..\..\Views\Dilemmas\Index.cshtml"
+                                                                
                 }
 
             
@@ -267,13 +157,13 @@ WriteLiteral("></span>\r\n                        Vote\r\n                    </
 "    </h2>\r\n          \r\n");
 
             
-            #line 66 "..\..\Views\Dilemmas\Index.cshtml"
+            #line 40 "..\..\Views\Dilemmas\Index.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 66 "..\..\Views\Dilemmas\Index.cshtml"
+            #line 40 "..\..\Views\Dilemmas\Index.cshtml"
                  if (Model.DilemmasToVote.Any())
                 {
                     
@@ -281,142 +171,32 @@ WriteLiteral("></span>\r\n                        Vote\r\n                    </
             #line default
             #line hidden
             
-            #line 68 "..\..\Views\Dilemmas\Index.cshtml"
+            #line 42 "..\..\Views\Dilemmas\Index.cshtml"
                Write(Html.DisplayForList(x => x.DilemmasToVote, "QuestionSummary"));
 
             
             #line default
             #line hidden
             
-            #line 68 "..\..\Views\Dilemmas\Index.cshtml"
+            #line 42 "..\..\Views\Dilemmas\Index.cshtml"
                                                                                   
                 }
                 else
                 {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    <div");
-
-WriteLiteral(" class=\"Card Dilemmas-empty\"");
-
-WriteLiteral(">\r\n");
-
-            
-            #line 73 "..\..\Views\Dilemmas\Index.cshtml"
-                        
+                    
             
             #line default
             #line hidden
             
-            #line 73 "..\..\Views\Dilemmas\Index.cshtml"
-                         if (isAllCategories)
-                        {
+            #line 46 "..\..\Views\Dilemmas\Index.cshtml"
+               Write(Html.Partial("DisplayTemplates/NoDilemmas"));
 
             
             #line default
             #line hidden
-WriteLiteral("                            <h2>Oh no! there are no dilemmas to vote on right now" +
-"!</h2>\r\n");
-
-WriteLiteral("                            <p>Maybe you want to share your Dilemma?</p>\r\n");
-
             
-            #line 77 "..\..\Views\Dilemmas\Index.cshtml"
-                        }
-                        else
-                        {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                            <h2>Oh no! there are no dilemmas in this category rig" +
-"ht now!</h2>\r\n");
-
-WriteLiteral("                            <p>Maybe you want to share your Dilemma? Or take a lu" +
-"cky dip!</p>\r\n");
-
-            
-            #line 82 "..\..\Views\Dilemmas\Index.cshtml"
-                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                        <div");
-
-WriteLiteral(" class=\"line\"");
-
-WriteLiteral(">\r\n                            <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 3313), Tuple.Create("\"", 3347)
-            
-            #line 85 "..\..\Views\Dilemmas\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3320), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Ask")
-            
-            #line default
-            #line hidden
-, 3320), false)
-);
-
-WriteLiteral(" class=\"Button--ask mb20\"");
-
-WriteLiteral(">\r\n                                <span");
-
-WriteLiteral(" data-icon=\"ask\"");
-
-WriteLiteral("></span> \r\n                                Share Your Dilemma\r\n                  " +
-"          </a>                \r\n");
-
-            
-            #line 89 "..\..\Views\Dilemmas\Index.cshtml"
-                            
-            
-            #line default
-            #line hidden
-            
-            #line 89 "..\..\Views\Dilemmas\Index.cshtml"
-                             if (!isAllCategories)
-                            {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                                <span>&nbsp;&nbsp;&nbsp;</span>\r\n");
-
-WriteLiteral("                                <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 3724), Tuple.Create("\"", 3763)
-            
-            #line 92 "..\..\Views\Dilemmas\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3731), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
-            
-            #line default
-            #line hidden
-, 3731), false)
-);
-
-WriteLiteral(" class=\"Button--ask\"");
-
-WriteLiteral(">\r\n                                    <span");
-
-WriteLiteral(" data-icon=\"refresh\"");
-
-WriteLiteral("></span> \r\n                                    Lucky Dip\r\n                       " +
-"         </a>\r\n");
-
-            
-            #line 96 "..\..\Views\Dilemmas\Index.cshtml"
-                            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        </div>\r\n                    </div>\r\n");
-
-            
-            #line 99 "..\..\Views\Dilemmas\Index.cshtml"
+            #line 46 "..\..\Views\Dilemmas\Index.cshtml"
+                                                                
                 }
 
             

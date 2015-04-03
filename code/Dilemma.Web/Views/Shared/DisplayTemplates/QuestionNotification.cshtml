@@ -6,13 +6,10 @@
         <div><span data-icon="@(Model.IsMyQuestion ? "ask" : "advise")"></span></div>
     </div>
     <div class="Notification-summary">
-        <div class="Card-label--small">@Model.CreatedDateTime</div>
+        <div class="Card-label--small">@Model.CreatedDateTime.ToRelativeText()</div>
         <div class="Notification-summary-text">
             @Model.Text          
         </div>
-        <a href="#" class="Notification-summary-link">
-            View Details
-        </a> 
     </div><!-- Notification-summary -->
 </div>
 

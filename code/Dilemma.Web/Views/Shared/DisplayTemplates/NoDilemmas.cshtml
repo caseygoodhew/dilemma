@@ -1,0 +1,38 @@
+﻿@{
+    var showLuckDip = ViewBag.ShowLuckyDip == true;
+    var panic = ViewBag.DontPanic != true;
+}
+
+<div class="Card Dilemmas-empty">
+    @if(showLuckDip)
+    {
+        if (panic)
+        {
+            <h2>Oh no! there are no dilemmas in this category right now!</h2>
+        }
+        <p>Maybe you want to share your Dilemma? Or take a lucky dip!</p>
+    }
+    else
+    {
+        if (panic)
+        {
+            <h2>Oh no! there are no dilemmas to answer right now!</h2>
+        }
+        <p>Maybe you want to share your Dilemma?</p>
+    }
+
+    <div class="line">
+        <a href="@Url.Action("Index", "Ask")" class="Button--ask mb20">
+            <span data-icon="ask"></span> 
+            Share Your Dilemma
+        </a>                
+        @if (showLuckDip)
+        {
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <a href="@Url.Action("Index", "Dilemmas")" class="Button--ask">
+                <span data-icon="refresh"></span> 
+                Lucky Dip
+            </a>
+        }
+    </div>
+</div>

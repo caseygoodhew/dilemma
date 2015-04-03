@@ -745,6 +745,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>SidebarNotificationSummary.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Shared\DisplayTemplates\NoDilemmas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
