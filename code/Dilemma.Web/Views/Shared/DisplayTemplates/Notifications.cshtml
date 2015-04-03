@@ -1,9 +1,9 @@
-﻿@model Dilemma.Business.ViewModels.NotificationViewModel
+﻿@model Dilemma.Business.ViewModels.NotificationListViewModel
 
 <div class="Card Notification Card-go--container">
     <a href="#" class="Card-go--trigger"></a>
     <div class="Notification-score">
-        @if (Model.PointsAwarded == null || Model.PointsAwarded == 0)
+        @if (Model.TotalPointsAwarded == 0)
         {
             <div>
                 <span data-icon="notification"></span>
@@ -11,7 +11,7 @@
         }
         else
         {
-            <div>@string.Format("{0}{1}", Model.PointsAwarded > 0 ? "+" : string.Empty, Model.PointsAwarded)
+            <div>@string.Format("{0}{1}", Model.TotalPointsAwarded > 0 ? "+" : string.Empty, Model.TotalPointsAwarded)
                 <span class="Notification-score-label">Points</span>
             </div>
         }

@@ -20,6 +20,19 @@ namespace Dilemma.Data.Repositories
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
+        public int CountNewNotifications(int forUserId)
+        {
+            using (var context = new DilemmaContext())
+            {
+                return context.Notifications.Where(x => x.ForUser.UserId == forUserId).Count(x => x.ActionedDateTime == null);
+            }
+        }
+
+        public IEnumerable<T> GetTopUnread<T>(int getUserId, int max) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Gets all notifications for a given user.
         /// </summary>

@@ -6,16 +6,16 @@ namespace Dilemma.Business.Conversion
     /// <summary>
     /// Notification view model converter.
     /// </summary>
-    public static class NotificationViewModelConverter
+    internal static class NotificationViewModelConverter
     {
         /// <summary>
-        /// Converts a <see cref="Notification"/> to a <see cref="NotificationViewModel"/>.
+        /// Converts a <see cref="Notification"/> to a <see cref="InternalNotificationViewModel"/>.
         /// </summary>
         /// <param name="model">The <see cref="Notification"/> to convert.</param>
-        /// <returns>The <see cref="NotificationViewModel"/>.</returns>
-        public static NotificationViewModel FromNotification(Notification model)
+        /// <returns>The <see cref="InternalNotificationViewModel"/>.</returns>
+        internal static InternalNotificationViewModel FromNotification(Notification model)
         {
-            return new NotificationViewModel
+            return new InternalNotificationViewModel
                        {
                            NotificationType = model.NotificationType,
                            AnswerId = model.Answer == null ? null : model.Answer.AnswerId as int?,

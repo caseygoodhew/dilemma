@@ -3,6 +3,7 @@ using System.Web.Mvc;
 
 using Dilemma.Common;
 using Dilemma.Security.AccessFilters;
+using Dilemma.Web.ViewModels;
 
 namespace Dilemma.Web.Controllers
 {
@@ -13,7 +14,7 @@ namespace Dilemma.Web.Controllers
         // GET: /Profile/
         public ActionResult Index()
         {
-            return View(XTestData.GetMyProfileViewModel());
+            return View(new MyProfileViewModel());
         }
     }
 }

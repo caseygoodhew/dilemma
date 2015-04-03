@@ -62,7 +62,7 @@ namespace Dilemma.Business
             ConverterFactory.Register<DevelopmentUserViewModel, DevelopmentUser>(registrar, DevelopmentUserViewModelConverter.ToDevelopmentUser);
             ConverterFactory.Register<DevelopmentUser, DevelopmentUserViewModel>(registrar, DevelopmentUserViewModelConverter.FromDevelopmentUser);
 
-            ConverterFactory.Register<Notification, NotificationViewModel>(registrar, NotificationViewModelConverter.FromNotification);
+            ConverterFactory.Register<Notification, InternalNotificationViewModel>(registrar, NotificationViewModelConverter.FromNotification);
             ConverterFactory.Register<Moderation, ModerationViewModel>(registrar, ModerationViewModelConverter.FromModeration);
             ConverterFactory.Register<ModerationEntry, ModerationEntryViewModel>(registrar, ModerationEntryViewModelConverter.FromModerationEntry);
             ConverterFactory.Register<User, UserViewModel>(registrar, UserViewModelConverter.FromUser);

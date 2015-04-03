@@ -10,6 +10,10 @@ namespace Dilemma.Data.Repositories
     /// </summary>
     public interface INotificationRepository
     {
+        int CountNewNotifications(int forUserId);
+        
+        IEnumerable<T> GetTopUnread<T>(int getUserId, int max) where T : class;
+        
         /// <summary>
         /// Gets all notifications for a given user.
         /// </summary>

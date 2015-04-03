@@ -10,10 +10,14 @@ namespace Dilemma.Business.Services
     /// </summary>
     public interface INotificationService
     {
+        int CountNewNotifications();
+
+        IEnumerable<NotificationListViewModel> GetTopUnread(int max);
+        
         /// <summary>
         /// Gets a list of all notifications for a user.
         /// </summary>
-        /// <returns>A list of <see cref="NotificationViewModel"/>s.</returns>
+        /// <returns>A list of <see cref="InternalNotificationViewModel"/>s.</returns>
         IEnumerable<NotificationListViewModel> GetAll();
 
         /// <summary>

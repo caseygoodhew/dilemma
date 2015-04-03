@@ -7,7 +7,7 @@ namespace Dilemma.Business.ViewModels
     /// <summary>
     /// Notification view model.
     /// </summary>
-    public class NotificationViewModel
+    internal class InternalNotificationViewModel
     {
         /// <summary>
         /// Gets or sets the notification id.

@@ -16,6 +16,8 @@ namespace Dilemma.Web.Controllers
         
         private static readonly Lazy<IUserService> UserService = Locator.Lazy<IUserService>();
 
+        public static readonly Lazy<INotificationService> NotificationService = Locator.Lazy<INotificationService>();
+
         protected DilemmaBaseController()
         {
             ViewBag.Categories = SiteService.Value.GetCategories();
@@ -25,8 +27,9 @@ namespace Dilemma.Web.Controllers
         {
             return new SidebarViewModel
                        {
-                           Notifications = XTestData.GetNotifications(),
-                           UserStatsViewModel = UserService.Value.GetUserStatistics()
+                           UserStatsViewModel = UserService.Value.GetUserStatistics(),
+                           NewNotificationsCount = NotificationService.Value.CountNewNotifications(),
+                           Notifications = NotificationService.Value.GetAll()
                        };
         }
     }

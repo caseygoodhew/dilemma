@@ -8,18 +8,18 @@ using Disposable.Common;
 namespace Dilemma.Business.Services
 {
     /// <summary>
-    /// Groups <see cref="NotificationViewModel"/>s into <see cref="NotificationListViewModel"/>s.
+    /// Groups <see cref="InternalNotificationViewModel"/>s into <see cref="NotificationListViewModel"/>s.
     /// </summary>
     internal static class NotificationServiceGroupingExtensions
     {
         /// <summary>
-        /// Groups <see cref="NotificationViewModel"/>s into <see cref="NotificationListViewModel"/>s.
+        /// Groups <see cref="InternalNotificationViewModel"/>s into <see cref="NotificationListViewModel"/>s.
         /// </summary>
-        /// <param name="enumerable">The <see cref="NotificationViewModel"/>s to group.</param>
+        /// <param name="enumerable">The <see cref="InternalNotificationViewModel"/>s to group.</param>
         /// <returns>The <see cref="NotificationListViewModel"/>s.</returns>
-        internal static IEnumerable<NotificationListViewModel> GetGroupedQuestions(this IEnumerable<NotificationViewModel> enumerable)
+        internal static IEnumerable<NotificationListViewModel> GetGroupedQuestions(this IEnumerable<InternalNotificationViewModel> enumerable)
         {
-            var notificationViewModels = enumerable as IList<NotificationViewModel> ?? enumerable.ToList();
+            var notificationViewModels = enumerable as IList<InternalNotificationViewModel> ?? enumerable.ToList();
             notificationViewModels.ToList().ForEach(x => Guard.ArgumentNotNull(x.QuestionId, "QuestionId"));
             
             var grouped = notificationViewModels.GroupBy(x => new { QuestionId = x.QuestionId.Value, IsActioned = x.ActionedDateTime != null, x.NotificationType });
@@ -41,6 +41,7 @@ namespace Dilemma.Business.Services
                             CreatedDateTime = x.Items.First().CreatedDateTime,
                             NotificationType = x.NotificationType,
                             Occurrences = x.Items.Count(),
+                            TotalPointsAwarded = x.Items.Where(i => i.PointsAwarded.HasValue).Sum(i => i.PointsAwarded.Value),
                             RouteDataValue = x.QuestionId
                         });
         }

@@ -196,7 +196,6 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QuickAuthenticationController.cs" />
     <Compile Include="Controllers\SystemServerConfigurationController.cs" />
-    <Compile Include="Controllers\TestData.cs" />
     <Compile Include="DataTransferObjects\VoteDto.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />

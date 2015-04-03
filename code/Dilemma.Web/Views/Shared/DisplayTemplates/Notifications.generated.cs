@@ -35,7 +35,7 @@ namespace ASP
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/DisplayTemplates/Notifications.cshtml")]
-    public partial class _Views_Shared_DisplayTemplates_Notifications_cshtml_ : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.NotificationViewModel>
+    public partial class _Views_Shared_DisplayTemplates_Notifications_cshtml_ : System.Web.Mvc.WebViewPage<Dilemma.Business.ViewModels.NotificationListViewModel>
     {
         public _Views_Shared_DisplayTemplates_Notifications_cshtml_()
         {
@@ -66,7 +66,7 @@ WriteLiteral(">\r\n");
             #line hidden
             
             #line 6 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
-         if (Model.PointsAwarded == null || Model.PointsAwarded == 0)
+         if (Model.TotalPointsAwarded == 0)
         {
 
             
@@ -91,7 +91,7 @@ WriteLiteral("            <div>");
 
             
             #line 14 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
-            Write(string.Format("{0}{1}", Model.PointsAwarded > 0 ? "+" : string.Empty, Model.PointsAwarded));
+            Write(string.Format("{0}{1}", Model.TotalPointsAwarded > 0 ? "+" : string.Empty, Model.TotalPointsAwarded));
 
             
             #line default

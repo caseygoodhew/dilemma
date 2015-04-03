@@ -20,26 +20,31 @@ namespace Dilemma.Business.Services
 
         private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
 
+        public int CountNewNotifications()
+        {
+            return NotificationRepository.Value.CountNewNotifications(SecurityManager.Value.GetUserId());
+        }
+        
+        public IEnumerable<NotificationListViewModel> GetTopUnread(int max)
+        {
+            var all =
+                NotificationRepository.Value.GetTopUnread<InternalNotificationViewModel>(
+                    SecurityManager.Value.GetUserId(), max).ToList();
+            
+            return ToNotificationList(all);
+        }
+
         /// <summary>
         /// Gets a list of all notifications for a user.
         /// </summary>
-        /// <returns>A list of <see cref="NotificationViewModel"/>s.</returns>
+        /// <returns>A list of <see cref="InternalNotificationViewModel"/>s.</returns>
         public IEnumerable<NotificationListViewModel> GetAll()
         {
-            var all = NotificationRepository.Value.GetAll<NotificationViewModel>(SecurityManager.Value.GetUserId()).ToList();
-            
-            var byQuestions = all.Where(x => x.QuestionId != null).GetGroupedQuestions();
+            var all =
+                NotificationRepository.Value.GetAll<InternalNotificationViewModel>(SecurityManager.Value.GetUserId())
+                    .ToList();
 
-            var remaining = all.Where(x => x.ModerationId != null).Select(x => new NotificationListViewModel
-                                                                                 {
-                                                                                     CreatedDateTime = x.CreatedDateTime,
-                                                                                     IsActioned = x.ActionedDateTime != null,
-                                                                                     RouteDataValue = x.ModerationId.Value,
-                                                                                     NotificationType = x.NotificationType,
-                                                                                     Occurrences = 1
-                                                                                 });
-
-            return byQuestions.Concat(remaining).OrderByDescending(x => x.CreatedDateTime);
+            return ToNotificationList(all);
         }
 
         /// <summary>
@@ -50,6 +55,23 @@ namespace Dilemma.Business.Services
         public void Mute(NotificationLookupBy notificationLookupBy, int id)
         {
             NotificationRepository.Value.Mute(SecurityManager.Value.GetUserId(), notificationLookupBy, id);
+        }
+
+        private static IEnumerable<NotificationListViewModel> ToNotificationList(IList<InternalNotificationViewModel> all)
+        {
+            var byQuestions = all.Where(x => x.QuestionId != null).GetGroupedQuestions();
+
+            var remaining = all.Where(x => x.ModerationId != null).Select(x => new NotificationListViewModel
+            {
+                CreatedDateTime = x.CreatedDateTime,
+                IsActioned = x.ActionedDateTime != null,
+                RouteDataValue = x.ModerationId.Value,
+                NotificationType = x.NotificationType,
+                TotalPointsAwarded = x.PointsAwarded ?? 0,
+                Occurrences = 1
+            });
+
+            return byQuestions.Concat(remaining).OrderByDescending(x => x.CreatedDateTime);
         }
     }
 }

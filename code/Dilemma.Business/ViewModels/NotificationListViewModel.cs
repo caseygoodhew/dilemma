@@ -58,6 +58,8 @@ namespace Dilemma.Business.ViewModels
         /// </summary>
         public int Occurrences { get; set; }
 
+        public int TotalPointsAwarded { get; set; }
+
         /// <summary>
         /// Gets the message relating to this notification.
         /// </summary>

@@ -10,7 +10,7 @@ namespace Dilemma.Web.ViewModels
 
         public IEnumerable<QuestionViewModel> Answers;
 
-        public IEnumerable<NotificationViewModel> Notifications;
+        public IEnumerable<NotificationListViewModel> Notifications;
 
         public SidebarViewModel Sidebar;
     }

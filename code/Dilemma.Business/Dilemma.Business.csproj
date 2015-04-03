@@ -78,7 +78,7 @@
     <Compile Include="ViewModels\ModerationViewModel.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="ViewModels\NotificationViewModel.cs" />
+    <Compile Include="ViewModels\InternalNotificationViewModel.cs" />
     <Compile Include="ViewModels\DevelopmentUserViewModel.cs" />
     <Compile Include="Services\IDevelopmentService.cs" />
     <Compile Include="Services\SiteService.cs" />
