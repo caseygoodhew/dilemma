@@ -27,7 +27,7 @@ namespace Dilemma.Web.Controllers
         {
             return new SidebarViewModel
                        {
-                           UserStatsViewModel = UserService.Value.GetUserStatistics(),
+                           UserStatistics = UserService.Value.GetUserStatistics(),
                            NewNotificationsCount = NotificationService.Value.CountNewNotifications(),
                            Notifications = NotificationService.Value.GetTopUnread(2)
                        };

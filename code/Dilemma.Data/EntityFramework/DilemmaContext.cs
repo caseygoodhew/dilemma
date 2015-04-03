@@ -89,6 +89,8 @@ namespace Dilemma.Data.EntityFramework
         /// </summary>
         public DbSet<LastRunLog> LastRunLog { get; set; }
 
+        public DbSet<Rank> Rank { get; set; }
+
         /// <summary>
         /// Called the first that the the DbContext is used in each session.
         /// </summary>
@@ -131,7 +133,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new UserPointRetirementMap());
             modelBuilder.Configurations.Add(new LastRunLogMap());
             modelBuilder.Configurations.Add(new VoteCountRetirementMap());
-            modelBuilder.Configurations.Add(new UserStatisticsMap());
+            modelBuilder.Configurations.Add(new RankMap());
         }
     }
 }

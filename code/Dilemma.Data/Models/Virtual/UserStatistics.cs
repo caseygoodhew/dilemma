@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Dilemma.Data.Models.Virtual
 {
     /// <summary>
@@ -5,6 +7,7 @@ namespace Dilemma.Data.Models.Virtual
     /// </summary>
     public class UserStatistics
     {
+        [Key]
         public int UserId { get; set; }
 
         public int TotalQuestions { get; set; }

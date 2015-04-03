@@ -23,5 +23,15 @@ namespace Dilemma.Business.Services
         {
             return SiteRepository.Value.GetCategories<CategoryViewModel>();
         }
+
+        public RankViewModel GetRankByPoints(int points)
+        {
+            return SiteRepository.Value.GetRankByPoints<RankViewModel>(points);
+        }
+
+        public IEnumerable<RankViewModel> GetRanks()
+        {
+            return SiteRepository.Value.GetRanks<RankViewModel>();
+        }
     }
 }

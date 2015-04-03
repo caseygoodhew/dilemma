@@ -109,13 +109,13 @@ WriteLiteral(" class=\"Card Card--sidebar-profile\"");
 
 WriteLiteral(">\r\n    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 793), Tuple.Create("\"", 873)
+WriteAttribute("class", Tuple.Create(" class=\"", 793), Tuple.Create("\"", 874)
 , Tuple.Create(Tuple.Create("", 801), Tuple.Create("Card-section", 801), true)
 , Tuple.Create(Tuple.Create(" ", 813), Tuple.Create("Rank", 814), true)
 , Tuple.Create(Tuple.Create(" ", 818), Tuple.Create("user-is-level-", 819), true)
             
             #line 29 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-, Tuple.Create(Tuple.Create("", 833), Tuple.Create<System.Object, System.Int32>(Model.UserStatsViewModel.UserRank.Level
+, Tuple.Create(Tuple.Create("", 833), Tuple.Create<System.Object, System.Int32>(Model.UserStatistics.UserRank.Rank.Level
             
             #line default
             #line hidden
@@ -138,7 +138,7 @@ WriteLiteral(">\r\n                Your rank: ");
 
             
             #line 34 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                      Write(Model.UserStatsViewModel.UserRank.Name);
+                      Write(Model.UserStatistics.UserRank.Rank.Name);
 
             
             #line default
@@ -155,16 +155,16 @@ WriteLiteral(">\r\n                <div");
 
 WriteLiteral(" class=\"Rank-ometer-amount\"");
 
-WriteAttribute("style", Tuple.Create(" style=\"", 1256), Tuple.Create("\"", 1316)
-, Tuple.Create(Tuple.Create("", 1264), Tuple.Create("width:", 1264), true)
+WriteAttribute("style", Tuple.Create(" style=\"", 1258), Tuple.Create("\"", 1314)
+, Tuple.Create(Tuple.Create("", 1266), Tuple.Create("width:", 1266), true)
             
             #line 40 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-, Tuple.Create(Tuple.Create("", 1270), Tuple.Create<System.Object, System.Int32>(Model.UserStatsViewModel.UserRank.Percentage
+, Tuple.Create(Tuple.Create("", 1272), Tuple.Create<System.Object, System.Int32>(Model.UserStatistics.UserRank.Percentage
             
             #line default
             #line hidden
-, 1270), false)
-, Tuple.Create(Tuple.Create("", 1315), Tuple.Create("%", 1315), true)
+, 1272), false)
+, Tuple.Create(Tuple.Create("", 1313), Tuple.Create("%", 1313), true)
 );
 
 WriteLiteral("></div>\r\n            </div> \r\n            <div");
@@ -192,7 +192,7 @@ WriteLiteral(">");
 
             
             #line 53 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                  Write(Model.UserStatsViewModel.TotalQuestions);
+                                  Write(Model.UserStatistics.TotalQuestions);
 
             
             #line default
@@ -209,7 +209,7 @@ WriteLiteral(">");
 
             
             #line 57 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                  Write(Model.UserStatsViewModel.TotalAnswers);
+                                  Write(Model.UserStatistics.TotalAnswers);
 
             
             #line default
@@ -226,7 +226,7 @@ WriteLiteral(">");
 
             
             #line 61 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                  Write(Model.UserStatsViewModel.TotalStarVotes);
+                                  Write(Model.UserStatistics.TotalStarVotes);
 
             
             #line default
@@ -243,7 +243,7 @@ WriteLiteral(">");
 
             
             #line 65 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-                                  Write(Model.UserStatsViewModel.TotalPopularVotes);
+                                  Write(Model.UserStatistics.TotalPopularVotes);
 
             
             #line default
@@ -275,14 +275,14 @@ WriteLiteral("            <a");
 
 WriteLiteral(" class=\"Card-section Card-section--notification Card-go--container\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2563), Tuple.Create("\"", 2601)
+WriteAttribute("href", Tuple.Create(" href=\"", 2545), Tuple.Create("\"", 2583)
             
             #line 74 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-        , Tuple.Create(Tuple.Create("", 2570), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
+        , Tuple.Create(Tuple.Create("", 2552), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
             
             #line default
             #line hidden
-, 2570), false)
+, 2552), false)
 );
 
 WriteLiteral(">\r\n                <span");

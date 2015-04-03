@@ -15,5 +15,9 @@ namespace Dilemma.Business.Services
         /// </summary>
         /// <returns>The <see cref="CategoryViewModel"/>s.</returns>
         IEnumerable<CategoryViewModel> GetCategories();
+
+        RankViewModel GetRankByPoints(int points);
+
+        IEnumerable<RankViewModel> GetRanks();
     }
 }

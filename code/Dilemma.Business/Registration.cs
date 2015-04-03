@@ -68,6 +68,8 @@ namespace Dilemma.Business
             ConverterFactory.Register<User, UserViewModel>(registrar, UserViewModelConverter.FromUser);
             ConverterFactory.Register<LastRunLog, LastRunLogViewModel>(registrar, LastRunLogViewModelConverter.FromLastRunLog);
             ConverterFactory.Register<UserStatistics, UserStatisticsViewModel>(registrar, UserStatisticsViewModelConverter.FromUserStatistics);
+            ConverterFactory.Register<Rank, RankViewModel>(registrar, RankViewModelConverter.FromRank);
         }
     }
 }
+

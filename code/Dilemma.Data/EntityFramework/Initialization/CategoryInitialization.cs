@@ -21,8 +21,6 @@ namespace Dilemma.Data.EntityFramework.Initialization
             {
                 context.Categories.Add(new Category { Name = category });
             }
-
-            // TODO: Cleanup unused Categories?
         }
     }
 }

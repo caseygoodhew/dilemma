@@ -79,6 +79,7 @@
     <Compile Include="EntityFramework\Initialization\DatabaseInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\LastRunLogInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\PointConfigurationInitialization.cs" />
+    <Compile Include="EntityFramework\Initialization\RankInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\SystemConfigurationInitialization.cs" />
     <Compile Include="EntityFramework\Initialization\CategoryInitialization.cs" />
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
@@ -86,7 +87,7 @@
     <Compile Include="EntityFramework\Maps\LastRunLogMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionRetirementMap.cs" />
     <Compile Include="EntityFramework\Maps\UserPointMap.cs" />
-    <Compile Include="EntityFramework\Maps\UserStatisticsMap.cs" />
+    <Compile Include="EntityFramework\Maps\RankMap.cs" />
     <Compile Include="EntityFramework\Maps\VoteMap.cs" />
     <Compile Include="Migrations\201502060552490_Migration.cs" />
     <Compile Include="Migrations\201502060552490_Migration.Designer.cs">
@@ -152,7 +153,16 @@
     <Compile Include="Migrations\201504030452571_Migration15.Designer.cs">
       <DependentUpon>201504030452571_Migration15.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504031057432_Migration16.cs" />
+    <Compile Include="Migrations\201504031057432_Migration16.Designer.cs">
+      <DependentUpon>201504031057432_Migration16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504031108144_Migration17.cs" />
+    <Compile Include="Migrations\201504031108144_Migration17.Designer.cs">
+      <DependentUpon>201504031108144_Migration17.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\LastRunLog.cs" />
+    <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Virtual\CloseQuestions.cs" />
     <Compile Include="Models\Virtual\ExpireAnswerSlots.cs" />
     <Compile Include="Models\Virtual\ModerationRetirement.cs" />
@@ -284,6 +294,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504030452571_Migration15.resx">
       <DependentUpon>201504030452571_Migration15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504031057432_Migration16.resx">
+      <DependentUpon>201504031057432_Migration16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504031108144_Migration17.resx">
+      <DependentUpon>201504031108144_Migration17.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

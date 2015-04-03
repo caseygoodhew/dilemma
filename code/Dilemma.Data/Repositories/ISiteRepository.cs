@@ -15,5 +15,9 @@ namespace Dilemma.Data.Repositories
         /// <typeparam name="T">The type to get.</typeparam>
         /// <returns>A list of <see cref="Category"/>s converted to type T.</returns>
         IList<T> GetCategories<T>() where T : class;
+
+        IList<T> GetRanks<T>() where T : class;
+
+        T GetRankByPoints<T>(int points) where T : class;
     }
 }

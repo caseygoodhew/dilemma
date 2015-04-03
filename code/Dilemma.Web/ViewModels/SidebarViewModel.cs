@@ -6,7 +6,7 @@ namespace Dilemma.Web.ViewModels
 {
     public class SidebarViewModel
     {
-        public UserStatisticsViewModel UserStatsViewModel { get; set; }
+        public UserStatisticsViewModel UserStatistics { get; set; }
 
         public int NewNotificationsCount { get; set; }
 

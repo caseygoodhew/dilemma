@@ -28,11 +28,44 @@ namespace Dilemma.Data.Repositories
             var categories = Cache.Value.Get<IList<Category>>(
                 () =>
                     {
-                        var context = new DilemmaContext();
-                        return context.Categories.ToList();
+                        using (var context = new DilemmaContext())
+                        {
+                            return context.Categories.ToList();
+                        }
                     });
             
             return ConverterFactory.ConvertMany<Category, T>(categories).ToList();
+        }
+
+        public IList<T> GetRanks<T>() where T : class
+        {
+            var ranks = GetRanks();
+            return ConverterFactory.ConvertMany<Rank, T>(ranks).ToList();
+        }
+
+        public T GetRankByPoints<T>(int points) where T : class
+        {
+            var ranks = GetRanks().OrderByDescending(x => x.PointsRequired);
+            var rank = ranks.SkipWhile(x => x.PointsRequired > points).FirstOrDefault() ?? ranks.Last();
+
+            return ConverterFactory.ConvertOne<Rank, T>(rank);
+        }
+
+        private static IEnumerable<Rank> GetRanks()
+        {
+            return Cache.Value.Get<IList<Rank>>(
+                () =>
+                {
+                    using (var context = new DilemmaContext())
+                    {
+                        return context.Rank.ToList().OrderBy(x => x.PointsRequired).Select(
+                            (x, i) =>
+                            {
+                                x.Level = i + 1;
+                                return x;
+                            }).ToList();
+                    }
+                });
         }
     }
 }

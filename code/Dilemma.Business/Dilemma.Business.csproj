@@ -53,6 +53,7 @@
     <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\AnswerViewModelConverter.cs" />
     <Compile Include="Conversion\LastRunLogViewModelConverter.cs" />
+    <Compile Include="Conversion\RankViewModelConverter.cs" />
     <Compile Include="Conversion\ServerConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\PointConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\ModerationEntryViewModelConverter.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Registration.cs" />
     <Compile Include="Validators\ValidatorFactory.cs" />
     <Compile Include="Validators\QuestionViewModelValidator.cs" />
+    <Compile Include="ViewModels\RankViewModel.cs" />
     <Compile Include="ViewModels\RejectModerationViewModel.cs" />
     <Compile Include="ViewModels\ServerConfigurationViewModel.cs" />
     <Compile Include="ViewModels\SystemConfigurationViewModel.cs" />

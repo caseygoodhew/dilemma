@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.Data.Models;
@@ -17,6 +18,8 @@ namespace Dilemma.Business.Conversion
     public static class AnswerViewModelConverter
     {
         private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
+
+        private static readonly Lazy<ISiteService> SiteService = Locator.Lazy<ISiteService>();
 
         /// <summary>
         /// Converts an <see cref="AnswerViewModel"/> to an <see cref="Answer"/>.
@@ -44,6 +47,8 @@ namespace Dilemma.Business.Conversion
 
             var userVotes = model.UserVotes ?? new List<int>();
 
+            var rank = SiteService.Value.GetRankByPoints(model.User.TotalPoints);
+
             return new AnswerViewModel
                 {
                     AnswerId = model.AnswerId,
@@ -55,7 +60,7 @@ namespace Dilemma.Business.Conversion
                     VoteCount = userVotes.Count,
                     HasMyVote = userVotes.Contains(userId),
                     // TODO: this shouldn't be hardcoded
-                    UserLevel = 1
+                    UserLevel = rank.Level
                 };
         }
     }

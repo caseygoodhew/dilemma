@@ -42,7 +42,5 @@ namespace Dilemma.Data.Models
         public int HistoricStarVotes { get; set; }
 
         public int HistoricPopularVotes { get; set; }
-        
-        
     }
 }

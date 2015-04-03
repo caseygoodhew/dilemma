@@ -26,18 +26,18 @@
 </div>
         
 <div class="Card Card--sidebar-profile">
-    <div class="Card-section Rank user-is-level-@Model.UserStatsViewModel.UserRank.Level">
+    <div class="Card-section Rank user-is-level-@Model.UserStatistics.UserRank.Rank.Level">
 
         <div class="Rank-image">
             <span data-icon="user-level"></span>
             <div class="Rank-text">
-                Your rank: @Model.UserStatsViewModel.UserRank.Name
+                Your rank: @Model.UserStatistics.UserRank.Rank.Name
             </div>
         </div><!-- Rank-image -->
 
         <div class="Rank-ometer-container">
             <div class="Rank-ometer">
-                <div class="Rank-ometer-amount" style="width:@Model.UserStatsViewModel.UserRank.Percentage%"></div>
+                <div class="Rank-ometer-amount" style="width:@Model.UserStatistics.UserRank.Percentage%"></div>
             </div> 
             <div class="Image-ometer ">
                 <img src="/Content/images/wise-ometer.png">
@@ -50,19 +50,19 @@
     <div class="Rank-table">
         <table>
             <tr>
-                <td class="Rank-score">@Model.UserStatsViewModel.TotalQuestions</td>
+                <td class="Rank-score">@Model.UserStatistics.TotalQuestions</td>
                 <th class="Rank-facet">Dilemmas posed</th>
             </tr>
             <tr>
-                <td class="Rank-score">@Model.UserStatsViewModel.TotalAnswers</td>
+                <td class="Rank-score">@Model.UserStatistics.TotalAnswers</td>
                 <th class="Rank-facet">Answers given</th>
             </tr>
             <tr>
-                <td class="Rank-score">@Model.UserStatsViewModel.TotalStarVotes</td>
+                <td class="Rank-score">@Model.UserStatistics.TotalStarVotes</td>
                 <th class="Rank-facet">Best answers</th>
             </tr>
             <tr>
-                <td class="Rank-score">@Model.UserStatsViewModel.TotalPopularVotes</td>
+                <td class="Rank-score">@Model.UserStatistics.TotalPopularVotes</td>
                 <th class="Rank-facet">Up-votes</th>
             </tr>
         </table> 
