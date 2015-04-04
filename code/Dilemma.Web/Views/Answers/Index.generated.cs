@@ -45,14 +45,7 @@ namespace ASP
             
             #line 3 "..\..\Views\Answers\Index.cshtml"
   
-    ViewBag.IsDilemmaViewPage = true;
-
-    var userHasAnswered = Model.QuestionDetails.QuestionViewModel.Answers.Any(x => x.IsMyAnswer);
-
-    var showAnswerNow = !Model.QuestionDetails.QuestionViewModel.IsMyQuestion 
-        && !userHasAnswered 
-        && Model.QuestionDetails.QuestionViewModel.TotalAnswers < Model.QuestionDetails.QuestionViewModel.MaxAnswers;
-                
+    ViewBag.IsDilemmaViewPage = true;                
 
             
             #line default
@@ -82,7 +75,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("        ");
 
             
-            #line 24 "..\..\Views\Answers\Index.cshtml"
+            #line 17 "..\..\Views\Answers\Index.cshtml"
    Write(Html.DisplayFor(x => x.Sidebar, "Sidebar"));
 
             
@@ -99,7 +92,7 @@ WriteLiteral(">\r\n    \r\n");
 WriteLiteral("        ");
 
             
-            #line 29 "..\..\Views\Answers\Index.cshtml"
+            #line 22 "..\..\Views\Answers\Index.cshtml"
    Write(Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel, "QuestionSummary"));
 
             
@@ -108,14 +101,14 @@ WriteLiteral("        ");
 WriteLiteral("\r\n          \r\n");
 
             
-            #line 31 "..\..\Views\Answers\Index.cshtml"
+            #line 24 "..\..\Views\Answers\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 31 "..\..\Views\Answers\Index.cshtml"
-         if (showAnswerNow)
+            #line 24 "..\..\Views\Answers\Index.cshtml"
+         if (Model.QuestionDetails.CanAnswer)
         {
 
             
@@ -174,7 +167,111 @@ WriteLiteral("></textarea>\r\n                    </div>\r\n                </di
 "ons -->\r\n            </form>\r\n");
 
             
-            #line 47 "..\..\Views\Answers\Index.cshtml"
+            #line 40 "..\..\Views\Answers\Index.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        \r\n");
+
+            
+            #line 42 "..\..\Views\Answers\Index.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 42 "..\..\Views\Answers\Index.cshtml"
+         if (Model.QuestionDetails.CanFollowup)
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <form");
+
+WriteLiteral(" class=\"Card Answer--window\"");
+
+WriteLiteral(" action=\"\"");
+
+WriteLiteral(">\r\n                <div");
+
+WriteLiteral(" class=\"Card-section Card-info\"");
+
+WriteLiteral(">\r\n                    What did you do?\r\n                </div>\r\n                " +
+"<div");
+
+WriteLiteral(" class=\"Card-section line\"");
+
+WriteLiteral(">\r\n                    <button");
+
+WriteLiteral(" type=\"submit\"");
+
+WriteLiteral(" class=\"Button Button--answer\"");
+
+WriteLiteral(">\r\n                        <span");
+
+WriteLiteral(" data-icon=\"advise\"");
+
+WriteLiteral("></span>\r\n                        <span");
+
+WriteLiteral(" class=\"Button-label\"");
+
+WriteLiteral(">Followup</span>\r\n                    </button>\r\n                    <div");
+
+WriteLiteral(" class=\"textarea-wrap\"");
+
+WriteLiteral(">\r\n                        <textarea");
+
+WriteLiteral(" name=\"answer\"");
+
+WriteLiteral(" id=\"\"");
+
+WriteLiteral(" cols=\"30\"");
+
+WriteLiteral(" rows=\"2\"");
+
+WriteLiteral(" class=\"form-control js-activate-answer-form\"");
+
+WriteLiteral(" placeholder=\"Tell your adoring fans how it all worked out for you in the end\"");
+
+WriteLiteral("></textarea>\r\n                    </div>\r\n                </div><!-- Dilemma-acti" +
+"ons -->\r\n            </form>\r\n");
+
+            
+            #line 58 "..\..\Views\Answers\Index.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        \r\n");
+
+            
+            #line 60 "..\..\Views\Answers\Index.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 60 "..\..\Views\Answers\Index.cshtml"
+         if (Model.QuestionDetails.QuestionViewModel.HasFollowup)
+        {
+            
+            
+            #line default
+            #line hidden
+            
+            #line 62 "..\..\Views\Answers\Index.cshtml"
+       Write(Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel.Followup, "FollowupResponse"));
+
+            
+            #line default
+            #line hidden
+            
+            #line 62 "..\..\Views\Answers\Index.cshtml"
+                                                                                                   
         }
 
             
@@ -187,13 +284,13 @@ WriteLiteral(" class=\"Answers\"");
 WriteLiteral(">\r\n            \r\n");
 
             
-            #line 51 "..\..\Views\Answers\Index.cshtml"
+            #line 67 "..\..\Views\Answers\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 51 "..\..\Views\Answers\Index.cshtml"
+            #line 67 "..\..\Views\Answers\Index.cshtml"
              foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
             {
                 
@@ -201,14 +298,14 @@ WriteLiteral(">\r\n            \r\n");
             #line default
             #line hidden
             
-            #line 53 "..\..\Views\Answers\Index.cshtml"
+            #line 69 "..\..\Views\Answers\Index.cshtml"
            Write(Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion }));
 
             
             #line default
             #line hidden
             
-            #line 53 "..\..\Views\Answers\Index.cshtml"
+            #line 69 "..\..\Views\Answers\Index.cshtml"
                                                                                                                                                     
             }
 
@@ -218,14 +315,14 @@ WriteLiteral(">\r\n            \r\n");
 WriteLiteral("                \r\n");
 
             
-            #line 56 "..\..\Views\Answers\Index.cshtml"
+            #line 72 "..\..\Views\Answers\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Views\Answers\Index.cshtml"
-             if (showAnswerNow)
+            #line 72 "..\..\Views\Answers\Index.cshtml"
+             if (Model.QuestionDetails.CanAnswer)
             { 
 
             
@@ -255,14 +352,14 @@ WriteLiteral(" class=\"mt10 mb20\"");
 
 WriteLiteral(">What do you think?</h3>\r\n                        \r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2599), Tuple.Create("\"", 2627)
+WriteAttribute("href", Tuple.Create(" href=\"", 3391), Tuple.Create("\"", 3419)
             
-            #line 64 "..\..\Views\Answers\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2606), Tuple.Create<System.Object, System.Int32>(Url.Action("Answer")
+            #line 80 "..\..\Views\Answers\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 3398), Tuple.Create<System.Object, System.Int32>(Url.Action("Answer")
             
             #line default
             #line hidden
-, 2606), false)
+, 3398), false)
 );
 
 WriteLiteral(" class=\"Button--ask btn-success\"");
@@ -276,7 +373,7 @@ WriteLiteral("></span>\r\n                            Answer Now\r\n            
 "\n");
 
             
-            #line 70 "..\..\Views\Answers\Index.cshtml"
+            #line 86 "..\..\Views\Answers\Index.cshtml"
             }
 
             

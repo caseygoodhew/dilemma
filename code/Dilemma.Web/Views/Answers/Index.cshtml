@@ -1,14 +1,7 @@
 ﻿@model Dilemma.Web.ViewModels.DilemmaDetailsViewModel
 
 @{
-    ViewBag.IsDilemmaViewPage = true;
-
-    var userHasAnswered = Model.QuestionDetails.QuestionViewModel.Answers.Any(x => x.IsMyAnswer);
-
-    var showAnswerNow = !Model.QuestionDetails.QuestionViewModel.IsMyQuestion 
-        && !userHasAnswered 
-        && Model.QuestionDetails.QuestionViewModel.TotalAnswers < Model.QuestionDetails.QuestionViewModel.MaxAnswers;
-                
+    ViewBag.IsDilemmaViewPage = true;                
 }
 
     <h1 class="section-label js-sticky">
@@ -28,7 +21,7 @@
     
         @Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel, "QuestionSummary")
           
-        @if (showAnswerNow)
+        @if (Model.QuestionDetails.CanAnswer)
         {
             <form class="Card Answer--window" action="">
                 <div class="Card-section Card-info">
@@ -45,6 +38,29 @@
                 </div><!-- Dilemma-actions -->
             </form>
         }
+        
+        @if (Model.QuestionDetails.CanFollowup)
+        {
+            <form class="Card Answer--window" action="">
+                <div class="Card-section Card-info">
+                    What did you do?
+                </div>
+                <div class="Card-section line">
+                    <button type="submit" class="Button Button--answer">
+                        <span data-icon="advise"></span>
+                        <span class="Button-label">Followup</span>
+                    </button>
+                    <div class="textarea-wrap">
+                        <textarea name="answer" id="" cols="30" rows="2" class="form-control js-activate-answer-form" placeholder="Tell your adoring fans how it all worked out for you in the end"></textarea>
+                    </div>
+                </div><!-- Dilemma-actions -->
+            </form>
+        }
+        
+        @if (Model.QuestionDetails.QuestionViewModel.HasFollowup)
+        {
+            @Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel.Followup, "FollowupResponse")
+        }
 
         <div class="Answers">
             
@@ -53,7 +69,7 @@
                 @Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion })
             }
                 
-            @if (showAnswerNow)
+            @if (Model.QuestionDetails.CanAnswer)
             { 
                 <hr  style="margin-left: 60px;" />
                 <div class="Card align-center">

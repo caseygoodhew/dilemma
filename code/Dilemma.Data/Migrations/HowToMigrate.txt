@@ -11,9 +11,20 @@ APPLY
 Update-Database -ProjectName Dilemma.Data -Verbose
 
 ROLLBACK
-Update-Database -ProjectName Dilemma.Data -TargetMigration:"Migration1"
+Update-Database -ProjectName Dilemma.Data -TargetMigration:"201504031318593_Migration18"
 
 RELEASE:
 Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: $InitialDatabase
 
 Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: 201502200700054_Migration10 -TargetMigration: AddPostAbstract
+
+
+
+
+
+
+Access IISExpress from local network:
+C:\Users\Casey\Documents\IISExpress\config\applicationhost.config -> Add <binding protocol="http" bindingInformation="*:58938:192.168.1.42" /> for the correct site
+
+netsh http add urlacl url=http://192.168.1.42:58938/ user=everyone
+netsh advfirewall firewall add rule name="IISExpressWeb" dir=in protocol=tcp localport=58938 profile=private remoteip=localsubnet action=allow

@@ -9,6 +9,8 @@ namespace Dilemma.Common
         
         PostRejected,
 
-        PointsAwarded
+        PointsAwarded,
+
+        QuestionFollowuped
     }
 }

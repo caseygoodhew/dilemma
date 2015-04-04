@@ -18,6 +18,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             Property(p => p.Text).HasMaxLength(2000);
             Property(p => p.CreatedDateTime).IsRequired();
             Property(p => p.LastTouchedDateTime).IsRequired();
+            Property(p => p.AnswerState).IsRequired();
 
             HasRequired(p => p.User).WithMany().WillCascadeOnDelete(false);
 

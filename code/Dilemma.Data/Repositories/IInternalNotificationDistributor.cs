@@ -13,6 +13,12 @@ namespace Dilemma.Data.Repositories
         void OnAnswerStateChange(IMessenger<AnswerDataAction> messenger);
 
         /// <summary>
+        /// To be called when an followup state changes.
+        /// </summary>
+        /// <param name="messenger">The <see cref="IMessenger{FollowupDataAction}"/>.</param>
+        void OnFollowupStateChange(IMessenger<FollowupDataAction> messenger);
+
+        /// <summary>
         /// To be called when a moderation state changes.
         /// </summary>
         /// <param name="messenger">The <see cref="IMessenger{ModerationState}"/>.</param>

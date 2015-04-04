@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="ActiveState.cs" />
     <Compile Include="AnswerState.cs" />
+    <Compile Include="FollowupState.cs" />
     <Compile Include="ITestingConfiguration.cs" />
     <Compile Include="ModerationState.cs" />
     <Compile Include="ModerationFor.cs" />

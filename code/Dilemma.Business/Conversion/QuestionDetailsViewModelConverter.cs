@@ -30,13 +30,6 @@ namespace Dilemma.Business.Conversion
         public static Question ToQuestion(QuestionDetailsViewModel viewModel)
         {
             return ConverterFactory.ConvertOne<QuestionViewModel, Question>(viewModel.QuestionViewModel);
-
-            /*if (viewModel.Answer != null && viewModel.Answer.AnswerId != null)
-            {
-                question.Answers.Add(ConverterFactory.ConvertOne<AnswerViewModel, Answer>(viewModel.Answer));
-            }
-
-            return question;*/
         }
 
         /// <summary>
@@ -46,11 +39,14 @@ namespace Dilemma.Business.Conversion
         /// <returns>The resultant <see cref="QuestionDetailsViewModel"/>.</returns>
         public static QuestionDetailsViewModel FromQuestion(Question model)
         {
+            var questionViewModel = ConverterFactory.ConvertOne<Question, QuestionViewModel>(model);
+            
             return new QuestionDetailsViewModel
                        {
-                           QuestionViewModel = ConverterFactory.ConvertOne<Question, QuestionViewModel>(model),
+                           QuestionViewModel = questionViewModel,
                            CanAnswer = CanAnswer(model),
-                           CanVote = CanVote(model)
+                           CanVote = CanVote(model),
+                           CanFollowup = !questionViewModel.HasFollowup && CanFollowup(model)
                        };
         }
 
@@ -111,6 +107,28 @@ namespace Dilemma.Business.Conversion
             }
 
             return true;
+        }
+
+        private static bool CanFollowup(Question model)
+        {
+            if (model.QuestionState != QuestionState.Approved)
+            {
+                return false;
+            }
+
+            if (!model.ClosedDateTime.HasValue)
+            {
+                return false;
+            }
+
+            var userId = SecurityManager.Value.GetUserId();
+
+            if (model.User.UserId != userId)
+            {
+                return false;
+            }
+
+            return model.Answers.SelectMany(x => x.UserVotes).Contains(userId);
         }
     }
 }

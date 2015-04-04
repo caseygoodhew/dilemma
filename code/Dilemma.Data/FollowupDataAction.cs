@@ -1,6 +1,6 @@
 namespace Dilemma.Data
 {
-    internal enum AnswerDataAction
+    internal enum FollowupDataAction
     {
         Created,
         StateChanged

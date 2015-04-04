@@ -42,6 +42,10 @@ namespace Dilemma.Business
             ConverterFactory.Register<AnswerViewModel, Answer>(registrar, AnswerViewModelConverter.ToAnswer);
             ConverterFactory.Register<Answer, AnswerViewModel>(registrar, AnswerViewModelConverter.FromAnswer);
 
+            registrar.Register<IValidator<FollowupViewModel>>(() => new FollowupViewModelValidator());
+            ConverterFactory.Register<FollowupViewModel, Followup>(registrar, FollowupViewModelConverter.ToFollowup);
+            ConverterFactory.Register<Followup, FollowupViewModel>(registrar, FollowupViewModelConverter.FromFollowup);
+
             registrar.Register<IValidator<SystemConfigurationViewModel>>(() => new SystemConfigurationViewModelValidator());
             ConverterFactory.Register<SystemConfigurationViewModel, SystemConfiguration>(registrar, SystemConfigurationViewModelConverter.ToSystemConfiguration);
             ConverterFactory.Register<SystemConfiguration, SystemConfigurationViewModel>(registrar, SystemConfigurationViewModelConverter.FromSystemConfiguration);

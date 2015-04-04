@@ -21,5 +21,11 @@ namespace Dilemma.Data.Repositories
         /// </summary>
         /// <param name="messenger">The answer <see cref="IMessenger{T}"/>.</param>
         void OnAnswerCreated(IMessenger<AnswerDataAction> messenger);
+
+        /// <summary>
+        /// To be called when an followup is created.
+        /// </summary>
+        /// <param name="messenger">The followup <see cref="IMessenger{T}"/>.</param>
+        void OnFollowupCreated(IMessenger<FollowupDataAction> messenger);
     }
 }

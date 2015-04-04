@@ -23,6 +23,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             // needs to remain optional for valid insert operation
             HasOptional(p => p.Question).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Answer).WithMany().WillCascadeOnDelete(false);
+            HasOptional(p => p.Followup).WithMany().WillCascadeOnDelete(false);
 
             HasMany(x => x.ModerationEntries).WithRequired(x => x.Moderation).WillCascadeOnDelete(false);
         }

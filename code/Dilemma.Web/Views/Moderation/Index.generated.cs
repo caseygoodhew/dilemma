@@ -111,13 +111,13 @@ WriteLiteral("\r\n            </dd>\r\n        \r\n            <dt>\r\n         
 "essage is correct -> might be Last())\r\n            </dt>\r\n\r\n            <dd>\r\n  " +
 "              <span");
 
-WriteLiteral(" style=\"white-space: pre\"");
+WriteLiteral(" style=\"white-space: pre-wrap\"");
 
 WriteLiteral(">");
 
             
             #line 30 "..\..\Views\Moderation\Index.cshtml"
-                                          Write(Model.ModerationEntries.First().Message);
+                                               Write(Model.ModerationEntries.First().Message);
 
             
             #line default

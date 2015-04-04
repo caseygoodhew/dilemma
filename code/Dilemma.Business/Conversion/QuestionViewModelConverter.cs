@@ -44,6 +44,9 @@ namespace Dilemma.Business.Conversion
         public static QuestionViewModel FromQuestion(Question model)
         {
             var answers = ConverterFactory.ConvertMany<Answer, AnswerViewModel>(model.Answers);
+            var followup = model.Followup == null ? null : ConverterFactory.ConvertOne<Followup, FollowupViewModel>(model.Followup);
+            var includeFollowup = followup != null && !followup.IsRejected
+                                  && (followup.IsApproved || followup.IsMyFollowup);
             
             var userId = SecurityManager.Value.GetUserId();
 
@@ -63,7 +66,9 @@ namespace Dilemma.Business.Conversion
                            IsRejected = model.QuestionState == QuestionState.Rejected,
                            IsOpen = model.QuestionState == QuestionState.Approved && !model.ClosedDateTime.HasValue,
                            IsClosed = model.ClosedDateTime.HasValue,
-                           Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList()
+                           HasFollowup = followup != null,
+                           Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList(),
+                           Followup = includeFollowup ? followup : null
                        };
 
             if (model.Answers == null)

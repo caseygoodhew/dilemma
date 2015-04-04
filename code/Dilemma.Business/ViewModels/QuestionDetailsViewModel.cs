@@ -22,5 +22,7 @@ namespace Dilemma.Business.ViewModels
         public bool CanAnswer { get; set; }
 
         public bool CanVote { get; set; }
+
+        public bool CanFollowup { get; set; }
     }
 }

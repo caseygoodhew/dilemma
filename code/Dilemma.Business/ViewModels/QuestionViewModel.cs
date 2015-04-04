@@ -61,6 +61,8 @@ namespace Dilemma.Business.ViewModels
         /// </summary>
         public IList<AnswerViewModel> Answers { get; set; }
 
+        public FollowupViewModel Followup { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether the current user asked this question.
         /// </summary>
@@ -87,5 +89,7 @@ namespace Dilemma.Business.ViewModels
         public bool IsClosed { get; set; }
 
         public bool IsBookmarked { get; set; }
+
+        public bool HasFollowup { get; set; }
     }
 }

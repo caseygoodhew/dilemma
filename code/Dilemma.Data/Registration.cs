@@ -40,6 +40,7 @@ namespace Dilemma.Data
 
             registrar.CreatePipe<QuestionDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<AnswerDataAction>(MessengerType.Stepping, InitiateMessagePipe);
+            registrar.CreatePipe<FollowupDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<ModerationState>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<VotingDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             
@@ -63,6 +64,12 @@ namespace Dilemma.Data
         {
             messagePipe.Locator<AnswerDataAction, IInternalManualModerationRepository>(AnswerDataAction.Created, x => x.OnAnswerCreated);
             messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.StateChanged, x => x.OnAnswerStateChange);
+        }
+
+        private static void InitiateMessagePipe(IMessagePipe<FollowupDataAction> messagePipe)
+        {
+            messagePipe.Locator<FollowupDataAction, IInternalManualModerationRepository>(FollowupDataAction.Created, x => x.OnFollowupCreated);
+            messagePipe.Locator<FollowupDataAction, IInternalNotificationDistributor>(FollowupDataAction.StateChanged, x => x.OnFollowupStateChange);
         }
 
         private static void InitiateMessagePipe(IMessagePipe<ModerationState> messagePipe)

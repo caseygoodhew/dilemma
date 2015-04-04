@@ -277,6 +277,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Answer.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\DisplayTemplates\FollowupResponse.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FollowupResponse.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\DisplayTemplates\NoDilemmas.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -754,6 +759,10 @@
     <Content Include="Views\Shared\DisplayTemplates\NoDilemmas.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>NoDilemmas.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\DisplayTemplates\FollowupResponse.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FollowupResponse.generated.cs</LastGenOutput>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

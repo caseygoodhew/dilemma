@@ -36,6 +36,11 @@ namespace Dilemma.Data.Models
         public Answer Answer { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="Followup"/> being moderated.
+        /// </summary>
+        public Followup Followup { get; set; }
+
+        /// <summary>
         /// Gets or sets the <see cref="ModerationEntry"/>s that are attached to this moderation.
         /// </summary>
         public virtual List<ModerationEntry> ModerationEntries { get; set; }

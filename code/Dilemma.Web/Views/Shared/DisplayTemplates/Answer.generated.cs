@@ -198,13 +198,13 @@ WriteLiteral(" class=\"Answer-text\"");
 
 WriteLiteral(">\r\n            <p");
 
-WriteLiteral(" style=\"white-space: pre\"");
+WriteLiteral(" style=\"white-space: pre-wrap\"");
 
 WriteLiteral(">");
 
             
             #line 47 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-                                   Write(Model.Text);
+                                        Write(Model.Text);
 
             
             #line default
@@ -296,22 +296,22 @@ WriteLiteral(">\r\n            <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2245), Tuple.Create("\"", 2331)
-, Tuple.Create(Tuple.Create("", 2253), Tuple.Create("Button--vote", 2253), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2250), Tuple.Create("\"", 2336)
+, Tuple.Create(Tuple.Create("", 2258), Tuple.Create("Button--vote", 2258), true)
             
             #line 66 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-, Tuple.Create(Tuple.Create(" ", 2265), Tuple.Create<System.Object, System.Int32>(Model.HasMyVote ? string.Empty : "js-voting-button"
+, Tuple.Create(Tuple.Create(" ", 2270), Tuple.Create<System.Object, System.Int32>(Model.HasMyVote ? string.Empty : "js-voting-button"
             
             #line default
             #line hidden
-, 2266), false)
+, 2271), false)
             
             #line 66 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-                            , Tuple.Create(Tuple.Create(" ", 2320), Tuple.Create<System.Object, System.Int32>(voteClass
+                            , Tuple.Create(Tuple.Create(" ", 2325), Tuple.Create<System.Object, System.Int32>(voteClass
             
             #line default
             #line hidden
-, 2321), false)
+, 2326), false)
 );
 
 WriteLiteral(" ");
@@ -452,16 +452,16 @@ WriteLiteral(">\r\n            <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3617), Tuple.Create("\"", 3666)
-, Tuple.Create(Tuple.Create("", 3625), Tuple.Create("Button--flag", 3625), true)
-, Tuple.Create(Tuple.Create(" ", 3637), Tuple.Create("js-flag-button", 3638), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 3622), Tuple.Create("\"", 3671)
+, Tuple.Create(Tuple.Create("", 3630), Tuple.Create("Button--flag", 3630), true)
+, Tuple.Create(Tuple.Create(" ", 3642), Tuple.Create("js-flag-button", 3643), true)
             
             #line 94 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-, Tuple.Create(Tuple.Create(" ", 3652), Tuple.Create<System.Object, System.Int32>(flaggedClass
+, Tuple.Create(Tuple.Create(" ", 3657), Tuple.Create<System.Object, System.Int32>(flaggedClass
             
             #line default
             #line hidden
-, 3653), false)
+, 3658), false)
 );
 
 WriteLiteral(" title=\"Report an issue with this answer\"");

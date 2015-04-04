@@ -24,7 +24,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             
             HasRequired(x => x.Category).WithMany().WillCascadeOnDelete(false);
             HasMany(x => x.Answers).WithRequired(x => x.Question).WillCascadeOnDelete(false);
-
+            
             HasRequired(p => p.User).WithMany().WillCascadeOnDelete(false);
 
             Ignore(p => p.TotalAnswers);

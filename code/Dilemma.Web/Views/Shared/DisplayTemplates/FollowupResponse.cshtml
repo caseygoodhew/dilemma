@@ -1,0 +1,14 @@
+﻿@model Dilemma.Business.ViewModels.FollowupViewModel
+
+<div class="Card Dilemmas-empty">
+    <p>Here's how it ended up</p>
+    <div class="Card-label--small" style ="margin-top: -20px; margin-bottom: 20px">
+        @Model.CreatedDateTime.ToRelativeText()
+    </div>
+    
+    <div class="line">
+        @Model.Text
+    </div>
+    
+    
+</div>

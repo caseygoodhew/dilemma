@@ -100,6 +100,16 @@ namespace Dilemma.Data.Repositories
         bool CompleteAnswer<T>(int userId, int questionId, T answerType) where T : class;
 
         /// <summary>
+        /// Adds a followup to a question.
+        /// </summary>
+        /// <typeparam name="T">The type to receive.</typeparam>
+        /// <param name="userId">The id of the user who is completing the followup (this must be the question owner).</param>
+        /// <param name="questionId">The question id.</param>
+        /// <param name="followupType">The convertable instance.</param>
+        /// <returns>true if the followup was saved, false if a followup has already been added.</returns>
+        bool AddFollowup<T>(int userId, int questionId, T followupType) where T : class;
+        
+        /// <summary>
         /// Registers a users vote for an answer.
         /// </summary>
         /// <param name="userId">The user id of the user that is voting.</param>

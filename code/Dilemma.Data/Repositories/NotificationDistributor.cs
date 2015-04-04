@@ -36,6 +36,25 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        public void OnFollowupStateChange(IMessenger<FollowupDataAction> messenger)
+        {
+            var messageContext = messenger.GetContext<FollowupMessageContext>(FollowupDataAction.StateChanged);
+            var followup = messageContext.Followup;
+
+            switch (followup.FollowupState)
+            {
+                case FollowupState.ReadyForModeration:
+                    break;
+                case FollowupState.Approved:
+                    NotificationRepository.Value.Raise(messageContext.DataContext, followup.Question.User.UserId, NotificationType.QuestionFollowuped, followup.FollowupId);
+                    break;
+                case FollowupState.Rejected:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         /// <summary>
         /// To be called when a moderation state changes.
         /// </summary>

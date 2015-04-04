@@ -23,11 +23,16 @@ namespace Dilemma.Data.EntityFramework
         /// Gets or sets the <see cref="Question"/> database set.
         /// </summary>
         public DbSet<Question> Questions { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the <see cref="Answer"/> database set.
         /// </summary>
         public DbSet<Answer> Answers { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Followup"/> database set.
+        /// </summary>
+        public DbSet<Followup> Followups { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="SystemConfiguration"/> database set. 
@@ -137,6 +142,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new VoteCountRetirementMap());
             modelBuilder.Configurations.Add(new RankMap());
             modelBuilder.Configurations.Add(new BookmarkMap());
+            modelBuilder.Configurations.Add(new FollowupMap());
         }
     }
 }

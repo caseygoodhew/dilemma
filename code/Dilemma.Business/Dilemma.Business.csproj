@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\AnswerViewModelConverter.cs" />
+    <Compile Include="Conversion\FollowupViewModelConverter.cs" />
     <Compile Include="Conversion\LastRunLogViewModelConverter.cs" />
     <Compile Include="Conversion\RankViewModelConverter.cs" />
     <Compile Include="Conversion\ServerConfigurationViewModelConverter.cs" />
@@ -71,9 +72,11 @@
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ManualModerationService.cs" />
     <Compile Include="Services\NotificationServiceGroupingExtensions.cs" />
+    <Compile Include="Validators\FollowupViewModelValidator.cs" />
     <Compile Include="Validators\PointConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\ServerConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\SystemServerConfigurationViewModelValidator.cs" />
+    <Compile Include="ViewModels\FollowupViewModel.cs" />
     <Compile Include="ViewModels\LastRunLogViewModel.cs" />
     <Compile Include="ViewModels\ModerationEntryViewModel.cs" />
     <Compile Include="ViewModels\ModerationViewModel.cs" />

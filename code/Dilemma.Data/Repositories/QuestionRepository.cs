@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Xml;
 
@@ -29,6 +30,8 @@ namespace Dilemma.Data.Repositories
         private static readonly Lazy<IMessagePipe<QuestionDataAction>> QuestionMessagePipe = Locator.Lazy<IMessagePipe<QuestionDataAction>>();
         
         private static readonly Lazy<IMessagePipe<AnswerDataAction>> AnswerMessagePipe = Locator.Lazy<IMessagePipe<AnswerDataAction>>();
+
+        private static readonly Lazy<IMessagePipe<FollowupDataAction>> FollowupMessagePipe = Locator.Lazy<IMessagePipe<FollowupDataAction>>();
 
         private static readonly Lazy<IMessagePipe<VotingDataAction>> VotingMessagePipe = Locator.Lazy<IMessagePipe<VotingDataAction>>();
 
@@ -323,10 +326,10 @@ namespace Dilemma.Data.Repositories
         /// <returns>true if the answer was saved, false if the answer slot was no longer available.</returns>
         public bool CompleteAnswer<T>(int userId, int questionId, T answerType) where T : class
         {
+            var answer = ConverterFactory.ConvertOne<T, Answer>(answerType);
+            
             using (var context = new DilemmaContext())
             {
-                var answer = ConverterFactory.ConvertOne<T, Answer>(answerType);
-
                 var existingAnswer = GetAnswerInProgress(context, userId, questionId, answer.AnswerId);
 
                 if (existingAnswer == null)
@@ -346,6 +349,64 @@ namespace Dilemma.Data.Repositories
 
                 return true;
             }
+        }
+
+        /// <summary>
+        /// Adds a followup to a question.
+        /// </summary>
+        /// <typeparam name="T">The type to receive.</typeparam>
+        /// <param name="userId">The id of the user who is completing the followup (this must be the question owner).</param>
+        /// <param name="questionId">The question id.</param>
+        /// <param name="followupType">The convertable instance.</param>
+        /// <returns>true if the followup was saved, false if a followup has already been added.</returns>
+        public bool AddFollowup<T>(int userId, int questionId, T followupType) where T : class
+        {
+            var followup = ConverterFactory.ConvertOne<T, Followup>(followupType);
+
+            using (var context = new DilemmaContext())
+            {
+                var question =
+                    context.Questions.Where(x => x.QuestionId == questionId)
+                        .Where(x => x.User.UserId == userId)
+                        .Include(x => x.Followup)
+                        .AsNoTracking()
+                        .Select(
+                            x => new
+                                     {
+                                         x.QuestionId,
+                                         x.QuestionState,
+                                         x.ClosedDateTime,
+                                         x.Followup
+                                     }).ToList().Select(
+                                         x => new Question
+                                                  {
+                                                      QuestionId = x.QuestionId,
+                                                      QuestionState = x.QuestionState,
+                                                      ClosedDateTime = x.ClosedDateTime,
+                                                      Followup = x.Followup
+                                                  }).SingleOrDefault();
+
+                if (question == null 
+                    || question.ClosedDateTime == null 
+                    || question.Followup != null
+                    || question.QuestionState != QuestionState.Approved)
+                {
+                    return false;
+                }
+
+                followup.User = context.GetOrAttachNew<User, int>(userId, x => x.UserId);
+                followup.Question = context.GetOrAttachNew<Question, int>(questionId, x => x.QuestionId);
+                followup.CreatedDateTime = TimeSource.Value.Now;
+                followup.FollowupState = FollowupState.Approved;
+                
+                context.Followups.Add(followup);
+                context.SaveChangesVerbose();
+
+                var messageContext = new FollowupMessageContext(FollowupDataAction.Created, context, followup);
+                FollowupMessagePipe.Value.Announce(messageContext);
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -560,6 +621,9 @@ namespace Dilemma.Data.Repositories
                 case ModerationFor.Answer:
                     UpdateAnswerState(dataContext, moderation.Answer.AnswerId, moderationEntry.State);
                     break;
+                case ModerationFor.Followup:
+                    UpdateFollowupState(dataContext, moderation.Followup.FollowupId, moderationEntry.State);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -601,6 +665,40 @@ namespace Dilemma.Data.Repositories
             AnswerMessagePipe.Value.Announce(messageContext);
         }
 
+        private void UpdateFollowupState(DilemmaContext dataContext, int followupId, ModerationState moderationState)
+        {
+            var followup = dataContext.Followups.Include(x => x.Question).Include(x => x.Question.User).Single(x => x.FollowupId == followupId);
+            FollowupState newFollowupState;
+
+
+            switch (moderationState)
+            {
+                case ModerationState.Queued:
+                    newFollowupState = FollowupState.ReadyForModeration;
+                    break;
+                case ModerationState.Approved:
+                    newFollowupState = FollowupState.Approved;
+                    break;
+                case ModerationState.Rejected:
+                    newFollowupState = FollowupState.Rejected;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("moderationState");
+            }
+
+            if (newFollowupState == followup.FollowupState)
+            {
+                return;
+            }
+
+            followup.FollowupState = newFollowupState;
+            dataContext.Followups.Update(dataContext, followup);
+            dataContext.SaveChangesVerbose();
+
+            var messageContext = new FollowupMessageContext(FollowupDataAction.StateChanged, dataContext, followup);
+            FollowupMessagePipe.Value.Announce(messageContext);
+        }
+        
         private void UpdateQuestionState(DilemmaContext dataContext, int questionId, ModerationState moderationState)
         {
             var question = dataContext.Questions.Single(x => x.QuestionId == questionId);
@@ -671,6 +769,8 @@ namespace Dilemma.Data.Repositories
                             .Include(x => x.Category)
                             .Include(x => x.Answers)
                             .Include(x => x.Answers.Select(a => a.User))
+                            .Include(x => x.Followup)
+                            .Include(x => x.Followup.User)
                             .Select(
                                 x => new
                                          {
@@ -693,7 +793,8 @@ namespace Dilemma.Data.Repositories
                                                     a.User
                                                 }
                                              ),
-                                             x.User
+                                             x.User,
+                                             x.Followup
                                          })
                             .AsEnumerable()
                             .Select(
@@ -716,7 +817,8 @@ namespace Dilemma.Data.Repositories
                                             QuestionState = x.QuestionState,
                                             Text = x.Text,
                                             TotalAnswers = x.TotalAnswers,
-                                            User = x.User
+                                            User = x.User,
+                                            Followup = x.Followup
                                         })
                              .SingleOrDefault();
 

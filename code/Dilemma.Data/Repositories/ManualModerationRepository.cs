@@ -89,6 +89,39 @@ namespace Dilemma.Data.Repositories
         }
 
         /// <summary>
+        /// To be called when an followup is created.
+        /// </summary>
+        /// <param name="messenger">The followup <see cref="IMessenger{T}"/>.</param>
+        public void OnFollowupCreated(IMessenger<FollowupDataAction> messenger)
+        {
+            var messageContext = messenger.GetContext<FollowupMessageContext>(FollowupDataAction.Created);
+
+            if (messageContext.TestingConfigurationProperty(x => x.ManualModeration).Is(ActiveState.Active))
+            {
+                var dataContext = messageContext.DataContext;
+                var followup = messageContext.Followup;
+
+                dataContext.EnsureAttached(followup, x => x.FollowupId);
+                dataContext.EnsureAttached(followup.User, x => x.UserId);
+
+                followup.FollowupState = FollowupState.ReadyForModeration;
+                dataContext.Entry(followup).State = EntityState.Modified;
+
+                OnModerableCreated(
+                    dataContext,
+                    new Moderation
+                    {
+                        ModerationFor = ModerationFor.Followup,
+                        Followup = followup,
+                        ForUser = followup.User
+                    },
+                    followup.Text);
+            }
+
+            messenger.Forward();
+        }
+
+        /// <summary>
         /// Gets the next item for moderation.
         /// </summary>
         /// <typeparam name="T">The type to convert the output to.</typeparam>

@@ -6,6 +6,7 @@ namespace Dilemma.Common
     public enum ModerationFor
     {
         Question,
-        Answer
+        Answer,
+        Followup
     }
 }

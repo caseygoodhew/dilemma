@@ -97,13 +97,13 @@ WriteLiteral(" style=\"min-height: 100px; overflow: auto; border: solid 1px #ddd
 
 WriteLiteral(">\r\n                        <p");
 
-WriteLiteral(" style=\"white-space: pre\"");
+WriteLiteral(" style=\"white-space: pre-wrap\"");
 
 WriteLiteral(">");
 
             
             #line 26 "..\..\Views\Answers\Answer.cshtml"
-                                               Write(Model.QuestionDetails.QuestionViewModel.Text);
+                                                    Write(Model.QuestionDetails.QuestionViewModel.Text);
 
             
             #line default

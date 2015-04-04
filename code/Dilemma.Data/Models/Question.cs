@@ -57,6 +57,11 @@ namespace Dilemma.Data.Models
         public virtual List<Answer> Answers { get; set; }
 
         /// <summary>
+        /// Gets or sets the followup information.
+        /// </summary>
+        public virtual Followup Followup { get; set; }
+
+        /// <summary>
         /// Gets or sets the user who created the question.
         /// </summary>
         public User User { get; set; }
