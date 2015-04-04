@@ -7,7 +7,7 @@
     <h1 class="section-label js-sticky">
         <span class="js-sticky--offset">
             <span data-icon="advise"></span>
-            Answer this dilemma
+            @(Model.QuestionDetails.CanAnswer ? "Answer this dilemma" : "Check out this dilemma")
         </span>
     </h1>
 

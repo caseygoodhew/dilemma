@@ -62,7 +62,18 @@ WriteLiteral(">\r\n            <span");
 
 WriteLiteral(" data-icon=\"advise\"");
 
-WriteLiteral("></span>\r\n            Answer this dilemma\r\n        </span>\r\n    </h1>\r\n\r\n<div");
+WriteLiteral("></span>\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 10 "..\..\Views\Answers\Index.cshtml"
+        Write(Model.QuestionDetails.CanAnswer ? "Answer this dilemma" : "Check out this dilemma");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </span>\r\n    </h1>\r\n\r\n<div");
 
 WriteLiteral(" class=\"line\"");
 
@@ -352,14 +363,14 @@ WriteLiteral(" class=\"mt10 mb20\"");
 
 WriteLiteral(">What do you think?</h3>\r\n                        \r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3391), Tuple.Create("\"", 3419)
+WriteAttribute("href", Tuple.Create(" href=\"", 3457), Tuple.Create("\"", 3485)
             
             #line 80 "..\..\Views\Answers\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3398), Tuple.Create<System.Object, System.Int32>(Url.Action("Answer")
+, Tuple.Create(Tuple.Create("", 3464), Tuple.Create<System.Object, System.Int32>(Url.Action("Answer")
             
             #line default
             #line hidden
-, 3398), false)
+, 3464), false)
 );
 
 WriteLiteral(" class=\"Button--ask btn-success\"");
