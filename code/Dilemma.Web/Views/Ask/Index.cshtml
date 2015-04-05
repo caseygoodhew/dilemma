@@ -14,8 +14,7 @@
 
         <main role="main" class="main">
             
-            @using (Html.BeginForm("Index", "Ask", FormMethod.Post, new { @class = "Card", role = "form" }))
-            { 
+            <form action="@Url.ActionWithCategory("Index", "Ask", (string)ViewBag.Category)" method="post" class="Card", role ="form">
                 @Html.AntiForgeryToken()
 
                 <div class="Card-section Card-divider pa10" style="background: #f9f9f9;">
@@ -41,7 +40,7 @@
                     </div>
       
                 </div>
-            }
+            </form>
 
         </main>
     

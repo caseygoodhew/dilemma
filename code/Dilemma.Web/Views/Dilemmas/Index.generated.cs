@@ -47,7 +47,7 @@ namespace ASP
   
     ViewBag.Title = "";
 
-    ViewBag.ShowLuckyDip = string.IsNullOrEmpty(ViewBag.Category);
+    ViewBag.ShowLuckyDip = !string.IsNullOrEmpty(ViewBag.Category);
 
             
             #line default

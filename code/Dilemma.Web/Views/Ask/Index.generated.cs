@@ -83,38 +83,34 @@ WriteLiteral(" role=\"main\"");
 
 WriteLiteral(" class=\"main\"");
 
-WriteLiteral(">\r\n            \r\n");
+WriteLiteral(">\r\n            \r\n            <form");
+
+WriteAttribute("action", Tuple.Create(" action=\"", 362), Tuple.Create("\"", 436)
+            
+            #line 17 "..\..\Views\Ask\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 371), Tuple.Create<System.Object, System.Int32>(Url.ActionWithCategory("Index", "Ask", (string)ViewBag.Category)
+            
+            #line default
+            #line hidden
+, 371), false)
+);
+
+WriteLiteral(" method=\"post\"");
+
+WriteLiteral(" class=\"Card\"");
+
+WriteLiteral(", role =\"form\">\r\n");
+
+WriteLiteral("                ");
 
             
-            #line 17 "..\..\Views\Ask\Index.cshtml"
-            
-            
-            #line default
-            #line hidden
-            
-            #line 17 "..\..\Views\Ask\Index.cshtml"
-             using (Html.BeginForm("Index", "Ask", FormMethod.Post, new { @class = "Card", role = "form" }))
-            { 
-                
-            
-            #line default
-            #line hidden
-            
-            #line 19 "..\..\Views\Ask\Index.cshtml"
+            #line 18 "..\..\Views\Ask\Index.cshtml"
            Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
-            
-            #line 19 "..\..\Views\Ask\Index.cshtml"
-                                        
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <div");
+WriteLiteral("\r\n\r\n                <div");
 
 WriteLiteral(" class=\"Card-section Card-divider pa10\"");
 
@@ -129,7 +125,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 24 "..\..\Views\Ask\Index.cshtml"
+            #line 23 "..\..\Views\Ask\Index.cshtml"
                    Write(Html.LabelFor(x => x.Question.Text, "What's on your mind?", new { @class = "h3 pv10" }));
 
             
@@ -145,7 +141,7 @@ WriteLiteral(">Ask your question in complete anonymity. All questions disapear w
 WriteLiteral("                        ");
 
             
-            #line 26 "..\..\Views\Ask\Index.cshtml"
+            #line 25 "..\..\Views\Ask\Index.cshtml"
                    Write(Html.TextAreaFor(x => x.Question.Text, new { @class = "form-control", cols="30", rows="10"}));
 
             
@@ -156,7 +152,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 27 "..\..\Views\Ask\Index.cshtml"
+            #line 26 "..\..\Views\Ask\Index.cshtml"
                    Write(Html.ValidationMessageFor(x => x.Question.Text));
 
             
@@ -171,7 +167,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 31 "..\..\Views\Ask\Index.cshtml"
+            #line 30 "..\..\Views\Ask\Index.cshtml"
                    Write(Html.LabelFor(x => x.Question.CategoryId, "Which best describes your dilemma?", new { @class = "h3 pv10" }));
 
             
@@ -182,7 +178,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 32 "..\..\Views\Ask\Index.cshtml"
+            #line 31 "..\..\Views\Ask\Index.cshtml"
                    Write(Html.DropDownListFor(x => x.Question.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), new { @class = "form-control" }));
 
             
@@ -193,7 +189,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 33 "..\..\Views\Ask\Index.cshtml"
+            #line 32 "..\..\Views\Ask\Index.cshtml"
                    Write(Html.ValidationMessageFor(x => x.Question.CategoryId));
 
             
@@ -215,16 +211,8 @@ WriteLiteral(" data-icon=\"ask\"");
 
 WriteLiteral("></span>\r\n                            Share My Dilemma\r\n                        <" +
 "/button>                      \r\n                    </div>\r\n      \r\n            " +
-"    </div>\r\n");
-
-            
-            #line 44 "..\..\Views\Ask\Index.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n        </main>\r\n    \r\n    </div><!-- line -->\r\n\r\n\r\n\r\n");
+"    </div>\r\n            </form>\r\n\r\n        </main>\r\n    \r\n    </div><!-- line --" +
+">\r\n\r\n\r\n\r\n");
 
 DefineSection("scripts", () => {
 

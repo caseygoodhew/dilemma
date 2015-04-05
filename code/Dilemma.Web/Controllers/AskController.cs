@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
@@ -30,14 +31,25 @@ namespace Dilemma.Web.Controllers
         [Route("ask/{category:alpha}")]
         public ActionResult Index(string category)
         {
+            ViewBag.Category = category;
             return View(InitNewQuestion(CategoryHelper.GetCategory(category)));
         }
 
         //
         // POST: /Ask/Create
         [HttpPost]
+        [Route("ask")]
         public ActionResult Index(AskViewModel model)
         {
+            return Index(string.Empty, model);
+        }
+
+        [HttpPost]
+        [Route("ask/{category:alpha}")]
+        public ActionResult Index(string category, AskViewModel model)
+        {
+            ViewBag.Category = category;
+            
             if (ModelState.IsValid)
             {
                 QuestionService.Value.SaveNewQuestion(model.Question);

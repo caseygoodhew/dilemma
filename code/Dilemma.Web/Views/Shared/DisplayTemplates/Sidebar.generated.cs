@@ -102,24 +102,24 @@ WriteLiteral(">\r\n            <span");
 
 WriteLiteral(" data-icon=\"ask\"");
 
-WriteLiteral("></span>\r\n            Share Your Dilemma\r\n        </a>\r\n    </div>\r\n</div>\r\n     " +
-"   \r\n<div");
+WriteLiteral("></span>\r\n            Post Your Dilemma\r\n        </a>\r\n    </div>\r\n</div>\r\n      " +
+"  \r\n<div");
 
 WriteLiteral(" class=\"Card Card--sidebar-profile\"");
 
 WriteLiteral(">\r\n    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 837), Tuple.Create("\"", 918)
-, Tuple.Create(Tuple.Create("", 845), Tuple.Create("Card-section", 845), true)
-, Tuple.Create(Tuple.Create(" ", 857), Tuple.Create("Rank", 858), true)
-, Tuple.Create(Tuple.Create(" ", 862), Tuple.Create("user-is-level-", 863), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 836), Tuple.Create("\"", 917)
+, Tuple.Create(Tuple.Create("", 844), Tuple.Create("Card-section", 844), true)
+, Tuple.Create(Tuple.Create(" ", 856), Tuple.Create("Rank", 857), true)
+, Tuple.Create(Tuple.Create(" ", 861), Tuple.Create("user-is-level-", 862), true)
             
             #line 29 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-, Tuple.Create(Tuple.Create("", 877), Tuple.Create<System.Object, System.Int32>(Model.UserStatistics.UserRank.Rank.Level
+, Tuple.Create(Tuple.Create("", 876), Tuple.Create<System.Object, System.Int32>(Model.UserStatistics.UserRank.Rank.Level
             
             #line default
             #line hidden
-, 877), false)
+, 876), false)
 );
 
 WriteLiteral(">\r\n\r\n        <div");
@@ -155,16 +155,16 @@ WriteLiteral(">\r\n                <div");
 
 WriteLiteral(" class=\"Rank-ometer-amount\"");
 
-WriteAttribute("style", Tuple.Create(" style=\"", 1302), Tuple.Create("\"", 1358)
-, Tuple.Create(Tuple.Create("", 1310), Tuple.Create("width:", 1310), true)
+WriteAttribute("style", Tuple.Create(" style=\"", 1301), Tuple.Create("\"", 1357)
+, Tuple.Create(Tuple.Create("", 1309), Tuple.Create("width:", 1309), true)
             
             #line 40 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-, Tuple.Create(Tuple.Create("", 1316), Tuple.Create<System.Object, System.Int32>(Model.UserStatistics.UserRank.Percentage
+, Tuple.Create(Tuple.Create("", 1315), Tuple.Create<System.Object, System.Int32>(Model.UserStatistics.UserRank.Percentage
             
             #line default
             #line hidden
-, 1316), false)
-, Tuple.Create(Tuple.Create("", 1357), Tuple.Create("%", 1357), true)
+, 1315), false)
+, Tuple.Create(Tuple.Create("", 1356), Tuple.Create("%", 1356), true)
 );
 
 WriteLiteral("></div>\r\n            </div> \r\n            <div");
@@ -275,14 +275,14 @@ WriteLiteral("            <a");
 
 WriteLiteral(" class=\"Card-section Card-section--notification Card-go--container\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2589), Tuple.Create("\"", 2627)
+WriteAttribute("href", Tuple.Create(" href=\"", 2588), Tuple.Create("\"", 2626)
             
             #line 74 "..\..\Views\Shared\DisplayTemplates\Sidebar.cshtml"
-        , Tuple.Create(Tuple.Create("", 2596), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
+        , Tuple.Create(Tuple.Create("", 2595), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Profile")
             
             #line default
             #line hidden
-, 2596), false)
+, 2595), false)
 );
 
 WriteLiteral(">\r\n                <span");

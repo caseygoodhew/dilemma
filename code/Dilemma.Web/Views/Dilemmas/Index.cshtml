@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "";
 
-    ViewBag.ShowLuckyDip = string.IsNullOrEmpty(ViewBag.Category);
+    ViewBag.ShowLuckyDip = !string.IsNullOrEmpty(ViewBag.Category);
 }
     
     <h1 class="js-sticky">

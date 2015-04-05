@@ -135,7 +135,7 @@ WriteLiteral(">\r\n            <span");
 
 WriteLiteral(" data-icon=\"ask\"");
 
-WriteLiteral("></span> \r\n            Share Your Dilemma\r\n        </a>                \r\n");
+WriteLiteral("></span> \r\n            Post Your Dilemma\r\n        </a>                \r\n");
 
             
             #line 29 "..\..\Views\Shared\DisplayTemplates\NoDilemmas.cshtml"
@@ -155,14 +155,14 @@ WriteLiteral("            <span>&nbsp;&nbsp;&nbsp;</span>\r\n");
 
 WriteLiteral("            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 912), Tuple.Create("\"", 951)
+WriteAttribute("href", Tuple.Create(" href=\"", 911), Tuple.Create("\"", 950)
             
             #line 32 "..\..\Views\Shared\DisplayTemplates\NoDilemmas.cshtml"
-, Tuple.Create(Tuple.Create("", 919), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
+, Tuple.Create(Tuple.Create("", 918), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
             
             #line default
             #line hidden
-, 919), false)
+, 918), false)
 );
 
 WriteLiteral(" class=\"Button--ask\"");

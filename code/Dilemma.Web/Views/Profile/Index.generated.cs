@@ -153,8 +153,8 @@ WriteLiteral(">\r\n                    <span");
 
 WriteLiteral(" class=\"js-sticky--offset\"");
 
-WriteLiteral(">\r\n                        My Current Answers\r\n                    </span>\r\n     " +
-"           </h2>\r\n\r\n");
+WriteLiteral(">\r\n                        Advice You\'ve Given\r\n                    </span>\r\n    " +
+"            </h2>\r\n\r\n");
 
             
             #line 45 "..\..\Views\Profile\Index.cshtml"
@@ -199,14 +199,14 @@ WriteLiteral(" class=\"line\"");
 WriteLiteral(">\r\n                            <span>&nbsp;&nbsp;&nbsp;</span>\r\n                 " +
 "           <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1650), Tuple.Create("\"", 1689)
+WriteAttribute("href", Tuple.Create(" href=\"", 1651), Tuple.Create("\"", 1690)
             
             #line 55 "..\..\Views\Profile\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1657), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
+, Tuple.Create(Tuple.Create("", 1658), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
             
             #line default
             #line hidden
-, 1657), false)
+, 1658), false)
 );
 
 WriteLiteral(" class=\"Button--ask\"");
@@ -233,8 +233,8 @@ WriteLiteral(">\r\n                    <span");
 
 WriteLiteral(" class=\"js-sticky--offset\"");
 
-WriteLiteral(">\r\n                        Other notifications\r\n                    </span>\r\n    " +
-"            </h2>\r\n\r\n");
+WriteLiteral(">\r\n                        Notifications\r\n                    </span>\r\n          " +
+"      </h2>\r\n\r\n");
 
 WriteLiteral("                ");
 
