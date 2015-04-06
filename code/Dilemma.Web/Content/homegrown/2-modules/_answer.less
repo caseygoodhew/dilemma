@@ -94,7 +94,9 @@
     .textarea-wrap { margin: 0 78px 0 0; }
   }
 }
-
+.Answer .Dilemma-actions {
+  clear: both;
+}
 
 
 .user-is-level-1 [data-icon="user-level"]:before { content: @user-level-1-unicode; }
@@ -144,6 +146,9 @@
 .Card.is-star,
 .Card.is-upvoted,
 .Answer--window{ 
+  .Answer-text {
+    position: relative;
+  }
   .Card-info {
     background: #222;
     border-radius: 4px 4px 0 0;
@@ -154,10 +159,20 @@
     padding: 7px 7px 5px;
   }  
 }
-@answer-badge: 100px;
+
+/*
+
+  Answer Badges (Mine, Upvoted, Star answer)
+
+======================================================*/
+
+@answer-badge: 80px;
 .Answer.is-mine .Answer-text:before,
 .Answer.is-star .Answer-text:before,
-.Answer.is-upvoted .Answer-text:before {
+.Answer.is-star .Answer-text:after,
+.Answer.is-upvoted .Answer-text:before,
+.Answer.is-upvoted.is-star .Answer-text:after,
+.Answer.is-mine.is-upvoted .Answer-text p:first-child:before  {
   font-family: "dilemmasregular";
   font-size: @answer-badge;
   height: @answer-badge;
@@ -165,32 +180,75 @@
   line-height: .45;
   float: right;
   display: block;
-  padding: 0 10px 30px;
   background: #EEE;
   border-radius: 50%;
-  padding: 20px;
   margin: 10px;
+  &:hover { z-index: 99; }
 }
-.Answer.is-mine .Answer-text:before { 
+.Answer.is-mine .Answer-text:before,
+.Answer.is-mine.is-star .Answer-text:before,
+.Answer.is-mine.is-upvoted .Answer-text:before { 
   background: @color-accent; 
   color: #fff; 
   content: "\E011"; 
+  padding: 16px;
 }
 .Answer.is-star .Answer-text:before { 
   background: @color-answer; 
   content: "\E00F"; 
-  padding: 22px;
+  padding: 18px 0 0 18px;
 }
 .Answer.is-upvoted .Answer-text:before { 
   background: @color-vote;
   content: "\E005";
+  padding: 16px;
+}
+.Answer.is-mine.is-upvoted .Answer-text:before,
+.Answer.is-mine.is-star .Answer-text:before,
+.Answer.is-upvoted.is-star .Answer-text:before {
+  margin-bottom: 80px;
 }
 
-.Answer.is-mine .Answer-text,
-.Answer.is-star .Answer-text,
-.Answer.is-upvoted .Answer-text {
-    min-height: 110px;
+
+// Upvoted + Star
+.Answer.is-mine.is-star .Answer-text:after,
+.Answer.is-upvoted.is-star .Answer-text:after { 
+  background: @color-answer; 
+  content: "\E00F"; 
+  padding: 18px;
+  z-index: 10;
+  position: absolute;
+  top: 60px;
+  right: 0;
 }
+
+.Answer.is-mine.is-upvoted .Answer-text p:first-child:before {
+  background: @color-vote;
+  content: "\E005";
+  z-index: 5;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  padding: 17px;
+}
+
+// Trifecta
+.Answer.is-mine.is-upvoted.is-star .Answer-text:before {
+  top: -10px; 
+  position: relative;
+  margin-bottom: 100px;
+}
+.Answer.is-mine.is-upvoted.is-star .Answer-text p:first-child:before {
+  top: 45px;
+}
+.Answer.is-mine.is-upvoted.is-star .Answer-text:after {
+  top: 100px;
+}
+
+
+
+
+
 
 
 .Answer.user-is-questioner .number-bubble {
