@@ -261,7 +261,7 @@ WriteLiteral("        \r\n");
             #line hidden
 WriteLiteral("\r\n        <div");
 
-WriteLiteral(" class=\"Answers\"");
+WriteLiteral(" class=\"\"");
 
 WriteLiteral(">\r\n            \r\n");
 
@@ -334,14 +334,14 @@ WriteLiteral(" class=\"mt10 mb20\"");
 
 WriteLiteral(">What do you think?</h3>\r\n                        \r\n                        <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2716), Tuple.Create("\"", 2744)
+WriteAttribute("href", Tuple.Create(" href=\"", 2709), Tuple.Create("\"", 2737)
             
             #line 70 "..\..\Views\Answers\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2723), Tuple.Create<System.Object, System.Int32>(Url.Action("Answer")
+, Tuple.Create(Tuple.Create("", 2716), Tuple.Create<System.Object, System.Int32>(Url.Action("Answer")
             
             #line default
             #line hidden
-, 2723), false)
+, 2716), false)
 );
 
 WriteLiteral(" class=\"Button--ask btn-success\"");

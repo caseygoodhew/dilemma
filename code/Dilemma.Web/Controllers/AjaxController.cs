@@ -60,6 +60,8 @@ namespace Dilemma.Web.Controllers
                     return PartialView("DisplayTemplates/AnswerSlotsFull");
                 }
 
+                ViewBag.CanVote = false;
+                
                 return PartialView(
                     "DisplayTemplates/Answer",
                     QuestionService.Value.GetQuestion(questionId)
