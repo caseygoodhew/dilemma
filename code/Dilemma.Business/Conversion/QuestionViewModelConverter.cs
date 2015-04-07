@@ -67,7 +67,7 @@ namespace Dilemma.Business.Conversion
                            IsOpen = model.QuestionState == QuestionState.Approved && !model.ClosedDateTime.HasValue,
                            IsClosed = model.ClosedDateTime.HasValue,
                            HasFollowup = followup != null,
-                           Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).ToList(),
+                           Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).Where(x => !x.IsReservedSlot).ToList(),
                            Followup = includeFollowup ? followup : null
                        };
 

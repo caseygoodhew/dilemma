@@ -1,7 +1,8 @@
-﻿@model Dilemma.Web.ViewModels.DilemmaDetailsViewModel
+﻿@using Dilemma.Business.ViewModels
+@model Dilemma.Web.ViewModels.DilemmaDetailsViewModel
 
 @{
-    ViewBag.IsDilemmaViewPage = true;                
+    ViewBag.IsDilemmaViewPage = true;
 }
 
     <h1 class="section-label js-sticky">
@@ -23,25 +24,14 @@
           
         @if (Model.QuestionDetails.CanAnswer)
         {
-            <form class="Card Answer--window" action="">
-                <div class="Card-section Card-info">
-                    Post your advice
-                </div>
-                <div class="Card-section line">
-                    <button type="submit" class="Button Button--answer">
-                        <span data-icon="advise"></span>
-                        <span class="Button-label">Advise</span>
-                    </button>
-                    <div class="textarea-wrap">
-                        <textarea name="answer" id="" cols="30" rows="2" class="form-control js-activate-answer-form" placeholder="Greg, Clint - Paul and I prefer the 'Post Your Advice' box up here and it tested better with users in Pauls's testing. This isn't wired in yet, so let me know what you think."></textarea>
-                    </div>
-                </div><!-- Dilemma-actions -->
-            </form>
+            <div id="js-answer-container">
+                @Html.Partial("EditorTemplates/Advise", new AnswerViewModel())
+            </div>
         }
         
         @if (Model.QuestionDetails.CanFollowup)
         {
-            <form class="Card Answer--window" action="">
+            <form class="Card Answer--window" action="post">
                 <div class="Card-section Card-info">
                     What did you do?
                 </div>
@@ -69,7 +59,7 @@
                 @Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion })
             }
                 
-            @if (Model.QuestionDetails.CanAnswer)
+            @if (false && Model.QuestionDetails.CanAnswer)
             { 
                 <hr  style="margin-left: 60px;" />
                 <div class="Card align-center">
@@ -93,7 +83,31 @@
 
 
 @section scripts {
+    
+    <script>
+        window.resetAnswerHook = function() {
+            $('#js-button-answer').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Advise", "Ajax")',
+                    dataType: "html",
+                    data: $('form.Answer--window').serialize(),
+                    success: function(result) {
+                        $("#js-answer-container").html(result);
+                        window.resetAnswerHook();
+                    },
+                    error: function() {
+                    }
+                });
+            });
+        };
+
+        $(document).ready(window.resetAnswerHook);
+    </script>
+    
     <script type="text/javascript">
         document.getElementsByTagName('body')[0].className+=' page-answer';
     </script>
+
 }

@@ -492,7 +492,7 @@ WriteLiteral(">Flag</span>\r\n                <span");
 WriteLiteral(" class=\"Button-label is-active\"");
 
 WriteLiteral(">Flagged</span>\r\n            </button>                 \r\n        </div>\r\n    </di" +
-"v><!-- Dilemma-actions -->\r\n</div>\r\n\r\n");
+"v><!-- Dilemma-actions -->\r\n</div>\r\n\r\n\r\n\r\n");
 
         }
     }

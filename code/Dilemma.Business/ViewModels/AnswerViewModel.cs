@@ -58,5 +58,7 @@ namespace Dilemma.Business.ViewModels
         public bool IsStarVote { get; set; }
         
         public bool IsPopularVote { get; set; }
+
+        public bool IsReservedSlot { get; set; }
     }
 }

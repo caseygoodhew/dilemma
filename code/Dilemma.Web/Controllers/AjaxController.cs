@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 
 using Dilemma.Business.Services;
+using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.Security.AccessFilters;
 using Dilemma.Web.DataTransferObjects;
@@ -37,6 +39,37 @@ namespace Dilemma.Web.Controllers
             QuestionService.Value.RemoveBookmark(bookmark.QuestionId);
 
             return Json(new { success = true });
+        }
+
+        [HttpPost]
+        [Route("Advise/{questionId:int:min(1)}")]
+        public ActionResult Advise(int questionId, AnswerViewModel viewModel)
+        {
+            var answerId = QuestionService.Value.RequestAnswerSlot(questionId);
+
+            if (answerId == null)
+            {
+                return PartialView("DisplayTemplates/AnswerSlotsFull");
+            }
+
+            if (ModelState.IsValid)
+            {
+                viewModel.AnswerId = answerId;
+                if (!QuestionService.Value.CompleteAnswer(questionId, viewModel))
+                {
+                    return PartialView("DisplayTemplates/AnswerSlotsFull");
+                }
+
+                return PartialView(
+                    "DisplayTemplates/Answer",
+                    QuestionService.Value.GetQuestion(questionId)
+                        .QuestionViewModel.Answers.Single(x => x.IsMyAnswer));
+            }
+
+            QuestionService.Value.TouchAnswer(answerId.Value);
+            ViewBag.AnswerIsActive = true;
+
+            return PartialView(viewModel);
         }
     }
 }

@@ -52,6 +52,12 @@ namespace Dilemma.Business.Conversion
 
         private static bool CanAnswer(Question model)
         {
+            var userId = SecurityManager.Value.GetUserId();
+            
+            var iHaveReservedSlot =
+                model.Answers.Any(
+                    x => x.User.UserId == userId && x.AnswerState == AnswerState.ReservedSlot);
+            
             if (model.QuestionState != QuestionState.Approved)
             {
                 return false;
@@ -62,7 +68,7 @@ namespace Dilemma.Business.Conversion
                 return false;
             }
             
-            if (model.TotalAnswers > model.MaxAnswers)
+            if (model.User.UserId == userId)
             {
                 return false;
             }
@@ -72,19 +78,17 @@ namespace Dilemma.Business.Conversion
                 return false;
             }
 
-            var userId = SecurityManager.Value.GetUserId();
-            
-            if (model.User.UserId == userId)
+            if (iHaveReservedSlot)
             {
-                return false;
+                return true;
             }
 
             if (model.Answers.Any(x => x.User.UserId == userId))
             {
                 return false;
             }
-
-            return true;
+            
+            return model.TotalAnswers <= model.MaxAnswers;
         }
 
         private static bool CanVote(Question model)

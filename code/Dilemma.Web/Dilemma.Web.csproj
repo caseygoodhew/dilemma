@@ -312,6 +312,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sidebar.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Advise.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Advise.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\Error.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -764,6 +769,12 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>FollowupResponse.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Shared\EditorTemplates\Advise.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Advise.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Ajax\Advise.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AnswerSlotsFull.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -773,8 +784,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ajax\" />
-    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

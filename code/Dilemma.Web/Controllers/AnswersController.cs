@@ -42,7 +42,7 @@ namespace Dilemma.Web.Controllers
                                 });
         }
 
-        [Route("advise/{questionId:int:min(1)}")]
+        //[Route("advise/{questionId:int:min(1)}")]
         public ActionResult Answer(int questionId)
         {
             var answerId = QuestionService.Value.RequestAnswerSlot(questionId);
@@ -61,7 +61,7 @@ namespace Dilemma.Web.Controllers
             return View(viewModel);
         }
 
-        [Route("advise/{questionId:int:min(1)}")]
+        //[Route("advise/{questionId:int:min(1)}")]
         [HttpPost]
         public ActionResult Answer(int questionId, DilemmaDetailsViewModel viewModel)
         {

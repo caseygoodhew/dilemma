@@ -59,7 +59,8 @@ namespace Dilemma.Business.Conversion
                     IsRejected = model.AnswerState == AnswerState.Rejected,
                     VoteCount = userVotes.Count,
                     HasMyVote = userVotes.Contains(userId),
-                    UserLevel = rank.Level
+                    UserLevel = rank.Level,
+                    IsReservedSlot = model.AnswerState == AnswerState.ReservedSlot
                 };
         }
     }

@@ -8296,6 +8296,9 @@ button:active,
     margin: 0 78px 0 0;
   }
 }
+.Answer .Dilemma-actions {
+  clear: both;
+}
 .user-is-level-1 [data-icon="user-level"]:before {
   content: "\E024";
 }
@@ -8344,6 +8347,12 @@ button:active,
 .number-bubble .Card-label--small {
   padding: 3px 0;
 }
+.Card.is-mine .Answer-text,
+.Card.is-star .Answer-text,
+.Card.is-upvoted .Answer-text,
+.Answer--window .Answer-text {
+  position: relative;
+}
 .Card.is-mine .Card-info,
 .Card.is-star .Card-info,
 .Card.is-upvoted .Card-info,
@@ -8356,40 +8365,88 @@ button:active,
   font-weight: 600;
   padding: 7px 7px 5px;
 }
+/*
+
+  Answer Badges (Mine, Upvoted, Star answer)
+
+======================================================*/
 .Answer.is-mine .Answer-text:before,
 .Answer.is-star .Answer-text:before,
-.Answer.is-upvoted .Answer-text:before {
+.Answer.is-star .Answer-text:after,
+.Answer.is-upvoted .Answer-text:before,
+.Answer.is-upvoted.is-star .Answer-text:after,
+.Answer.is-mine.is-upvoted .Answer-text p:first-child:before {
   font-family: "dilemmasregular";
-  font-size: 100px;
-  height: 100px;
-  width: 100px;
+  font-size: 80px;
+  height: 80px;
+  width: 80px;
   line-height: .45;
   float: right;
   display: block;
-  padding: 0 10px 30px;
   background: #EEE;
   border-radius: 50%;
-  padding: 20px;
   margin: 10px;
 }
-.Answer.is-mine .Answer-text:before {
+.Answer.is-mine .Answer-text:before:hover,
+.Answer.is-star .Answer-text:before:hover,
+.Answer.is-star .Answer-text:after:hover,
+.Answer.is-upvoted .Answer-text:before:hover,
+.Answer.is-upvoted.is-star .Answer-text:after:hover,
+.Answer.is-mine.is-upvoted .Answer-text p:first-child:before:hover {
+  z-index: 99;
+}
+.Answer.is-mine .Answer-text:before,
+.Answer.is-mine.is-star .Answer-text:before,
+.Answer.is-mine.is-upvoted .Answer-text:before {
   background: #da4453;
   color: #fff;
   content: "\E011";
+  padding: 16px;
 }
 .Answer.is-star .Answer-text:before {
   background: #c3da5d;
   content: "\E00F";
-  padding: 22px;
+  padding: 18px 0 0 18px;
 }
 .Answer.is-upvoted .Answer-text:before {
   background: #729f0c;
   content: "\E005";
+  padding: 16px;
 }
-.Answer.is-mine .Answer-text,
-.Answer.is-star .Answer-text,
-.Answer.is-upvoted .Answer-text {
-  min-height: 110px;
+.Answer.is-mine.is-upvoted .Answer-text:before,
+.Answer.is-mine.is-star .Answer-text:before,
+.Answer.is-upvoted.is-star .Answer-text:before {
+  margin-bottom: 80px;
+}
+.Answer.is-mine.is-star .Answer-text:after,
+.Answer.is-upvoted.is-star .Answer-text:after {
+  background: #c3da5d;
+  content: "\E00F";
+  padding: 18px;
+  z-index: 10;
+  position: absolute;
+  top: 60px;
+  right: 0;
+}
+.Answer.is-mine.is-upvoted .Answer-text p:first-child:before {
+  background: #729f0c;
+  content: "\E005";
+  z-index: 5;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  padding: 17px;
+}
+.Answer.is-mine.is-upvoted.is-star .Answer-text:before {
+  top: -10px;
+  position: relative;
+  margin-bottom: 120px;
+}
+.Answer.is-mine.is-upvoted.is-star .Answer-text p:first-child:before {
+  top: 45px;
+}
+.Answer.is-mine.is-upvoted.is-star .Answer-text:after {
+  top: 100px;
 }
 .Answer.user-is-questioner .number-bubble {
   background: transparent;

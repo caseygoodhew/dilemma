@@ -1,0 +1,36 @@
+﻿@model Dilemma.Business.ViewModels.AnswerViewModel
+
+@{
+    var isActive = ViewBag.AnswerIsActive == true;
+    var textareaClass = isActive ? "is-active" : "js-activate-answer-form";
+}
+
+<form class="Card Answer--window">
+    
+    <div class="Card-section Card-info">
+        Post your advice
+    </div>
+
+    @Html.AntiForgeryToken()
+    
+    <div class="Card-section line">
+        <button id="js-button-answer" class="Button Button--answer">
+            <span data-icon="advise"></span>
+            <span class="Button-label">Advise</span>
+        </button>
+        <div class="textarea-wrap">
+            @Html.TextAreaFor(x => x.Text, new
+                                               {
+                                                   @class = "form-control " + textareaClass,
+                                                   rows = "2",
+                                                   cols = "30",
+                                                   placeholder="What do you think?"
+                                               })
+            @Html.ValidationMessageFor(x => x.Text)
+        </div>
+    </div>
+    
+    
+    
+</form>
+
