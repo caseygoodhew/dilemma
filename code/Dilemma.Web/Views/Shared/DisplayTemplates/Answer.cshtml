@@ -13,28 +13,66 @@
     var disabled = "disabled=disabled";
 
     var isMyQuestion = (bool?)ViewBag.IsMyQuestion == true;
+    
+    var cardClass = string.Empty;
+    
+    if (Model.IsMyAnswer)
+    {
+        cardClass += " is-mine";
+    }
 
-    var cardClass = Model.IsMyAnswer ? "is-mine" : Model.IsStarVote ? "is-star" : Model.IsPopularVote ? "is-upvoted" : string.Empty;
+    if (Model.IsStarVote)
+    {
+        cardClass += " is-star";
+    }
+
+    if (Model.IsPopularVote)
+    {
+        cardClass += " is-upvoted";
+    }
+        
 }
 <div class="Card Answer @cardClass user-level-@Model.UserLevel">
         
-    @if (Model.IsStarVote)
+    @if (Model.IsStarVote && Model.IsPopularVote && Model.IsMyAnswer)
+    {
+        <div class="Card-section Card-info">
+            Most votes + Questioners Choice + Your answer
+        </div>
+    }
+    else if (Model.IsStarVote && Model.IsPopularVote)
+    {
+        <div class="Card-section Card-info">
+            Most votes + Questioners Choice
+        </div>
+    }
+    else if (Model.IsStarVote && Model.IsMyAnswer)
+    {
+        <div class="Card-section Card-info">
+            Most votes + Questioners Choice
+        </div>
+    }
+    else if (Model.IsPopularVote && Model.IsMyAnswer)
+    {
+        <div class="Card-section Card-info">
+            Most votes + Questioners Choice
+        </div>
+    }
+    else if (Model.IsStarVote)
     {
         <div class="Card-section Card-info">
             <span data-icon="star"></span>
             Best Answer as voted by the Questioner
         </div>
     }
-    
-    @if (Model.IsPopularVote)
+    else if (Model.IsPopularVote)
     {
         <div class="Card-section Card-info">
             <span data-icon="vote"></span>
             Most popular answer
         </div>
     }
-
-    @if (Model.IsMyAnswer)
+    else if (Model.IsMyAnswer)
     { 
         <div class="Card-section Card-info">
             <img src="/Content/images/icons/user.png" alt="" width="20">

@@ -94,10 +94,22 @@
     .textarea-wrap { margin: 0 78px 0 0; }
   }
 }
-.Answer .Dilemma-actions {
-  clear: both;
+
+.Answer.is-mine .Answer-text,
+.Answer.is-star .Answer-text,
+.Answer.is-upvoted .Answer-text {
+    min-height: 94px;
 }
 
+.Answer.is-star.is-mine .Answer-text,
+.Answer.is-star.is-upvoted .Answer-text,
+.Answer.is-upvoted.is-mine .Answer-text {
+    min-height: 154px;
+}
+
+.Answer.is-star.is-upvoted.is-mine .Answer-text {
+    min-height: 194px;
+}
 
 .user-is-level-1 [data-icon="user-level"]:before { content: @user-level-1-unicode; }
 .user-is-level-2 [data-icon="user-level"]:before { content: @user-level-2-unicode; }
