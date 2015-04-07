@@ -197,6 +197,7 @@
     <Compile Include="Controllers\QuickAuthenticationController.cs" />
     <Compile Include="Controllers\SystemServerConfigurationController.cs" />
     <Compile Include="DataTransferObjects\BookmarkDto.cs" />
+    <Compile Include="DataTransferObjects\ReportDto.cs" />
     <Compile Include="DataTransferObjects\VoteDto.cs" />
     <Compile Include="Extensions\CategoryHelper.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />

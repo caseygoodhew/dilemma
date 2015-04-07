@@ -280,7 +280,18 @@ $(document).ready(function() {
   });
   $('.js-flag-confirm:not([disabled])').on('click', function() {
     window.flagTriggered.addClass('is-active').attr('disabled','disabled');
-    alert('[user would never see this] — Action for' + window.flagTriggered);
+    $.ajax({
+        url: '/ajax/report',
+        type: 'POST',
+        data: JSON.stringify({ questionId: window.flagTriggered.data('question-id'), answerId: window.flagTriggered.data('answer-id'), }),
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            
+        },
+        error: function () {
+
+        }
+    });
   });
 
 

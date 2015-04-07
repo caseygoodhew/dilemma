@@ -73,5 +73,11 @@ namespace Dilemma.Web.Controllers
 
             return PartialView(viewModel);
         }
+
+        [HttpPost]
+        public JsonResult Report(ReportDto report)
+        {
+            return Json(new { success = true, report.QuestionId, report.AnswerId }); 
+        }
     }
 }

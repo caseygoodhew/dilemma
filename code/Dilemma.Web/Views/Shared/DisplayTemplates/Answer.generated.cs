@@ -521,6 +521,17 @@ WriteAttribute("class", Tuple.Create(" class=\"", 4908), Tuple.Create("\"", 4957
 
 WriteLiteral(" title=\"Report an issue with this answer\"");
 
+WriteLiteral(" data-answer-id=\"");
+
+            
+            #line 134 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+                                                                                                                                            Write(Model.AnswerId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"");
+
 WriteLiteral(" data-toggle=\"modal\"");
 
 WriteLiteral(" data-target=\"#modal-flag\"");
@@ -529,7 +540,7 @@ WriteLiteral(" ");
 
             
             #line 134 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-                                                                                                                                                                           Write(canFlag ? String.Empty : disabled);
+                                                                                                                                                                                                            Write(canFlag ? String.Empty : disabled);
 
             
             #line default

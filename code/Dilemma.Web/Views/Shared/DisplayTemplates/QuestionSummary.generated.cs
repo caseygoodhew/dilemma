@@ -447,6 +447,17 @@ WriteLiteral(" class=\"Button--flag js-flag-button \"");
 
 WriteLiteral(" title=\"Report an issue with this question\"");
 
+WriteLiteral("  data-question-id=\"");
+
+            
+            #line 90 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+                                                                                                                                        Write(Model.QuestionId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"");
+
 WriteLiteral(" data-toggle=\"modal\"");
 
 WriteLiteral(" data-target=\"#modal-flag\"");

@@ -131,7 +131,7 @@
                   
             </div>
             <div class="u-1of5 right">
-                <button type="button" class="Button--flag js-flag-button @flaggedClass" title="Report an issue with this answer" data-toggle="modal" data-target="#modal-flag" @(canFlag ? String.Empty : disabled)>
+                <button type="button" class="Button--flag js-flag-button @flaggedClass" title="Report an issue with this answer" data-answer-id="@Model.AnswerId" data-toggle="modal" data-target="#modal-flag" @(canFlag ? String.Empty : disabled)>
                     <span data-icon="flag"></span> 
                     <span class="Button-label is-inactive">Flag</span>
                     <span class="Button-label is-active">Flagged</span>
