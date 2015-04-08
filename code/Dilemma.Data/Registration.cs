@@ -42,7 +42,6 @@ namespace Dilemma.Data
             registrar.CreatePipe<AnswerDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<FollowupDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<ModerationState>(MessengerType.Stepping, InitiateMessagePipe);
-            registrar.CreatePipe<VotingDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             
             ConverterFactory.Register<Question>(registrar);
             ConverterFactory.Register<Answer>(registrar);
@@ -58,34 +57,42 @@ namespace Dilemma.Data
         private static void InitiateMessagePipe(IMessagePipe<QuestionDataAction> messagePipe)
         {
             messagePipe.Locator<QuestionDataAction, IInternalManualModerationRepository>(QuestionDataAction.Created, x => x.OnQuestionCreated);
+            
+            messagePipe.Locator<QuestionDataAction, IInternalPointDistributor>(QuestionDataAction.StateChanged, x => x.OnQuestionStateChange);
+            messagePipe.Locator<QuestionDataAction, IInternalNotificationDistributor>(QuestionDataAction.StateChanged, x => x.OnQuestionStateChange);
+
+            messagePipe.Locator<QuestionDataAction, IInternalNotificationDistributor>(QuestionDataAction.OpenForVoting, x => x.OnQuestionStateChange);
         }
 
         private static void InitiateMessagePipe(IMessagePipe<AnswerDataAction> messagePipe)
         {
             messagePipe.Locator<AnswerDataAction, IInternalManualModerationRepository>(AnswerDataAction.Created, x => x.OnAnswerCreated);
+
+            messagePipe.Locator<AnswerDataAction, IInternalPointDistributor>(AnswerDataAction.StateChanged, x => x.OnAnswerStateChange);
             messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.StateChanged, x => x.OnAnswerStateChange);
+
+            messagePipe.Locator<AnswerDataAction, IInternalPointDistributor>(AnswerDataAction.VoteCast, x => x.OnVoteCast);
+            messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.VoteCast, x => x.OnVoteCast);
+
+            messagePipe.Locator<AnswerDataAction, IInternalPointDistributor>(AnswerDataAction.BestAnswerAwarded, x => x.OnBestAnswerAwarded);
+            messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.BestAnswerAwarded, x => x.OnBestAnswerAwarded);
         }
 
         private static void InitiateMessagePipe(IMessagePipe<FollowupDataAction> messagePipe)
         {
             messagePipe.Locator<FollowupDataAction, IInternalManualModerationRepository>(FollowupDataAction.Created, x => x.OnFollowupCreated);
+
+            messagePipe.Locator<FollowupDataAction, IInternalPointDistributor>(FollowupDataAction.StateChanged, x => x.OnFollowupStateChange);
             messagePipe.Locator<FollowupDataAction, IInternalNotificationDistributor>(FollowupDataAction.StateChanged, x => x.OnFollowupStateChange);
         }
 
+        // TODO: I want this to go away
         private static void InitiateMessagePipe(IMessagePipe<ModerationState> messagePipe)
         {
             messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Approved, x => x.OnModerationStateUpdated);
-            messagePipe.Locator<ModerationState, IInternalPointDistributor>(ModerationState.Approved, x => x.OnModerationApproved);
-
+            
             messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Rejected, x => x.OnModerationStateUpdated);
             messagePipe.Locator<ModerationState, IInternalNotificationDistributor>(ModerationState.Rejected, x => x.OnModerationRejected);
-        }
-
-        private static void InitiateMessagePipe(IMessagePipe<VotingDataAction> messagePipe)
-        {
-            messagePipe.Locator<VotingDataAction, IInternalPointDistributor>(VotingDataAction.VoteRegistered, x => x.OnVoteRegistered);
-            messagePipe.Locator<VotingDataAction, IInternalPointDistributor>(VotingDataAction.VoteDeregistered, x => x.OnVoteDeregistered);
-            messagePipe.Locator<VotingDataAction, IInternalPointDistributor>(VotingDataAction.StarVoteRegistered, x => x.OnStarVoteRegistered);
         }
     }
 }

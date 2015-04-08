@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+using Dilemma.Business.Utils;
 using Dilemma.Common;
 
 using Disposable.Common.ServiceLocator;
@@ -13,7 +14,9 @@ namespace Dilemma.Business.ViewModels
     public class NotificationListViewModel
     {
         private static readonly Lazy<INotificationTypeLocator> NotificationTypeLocator = Locator.Lazy<INotificationTypeLocator>();
-        
+
+        private static readonly Lazy<INotificationMessageFactory> NotificationMessageFactory = Locator.Lazy<INotificationMessageFactory>();
+
         private NotificationType notificationType;
 
         /// <summary>
@@ -32,6 +35,8 @@ namespace Dilemma.Business.ViewModels
                 NotificationRoute = NotificationTypeLocator.Value.GetRoute(value); 
             }
         }
+
+        public NotificationTarget NotificationTarget { get; set; }
 
         /// <summary>
         /// Gets the <see cref="NotificationRoute"/>.
@@ -66,19 +71,7 @@ namespace Dilemma.Business.ViewModels
         /// <returns>The notification message.</returns>
         public string GetMessage()
         {
-            switch (NotificationType)
-            {
-                case NotificationType.QuestionAnswered:
-                    return Occurrences == 1
-                               ? string.Format("1 answer has been added to your question.")
-                               : string.Format("{0} answers have been added to your question.", Occurrences);
-                
-                case NotificationType.PostRejected:
-                    return "Your post has been rejected.";
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            return NotificationMessageFactory.Value.GetMessage(NotificationType, NotificationTarget, Occurrences);
         }
 
         /// <summary>
@@ -90,4 +83,6 @@ namespace Dilemma.Business.ViewModels
             return new Dictionary<string, object> { { NotificationRoute.RouteDataKey, RouteDataValue } };
         }
     }
+
+    
 }

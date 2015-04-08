@@ -25,6 +25,11 @@ namespace Dilemma.Data.Models
         public NotificationType NotificationType { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="NotificationTarget"/>
+        /// </summary>
+        public NotificationTarget NotificationTarget { get; set; }
+        
+        /// <summary>
         /// Gets or sets the corresponding <see cref="Moderation"/>.
         /// </summary>
         public Moderation Moderation { get; set; }
@@ -48,5 +53,10 @@ namespace Dilemma.Data.Models
         /// Gets or sets the date and time that the notification was actioned.
         /// </summary>
         public DateTime? ActionedDateTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the corresponding <see cref="Followup"/>.
+        /// </summary>
+        public Followup Followup { get; set; }
     }
 }

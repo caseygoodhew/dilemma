@@ -68,8 +68,9 @@ namespace Dilemma.Data.Repositories
         /// <param name="context">The context to run the queries against.</param>
         /// <param name="forUserId">The <see cref="User"/> that the notification should be created for.</param>
         /// <param name="notificationType">The <see cref="NotificationType"/>.</param>
+        /// <param name="notificationTarget">The <see cref="NotificationTarget"/>.</param>
         /// <param name="id">The id of the object that the notification refers to.</param>
-        public void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, int id)
+        public void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, NotificationTarget notificationTarget, int id)
         {
             var forUser = context.GetOrAttachNew<User, int>(forUserId, x => x.UserId);
             
@@ -77,6 +78,7 @@ namespace Dilemma.Data.Repositories
                                    {
                                        ForUser = forUser,
                                        NotificationType = notificationType,
+                                       NotificationTarget = notificationTarget,
                                        CreatedDateTime = TimeSource.Value.Now
                                    };
 
@@ -84,31 +86,39 @@ namespace Dilemma.Data.Repositories
             
             switch (notificationType)
             {
-                case NotificationType.QuestionAnswered:
-                    questionId = context.Answers.Where(x => x.AnswerId == id).Select(
-                        x => new
-                                 {
-                                     x.Question.QuestionId
-                                 }).Single().QuestionId;
-
-                    notification.Answer = context.GetOrAttachNew<Answer, int>(id, x => x.AnswerId);
-                    notification.Question = context.GetOrAttachNew<Question, int>(questionId, x => x.QuestionId);
+                case NotificationType.QuestionApproved:
+                case NotificationType.QuestionRejected:
+                case NotificationType.OpenForVoting:
+                    
+                    var question = context.Questions.Where(x => x.QuestionId == id).Select(x => new { x.QuestionId }).Single();
+                    notification.Question = context.GetOrAttachNew<Question, int>(question.QuestionId, x => x.QuestionId);
                     break;
 
-                case NotificationType.PostRejected:
-                    notification.Moderation = context.GetOrAttachNew<Moderation, int>(id, x => x.ModerationId);
+                case NotificationType.AnswerApproved:
+                case NotificationType.AnswerRejected:
+                case NotificationType.VoteOnAnswer:
+                case NotificationType.BestAnswerAwarded:
+
+                    var answer = context.Answers.Where(x => x.AnswerId == id).Select(x => new { x.Question.QuestionId, x.AnswerId }).Single();
+                    notification.Question = context.GetOrAttachNew<Question, int>(answer.QuestionId, x => x.QuestionId);
+                    notification.Answer = context.GetOrAttachNew<Answer, int>(answer.AnswerId, x => x.AnswerId);
                     break;
 
-                case NotificationType.QuestionFollowedUp:
-                    questionId = context.Followups.Where(x => x.FollowupId == id).Select(
-                        x => new
-                        {
-                            x.Question.QuestionId
-                        }).Single().QuestionId;
+                case NotificationType.FollowupApproved:
+                case NotificationType.FollowupRejected:
 
+                    var followup = context.Followups.Where(x => x.FollowupId == id).Select(x => new { x.Question.QuestionId, x.FollowupId }).Single();
+                    notification.Question = context.GetOrAttachNew<Question, int>(followup.QuestionId, x => x.QuestionId);
+                    notification.Followup = context.GetOrAttachNew<Followup, int>(followup.FollowupId, x => x.FollowupId);
+                    break;
+
+                case NotificationType.FlaggedQuestionApproved:
+                case NotificationType.FlaggedAnswerApproved:
+                case NotificationType.FlaggedFollowupApproved:
+                case NotificationType.FlaggedQuestionRejected:
+                case NotificationType.FlaggedAnswerRejected:
+                case NotificationType.FlaggedFollowupRejected:
                     return;
-                    //notification
-                    //break;
 
                 default:
                     throw new ArgumentOutOfRangeException("notificationType");
@@ -158,22 +168,29 @@ namespace Dilemma.Data.Repositories
             context.SaveChangesVerbose();
         }
 
-        private static List<Notification> FindNotifications(
-            DilemmaContext context,
-            int? forUserId,
-            NotificationLookupBy notificationLookupBy,
-            int id)
+        private static List<Notification> FindNotifications(DilemmaContext context, int? forUserId, NotificationLookupBy notificationLookupBy, int id)
         {
-            return
-                context.Notifications.Where(
-                    x =>
-                    (notificationLookupBy == NotificationLookupBy.QuestionId
-                     && x.NotificationType == NotificationType.QuestionAnswered && x.Answer.Question.QuestionId == id)
-                    || (notificationLookupBy == NotificationLookupBy.ModerationId
-                        && x.NotificationType == NotificationType.PostRejected && x.Moderation.ModerationId == id))
-                    .Where(x => x.ActionedDateTime == null)
-                    .Where(x => x.ForUser.UserId == (forUserId ?? x.ForUser.UserId))
-                    .ToList();
+            var query =
+                context.Notifications.Where(x => x.ActionedDateTime == null)
+                    .Where(x => x.ForUser.UserId == (forUserId ?? x.ForUser.UserId));
+
+            switch (notificationLookupBy)
+            {
+                case NotificationLookupBy.Question:
+                    return query.Where(x => x.Question != null).Where(x => x.Question.QuestionId == id).ToList();
+
+                case NotificationLookupBy.Answer:
+                    return query.Where(x => x.Answer != null).Where(x => x.Answer.AnswerId == id).ToList();
+
+                case NotificationLookupBy.Followup:
+                    return query.Where(x => x.Followup != null).Where(x => x.Followup.FollowupId == id).ToList();
+                
+                case NotificationLookupBy.Moderation:
+                    return query.Where(x => x.Moderation != null).Where(x => x.Moderation.ModerationId == id).ToList();
+                    
+                default:
+                    throw new ArgumentOutOfRangeException("notificationLookupBy");
+            }
         }
 
         private static IList<Notification> QueryNotifications(IQueryable<Notification> query)

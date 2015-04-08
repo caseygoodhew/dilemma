@@ -33,8 +33,6 @@ namespace Dilemma.Data.Repositories
 
         private static readonly Lazy<IMessagePipe<FollowupDataAction>> FollowupMessagePipe = Locator.Lazy<IMessagePipe<FollowupDataAction>>();
 
-        private static readonly Lazy<IMessagePipe<VotingDataAction>> VotingMessagePipe = Locator.Lazy<IMessagePipe<VotingDataAction>>();
-
         private static readonly Lazy<IAdministrationRepository> AdministrationRepository =
             Locator.Lazy<IAdministrationRepository>();
 
@@ -82,6 +80,12 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <param name="maximum">The maximum number of questions to return.</param>
+        /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         public IEnumerable<T> QuestionList<T>(int maximum) where T : class
         {
             using (var context = new DilemmaContext())
@@ -90,6 +94,13 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <param name="maximum">The maximum number of questions to return.</param>
+        /// <param name="userId">The id of user to get the questions for.</param>
+        /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         public IEnumerable<T> QuestionList<T>(int userId, int maximum) where T : class
         {
             using (var context = new DilemmaContext())
@@ -104,6 +115,14 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <typeparam name="TC">The <see cref="category"/> type.</typeparam>
+        /// <param name="maximum">The maximum number of questions to return.</param>
+        /// <param name="category">The category of question to get.</param>
+        /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         public IEnumerable<T> QuestionList<T, TC>(TC category, int maximum) where T : class where TC : class
         {
             var categoryId = ConverterFactory.ConvertOne<TC, Category>(category).CategoryId;
@@ -114,6 +133,13 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="Question"/> list in the specified type. There must be a converter registered between <see cref="Question"/> and <see cref="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type to get.</typeparam>
+        /// <param name="maximum">The maximum number of questions to return.</param>
+        /// <param name="questionIds">The ids of question to get.</param>
+        /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         public IEnumerable<T> QuestionList<T>(IEnumerable<int> questionIds, int maximum) where T : class
         {
             using (var context = new DilemmaContext())
@@ -419,29 +445,21 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var votingMessageContext = context.Answers.Where(x => x.AnswerId == answerId).Select(
-                    x => new
-                             {
-                                 VotingUserId = userId,
-                                 QuestionId = x.Question.QuestionId,
-                                 QuestionUserId = x.Question.User.UserId,
-                                 AnswerId = answerId,
-                                 AnswerUserId = x.User.UserId
-                             })
-                    .ToList()
-                    .Select(
-                        x =>
-                        new VotingMessageContext(
-                            VotingDataAction.VoteRegistered,
-                            context,
-                            x.VotingUserId,
-                            x.QuestionId,
-                            x.QuestionUserId,
-                            x.AnswerId,
-                            x.AnswerUserId))
-                    .SingleOrDefault();
+                var result =
+                    context.Answers
+                        .AsNoTracking()
+                        .Where(x => x.AnswerId == answerId)
+                        .Where(x => x.AnswerState == AnswerState.Approved)
+                        .Where(x => x.Question.QuestionState == QuestionState.Approved)
+                        .Where(x => x.Question.ClosedDateTime != null)
+                        .Select(
+                            x => new
+                                     {
+                                         QuestionId = x.Question.QuestionId,
+                                         QuestionUserId = x.Question.User.UserId
+                                     }).SingleOrDefault();
 
-                if (votingMessageContext == null)
+                if (result == null)
                 {
                     return;
                 }
@@ -450,8 +468,8 @@ namespace Dilemma.Data.Repositories
                     context.Vote.Where(x => x.User.UserId == userId)
                         .Where(
                             x =>
-                               x.Answer.AnswerId == votingMessageContext.AnswerId
-                            || x.Question.QuestionId == votingMessageContext.QuestionId);
+                               x.Answer.AnswerId == answerId
+                            || x.Question.QuestionId == result.QuestionId);
 
                 if (existingVote.Any())
                 {
@@ -462,7 +480,7 @@ namespace Dilemma.Data.Repositories
                                    {
                                        CreatedDateTime = TimeSource.Value.Now,
                                        User = context.GetOrAttachNew<User, int>(userId, x => x.UserId),
-                                       Question = context.GetOrAttachNew<Question, int>(votingMessageContext.QuestionId, x => x.QuestionId),
+                                       Question = context.GetOrAttachNew<Question, int>(result.QuestionId, x => x.QuestionId),
                                        Answer = context.GetOrAttachNew<Answer, int>(answerId, x => x.AnswerId)
                                    };
 
@@ -470,7 +488,12 @@ namespace Dilemma.Data.Repositories
 
                 context.SaveChangesVerbose();
 
-                VotingMessagePipe.Value.Announce(votingMessageContext);
+                var answerDataAction = userId == result.QuestionUserId
+                                           ? AnswerDataAction.BestAnswerAwarded
+                                           : AnswerDataAction.VoteCast;
+
+                var messageContext = new AnswerMessageContext(answerDataAction, context, vote.Answer);
+                AnswerMessagePipe.Value.Announce(messageContext);
             }
         }
 
@@ -481,48 +504,8 @@ namespace Dilemma.Data.Repositories
         /// <param name="answerId">The answer to deregister the vote against.</param>
         public void DeregisterVote(int userId, int answerId)
         {
-            using (var context = new DilemmaContext())
-            {
-                var result =
-                    context.Vote.Where(x => x.User.UserId == userId)
-                        .Where(x => x.Answer.AnswerId == answerId)
-                        .Select(
-                            x => new
-                                     {
-                                         VoteId = x.Id,
-                                         VotingUserId = userId,
-                                         QuestionId = x.Question.QuestionId,
-                                         QuestionUserId = x.Question.User.UserId,
-                                         AnswerId = answerId,
-                                         AnswerUserId = x.User.UserId
-                                     }).ToList().Select(
-                                         x => new
-                                                  {
-                                                      VoteId = x.VoteId,
-                                                      VotingMessageContext =
-                                                          new VotingMessageContext(
-                                                              VotingDataAction.VoteRegistered,
-                                                              context,
-                                                              x.VotingUserId,
-                                                              x.QuestionId,
-                                                              x.QuestionUserId,
-                                                              x.AnswerId,
-                                                              x.AnswerUserId)
-                                                  }).SingleOrDefault();
-                
-                if (result == null)
-                {
-                    return;
-                }
-
-                var vote = context.Vote.Single(x => x.Id == result.VoteId);
-
-                context.Vote.Remove(vote);
-
-                context.SaveChangesVerbose();
-
-                VotingMessagePipe.Value.Announce(result.VotingMessageContext);
-            }
+            // this is not required functionality at this time
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -630,6 +613,26 @@ namespace Dilemma.Data.Repositories
             }
 
             messenger.Forward();
+        }
+
+        public IEnumerable<int> GetBookmarkUserIds(DilemmaContext dataContext, int questionId)
+        {
+            return
+                dataContext.Bookmarks.Where(x => x.Question.QuestionId == questionId)
+                    .AsNoTracking()
+                    .Select(x => x.User.UserId)
+                    .Distinct()
+                    .ToList();
+        }
+
+        public IEnumerable<int> GetAnswererUserIds(DilemmaContext dataContext, int questionId)
+        {
+            return
+                dataContext.Answers.Where(x => x.Question.QuestionId == questionId)
+                    .AsNoTracking()
+                    .Select(x => x.User.UserId)
+                    .Distinct()
+                    .ToList();
         }
 
         private void UpdateAnswerState(DilemmaContext dataContext, int answerId, ModerationState moderationState)

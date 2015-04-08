@@ -1,7 +1,7 @@
 ﻿@model Dilemma.Business.ViewModels.NotificationListViewModel
 
 <div class="Card Notification Card-go--container">
-    <a href="#" class="Card-go--trigger"></a>
+    <a href="@Url.Action(Model.NotificationRoute.Action, Model.NotificationRoute.Controller, Model.GetRouteData())" class="Card-go--trigger"></a>
     <div class="Notification-score">
         @if (Model.TotalPointsAwarded == 0)
         {
@@ -19,20 +19,7 @@
     <div class="Notification-summary">
         <div class="Card-label--small">@Model.CreatedDateTime.ToRelativeText()</div>
         <div class="Notification-summary-text">
-            @switch (Model.NotificationType)
-            {
-                case NotificationType.QuestionAnswered:
-                    <text>You have new advice for your dilemma!</text>
-                    break;
-                case NotificationType.PostRejected:
-                    <text>One of your posts has been rejected by a moderator. Find out why.</text>
-                    break;
-                case NotificationType.PointsAwarded:
-                    <text>POINTS AWARDED</text>
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            @Model.GetMessage()
         </div>
     </div><!-- Notification-summary -->
 </div>

@@ -1,5 +1,6 @@
 ﻿using Dilemma.Business.Conversion;
 using Dilemma.Business.Services;
+using Dilemma.Business.Utils;
 using Dilemma.Business.Validators;
 using Dilemma.Business.ViewModels;
 using Dilemma.Data.Models;
@@ -23,6 +24,8 @@ namespace Dilemma.Business
         /// <param name="registrar">The <see cref="IRegistrar"/> to use.</param>
         public static void Register(IRegistrar registrar)
         {
+            registrar.Register<INotificationMessageFactory>(() => new NotificationMessageFactory());
+            
             registrar.Register<IAdministrationService>(() => new AdministrationService());
             registrar.Register<IQuestionService>(() => new QuestionService());
             registrar.Register<ISiteService>(() => new SiteService());

@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201504080437099_Migration20.Designer.cs">
       <DependentUpon>201504080437099_Migration20.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504082248536_Migration21.cs" />
+    <Compile Include="Migrations\201504082248536_Migration21.Designer.cs">
+      <DependentUpon>201504082248536_Migration21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Followup.cs" />
     <Compile Include="Models\LastRunLog.cs" />
@@ -247,8 +251,6 @@
     <Compile Include="Repositories\SiteRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="VotingDataAction.cs" />
-    <Compile Include="VotingMessageContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -329,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504080437099_Migration20.resx">
       <DependentUpon>201504080437099_Migration20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504082248536_Migration21.resx">
+      <DependentUpon>201504082248536_Migration21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

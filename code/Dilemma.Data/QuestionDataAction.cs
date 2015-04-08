@@ -4,6 +4,8 @@ namespace Dilemma.Data
     {
         Created,
 
-        StateChanged
+        StateChanged,
+
+        OpenForVoting
     }
 }

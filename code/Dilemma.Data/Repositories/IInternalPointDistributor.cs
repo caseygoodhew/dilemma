@@ -1,21 +1,19 @@
-using Dilemma.Common;
-
 using Disposable.MessagePipe;
 
 namespace Dilemma.Data.Repositories
 {
     internal interface IInternalPointDistributor
     {
-        /// <summary>
-        /// To be called when moderation is approved.
-        /// </summary>
-        /// <param name="messenger">The <see cref="IMessenger{ModerationState}"/>.</param>
-        void OnModerationApproved(IMessenger<ModerationState> messenger);
+        void OnQuestionStateChange(IMessenger<QuestionDataAction> messenger);
 
-        void OnVoteRegistered(IMessenger<VotingDataAction> messenger);
+        void OnAnswerStateChange(IMessenger<AnswerDataAction> messenger);
 
-        void OnVoteDeregistered(IMessenger<VotingDataAction> messenger);
+        void OnFollowupStateChange(IMessenger<FollowupDataAction> messenger);
 
-        void OnStarVoteRegistered(IMessenger<VotingDataAction> messenger);
+        void OnVotingOpen(IMessenger<QuestionDataAction> messenger);
+
+        void OnVoteCast(IMessenger<AnswerDataAction> messenger);
+
+        void OnBestAnswerAwarded(IMessenger<AnswerDataAction> messenger);
     }
 }

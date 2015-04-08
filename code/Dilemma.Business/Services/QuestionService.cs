@@ -90,7 +90,7 @@ namespace Dilemma.Business.Services
 
             if (question != null)
             {
-                NotificationService.Value.Mute(NotificationLookupBy.QuestionId, questionId);
+                NotificationService.Value.Mute(NotificationLookupBy.Question, questionId);
             }
             
             return MarkBookmarks(question);

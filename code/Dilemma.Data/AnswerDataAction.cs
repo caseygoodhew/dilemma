@@ -3,6 +3,9 @@ namespace Dilemma.Data
     internal enum AnswerDataAction
     {
         Created,
-        StateChanged
+        StateChanged,
+        VoteCast,
+
+        BestAnswerAwarded
     }
 }

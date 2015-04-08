@@ -5,8 +5,12 @@ namespace Dilemma.Common
     /// </summary>
     public enum NotificationLookupBy
     {
-        QuestionId,
+        Question,
 
-        ModerationId
+        Answer,
+
+        Followup,
+
+        Moderation
     }
 }

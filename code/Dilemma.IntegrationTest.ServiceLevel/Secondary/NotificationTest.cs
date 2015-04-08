@@ -103,7 +103,8 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
             notifications = Notifications.GetAll();
             var notification = notifications.Single();
             Assert.AreEqual(1, notification.Occurrences);
-            Assert.AreEqual(NotificationType.QuestionAnswered, notification.NotificationType);
+            throw new NotImplementedException();
+            //Assert.AreEqual(NotificationType.QuestionAnswered, notification.NotificationType);
         }
 
         [TestMethod]
@@ -121,7 +122,8 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
             notifications = Notifications.GetAll();
             var notification = notifications.Single();
             Assert.AreEqual(1, notification.Occurrences);
-            Assert.AreEqual(NotificationType.PostRejected, notification.NotificationType);
+            throw new NotImplementedException();
+            //Assert.AreEqual(NotificationType.PostRejected, notification.NotificationType);
         }
 
         [TestMethod]
@@ -145,7 +147,8 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
             notifications = Notifications.GetAll();
             var notification = notifications.Single();
             Assert.AreEqual(1, notification.Occurrences);
-            Assert.AreEqual(NotificationType.PostRejected, notification.NotificationType);
+            throw new NotImplementedException();
+            //Assert.AreEqual(NotificationType.PostRejected, notification.NotificationType);
         }
 
         [TestMethod]
@@ -165,7 +168,8 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
 
             Action<int, int> validateNotificationOccurrences = (expectedNew, expectedMuted) =>
                 {
-                    var notifications = Notifications.GetAll().Where(x => x.NotificationType == NotificationType.QuestionAnswered).ToList();
+                    throw new NotImplementedException();
+                    /*var notifications = Notifications.GetAll().Where(x => x.NotificationType == NotificationType.QuestionAnswered).ToList();
 
                     var newNotifications = notifications.Where(x => !x.IsActioned).ToList();
                     var mutedNotifications = notifications.Where(x => x.IsActioned).ToList();
@@ -186,7 +190,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
                     else
                     {
                         Assert.AreEqual(expectedMuted, mutedNotifications.Single().Occurrences);
-                    }
+                    }*/
                 };
 
             Administration.UpdateTestingConfiguration(x => x.ManualModeration = ActiveState.Inactive);

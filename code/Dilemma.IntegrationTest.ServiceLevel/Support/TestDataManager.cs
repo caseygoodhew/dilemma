@@ -33,10 +33,10 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Support
                 locator.Register<ITimeSource>(() => timeSource);
                 locator.Register<ITimeWarpSource>(() => timeSource);
 
-                locator.Register<INotificationTypeLocator>(() => new NotificationTypeLocator(
+                /*locator.Register<INotificationTypeLocator>(() => new NotificationTypeLocator(
                     NotificationRoute.Create<NotificationRouterStub>(NotificationType.QuestionAnswered, x => x.OnQuestionAnswered(0)),
                     NotificationRoute.Create<NotificationRouterStub>(NotificationType.PostRejected, x => x.OnPostRejected(0))
-                ));
+                ));*/
 
                 _initialized = true;
             }

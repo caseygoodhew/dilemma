@@ -11,8 +11,23 @@ namespace Dilemma.Data.Repositories
     internal class PointDistributor : IInternalPointDistributor
     {
         private static readonly Lazy<IInternalPointsRepository> PointsRepository = Locator.Lazy<IInternalPointsRepository>();
-        
-        public void OnModerationApproved(IMessenger<ModerationState> messenger)
+
+        public void OnQuestionStateChange(IMessenger<QuestionDataAction> messenger)
+        {
+            messenger.Forward();
+        }
+
+        public void OnAnswerStateChange(IMessenger<AnswerDataAction> messenger)
+        {
+            messenger.Forward();
+        }
+
+        public void OnFollowupStateChange(IMessenger<FollowupDataAction> messenger)
+        {
+            messenger.Forward();
+        }
+
+        /*public void OnModerationApproved(IMessenger<ModerationState> messenger)
         {
             var messageContext = messenger.GetContext<ModerationMessageContext>(ModerationState.Approved);
 
@@ -71,6 +86,21 @@ namespace Dilemma.Data.Repositories
             PointsRepository.Value.AwardPoints(messageContext.DataContext, messageContext.AnswerUserId, PointType.StarVoteReceived, messageContext.QuestionId);
 
             messenger.Forward();
+        }*/
+
+        public void OnVotingOpen(IMessenger<QuestionDataAction> messenger)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnVoteCast(IMessenger<AnswerDataAction> messenger)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnBestAnswerAwarded(IMessenger<AnswerDataAction> messenger)
+        {
+            throw new NotImplementedException();
         }
     }
 }

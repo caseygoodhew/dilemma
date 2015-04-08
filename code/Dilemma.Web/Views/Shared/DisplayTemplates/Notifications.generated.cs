@@ -48,7 +48,15 @@ WriteLiteral(" class=\"Card Notification Card-go--container\"");
 
 WriteLiteral(">\r\n    <a");
 
-WriteLiteral(" href=\"#\"");
+WriteAttribute("href", Tuple.Create(" href=\"", 122), Tuple.Create("\"", 230)
+            
+            #line 4 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
+, Tuple.Create(Tuple.Create("", 129), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.NotificationRoute.Action, Model.NotificationRoute.Controller, Model.GetRouteData())
+            
+            #line default
+            #line hidden
+, 129), false)
+);
 
 WriteLiteral(" class=\"Card-go--trigger\"");
 
@@ -132,66 +140,16 @@ WriteLiteral(" class=\"Notification-summary-text\"");
 
 WriteLiteral(">\r\n");
 
+WriteLiteral("            ");
+
             
             #line 22 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
-            
-            
-            #line default
-            #line hidden
-            
-            #line 22 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
-             switch (Model.NotificationType)
-            {
-                case NotificationType.QuestionAnswered:
+       Write(Model.GetMessage());
 
             
             #line default
             #line hidden
-WriteLiteral("                    ");
-
-WriteLiteral("You have new advice for your dilemma!");
-
-WriteLiteral("\r\n");
-
-            
-            #line 26 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
-                    break;
-                case NotificationType.PostRejected:
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    ");
-
-WriteLiteral("One of your posts has been rejected by a moderator. Find out why.");
-
-WriteLiteral("\r\n");
-
-            
-            #line 29 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
-                    break;
-                case NotificationType.PointsAwarded:
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    ");
-
-WriteLiteral("POINTS AWARDED");
-
-WriteLiteral("\r\n");
-
-            
-            #line 32 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        </div>\r\n    </div><!-- Notification-summary -->\r\n</div>\r\n");
+WriteLiteral("\r\n        </div>\r\n    </div><!-- Notification-summary -->\r\n</div>\r\n");
 
         }
     }

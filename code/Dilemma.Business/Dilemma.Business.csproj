@@ -72,6 +72,8 @@
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ManualModerationService.cs" />
     <Compile Include="Services\NotificationServiceGroupingExtensions.cs" />
+    <Compile Include="Utils\NotificationMessageFactory.cs" />
+    <Compile Include="Utils\INotificationMessageFactory.cs" />
     <Compile Include="Validators\FollowupViewModelValidator.cs" />
     <Compile Include="Validators\PointConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\ServerConfigurationViewModelValidator.cs" />

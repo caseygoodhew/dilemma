@@ -1,4 +1,6 @@
-﻿using Dilemma.Common;
+﻿using System.Collections.Generic;
+
+using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
 
 using Disposable.MessagePipe;
@@ -15,5 +17,9 @@ namespace Dilemma.Data.Repositories
         /// </summary>
         /// <param name="messenger">The messenger.</param>
         void OnModerationStateUpdated(IMessenger<ModerationState> messenger);
+
+        IEnumerable<int> GetBookmarkUserIds(DilemmaContext dataContext, int questionId);
+
+        IEnumerable<int> GetAnswererUserIds(DilemmaContext dataContext, int questionId);
     }
 }
