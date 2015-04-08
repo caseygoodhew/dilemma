@@ -31,20 +31,9 @@
         
         @if (Model.QuestionDetails.CanFollowup)
         {
-            <form class="Card Answer--window" action="post">
-                <div class="Card-section Card-info">
-                    What did you do?
-                </div>
-                <div class="Card-section line">
-                    <button type="submit" class="Button Button--answer">
-                        <span data-icon="advise"></span>
-                        <span class="Button-label">Followup</span>
-                    </button>
-                    <div class="textarea-wrap">
-                        <textarea name="answer" id="" cols="30" rows="2" class="form-control js-activate-answer-form" placeholder="Tell your adoring fans how it all worked out for you in the end"></textarea>
-                    </div>
-                </div><!-- Dilemma-actions -->
-            </form>
+            <div id="js-followup-container">
+                @Html.Partial("EditorTemplates/Followup", new FollowupViewModel())
+            </div>
         }
         
         @if (Model.QuestionDetails.QuestionViewModel.HasFollowup)
@@ -52,31 +41,11 @@
             @Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel.Followup, "FollowupResponse")
         }
 
-        <div class="">
-            
-            @foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
-            {
-                @Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion })
-            }
-                
-            @if (false && Model.QuestionDetails.CanAnswer)
-            { 
-                <hr  style="margin-left: 60px;" />
-                <div class="Card align-center">
-                    <div class="pa30">
-                        <h2 class="section-label pt0 pl0">Your Answer</h2>
-                        <h3 class="mt10 mb20">What do you think?</h3>
-                        
-                        <a href="@Url.Action("Answer")" class="Button--ask btn-success">
-                            <span data-icon="advise"></span>
-                            Answer Now
-                        </a>                 
-                    </div><!-- pa30 -->
-                </div>
-            }
-                
-        </div>
-
+        @foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
+        {
+            @Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion })
+        }
+        
     </main><!-- main-->   
 
 </div>
@@ -104,6 +73,28 @@
         };
 
         $(document).ready(window.resetAnswerHook);
+    </script>
+    
+    <script>
+        window.resetFollowupHook = function () {
+            $('#js-button-followup').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Followup", "Ajax")',
+                    dataType: "html",
+                    data: $('form.Answer--window').serialize(),
+                    success: function (result) {
+                        $("#js-followup-container").html(result);
+                        window.resetFollowupHook();
+                    },
+                    error: function () {
+                    }
+                });
+            });
+        };
+
+        $(document).ready(window.resetFollowupHook);
     </script>
     
     <script type="text/javascript">

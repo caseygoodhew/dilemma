@@ -91,5 +91,9 @@ namespace Dilemma.Business.ViewModels
         public bool IsBookmarked { get; set; }
 
         public bool HasFollowup { get; set; }
+
+        public bool IHaveAnswsered { get; set; }
+
+        public bool IHaveVoted { get; set; }
     }
 }

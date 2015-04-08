@@ -43,7 +43,7 @@ namespace Dilemma.Business.Conversion
         /// <returns>The resultant <see cref="QuestionViewModel"/>.</returns>
         public static QuestionViewModel FromQuestion(Question model)
         {
-            var answers = ConverterFactory.ConvertMany<Answer, AnswerViewModel>(model.Answers);
+            var answers = (ConverterFactory.ConvertMany<Answer, AnswerViewModel>(model.Answers) ?? Enumerable.Empty<AnswerViewModel>()).ToList();
             var followup = model.Followup == null ? null : ConverterFactory.ConvertOne<Followup, FollowupViewModel>(model.Followup);
             var includeFollowup = followup != null && !followup.IsRejected
                                   && (followup.IsApproved || followup.IsMyFollowup);
@@ -67,8 +67,10 @@ namespace Dilemma.Business.Conversion
                            IsOpen = model.QuestionState == QuestionState.Approved && !model.ClosedDateTime.HasValue,
                            IsClosed = model.ClosedDateTime.HasValue,
                            HasFollowup = followup != null,
-                           Answers = (answers ?? Enumerable.Empty<AnswerViewModel>()).Where(x => !x.IsReservedSlot).ToList(),
-                           Followup = includeFollowup ? followup : null
+                           Answers = answers.Where(x => !x.IsReservedSlot).ToList(),
+                           Followup = includeFollowup ? followup : null,
+                           IHaveAnswsered = answers.Any(x => x.IsMyAnswer),
+                           IHaveVoted = answers.Any(x => x.HasMyVote)
                        };
 
             if (model.Answers == null)

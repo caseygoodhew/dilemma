@@ -78,6 +78,14 @@ namespace Dilemma.Business.Services
         bool CompleteAnswer(int questionId, AnswerViewModel answerViewModel);
 
         /// <summary>
+        /// Adds a followup to a question.
+        /// </summary>
+        /// <param name="questionId">The question id.</param>
+        /// <param name="followupViewModel">The <see cref="FollowupViewModel"/> to save.</param>
+        /// <returns>true if the followup was saved, false if a followup has already been added.</returns>
+        bool AddFollowup(int questionId, FollowupViewModel followupViewModel);
+
+        /// <summary>
         /// Registers a users vote for an answer.
         /// </summary>
         /// <param name="answerId">The answer to register the vote against.</param>

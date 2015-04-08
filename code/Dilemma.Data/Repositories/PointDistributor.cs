@@ -34,6 +34,9 @@ namespace Dilemma.Data.Repositories
                             .Select(x => x.Question.QuestionId)
                             .Single();
                     break;
+                case ModerationFor.Followup:
+                    return;
+                
                 default:
                     throw new ArgumentOutOfRangeException();
             }

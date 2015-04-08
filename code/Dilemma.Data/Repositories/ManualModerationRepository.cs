@@ -215,6 +215,7 @@ namespace Dilemma.Data.Repositories
                                 ForUserId = x.ForUser.UserId,
                                 AnswerId = x.Answer == null ? -1 : x.Answer.AnswerId,
                                 QuestionId = x.Question == null ? -1 : x.Question.QuestionId,
+                                FollowupId = x.Followup == null ? -1 : x.Followup.FollowupId
                             })
                      .ToList()
                      .Select(
@@ -224,7 +225,8 @@ namespace Dilemma.Data.Repositories
                                 ModerationFor = x.ModerationFor,
                                 ForUser = new User { UserId = x.ForUserId },
                                 Answer = new Answer { AnswerId = x.AnswerId },
-                                Question = new Question { QuestionId = x.QuestionId }
+                                Question = new Question { QuestionId = x.QuestionId },
+                                Followup = new Followup {  FollowupId = x.FollowupId }
                             })
                       .Single();
             

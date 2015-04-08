@@ -11,6 +11,6 @@ namespace Dilemma.Common
 
         PointsAwarded,
 
-        QuestionFollowuped
+        QuestionFollowedUp
     }
 }

@@ -28,7 +28,6 @@ namespace Dilemma.Business.Conversion
         {
             return new Followup
                        {
-                           FollowupId = viewModel.FollowupId.GuardedValue(),
                            Text = viewModel.Text.Trim(),
                            CreatedDateTime = viewModel.CreatedDateTime
                        };

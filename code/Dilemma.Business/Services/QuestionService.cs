@@ -143,6 +143,19 @@ namespace Dilemma.Business.Services
         }
 
         /// <summary>
+        /// Adds a followup to a question.
+        /// </summary>
+        /// <param name="questionId">The question id.</param>
+        /// <param name="followupViewModel">The <see cref="FollowupViewModel"/> to save.</param>
+        /// <returns>true if the followup was saved, false if a followup has already been added.</returns>
+        public bool AddFollowup(int questionId, FollowupViewModel followupViewModel)
+        {
+            var userId = SecurityManager.Value.GetUserId();
+            followupViewModel.Text = followupViewModel.Text.TidyWhiteSpace();
+            return QuestionRepository.Value.AddFollowup(userId, questionId, followupViewModel);
+        }
+
+        /// <summary>
         /// Registers a users vote for an answer.
         /// </summary>
         /// <param name="answerId">The answer to register the vote against.</param>

@@ -171,58 +171,25 @@ WriteLiteral("        \r\n");
             
             #line default
             #line hidden
-WriteLiteral("            <form");
+WriteLiteral("            <div");
 
-WriteLiteral(" class=\"Card Answer--window\"");
+WriteLiteral(" id=\"js-followup-container\"");
 
-WriteLiteral(" action=\"post\"");
+WriteLiteral(">\r\n");
 
-WriteLiteral(">\r\n                <div");
-
-WriteLiteral(" class=\"Card-section Card-info\"");
-
-WriteLiteral(">\r\n                    What did you do?\r\n                </div>\r\n                " +
-"<div");
-
-WriteLiteral(" class=\"Card-section line\"");
-
-WriteLiteral(">\r\n                    <button");
-
-WriteLiteral(" type=\"submit\"");
-
-WriteLiteral(" class=\"Button Button--answer\"");
-
-WriteLiteral(">\r\n                        <span");
-
-WriteLiteral(" data-icon=\"advise\"");
-
-WriteLiteral("></span>\r\n                        <span");
-
-WriteLiteral(" class=\"Button-label\"");
-
-WriteLiteral(">Followup</span>\r\n                    </button>\r\n                    <div");
-
-WriteLiteral(" class=\"textarea-wrap\"");
-
-WriteLiteral(">\r\n                        <textarea");
-
-WriteLiteral(" name=\"answer\"");
-
-WriteLiteral(" id=\"\"");
-
-WriteLiteral(" cols=\"30\"");
-
-WriteLiteral(" rows=\"2\"");
-
-WriteLiteral(" class=\"form-control js-activate-answer-form\"");
-
-WriteLiteral(" placeholder=\"Tell your adoring fans how it all worked out for you in the end\"");
-
-WriteLiteral("></textarea>\r\n                    </div>\r\n                </div><!-- Dilemma-acti" +
-"ons -->\r\n            </form>\r\n");
+WriteLiteral("                ");
 
             
-            #line 48 "..\..\Views\Answers\Index.cshtml"
+            #line 35 "..\..\Views\Answers\Index.cshtml"
+           Write(Html.Partial("EditorTemplates/Followup", new FollowupViewModel()));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            </div>\r\n");
+
+            
+            #line 37 "..\..\Views\Answers\Index.cshtml"
         }
 
             
@@ -231,13 +198,13 @@ WriteLiteral("></textarea>\r\n                    </div>\r\n                </di
 WriteLiteral("        \r\n");
 
             
-            #line 50 "..\..\Views\Answers\Index.cshtml"
+            #line 39 "..\..\Views\Answers\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Views\Answers\Index.cshtml"
+            #line 39 "..\..\Views\Answers\Index.cshtml"
          if (Model.QuestionDetails.QuestionViewModel.HasFollowup)
         {
             
@@ -245,123 +212,52 @@ WriteLiteral("        \r\n");
             #line default
             #line hidden
             
-            #line 52 "..\..\Views\Answers\Index.cshtml"
+            #line 41 "..\..\Views\Answers\Index.cshtml"
        Write(Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel.Followup, "FollowupResponse"));
 
             
             #line default
             #line hidden
             
-            #line 52 "..\..\Views\Answers\Index.cshtml"
+            #line 41 "..\..\Views\Answers\Index.cshtml"
                                                                                                    
         }
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n        <div");
-
-WriteLiteral(" class=\"\"");
-
-WriteLiteral(">\r\n            \r\n");
+WriteLiteral("\r\n");
 
             
-            #line 57 "..\..\Views\Answers\Index.cshtml"
+            #line 44 "..\..\Views\Answers\Index.cshtml"
+        
+            
+            #line default
+            #line hidden
+            
+            #line 44 "..\..\Views\Answers\Index.cshtml"
+         foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
+        {
             
             
             #line default
             #line hidden
             
-            #line 57 "..\..\Views\Answers\Index.cshtml"
-             foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
-            {
-                
-            
-            #line default
-            #line hidden
-            
-            #line 59 "..\..\Views\Answers\Index.cshtml"
-           Write(Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion }));
+            #line 46 "..\..\Views\Answers\Index.cshtml"
+       Write(Html.DisplayFor(x => answer, "Answer", new { Model.QuestionDetails.CanVote, Model.QuestionDetails.QuestionViewModel.IsMyQuestion }));
 
             
             #line default
             #line hidden
             
-            #line 59 "..\..\Views\Answers\Index.cshtml"
-                                                                                                                                                    
-            }
+            #line 46 "..\..\Views\Answers\Index.cshtml"
+                                                                                                                                                
+        }
 
             
             #line default
             #line hidden
-WriteLiteral("                \r\n");
-
-            
-            #line 62 "..\..\Views\Answers\Index.cshtml"
-            
-            
-            #line default
-            #line hidden
-            
-            #line 62 "..\..\Views\Answers\Index.cshtml"
-             if (false && Model.QuestionDetails.CanAnswer)
-            { 
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                <hr");
-
-WriteLiteral("  style=\"margin-left: 60px;\"");
-
-WriteLiteral(" />\r\n");
-
-WriteLiteral("                <div");
-
-WriteLiteral(" class=\"Card align-center\"");
-
-WriteLiteral(">\r\n                    <div");
-
-WriteLiteral(" class=\"pa30\"");
-
-WriteLiteral(">\r\n                        <h2");
-
-WriteLiteral(" class=\"section-label pt0 pl0\"");
-
-WriteLiteral(">Your Answer</h2>\r\n                        <h3");
-
-WriteLiteral(" class=\"mt10 mb20\"");
-
-WriteLiteral(">What do you think?</h3>\r\n                        \r\n                        <a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 2709), Tuple.Create("\"", 2737)
-            
-            #line 70 "..\..\Views\Answers\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2716), Tuple.Create<System.Object, System.Int32>(Url.Action("Answer")
-            
-            #line default
-            #line hidden
-, 2716), false)
-);
-
-WriteLiteral(" class=\"Button--ask btn-success\"");
-
-WriteLiteral(">\r\n                            <span");
-
-WriteLiteral(" data-icon=\"advise\"");
-
-WriteLiteral("></span>\r\n                            Answer Now\r\n                        </a>   " +
-"              \r\n                    </div><!-- pa30 -->\r\n                </div>\r" +
-"\n");
-
-            
-            #line 76 "..\..\Views\Answers\Index.cshtml"
-            }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                \r\n        </div>\r\n\r\n    </main><!-- main-->   \r\n\r\n</div>\r\n\r\n\r\n");
+WriteLiteral("        \r\n    </main><!-- main-->   \r\n\r\n</div>\r\n\r\n\r\n");
 
 DefineSection("scripts", () => {
 
@@ -371,7 +267,7 @@ WriteLiteral("\r\n    \r\n    <script>\r\n        window.resetAnswerHook = funct
 "  url: \'");
 
             
-            #line 93 "..\..\Views\Answers\Index.cshtml"
+            #line 62 "..\..\Views\Answers\Index.cshtml"
                      Write(Url.Action("Advise", "Ajax"));
 
             
@@ -391,6 +287,37 @@ WriteLiteral(@"',
         };
 
         $(document).ready(window.resetAnswerHook);
+    </script>
+    
+    <script>
+        window.resetFollowupHook = function () {
+            $('#js-button-followup').click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: ""POST"",
+                    url: '");
+
+            
+            #line 84 "..\..\Views\Answers\Index.cshtml"
+                     Write(Url.Action("Followup", "Ajax"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"',
+                    dataType: ""html"",
+                    data: $('form.Answer--window').serialize(),
+                    success: function (result) {
+                        $(""#js-followup-container"").html(result);
+                        window.resetFollowupHook();
+                    },
+                    error: function () {
+                    }
+                });
+            });
+        };
+
+        $(document).ready(window.resetFollowupHook);
     </script>
     
     <script");

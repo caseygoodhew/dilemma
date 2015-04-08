@@ -33,7 +33,7 @@ namespace Dilemma.Web.Extensions
 
                 if (delta < 1 * Minute)
                 {
-                    return ts.Seconds == 1 ? "in one second" : "in " + ts.Seconds + " seconds";
+                    return "Now";
                 }
 
                 if (delta < 2 * Minute)
@@ -78,7 +78,7 @@ namespace Dilemma.Web.Extensions
 
             if (delta < 1 * Minute)
             {
-                return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
+                return "Just Now";
             }
 
             if (delta < 2 * Minute)

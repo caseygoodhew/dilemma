@@ -396,6 +396,7 @@ namespace Dilemma.Data.Repositories
 
                 followup.User = context.GetOrAttachNew<User, int>(userId, x => x.UserId);
                 followup.Question = context.GetOrAttachNew<Question, int>(questionId, x => x.QuestionId);
+                followup.Question.Followup = followup;
                 followup.CreatedDateTime = TimeSource.Value.Now;
                 followup.FollowupState = FollowupState.Approved;
                 
@@ -692,6 +693,8 @@ namespace Dilemma.Data.Repositories
             }
 
             followup.FollowupState = newFollowupState;
+            followup.Question.Followup = null;
+            
             dataContext.Followups.Update(dataContext, followup);
             dataContext.SaveChangesVerbose();
 
@@ -794,7 +797,7 @@ namespace Dilemma.Data.Repositories
                                                 }
                                              ),
                                              x.User,
-                                             x.Followup
+                                             Followup = x.Followup != null && (x.Followup.FollowupState == FollowupState.Approved || x.Followup.User.UserId == userId) ? x.Followup : null
                                          })
                             .AsEnumerable()
                             .Select(

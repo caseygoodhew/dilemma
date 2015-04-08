@@ -80,10 +80,12 @@ namespace Dilemma.Data.Repositories
                                        CreatedDateTime = TimeSource.Value.Now
                                    };
 
+            int questionId;
+            
             switch (notificationType)
             {
                 case NotificationType.QuestionAnswered:
-                    var questionId = context.Answers.Where(x => x.AnswerId == id).Select(
+                    questionId = context.Answers.Where(x => x.AnswerId == id).Select(
                         x => new
                                  {
                                      x.Question.QuestionId
@@ -96,6 +98,17 @@ namespace Dilemma.Data.Repositories
                 case NotificationType.PostRejected:
                     notification.Moderation = context.GetOrAttachNew<Moderation, int>(id, x => x.ModerationId);
                     break;
+
+                case NotificationType.QuestionFollowedUp:
+                    questionId = context.Followups.Where(x => x.FollowupId == id).Select(
+                        x => new
+                        {
+                            x.Question.QuestionId
+                        }).Single().QuestionId;
+
+                    return;
+                    //notification
+                    //break;
 
                 default:
                     throw new ArgumentOutOfRangeException("notificationType");

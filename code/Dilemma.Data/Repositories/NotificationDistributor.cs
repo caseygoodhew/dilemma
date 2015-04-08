@@ -46,7 +46,7 @@ namespace Dilemma.Data.Repositories
                 case FollowupState.ReadyForModeration:
                     break;
                 case FollowupState.Approved:
-                    NotificationRepository.Value.Raise(messageContext.DataContext, followup.Question.User.UserId, NotificationType.QuestionFollowuped, followup.FollowupId);
+                    NotificationRepository.Value.Raise(messageContext.DataContext, followup.Question.User.UserId, NotificationType.QuestionFollowedUp, followup.FollowupId);
                     break;
                 case FollowupState.Rejected:
                     break;

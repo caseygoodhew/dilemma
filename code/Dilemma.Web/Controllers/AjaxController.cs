@@ -75,6 +75,24 @@ namespace Dilemma.Web.Controllers
         }
 
         [HttpPost]
+        [Route("Followup/{questionId:int:min(1)}")]
+        public ActionResult Followup(int questionId, FollowupViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                QuestionService.Value.AddFollowup(questionId, viewModel);
+                
+                return PartialView(
+                    "DisplayTemplates/FollowupResponse",
+                    QuestionService.Value.GetQuestion(questionId).QuestionViewModel.Followup);
+            }
+
+            ViewBag.FollowupIsActive = true;
+
+            return PartialView(viewModel);
+        }
+        
+        [HttpPost]
         public JsonResult Report(ReportDto report)
         {
             return Json(new { success = true, report.QuestionId, report.AnswerId }); 

@@ -56,25 +56,38 @@
     {
         <div class="Dilemma-actions Card-section line">
             <div class="u-2of5">
-                @if (Model.IsOpen && !isDilemmaViewPage)
+                @if (!isDilemmaViewPage)
                 {
-                    <a href="@Url.Action("Index", "Answers", new
-                                                                 {
-                                                                     Model.QuestionId
-                                                                 })" class="Button--answer">
-                        <img src="/Content/images/icons/dark-answer.png" alt="" width="20">
-                        <span class="Button-label">@(Model.IsMyQuestion ? "View" : "Advise")</span>
-                    </a>
-                }
-                else if (Model.IsClosed && !Model.IsMyQuestion && !isDilemmaViewPage)
-                {
-                    <a href="@Url.Action("Index", "Answers", new
-                                                                 {
-                                                                     Model.QuestionId
-                                                                 })"  class="Button--vote ">
-                        <span data-icon="vote"></span>
-                        <span class="Button-label">Vote</span>
-                    </a>
+                     if (Model.IsMyQuestion || (Model.IsOpen && Model.IHaveAnswsered) || (Model.IsClosed && Model.IHaveVoted))
+                     {
+                         <a href="@Url.Action("Index", "Answers", new
+                                                                      {
+                                                                          Model.QuestionId
+                                                                      })" class="Button--answer">
+                             <img src="/Content/images/icons/dark-answer.png" alt="" width="20">
+                             <span class="Button-label">View</span>
+                         </a>
+                     }
+                     else if (Model.IsOpen)
+                     {
+                         <a href="@Url.Action("Index", "Answers", new
+                                                                      {
+                                                                          Model.QuestionId
+                                                                      })" class="Button--answer">
+                             <img src="/Content/images/icons/dark-answer.png" alt="" width="20">
+                             <span class="Button-label">Advise</span>
+                         </a>
+                     }
+                     else if (Model.IsClosed && !Model.IsMyQuestion)
+                     {
+                         <a href="@Url.Action("Index", "Answers", new
+                                                                      {
+                                                                          Model.QuestionId
+                                                                      })"  class="Button--vote ">
+                             <span data-icon="vote"></span>
+                             <span class="Button-label">Vote</span>
+                         </a>
+                     }
                 }
             </div>
             @if (!Model.IsMyQuestion)
