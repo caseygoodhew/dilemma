@@ -73,8 +73,7 @@ namespace ASP
     if (Model.IsPopularVote)
     {
         cardClass += " is-upvoted";
-    }
-        
+    }   
 
             
             #line default
@@ -85,36 +84,36 @@ WriteLiteral(" class=\"Answers\"");
 
 WriteLiteral(">\r\n    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 793), Tuple.Create("\"", 851)
-, Tuple.Create(Tuple.Create("", 801), Tuple.Create("Card", 801), true)
-, Tuple.Create(Tuple.Create(" ", 805), Tuple.Create("Answer", 806), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 786), Tuple.Create("\"", 844)
+, Tuple.Create(Tuple.Create("", 794), Tuple.Create("Card", 794), true)
+, Tuple.Create(Tuple.Create(" ", 798), Tuple.Create("Answer", 799), true)
             
-            #line 37 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-, Tuple.Create(Tuple.Create(" ", 812), Tuple.Create<System.Object, System.Int32>(cardClass
-            
-            #line default
-            #line hidden
-, 813), false)
-, Tuple.Create(Tuple.Create(" ", 823), Tuple.Create("user-level-", 824), true)
-            
-            #line 37 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-, Tuple.Create(Tuple.Create("", 835), Tuple.Create<System.Object, System.Int32>(Model.UserLevel
+            #line 36 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+, Tuple.Create(Tuple.Create(" ", 805), Tuple.Create<System.Object, System.Int32>(cardClass
             
             #line default
             #line hidden
-, 835), false)
+, 806), false)
+, Tuple.Create(Tuple.Create(" ", 816), Tuple.Create("user-level-", 817), true)
+            
+            #line 36 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+, Tuple.Create(Tuple.Create("", 828), Tuple.Create<System.Object, System.Int32>(Model.UserLevel
+            
+            #line default
+            #line hidden
+, 828), false)
 );
 
 WriteLiteral(">\r\n        \r\n");
 
             
-            #line 39 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 38 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 38 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
          if (Model.IsStarVote && Model.IsPopularVote && Model.IsMyAnswer)
         {
 
@@ -129,7 +128,7 @@ WriteLiteral(">\r\n                Your answer + Most votes + Questioners Choice
 "iv>\r\n");
 
             
-            #line 44 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 43 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
         }
         else if (Model.IsStarVote && Model.IsPopularVote)
         {
@@ -144,7 +143,7 @@ WriteLiteral(" class=\"Card-section Card-info\"");
 WriteLiteral(">\r\n                Most votes + Questioners Choice\r\n            </div>\r\n");
 
             
-            #line 50 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 49 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
         }
         else if (Model.IsStarVote && Model.IsMyAnswer)
         {
@@ -159,7 +158,7 @@ WriteLiteral(" class=\"Card-section Card-info\"");
 WriteLiteral(">\r\n                Your answer + Questioners Choice\r\n            </div>\r\n");
 
             
-            #line 56 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 55 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
         }
         else if (Model.IsPopularVote && Model.IsMyAnswer)
         {
@@ -174,7 +173,7 @@ WriteLiteral(" class=\"Card-section Card-info\"");
 WriteLiteral(">\r\n                Your answer + Most votes\r\n            </div>\r\n");
 
             
-            #line 62 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 61 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
         }
         else if (Model.IsStarVote)
         {
@@ -194,7 +193,7 @@ WriteLiteral("></span>\r\n                Best Answer as voted by the Questioner
 "iv>\r\n");
 
             
-            #line 69 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 68 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
         }
         else if (Model.IsPopularVote)
         {
@@ -213,7 +212,7 @@ WriteLiteral(" data-icon=\"vote\"");
 WriteLiteral("></span>\r\n                Most popular answer\r\n            </div>\r\n");
 
             
-            #line 76 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 75 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
         }
         else if (Model.IsMyAnswer)
         { 
@@ -236,7 +235,7 @@ WriteLiteral(" width=\"20\"");
 WriteLiteral(">\r\n                Your answer\r\n            </div>\r\n");
 
             
-            #line 83 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 82 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
         }
 
             
@@ -257,7 +256,7 @@ WriteLiteral(" style=\"white-space: pre-wrap\"");
 WriteLiteral(">");
 
             
-            #line 87 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 86 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                                             Write(Model.Text);
 
             
@@ -266,13 +265,13 @@ WriteLiteral(">");
 WriteLiteral("</p>\r\n            </div><!-- Dilemma-text -->\r\n");
 
             
-            #line 89 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 88 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 89 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 88 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
              if (!Model.IsApproved && Model.IsMyAnswer)
             {
 
@@ -286,13 +285,13 @@ WriteLiteral(" style=\"margin-top: 15px; color: #999; font-style: italic; font-s
 WriteLiteral(">\r\n");
 
             
-            #line 92 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 91 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 92 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 91 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                      if (Model.IsRejected)
                     {
 
@@ -307,7 +306,7 @@ WriteLiteral("This answer didn\'t pass moderation. Check you notifications to fi
 WriteLiteral("\r\n");
 
             
-            #line 95 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 94 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                     }
                     else
                     {
@@ -323,7 +322,7 @@ WriteLiteral("You\'re the only one who can see this answer until its been approv
 WriteLiteral("\r\n");
 
             
-            #line 99 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 98 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                     }
 
             
@@ -332,7 +331,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                </div>\r\n");
 
             
-            #line 101 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 100 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
             }
 
             
@@ -350,28 +349,28 @@ WriteLiteral(">\r\n                <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3428), Tuple.Create("\"", 3514)
-, Tuple.Create(Tuple.Create("", 3436), Tuple.Create("Button--vote", 3436), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 3421), Tuple.Create("\"", 3507)
+, Tuple.Create(Tuple.Create("", 3429), Tuple.Create("Button--vote", 3429), true)
             
-            #line 106 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-, Tuple.Create(Tuple.Create(" ", 3448), Tuple.Create<System.Object, System.Int32>(Model.HasMyVote ? string.Empty : "js-voting-button"
-            
-            #line default
-            #line hidden
-, 3449), false)
-            
-            #line 106 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-                                , Tuple.Create(Tuple.Create(" ", 3503), Tuple.Create<System.Object, System.Int32>(voteClass
+            #line 105 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+, Tuple.Create(Tuple.Create(" ", 3441), Tuple.Create<System.Object, System.Int32>(Model.HasMyVote ? string.Empty : "js-voting-button"
             
             #line default
             #line hidden
-, 3504), false)
+, 3442), false)
+            
+            #line 105 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+                                , Tuple.Create(Tuple.Create(" ", 3496), Tuple.Create<System.Object, System.Int32>(voteClass
+            
+            #line default
+            #line hidden
+, 3497), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 106 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 105 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                                                                                                                          Write(canVote || Model.HasMyVote ? String.Empty : disabled);
 
             
@@ -380,7 +379,7 @@ WriteLiteral(" ");
 WriteLiteral(" data-answer-id=\"");
 
             
-            #line 106 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 105 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                                                                                                                                                                                                 Write(Model.AnswerId);
 
             
@@ -389,13 +388,13 @@ WriteLiteral(" data-answer-id=\"");
 WriteLiteral("\">\r\n");
 
             
-            #line 107 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 106 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 107 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 106 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                      if (isMyQuestion)
                     {
 
@@ -431,7 +430,7 @@ WriteLiteral(" class=\"size-m-and-up inline\"");
 WriteLiteral("> Answer</span>\r\n                        </span>\r\n");
 
             
-            #line 117 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 116 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                     }
                     else
                     {
@@ -458,7 +457,7 @@ WriteLiteral(" class=\"Button-label is-active\"");
 WriteLiteral(">Voted</span>\r\n");
 
             
-            #line 123 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 122 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                     }
 
             
@@ -479,7 +478,7 @@ WriteLiteral(" class=\"number-bubble--number\"");
 WriteLiteral(">");
 
             
-            #line 128 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 127 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                                                    Write(Model.VoteCount);
 
             
@@ -492,7 +491,7 @@ WriteLiteral(" class=\"inline Card-label--small\"");
 WriteLiteral(">");
 
             
-            #line 129 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 128 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                                                       Write(votesText);
 
             
@@ -507,16 +506,16 @@ WriteLiteral(">\r\n                <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 4908), Tuple.Create("\"", 4957)
-, Tuple.Create(Tuple.Create("", 4916), Tuple.Create("Button--flag", 4916), true)
-, Tuple.Create(Tuple.Create(" ", 4928), Tuple.Create("js-flag-button", 4929), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 4901), Tuple.Create("\"", 4950)
+, Tuple.Create(Tuple.Create("", 4909), Tuple.Create("Button--flag", 4909), true)
+, Tuple.Create(Tuple.Create(" ", 4921), Tuple.Create("js-flag-button", 4922), true)
             
-            #line 134 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-, Tuple.Create(Tuple.Create(" ", 4943), Tuple.Create<System.Object, System.Int32>(flaggedClass
+            #line 133 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+, Tuple.Create(Tuple.Create(" ", 4936), Tuple.Create<System.Object, System.Int32>(flaggedClass
             
             #line default
             #line hidden
-, 4944), false)
+, 4937), false)
 );
 
 WriteLiteral(" title=\"Report an issue with this answer\"");
@@ -524,7 +523,7 @@ WriteLiteral(" title=\"Report an issue with this answer\"");
 WriteLiteral(" data-answer-id=\"");
 
             
-            #line 134 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 133 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                                                                                                                                             Write(Model.AnswerId);
 
             
@@ -539,7 +538,7 @@ WriteLiteral(" data-target=\"#modal-flag\"");
 WriteLiteral(" ");
 
             
-            #line 134 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
+            #line 133 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
                                                                                                                                                                                                             Write(canFlag ? String.Empty : disabled);
 
             

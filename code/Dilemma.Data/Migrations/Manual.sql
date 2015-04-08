@@ -346,6 +346,15 @@ AS
 	/* RETIRE DATA											*/
 	/********************************************************/
 
+	DELETE FROM ReportedPost
+	 WHERE Answer_AnswerId IN (
+            SELECT a.AnswerId 
+              FROM Answer a, QuestionRetirement qr
+             WHERE a.Question_QuestionId = qr.QuestionId)
+
+	DELETE FROM ReportedPost
+	 WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement) 
+	
 	DELETE FROM UserPoint
      WHERE RelatedQuestion_QuestionId IN (SELECT QuestionId FROM QuestionRetirement) 
 

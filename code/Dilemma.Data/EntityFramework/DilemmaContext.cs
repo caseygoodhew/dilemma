@@ -98,6 +98,8 @@ namespace Dilemma.Data.EntityFramework
 
         public DbSet<Bookmark> Bookmarks { get; set; }
 
+        public DbSet<ReportedPost> ReportedPosts { get; set; }
+
         /// <summary>
         /// Called the first that the the DbContext is used in each session.
         /// </summary>
@@ -143,6 +145,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new RankMap());
             modelBuilder.Configurations.Add(new BookmarkMap());
             modelBuilder.Configurations.Add(new FollowupMap());
+            modelBuilder.Configurations.Add(new ReportedPostMap());
         }
     }
 }

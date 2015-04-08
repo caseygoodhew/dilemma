@@ -88,6 +88,7 @@
     <Compile Include="EntityFramework\Maps\FollowupMap.cs" />
     <Compile Include="EntityFramework\Maps\LastRunLogMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionRetirementMap.cs" />
+    <Compile Include="EntityFramework\Maps\ReportedPostMap.cs" />
     <Compile Include="EntityFramework\Maps\UserPointMap.cs" />
     <Compile Include="EntityFramework\Maps\RankMap.cs" />
     <Compile Include="EntityFramework\Maps\VoteMap.cs" />
@@ -173,10 +174,15 @@
     <Compile Include="Migrations\201504040626175_Migration19.Designer.cs">
       <DependentUpon>201504040626175_Migration19.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504080437099_Migration20.cs" />
+    <Compile Include="Migrations\201504080437099_Migration20.Designer.cs">
+      <DependentUpon>201504080437099_Migration20.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Followup.cs" />
     <Compile Include="Models\LastRunLog.cs" />
     <Compile Include="Models\Rank.cs" />
+    <Compile Include="Models\ReportedPost.cs" />
     <Compile Include="Models\Virtual\CloseQuestions.cs" />
     <Compile Include="Models\Virtual\ExpireAnswerSlots.cs" />
     <Compile Include="Models\Virtual\ModerationRetirement.cs" />
@@ -320,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504040626175_Migration19.resx">
       <DependentUpon>201504040626175_Migration19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504080437099_Migration20.resx">
+      <DependentUpon>201504080437099_Migration20.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
