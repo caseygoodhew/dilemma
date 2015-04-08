@@ -682,6 +682,7 @@ namespace Dilemma.Data.Repositories
                     break;
                 case ModerationState.Rejected:
                     newFollowupState = FollowupState.Rejected;
+                    followup.Question.Followup = null;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("moderationState");
@@ -693,7 +694,6 @@ namespace Dilemma.Data.Repositories
             }
 
             followup.FollowupState = newFollowupState;
-            followup.Question.Followup = null;
             
             dataContext.Followups.Update(dataContext, followup);
             dataContext.SaveChangesVerbose();
