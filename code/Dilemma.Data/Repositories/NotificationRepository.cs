@@ -94,6 +94,7 @@ namespace Dilemma.Data.Repositories
                     notification.Question = context.GetOrAttachNew<Question, int>(question.QuestionId, x => x.QuestionId);
                     break;
 
+                
                 case NotificationType.AnswerApproved:
                 case NotificationType.AnswerRejected:
                 case NotificationType.VoteOnAnswer:

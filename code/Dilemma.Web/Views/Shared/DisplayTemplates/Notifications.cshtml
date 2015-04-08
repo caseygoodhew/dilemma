@@ -1,7 +1,7 @@
 ﻿@model Dilemma.Business.ViewModels.NotificationListViewModel
 
 <div class="Card Notification Card-go--container">
-    <a href="@Url.Action(Model.NotificationRoute.Action, Model.NotificationRoute.Controller, Model.GetRouteData())" class="Card-go--trigger"></a>
+    <a href="@Url.Action(Model)" class="Card-go--trigger"></a>
     <div class="Notification-score">
         @if (Model.TotalPointsAwarded == 0)
         {

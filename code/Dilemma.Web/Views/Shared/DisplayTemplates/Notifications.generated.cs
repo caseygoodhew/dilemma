@@ -48,10 +48,10 @@ WriteLiteral(" class=\"Card Notification Card-go--container\"");
 
 WriteLiteral(">\r\n    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 122), Tuple.Create("\"", 230)
+WriteAttribute("href", Tuple.Create(" href=\"", 122), Tuple.Create("\"", 147)
             
             #line 4 "..\..\Views\Shared\DisplayTemplates\Notifications.cshtml"
-, Tuple.Create(Tuple.Create("", 129), Tuple.Create<System.Object, System.Int32>(Url.Action(Model.NotificationRoute.Action, Model.NotificationRoute.Controller, Model.GetRouteData())
+, Tuple.Create(Tuple.Create("", 129), Tuple.Create<System.Object, System.Int32>(Url.Action(Model)
             
             #line default
             #line hidden

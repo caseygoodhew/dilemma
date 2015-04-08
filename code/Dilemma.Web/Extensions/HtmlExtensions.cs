@@ -5,8 +5,13 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Routing;
+
+using Dilemma.Business.ViewModels;
 
 using Disposable.Common;
+
+using Glimpse.AspNet.Tab;
 
 namespace Dilemma.Web.Extensions
 {
@@ -38,6 +43,14 @@ namespace Dilemma.Web.Extensions
             }
 
             return string.Format("{0}/{1}", result, category);
+        }
+
+        public static string Action(this UrlHelper url, NotificationListViewModel viewModel)
+        {
+            return url.Action(
+                viewModel.NotificationRoute.Action,
+                viewModel.NotificationRoute.Controller,
+                new RouteValueDictionary(viewModel.GetRouteData()));
         }
     }
 }
