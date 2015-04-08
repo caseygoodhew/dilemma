@@ -213,11 +213,6 @@
     <Compile Include="ViewModels\MyProfileViewModel.cs" />
     <Compile Include="ViewModels\SidebarViewModel.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
-    <Compile Include="Views\Answers\Answer.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Answer.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Answers\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -317,6 +312,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Advise.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\EditorTemplates\Followup.generated.cs">
+      <DependentUpon>Followup.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Shared\Error.generated.cs">
       <AutoGen>True</AutoGen>
@@ -738,10 +738,6 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Answers\Answer.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Answer.generated.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\QuickAuthentication\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Edit.generated.cs</LastGenOutput>
@@ -776,6 +772,11 @@
     </Content>
     <Content Include="Views\Ajax\Advise.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AnswerSlotsFull.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Followup.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Followup.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Ajax\Followup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
