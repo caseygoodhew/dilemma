@@ -41,47 +41,5 @@ namespace Dilemma.Web.Controllers
                                     Sidebar = GetSidebarViewModel()
                                 });
         }
-
-        //[Route("advise/{questionId:int:min(1)}")]
-        public ActionResult Answer(int questionId)
-        {
-            var answerId = QuestionService.Value.RequestAnswerSlot(questionId);
-
-            var viewModel = new DilemmaDetailsViewModel
-                                {
-                                    QuestionDetails = QuestionService.Value.GetQuestion(questionId),
-                                    Sidebar = GetSidebarViewModel()
-                                };
-            
-            if (answerId.HasValue)
-            {
-                viewModel.MyAnswer = QuestionService.Value.GetAnswerInProgress(questionId, answerId.Value);
-            }
-            
-            return View(viewModel);
-        }
-
-        //[Route("advise/{questionId:int:min(1)}")]
-        [HttpPost]
-        public ActionResult Answer(int questionId, DilemmaDetailsViewModel viewModel)
-        {
-            var answerId = QuestionService.Value.RequestAnswerSlot(questionId);
-            
-            if (ModelState.IsValid)
-            {
-                viewModel.MyAnswer.AnswerId = answerId;
-                QuestionService.Value.CompleteAnswer(questionId, viewModel.MyAnswer);
-                return RedirectToAction("Index", "Answers", new { questionId });
-            }
-
-            var refreshedViewModel = new DilemmaDetailsViewModel
-            {
-                QuestionDetails = QuestionService.Value.GetQuestion(questionId),
-                MyAnswer = viewModel.MyAnswer,
-                Sidebar = GetSidebarViewModel()
-            };
-
-            return View(refreshedViewModel);
-        }
     }
 }
