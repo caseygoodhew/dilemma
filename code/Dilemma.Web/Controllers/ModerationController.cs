@@ -5,6 +5,7 @@ using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
 using Dilemma.Common;
 using Dilemma.Security.AccessFilters;
+using Dilemma.Web.ViewModels;
 
 using Disposable.Common.ServiceLocator;
 
@@ -36,25 +37,25 @@ namespace Dilemma.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("moderation/question/{questionId:int:min(1)}")]
+        [Route("moderation/dilemma/{questionId:int:min(1)}")]
         public ActionResult QuestionHistory(int questionId)
         {
             var viewModel = ManualModerationService.Value.GetQuestionHistory(questionId);
-            return View(viewModel);
+            return View(new ModerationHistoryViewModel<QuestionModerationHistoryViewModel>(viewModel, GetSidebarViewModel()));
         }
         
         [Route("moderation/answer/{answerId:int:min(1)}")]
         public ActionResult AnswerHistory(int answerId)
         {
             var viewModel = ManualModerationService.Value.GetAnswerHistory(answerId);
-            return View(viewModel);
+            return View(new ModerationHistoryViewModel<AnswerModerationHistoryViewModel>(viewModel, GetSidebarViewModel()));
         }
 
         [Route("moderation/followup/{followupId:int:min(1)}")]
         public ActionResult FollowupHistory(int followupId)
         {
             var viewModel = ManualModerationService.Value.GetFollowupHistory(followupId);
-            return View(viewModel);
+            return View(new ModerationHistoryViewModel<FollowupModerationHistoryViewModel>(viewModel, GetSidebarViewModel()));
         }
     }
 }

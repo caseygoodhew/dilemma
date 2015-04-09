@@ -38,19 +38,8 @@
         </div>
     </div><!-- Dilemma-question Card-section -->
 
-    <div class="Card-section">
-        <div class="Dilemma-question">
-
-            <div class="Dilemma-text ">
-                <p style="white-space: pre-wrap">@Model.Text</p>
-                <a href="#" class="Dilemma-text-toggle">
-                    <span class="Dilemma-text-toggle-more">&hellip; continue reading</span>
-                    <span class="Dilemma-text-toggle-less">&hellip; show less</span>
-                </a>
-            </div><!-- Dilemma-text -->
-        </div>  
-
-    </div><!--  Card-section -->
+    @Html.Partial("DisplayTemplates/QuestionCard", Model)
+    
     
     @if (!Model.IsMyQuestion || !isDilemmaViewPage)
     {

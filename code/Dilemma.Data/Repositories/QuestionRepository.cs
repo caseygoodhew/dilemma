@@ -709,7 +709,7 @@ namespace Dilemma.Data.Repositories
         
         private void UpdateQuestionState(DilemmaContext dataContext, int questionId, ModerationState moderationState)
         {
-            var question = dataContext.Questions.Single(x => x.QuestionId == questionId);
+            var question = dataContext.Questions.Include(x => x.User).Single(x => x.QuestionId == questionId);
 
             switch (moderationState)
             {

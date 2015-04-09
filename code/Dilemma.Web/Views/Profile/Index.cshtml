@@ -6,73 +6,74 @@
 }
 
 
-    <h1 class="mb0 mh15 pb0">
-      <span data-icon="user"></span> 
-      Your Profile
-    </h1>
+<h1 class="mb0 mh15 pb0">
+    <span data-icon="user"></span> 
+    Your Profile
+</h1>
 
-    <div class="line">
+<div class="line">
 
-        <aside class="sidebar">
-            @Html.DisplayFor(x => x.Sidebar, "Sidebar", new { HideNotifications = true })
-        </aside><!-- sidebar -->
+    <aside class="sidebar">
+        @Html.DisplayFor(x => x.Sidebar, "Sidebar", new { HideNotifications = true })
+    </aside><!-- sidebar -->
         
-        <main role="main" class="main">
+    <main role="main" class="main">
             
+        <h2 class="js-sticky h3">
+            <span class="js-sticky--offset">
+                Your Current Dilemmas
+            </span>
+        </h2>
+
+        <div class="Dilemmas">
+
+            @if (Model.Dilemmas.Any())
+            {
+                @Html.DisplayForList(x => x.Dilemmas, "QuestionNotification")
+            }
+            else
+            {
+                @Html.Partial("DisplayTemplates/NoDilemmas")
+            }
+
             <h2 class="js-sticky h3">
                 <span class="js-sticky--offset">
-                    Your Current Dilemmas
+                    Advice You've Given
                 </span>
             </h2>
 
-            <div class="Dilemmas">
-
-                @if (Model.Dilemmas.Any())
-                {
-                    @Html.DisplayForList(x => x.Dilemmas, "QuestionNotification")
-                }
-                else
-                {
-                    @Html.Partial("DisplayTemplates/NoDilemmas")
-                }
-
-                <h2 class="js-sticky h3">
-                    <span class="js-sticky--offset">
-                        Advice You've Given
-                    </span>
-                </h2>
-
-                @if (Model.Answers.Any())
-                {
-                    @Html.DisplayForList(x => x.Answers, "QuestionNotification")
-                }
-                else
-                {
-                    <div class="Card Dilemmas-empty">
-                        <p>Looks like it's time to give some advice!</p>
-                        <div class="line">
-                            <span>&nbsp;&nbsp;&nbsp;</span>
-                            <a href="@Url.Action("Index", "Dilemmas")" class="Button--ask">
-                                <span data-icon="discuss-2"></span> 
-                                Start Advising Now
-                            </a>
-                        </div>
+            @if (Model.Answers.Any())
+            {
+                @Html.DisplayForList(x => x.Answers, "QuestionNotification")
+            }
+            else
+            {
+                <div class="Card Dilemmas-empty">
+                    <p>Looks like it's time to give some advice!</p>
+                    <div class="line">
+                        <span>&nbsp;&nbsp;&nbsp;</span>
+                        <a href="@Url.Action("Index", "Dilemmas")" class="Button--ask">
+                            <span data-icon="discuss-2"></span> 
+                            Start Advising Now
+                        </a>
                     </div>
-                }
+                </div>
+            }
                 
-                <h2 class="js-sticky h3">
-                    <span class="js-sticky--offset">
-                        Notifications
-                    </span>
-                </h2>
+            <h2 class="js-sticky h3">
+                <span class="js-sticky--offset">
+                    Notifications
+                </span>
+            </h2>
 
-                @Html.DisplayForList(x => x.Notifications, "Notifications")
+            @Html.DisplayForList(x => x.Notifications, "Notifications")
                 
-            </div>
+        </div>
 
-        </main><!-- main-->   
+    </main><!-- main-->   
 
-    </div>     
+</div>
+    
 
 @section scripts {
     <script type="text/javascript">

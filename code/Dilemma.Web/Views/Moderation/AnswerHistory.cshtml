@@ -1,0 +1,70 @@
+﻿@model Dilemma.Web.ViewModels.ModerationHistoryViewModel<Dilemma.Business.ViewModels.AnswerModerationHistoryViewModel>
+@{
+    ViewBag.Title = "Answer History";
+}
+
+<h1 class="mb0 mh15 pb0">
+    Answer History
+</h1>
+
+
+<div class="line">
+    <aside class="sidebar">
+        @Html.DisplayFor(x => x.Sidebar, "Sidebar")
+    </aside>
+    
+    <main role="main" class="main">
+        @if (Model.History == null)
+        {
+            @Html.Partial("DisplayTemplates/NoModerationHistory")
+        }
+        else
+        {
+            <h2 class="js-sticky h3">
+                <span class="js-sticky--offset">
+                    The dilemma that was being answered
+                </span>
+            </h2>
+
+            <article class="Dilemma Card">
+                <div class="Card-section Card-info">
+                    <div class="line align-center">
+                        <div class="Card-label--small">
+                            @Model.History.Question.CategoryName
+                        </div>
+                        <div style="margin-bottom: 20px"></div>
+                    </div>
+                </div>
+
+                @Html.DisplayFor(x => x.History.Question, "QuestionCard")
+            </article>
+
+            <h2 class="js-sticky h3">
+                <span class="js-sticky--offset">
+                    The answer that was moderated
+                </span>
+            </h2>
+
+            <article class="Dilemma Card">
+                <div class="Card-section">
+                    <div class="Dilemma-question">
+
+                        <div class="Dilemma-text ">
+                            <p style="white-space: pre-wrap">@Model.History.Answer.Text</p>
+                        </div><!-- Dilemma-text -->
+
+                    </div> 
+                </div>
+            </article>
+            
+            <h2 class="js-sticky h3">
+                <span class="js-sticky--offset">
+                    Moderation history
+                </span>
+            </h2>
+
+            @Html.DisplayForList(x => x.History.ModerationEntries, "ModerationEntry")
+        }
+    </main>
+</div>
+

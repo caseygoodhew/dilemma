@@ -169,19 +169,7 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var question = context.Questions.Where(x => x.QuestionId == questionId)
-                    .Where(x => x.User.UserId == userId)
-                    .Select(
-                        x => new
-                                 {
-                                     x.Text,
-                                     x.CreatedDateTime
-                                 }).ToList().Select(
-                                     x => new Question
-                                              {
-                                                  Text = x.Text,
-                                                  CreatedDateTime = x.CreatedDateTime
-                                              }).SingleOrDefault();
+                var question = GetShortQuestion(context.Questions.Where(x => x.User.UserId == userId), questionId);
 
                 if (question == null)
                 {
@@ -189,22 +177,97 @@ namespace Dilemma.Data.Repositories
                 }
 
                 var moderationEntries =
-                    context.ModerationEntries.Where(x => x.Moderation.Question != null)
-                        .Where(x => x.Moderation.Question.QuestionId == questionId)
-                        .ToList();
+                    context.ModerationEntries.Where(x => x.Moderation.Question.QuestionId == questionId).ToList();
 
-                return ConverterFactory.ConvertOne<QuestionHistoryProxy, T>(new QuestionHistoryProxy { Question = question, ModerationEntries = moderationEntries });
+                return ConverterFactory.ConvertOne<QuestionHistoryProxy, T>(
+                    new QuestionHistoryProxy
+                        {
+                            Question = question,
+                            ModerationEntries = moderationEntries
+                        });
             }
         }
 
         public T GetAnswerHistory<T>(int userId, int answerId) where T : class
         {
-            throw new NotImplementedException();
+            using (var context = new DilemmaContext())
+            {
+                var answer = context.Answers.Where(x => x.AnswerId == answerId)
+                    .Where(x => x.User.UserId == userId)
+                    .Select(
+                        x => new
+                        {
+                            x.Text,
+                            x.CreatedDateTime,
+                            x.Question.QuestionId
+                        }).ToList().Select(
+                                     x => new Answer
+                                     {
+                                         Text = x.Text,
+                                         CreatedDateTime = x.CreatedDateTime,
+                                         Question = new Question { QuestionId = x.QuestionId },
+                                         User = new User { UserId = 0 }
+                                     }).SingleOrDefault();
+
+                if (answer == null)
+                {
+                    return null;
+                }
+
+                answer.Question = GetShortQuestion(context.Questions, answer.Question.QuestionId);
+
+                var moderationEntries =
+                    context.ModerationEntries.Where(x => x.Moderation.Answer.AnswerId == answerId).ToList();
+
+                return ConverterFactory.ConvertOne<AnswerHistoryProxy, T>(
+                    new AnswerHistoryProxy
+                        {
+                            Answer = answer,
+                            Question = answer.Question,
+                            ModerationEntries = moderationEntries
+                        });
+            }
         }
 
         public T GetFollowupHistory<T>(int userId, int followupId) where T : class
         {
-            throw new NotImplementedException();
+            using (var context = new DilemmaContext())
+            {
+                var followup = context.Followups.Where(x => x.FollowupId == followupId)
+                    .Where(x => x.User.UserId == userId)
+                    .Select(
+                        x => new
+                        {
+                            x.Text,
+                            x.CreatedDateTime,
+                            x.Question.QuestionId
+                        }).ToList().Select(
+                                     x => new Followup
+                                     {
+                                         Text = x.Text,
+                                         CreatedDateTime = x.CreatedDateTime,
+                                         Question = new Question { QuestionId = x.QuestionId },
+                                         User = new User { UserId = 0 }
+                                     }).SingleOrDefault();
+
+                if (followup == null)
+                {
+                    return null;
+                }
+
+                followup.Question = GetShortQuestion(context.Questions, followup.Question.QuestionId);
+
+                var moderationEntries =
+                    context.ModerationEntries.Where(x => x.Moderation.Followup.FollowupId == followupId).ToList();
+
+                return ConverterFactory.ConvertOne<FollowupHistoryProxy, T>(
+                    new FollowupHistoryProxy
+                    {
+                        Followup = followup,
+                        Question = followup.Question,
+                        ModerationEntries = moderationEntries
+                    });
+            }
         }
 
         private static void OnModerableCreated(DilemmaContext context, Moderation moderation, string message)
@@ -304,6 +367,25 @@ namespace Dilemma.Data.Repositories
             context.SaveChangesVerbose();
 
             return moderationEntry;
+        }
+
+        private static Question GetShortQuestion(IQueryable<Question> questionQuery, int questionId)
+        {
+            return questionQuery.Where(x => x.QuestionId == questionId)
+                    .Select(
+                        x => new
+                        {
+                            x.Text,
+                            x.CreatedDateTime,
+                            x.Category,
+                        }).ToList().Select(
+                                     x => new Question
+                                     {
+                                         Text = x.Text,
+                                         CreatedDateTime = x.CreatedDateTime,
+                                         Category = x.Category,
+                                         User = new User { UserId = 0 }
+                                     }).SingleOrDefault();
         }
     }
 }

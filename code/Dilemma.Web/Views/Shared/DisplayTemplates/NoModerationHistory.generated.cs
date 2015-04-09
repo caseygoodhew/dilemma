@@ -34,25 +34,36 @@ namespace ASP
     using Disposable.Web.Common;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Moderation/Details.cshtml")]
-    public partial class _Views_Moderation_Details_cshtml : System.Web.Mvc.WebViewPage<dynamic>
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/DisplayTemplates/NoModerationHistory.cshtml")]
+    public partial class _Views_Shared_DisplayTemplates_NoModerationHistory_cshtml_ : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public _Views_Moderation_Details_cshtml()
+        public _Views_Shared_DisplayTemplates_NoModerationHistory_cshtml_()
         {
         }
         public override void Execute()
         {
-WriteLiteral("\r\n");
+WriteLiteral("<article");
 
-            
-            #line 2 "..\..\Views\Moderation\Details.cshtml"
-  
-    ViewBag.Title = "Details";
+WriteLiteral(" class=\"Dilemma Card\"");
 
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n\r\n<h2>Details</h2>\r\n\r\nThis will show the moderation details.\r\n");
+WriteLiteral(">\r\n    <div");
+
+WriteLiteral(" class=\"Card-section\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"Dilemma-question\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"Moderation-entry-text \"");
+
+WriteLiteral(">\r\n                <p");
+
+WriteLiteral(" style=\"white-space: pre-wrap\"");
+
+WriteLiteral(">Nothing to show</p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</article>\r" +
+"\n");
 
         }
     }

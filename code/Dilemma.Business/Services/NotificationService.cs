@@ -61,18 +61,11 @@ namespace Dilemma.Business.Services
         {
             var byQuestions = all.Where(x => x.QuestionId != null).GetGroupedQuestions();
 
-            var remaining = all.Where(x => x.ModerationId != null).Select(x => new NotificationListViewModel
-            {
-                CreatedDateTime = x.CreatedDateTime,
-                IsActioned = x.ActionedDateTime != null,
-                RouteDataValue = x.ModerationId.Value,
-                NotificationType = x.NotificationType,
-                NotificationTarget = x.NotificationTarget,
-                TotalPointsAwarded = x.PointsAwarded ?? 0,
-                Occurrences = 1
-            });
+            var byAnswers = all.Where(x => x.QuestionId == null).Where(x => x.AnswerId != null).GetGroupedAnswers();
 
-            return byQuestions.Concat(remaining).OrderByDescending(x => x.CreatedDateTime);
+            var byFollowups = all.Where(x => x.QuestionId == null).Where(x => x.FollowupId != null).GetGroupedFollowups();
+
+            return byQuestions.Concat(byAnswers).Concat(byFollowups).OrderByDescending(x => x.CreatedDateTime);
         }
     }
 }

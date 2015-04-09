@@ -123,11 +123,12 @@ namespace Dilemma.Data.Repositories
                     // AnswerRejected -> Answerer
                     NotificationRepository.Value.Raise(
                         messageContext.DataContext,
-                        answer.Question.User.UserId,
+                        answer.User.UserId,
                         NotificationType.AnswerRejected,
                         NotificationTarget.Answerer,
                         NotificationLookupBy.Answer,
-                        answer.AnswerId);
+                        answer.AnswerId,
+                        false);
 
                     break;
 
@@ -204,7 +205,9 @@ namespace Dilemma.Data.Repositories
                         NotificationType.FollowupRejected,
                         NotificationTarget.Questioner,
                         NotificationLookupBy.Followup,
-                        followup.FollowupId);
+                        followup.FollowupId,
+                        false);
+
                     break;
 
                 default:
@@ -276,6 +279,15 @@ namespace Dilemma.Data.Repositories
         {
             var messageContext = messenger.GetContext<AnswerMessageContext>(AnswerDataAction.BestAnswerAwarded);
             var answer = messageContext.Answer;
+
+            // BestAnswerAwarded -> Questioner
+            NotificationRepository.Value.Raise(
+                messageContext.DataContext,
+                answer.Question.User.UserId,
+                NotificationType.BestAnswerAwarded,
+                NotificationTarget.Questioner,
+                NotificationLookupBy.Answer,
+                answer.AnswerId);
 
             // BestAnswerAwarded -> Answerer
             NotificationRepository.Value.Raise(

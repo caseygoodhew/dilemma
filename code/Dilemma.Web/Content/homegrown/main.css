@@ -12,7 +12,7 @@
       * to make it easier to turn off Bootstrap components as desired
 /
 ======================================================*/
-/* 
+/*  
     Config
    
   ======================================================*/
@@ -8117,6 +8117,13 @@ button:active,
 .Dilemma-question {
   position: relative;
 }
+.Moderation-entry-text {
+  font-size: 13px;
+  line-height: 18px;
+  overflow: hidden;
+  box-sizing: content-box !important;
+  padding: 10px 5px 20px;
+}
 .Dilemma-text {
   font-size: 13px;
   line-height: 18px;
@@ -9229,14 +9236,14 @@ html {
 .js-sticky--vote img {
   top: -4px;
 }
-.page-profile h2.js-sticky {
+h2.js-sticky {
   color: #000;
   display: block;
   text-transform: uppercase;
   font-size: 18px;
   color: rgba(0, 0, 0, 0.5);
 }
-.page-profile h2.js-sticky img {
+h2.js-sticky img {
   opacity: 0.5;
 }
 .js-conc-content {

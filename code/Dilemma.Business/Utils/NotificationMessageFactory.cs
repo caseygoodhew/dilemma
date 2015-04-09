@@ -38,6 +38,7 @@ namespace Dilemma.Business.Utils
 
             AddEntry(NotificationType.VoteOnAnswer, NotificationTarget.Answerer, x => x == 1 ? "Your answer got a vote!" : string.Format("Your answer has {0} votes!", x));
 
+            AddEntry(NotificationType.BestAnswerAwarded, NotificationTarget.Questioner, x => "It's time to add your followup!");
             AddEntry(NotificationType.BestAnswerAwarded, NotificationTarget.Answerer, x => "Your answer is the best!");
             AddEntry(NotificationType.BestAnswerAwarded, NotificationTarget.Bookmarker, x => "The best answer has been aswarded to a bookmarked dilemma");
         }

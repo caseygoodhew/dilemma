@@ -71,7 +71,7 @@ namespace Dilemma.Data.Repositories
         /// <param name="notificationTarget">The <see cref="NotificationTarget"/>.</param>
         /// <param name="lookupBy">The <see cref="NotificationLookupBy"/> for the <see cref="id"/>.</param>
         /// <param name="id">The id of the object that the notification refers to.</param>
-        public void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, NotificationTarget notificationTarget, NotificationLookupBy lookupBy, int id)
+        public void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, NotificationTarget notificationTarget, NotificationLookupBy lookupBy, int id, bool alsoLookupByQuestion = true)
         {
             var forUser = context.GetOrAttachNew<User, int>(forUserId, x => x.UserId);
             
@@ -94,67 +94,31 @@ namespace Dilemma.Data.Repositories
                 case NotificationLookupBy.Answer:
 
                     var answer = context.Answers.Where(x => x.AnswerId == id).Select(x => new { x.Question.QuestionId, x.AnswerId }).Single();
-                    notification.Question = context.GetOrAttachNew<Question, int>(answer.QuestionId, x => x.QuestionId);
+                    
+                    if (alsoLookupByQuestion)
+                    {
+                        notification.Question = context.GetOrAttachNew<Question, int>(answer.QuestionId, x => x.QuestionId);
+                    }
+
                     notification.Answer = context.GetOrAttachNew<Answer, int>(answer.AnswerId, x => x.AnswerId);
                     break;
 
                 case NotificationLookupBy.Followup:
 
                     var followup = context.Followups.Where(x => x.FollowupId == id).Select(x => new { x.Question.QuestionId, x.FollowupId }).Single();
-                    notification.Question = context.GetOrAttachNew<Question, int>(followup.QuestionId, x => x.QuestionId);
+                    
+                    if (alsoLookupByQuestion)
+                    { 
+                        notification.Question = context.GetOrAttachNew<Question, int>(followup.QuestionId, x => x.QuestionId);
+                    }
+
                     notification.Followup = context.GetOrAttachNew<Followup, int>(followup.FollowupId, x => x.FollowupId);
                     break;
 
-                // I don't think this will get used anymore
-                //case NotificationLookupBy.Moderation:
-                
                 default:
                     throw new ArgumentOutOfRangeException("lookupBy");
             }
-
-            /*int questionId;
             
-            switch (notificationType)
-            {
-                case NotificationType.QuestionApproved:
-                case NotificationType.QuestionRejected:
-                case NotificationType.OpenForVoting:
-                    
-                    var question = context.Questions.Where(x => x.QuestionId == id).Select(x => new { x.QuestionId }).Single();
-                    notification.Question = context.GetOrAttachNew<Question, int>(question.QuestionId, x => x.QuestionId);
-                    break;
-
-                
-                case NotificationType.AnswerApproved:
-                case NotificationType.AnswerRejected:
-                case NotificationType.VoteOnAnswer:
-                case NotificationType.BestAnswerAwarded:
-
-                    var answer = context.Answers.Where(x => x.AnswerId == id).Select(x => new { x.Question.QuestionId, x.AnswerId }).Single();
-                    notification.Question = context.GetOrAttachNew<Question, int>(answer.QuestionId, x => x.QuestionId);
-                    notification.Answer = context.GetOrAttachNew<Answer, int>(answer.AnswerId, x => x.AnswerId);
-                    break;
-
-                case NotificationType.FollowupApproved:
-                case NotificationType.FollowupRejected:
-
-                    var followup = context.Followups.Where(x => x.FollowupId == id).Select(x => new { x.Question.QuestionId, x.FollowupId }).Single();
-                    notification.Question = context.GetOrAttachNew<Question, int>(followup.QuestionId, x => x.QuestionId);
-                    notification.Followup = context.GetOrAttachNew<Followup, int>(followup.FollowupId, x => x.FollowupId);
-                    break;
-
-                case NotificationType.FlaggedQuestionApproved:
-                case NotificationType.FlaggedAnswerApproved:
-                case NotificationType.FlaggedFollowupApproved:
-                case NotificationType.FlaggedQuestionRejected:
-                case NotificationType.FlaggedAnswerRejected:
-                case NotificationType.FlaggedFollowupRejected:
-                    return;
-
-                default:
-                    throw new ArgumentOutOfRangeException("notificationType");
-            }*/
-
             context.Notifications.Add(notification);
 
             context.SaveChangesVerbose();
@@ -216,9 +180,6 @@ namespace Dilemma.Data.Repositories
                 case NotificationLookupBy.Followup:
                     return query.Where(x => x.Followup != null).Where(x => x.Followup.FollowupId == id).ToList();
                 
-                case NotificationLookupBy.Moderation:
-                    return query.Where(x => x.Moderation != null).Where(x => x.Moderation.ModerationId == id).ToList();
-                    
                 default:
                     throw new ArgumentOutOfRangeException("notificationLookupBy");
             }
@@ -228,7 +189,6 @@ namespace Dilemma.Data.Repositories
         {
             return query.Include(x => x.Answer)
                         .Include(x => x.Question)
-                        .Include(x => x.Moderation)
                         .Select(
                             x => new
                             {
@@ -236,25 +196,32 @@ namespace Dilemma.Data.Repositories
                                 x.CreatedDateTime,
                                 x.NotificationType,
                                 x.NotificationTarget,
+                                QuestionId = x.Question != null ? (int?)x.Question.QuestionId : null,
                                 AnswerId = x.Answer != null ? (int?)x.Answer.AnswerId : null,
-                                x.Question,
-                                ModerationId = x.Moderation != null ? (int?)x.Moderation.ModerationId : null
+                                FollowupId = x.Followup != null ? (int?)x.Followup.FollowupId : null,
                             }).OrderByDescending(x => x.CreatedDateTime).ToList().Select(
                                          x =>
                                          {
+                                             var question = x.QuestionId.HasValue
+                                                              ? new Question
+                                                              {
+                                                                  QuestionId = x.QuestionId.Value
+                                                              }
+                                                              : null;
+                                             
                                              var answer = x.AnswerId.HasValue
                                                               ? new Answer
                                                               {
                                                                   AnswerId = x.AnswerId.Value,
-                                                                  Question = x.Question
+                                                                  Question = question
                                                               }
                                                               : null;
 
-                                             var moderation = x.ModerationId.HasValue
-                                                                  ? new Moderation
+                                             var followup = x.FollowupId.HasValue
+                                                                  ? new Followup
                                                                   {
-                                                                      ModerationId = x.ModerationId.Value,
-                                                                      Question = x.Question
+                                                                      FollowupId = x.FollowupId.Value,
+                                                                      Question = question
                                                                   }
                                                                   : null;
 
@@ -264,9 +231,9 @@ namespace Dilemma.Data.Repositories
                                                  CreatedDateTime = x.CreatedDateTime,
                                                  NotificationType = x.NotificationType,
                                                  NotificationTarget = x.NotificationTarget,
+                                                 Question = question,
                                                  Answer = answer,
-                                                 Question = x.Question,
-                                                 Moderation = moderation
+                                                 Followup = followup
                                              };
                                          }).ToList();
         }

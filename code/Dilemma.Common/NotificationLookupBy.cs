@@ -9,8 +9,6 @@ namespace Dilemma.Common
 
         Answer,
 
-        Followup,
-
-        Moderation
+        Followup
     }
 }

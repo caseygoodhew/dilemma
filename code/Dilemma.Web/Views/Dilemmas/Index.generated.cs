@@ -141,7 +141,7 @@ WriteLiteral(">\r\n\r\n");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                <h2");
+WriteLiteral("\r\n                <h1");
 
 WriteLiteral(" class=\"js-sticky h1 js-sticky--vote\"");
 
@@ -154,7 +154,7 @@ WriteLiteral(">\r\n                        <span");
 WriteLiteral(" data-icon=\"vote\"");
 
 WriteLiteral("></span>\r\n                        Vote\r\n                    </span>\r\n            " +
-"    </h2>\r\n          \r\n");
+"    </h1>\r\n          \r\n");
 
             
             #line 40 "..\..\Views\Dilemmas\Index.cshtml"

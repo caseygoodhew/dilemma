@@ -1,0 +1,50 @@
+﻿@model Dilemma.Business.ViewModels.ModerationEntryViewModel
+
+<article class="Dilemma Card">
+    <div class="Card-section Card-info">
+        <div class="line align-center">
+            <div class="Card-label--small">
+                @Model.CreatedDateTime.ToRelativeText()
+            </div>
+            <div style="margin-bottom: 20px"></div>
+        </div>
+    </div>
+    
+    <div class="Card-section">
+        <div class="Dilemma-question">
+            
+            @switch (Model.State)
+            {
+                case ModerationState.Queued:
+                    
+                    <div class="Moderation-entry-text ">
+                        <div style="font-weight: bold">Added to Moderation Queue</div>
+                    </div>
+            
+                    break;
+                case ModerationState.Approved:
+                    
+                    <div class="Moderation-entry-text ">
+                        <div style="font-weight: bold">Approved by Moderator</div>
+                    </div>
+            
+                    break;
+                case ModerationState.Rejected:
+                
+                    <div class="Moderation-entry-text ">
+                        <div style="font-weight: bold; margin-bottom: 10px">Rejected by Moderator</div>
+                        <div style="font-style: italic; margin: 0 50px; color: #888">
+                            <p style="white-space: pre-wrap">@Model.Message</p>
+                        </div>
+                    </div>
+            
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+        </div> 
+    </div>
+</article>
+
+

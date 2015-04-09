@@ -35,9 +35,9 @@ namespace Dilemma.Business.ViewModels
         public int? AnswerId { get; set; }
 
         /// <summary>
-        /// Gets or sets the corresponding moderation id.
+        /// Gets or sets the corresponding followup id.
         /// </summary>
-        public int? ModerationId { get; set; }
+        public int? FollowupId { get; set; }
 
         /// <summary>
         /// Gets or sets the date and time that this notification was created.

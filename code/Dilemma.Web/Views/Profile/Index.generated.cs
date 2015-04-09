@@ -51,49 +51,49 @@ namespace ASP
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n\r\n    <h1");
+WriteLiteral("\r\n\r\n\r\n<h1");
 
 WriteLiteral(" class=\"mb0 mh15 pb0\"");
 
-WriteLiteral(">\r\n      <span");
+WriteLiteral(">\r\n    <span");
 
 WriteLiteral(" data-icon=\"user\"");
 
-WriteLiteral("></span> \r\n      Your Profile\r\n    </h1>\r\n\r\n    <div");
+WriteLiteral("></span> \r\n    Your Profile\r\n</h1>\r\n\r\n<div");
 
 WriteLiteral(" class=\"line\"");
 
-WriteLiteral(">\r\n\r\n        <aside");
+WriteLiteral(">\r\n\r\n    <aside");
 
 WriteLiteral(" class=\"sidebar\"");
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("            ");
+WriteLiteral("        ");
 
             
             #line 17 "..\..\Views\Profile\Index.cshtml"
-       Write(Html.DisplayFor(x => x.Sidebar, "Sidebar", new { HideNotifications = true }));
+   Write(Html.DisplayFor(x => x.Sidebar, "Sidebar", new { HideNotifications = true }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n        </aside><!-- sidebar -->\r\n        \r\n        <main");
+WriteLiteral("\r\n    </aside><!-- sidebar -->\r\n        \r\n    <main");
 
 WriteLiteral(" role=\"main\"");
 
 WriteLiteral(" class=\"main\"");
 
-WriteLiteral(">\r\n            \r\n            <h2");
+WriteLiteral(">\r\n            \r\n        <h2");
 
 WriteLiteral(" class=\"js-sticky h3\"");
 
-WriteLiteral(">\r\n                <span");
+WriteLiteral(">\r\n            <span");
 
 WriteLiteral(" class=\"js-sticky--offset\"");
 
-WriteLiteral(">\r\n                    Your Current Dilemmas\r\n                </span>\r\n          " +
-"  </h2>\r\n\r\n            <div");
+WriteLiteral(">\r\n                Your Current Dilemmas\r\n            </span>\r\n        </h2>\r\n\r\n " +
+"       <div");
 
 WriteLiteral(" class=\"Dilemmas\"");
 
@@ -101,152 +101,152 @@ WriteLiteral(">\r\n\r\n");
 
             
             #line 30 "..\..\Views\Profile\Index.cshtml"
-                
+            
             
             #line default
             #line hidden
             
             #line 30 "..\..\Views\Profile\Index.cshtml"
-                 if (Model.Dilemmas.Any())
-                {
-                    
-            
-            #line default
-            #line hidden
-            
-            #line 32 "..\..\Views\Profile\Index.cshtml"
-               Write(Html.DisplayForList(x => x.Dilemmas, "QuestionNotification"));
-
-            
-            #line default
-            #line hidden
-            
-            #line 32 "..\..\Views\Profile\Index.cshtml"
-                                                                                 
-                }
-                else
-                {
-                    
-            
-            #line default
-            #line hidden
-            
-            #line 36 "..\..\Views\Profile\Index.cshtml"
-               Write(Html.Partial("DisplayTemplates/NoDilemmas"));
-
-            
-            #line default
-            #line hidden
-            
-            #line 36 "..\..\Views\Profile\Index.cshtml"
-                                                                
-                }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                <h2");
-
-WriteLiteral(" class=\"js-sticky h3\"");
-
-WriteLiteral(">\r\n                    <span");
-
-WriteLiteral(" class=\"js-sticky--offset\"");
-
-WriteLiteral(">\r\n                        Advice You\'ve Given\r\n                    </span>\r\n    " +
-"            </h2>\r\n\r\n");
-
-            
-            #line 45 "..\..\Views\Profile\Index.cshtml"
+             if (Model.Dilemmas.Any())
+            {
                 
             
             #line default
             #line hidden
             
+            #line 32 "..\..\Views\Profile\Index.cshtml"
+           Write(Html.DisplayForList(x => x.Dilemmas, "QuestionNotification"));
+
+            
+            #line default
+            #line hidden
+            
+            #line 32 "..\..\Views\Profile\Index.cshtml"
+                                                                             
+            }
+            else
+            {
+                
+            
+            #line default
+            #line hidden
+            
+            #line 36 "..\..\Views\Profile\Index.cshtml"
+           Write(Html.Partial("DisplayTemplates/NoDilemmas"));
+
+            
+            #line default
+            #line hidden
+            
+            #line 36 "..\..\Views\Profile\Index.cshtml"
+                                                            
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            <h2");
+
+WriteLiteral(" class=\"js-sticky h3\"");
+
+WriteLiteral(">\r\n                <span");
+
+WriteLiteral(" class=\"js-sticky--offset\"");
+
+WriteLiteral(">\r\n                    Advice You\'ve Given\r\n                </span>\r\n            " +
+"</h2>\r\n\r\n");
+
+            
             #line 45 "..\..\Views\Profile\Index.cshtml"
-                 if (Model.Answers.Any())
-                {
-                    
+            
+            
+            #line default
+            #line hidden
+            
+            #line 45 "..\..\Views\Profile\Index.cshtml"
+             if (Model.Answers.Any())
+            {
+                
             
             #line default
             #line hidden
             
             #line 47 "..\..\Views\Profile\Index.cshtml"
-               Write(Html.DisplayForList(x => x.Answers, "QuestionNotification"));
+           Write(Html.DisplayForList(x => x.Answers, "QuestionNotification"));
 
             
             #line default
             #line hidden
             
             #line 47 "..\..\Views\Profile\Index.cshtml"
-                                                                                
-                }
-                else
-                {
+                                                                            
+            }
+            else
+            {
 
             
             #line default
             #line hidden
-WriteLiteral("                    <div");
+WriteLiteral("                <div");
 
 WriteLiteral(" class=\"Card Dilemmas-empty\"");
 
-WriteLiteral(">\r\n                        <p>Looks like it\'s time to give some advice!</p>\r\n    " +
-"                    <div");
+WriteLiteral(">\r\n                    <p>Looks like it\'s time to give some advice!</p>\r\n        " +
+"            <div");
 
 WriteLiteral(" class=\"line\"");
 
-WriteLiteral(">\r\n                            <span>&nbsp;&nbsp;&nbsp;</span>\r\n                 " +
-"           <a");
+WriteLiteral(">\r\n                        <span>&nbsp;&nbsp;&nbsp;</span>\r\n                     " +
+"   <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1651), Tuple.Create("\"", 1690)
+WriteAttribute("href", Tuple.Create(" href=\"", 1499), Tuple.Create("\"", 1538)
             
             #line 55 "..\..\Views\Profile\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1658), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
+, Tuple.Create(Tuple.Create("", 1506), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
             
             #line default
             #line hidden
-, 1658), false)
+, 1506), false)
 );
 
 WriteLiteral(" class=\"Button--ask\"");
 
-WriteLiteral(">\r\n                                <span");
+WriteLiteral(">\r\n                            <span");
 
 WriteLiteral(" data-icon=\"discuss-2\"");
 
-WriteLiteral("></span> \r\n                                Start Advising Now\r\n                  " +
-"          </a>\r\n                        </div>\r\n                    </div>\r\n");
+WriteLiteral("></span> \r\n                            Start Advising Now\r\n                      " +
+"  </a>\r\n                    </div>\r\n                </div>\r\n");
 
             
             #line 61 "..\..\Views\Profile\Index.cshtml"
-                }
+            }
 
             
             #line default
             #line hidden
-WriteLiteral("                \r\n                <h2");
+WriteLiteral("                \r\n            <h2");
 
 WriteLiteral(" class=\"js-sticky h3\"");
 
-WriteLiteral(">\r\n                    <span");
+WriteLiteral(">\r\n                <span");
 
 WriteLiteral(" class=\"js-sticky--offset\"");
 
-WriteLiteral(">\r\n                        Notifications\r\n                    </span>\r\n          " +
-"      </h2>\r\n\r\n");
+WriteLiteral(">\r\n                    Notifications\r\n                </span>\r\n            </h2>\r" +
+"\n\r\n");
 
-WriteLiteral("                ");
+WriteLiteral("            ");
 
             
             #line 69 "..\..\Views\Profile\Index.cshtml"
-           Write(Html.DisplayForList(x => x.Notifications, "Notifications"));
+       Write(Html.DisplayForList(x => x.Notifications, "Notifications"));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                \r\n            </div>\r\n\r\n        </main><!-- main-->   \r\n\r\n    <" +
-"/div>     \r\n\r\n");
+WriteLiteral("\r\n                \r\n        </div>\r\n\r\n    </main><!-- main-->   \r\n\r\n</div>\r\n    \r" +
+"\n\r\n");
 
 DefineSection("scripts", () => {
 

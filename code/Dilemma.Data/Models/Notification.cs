@@ -30,11 +30,6 @@ namespace Dilemma.Data.Models
         public NotificationTarget NotificationTarget { get; set; }
         
         /// <summary>
-        /// Gets or sets the corresponding <see cref="Moderation"/>.
-        /// </summary>
-        public Moderation Moderation { get; set; }
-        
-        /// <summary>
         /// Gets or sets the corresponding <see cref="Answer"/>.
         /// </summary>
         public Answer Answer { get; set; }

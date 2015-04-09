@@ -20,7 +20,6 @@ namespace Dilemma.Data.EntityFramework.Maps
             Property(p => p.NotificationTarget).IsRequired();
             
             HasRequired(p => p.ForUser).WithMany().WillCascadeOnDelete(false);
-            HasOptional(p => p.Moderation).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Answer).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Question).WithMany().WillCascadeOnDelete(false);
             HasOptional(p => p.Followup).WithMany().WillCascadeOnDelete(false);

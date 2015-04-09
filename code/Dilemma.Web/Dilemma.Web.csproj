@@ -210,6 +210,7 @@
     <Compile Include="ViewModels\AskViewModel.cs" />
     <Compile Include="ViewModels\DilemmaDetailsViewModel.cs" />
     <Compile Include="ViewModels\DilemmasViewModel.cs" />
+    <Compile Include="ViewModels\ModerationHistoryViewModel.cs" />
     <Compile Include="ViewModels\MyProfileViewModel.cs" />
     <Compile Include="ViewModels\SidebarViewModel.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
@@ -238,10 +239,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Moderation\Details.generated.cs">
+    <Compile Include="Views\Moderation\AnswerHistory.generated.cs">
+      <DependentUpon>AnswerHistory.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Details.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Moderation\FollowupHistory.generated.cs">
+      <DependentUpon>FollowupHistory.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Moderation\QuestionHistory.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuestionHistory.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Moderation\Index.generated.cs">
       <AutoGen>True</AutoGen>
@@ -272,6 +283,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Answer.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\DisplayTemplates\NoModerationHistory.generated.cs">
+      <DependentUpon>NoModerationHistory.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\DisplayTemplates\ModerationEntry.generated.cs">
+      <DependentUpon>ModerationEntry.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\DisplayTemplates\QuestionCard.generated.cs">
+      <DependentUpon>QuestionCard.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\Shared\DisplayTemplates\FollowupResponse.generated.cs">
       <AutoGen>True</AutoGen>
@@ -730,9 +756,9 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Moderation\Details.cshtml">
+    <Content Include="Views\Moderation\QuestionHistory.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Details.generated.cs</LastGenOutput>
+      <LastGenOutput>QuestionHistory.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Moderation\Index.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -777,6 +803,26 @@
       <LastGenOutput>Followup.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Ajax\Followup.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\QuestionCard.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>QuestionCard.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\DisplayTemplates\ModerationEntry.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ModerationEntry.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\DisplayTemplates\NoModerationHistory.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>NoModerationHistory.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Moderation\AnswerHistory.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AnswerHistory.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Moderation\FollowupHistory.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FollowupHistory.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

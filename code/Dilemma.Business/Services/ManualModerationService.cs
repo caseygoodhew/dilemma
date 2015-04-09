@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
 using Dilemma.Security;
@@ -17,6 +19,8 @@ namespace Dilemma.Business.Services
         private static readonly Lazy<IManualModerationRepository> ModerationRepository = Locator.Lazy<IManualModerationRepository>();
 
         private static readonly Lazy<ISecurityManager> SecurityManager = Locator.Lazy<ISecurityManager>();
+
+        private static readonly Lazy<INotificationService> NotificationService = Locator.Lazy<INotificationService>();
 
         /// <summary>
         /// Gets the next item to be moderated.
@@ -58,26 +62,47 @@ namespace Dilemma.Business.Services
 
         public QuestionModerationHistoryViewModel GetQuestionHistory(int questionId)
         {
-            return
+            var moderation =
                 ModerationRepository.Value.GetQuestionHistory<QuestionModerationHistoryViewModel>(
                     SecurityManager.Value.GetUserId(),
                     questionId);
+
+            if (moderation != null)
+            {
+                NotificationService.Value.Mute(NotificationLookupBy.Question, questionId);
+            }
+
+            return moderation;
         }
 
         public AnswerModerationHistoryViewModel GetAnswerHistory(int answerId)
         {
-            return
+            var moderation =
                 ModerationRepository.Value.GetAnswerHistory<AnswerModerationHistoryViewModel>(
                     SecurityManager.Value.GetUserId(),
                     answerId);
+
+            if (moderation != null)
+            {
+                NotificationService.Value.Mute(NotificationLookupBy.Answer, answerId);
+            }
+
+            return moderation;
         }
 
         public FollowupModerationHistoryViewModel GetFollowupHistory(int followupId)
         {
-            return
+            var moderation =
                 ModerationRepository.Value.GetFollowupHistory<FollowupModerationHistoryViewModel>(
                     SecurityManager.Value.GetUserId(),
                     followupId);
+
+            if (moderation != null)
+            {
+                NotificationService.Value.Mute(NotificationLookupBy.Followup, followupId);
+            }
+
+            return moderation;
         }
     }
 }
