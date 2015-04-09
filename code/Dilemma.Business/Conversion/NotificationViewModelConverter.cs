@@ -18,6 +18,7 @@ namespace Dilemma.Business.Conversion
             return new InternalNotificationViewModel
                        {
                            NotificationType = model.NotificationType,
+                           NotificationTarget = model.NotificationTarget,
                            AnswerId = model.Answer == null ? null : model.Answer.AnswerId as int?,
                            QuestionId = model.Question == null ? null : model.Question.QuestionId as int?,
                            ModerationId = model.Moderation == null ? null : model.Moderation.ModerationId as int?,

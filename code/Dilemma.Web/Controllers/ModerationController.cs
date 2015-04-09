@@ -22,11 +22,6 @@ namespace Dilemma.Web.Controllers
             return View(ManualModerationService.Value.GetNext());
         }
 
-        public ActionResult Details(int moderationId)
-        {
-            return View(ManualModerationService.Value.GetNext());
-        }
-
         [HttpPost]
         public ActionResult Approve(ModerationViewModel viewModel)
         {
@@ -39,6 +34,27 @@ namespace Dilemma.Web.Controllers
         {
             ManualModerationService.Value.Reject(viewModel.ModerationId, viewModel.Message);
             return RedirectToAction("Index");
+        }
+
+        [Route("moderation/question/{questionId:int:min(1)}")]
+        public ActionResult QuestionHistory(int questionId)
+        {
+            var viewModel = ManualModerationService.Value.GetQuestionHistory(questionId);
+            return View(viewModel);
+        }
+        
+        [Route("moderation/answer/{answerId:int:min(1)}")]
+        public ActionResult AnswerHistory(int answerId)
+        {
+            var viewModel = ManualModerationService.Value.GetAnswerHistory(answerId);
+            return View(viewModel);
+        }
+
+        [Route("moderation/followup/{followupId:int:min(1)}")]
+        public ActionResult FollowupHistory(int followupId)
+        {
+            var viewModel = ManualModerationService.Value.GetFollowupHistory(followupId);
+            return View(viewModel);
         }
     }
 }

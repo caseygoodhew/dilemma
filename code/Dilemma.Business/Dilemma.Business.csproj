@@ -50,10 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conversion\AnswerModerationHistoryViewModelConverter.cs" />
     <Compile Include="Conversion\CategoryViewModelConverter.cs" />
     <Compile Include="Conversion\AnswerViewModelConverter.cs" />
+    <Compile Include="Conversion\FollowupModerationHistoryViewModelConverter.cs" />
     <Compile Include="Conversion\FollowupViewModelConverter.cs" />
     <Compile Include="Conversion\LastRunLogViewModelConverter.cs" />
+    <Compile Include="Conversion\QuestionHistoryViewModelConverter.cs" />
     <Compile Include="Conversion\RankViewModelConverter.cs" />
     <Compile Include="Conversion\ServerConfigurationViewModelConverter.cs" />
     <Compile Include="Conversion\PointConfigurationViewModelConverter.cs" />
@@ -78,6 +81,8 @@
     <Compile Include="Validators\PointConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\ServerConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\SystemServerConfigurationViewModelValidator.cs" />
+    <Compile Include="ViewModels\AnswerModerationHistoryViewModel.cs" />
+    <Compile Include="ViewModels\FollowupModerationHistoryViewModel.cs" />
     <Compile Include="ViewModels\FollowupViewModel.cs" />
     <Compile Include="ViewModels\LastRunLogViewModel.cs" />
     <Compile Include="ViewModels\ModerationEntryViewModel.cs" />
@@ -104,6 +109,7 @@
     <Compile Include="ViewModels\PointConfigurationViewModel.cs" />
     <Compile Include="ViewModels\QuestionDetailsViewModel.cs" />
     <Compile Include="ViewModels\QuestionListViewModel.cs" />
+    <Compile Include="ViewModels\QuestionModerationHistoryViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.cs" />

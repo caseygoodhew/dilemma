@@ -86,13 +86,11 @@ namespace Dilemma.Data
             messagePipe.Locator<FollowupDataAction, IInternalNotificationDistributor>(FollowupDataAction.StateChanged, x => x.OnFollowupStateChange);
         }
 
-        // TODO: I want this to go away
         private static void InitiateMessagePipe(IMessagePipe<ModerationState> messagePipe)
         {
             messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Approved, x => x.OnModerationStateUpdated);
             
             messagePipe.Locator<ModerationState, IInternalQuestionRepository>(ModerationState.Rejected, x => x.OnModerationStateUpdated);
-            messagePipe.Locator<ModerationState, IInternalNotificationDistributor>(ModerationState.Rejected, x => x.OnModerationRejected);
         }
     }
 }

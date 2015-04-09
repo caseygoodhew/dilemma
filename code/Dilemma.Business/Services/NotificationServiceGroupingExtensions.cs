@@ -22,7 +22,7 @@ namespace Dilemma.Business.Services
             var notificationViewModels = enumerable as IList<InternalNotificationViewModel> ?? enumerable.ToList();
             notificationViewModels.ToList().ForEach(x => Guard.ArgumentNotNull(x.QuestionId, "QuestionId"));
             
-            var grouped = notificationViewModels.GroupBy(x => new { QuestionId = x.QuestionId.Value, IsActioned = x.ActionedDateTime != null, x.NotificationType });
+            var grouped = notificationViewModels.GroupBy(x => new { QuestionId = x.QuestionId.Value, IsActioned = x.ActionedDateTime != null, x.NotificationType, x.NotificationTarget });
 
             return grouped.Select(
                 x =>
@@ -30,6 +30,7 @@ namespace Dilemma.Business.Services
                     {
                         x.Key.QuestionId,
                         x.Key.NotificationType,
+                        x.Key.NotificationTarget,
                         x.Key.IsActioned,
                         Items = x.OrderByDescending(i => i.CreatedDateTime)
                     })
@@ -40,6 +41,7 @@ namespace Dilemma.Business.Services
                             IsActioned = x.IsActioned,
                             CreatedDateTime = x.Items.First().CreatedDateTime,
                             NotificationType = x.NotificationType,
+                            NotificationTarget = x.NotificationTarget,
                             Occurrences = x.Items.Count(),
                             TotalPointsAwarded = x.Items.Where(i => i.PointsAwarded.HasValue).Sum(i => i.PointsAwarded.Value),
                             RouteDataValue = x.QuestionId

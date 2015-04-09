@@ -20,6 +20,11 @@ namespace Dilemma.Business.ViewModels
         public NotificationType NotificationType { get; set; }
 
         /// <summary>
+        /// Gets or sets the notification target.
+        /// </summary>
+        public NotificationTarget NotificationTarget { get; set; }
+
+        /// <summary>
         /// Gets or sets the corresponding question id.
         /// </summary>
         public int? QuestionId { get; set; }

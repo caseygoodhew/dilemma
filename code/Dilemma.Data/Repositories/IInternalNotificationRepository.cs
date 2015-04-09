@@ -16,8 +16,9 @@ namespace Dilemma.Data.Repositories
         /// <param name="forUserId">The <see cref="User"/> that the notification should be created for.</param>
         /// <param name="notificationType">The <see cref="NotificationType"/>.</param>
         /// <param name="notificationTarget">The <see cref="NotificationTarget"/>.</param>
+        /// <param name="lookupBy">The <see cref="NotificationLookupBy"/> for the <see cref="id"/>.</param>
         /// <param name="id">The id of the object that the notification refers to.</param>
-        void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, NotificationTarget notificationTarget, int id);
+        void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, NotificationTarget notificationTarget, NotificationLookupBy lookupBy, int id);
 
         /// <summary>
         /// Deletes all existing notifications that refer to the provided <see cref="id"/>.

@@ -185,6 +185,9 @@
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Followup.cs" />
     <Compile Include="Models\LastRunLog.cs" />
+    <Compile Include="Models\Proxies\AnswerHistoryProxy.cs" />
+    <Compile Include="Models\Proxies\FollowupHistoryProxy.cs" />
+    <Compile Include="Models\Proxies\QuestionHistoryProxy.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\ReportedPost.cs" />
     <Compile Include="Models\Virtual\CloseQuestions.cs" />

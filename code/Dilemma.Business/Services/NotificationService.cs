@@ -67,6 +67,7 @@ namespace Dilemma.Business.Services
                 IsActioned = x.ActionedDateTime != null,
                 RouteDataValue = x.ModerationId.Value,
                 NotificationType = x.NotificationType,
+                NotificationTarget = x.NotificationTarget,
                 TotalPointsAwarded = x.PointsAwarded ?? 0,
                 Occurrences = 1
             });

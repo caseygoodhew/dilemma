@@ -36,5 +36,11 @@ namespace Dilemma.Data.Repositories
         /// <param name="moderationId">The id of the moderation to reject.</param>
         /// <param name="message">A message as to why the moderation item is being rejected.</param>
         void Reject(int userId, int moderationId, string message);
+
+        T GetQuestionHistory<T>(int userId, int questionId) where T : class;
+
+        T GetAnswerHistory<T>(int userId, int answerId) where T : class;
+
+        T GetFollowupHistory<T>(int userId, int followupId) where T : class;
     }
 }

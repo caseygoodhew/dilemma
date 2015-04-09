@@ -1,6 +1,7 @@
 using System;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Data.Models;
 using Dilemma.Data.Repositories;
 using Dilemma.Security;
 
@@ -53,6 +54,30 @@ namespace Dilemma.Business.Services
         public void Reject(int moderationId, string message)
         {
             ModerationRepository.Value.Reject(SecurityManager.Value.GetUserId(), moderationId, message);
+        }
+
+        public QuestionModerationHistoryViewModel GetQuestionHistory(int questionId)
+        {
+            return
+                ModerationRepository.Value.GetQuestionHistory<QuestionModerationHistoryViewModel>(
+                    SecurityManager.Value.GetUserId(),
+                    questionId);
+        }
+
+        public AnswerModerationHistoryViewModel GetAnswerHistory(int answerId)
+        {
+            return
+                ModerationRepository.Value.GetAnswerHistory<AnswerModerationHistoryViewModel>(
+                    SecurityManager.Value.GetUserId(),
+                    answerId);
+        }
+
+        public FollowupModerationHistoryViewModel GetFollowupHistory(int followupId)
+        {
+            return
+                ModerationRepository.Value.GetFollowupHistory<FollowupModerationHistoryViewModel>(
+                    SecurityManager.Value.GetUserId(),
+                    followupId);
         }
     }
 }

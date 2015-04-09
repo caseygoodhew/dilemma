@@ -1,10 +1,12 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
+using Dilemma.Data.Models.Proxies;
 
 using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
@@ -161,6 +163,48 @@ namespace Dilemma.Data.Repositories
             {
                 UpdateModerationState(context, ModerationState.Rejected, userId, moderationId, message);
             }
+        }
+
+        public T GetQuestionHistory<T>(int userId, int questionId) where T : class
+        {
+            using (var context = new DilemmaContext())
+            {
+                var question = context.Questions.Where(x => x.QuestionId == questionId)
+                    .Where(x => x.User.UserId == userId)
+                    .Select(
+                        x => new
+                                 {
+                                     x.Text,
+                                     x.CreatedDateTime
+                                 }).ToList().Select(
+                                     x => new Question
+                                              {
+                                                  Text = x.Text,
+                                                  CreatedDateTime = x.CreatedDateTime
+                                              }).SingleOrDefault();
+
+                if (question == null)
+                {
+                    return null;
+                }
+
+                var moderationEntries =
+                    context.ModerationEntries.Where(x => x.Moderation.Question != null)
+                        .Where(x => x.Moderation.Question.QuestionId == questionId)
+                        .ToList();
+
+                return ConverterFactory.ConvertOne<QuestionHistoryProxy, T>(new QuestionHistoryProxy { Question = question, ModerationEntries = moderationEntries });
+            }
+        }
+
+        public T GetAnswerHistory<T>(int userId, int answerId) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
+        public T GetFollowupHistory<T>(int userId, int followupId) where T : class
+        {
+            throw new NotImplementedException();
         }
 
         private static void OnModerableCreated(DilemmaContext context, Moderation moderation, string message)

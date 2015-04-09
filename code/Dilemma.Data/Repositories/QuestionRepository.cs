@@ -476,12 +476,14 @@ namespace Dilemma.Data.Repositories
                     return;
                 }
 
+                var answer = context.Answers.Include(x => x.User).Include(x => x.Question).Include(x => x.Question.User).Single(x => x.AnswerId == answerId);
+                
                 var vote = new Vote
                                    {
                                        CreatedDateTime = TimeSource.Value.Now,
                                        User = context.GetOrAttachNew<User, int>(userId, x => x.UserId),
                                        Question = context.GetOrAttachNew<Question, int>(result.QuestionId, x => x.QuestionId),
-                                       Answer = context.GetOrAttachNew<Answer, int>(answerId, x => x.AnswerId)
+                                       Answer = answer
                                    };
 
                 context.Vote.Add(vote);
@@ -637,7 +639,7 @@ namespace Dilemma.Data.Repositories
 
         private void UpdateAnswerState(DilemmaContext dataContext, int answerId, ModerationState moderationState)
         {
-            var answer = dataContext.Answers.Include(x => x.Question).Include(x => x.Question.User).Single(x => x.AnswerId == answerId);
+            var answer = dataContext.Answers.Include(x => x.User).Include(x => x.Question).Include(x => x.Question.User).Single(x => x.AnswerId == answerId);
             AnswerState newAnswerState;
             
             

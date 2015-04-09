@@ -32,5 +32,11 @@ namespace Dilemma.Business.Services
         /// <param name="moderationId">The moderation id to reject.</param>
         /// <param name="message">A message detailing the reason for rejection.</param>
         void Reject(int moderationId, string message);
+
+        QuestionModerationHistoryViewModel GetQuestionHistory(int questionId);
+
+        AnswerModerationHistoryViewModel GetAnswerHistory(int answerId);
+
+        FollowupModerationHistoryViewModel GetFollowupHistory(int followupId);
     }
 }

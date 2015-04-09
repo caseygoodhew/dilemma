@@ -90,17 +90,17 @@ namespace Dilemma.Data.Repositories
 
         public void OnVotingOpen(IMessenger<QuestionDataAction> messenger)
         {
-            throw new NotImplementedException();
+            messenger.Forward();
         }
 
         public void OnVoteCast(IMessenger<AnswerDataAction> messenger)
         {
-            throw new NotImplementedException();
+            messenger.Forward();
         }
 
         public void OnBestAnswerAwarded(IMessenger<AnswerDataAction> messenger)
         {
-            throw new NotImplementedException();
+            messenger.Forward();
         }
     }
 }

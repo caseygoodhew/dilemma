@@ -29,11 +29,5 @@ namespace Dilemma.Data.Repositories
         void OnVoteCast(IMessenger<AnswerDataAction> messenger);
 
         void OnBestAnswerAwarded(IMessenger<AnswerDataAction> messenger);
-
-        /// <summary>
-        /// To be called when a moderation state changes.
-        /// </summary>
-        /// <param name="messenger">The <see cref="IMessenger{ModerationState}"/>.</param>
-        void OnModerationRejected(IMessenger<ModerationState> messenger);
     }
 }

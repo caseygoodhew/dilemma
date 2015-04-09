@@ -32,9 +32,9 @@ namespace Dilemma.Web
                     NotificationRoute.Create<AnswersController>(NotificationType.AnswerApproved, x => x.Index(0)),
                     NotificationRoute.Create<AnswersController>(NotificationType.FollowupApproved,  x => x.Index(0)),
 
-                    NotificationRoute.Create<ModerationController>(NotificationType.QuestionRejected, x => x.Details(0)),
-                    NotificationRoute.Create<ModerationController>(NotificationType.AnswerRejected, x => x.Details(0)),
-                    NotificationRoute.Create<ModerationController>(NotificationType.FollowupRejected, x => x.Details(0)),
+                    NotificationRoute.Create<ModerationController>(NotificationType.QuestionRejected, x => x.QuestionHistory(0)),
+                    NotificationRoute.Create<ModerationController>(NotificationType.AnswerRejected, x => x.AnswerHistory(0)),
+                    NotificationRoute.Create<ModerationController>(NotificationType.FollowupRejected, x => x.FollowupHistory(0)),
         
                     //NotificationRoute.Create<XXX>(NotificationType.FlaggedQuestionApproved,
                     //NotificationRoute.Create<XXX>(NotificationType.FlaggedAnswerApproved,

@@ -69,8 +69,9 @@ namespace Dilemma.Data.Repositories
         /// <param name="forUserId">The <see cref="User"/> that the notification should be created for.</param>
         /// <param name="notificationType">The <see cref="NotificationType"/>.</param>
         /// <param name="notificationTarget">The <see cref="NotificationTarget"/>.</param>
+        /// <param name="lookupBy">The <see cref="NotificationLookupBy"/> for the <see cref="id"/>.</param>
         /// <param name="id">The id of the object that the notification refers to.</param>
-        public void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, NotificationTarget notificationTarget, int id)
+        public void Raise(DilemmaContext context, int forUserId, NotificationType notificationType, NotificationTarget notificationTarget, NotificationLookupBy lookupBy, int id)
         {
             var forUser = context.GetOrAttachNew<User, int>(forUserId, x => x.UserId);
             
@@ -82,7 +83,36 @@ namespace Dilemma.Data.Repositories
                                        CreatedDateTime = TimeSource.Value.Now
                                    };
 
-            int questionId;
+            switch (lookupBy)
+            {
+                case NotificationLookupBy.Question:
+
+                    var question = context.Questions.Where(x => x.QuestionId == id).Select(x => new { x.QuestionId }).Single();
+                    notification.Question = context.GetOrAttachNew<Question, int>(question.QuestionId, x => x.QuestionId);
+                    break;
+
+                case NotificationLookupBy.Answer:
+
+                    var answer = context.Answers.Where(x => x.AnswerId == id).Select(x => new { x.Question.QuestionId, x.AnswerId }).Single();
+                    notification.Question = context.GetOrAttachNew<Question, int>(answer.QuestionId, x => x.QuestionId);
+                    notification.Answer = context.GetOrAttachNew<Answer, int>(answer.AnswerId, x => x.AnswerId);
+                    break;
+
+                case NotificationLookupBy.Followup:
+
+                    var followup = context.Followups.Where(x => x.FollowupId == id).Select(x => new { x.Question.QuestionId, x.FollowupId }).Single();
+                    notification.Question = context.GetOrAttachNew<Question, int>(followup.QuestionId, x => x.QuestionId);
+                    notification.Followup = context.GetOrAttachNew<Followup, int>(followup.FollowupId, x => x.FollowupId);
+                    break;
+
+                // I don't think this will get used anymore
+                //case NotificationLookupBy.Moderation:
+                
+                default:
+                    throw new ArgumentOutOfRangeException("lookupBy");
+            }
+
+            /*int questionId;
             
             switch (notificationType)
             {
@@ -123,7 +153,7 @@ namespace Dilemma.Data.Repositories
 
                 default:
                     throw new ArgumentOutOfRangeException("notificationType");
-            }
+            }*/
 
             context.Notifications.Add(notification);
 
@@ -194,7 +224,7 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        private static IList<Notification> QueryNotifications(IQueryable<Notification> query)
+        private static IEnumerable<Notification> QueryNotifications(IQueryable<Notification> query)
         {
             return query.Include(x => x.Answer)
                         .Include(x => x.Question)
@@ -205,6 +235,7 @@ namespace Dilemma.Data.Repositories
                                 x.ActionedDateTime,
                                 x.CreatedDateTime,
                                 x.NotificationType,
+                                x.NotificationTarget,
                                 AnswerId = x.Answer != null ? (int?)x.Answer.AnswerId : null,
                                 x.Question,
                                 ModerationId = x.Moderation != null ? (int?)x.Moderation.ModerationId : null
@@ -232,6 +263,7 @@ namespace Dilemma.Data.Repositories
                                                  ActionedDateTime = x.ActionedDateTime,
                                                  CreatedDateTime = x.CreatedDateTime,
                                                  NotificationType = x.NotificationType,
+                                                 NotificationTarget = x.NotificationTarget,
                                                  Answer = answer,
                                                  Question = x.Question,
                                                  Moderation = moderation
