@@ -193,6 +193,7 @@
     <Compile Include="Controllers\LastRunLogController.cs" />
     <Compile Include="Controllers\ModerationController.cs" />
     <Compile Include="Controllers\OfflineController.cs" />
+    <Compile Include="Controllers\PointConfigurationController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QuickAuthenticationController.cs" />
     <Compile Include="Controllers\SystemServerConfigurationController.cs" />
@@ -823,6 +824,8 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>FollowupHistory.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\PointConfiguration\Edit.cshtml" />
+    <Content Include="Views\PointConfiguration\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
