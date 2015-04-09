@@ -74,7 +74,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
             AssertUserPoints("Answerer One", 0);
 
             ManualModeration.Approve(ManualModeration.GetNextForUser("Answerer One").ModerationId);
-            AssertUserPoints("Answerer One", Points.For(PointType.AnswerProvided));
+            AssertUserPoints("Answerer One", Points.For(PointType.QuestionAnswered));
 
             // verify points are awarded to correct users
             Action<string, string> setupAnswer = (userReference, answerReference) =>
@@ -91,8 +91,8 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
             ManualModeration.Approve(ManualModeration.GetNextForUser("Answerer Two").ModerationId);
             
             AssertUserPoints("Questioner", Points.For(PointType.QuestionAsked));
-            AssertUserPoints("Answerer One", Points.For(PointType.AnswerProvided));
-            AssertUserPoints("Answerer Two", Points.For(PointType.AnswerProvided));
+            AssertUserPoints("Answerer One", Points.For(PointType.QuestionAnswered));
+            AssertUserPoints("Answerer Two", Points.For(PointType.QuestionAnswered));
             AssertUserPoints("Answerer Three", 0);
         }
 

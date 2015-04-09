@@ -16,7 +16,7 @@ namespace Dilemma.Data.Repositories
         
         private readonly static Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
 
-        public void AwardPoints(DilemmaContext context, int forUserId, PointType pointType, int? referenceId = null)
+        public int AwardPoints(DilemmaContext context, int forUserId, PointType pointType, int? referenceId = null)
         {
             var points =
                 AdministrationRepository.Value.GetPointConfigurations<PointConfiguration>()
@@ -32,9 +32,9 @@ namespace Dilemma.Data.Repositories
                 switch (pointType)
                 {
                     case PointType.QuestionAsked:
-                    case PointType.AnswerProvided:
-                    case PointType.VoteRegistered:
+                    case PointType.QuestionAnswered:
                     case PointType.StarVoteReceived:
+                    case PointType.PopularVoteReceived:
                         relatedQuestion = context.GetOrAttachNew<Question, int>(referenceId.Value, x => x.QuestionId);
                         break;
                     default:
@@ -53,9 +53,11 @@ namespace Dilemma.Data.Repositories
                     });
 
             context.SaveChangesVerbose();
+
+            return points;
         }
 
-        public void RemovePoints(DilemmaContext dataContext, int userId, PointType voteRegistered, int questionId)
+        public int RemovePoints(DilemmaContext dataContext, int userId, PointType voteRegistered, int questionId)
         {
             throw new NotImplementedException();
         }
