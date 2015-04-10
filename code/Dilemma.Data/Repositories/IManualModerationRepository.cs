@@ -1,3 +1,4 @@
+using Dilemma.Common;
 using Dilemma.Data.Models;
 
 namespace Dilemma.Data.Repositories
@@ -42,5 +43,11 @@ namespace Dilemma.Data.Repositories
         T GetAnswerHistory<T>(int userId, int answerId) where T : class;
 
         T GetFollowupHistory<T>(int userId, int followupId) where T : class;
+
+        void ReportQuestion(int userId, int questionId, ReportReason reportReason);
+
+        void ReportAnswer(int userId, int answerId, ReportReason reportReason);
+
+        void ReportFollowup(int userId, int followupId, ReportReason reportReason);
     }
 }

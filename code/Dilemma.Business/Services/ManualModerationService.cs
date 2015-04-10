@@ -104,5 +104,20 @@ namespace Dilemma.Business.Services
 
             return moderation;
         }
+
+        public void ReportQuestion(int questionId, ReportReason reportReason)
+        {
+            ModerationRepository.Value.ReportQuestion(SecurityManager.Value.GetUserId(), questionId, reportReason);
+        }
+
+        public void ReportAnswer(int answerId, ReportReason reportReason)
+        {
+            ModerationRepository.Value.ReportAnswer(SecurityManager.Value.GetUserId(), answerId, reportReason);
+        }
+
+        public void ReportFollowup(int followupId, ReportReason reportReason)
+        {
+            ModerationRepository.Value.ReportFollowup(SecurityManager.Value.GetUserId(), followupId, reportReason);
+        }
     }
 }

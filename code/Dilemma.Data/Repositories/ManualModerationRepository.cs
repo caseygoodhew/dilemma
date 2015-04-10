@@ -270,6 +270,79 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+        public void ReportQuestion(int userId, int questionId, ReportReason reportReason)
+        {
+            using (var context = new DilemmaContext())
+            {
+                var moderation = context.Moderations.AsNoTracking().Where(x => x.Question.QuestionId == questionId).Select(x => new { x.ModerationId, x.Question.Text }).SingleOrDefault();
+
+                if (moderation != null)
+                {
+                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, moderation.Text);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+        }
+
+        public void ReportAnswer(int userId, int answerId, ReportReason reportReason)
+        {
+            using (var context = new DilemmaContext())
+            {
+                var moderation = context.Moderations.AsNoTracking().Where(x => x.Answer.AnswerId == answerId).Select(x => new { x.ModerationId, x.Answer.Text }).SingleOrDefault();
+
+                if (moderation != null)
+                {
+                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, moderation.Text);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+        }
+
+        public void ReportFollowup(int userId, int followupId, ReportReason reportReason)
+        {
+            using (var context = new DilemmaContext())
+            {
+                var moderation = context.Moderations.AsNoTracking().Where(x => x.Followup.FollowupId == followupId).Select(x => new { x.ModerationId, x.Followup.Text }).SingleOrDefault();
+
+                if (moderation != null)
+                {
+                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, moderation.Text);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+        }
+
+        private static void ReportToExisting(
+            DilemmaContext context,
+            int userId,
+            ReportReason reportReason,
+            int moderationId,
+            string itemText)
+        {
+            UpdateModerationState(
+                context,
+                ModerationState.Reported,
+                userId,
+                moderationId,
+                reportReason.ToString());
+
+            UpdateModerationState(
+                context,
+                ModerationState.ReQueued,
+                userId,
+                moderationId,
+                string.Format("REPORTED FOR {0}: {1}", reportReason.ToString().ToUpper(), itemText));
+        }
+
         private static void OnModerableCreated(DilemmaContext context, Moderation moderation, string message)
         {
             context.Moderations.Add(moderation);
@@ -294,7 +367,7 @@ namespace Dilemma.Data.Repositories
                             x.ModerationFor,
                             x.ModerationId
                         })
-                        .Where(x => x.MostRecentEntry.State == ModerationState.Queued)
+                        .Where(x => x.MostRecentEntry.State == ModerationState.Queued || x.MostRecentEntry.State == ModerationState.ReQueued)
                         .OrderBy(x => x.MostRecentEntry.CreatedDateTime)
                         .Take(1)
                         .ToList()

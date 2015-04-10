@@ -44,7 +44,16 @@ namespace ASP
         {
 WriteLiteral("<div");
 
-WriteLiteral(" class=\"Card Dilemmas-empty\"");
+WriteAttribute("class", Tuple.Create(" class=\"", 60), Tuple.Create("\"", 145)
+, Tuple.Create(Tuple.Create("", 68), Tuple.Create("Card", 68), true)
+            
+            #line 3 "..\..\Views\Shared\DisplayTemplates\FollowupResponse.cshtml"
+, Tuple.Create(Tuple.Create(" ", 72), Tuple.Create<System.Object, System.Int32>(Model.IsMyFollowup ? "Dilemmas-empty" : "Dilemmas-empty-with-buttons"
+            
+            #line default
+            #line hidden
+, 73), false)
+);
 
 WriteLiteral(">\r\n    <p>Here\'s how it ended up</p>\r\n    <div");
 
@@ -65,18 +74,91 @@ WriteLiteral("\r\n    </div>\r\n    \r\n    <div");
 
 WriteLiteral(" class=\"line\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(">\r\n        <span");
 
-WriteLiteral("        ");
+WriteLiteral(" style=\"white-space: pre-wrap\"");
+
+WriteLiteral(">");
 
             
             #line 10 "..\..\Views\Shared\DisplayTemplates\FollowupResponse.cshtml"
-   Write(Model.Text);
+                                       Write(Model.Text);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    </div>\r\n</div>");
+WriteLiteral("</span>\r\n    </div>\r\n    \r\n");
+
+            
+            #line 13 "..\..\Views\Shared\DisplayTemplates\FollowupResponse.cshtml"
+    
+            
+            #line default
+            #line hidden
+            
+            #line 13 "..\..\Views\Shared\DisplayTemplates\FollowupResponse.cshtml"
+     if (!Model.IsMyFollowup)
+    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
+
+WriteLiteral(" class=\"line button-section\"");
+
+WriteLiteral(">\r\n            \r\n            <div");
+
+WriteLiteral(" class=\"u-1of5 right\"");
+
+WriteLiteral(">\r\n                <button");
+
+WriteLiteral(" type=\"button\"");
+
+WriteLiteral(" class=\"Button--flag js-flag-button \"");
+
+WriteLiteral(" title=\"Report an issue with this question\"");
+
+WriteLiteral("  data-followup-id=\"");
+
+            
+            #line 18 "..\..\Views\Shared\DisplayTemplates\FollowupResponse.cshtml"
+                                                                                                                                    Write(Model.FollowupId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"");
+
+WriteLiteral(" data-toggle=\"modal\"");
+
+WriteLiteral(" data-target=\"#modal-flag\"");
+
+WriteLiteral(">\r\n                    <span");
+
+WriteLiteral(" data-icon=\"flag\"");
+
+WriteLiteral("></span>\r\n                    <span");
+
+WriteLiteral(" class=\"Button-label is-inactive\"");
+
+WriteLiteral(">Flag</span>\r\n                    <span");
+
+WriteLiteral(" class=\"Button-label is-active\"");
+
+WriteLiteral(">Flagged</span>\r\n                </button>                               \r\n      " +
+"      </div>\r\n            \r\n        </div>\r\n");
+
+WriteLiteral("        <!-- Dilemma-actions -->\r\n");
+
+            
+            #line 27 "..\..\Views\Shared\DisplayTemplates\FollowupResponse.cshtml"
+    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>");
 
         }
     }

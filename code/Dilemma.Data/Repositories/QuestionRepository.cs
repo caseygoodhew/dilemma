@@ -642,7 +642,6 @@ namespace Dilemma.Data.Repositories
             var answer = dataContext.Answers.Include(x => x.User).Include(x => x.Question).Include(x => x.Question.User).Single(x => x.AnswerId == answerId);
             AnswerState newAnswerState;
             
-            
             switch (moderationState)
             {
                 case ModerationState.Queued:
@@ -675,8 +674,7 @@ namespace Dilemma.Data.Repositories
         {
             var followup = dataContext.Followups.Include(x => x.Question).Include(x => x.Question.User).Single(x => x.FollowupId == followupId);
             FollowupState newFollowupState;
-
-
+            
             switch (moderationState)
             {
                 case ModerationState.Queued:
@@ -709,23 +707,31 @@ namespace Dilemma.Data.Repositories
         
         private void UpdateQuestionState(DilemmaContext dataContext, int questionId, ModerationState moderationState)
         {
-            var question = dataContext.Questions.Include(x => x.User).Single(x => x.QuestionId == questionId);
-
+            QuestionState newQuestionState;
+            
             switch (moderationState)
             {
                 case ModerationState.Queued:
-                    question.QuestionState = QuestionState.ReadyForModeration;
+                    newQuestionState = QuestionState.ReadyForModeration;
                     break;
                 case ModerationState.Approved:
-                    question.QuestionState = QuestionState.Approved;
+                    newQuestionState = QuestionState.Approved;
                     break;
                 case ModerationState.Rejected:
-                    question.QuestionState = QuestionState.Rejected;
+                    newQuestionState = QuestionState.Rejected;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("moderationState");
             }
+            
+            var question = dataContext.Questions.Include(x => x.User).Single(x => x.QuestionId == questionId);
 
+            if (newQuestionState == question.QuestionState)
+            {
+                return;
+            }
+
+            question.QuestionState = newQuestionState;
             dataContext.Questions.Update(dataContext, question);
             dataContext.SaveChangesVerbose();
 

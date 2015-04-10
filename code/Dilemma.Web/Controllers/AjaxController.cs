@@ -16,6 +16,8 @@ namespace Dilemma.Web.Controllers
     public class AjaxController : DilemmaBaseController
     {
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
+
+        private static readonly Lazy<IManualModerationService> ModerationService = Locator.Lazy<IManualModerationService>();
             
         [HttpPost]
         public JsonResult Vote(VoteDto vote)
@@ -93,9 +95,20 @@ namespace Dilemma.Web.Controllers
         }
         
         [HttpPost]
-        public JsonResult Report(ReportDto report)
+        public void Report(ReportDto report)
         {
-            return Json(new { success = true, report.QuestionId, report.AnswerId }); 
+            if (report.QuestionId.HasValue)
+            {
+                ModerationService.Value.ReportQuestion(report.QuestionId.Value, report.ReportReason);
+            }
+            else if (report.AnswerId.HasValue)
+            {
+                ModerationService.Value.ReportAnswer(report.AnswerId.Value, report.ReportReason);
+            }
+            else if (report.FollowupId.HasValue)
+            {
+                ModerationService.Value.ReportFollowup(report.FollowupId.Value, report.ReportReason);
+            }
         }
     }
 }

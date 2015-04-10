@@ -94,6 +94,7 @@ WriteLiteral(">\r\n            \r\n");
              switch (Model.State)
             {
                 case ModerationState.Queued:
+                case ModerationState.ReQueued:
                     
 
             
@@ -110,7 +111,7 @@ WriteLiteral(" style=\"font-weight: bold\"");
 WriteLiteral(">Added to Moderation Queue</div>\r\n                    </div>\r\n");
 
             
-            #line 23 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
+            #line 24 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
             
                     break;
                 case ModerationState.Approved:
@@ -130,7 +131,7 @@ WriteLiteral(" style=\"font-weight: bold\"");
 WriteLiteral(">Approved by Moderator</div>\r\n                    </div>\r\n");
 
             
-            #line 30 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
+            #line 31 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
             
                     break;
                 case ModerationState.Rejected:
@@ -158,7 +159,7 @@ WriteLiteral(" style=\"white-space: pre-wrap\"");
 WriteLiteral(">");
 
             
-            #line 37 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
+            #line 38 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
                                                         Write(Model.Message);
 
             
@@ -167,9 +168,48 @@ WriteLiteral(">");
 WriteLiteral("</p>\r\n                        </div>\r\n                    </div>\r\n");
 
             
-            #line 40 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
+            #line 41 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
             
                     break;
+                    
+                case ModerationState.Reported:
+                    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <div");
+
+WriteLiteral(" class=\"Moderation-entry-text \"");
+
+WriteLiteral(">\r\n                        <div");
+
+WriteLiteral(" style=\"font-weight: bold; margin-bottom: 10px\"");
+
+WriteLiteral(">Reported by another User</div>\r\n                        <div");
+
+WriteLiteral(" style=\"font-style: italic; margin: 0 50px; color: #888\"");
+
+WriteLiteral(">\r\n                            <p");
+
+WriteLiteral(" style=\"white-space: pre-wrap\"");
+
+WriteLiteral(">");
+
+            
+            #line 49 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
+                                                        Write(Model.Message);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                        </div>\r\n                    </div>\r\n");
+
+            
+            #line 52 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
+            
+                    break;
+                    
                 default:
                     throw new ArgumentOutOfRangeException();
             }

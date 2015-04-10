@@ -1,4 +1,5 @@
 using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 
 namespace Dilemma.Business.Services
 {
@@ -38,5 +39,11 @@ namespace Dilemma.Business.Services
         AnswerModerationHistoryViewModel GetAnswerHistory(int answerId);
 
         FollowupModerationHistoryViewModel GetFollowupHistory(int followupId);
+
+        void ReportQuestion(int questionId, ReportReason reportReason);
+
+        void ReportAnswer(int answerId, ReportReason reportReason);
+
+        void ReportFollowup(int followupId, ReportReason reportReason);
     }
 }

@@ -13,7 +13,7 @@
 /
 ======================================================*/
 /*  
-    Config
+    Config 
    
   ======================================================*/
 /*=====================================================
@@ -8087,24 +8087,45 @@ button:active,
   display: block;
   background: #fff;
 }
+.Dilemmas-empty-with-buttons,
 .Dilemmas-empty {
-  padding: 20px 10px 30px;
+  padding: 20px 10px 10px;
   text-align: center;
   margin: 7px 7px 30px;
 }
+.Dilemmas-empty-with-buttons h2,
 .Dilemmas-empty h2 {
   padding: 10px 0 20px;
 }
+.Dilemmas-empty-with-buttons p,
 .Dilemmas-empty p {
   font-size: 21px;
   line-height: 30px;
   color: #888;
   margin: 0  0 1em 0;
 }
+.Dilemmas-empty-with-buttons [class^='Button--'],
+.Dilemmas-empty [class^='Button--'],
+.Dilemmas-empty-with-buttons [class*=' Button--'],
+.Dilemmas-empty [class*=' Button--'] {
+  display: inline-block;
+}
+@media (max-width: 650px) {
+  .Dilemmas-empty-with-buttons [class^='Button--'],
+  .Dilemmas-empty [class^='Button--'],
+  .Dilemmas-empty-with-buttons [class*=' Button--'],
+  .Dilemmas-empty [class*=' Button--'] {
+    display: block;
+    clear: both;
+    width: 90%;
+  }
+}
+.Dilemmas-empty {
+  padding: 20px 10px 30px;
+}
 .Dilemmas-empty [class^='Button--'],
 .Dilemmas-empty [class*=' Button--'] {
   width: 48%;
-  display: inline-block;
 }
 @media (max-width: 650px) {
   .Dilemmas-empty [class^='Button--'],
@@ -8113,6 +8134,9 @@ button:active,
     clear: both;
     width: 90%;
   }
+}
+.Dilemmas-empty-with-buttons .button-section {
+  padding-top: 30px;
 }
 .Dilemma-question {
   position: relative;

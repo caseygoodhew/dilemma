@@ -1,12 +1,28 @@
 ﻿@model Dilemma.Business.ViewModels.FollowupViewModel
 
-<div class="Card Dilemmas-empty">
+<div class="Card @(Model.IsMyFollowup ? "Dilemmas-empty" : "Dilemmas-empty-with-buttons")">
     <p>Here's how it ended up</p>
     <div class="Card-label--small" style ="margin-top: -20px; margin-bottom: 20px">
         @Model.CreatedDateTime.ToRelativeText()
     </div>
     
     <div class="line">
-        @Model.Text
+        <span style="white-space: pre-wrap">@Model.Text</span>
     </div>
+    
+    @if (!Model.IsMyFollowup)
+    {
+        <div class="line button-section">
+            
+            <div class="u-1of5 right">
+                <button type="button" class="Button--flag js-flag-button " title="Report an issue with this question"  data-followup-id="@Model.FollowupId" data-toggle="modal" data-target="#modal-flag">
+                    <span data-icon="flag"></span>
+                    <span class="Button-label is-inactive">Flag</span>
+                    <span class="Button-label is-active">Flagged</span>
+                </button>                               
+            </div>
+            
+        </div>
+        <!-- Dilemma-actions -->
+    }
 </div>

@@ -87,7 +87,15 @@ WriteLiteral(" name=\"flag_reason\"");
 
 WriteLiteral(" id=\"flag_reason_1\"");
 
-WriteLiteral(" value=\"option1\"");
+WriteAttribute("value", Tuple.Create(" value=\"", 527), Tuple.Create("\"", 572)
+            
+            #line 11 "..\..\Views\Shared\Modals.cshtml"
+               , Tuple.Create(Tuple.Create("", 535), Tuple.Create<System.Object, System.Int32>((int)ReportReason.OffensiveContent
+            
+            #line default
+            #line hidden
+, 535), false)
+);
 
 WriteLiteral(">\r\n                            Offensive or abusive content\r\n                    " +
 "    </label>\r\n                    </div>\r\n                    <div");
@@ -102,7 +110,15 @@ WriteLiteral(" name=\"flag_reason\"");
 
 WriteLiteral(" id=\"flag_reason_2\"");
 
-WriteLiteral(" value=\"option2\"");
+WriteAttribute("value", Tuple.Create(" value=\"", 855), Tuple.Create("\"", 888)
+            
+            #line 17 "..\..\Views\Shared\Modals.cshtml"
+               , Tuple.Create(Tuple.Create("", 863), Tuple.Create<System.Object, System.Int32>((int)ReportReason.Spam
+            
+            #line default
+            #line hidden
+, 863), false)
+);
 
 WriteLiteral(">\r\n                            Spam / unsolicited advertising\r\n                  " +
 "      </label>\r\n                    </div>\r\n                    <div");
@@ -117,7 +133,15 @@ WriteLiteral(" name=\"flag_reason\"");
 
 WriteLiteral(" id=\"flag_reason_3\"");
 
-WriteLiteral(" value=\"option3\"");
+WriteAttribute("value", Tuple.Create(" value=\"", 1173), Tuple.Create("\"", 1220)
+            
+            #line 23 "..\..\Views\Shared\Modals.cshtml"
+              , Tuple.Create(Tuple.Create("", 1181), Tuple.Create<System.Object, System.Int32>((int)ReportReason.UnrelatedToSubject
+            
+            #line default
+            #line hidden
+, 1181), false)
+);
 
 WriteLiteral(">\r\n                            Not an answer or unrelated to this dilemma\r\n      " +
 "                  </label>\r\n                    </div>\r\n                </div><!" +
@@ -136,6 +160,8 @@ WriteLiteral(" type=\"submit\"");
 WriteLiteral(" class=\"btn Button Button-danger btn-large left js-flag-confirm\"");
 
 WriteLiteral(" data-dismiss=\"modal\"");
+
+WriteLiteral(" disabled=\"disabled\"");
 
 WriteLiteral(" >\r\n                        <span");
 

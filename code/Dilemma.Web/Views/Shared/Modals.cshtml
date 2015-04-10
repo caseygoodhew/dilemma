@@ -8,19 +8,19 @@
                     <legend>Why are you you reporting this?</legend>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="flag_reason" id="flag_reason_1" value="option1">
+                            <input type="radio" name="flag_reason" id="flag_reason_1" value="@((int)ReportReason.OffensiveContent)">
                             Offensive or abusive content
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="flag_reason" id="flag_reason_2" value="option2">
+                            <input type="radio" name="flag_reason" id="flag_reason_2" value="@((int)ReportReason.Spam)">
                             Spam / unsolicited advertising
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="flag_reason" id="flag_reason_3" value="option3">
+                            <input type="radio" name="flag_reason" id="flag_reason_3" value="@((int)ReportReason.UnrelatedToSubject)">
                             Not an answer or unrelated to this dilemma
                         </label>
                     </div>
@@ -28,7 +28,7 @@
             </div><!-- modal-body -->
             <div class="modal-footer">
                 <div class="line">
-                    <button type="submit" class="btn Button Button-danger btn-large left js-flag-confirm" data-dismiss="modal" >
+                    <button type="submit" class="btn Button Button-danger btn-large left js-flag-confirm" data-dismiss="modal" disabled="disabled" >
                         <span data-icon="flag-active"></span>
                         <strong>Report<span class="size-s-and-up inline"> this</span> post</strong>
                     </button>

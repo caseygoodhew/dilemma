@@ -268,8 +268,7 @@ $(document).ready(function() {
   });
 
 
-
-  /*
+ /*
 
     Flag button
 
@@ -278,18 +277,27 @@ $(document).ready(function() {
   $('.js-flag-button:not([disabled])').on('click', function() {
     window.flagTriggered = $(this);
   });
-  $('.js-flag-confirm:not([disabled])').on('click', function() {
+
+  $('input[name=flag_reason]:radio').change(function() {
+      $('.js-flag-confirm[disabled]').removeAttr('disabled');
+  });
+
+  $('#modal-flag').on('click', '.js-flag-confirm:not([disabled])', function () {
     window.flagTriggered.addClass('is-active').attr('disabled','disabled');
+
     $.ajax({
         url: '/ajax/report',
         type: 'POST',
-        data: JSON.stringify({ questionId: window.flagTriggered.data('question-id'), answerId: window.flagTriggered.data('answer-id'), }),
+        data: JSON.stringify({
+            questionId: window.flagTriggered.data('question-id'),
+            answerId: window.flagTriggered.data('answer-id'),
+            followupId: window.flagTriggered.data('followup-id'),
+            reportReason: $('input[name=flag_reason]:radio:checked').val()
+        }),
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            
         },
         error: function () {
-
         }
     });
   });

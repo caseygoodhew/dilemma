@@ -227,7 +227,10 @@ namespace Dilemma.Business.Services
 
         private static QuestionDetailsViewModel MarkBookmarks(QuestionDetailsViewModel question)
         {
-            MarkBookmarks(question.QuestionViewModel);
+            if (question != null)
+            {
+                MarkBookmarks(question.QuestionViewModel);
+            }
             return question;
         }
 

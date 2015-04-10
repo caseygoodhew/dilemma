@@ -7,6 +7,8 @@ namespace Dilemma.Common
     {
         Queued,
         Approved,
-        Rejected
+        Rejected,
+        Reported,
+        ReQueued
     }
 }

@@ -285,6 +285,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Answer.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\DisplayTemplates\AnswerSlotsFull.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnswerSlotsFull.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\DisplayTemplates\NoModerationHistory.generated.cs">
       <DependentUpon>NoModerationHistory.cshtml</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -798,7 +803,10 @@
       <LastGenOutput>Advise.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Ajax\Advise.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\AnswerSlotsFull.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AnswerSlotsFull.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AnswerSlotsFull.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Views\Shared\EditorTemplates\Followup.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Followup.generated.cs</LastGenOutput>

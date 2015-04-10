@@ -2,8 +2,10 @@
 .Dilemma-state {}//heading
 
 .Dilemma {}
+
+.Dilemmas-empty-with-buttons,
 .Dilemmas-empty {
-  padding: 20px 10px 30px;
+  padding: 20px 10px 10px;
   text-align: center;
   margin: 7px 7px 30px;
   h2 {
@@ -17,7 +19,6 @@
   }
   [class^='Button--'],
   [class*=' Button--'] {
-    width: 48%;
     display: inline-block;
   }
   @media (max-width: 650px) {
@@ -28,6 +29,28 @@
       width: 90%;
     }
   }
+}
+
+.Dilemmas-empty {
+  padding: 20px 10px 30px;
+  [class^='Button--'],
+  [class*=' Button--'] {
+    width: 48%;
+  }
+  @media (max-width: 650px) {
+    [class^='Button--'],
+    [class*=' Button--'] {
+      display: block;
+      clear: both;
+      width: 90%;
+    }
+  }
+}
+
+.Dilemmas-empty-with-buttons {
+    .button-section {
+        padding-top: 30px;
+    }
 }
 
 .Dilemma-question {
