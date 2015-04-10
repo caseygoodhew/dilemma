@@ -68,50 +68,69 @@ WriteLiteral("\r\n\r\n");
             #line hidden
 WriteLiteral("    <h2>&nbsp;</h2>\r\n");
 
-WriteLiteral("    <article");
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"line\"");
+
+WriteLiteral(">\r\n        <aside");
+
+WriteLiteral(" class=\"sidebar\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 13 "..\..\Views\Answers\Index.cshtml"
+       Write(Html.DisplayFor(x => x.Sidebar, "Sidebar"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </aside>\r\n        <article");
 
 WriteLiteral(" class=\"Dilemma Card\"");
 
-WriteLiteral(">\r\n    <div");
+WriteLiteral(">\r\n            <div");
 
 WriteLiteral(" class=\"Card-section Card-info\"");
 
-WriteLiteral(">\r\n        <div");
+WriteLiteral(">\r\n                <div");
 
 WriteLiteral(" class=\"line align-center\"");
 
-WriteLiteral(">\r\n            <div");
+WriteLiteral(">\r\n                    <div");
 
 WriteLiteral(" class=\"Card-label--small\"");
 
-WriteLiteral(">\r\n                Erm.... what were you looking for?\r\n            </div>\r\n      " +
-"      <div");
+WriteLiteral(">\r\n                        Erm.... what were you looking for?\r\n                  " +
+"  </div>\r\n                    <div");
 
 WriteLiteral(" style=\"margin-bottom: 20px\"");
 
-WriteLiteral("></div>\r\n        </div>\r\n    </div>\r\n    \r\n    <div");
+WriteLiteral("></div>\r\n                </div>\r\n            </div>\r\n    \r\n            <div");
 
 WriteLiteral(" class=\"Card-section\"");
 
-WriteLiteral(">\r\n        <div");
+WriteLiteral(">\r\n                <div");
 
 WriteLiteral(" class=\"Dilemma-question\"");
 
-WriteLiteral(">\r\n            <div");
+WriteLiteral(">\r\n                    <div");
 
 WriteLiteral(" class=\"Moderation-entry-text \"");
 
-WriteLiteral(">\r\n            <p");
+WriteLiteral(">\r\n                        <p");
 
 WriteLiteral(" style=\"white-space: pre-wrap\"");
 
 WriteLiteral(">We can\'t find the dilemma that you\'re looking for. Dilemmas don\'t last forever -" +
-" they\'re removed from the site after a couple of weeks.</p>\r\n        </div> </di" +
-"v> \r\n    </div>\r\n</article>\r\n");
+" they\'re removed from the site after a couple of weeks.</p>\r\n                   " +
+" </div> </div> \r\n            </div>\r\n        </article>\r\n    </div>\r\n");
 
             
-            #line 28 "..\..\Views\Answers\Index.cshtml"
-
+            #line 33 "..\..\Views\Answers\Index.cshtml"
+    
 }
 else
 {
@@ -137,7 +156,7 @@ WriteLiteral("></span>\r\n");
 WriteLiteral("            ");
 
             
-            #line 36 "..\..\Views\Answers\Index.cshtml"
+            #line 41 "..\..\Views\Answers\Index.cshtml"
         Write(Model.QuestionDetails.CanAnswer ? "Answer this dilemma" : "Check out this dilemma");
 
             
@@ -146,7 +165,7 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </span>\r\n    </h1>\r\n");
 
             
-            #line 39 "..\..\Views\Answers\Index.cshtml"
+            #line 44 "..\..\Views\Answers\Index.cshtml"
 
 
 
@@ -166,7 +185,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 44 "..\..\Views\Answers\Index.cshtml"
+            #line 49 "..\..\Views\Answers\Index.cshtml"
        Write(Html.DisplayFor(x => x.Sidebar, "Sidebar"));
 
             
@@ -183,7 +202,7 @@ WriteLiteral(">\r\n    \r\n");
 WriteLiteral("            ");
 
             
-            #line 49 "..\..\Views\Answers\Index.cshtml"
+            #line 54 "..\..\Views\Answers\Index.cshtml"
        Write(Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel, "QuestionSummary"));
 
             
@@ -192,13 +211,13 @@ WriteLiteral("            ");
 WriteLiteral("\r\n          \r\n");
 
             
-            #line 51 "..\..\Views\Answers\Index.cshtml"
+            #line 56 "..\..\Views\Answers\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 51 "..\..\Views\Answers\Index.cshtml"
+            #line 56 "..\..\Views\Answers\Index.cshtml"
              if (Model.QuestionDetails.CanAnswer)
             {
 
@@ -214,7 +233,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 54 "..\..\Views\Answers\Index.cshtml"
+            #line 59 "..\..\Views\Answers\Index.cshtml"
                Write(Html.Partial("EditorTemplates/Advise", new AnswerViewModel()));
 
             
@@ -223,7 +242,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </div>\r\n");
 
             
-            #line 56 "..\..\Views\Answers\Index.cshtml"
+            #line 61 "..\..\Views\Answers\Index.cshtml"
             }
 
             
@@ -232,13 +251,13 @@ WriteLiteral("\r\n                </div>\r\n");
 WriteLiteral("        \r\n");
 
             
-            #line 58 "..\..\Views\Answers\Index.cshtml"
+            #line 63 "..\..\Views\Answers\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 58 "..\..\Views\Answers\Index.cshtml"
+            #line 63 "..\..\Views\Answers\Index.cshtml"
              if (Model.QuestionDetails.CanFollowup)
             {
 
@@ -254,7 +273,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 61 "..\..\Views\Answers\Index.cshtml"
+            #line 66 "..\..\Views\Answers\Index.cshtml"
                Write(Html.Partial("EditorTemplates/Followup", new FollowupViewModel()));
 
             
@@ -263,7 +282,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </div>\r\n");
 
             
-            #line 63 "..\..\Views\Answers\Index.cshtml"
+            #line 68 "..\..\Views\Answers\Index.cshtml"
             }
 
             
@@ -272,13 +291,13 @@ WriteLiteral("\r\n                </div>\r\n");
 WriteLiteral("        \r\n");
 
             
-            #line 65 "..\..\Views\Answers\Index.cshtml"
+            #line 70 "..\..\Views\Answers\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 65 "..\..\Views\Answers\Index.cshtml"
+            #line 70 "..\..\Views\Answers\Index.cshtml"
              if (Model.QuestionDetails.QuestionViewModel.HasFollowup)
             {
                 
@@ -286,14 +305,14 @@ WriteLiteral("        \r\n");
             #line default
             #line hidden
             
-            #line 67 "..\..\Views\Answers\Index.cshtml"
+            #line 72 "..\..\Views\Answers\Index.cshtml"
            Write(Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel.Followup, "FollowupResponse"));
 
             
             #line default
             #line hidden
             
-            #line 67 "..\..\Views\Answers\Index.cshtml"
+            #line 72 "..\..\Views\Answers\Index.cshtml"
                                                                                                        
             }
 
@@ -303,13 +322,13 @@ WriteLiteral("        \r\n");
 WriteLiteral("\r\n");
 
             
-            #line 70 "..\..\Views\Answers\Index.cshtml"
+            #line 75 "..\..\Views\Answers\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 70 "..\..\Views\Answers\Index.cshtml"
+            #line 75 "..\..\Views\Answers\Index.cshtml"
              foreach (var answer in Model.QuestionDetails.QuestionViewModel.Answers)
             {
                 
@@ -317,7 +336,7 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 72 "..\..\Views\Answers\Index.cshtml"
+            #line 77 "..\..\Views\Answers\Index.cshtml"
            Write(Html.DisplayFor(x => answer, "Answer", new
            {
                Model.QuestionDetails.CanVote,
@@ -328,7 +347,7 @@ WriteLiteral("\r\n");
             #line default
             #line hidden
             
-            #line 76 "..\..\Views\Answers\Index.cshtml"
+            #line 81 "..\..\Views\Answers\Index.cshtml"
              
             }
 
@@ -338,7 +357,7 @@ WriteLiteral("\r\n");
 WriteLiteral("        \r\n        </main><!-- main-->   \r\n\r\n    </div>\r\n");
 
             
-            #line 82 "..\..\Views\Answers\Index.cshtml"
+            #line 87 "..\..\Views\Answers\Index.cshtml"
 }
 
             
@@ -354,7 +373,7 @@ WriteLiteral("\r\n    \r\n    <script>\r\n        window.resetAnswerHook = funct
 "  url: \'");
 
             
-            #line 93 "..\..\Views\Answers\Index.cshtml"
+            #line 98 "..\..\Views\Answers\Index.cshtml"
                      Write(Url.Action("Advise", "Ajax"));
 
             
@@ -385,7 +404,7 @@ WriteLiteral(@"',
                     url: '");
 
             
-            #line 115 "..\..\Views\Answers\Index.cshtml"
+            #line 120 "..\..\Views\Answers\Index.cshtml"
                      Write(Url.Action("Followup", "Ajax"));
 
             

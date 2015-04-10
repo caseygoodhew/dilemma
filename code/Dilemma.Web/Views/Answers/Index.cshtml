@@ -8,24 +8,29 @@
 @if (Model.QuestionDetails == null)
 {
     <h2>&nbsp;</h2>
-    <article class="Dilemma Card">
-    <div class="Card-section Card-info">
-        <div class="line align-center">
-            <div class="Card-label--small">
-                Erm.... what were you looking for?
+    <div class="line">
+        <aside class="sidebar">
+            @Html.DisplayFor(x => x.Sidebar, "Sidebar")
+        </aside>
+        <article class="Dilemma Card">
+            <div class="Card-section Card-info">
+                <div class="line align-center">
+                    <div class="Card-label--small">
+                        Erm.... what were you looking for?
+                    </div>
+                    <div style="margin-bottom: 20px"></div>
+                </div>
             </div>
-            <div style="margin-bottom: 20px"></div>
-        </div>
+    
+            <div class="Card-section">
+                <div class="Dilemma-question">
+                    <div class="Moderation-entry-text ">
+                        <p style="white-space: pre-wrap">We can't find the dilemma that you're looking for. Dilemmas don't last forever - they're removed from the site after a couple of weeks.</p>
+                    </div> </div> 
+            </div>
+        </article>
     </div>
     
-    <div class="Card-section">
-        <div class="Dilemma-question">
-            <div class="Moderation-entry-text ">
-            <p style="white-space: pre-wrap">We can't find the dilemma that you're looking for. Dilemmas don't last forever - they're removed from the site after a couple of weeks.</p>
-        </div> </div> 
-    </div>
-</article>
-
 }
 else
 {
