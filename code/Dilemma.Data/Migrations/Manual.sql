@@ -360,8 +360,7 @@ AS
 
     -- CLEAN UP RELATIONSHIPS
     DELETE FROM Notification
-     WHERE Moderation_ModerationId IN (SELECT ModerationId FROM ModerationRetirement)
-        OR Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
+     WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
         OR Answer_AnswerId IN (
             SELECT a.AnswerId 
               FROM Answer a, QuestionRetirement qr
