@@ -12,13 +12,13 @@
       * to make it easier to turn off Bootstrap components as desired
 /
 ======================================================*/
-/*  
+/* 
     Config 
    
   ======================================================*/
 /*=====================================================
 \
-  BOOTSTRAP — Variables
+  BOOTSTRAP — Variables 
 /
 ======================================================*/
 /*=====================================================
@@ -6575,11 +6575,11 @@ button.close {
   }
 }
 /*=====================================================
-\
+\ 
   CUSTOM
 
     // Uses SUIT naming conventions https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md
-    // u-utilityName
+    // u-utilityName 
     // ComponentName
     // ComponentName--modifierName
     // ComponentName-descendantName
@@ -8570,6 +8570,13 @@ form.Answer:after {
 .page-bd {
   background: #e9e9e9 url("/content/images/pattern-a.png");
 }
+.disguise-link,
+.disguise-link:hover {
+  color: white;
+}
+.disguise-link {
+  text-decoration: none;
+}
 .page-home .nav-main,
 .page-home .page-hd {
   display: none;
@@ -10317,7 +10324,8 @@ Licensed under the MIT license - http://opensource.org/licenses/MIT
 
 Copyright (c) 2014 Daniel Eden
 */
-.animated {
+.animated,
+.animated .disguise-link {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
