@@ -7,13 +7,13 @@ namespace Dilemma.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class Migration20 : IMigrationMetadata
+    public sealed partial class Migration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Migration20));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Migration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201504080437099_Migration20"; }
+            get { return "201504210602009_Migration"; }
         }
         
         string IMigrationMetadata.Source

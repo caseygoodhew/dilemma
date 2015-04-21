@@ -5,10 +5,10 @@ namespace Dilemma.Common
     /// </summary>
     public enum ModerationState
     {
-        Queued,
-        Approved,
-        Rejected,
-        Reported,
-        ReQueued
+        Queued = 100,
+        Approved = 200,
+        Rejected = 300,
+        Reported = 400,
+        ReQueued = 500
     }
 }

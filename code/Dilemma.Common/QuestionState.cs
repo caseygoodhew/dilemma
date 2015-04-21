@@ -5,8 +5,8 @@
     /// </summary>
     public enum QuestionState
     {
-        ReadyForModeration,
-        Approved,
-        Rejected
+        ReadyForModeration = 100,
+        Approved = 200,
+        Rejected = 300
     }
 }

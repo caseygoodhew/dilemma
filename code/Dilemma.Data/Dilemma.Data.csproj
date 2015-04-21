@@ -48,6 +48,10 @@
     <Reference Include="Disposable.Web.Caching">
       <HintPath>..\packages\Disposable.Web.Caching.1.0.6\lib\net45\Disposable.Web.Caching.dll</HintPath>
     </Reference>
+    <Reference Include="EfEnumToLookup, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1fde139e1e56f7c4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ef-enum-to-lookup.1.7.1\lib\net45\EfEnumToLookup.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
@@ -94,97 +98,9 @@
     <Compile Include="EntityFramework\Maps\VoteMap.cs" />
     <Compile Include="FollowupDataAction.cs" />
     <Compile Include="FollowupMessageContext.cs" />
-    <Compile Include="Migrations\201502060552490_Migration.cs" />
-    <Compile Include="Migrations\201502060552490_Migration.Designer.cs">
-      <DependentUpon>201502060552490_Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502130707588_Migration1.cs" />
-    <Compile Include="Migrations\201502130707588_Migration1.Designer.cs">
-      <DependentUpon>201502130707588_Migration1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502160713157_Migration2.cs" />
-    <Compile Include="Migrations\201502160713157_Migration2.Designer.cs">
-      <DependentUpon>201502160713157_Migration2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502160714266_Migration3.cs" />
-    <Compile Include="Migrations\201502160714266_Migration3.Designer.cs">
-      <DependentUpon>201502160714266_Migration3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502170655100_Migration4.cs" />
-    <Compile Include="Migrations\201502170655100_Migration4.Designer.cs">
-      <DependentUpon>201502170655100_Migration4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502180649315_Migration5.cs" />
-    <Compile Include="Migrations\201502180649315_Migration5.Designer.cs">
-      <DependentUpon>201502180649315_Migration5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502190614582_Migration6.cs" />
-    <Compile Include="Migrations\201502190614582_Migration6.Designer.cs">
-      <DependentUpon>201502190614582_Migration6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502190616099_Migration7.cs" />
-    <Compile Include="Migrations\201502190616099_Migration7.Designer.cs">
-      <DependentUpon>201502190616099_Migration7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502200611235_Migration8.cs" />
-    <Compile Include="Migrations\201502200611235_Migration8.Designer.cs">
-      <DependentUpon>201502200611235_Migration8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502200631404_Migration9.cs" />
-    <Compile Include="Migrations\201502200631404_Migration9.Designer.cs">
-      <DependentUpon>201502200631404_Migration9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502200700054_Migration10.cs" />
-    <Compile Include="Migrations\201502200700054_Migration10.Designer.cs">
-      <DependentUpon>201502200700054_Migration10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504020425057_Migration11.cs" />
-    <Compile Include="Migrations\201504020425057_Migration11.Designer.cs">
-      <DependentUpon>201504020425057_Migration11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504020457436_Migration12.cs" />
-    <Compile Include="Migrations\201504020457436_Migration12.Designer.cs">
-      <DependentUpon>201504020457436_Migration12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504020606483_Migration13.cs" />
-    <Compile Include="Migrations\201504020606483_Migration13.Designer.cs">
-      <DependentUpon>201504020606483_Migration13.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504030445260_Migration14.cs" />
-    <Compile Include="Migrations\201504030445260_Migration14.Designer.cs">
-      <DependentUpon>201504030445260_Migration14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504030452571_Migration15.cs" />
-    <Compile Include="Migrations\201504030452571_Migration15.Designer.cs">
-      <DependentUpon>201504030452571_Migration15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504031057432_Migration16.cs" />
-    <Compile Include="Migrations\201504031057432_Migration16.Designer.cs">
-      <DependentUpon>201504031057432_Migration16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504031108144_Migration17.cs" />
-    <Compile Include="Migrations\201504031108144_Migration17.Designer.cs">
-      <DependentUpon>201504031108144_Migration17.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504031318593_Migration18.cs" />
-    <Compile Include="Migrations\201504031318593_Migration18.Designer.cs">
-      <DependentUpon>201504031318593_Migration18.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504040626175_Migration19.cs" />
-    <Compile Include="Migrations\201504040626175_Migration19.Designer.cs">
-      <DependentUpon>201504040626175_Migration19.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504080437099_Migration20.cs" />
-    <Compile Include="Migrations\201504080437099_Migration20.Designer.cs">
-      <DependentUpon>201504080437099_Migration20.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504082248536_Migration21.cs" />
-    <Compile Include="Migrations\201504082248536_Migration21.Designer.cs">
-      <DependentUpon>201504082248536_Migration21.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504092229495_Migration22.cs" />
-    <Compile Include="Migrations\201504092229495_Migration22.Designer.cs">
-      <DependentUpon>201504092229495_Migration22.cs</DependentUpon>
+    <Compile Include="Migrations\201504210602009_Migration.cs" />
+    <Compile Include="Migrations\201504210602009_Migration.Designer.cs">
+      <DependentUpon>201504210602009_Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Followup.cs" />
@@ -266,6 +182,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Migrations\EnumToLookup.sql" />
     <Content Include="Migrations\HowToMigrate.txt" />
     <Content Include="Migrations\Manual.sql" />
   </ItemGroup>
@@ -276,77 +193,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201502060552490_Migration.resx">
-      <DependentUpon>201502060552490_Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502130707588_Migration1.resx">
-      <DependentUpon>201502130707588_Migration1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502160713157_Migration2.resx">
-      <DependentUpon>201502160713157_Migration2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502160714266_Migration3.resx">
-      <DependentUpon>201502160714266_Migration3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502170655100_Migration4.resx">
-      <DependentUpon>201502170655100_Migration4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502180649315_Migration5.resx">
-      <DependentUpon>201502180649315_Migration5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502190614582_Migration6.resx">
-      <DependentUpon>201502190614582_Migration6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502190616099_Migration7.resx">
-      <DependentUpon>201502190616099_Migration7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502200611235_Migration8.resx">
-      <DependentUpon>201502200611235_Migration8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502200631404_Migration9.resx">
-      <DependentUpon>201502200631404_Migration9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502200700054_Migration10.resx">
-      <DependentUpon>201502200700054_Migration10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504020425057_Migration11.resx">
-      <DependentUpon>201504020425057_Migration11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504020457436_Migration12.resx">
-      <DependentUpon>201504020457436_Migration12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504020606483_Migration13.resx">
-      <DependentUpon>201504020606483_Migration13.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504030445260_Migration14.resx">
-      <DependentUpon>201504030445260_Migration14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504030452571_Migration15.resx">
-      <DependentUpon>201504030452571_Migration15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504031057432_Migration16.resx">
-      <DependentUpon>201504031057432_Migration16.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504031108144_Migration17.resx">
-      <DependentUpon>201504031108144_Migration17.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504031318593_Migration18.resx">
-      <DependentUpon>201504031318593_Migration18.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504040626175_Migration19.resx">
-      <DependentUpon>201504040626175_Migration19.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504080437099_Migration20.resx">
-      <DependentUpon>201504080437099_Migration20.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504082248536_Migration21.resx">
-      <DependentUpon>201504082248536_Migration21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504092229495_Migration22.resx">
-      <DependentUpon>201504092229495_Migration22.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504210602009_Migration.resx">
+      <DependentUpon>201504210602009_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

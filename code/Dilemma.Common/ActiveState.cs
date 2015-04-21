@@ -2,7 +2,7 @@
 {
     public enum ActiveState
     {
-        Active,
-        Inactive
+        Active = 100,
+        Inactive = 200
     }
 }

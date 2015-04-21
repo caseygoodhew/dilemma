@@ -2,9 +2,9 @@ namespace Dilemma.Common
 {
     public enum ServerRole
     {
-        Offline,
-        Moderation,
-        Public,
-        QuestionSeeder
+        Offline = 100,
+        Moderation = 200,
+        Public = 300,
+        QuestionSeeder = 400
     }
 }

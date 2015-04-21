@@ -5,10 +5,10 @@
     /// </summary>
     public enum AnswerState
     {
-        ReservedSlot,
-        ReadyForModeration,
-        Approved,
-        Rejected,
-        Expired
+        ReservedSlot = 100,
+        ReadyForModeration = 200,
+        Approved = 300,
+        Rejected = 400,
+        Expired = 500
     }
 }

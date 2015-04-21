@@ -5,24 +5,24 @@ namespace Dilemma.Common
     /// </summary>
     public enum NotificationType
     {
-        QuestionApproved,
-        AnswerApproved,
-        FollowupApproved,
+        QuestionApproved = 110,
+        AnswerApproved = 120,
+        FollowupApproved = 130,
 
-        QuestionRejected,
-        AnswerRejected,
-        FollowupRejected,
+        QuestionRejected = 140,
+        AnswerRejected = 150,
+        FollowupRejected = 160,
         
-        FlaggedQuestionApproved,
-        FlaggedAnswerApproved,
-        FlaggedFollowupApproved,
+        FlaggedQuestionApproved = 170,
+        FlaggedAnswerApproved = 180,
+        FlaggedFollowupApproved = 190,
 
-        FlaggedQuestionRejected,
-        FlaggedAnswerRejected,
-        FlaggedFollowupRejected,
+        FlaggedQuestionRejected = 200,
+        FlaggedAnswerRejected = 210,
+        FlaggedFollowupRejected = 220,
         
-        OpenForVoting,
-        VoteOnAnswer,
-        BestAnswerAwarded
+        OpenForVoting = 230,
+        VoteOnAnswer = 240,
+        BestAnswerAwarded = 250
     }
 }

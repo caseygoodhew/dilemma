@@ -5,8 +5,8 @@
     /// </summary>
     public enum SystemEnvironment
     {
-        Development,
-        Testing,
-        Production
+        Development = 100,
+        Testing = 200,
+        Production = 300
     }
 }

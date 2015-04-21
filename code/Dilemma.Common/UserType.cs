@@ -5,7 +5,7 @@
     /// </summary>
     public enum UserType
     {
-        Anonymous,
-        Registered
+        Anonymous = 100,
+        Registered = 200
     }
 }
