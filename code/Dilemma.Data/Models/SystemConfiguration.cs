@@ -52,5 +52,11 @@ namespace Dilemma.Data.Models
         /// Gets or sets the number of minutes until an answer slot is expired (deleted) after it was last touched.
         /// </summary>
         public int ExpireAnswerSlotsAfterMinutes { get; set; }
+
+        public bool EnableWebPurify { get; set; }
+
+        public bool EmailErrors { get; set; }
+
+        public string EmailErrorsTo { get; set; }
     }
 }

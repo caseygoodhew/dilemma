@@ -102,6 +102,10 @@
     <Compile Include="Migrations\201504210602009_Migration.Designer.cs">
       <DependentUpon>201504210602009_Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505200524031_Migration1.cs" />
+    <Compile Include="Migrations\201505200524031_Migration1.Designer.cs">
+      <DependentUpon>201505200524031_Migration1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Followup.cs" />
     <Compile Include="Models\LastRunLog.cs" />
@@ -195,6 +199,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201504210602009_Migration.resx">
       <DependentUpon>201504210602009_Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505200524031_Migration1.resx">
+      <DependentUpon>201505200524031_Migration1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
