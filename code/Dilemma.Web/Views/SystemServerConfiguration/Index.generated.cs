@@ -45,24 +45,15 @@ namespace ASP
             
             #line 3 "..\..\Views\SystemServerConfiguration\Index.cshtml"
   
-    ViewBag.Title = "System Configuration";
+    ViewBag.Title = "System/Server Configuration";
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n\r\n<h2>");
+WriteLiteral("\r\n\r\n");
 
             
             #line 7 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-Write(ViewBag.Title);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</h2>\r\n\r\n");
-
-            
-            #line 9 "..\..\Views\SystemServerConfiguration\Index.cshtml"
  using (Html.BeginForm("Index", "SystemServerConfiguration", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     
@@ -70,16 +61,25 @@ WriteLiteral("</h2>\r\n\r\n");
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+            #line 9 "..\..\Views\SystemServerConfiguration\Index.cshtml"
 Write(Html.AntiForgeryToken());
 
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+            #line 9 "..\..\Views\SystemServerConfiguration\Index.cshtml"
                             
     
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <h2>System Configuration</h2>\r\n");
+
+            
+            #line 12 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+
 
             
             #line default
@@ -279,7 +279,7 @@ WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 44 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-    
+
 
             
             #line default
@@ -294,7 +294,7 @@ WriteLiteral("        ");
 
             
             #line 46 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-   Write(Html.LabelFor(x => x.SystemConfigurationViewModel.SystemEnvironment, new { @class = "col-md-2 col-sm-3 control-label" }));
+   Write(Html.LabelFor(x => x.SystemConfigurationViewModel.SystemEnvironment, new {@class = "col-md-2 col-sm-3 control-label"}));
 
             
             #line default
@@ -309,7 +309,7 @@ WriteLiteral("            ");
 
             
             #line 48 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-       Write(Html.EnumDropDownListFor(x => x.SystemConfigurationViewModel.SystemEnvironment, new { @class = "form-control" }));
+       Write(Html.EnumDropDownListFor(x => x.SystemConfigurationViewModel.SystemEnvironment, new {@class = "form-control"}));
 
             
             #line default
@@ -329,7 +329,7 @@ WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 52 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-    
+
 
             
             #line default
@@ -344,7 +344,7 @@ WriteLiteral("        ");
 
             
             #line 54 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-   Write(Html.LabelFor(x => x.ServerConfigurationViewModel.ServerRole, new { @class = "col-md-2 col-sm-3 control-label" }));
+   Write(Html.LabelFor(x => x.SystemConfigurationViewModel.EnableWebPurify, new { @class = "col-md-2 col-sm-3 control-label" }));
 
             
             #line default
@@ -359,7 +359,7 @@ WriteLiteral("            ");
 
             
             #line 56 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-       Write(Html.EnumDropDownListFor(x => x.ServerConfigurationViewModel.ServerRole, new { @class = "form-control" }));
+       Write(Html.CheckBoxFor(x => x.SystemConfigurationViewModel.EnableWebPurify, new {@class = "form-control"}));
 
             
             #line default
@@ -370,7 +370,7 @@ WriteLiteral("            ");
 
             
             #line 57 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-       Write(Html.ValidationMessageFor(x => x.ServerConfigurationViewModel.ServerRole));
+       Write(Html.ValidationMessageFor(x => x.SystemConfigurationViewModel.EnableWebPurify));
 
             
             #line default
@@ -379,7 +379,7 @@ WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 60 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-    
+
 
             
             #line default
@@ -394,7 +394,7 @@ WriteLiteral("        ");
 
             
             #line 62 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-   Write(Html.LabelFor(x => x.ServerConfigurationViewModel.Name, new { @class = "col-md-2 col-sm-3 control-label" }));
+   Write(Html.LabelFor(x => x.SystemConfigurationViewModel.EmailErrors, new {@class = "col-md-2 col-sm-3 control-label"}));
 
             
             #line default
@@ -409,7 +409,7 @@ WriteLiteral("            ");
 
             
             #line 64 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-       Write(Html.TextBoxFor(x => x.ServerConfigurationViewModel.Name, new { @class = "form-control" }));
+       Write(Html.CheckBoxFor(x => x.SystemConfigurationViewModel.EmailErrors, new {@class = "form-control"}));
 
             
             #line default
@@ -420,7 +420,7 @@ WriteLiteral("            ");
 
             
             #line 65 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-       Write(Html.ValidationMessageFor(x => x.ServerConfigurationViewModel.Name));
+       Write(Html.ValidationMessageFor(x => x.SystemConfigurationViewModel.EmailErrors));
 
             
             #line default
@@ -429,7 +429,7 @@ WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 68 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-    
+
 
             
             #line default
@@ -444,7 +444,7 @@ WriteLiteral("        ");
 
             
             #line 70 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-   Write(Html.LabelFor(x => x.AccessKey, new { @class = "col-md-2 col-sm-3 control-label" }));
+   Write(Html.LabelFor(x => x.SystemConfigurationViewModel.EmailErrorsTo, new { @class = "col-md-2 col-sm-3 control-label" }));
 
             
             #line default
@@ -459,7 +459,7 @@ WriteLiteral("            ");
 
             
             #line 72 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-       Write(Html.TextBoxFor(x => x.AccessKey, new { @class = "form-control" }));
+       Write(Html.TextBoxFor(x => x.SystemConfigurationViewModel.EmailErrorsTo, new {@class = "form-control"}));
 
             
             #line default
@@ -470,7 +470,7 @@ WriteLiteral("            ");
 
             
             #line 73 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-       Write(Html.ValidationMessageFor(x => x.AccessKey));
+       Write(Html.ValidationMessageFor(x => x.SystemConfigurationViewModel.EmailErrorsTo));
 
             
             #line default
@@ -479,6 +479,165 @@ WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 76 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <h2>Server Configuration</h2>\r\n");
+
+            
+            #line 78 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
+
+            
+            #line 80 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+   Write(Html.LabelFor(x => x.ServerConfigurationViewModel.ServerRole, new { @class = "col-md-2 col-sm-3 control-label" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        <div");
+
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 82 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+       Write(Html.EnumDropDownListFor(x => x.ServerConfigurationViewModel.ServerRole, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 83 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+       Write(Html.ValidationMessageFor(x => x.ServerConfigurationViewModel.ServerRole));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 86 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
+
+            
+            #line 88 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+   Write(Html.LabelFor(x => x.ServerConfigurationViewModel.Name, new { @class = "col-md-2 col-sm-3 control-label" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        <div");
+
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 90 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+       Write(Html.TextBoxFor(x => x.ServerConfigurationViewModel.Name, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 91 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+       Write(Html.ValidationMessageFor(x => x.ServerConfigurationViewModel.Name));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 94 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+    
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("        ");
+
+            
+            #line 96 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+   Write(Html.LabelFor(x => x.AccessKey, new { @class = "col-md-2 col-sm-3 control-label" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        <div");
+
+WriteLiteral(" class=\"col-md-3 col-sm-4\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 98 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+       Write(Html.TextBoxFor(x => x.AccessKey, new { @class = "form-control" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 99 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+       Write(Html.ValidationMessageFor(x => x.AccessKey));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
+
+            
+            #line 102 "..\..\Views\SystemServerConfiguration\Index.cshtml"
     
 
             
@@ -504,14 +663,14 @@ WriteLiteral(" />\r\n            <a");
 
 WriteLiteral(" class=\"btn btn-default\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3995), Tuple.Create("\"", 4029)
+WriteAttribute("href", Tuple.Create(" href=\"", 5334), Tuple.Create("\"", 5368)
             
-            #line 80 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4002), Tuple.Create<System.Object, System.Int32>(Url.Action("RefreshCache")
+            #line 106 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 5341), Tuple.Create<System.Object, System.Int32>(Url.Action("RefreshCache")
             
             #line default
             #line hidden
-, 4002), false)
+, 5341), false)
 );
 
 WriteLiteral(" role=\"button\"");
@@ -519,7 +678,7 @@ WriteLiteral(" role=\"button\"");
 WriteLiteral(">Refresh Cached Entries</a>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 83 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+            #line 109 "..\..\Views\SystemServerConfiguration\Index.cshtml"
 }
 
             
@@ -534,7 +693,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 86 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+            #line 112 "..\..\Views\SystemServerConfiguration\Index.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             
