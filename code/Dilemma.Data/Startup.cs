@@ -63,6 +63,8 @@ namespace Dilemma.Data
                         true);
                 }
             }
+
+            Logging.Configuration.SetServerName(registryName);
         }
 
         private static void RegisterSeverName(DilemmaContext context, string serverName, bool updateRegistry)

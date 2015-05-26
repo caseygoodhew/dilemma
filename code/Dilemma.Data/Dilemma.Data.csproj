@@ -195,6 +195,10 @@
       <Project>{9554F188-2EA1-4AF5-9C8E-20260652A74C}</Project>
       <Name>Dilemma.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dilemma.Logging\Dilemma.Logging.csproj">
+      <Project>{98bb6425-434d-4d19-833a-73b4f7c7b81f}</Project>
+      <Name>Dilemma.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201504210602009_Migration.resx">
