@@ -98,9 +98,9 @@
     <Compile Include="EntityFramework\Maps\VoteMap.cs" />
     <Compile Include="FollowupDataAction.cs" />
     <Compile Include="FollowupMessageContext.cs" />
-    <Compile Include="Migrations\201504210602009_Migration.cs" />
-    <Compile Include="Migrations\201504210602009_Migration.Designer.cs">
-      <DependentUpon>201504210602009_Migration.cs</DependentUpon>
+    <Compile Include="Migrations\201505201850568_Migration.cs" />
+    <Compile Include="Migrations\201505201850568_Migration.Designer.cs">
+      <DependentUpon>201505201850568_Migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201505200524031_Migration1.cs" />
     <Compile Include="Migrations\201505200524031_Migration1.Designer.cs">
@@ -197,8 +197,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504210602009_Migration.resx">
-      <DependentUpon>201504210602009_Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505201850568_Migration.resx">
+      <DependentUpon>201505201850568_Migration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505200524031_Migration1.resx">
       <DependentUpon>201505200524031_Migration1.cs</DependentUpon>
