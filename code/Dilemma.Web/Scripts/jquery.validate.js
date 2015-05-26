@@ -1142,7 +1142,6 @@ $.format = $.validator.format;
 			function handler(e) {
 				e = $.event.fix(e);
 				e.type = fix;
-				$.event.handle = $.event.handle || function () { };
 				return $.event.handle.call(this, e);
 			}
 		});
