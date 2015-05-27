@@ -89,6 +89,7 @@
     <Compile Include="EntityFramework\Maps\BookmarkMap.cs" />
     <Compile Include="EntityFramework\Maps\CategoryMap.cs" />
     <Compile Include="EntityFramework\Maps\AnswerMap.cs" />
+    <Compile Include="EntityFramework\Maps\EmailLogLevelMap.cs" />
     <Compile Include="EntityFramework\Maps\FollowupMap.cs" />
     <Compile Include="EntityFramework\Maps\LastRunLogMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionRetirementMap.cs" />
@@ -106,7 +107,16 @@
     <Compile Include="Migrations\201505200524031_Migration1.Designer.cs">
       <DependentUpon>201505200524031_Migration1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505270459311_Migration2.cs" />
+    <Compile Include="Migrations\201505270459311_Migration2.Designer.cs">
+      <DependentUpon>201505270459311_Migration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505270524162_Migration3.cs" />
+    <Compile Include="Migrations\201505270524162_Migration3.Designer.cs">
+      <DependentUpon>201505270524162_Migration3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
+    <Compile Include="Models\EmailLogLevel.cs" />
     <Compile Include="Models\Followup.cs" />
     <Compile Include="Models\LastRunLog.cs" />
     <Compile Include="Models\Proxies\AnswerHistoryProxy.cs" />
@@ -206,6 +216,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505200524031_Migration1.resx">
       <DependentUpon>201505200524031_Migration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505270459311_Migration2.resx">
+      <DependentUpon>201505270459311_Migration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505270524162_Migration3.resx">
+      <DependentUpon>201505270524162_Migration3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

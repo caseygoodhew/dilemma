@@ -9,6 +9,7 @@
     Func<string, string> getMenuClass = (x) => x == tidyString(ViewBag.Category ?? string.Empty) ? " is-page-current " : string.Empty;
     
     var isOffline = ViewBag.Offline == true;
+    var categories = ViewBag.Categories ?? Enumerable.Empty<CategoryViewModel>();
 }
 
 
@@ -47,7 +48,7 @@
                                         My Bookmarks
                                     </a>
                                 </li>
-                                @foreach (CategoryViewModel category in ViewBag.Categories)
+                                @foreach (CategoryViewModel category in categories)
                                 {
                                     <li class="nav-level-2 in-category-@getNextCounter() @getMenuClass(tidyString(category.Name))">
                                         <a href="@Url.ActionWithCategory("Index", "Dilemmas", tidyString(category.Name))" class="nav-level-2-link">

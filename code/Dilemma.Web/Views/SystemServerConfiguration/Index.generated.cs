@@ -638,7 +638,7 @@ WriteLiteral("\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 102 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-    
+
 
             
             #line default
@@ -659,18 +659,18 @@ WriteLiteral(" class=\"btn btn-default\"");
 
 WriteLiteral(" value=\"Submit\"");
 
-WriteLiteral(" />\r\n            <a");
+WriteLiteral("/>\r\n            <a");
 
 WriteLiteral(" class=\"btn btn-default\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5334), Tuple.Create("\"", 5368)
+WriteAttribute("href", Tuple.Create(" href=\"", 5329), Tuple.Create("\"", 5363)
             
             #line 106 "..\..\Views\SystemServerConfiguration\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 5341), Tuple.Create<System.Object, System.Int32>(Url.Action("RefreshCache")
+, Tuple.Create(Tuple.Create("", 5336), Tuple.Create<System.Object, System.Int32>(Url.Action("RefreshCache")
             
             #line default
             #line hidden
-, 5341), false)
+, 5336), false)
 );
 
 WriteLiteral(" role=\"button\"");
@@ -679,6 +679,41 @@ WriteLiteral(">Refresh Cached Entries</a>\r\n        </div>\r\n    </div>\r\n");
 
             
             #line 109 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <div");
+
+WriteLiteral(" class=\"form-group\"");
+
+WriteLiteral(" style=\"margin-top: 50px\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"col-md-offset-2 col-md-10\"");
+
+WriteLiteral(">\r\n            <a");
+
+WriteLiteral(" class=\"btn btn-default btn-danger\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 5590), Tuple.Create("\"", 5629)
+            
+            #line 112 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 5597), Tuple.Create<System.Object, System.Int32>(Url.Action("TestErrorHandling")
+            
+            #line default
+            #line hidden
+, 5597), false)
+);
+
+WriteLiteral(" role=\"button\"");
+
+WriteLiteral(">Test Error Handling</a>\r\n        </div>\r\n    </div>    \r\n");
+
+            
+            #line 115 "..\..\Views\SystemServerConfiguration\Index.cshtml"
 }
 
             
@@ -693,7 +728,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 112 "..\..\Views\SystemServerConfiguration\Index.cshtml"
+            #line 118 "..\..\Views\SystemServerConfiguration\Index.cshtml"
 Write(Scripts.Render("~/bundles/jqueryval"));
 
             

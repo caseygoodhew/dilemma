@@ -10,6 +10,8 @@ GO
 CREATE UNIQUE INDEX IX_UniqueVote ON Vote (User_UserId, Question_QuestionId);
 GO
 
+CREATE UNIQUE INDEX IX_LogLevel ON EmailLogLevel (LogLevel);
+GO
 
 
 
@@ -469,12 +471,6 @@ GO
 SET ANSI_PADDING ON 
 GO
 
-CREATE TABLE [dbo].[EmailLogLevel](
-	[LogLevel] [VARCHAR](100) NOT NULL,
-	[SendEmail] [BIT] NOT NULL
-)
-GO
-
 CREATE TABLE [dbo].[SystemLogging]( 
     [SystemLoggingGuid] [UNIQUEIDENTIFIER] ROWGUIDCOL  NOT NULL, 
     [EnteredDate] [DATETIME] NULL, 
@@ -543,7 +539,7 @@ BEGIN
     Declare @loglevel as varchar(100)    
     set @ToEmail = (SELECT EmailErrorsTo FROM SystemConfiguration)
     set @loglevel = (select loglevel from inserted) 
-    set @Title = 'Dilemmas ' + @loglevel 
+    set @Title = 'OurDilemmas ' + @loglevel 
 	set @logmessage = (select 
 		'User Date:' + char(9) + char(9) + logdate + char(13) + char(10) + 
 		'Computer:'+ char(9) + logmachinename + char(13) + char(10) +  
@@ -557,21 +553,25 @@ BEGIN
 		'StackTrace:'+ char(9) + logstacktrace as 'emailmessage'
     from inserted) 
     
-	If EXISTS (SELECT * FROM EmailLogLevel WHERE LOWER(LogLevel) = LOWER(@loglevel) AND SendEmail = 1)
+	If EXISTS (SELECT * FROM EmailLogLevel WHERE LOWER(LogLevel) = LOWER(@loglevel) AND EnableEmails = 1)
 	Begin
 		EXEC msdb.dbo.sp_send_dbmail @recipients=@ToEmail, @body= @logmessage,  @subject = @Title, @profile_name = 'admin'
 	End
 END
 GO
 
-INSERT INTO [EmailLogLevel] ([LogLevel], [SendEmail]) VALUES ('Error', 1)
-INSERT INTO [EmailLogLevel] ([LogLevel], [SendEmail]) VALUES ('TestMail', 1)
+INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Debug', 0)
+INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Error', 1)
+INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Fatal', 1)
+INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Info', 1)
+INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Trace', 0)
+INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Warn', 1)
 GO
 
 INSERT INTO [SystemLogging] ([LogApplication], [LogDate], [LogLevel], [LogLogger], [LogMessage], [LogMachineName], [LogUserName], [LogCallSite], [LogThread], [LogException], [LogStacktrace])
-SELECT 'Test Mail', 
+SELECT 'Logging Mail Test', 
 		GETDATE(), 
-		'TestMail', 
+		'Error', 
 		'DB Insert Statement', 
 		'This is a test log message', 
 		CONVERT(sysname, SERVERPROPERTY('MachineName')), 

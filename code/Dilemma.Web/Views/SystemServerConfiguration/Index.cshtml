@@ -99,13 +99,19 @@
             @Html.ValidationMessageFor(x => x.AccessKey)
         </div>
     </div>
-    
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Submit" />
+            <input type="submit" class="btn btn-default" value="Submit"/>
             <a class="btn btn-default" href="@Url.Action("RefreshCache")" role="button">Refresh Cached Entries</a>
         </div>
     </div>
+
+    <div class="form-group" style="margin-top: 50px">
+        <div class="col-md-offset-2 col-md-10">
+            <a class="btn btn-default btn-danger" href="@Url.Action("TestErrorHandling")" role="button">Test Error Handling</a>
+        </div>
+    </div>    
 }
 
 @section Scripts {

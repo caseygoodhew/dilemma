@@ -146,6 +146,7 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new BookmarkMap());
             modelBuilder.Configurations.Add(new FollowupMap());
             modelBuilder.Configurations.Add(new ReportedPostMap());
+            modelBuilder.Configurations.Add(new EmailLogLevelMap());
         }
     }
 }
