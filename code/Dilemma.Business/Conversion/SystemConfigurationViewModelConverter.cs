@@ -16,13 +16,16 @@ namespace Dilemma.Business.Conversion
         public static SystemConfiguration ToSystemConfiguration(SystemConfigurationViewModel viewModel)
         {
             return new SystemConfiguration
-                       {
-                           MaxAnswers = viewModel.MaxAnswers,
-                           QuestionLifetime = viewModel.QuestionLifetime,
-                           SystemEnvironment = viewModel.SystemEnvironment,
-                           RetireQuestionAfterDays = viewModel.RetireQuestionAfterDays,
-                           ExpireAnswerSlotsAfterMinutes = viewModel.ExpireAnswerSlotsAfterMinutes
-                       };
+            {
+                MaxAnswers = viewModel.MaxAnswers,
+                QuestionLifetime = viewModel.QuestionLifetime,
+                SystemEnvironment = viewModel.SystemEnvironment,
+                RetireQuestionAfterDays = viewModel.RetireQuestionAfterDays,
+                ExpireAnswerSlotsAfterMinutes = viewModel.ExpireAnswerSlotsAfterMinutes,
+                EnableWebPurify = viewModel.EnableWebPurify,
+                EmailErrors = viewModel.EmailErrors,
+                EmailErrorsTo = viewModel.EmailErrorsTo
+            };
         }
 
         /// <summary>
@@ -33,13 +36,16 @@ namespace Dilemma.Business.Conversion
         public static SystemConfigurationViewModel FromSystemConfiguration(SystemConfiguration model)
         {
             return new SystemConfigurationViewModel
-                       {
-                           MaxAnswers = model.MaxAnswers,
-                           QuestionLifetime = model.QuestionLifetime,
-                           SystemEnvironment = model.SystemEnvironment,
-                           RetireQuestionAfterDays = model.RetireQuestionAfterDays,
-                           ExpireAnswerSlotsAfterMinutes = model.ExpireAnswerSlotsAfterMinutes
-                       };
+            {
+                MaxAnswers = model.MaxAnswers,
+                QuestionLifetime = model.QuestionLifetime,
+                SystemEnvironment = model.SystemEnvironment,
+                RetireQuestionAfterDays = model.RetireQuestionAfterDays,
+                ExpireAnswerSlotsAfterMinutes = model.ExpireAnswerSlotsAfterMinutes,
+                EnableWebPurify = model.EnableWebPurify,
+                EmailErrors = model.EmailErrors,
+                EmailErrorsTo = model.EmailErrorsTo
+            };
         }
     }
 }

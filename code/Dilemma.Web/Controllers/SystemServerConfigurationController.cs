@@ -35,6 +35,11 @@ namespace Dilemma.Web.Controllers
             return RedirectToAction("index");
         }
 
+        public ActionResult TestErrorHandling()
+        {
+            throw new TestErrorHandlingException();
+        }
+
         //
         // POST: /SystemConfiguration/
         [HttpPost]
@@ -49,4 +54,6 @@ namespace Dilemma.Web.Controllers
             return View(systemServerConfiguration);
         }
     }
+
+    internal class TestErrorHandlingException : Exception { }
 }

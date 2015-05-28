@@ -20,6 +20,7 @@ namespace Dilemma.Business.Validators
             RuleFor(x => x.SystemEnvironment).NotNull().NotEqual(SystemEnvironment.Testing);
             RuleFor(x => x.RetireQuestionAfterDays).NotNull().GreaterThanOrEqualTo(7);
             RuleFor(x => x.ExpireAnswerSlotsAfterMinutes).NotNull().GreaterThanOrEqualTo(10);
+            RuleFor(x => x.EmailErrorsTo).EmailAddress();
         }
     }
 }

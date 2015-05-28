@@ -119,8 +119,9 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="RazorGenerator.Mvc">
-      <HintPath>..\packages\RazorGenerator.Mvc.2.2.3\lib\net40\RazorGenerator.Mvc.dll</HintPath>
+    <Reference Include="RazorGenerator.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorGenerator.Mvc.2.3.4\lib\net40\RazorGenerator.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -189,6 +190,7 @@
     <Compile Include="Controllers\AskController.cs" />
     <Compile Include="Controllers\DilemmaBaseController.cs" />
     <Compile Include="Controllers\DilemmasController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LastRunLogController.cs" />
     <Compile Include="Controllers\ModerationController.cs" />
@@ -834,6 +836,7 @@
     </Content>
     <Content Include="Views\PointConfiguration\Edit.cshtml" />
     <Content Include="Views\PointConfiguration\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -859,6 +862,10 @@
     <ProjectReference Include="..\Dilemma.Initialization\Dilemma.Initialization.csproj">
       <Project>{23333DCD-40C6-47BC-BCA2-D76F54C4E763}</Project>
       <Name>Dilemma.Initialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dilemma.Logging\Dilemma.Logging.csproj">
+      <Project>{98bb6425-434d-4d19-833a-73b4f7c7b81f}</Project>
+      <Name>Dilemma.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dilemma.Security\Dilemma.Security.csproj">
       <Project>{E64D25F6-1211-4A47-8ABF-08CF53BDDD71}</Project>

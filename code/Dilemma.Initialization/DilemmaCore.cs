@@ -22,6 +22,7 @@ namespace Dilemma.Initialization
             }
 
             locator.Initialize(
+                Logging.Registration.Register,
                 Business.Registration.Register,
                 Data.Registration.Register,
                 Security.Registration.Register,

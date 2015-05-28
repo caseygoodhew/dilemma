@@ -1,8 +1,10 @@
-﻿using Dilemma.Business.Conversion;
+﻿using System.Web.Configuration;
+using Dilemma.Business.Conversion;
 using Dilemma.Business.Services;
 using Dilemma.Business.Utils;
 using Dilemma.Business.Validators;
 using Dilemma.Business.ViewModels;
+using Dilemma.Business.WebPurify;
 using Dilemma.Data.Models;
 using Dilemma.Data.Models.Proxies;
 using Dilemma.Data.Models.Virtual;
@@ -80,6 +82,8 @@ namespace Dilemma.Business
             ConverterFactory.Register<QuestionHistoryProxy, QuestionModerationHistoryViewModel>(registrar, QuestionModerationHistoryViewModelConverter.FromQuestionHistoryProxy);
             ConverterFactory.Register<AnswerHistoryProxy, AnswerModerationHistoryViewModel>(registrar, AnswerModerationHistoryViewModelConverter.FromAnswerHistoryProxy);
             ConverterFactory.Register<FollowupHistoryProxy, FollowupModerationHistoryViewModel>(registrar, FollowupModerationHistoryViewModelConverter.FromFollowupHistoryProxy);
+
+            registrar.Register<IWebPurifyResponder>(() => new WebPurifyResponder(WebConfigurationManager.AppSettings["WebPurifyApiKey"]));
         }
     }
 }
