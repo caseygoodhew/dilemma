@@ -86,6 +86,7 @@
     <Compile Include="Validators\PointConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\ServerConfigurationViewModelValidator.cs" />
     <Compile Include="Validators\SystemServerConfigurationViewModelValidator.cs" />
+    <Compile Include="Validators\WebPurifyValidator.cs" />
     <Compile Include="ViewModels\AnswerModerationHistoryViewModel.cs" />
     <Compile Include="ViewModels\FollowupModerationHistoryViewModel.cs" />
     <Compile Include="ViewModels\FollowupViewModel.cs" />

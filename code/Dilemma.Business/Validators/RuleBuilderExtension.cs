@@ -32,5 +32,10 @@ namespace Dilemma.Business.Validators
         {
             return ruleBuilder.SetValidator(new TidiedTrimmedLengthValidator(min, max));
         }
+
+        public static IRuleBuilderOptions<T, string> WebPurify<T>(this IRuleBuilder<T, string> ruleBuilder)
+        {
+            return ruleBuilder.SetValidator(new WebPurifyValidator());
+        }
     }
 }

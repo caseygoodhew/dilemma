@@ -6,4 +6,9 @@ namespace Dilemma.Business.WebPurify
     {
         WebPurifyStatus Return(string text, out IEnumerable<string> result);
     }
+
+    public interface IWebPurifyable
+    {
+        void WebPurifyStatus(WebPurifyStatus status);
+    }
 }
