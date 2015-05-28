@@ -355,6 +355,24 @@ $(document).ready(function() {
   ; 
 
 
+
+
+    var _browser = navigator.userAgent.toLowerCase();
+    // Mobile chrome is a bit 'special' and forgets what position fixed means when an input gets focus so 'solution' is to 
+    if (
+            (
+                (_browser.match('crios'))  ||  (_browser.match('chrome'))
+            )
+            && (Modernizr.touch)
+        ) {
+        $(document).on('focus', 'textarea,input,select', function() {
+            $('body').addClass('fixfixed');
+        }).on('blur', 'textarea,input,select', function() {
+            $('body').removeClass('fixfixed');
+        });
+    }
+
+
 }); // $(document).ready(function()
 
 

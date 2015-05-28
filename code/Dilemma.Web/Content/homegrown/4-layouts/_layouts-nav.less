@@ -198,6 +198,7 @@
     right: 0;
     z-index: @z-header-footer;
     background: #222;
+    background: rgba(0,0,0,0.75);
     li {
       width: 33.333%;
       float: left;
@@ -226,4 +227,18 @@
       padding: 10px;
     }
   }  
+}
+
+
+// hide fixed elemnts when is a touch browser that is using chrome or chrome ios (crios)
+// fixfixed is added to body tag by javascript
+.fixfixed {
+    .js-sticky.stuck {
+        display:none !important;
+    }
+    @media only screen and (max-width: 780px) {
+        .page-hd .navbar-nav {
+             display:none !important;
+        }
+    }
 }
