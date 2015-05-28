@@ -57,8 +57,6 @@ namespace Dilemma.Web
             //routeData.Values.Add("Description", ex.Message);
             IController controller = new ErrorController();
             controller.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
-
-            //Request("/Error");
         }
     }
 }
