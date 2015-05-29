@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
+using Dilemma.Business.WebPurify;
 using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Security;
@@ -29,7 +30,9 @@ namespace Dilemma.Business.Conversion
             return new Followup
                        {
                            Text = viewModel.Text.Trim(),
-                           CreatedDateTime = viewModel.CreatedDateTime
+                           CreatedDateTime = viewModel.CreatedDateTime,
+                           WebPurifyAttempted = viewModel.WebPurifyStatus != null,
+                           PassedWebPurify = viewModel.WebPurifyStatus == WebPurifyStatus.Ok
                        };
         }
 

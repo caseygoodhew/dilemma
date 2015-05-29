@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dilemma.Business.WebPurify;
 
 namespace Dilemma.Business.ViewModels
 {
     /// <summary>
     /// The answer view model.
     /// </summary>
-    public class AnswerViewModel
+    public class AnswerViewModel : IWebPurifyable
     {
         /// <summary>
         /// Gets or sets the answer id.
@@ -59,5 +60,12 @@ namespace Dilemma.Business.ViewModels
         public bool IsPopularVote { get; set; }
 
         public bool IsReservedSlot { get; set; }
+
+        public void SetWebPurifyStatus(WebPurifyStatus status)
+        {
+            WebPurifyStatus = status;
+        }
+
+        public WebPurifyStatus? WebPurifyStatus { get; set; }
     }
 }

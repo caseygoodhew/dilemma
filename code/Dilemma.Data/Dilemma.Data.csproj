@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201505270524162_Migration3.Designer.cs">
       <DependentUpon>201505270524162_Migration3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505290527381_Migration4.cs" />
+    <Compile Include="Migrations\201505290527381_Migration4.Designer.cs">
+      <DependentUpon>201505290527381_Migration4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\EmailLogLevel.cs" />
     <Compile Include="Models\Followup.cs" />
@@ -163,9 +167,11 @@
     <Compile Include="QuestionMessageContext.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="Repositories\AdministrationRepository.cs" />
+    <Compile Include="Repositories\IInternalModerationRouter.cs" />
     <Compile Include="Repositories\IInternalNotificationDistributor.cs" />
     <Compile Include="Repositories\IInternalPointDistributor.cs" />
     <Compile Include="Repositories\IInternalUserRepository.cs" />
+    <Compile Include="Repositories\InternalModerationRouter.cs" />
     <Compile Include="Repositories\PointDistributor.cs" />
     <Compile Include="Repositories\IInternalPointsRepository.cs" />
     <Compile Include="Repositories\DevelopmentRepository.cs" />
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505270524162_Migration3.resx">
       <DependentUpon>201505270524162_Migration3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505290527381_Migration4.resx">
+      <DependentUpon>201505290527381_Migration4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

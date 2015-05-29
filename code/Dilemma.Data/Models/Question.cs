@@ -70,5 +70,9 @@ namespace Dilemma.Data.Models
         /// Gets or sets the question state.
         /// </summary>
         public QuestionState QuestionState { get; set; }
+
+        public bool WebPurifyAttempted { get; set; }
+        
+        public bool PassedWebPurify { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Dilemma.Business.ViewModels;
+using Dilemma.Business.WebPurify;
 using Dilemma.Common;
 using Dilemma.Data.Models;
 using Dilemma.Security;
@@ -32,7 +33,9 @@ namespace Dilemma.Business.Conversion
                            CreatedDateTime = viewModel.CreatedDateTime.GuardedValue("CreatedDateTime"),
                            ClosesDateTime = viewModel.ClosesDateTime.GuardedValue("ClosesDateTime"),
                            Category = new Category { CategoryId = viewModel.CategoryId.GuardedValue("CategoryId") },
-                           MaxAnswers = viewModel.MaxAnswers.GuardedValue("MaxAnswers")
+                           MaxAnswers = viewModel.MaxAnswers.GuardedValue("MaxAnswers"),
+                           WebPurifyAttempted = viewModel.WebPurifyStatus != null,
+                           PassedWebPurify = viewModel.WebPurifyStatus == WebPurifyStatus.Ok
                        };
         }
 

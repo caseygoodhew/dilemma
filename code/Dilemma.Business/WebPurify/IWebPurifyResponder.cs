@@ -9,6 +9,6 @@ namespace Dilemma.Business.WebPurify
 
     public interface IWebPurifyable
     {
-        void WebPurifyStatus(WebPurifyStatus status);
+        void SetWebPurifyStatus(WebPurifyStatus status);
     }
 }

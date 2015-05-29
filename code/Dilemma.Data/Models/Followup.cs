@@ -32,5 +32,9 @@ namespace Dilemma.Data.Models
         /// Gets or sets the user who created the followup.
         /// </summary>
         public User User { get; set; }
+
+        public bool WebPurifyAttempted { get; set; }
+        
+        public bool PassedWebPurify { get; set; }
     }
 }

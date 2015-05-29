@@ -147,6 +147,10 @@
       <Project>{81E63148-C585-4AD5-88BC-6AB47B6B0B89}</Project>
       <Name>Dilemma.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dilemma.Logging\Dilemma.Logging.csproj">
+      <Project>{98bb6425-434d-4d19-833a-73b4f7c7b81f}</Project>
+      <Name>Dilemma.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Dilemma.Security\Dilemma.Security.csproj">
       <Project>{E64D25F6-1211-4A47-8ABF-08CF53BDDD71}</Project>
       <Name>Dilemma.Security</Name>

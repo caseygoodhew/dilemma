@@ -7,7 +7,7 @@ using Dilemma.Common;
 using Dilemma.Data.EntityFramework;
 using Dilemma.Data.Models;
 using Dilemma.Data.Models.Proxies;
-
+using Dilemma.Logging;
 using Disposable.Common.Conversion;
 using Disposable.Common.ServiceLocator;
 using Disposable.Common.Services;
@@ -21,6 +21,8 @@ namespace Dilemma.Data.Repositories
     internal class ManualModerationRepository : IInternalManualModerationRepository
     {
         private static readonly Lazy<ITimeSource> TimeSource = Locator.Lazy<ITimeSource>();
+
+        private static readonly Lazy<ILogger> Logger = Locator.Lazy<ILogger>();
 
         private static readonly Lazy<IMessagePipe<ModerationState>> ModerationMessagePipe = Locator.Lazy<IMessagePipe<ModerationState>>();
         
@@ -341,6 +343,8 @@ namespace Dilemma.Data.Repositories
                 userId,
                 moderationId,
                 string.Format("REPORTED FOR {0}: {1}", reportReason.ToString().ToUpper(), itemText));
+
+            Logger.Value.Info("Moderable Reported");
         }
 
         private static void OnModerableCreated(DilemmaContext context, Moderation moderation, string message)
@@ -350,6 +354,8 @@ namespace Dilemma.Data.Repositories
             context.SaveChangesVerbose();
 
             AddModerationEntry(context, moderation.ModerationId, ModerationState.Queued, moderation.ForUser.UserId, message);
+
+            Logger.Value.Info("Moderable Created");
         }
 
         private static T GetNextForUser<T>(int? userId) where T : class

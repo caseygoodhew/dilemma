@@ -49,5 +49,9 @@ namespace Dilemma.Data.Models
         /// Gets or sets a list of users who have voted for this answer.
         /// </summary>
         public IList<int> UserVotes { get; set; }
+
+        public bool WebPurifyAttempted { get; set; }
+        
+        public bool PassedWebPurify { get; set; }
     }
 }

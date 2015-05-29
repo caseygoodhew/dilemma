@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using Dilemma.Business.WebPurify;
 using Dilemma.Common;
 
 namespace Dilemma.Business.ViewModels
@@ -9,7 +9,7 @@ namespace Dilemma.Business.ViewModels
     /// <summary>
     /// The question view model.
     /// </summary>
-    public class QuestionViewModel
+    public class QuestionViewModel : IWebPurifyable
     {
         /// <summary>
         /// Gets or sets the question id.
@@ -95,5 +95,12 @@ namespace Dilemma.Business.ViewModels
         public bool IHaveAnswsered { get; set; }
 
         public bool IHaveVoted { get; set; }
+
+        public void SetWebPurifyStatus(WebPurifyStatus status)
+        {
+            WebPurifyStatus = status;
+        }
+
+        public WebPurifyStatus? WebPurifyStatus { get; set; }
     }
 }

@@ -37,6 +37,7 @@ namespace Dilemma.Data
             registrar.Register<IInternalManualModerationRepository>(() => new ManualModerationRepository());
             registrar.Register<IInternalPointsRepository>(() => new PointsRepository());
             registrar.Register<IInternalPointDistributor>(() => new PointDistributor());
+            registrar.Register<IInternalModerationRouter>(() => new InternalModerationRouter());
 
             registrar.CreatePipe<QuestionDataAction>(MessengerType.Stepping, InitiateMessagePipe);
             registrar.CreatePipe<AnswerDataAction>(MessengerType.Stepping, InitiateMessagePipe);
@@ -56,6 +57,7 @@ namespace Dilemma.Data
 
         private static void InitiateMessagePipe(IMessagePipe<QuestionDataAction> messagePipe)
         {
+            messagePipe.Locator<QuestionDataAction, IInternalModerationRouter>(QuestionDataAction.Created, x => x.OnQuestionCreated);
             messagePipe.Locator<QuestionDataAction, IInternalManualModerationRepository>(QuestionDataAction.Created, x => x.OnQuestionCreated);
             
             messagePipe.Locator<QuestionDataAction, IInternalPointDistributor>(QuestionDataAction.StateChanged, x => x.OnQuestionStateChange);
@@ -66,6 +68,7 @@ namespace Dilemma.Data
 
         private static void InitiateMessagePipe(IMessagePipe<AnswerDataAction> messagePipe)
         {
+            messagePipe.Locator<AnswerDataAction, IInternalModerationRouter>(AnswerDataAction.Created, x => x.OnAnswerCreated);
             messagePipe.Locator<AnswerDataAction, IInternalManualModerationRepository>(AnswerDataAction.Created, x => x.OnAnswerCreated);
 
             messagePipe.Locator<AnswerDataAction, IInternalPointDistributor>(AnswerDataAction.StateChanged, x => x.OnAnswerStateChange);
@@ -79,6 +82,7 @@ namespace Dilemma.Data
 
         private static void InitiateMessagePipe(IMessagePipe<FollowupDataAction> messagePipe)
         {
+            messagePipe.Locator<FollowupDataAction, IInternalModerationRouter>(FollowupDataAction.Created, x => x.OnFollowupCreated);
             messagePipe.Locator<FollowupDataAction, IInternalManualModerationRepository>(FollowupDataAction.Created, x => x.OnFollowupCreated);
 
             messagePipe.Locator<FollowupDataAction, IInternalNotificationDistributor>(FollowupDataAction.StateChanged, x => x.OnFollowupStateChange);

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dilemma.Business.WebPurify;
 
 namespace Dilemma.Business.ViewModels
 {
     /// <summary>
     /// The Followup view model.
     /// </summary>
-    public class FollowupViewModel
+    public class FollowupViewModel : IWebPurifyable
     {
         /// <summary>
         /// Gets or sets the Followup id.
@@ -42,5 +43,12 @@ namespace Dilemma.Business.ViewModels
         public bool IsRejected { get; set; }
 
         public bool IHaveFlagged { get; set; }
+
+        public void SetWebPurifyStatus(WebPurifyStatus status)
+        {
+            WebPurifyStatus = status;
+        }
+
+        public WebPurifyStatus? WebPurifyStatus { get; set; }
     }
 }
