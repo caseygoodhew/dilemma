@@ -13298,6 +13298,30 @@ $(document).ready(function() {
     $('html').addClass('lte-ie9 ie-' + ie);
   }
 
+  var _browser = navigator.userAgent.toLowerCase();
+  console.log(_browser);
+    // Mobile chrome is a bit 'special' and forgets what position fixed means when an input gets focus
+    // so 'solution' is to 
+  if (
+      (  ( _browser.match('crios')) || ( _browser.match('/chrom(e|ium)/')  ) 
+     // && (Modernizr.touch)
+      
+  ) {
+      $(document).on('focus', 'textarea,input,select', function() {
+          $('body').addClass('fixfixed');
+      }).on('blur', 'textarea,input,select', function() {
+          $('body').removeClass('fixfixed');
+      });
+  }
+
+
+
+
+
+
+
+
+
 
   $('.js-activate-answer-form').on('click', function() {
     $(this).addClass('is-active');

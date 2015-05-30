@@ -207,3 +207,46 @@
   }
 }
 
+
+
+
+
+.Notification--mini {
+    display:block;
+    .Notification--mini-number {
+        color: @color-text;
+        font-size: 30px;
+        line-height: 1;
+    }
+
+    .Notification--mini-type {
+        color: @color-text--light;
+        font-size: 14px;
+    }
+
+    &:hover {
+        background: @color-bg-white-hover;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+        text-decoration: none;
+        .Notification--mini-number {
+            color: @color-accent;
+        }
+    }
+}
+.Notification--ask .Notification-score {
+    background: @color-ask;
+    [data-icon] {
+        color: #222;
+    }
+}
+.Notification--advise .Notification-score {
+    background:  @color-answer;
+    [data-icon] {
+        color: #222;
+    }
+}
+@media (max-width: 630px), (min-width: 780px) and (max-width: 989px) {
+    .Notification--mini-type {
+        display: none;
+    }
+}
