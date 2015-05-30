@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using System.Web;
 using Dilemma.Business.ViewModels;
 using Dilemma.Business.WebPurify;
 using Dilemma.Common;
@@ -29,7 +29,7 @@ namespace Dilemma.Business.Conversion
         {
             return new Question
                        {
-                           Text = viewModel.Text.Trim(),
+                           Text = HttpUtility.HtmlEncode(viewModel.Text.Trim()),
                            CreatedDateTime = viewModel.CreatedDateTime.GuardedValue("CreatedDateTime"),
                            ClosesDateTime = viewModel.ClosesDateTime.GuardedValue("ClosesDateTime"),
                            Category = new Category { CategoryId = viewModel.CategoryId.GuardedValue("CategoryId") },

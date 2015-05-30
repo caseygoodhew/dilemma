@@ -8,7 +8,7 @@
     <div class="Notification-summary">
         <div class="Card-label--small">@Model.CreatedDateTime.ToRelativeText()</div>
         <div class="Notification-summary-text">
-            @Model.Text          
+            @HttpUtility.HtmlDecode(Model.Text)          
         </div>
     </div><!-- Notification-summary -->
 </div>

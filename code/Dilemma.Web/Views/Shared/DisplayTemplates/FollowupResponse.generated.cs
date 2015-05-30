@@ -82,7 +82,7 @@ WriteLiteral(">");
 
             
             #line 10 "..\..\Views\Shared\DisplayTemplates\FollowupResponse.cshtml"
-                                       Write(Model.Text);
+                                       Write(HttpUtility.HtmlDecode(Model.Text));
 
             
             #line default

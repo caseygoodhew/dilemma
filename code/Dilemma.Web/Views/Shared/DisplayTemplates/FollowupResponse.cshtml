@@ -7,7 +7,7 @@
     </div>
     
     <div class="line">
-        <span style="white-space: pre-wrap">@Model.Text</span>
+        <span style="white-space: pre-wrap">@HttpUtility.HtmlDecode(Model.Text)</span>
     </div>
     
     @if (!Model.IsMyFollowup)

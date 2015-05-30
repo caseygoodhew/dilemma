@@ -38,6 +38,7 @@ namespace Dilemma.Web.Controllers
         //
         // POST: /Ask/Create
         [HttpPost]
+        [ValidateInput(false)]
         [Route("ask")]
         public ActionResult Index(AskViewModel model)
         {
@@ -45,6 +46,7 @@ namespace Dilemma.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         [Route("ask/{category:alpha}")]
         public ActionResult Index(string category, AskViewModel model)
         {

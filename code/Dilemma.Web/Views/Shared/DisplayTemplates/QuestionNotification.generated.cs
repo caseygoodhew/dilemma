@@ -104,7 +104,7 @@ WriteLiteral("            ");
 
             
             #line 11 "..\..\Views\Shared\DisplayTemplates\QuestionNotification.cshtml"
-       Write(Model.Text);
+       Write(HttpUtility.HtmlDecode(Model.Text));
 
             
             #line default

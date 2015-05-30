@@ -285,7 +285,8 @@ namespace Dilemma.Data.Repositories
                                      CreatedDateTime = TimeSource.Value.Now,
                                      LastTouchedDateTime = TimeSource.Value.Now,
                                      Question = question,
-                                     User = new User { UserId = userId }
+                                     User = new User { UserId = userId },
+                                     AnswerState = AnswerState.ReservedSlot
                                  };
                 
                 context.EnsureAttached(question, x => x.QuestionId);
@@ -366,6 +367,8 @@ namespace Dilemma.Data.Repositories
                 existingAnswer.LastTouchedDateTime = TimeSource.Value.Now;
                 existingAnswer.AnswerState = AnswerState.Approved;
                 existingAnswer.Text = answer.Text;
+                existingAnswer.WebPurifyAttempted = answer.WebPurifyAttempted;
+                existingAnswer.PassedWebPurify = answer.PassedWebPurify;
 
                 context.Answers.Update(context, existingAnswer);
                 context.SaveChangesVerbose();

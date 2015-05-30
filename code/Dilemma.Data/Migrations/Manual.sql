@@ -89,11 +89,11 @@ AS
 	SET @DateTimeNow = dbo.TimeSourceNow(@DateTimeNow)
 	
 	UPDATE Answer
-	   SET AnswerState = 4
+	   SET AnswerState = 500 -- Expired
 	 WHERE AnswerId IN (	
 		SELECT AnswerId
 		  FROM Answer a, SystemConfiguration sc
-		 WHERE a.AnswerState = 0 
+		 WHERE a.AnswerState = 100 -- ReservedSlot
 		   AND DATEADD("mi", sc.ExpireAnswerSlotsAfterMinutes, a.LastTouchedDateTime) < @DateTimeNow)
 
 	UPDATE LastRunLog SET ExpireAnswerSlots = @DateTimeNow;
@@ -125,7 +125,7 @@ AS
      WHERE QuestionId IN (
         SELECT questionId
 		  FROM Question
-		 WHERE QuestionState = 1 -- Approved Question
+		 WHERE QuestionState = 200 -- Approved Question
 		   AND ClosedDateTime IS NULL
 		   AND ClosesDateTime < @DateTimeNow
 		 UNION 
@@ -133,11 +133,11 @@ AS
 		  FROM Question q, (
 			SELECT Question_QuestionId QuestionId, COUNT(*) AnswerCount
 			  FROM Answer
-			 WHERE AnswerState = 2 -- Approved Answer
+			 WHERE AnswerState = 300 -- Approved Answer
 			 GROUP BY Question_QuestionId
 			) a
 		 WHERE q.QuestionId = a.QuestionId
-		   AND q.QuestionState = 1 -- Approved Question
+		   AND q.QuestionState = 200 -- Approved Question
 		   AND q.ClosedDateTime IS NULL
 		   AND (q.MaxAnswers = a.AnswerCount)
 	)
@@ -172,14 +172,14 @@ AS
 	  LEFT JOIN (
 			SELECT User_UserId UserId, COUNT(*) QuestionCount
 			  FROM Question
-			 WHERE QuestionState = 1 -- approved
+			 WHERE QuestionState = 200 -- approved
 			   AND User_UserId = @userId
 			 GROUP BY User_UserId) q
 				ON u.UserId = q.UserId
 	  LEFT JOIN (
 			SELECT User_UserId UserId, COUNT(*) AnswerCount
 			  FROM Answer
-			 WHERE AnswerState = 2 -- approved
+			 WHERE AnswerState = 300 -- approved
 			   AND User_UserId = @userId
 			 GROUP BY User_UserId) a
 				ON u.UserId = a.UserId
@@ -196,7 +196,7 @@ AS
 			   AND a.Question_QuestionId = v.Question_QuestionId
 			   AND a.AnswerId = v.Answer_AnswerId
 			   AND q.User_UserId = v.User_UserId
-			   AND a.AnswerState = 2 -- approved
+			   AND a.AnswerState = 300 -- approved
 			   AND a.User_UserId = @userId
 			 GROUP BY a.User_UserId) s
 				ON u.UserId = s.UserId
@@ -250,7 +250,7 @@ AS
 		 WHERE qr.QuestionId = a.Question_QuestionId
 		   AND a.Question_QuestionId = v.Question_QuestionId
 		   AND a.AnswerId = v.Answer_AnswerId
-		   AND a.AnswerState = 2 -- approved
+		   AND a.AnswerState = 300 -- approved
 		 GROUP BY qr.QuestionId, a.AnswerId
 		 ) r
 	 WHERE r.VoteCount >= 10 -- you need at least 10 votes to be popular
@@ -296,7 +296,7 @@ AS
 			SELECT q.User_UserId UserId, COUNT(*) QuestionCount
 			  FROM QuestionRetirement qr, Question q
 			 WHERE qr.QuestionId = q.QuestionId
-			   AND q.QuestionState = 1 -- approved
+			   AND q.QuestionState = 200 -- approved
 			 GROUP BY q.User_UserId) r
 			 ON u.UserId = r.UserId
 	
@@ -307,7 +307,7 @@ AS
 			SELECT a.User_UserId UserId, COUNT(*) AnswerCount
 			  FROM QuestionRetirement qr, Answer a
 			 WHERE qr.QuestionId = a.Question_QuestionId
-			   AND a.AnswerState = 2 -- approved
+			   AND a.AnswerState = 300 -- approved
 			 GROUP BY a.User_UserId) r
 			 ON u.UserId = r.UserId
 
@@ -322,7 +322,7 @@ AS
 			   AND a.Question_QuestionId = v.Question_QuestionId
 			   AND a.AnswerId = v.Answer_AnswerId
 			   AND q.User_UserId = v.User_UserId
-			   AND a.AnswerState = 2 -- approved
+			   AND a.AnswerState = 300 -- approved
 			 GROUP BY a.User_UserId) r
 	         ON u.UserId = r.UserId
 
@@ -334,7 +334,7 @@ AS
 			  FROM VoteCountRetirement vc, Answer a
 			 WHERE vc.QuestionId = a.Question_QuestionId
 			   AND vc.AnswerId = a.AnswerId
-			   AND a.AnswerState = 2 -- approved
+			   AND a.AnswerState = 300 -- approved
 			 GROUP BY a.User_UserId) r
 	         ON u.UserId = r.UserId
 	
@@ -477,14 +477,14 @@ CREATE TABLE [dbo].[SystemLogging](
     [LogApplication] [VARCHAR](200) NULL, 
     [LogDate] [VARCHAR](100) NULL, 
     [LogLevel] [VARCHAR](100) NULL, 
-    [LogLogger] [VARCHAR](8000) NULL, 
-    [LogMessage] [VARCHAR](8000) NULL, 
-    [LogMachineName] [VARCHAR](8000) NULL, 
-    [LogUserName] [VARCHAR](8000) NULL, 
-    [LogCallSite] [VARCHAR](8000) NULL, 
+    [LogLogger] [VARCHAR](MAX) NULL, 
+    [LogMessage] [VARCHAR](MAX) NULL, 
+    [LogMachineName] [VARCHAR](MAX) NULL, 
+    [LogUserName] [VARCHAR](MAX) NULL, 
+    [LogCallSite] [VARCHAR](MAX) NULL, 
     [LogThread] [VARCHAR](100) NULL, 
-    [LogException] [VARCHAR](8000) NULL, 
-    [LogStacktrace] [VARCHAR](8000) NULL, 
+    [LogException] [VARCHAR](MAX) NULL, 
+    [LogStacktrace] [VARCHAR](MAX) NULL, 
 CONSTRAINT [PKSystemLogging] PRIMARY KEY CLUSTERED 
 ( 
     [SYSTEMLOGGINGGUID] ASC 

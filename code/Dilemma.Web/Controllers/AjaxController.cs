@@ -44,6 +44,7 @@ namespace Dilemma.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         [Route("Advise/{questionId:int:min(1)}")]
         public ActionResult Advise(int questionId, AnswerViewModel viewModel)
         {
@@ -77,6 +78,7 @@ namespace Dilemma.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         [Route("Followup/{questionId:int:min(1)}")]
         public ActionResult Followup(int questionId, FollowupViewModel viewModel)
         {

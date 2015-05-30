@@ -223,7 +223,7 @@ WriteLiteral(">");
 
             
             #line 53 "..\..\Views\Moderation\AnswerHistory.cshtml"
-                                                        Write(Model.History.Answer.Text);
+                                                        Write(HttpUtility.HtmlDecode(Model.History.Answer.Text));
 
             
             #line default

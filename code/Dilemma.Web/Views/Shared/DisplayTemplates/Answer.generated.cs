@@ -257,7 +257,7 @@ WriteLiteral(">");
 
             
             #line 86 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-                                            Write(Model.Text);
+                                            Write(HttpUtility.HtmlDecode(Model.Text));
 
             
             #line default
@@ -349,29 +349,29 @@ WriteLiteral(">\r\n                <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3421), Tuple.Create("\"", 3507)
-, Tuple.Create(Tuple.Create("", 3429), Tuple.Create("Button--vote", 3429), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 3445), Tuple.Create("\"", 3551)
+, Tuple.Create(Tuple.Create("", 3453), Tuple.Create("Button--vote", 3453), true)
             
             #line 105 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-, Tuple.Create(Tuple.Create(" ", 3441), Tuple.Create<System.Object, System.Int32>(Model.HasMyVote ? string.Empty : "js-voting-button"
+, Tuple.Create(Tuple.Create(" ", 3465), Tuple.Create<System.Object, System.Int32>(Model.HasMyVote || Model.IsMyAnswer ? string.Empty : "js-voting-button"
             
             #line default
             #line hidden
-, 3442), false)
+, 3466), false)
             
             #line 105 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-                                , Tuple.Create(Tuple.Create(" ", 3496), Tuple.Create<System.Object, System.Int32>(voteClass
+                                                    , Tuple.Create(Tuple.Create(" ", 3540), Tuple.Create<System.Object, System.Int32>(voteClass
             
             #line default
             #line hidden
-, 3497), false)
+, 3541), false)
 );
 
 WriteLiteral(" ");
 
             
             #line 105 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-                                                                                                                         Write(canVote || Model.HasMyVote ? String.Empty : disabled);
+                                                                                                                                             Write(!Model.IsMyAnswer && (canVote || Model.HasMyVote) ? String.Empty : disabled);
 
             
             #line default
@@ -380,7 +380,7 @@ WriteLiteral(" data-answer-id=\"");
 
             
             #line 105 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-                                                                                                                                                                                                Write(Model.AnswerId);
+                                                                                                                                                                                                                                           Write(Model.AnswerId);
 
             
             #line default
@@ -506,16 +506,16 @@ WriteLiteral(">\r\n                <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 4901), Tuple.Create("\"", 4950)
-, Tuple.Create(Tuple.Create("", 4909), Tuple.Create("Button--flag", 4909), true)
-, Tuple.Create(Tuple.Create(" ", 4921), Tuple.Create("js-flag-button", 4922), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 4968), Tuple.Create("\"", 5017)
+, Tuple.Create(Tuple.Create("", 4976), Tuple.Create("Button--flag", 4976), true)
+, Tuple.Create(Tuple.Create(" ", 4988), Tuple.Create("js-flag-button", 4989), true)
             
             #line 133 "..\..\Views\Shared\DisplayTemplates\Answer.cshtml"
-, Tuple.Create(Tuple.Create(" ", 4936), Tuple.Create<System.Object, System.Int32>(flaggedClass
+, Tuple.Create(Tuple.Create(" ", 5003), Tuple.Create<System.Object, System.Int32>(flaggedClass
             
             #line default
             #line hidden
-, 4937), false)
+, 5004), false)
 );
 
 WriteLiteral(" title=\"Report an issue with this answer\"");

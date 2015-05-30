@@ -62,7 +62,7 @@ WriteLiteral(">");
 
             
             #line 7 "..\..\Views\Shared\DisplayTemplates\QuestionCard.cshtml"
-                                        Write(Model.Text);
+                                        Write(HttpUtility.HtmlDecode(Model.Text));
 
             
             #line default

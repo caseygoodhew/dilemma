@@ -83,7 +83,7 @@
     
         <div class="Dilemma-question Card-section">
             <div class="Answer-text">
-                <p style="white-space: pre-wrap">@Model.Text</p>
+                <p style="white-space: pre-wrap">@HttpUtility.HtmlDecode(Model.Text)</p>
             </div><!-- Dilemma-text -->
             @if (!Model.IsApproved && Model.IsMyAnswer)
             {
@@ -102,7 +102,7 @@
 
         <div class="Dilemma-actions Card-section line">
             <div class="u-2of5">
-                <button type="button" class="Button--vote @(Model.HasMyVote ? string.Empty : "js-voting-button") @voteClass" @(canVote || Model.HasMyVote ? String.Empty : disabled) data-answer-id="@Model.AnswerId">
+                <button type="button" class="Button--vote @(Model.HasMyVote || Model.IsMyAnswer ? string.Empty : "js-voting-button") @voteClass" @(!Model.IsMyAnswer && (canVote || Model.HasMyVote) ? String.Empty : disabled) data-answer-id="@Model.AnswerId">
                     @if (isMyQuestion)
                     {
                         <span class="Button-label is-inactive">

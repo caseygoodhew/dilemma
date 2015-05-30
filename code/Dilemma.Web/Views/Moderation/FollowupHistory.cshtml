@@ -50,7 +50,7 @@
                     <div class="Dilemma-question">
 
                         <div class="Dilemma-text ">
-                            <p style="white-space: pre-wrap">@Model.History.Followup.Text</p>
+                            <p style="white-space: pre-wrap">@HttpUtility.HtmlDecode(Model.History.Followup.Text)</p>
                         </div><!-- Dilemma-text -->
 
                     </div> 

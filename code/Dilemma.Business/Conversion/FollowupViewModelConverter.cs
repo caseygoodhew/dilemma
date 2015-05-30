@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Web;
 using Dilemma.Business.Services;
 using Dilemma.Business.ViewModels;
 using Dilemma.Business.WebPurify;
@@ -29,7 +29,7 @@ namespace Dilemma.Business.Conversion
         {
             return new Followup
                        {
-                           Text = viewModel.Text.Trim(),
+                           Text = HttpUtility.HtmlEncode(viewModel.Text.Trim()),
                            CreatedDateTime = viewModel.CreatedDateTime,
                            WebPurifyAttempted = viewModel.WebPurifyStatus != null,
                            PassedWebPurify = viewModel.WebPurifyStatus == WebPurifyStatus.Ok
