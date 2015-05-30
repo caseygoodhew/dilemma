@@ -230,7 +230,7 @@ WriteLiteral(" class=\"Media-text\"");
 
 WriteLiteral(@">
                     <h2>Anonymity</h2>
-                    <p>Questions and Answers disapear in 15 days</p>  
+                    <p>Questions and Answers disappear in 15 days</p>  
                     <p>Your account is completely anonymous. None of your details are stored on our servers. Your account is stored in an encrypted cookie on your phone or PC, which you can easily remove by deleting your cookies.</p>
                 </div>
             </div><!-- Media Media-to-stack -->

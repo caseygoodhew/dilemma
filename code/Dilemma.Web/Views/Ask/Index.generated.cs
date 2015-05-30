@@ -135,7 +135,7 @@ WriteLiteral("\r\n                        <p");
 
 WriteLiteral(" class=\"info\"");
 
-WriteLiteral(">Ask your question in complete anonymity. All questions disapear within a couple " +
+WriteLiteral(">Ask your question in complete anonymity. All questions disappear within a couple " +
 "of weeks.</p>\r\n");
 
 WriteLiteral("                        ");
