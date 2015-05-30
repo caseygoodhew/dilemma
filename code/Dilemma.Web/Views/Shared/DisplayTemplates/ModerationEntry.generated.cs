@@ -160,7 +160,7 @@ WriteLiteral(">");
 
             
             #line 38 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
-                                                        Write(Model.Message);
+                                                        Write(HttpUtility.HtmlDecode(Model.Message));
 
             
             #line default
@@ -198,7 +198,7 @@ WriteLiteral(">");
 
             
             #line 49 "..\..\Views\Shared\DisplayTemplates\ModerationEntry.cshtml"
-                                                        Write(Model.Message);
+                                                        Write(HttpUtility.HtmlDecode(Model.Message));
 
             
             #line default

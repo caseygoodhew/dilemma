@@ -35,7 +35,7 @@
                     <div class="Moderation-entry-text ">
                         <div style="font-weight: bold; margin-bottom: 10px">Rejected by Moderator</div>
                         <div style="font-style: italic; margin: 0 50px; color: #888">
-                            <p style="white-space: pre-wrap">@Model.Message</p>
+                            <p style="white-space: pre-wrap">@HttpUtility.HtmlDecode(Model.Message)</p>
                         </div>
                     </div>
             
@@ -46,7 +46,7 @@
                     <div class="Moderation-entry-text ">
                         <div style="font-weight: bold; margin-bottom: 10px">Reported by another User</div>
                         <div style="font-style: italic; margin: 0 50px; color: #888">
-                            <p style="white-space: pre-wrap">@Model.Message</p>
+                            <p style="white-space: pre-wrap">@HttpUtility.HtmlDecode(Model.Message)</p>
                         </div>
                     </div>
             

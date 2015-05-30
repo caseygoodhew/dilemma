@@ -276,15 +276,29 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var moderation = context.Moderations.AsNoTracking().Where(x => x.Question.QuestionId == questionId).Select(x => new { x.ModerationId, x.Question.Text }).SingleOrDefault();
+                var moderationStub = context.Moderations.AsNoTracking().Where(x => x.Question.QuestionId == questionId).Select(x => new { x.ModerationId, x.Question.Text }).SingleOrDefault();
 
-                if (moderation != null)
+                if (moderationStub != null)
                 {
-                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, moderation.Text);
+                    ReportToExisting(context, userId, reportReason, moderationStub.ModerationId, moderationStub.Text);
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    var question = context.Questions.Include(x => x.User).Single(x => x.QuestionId == questionId);
+
+                    var moderation = new Moderation
+                    {
+                        ModerationFor = ModerationFor.Question,
+                        Question = question,
+                        ForUser = question.User
+                    };
+
+                    OnModerableCreated(
+                        context,
+                        moderation,
+                        question.Text);
+
+                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, question.Text);
                 }
             }
         }
@@ -293,15 +307,29 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var moderation = context.Moderations.AsNoTracking().Where(x => x.Answer.AnswerId == answerId).Select(x => new { x.ModerationId, x.Answer.Text }).SingleOrDefault();
+                var moderationStub = context.Moderations.AsNoTracking().Where(x => x.Answer.AnswerId == answerId).Select(x => new { x.ModerationId, x.Answer.Text }).SingleOrDefault();
 
-                if (moderation != null)
+                if (moderationStub != null)
                 {
-                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, moderation.Text);
+                    ReportToExisting(context, userId, reportReason, moderationStub.ModerationId, moderationStub.Text);
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    var answer = context.Answers.Include(x => x.User).Single(x => x.AnswerId == answerId);
+
+                    var moderation = new Moderation
+                    {
+                        ModerationFor = ModerationFor.Answer,
+                        Answer = answer,
+                        ForUser = answer.User
+                    };
+                    
+                    OnModerableCreated(
+                        context,
+                        moderation,
+                        answer.Text);
+
+                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, answer.Text);
                 }
             }
         }
@@ -310,15 +338,29 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                var moderation = context.Moderations.AsNoTracking().Where(x => x.Followup.FollowupId == followupId).Select(x => new { x.ModerationId, x.Followup.Text }).SingleOrDefault();
+                var moderationStub = context.Moderations.AsNoTracking().Where(x => x.Followup.FollowupId == followupId).Select(x => new { x.ModerationId, x.Followup.Text }).SingleOrDefault();
 
-                if (moderation != null)
+                if (moderationStub != null)
                 {
-                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, moderation.Text);
+                    ReportToExisting(context, userId, reportReason, moderationStub.ModerationId, moderationStub.Text);
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    var followup = context.Followups.Include(x => x.User).Single(x => x.FollowupId == followupId);
+
+                    var moderation = new Moderation
+                    {
+                        ModerationFor = ModerationFor.Followup,
+                        Followup = followup,
+                        ForUser = followup.User
+                    };
+
+                    OnModerableCreated(
+                        context,
+                        moderation,
+                        followup.Text);
+
+                    ReportToExisting(context, userId, reportReason, moderation.ModerationId, followup.Text);
                 }
             }
         }
