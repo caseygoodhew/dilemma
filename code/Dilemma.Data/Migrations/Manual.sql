@@ -15,6 +15,13 @@ GO
 
 
 
+INSERT INTO [dbo].[SystemConfiguration] ([MaxAnswers], [QuestionLifetime], [SystemEnvironment], 
+			[RetireQuestionAfterDays], [ExpireAnswerSlotsAfterMinutes], 
+			[EnableWebPurify], [EmailErrors], [EmailErrorsTo])
+     VALUES
+           (10, 2, 300, 14, 15, 1, 0, null)
+GO
+
 
 
 
