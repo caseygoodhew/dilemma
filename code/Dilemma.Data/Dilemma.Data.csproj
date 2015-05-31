@@ -202,8 +202,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Migrations\DbMail.sql" />
     <Content Include="Migrations\EnumToLookup.sql" />
     <Content Include="Migrations\HowToMigrate.txt" />
+    <Content Include="Migrations\Logging.sql" />
     <Content Include="Migrations\Manual.sql" />
   </ItemGroup>
   <ItemGroup>
