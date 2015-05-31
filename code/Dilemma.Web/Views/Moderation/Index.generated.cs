@@ -117,7 +117,7 @@ WriteLiteral(">");
 
             
             #line 30 "..\..\Views\Moderation\Index.cshtml"
-                                               Write(Model.ModerationEntries.First().Message);
+                                               Write(HttpUtility.HtmlDecode(Model.ModerationEntries.First().Message));
 
             
             #line default
