@@ -24,7 +24,9 @@ namespace Dilemma.Data.EntityFramework.Initialization
                     QuestionLifetime = QuestionLifetime.OneDay,
                     SystemEnvironment = SystemEnvironment.Production,
                     RetireQuestionAfterDays = 14,
-                    ExpireAnswerSlotsAfterMinutes = 15
+                    ExpireAnswerSlotsAfterMinutes = 15,
+					EnableWebPurify = true,
+					EmailErrors = false
                 });
             }
         }
