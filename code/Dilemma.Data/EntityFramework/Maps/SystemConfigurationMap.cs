@@ -22,7 +22,7 @@ namespace Dilemma.Data.EntityFramework.Maps
             Property(p => p.ExpireAnswerSlotsAfterMinutes).IsRequired();
             Property(p => p.EnableWebPurify).IsRequired();
             Property(p => p.EmailErrors).IsRequired();
-            Property(p => p.EmailErrorsTo).IsRequired();
+			Property(p => p.EmailErrorsTo).IsOptional();
         }
     }
 }

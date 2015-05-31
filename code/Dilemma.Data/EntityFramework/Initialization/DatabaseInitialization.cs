@@ -23,7 +23,7 @@ namespace Dilemma.Data.EntityFramework.Initialization
             Debug.Write(migrationSql);
             Debug.WriteLine("********************************************************");
             */
-            //SystemConfigurationInitialization.Seed(context);
+            SystemConfigurationInitialization.Seed(context);
             CategoryInitialization.Seed(context);
             PointConfigurationInitialization.Seed(context);
             LastRunLogInitialization.Seed(context);
