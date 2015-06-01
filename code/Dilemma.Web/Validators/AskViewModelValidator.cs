@@ -15,7 +15,7 @@ namespace Dilemma.Web.Validators
         /// </summary>
         public AskViewModelValidator()
         {
-            RuleFor(x => x.Question).SetValidator(new QuestionViewModelValidator());
+            //RuleFor(x => x.Question).SetValidator(new QuestionViewModelValidator());
         }
     }
 }
