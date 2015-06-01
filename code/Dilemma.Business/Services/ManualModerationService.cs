@@ -29,8 +29,13 @@ namespace Dilemma.Business.Services
         public ModerationViewModel GetNext()
         {
 	        var moderation = ModerationRepository.Value.GetNext<ModerationViewModel>();
-	        moderation.ModerationsWaitingCount = ModerationRepository.Value.BacklogCount();
-			return moderation;
+
+	        if (moderation != null)
+	        {
+		        moderation.ModerationsWaitingCount = ModerationRepository.Value.BacklogCount();
+	        }
+
+	        return moderation;
         }
 
         /// <summary>
