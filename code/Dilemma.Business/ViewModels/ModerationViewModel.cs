@@ -16,5 +16,7 @@ namespace Dilemma.Business.ViewModels
         /// Gets or sets the list of moderation entries related to this moderation.
         /// </summary>
         public List<ModerationEntryViewModel> ModerationEntries { get; set; }
+
+		public int ModerationsWaitingCount { get; set; }
     }
 }

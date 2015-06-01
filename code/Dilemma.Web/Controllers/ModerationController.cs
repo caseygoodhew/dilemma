@@ -20,7 +20,7 @@ namespace Dilemma.Web.Controllers
         // GET: /Moderation/
         public ActionResult Index()
         {
-            return View(ManualModerationService.Value.GetNext());
+			return View(ManualModerationService.Value.GetNext());
         }
 
         [HttpPost]

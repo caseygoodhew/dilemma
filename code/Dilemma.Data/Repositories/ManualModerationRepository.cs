@@ -365,7 +365,17 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        private static void ReportToExisting(
+	    public int BacklogCount()
+	    {
+		    using (var context = new DilemmaContext())
+		    {
+			    return
+				    context.Moderations.Select(x => x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).FirstOrDefault())
+					    .Count(x => x.State == ModerationState.Queued || x.State == ModerationState.ReQueued);
+		    }
+	    }
+
+	    private static void ReportToExisting(
             DilemmaContext context,
             int userId,
             ReportReason reportReason,

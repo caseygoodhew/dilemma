@@ -49,5 +49,7 @@ namespace Dilemma.Data.Repositories
         void ReportAnswer(int userId, int answerId, ReportReason reportReason);
 
         void ReportFollowup(int userId, int followupId, ReportReason reportReason);
+
+	    int BacklogCount();
     }
 }
