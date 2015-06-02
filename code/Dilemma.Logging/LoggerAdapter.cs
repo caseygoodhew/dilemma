@@ -537,7 +537,7 @@ namespace Dilemma.Logging
 
         private static Logger GetLogger()
         {
-            return LogManager.GetLogger(Configuration.GetServerName());
+            return LogManager.GetLogger(Configuration.ServerGuid);
         }
     }
 }

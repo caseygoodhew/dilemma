@@ -56,8 +56,6 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Support
             Locator.Get<ITimeWarpSource>().DoThe(TimeWarpTo.TheHereAndNow);
             
             RequestCache.Current.ExpireAll();
-
-            Data.Startup.ValidateServerName();
         }
     }
 }

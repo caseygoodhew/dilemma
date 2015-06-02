@@ -8605,6 +8605,7 @@ form.Answer:after {
   color: #999;
 }
 body {
+  background: #e9e9e9 url("/content/images/pattern-a.png");
 }
 .disguise-link,
 .disguise-link:hover {

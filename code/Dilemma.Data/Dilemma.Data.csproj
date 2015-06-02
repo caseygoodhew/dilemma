@@ -123,6 +123,10 @@
     <Compile Include="Migrations\201505311022397_Migration5.Designer.cs">
       <DependentUpon>201505311022397_Migration5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506021832108_Migration6.cs" />
+    <Compile Include="Migrations\201506021832108_Migration6.Designer.cs">
+      <DependentUpon>201506021832108_Migration6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\EmailLogLevel.cs" />
     <Compile Include="Models\Followup.cs" />
@@ -143,14 +147,12 @@
     <Compile Include="EntityFramework\Maps\ModerationMap.cs" />
     <Compile Include="EntityFramework\Maps\NotificationMap.cs" />
     <Compile Include="EntityFramework\Maps\DevelopmentUserMap.cs" />
-    <Compile Include="EntityFramework\Maps\ServerConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\UserMap.cs" />
     <Compile Include="EntityFramework\Maps\SystemConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionMap.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
-    <Compile Include="Models\ServerConfiguration.cs" />
     <Compile Include="Models\PointConfiguration.cs" />
     <Compile Include="Models\DevelopmentUser.cs" />
     <Compile Include="Models\Moderation.cs" />
@@ -240,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505311022397_Migration5.resx">
       <DependentUpon>201505311022397_Migration5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506021832108_Migration6.resx">
+      <DependentUpon>201506021832108_Migration6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
