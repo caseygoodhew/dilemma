@@ -17,8 +17,8 @@ namespace Dilemma.Web.Controllers
     public class AnswersController : DilemmaBaseController
     {
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
-        
-        //
+
+		//
         // GET: /advise/QuestionId
         [Route("view/{questionId:int:min(1)}")]
         public ActionResult Index(int questionId)

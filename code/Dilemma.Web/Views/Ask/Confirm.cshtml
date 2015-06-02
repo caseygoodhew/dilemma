@@ -1,0 +1,29 @@
+﻿@using Dilemma.Business.ViewModels
+@model Dilemma.Web.ViewModels.DilemmaDetailsViewModel
+
+@{
+    ViewBag.IsDilemmaViewPage = true;
+}
+
+<h1 class="section-label js-sticky">
+	<span class="js-sticky--offset">
+        <span data-icon="advise"></span>
+        We hear you!
+    </span>
+</h1>
+
+
+
+<div class="line">
+
+	<aside class="sidebar">
+		@Html.DisplayFor(x => x.Sidebar, "Sidebar")
+	</aside>
+
+	<main role="main" class="main">
+
+		@Html.DisplayFor(x => x.QuestionDetails.QuestionViewModel, "QuestionSummary")
+		
+	</main><!-- main-->
+
+</div>

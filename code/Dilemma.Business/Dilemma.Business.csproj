@@ -129,6 +129,7 @@
     <Compile Include="ViewModels\UserRankViewModel.cs" />
     <Compile Include="ViewModels\UserStatisticsViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="WebPurify\IWebPurifyable.cs" />
     <Compile Include="WebPurify\IWebPurifyResponder.cs" />
     <Compile Include="WebPurify\WebPurifyResponder.cs" />
     <Compile Include="WebPurify\WebPurifyMethod.cs" />

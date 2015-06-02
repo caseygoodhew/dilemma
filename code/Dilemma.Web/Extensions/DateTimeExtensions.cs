@@ -51,7 +51,7 @@ namespace Dilemma.Web.Extensions
                     return "in an hour";
                 }
 
-                if (delta < 24 * Hour)
+                if (delta < 23 * Hour)
                 {
                     return "in " + ts.Hours + " hours";
                 }

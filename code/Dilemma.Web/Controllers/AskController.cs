@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -54,8 +55,13 @@ namespace Dilemma.Web.Controllers
             
             if (ModelState.IsValid)
             {
-                QuestionService.Value.SaveNewQuestion(model.Question);
-                return RedirectToAction("Index", "Dilemmas");
+                var questionId = QuestionService.Value.SaveNewQuestion(model.Question);
+				var questionDetails = QuestionService.Value.GetQuestion(questionId);
+
+				return View("Confirm", new DilemmaDetailsViewModel {
+					QuestionDetails = questionDetails,
+					Sidebar = GetSidebarViewModel()
+				});
             }
 
             return View(InitNewQuestion(model));

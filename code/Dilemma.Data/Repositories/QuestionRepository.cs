@@ -827,7 +827,7 @@ namespace Dilemma.Data.Repositories
                                             }).ToList(),
                                             Category = x.Category,
                                             ClosesDateTime = x.ClosesDateTime,
-                                            CreatedDateTime = x.ClosesDateTime,
+											CreatedDateTime = x.CreatedDateTime,
                                             ClosedDateTime = x.ClosedDateTime,
                                             MaxAnswers = x.MaxAnswers,
                                             QuestionId = x.QuestionId,
