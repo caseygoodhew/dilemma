@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dilemma.Business.Services;
 using Dilemma.Business.WebPurify;
 using Dilemma.Logging;
 using Disposable.Common.ServiceLocator;
@@ -12,7 +13,9 @@ namespace Dilemma.Business.Validators
     {
         private static readonly string ErrorMessage = "'{PropertyName}' cannot contain the word(s) {Explicits}.";
 
-        private static readonly Lazy<IWebPurifyResponder> WebPurifyResponder = Locator.Lazy<IWebPurifyResponder>();
+		private static readonly Lazy<IAdministrationService> AdministrationService = Locator.Lazy<IAdministrationService>();
+		
+		private static readonly Lazy<IWebPurifyResponder> WebPurifyResponder = Locator.Lazy<IWebPurifyResponder>();
 
         private static readonly Lazy<ILogger> Logger = Locator.Lazy<ILogger>();
 
@@ -20,7 +23,14 @@ namespace Dilemma.Business.Validators
 
         protected override bool IsValid(PropertyValidatorContext context)
         {
-            if (context.PropertyValue == null)
+	        var systemConfigurationViewModel = AdministrationService.Value.GetSystemServerConfiguration().SystemConfigurationViewModel;
+
+			if (!systemConfigurationViewModel.EnableWebPurify)
+	        {
+		        return true;
+	        }
+			
+			if (context.PropertyValue == null)
             {
                 return true;
             }
