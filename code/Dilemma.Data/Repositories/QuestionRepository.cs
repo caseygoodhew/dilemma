@@ -591,6 +591,42 @@ namespace Dilemma.Data.Repositories
             }
         }
 
+		public void CloseQuestions()
+        {
+            using (var context = new DilemmaContext())
+            {
+	            var now = TimeSource.Value.Now;
+				
+				//var nowParameter = new SqlParameter("@DateTimeNow", TimeSource.Value.Now);
+                // we don't expect a result, but if we don't ToList then the query doesn't execute
+                //var result = context.Database.SqlQuery<CloseQuestions>("CloseQuestions @DateTimeNow", nowParameter).ToList();
+
+	            var questionSetOne =
+		            context.Questions.Include(x => x.User).Where(x => x.QuestionState == Common.QuestionState.Approved)
+			            .Where(x => x.ClosedDateTime == null)
+			            .Where(x => x.ClosesDateTime < now)
+			            .ToList();
+
+	            var questionSetTwo =
+		            context.Questions.Include(x => x.User).Where(x => x.QuestionState == QuestionState.Approved)
+			            .Where(x => x.ClosedDateTime == null)
+			            .Where(x => x.MaxAnswers <= x.Answers.Count(a => a.AnswerState == Common.AnswerState.Approved))
+			            .ToList();
+
+	            var questions = questionSetOne.Concat(questionSetTwo).GroupBy(x => x.QuestionId).Select(x => x.First()).ToList();
+
+	            foreach (var question in questions)
+	            {
+		            var messageContext = new QuestionMessageContext(QuestionDataAction.OpenForVoting, context, question);
+		            QuestionMessagePipe.Value.Announce(messageContext);
+	            }
+
+				questions.ForEach(x => x.ClosedDateTime = now);
+
+	            context.SaveChangesVerbose();
+            }
+        }
+
         /// <summary>
         /// To be called when the moderation state is updated.
         /// </summary>

@@ -63,7 +63,7 @@ namespace Dilemma.Data
             messagePipe.Locator<QuestionDataAction, IInternalPointDistributor>(QuestionDataAction.StateChanged, x => x.OnQuestionStateChange);
             messagePipe.Locator<QuestionDataAction, IInternalNotificationDistributor>(QuestionDataAction.StateChanged, x => x.OnQuestionStateChange);
 
-            messagePipe.Locator<QuestionDataAction, IInternalNotificationDistributor>(QuestionDataAction.OpenForVoting, x => x.OnQuestionStateChange);
+            messagePipe.Locator<QuestionDataAction, IInternalNotificationDistributor>(QuestionDataAction.OpenForVoting, x => x.OnVotingOpen);
         }
 
         private static void InitiateMessagePipe(IMessagePipe<AnswerDataAction> messagePipe)

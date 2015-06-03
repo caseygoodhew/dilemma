@@ -193,6 +193,11 @@ namespace Dilemma.Business.Services
             QuestionRepository.Value.RemoveBookmark(SecurityManager.Value.GetUserId(), questionId);
         }
 
+		public void CloseQuestions()
+		{
+			QuestionRepository.Value.CloseQuestions();
+		}
+
         private static void SetMaxAnswers(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
         {
             if (systemConfiguration.SystemEnvironment == SystemEnvironment.Production || !questionViewModel.MaxAnswers.HasValue)

@@ -149,18 +149,6 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        public void CloseQuestions()
-        {
-            using (var context = new DilemmaContext())
-            {
-                var nowParameter = new SqlParameter("@DateTimeNow", TimeSource.Value.Now);
-                // we don't expect a result, but if we don't ToList then the query doesn't execute
-                var result = context.Database.SqlQuery<CloseQuestions>("CloseQuestions @DateTimeNow", nowParameter).ToList();
-                
-                context.SaveChangesVerbose();
-            }
-        }
-
         public T GetLastRunLog<T>() where T : class
         {
             using (var context = new DilemmaContext())

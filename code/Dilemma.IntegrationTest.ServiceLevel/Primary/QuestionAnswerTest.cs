@@ -285,21 +285,21 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
             SetupQuestionWithAnswer();
             SecurityManager.LoginNewAnonymous("Another User");
             
-            Administration.CloseQuestions();
+            Questions.CloseQuestions();
             var question = Questions.GetQuestion("Question").QuestionViewModel;
             Assert.IsTrue(question.IsOpen);
             Assert.IsFalse(question.IsClosed);
 
             TimeWarpSource.Value.FreezeTime(question.ClosesDateTime);
 
-            Administration.CloseQuestions();
+			Questions.CloseQuestions();
             question = Questions.GetQuestion("Question").QuestionViewModel;
             Assert.IsTrue(question.IsOpen);
             Assert.IsFalse(question.IsClosed);
 
             TimeWarpSource.Value.FreezeTime(question.ClosesDateTime.Value.AddSeconds(1));
 
-            Administration.CloseQuestions();
+			Questions.CloseQuestions();
             question = Questions.GetQuestion("Question").QuestionViewModel;
             Assert.IsFalse(question.IsOpen);
             Assert.IsTrue(question.IsClosed);

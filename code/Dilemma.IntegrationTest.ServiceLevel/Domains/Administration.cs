@@ -14,7 +14,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
     {
         private static readonly Lazy<IAdministrationService> _adminService = Locator.Lazy<IAdministrationService>();
 
-        public static SystemServerConfigurationViewModel GetSystemServerConfiguration()
+		public static SystemServerConfigurationViewModel GetSystemServerConfiguration()
         {
             return _adminService.Value.GetSystemServerConfiguration();
         }
@@ -76,11 +76,6 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
         public static void RetireOldQuestions()
         {
             _adminService.Value.RetireOldQuestions();
-        }
-
-        public static void CloseQuestions()
-        {
-            _adminService.Value.CloseQuestions();
         }
     }
 }

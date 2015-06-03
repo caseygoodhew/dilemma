@@ -43,8 +43,6 @@ namespace Dilemma.Data.Repositories
         
         void RetireOldQuestions();
 
-        void CloseQuestions();
-
         T GetLastRunLog<T>() where T : class;
 
         void ExpireCachedSystemServerConfiguration();
