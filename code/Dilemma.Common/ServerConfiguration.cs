@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Web.Configuration;
 using Disposable.Common.Extensions;
@@ -36,7 +37,9 @@ namespace Dilemma.Common
 
 		public static void Write(ServerConfiguration serverConfiguration)
 		{
-			throw new NotImplementedException();
+			var webConfigApp = WebConfigurationManager.OpenWebConfiguration("~");
+			webConfigApp.AppSettings.Settings["ServerRole"].Value = serverConfiguration.ServerRole.ToString();
+			webConfigApp.Save();
 		}
 	}
 }
