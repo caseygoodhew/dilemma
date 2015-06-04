@@ -9,7 +9,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    //[AllowUserRole(UserRole.Administrator)]
+    [AllowUserRole(UserRole.Administrator)]
     public class LastRunLogController : DilemmaBaseController
     {
 		private static readonly Lazy<IAdministrationService> AdministrationService =

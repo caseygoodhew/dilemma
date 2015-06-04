@@ -11,7 +11,7 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    //[AllowUserRole(UserRole.Moderator)]
+    [AllowUserRole(UserRole.Moderator)]
     public class ModerationController : DilemmaBaseController
     {
         private static readonly Lazy<IManualModerationService> ManualModerationService = Locator.Lazy<IManualModerationService>();
