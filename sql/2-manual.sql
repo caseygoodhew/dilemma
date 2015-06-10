@@ -1,7 +1,4 @@
-﻿CREATE UNIQUE INDEX IX_PointType ON PointConfiguration (PointType);
-GO
-
-CREATE UNIQUE INDEX IX_ServerName ON ServerConfiguration (Name);
+CREATE UNIQUE INDEX IX_PointType ON PointConfiguration (PointType);
 GO
 
 CREATE UNIQUE INDEX IX_UniqueVote ON Vote (User_UserId, Question_QuestionId);
@@ -717,7 +714,6 @@ DROP TABLE #lookups;
  IF OBJECT_ID('FK_Notification_NotificationTarget', 'F') IS NULL ALTER TABLE [Notification] ADD CONSTRAINT FK_Notification_NotificationTarget FOREIGN KEY ([NotificationTarget]) REFERENCES [Enum_NotificationTarget] (Id);
  IF OBJECT_ID('FK_PointConfiguration_PointType', 'F') IS NULL ALTER TABLE [PointConfiguration] ADD CONSTRAINT FK_PointConfiguration_PointType FOREIGN KEY ([PointType]) REFERENCES [Enum_PointType] (Id);
  IF OBJECT_ID('FK_ReportedPost_Reason', 'F') IS NULL ALTER TABLE [ReportedPost] ADD CONSTRAINT FK_ReportedPost_Reason FOREIGN KEY ([Reason]) REFERENCES [Enum_ReportReason] (Id);
- IF OBJECT_ID('FK_ServerConfiguration_ServerRole', 'F') IS NULL ALTER TABLE [ServerConfiguration] ADD CONSTRAINT FK_ServerConfiguration_ServerRole FOREIGN KEY ([ServerRole]) REFERENCES [Enum_ServerRole] (Id);
  IF OBJECT_ID('FK_SystemConfiguration_QuestionLifetime', 'F') IS NULL ALTER TABLE [SystemConfiguration] ADD CONSTRAINT FK_SystemConfiguration_QuestionLifetime FOREIGN KEY ([QuestionLifetime]) REFERENCES [Enum_QuestionLifetime] (Id);
  IF OBJECT_ID('FK_SystemConfiguration_SystemEnvironment', 'F') IS NULL ALTER TABLE [SystemConfiguration] ADD CONSTRAINT FK_SystemConfiguration_SystemEnvironment FOREIGN KEY ([SystemEnvironment]) REFERENCES [Enum_SystemEnvironment] (Id);
  IF OBJECT_ID('FK_UserPoint_PointType', 'F') IS NULL ALTER TABLE [UserPoint] ADD CONSTRAINT FK_UserPoint_PointType FOREIGN KEY ([PointType]) REFERENCES [Enum_PointType] (Id);

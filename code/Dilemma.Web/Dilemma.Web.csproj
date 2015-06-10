@@ -637,7 +637,6 @@
     <Content Include="Content\homegrown\5-overrides\_shame.less" />
     <Content Include="Content\homegrown\css\animate.css.map" />
     <Content Include="Content\homegrown\main.less" />
-    <Content Include="Content\fonts\dilemmicons\.DS_Store" />
     <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.eot" />
     <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.ttf" />
     <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.woff" />
@@ -662,6 +661,8 @@
     <Content Include="Content\images\icons\fav\manifest.json" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Question Seeder %28i-e00ade11%29.pubxml" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Testing Server %28i-eb5a63e0%29.pubxml" />
+    <None Include="Properties\PublishProfiles\moderation.ourdilemmas.com.pubxml" />
+    <None Include="Properties\PublishProfiles\ourdilemmas.com.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
