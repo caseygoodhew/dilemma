@@ -1,4 +1,4 @@
-﻿DECLARE @CurrentMigration [nvarchar](max)
+DECLARE @CurrentMigration [nvarchar](max) 
 
 IF object_id('[dbo].[__MigrationHistory]') IS NOT NULL
     SELECT @CurrentMigration =
