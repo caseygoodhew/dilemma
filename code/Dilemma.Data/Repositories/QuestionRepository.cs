@@ -597,11 +597,7 @@ namespace Dilemma.Data.Repositories
             {
 	            var now = TimeSource.Value.Now;
 				
-				//var nowParameter = new SqlParameter("@DateTimeNow", TimeSource.Value.Now);
-                // we don't expect a result, but if we don't ToList then the query doesn't execute
-                //var result = context.Database.SqlQuery<CloseQuestions>("CloseQuestions @DateTimeNow", nowParameter).ToList();
-
-	            var questionSetOne =
+				var questionSetOne =
 		            context.Questions.Include(x => x.User).Where(x => x.QuestionState == Common.QuestionState.Approved)
 			            .Where(x => x.ClosedDateTime == null)
 			            .Where(x => x.ClosesDateTime < now)
@@ -622,6 +618,10 @@ namespace Dilemma.Data.Repositories
 	            }
 
 				questions.ForEach(x => x.ClosedDateTime = now);
+
+                var lastRunLog = context.LastRunLog.Single();
+                lastRunLog.CloseQuestions = TimeSource.Value.Now;
+                context.Entry(lastRunLog).Property(x => x.CloseQuestions).IsModified = true;
 
 	            context.SaveChangesVerbose();
             }

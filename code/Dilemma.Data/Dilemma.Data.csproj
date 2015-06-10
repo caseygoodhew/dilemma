@@ -136,7 +136,6 @@
     <Compile Include="Models\Proxies\QuestionHistoryProxy.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\ReportedPost.cs" />
-    <Compile Include="Models\Virtual\CloseQuestions.cs" />
     <Compile Include="Models\Virtual\ExpireAnswerSlots.cs" />
     <Compile Include="Models\Virtual\ModerationRetirement.cs" />
     <Compile Include="Models\Virtual\QuestionRetirement.cs" />
