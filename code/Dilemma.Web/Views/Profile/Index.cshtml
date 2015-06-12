@@ -31,8 +31,8 @@
                         </div>
                     </div>
                     <div class="Notification-summary">
-                        <div class="Notification--mini-number">4</div>
-                        <div class="Notification--mini-type">NOTIFICATIONS</div>
+                        <div class="Notification--mini-number">@Model.Notifications.Count()</div>
+                        <div class="Notification--mini-type">@(Model.Notifications.Count() == 1 ? "NOTIFICATION" : "NOTIFICATIONS")</div>
                     </div><!-- Notification-summary -->
                 </a>
             </div><!-- gu1of3 -->
@@ -45,8 +45,8 @@
                         </div>
                     </div>
                     <div class="Notification-summary">
-                        <div class="Notification--mini-number">3</div>
-                        <div class="Notification--mini-type">DILEMMAS</div>
+                        <div class="Notification--mini-number">@Model.Dilemmas.Count()</div>
+                        <div class="Notification--mini-type">@(Model.Dilemmas.Count() == 1 ? "DILEMMA" : "DILEMMAS")</div>
                     </div><!-- Notification-summary -->
                 </a>
             </div><!-- gu1of3 -->
@@ -59,8 +59,8 @@
                         </div>
                     </div>
                     <div class="Notification-summary">
-                        <div class="Notification--mini-number">1</div>
-                        <div class="Notification--mini-type">ANSWERS</div>
+                        <div class="Notification--mini-number">@Model.Answers.Count()</div>
+                        <div class="Notification--mini-type">@(Model.Answers.Count() == 1 ? "ANSWER" : "ANSWERS")</div>
                     </div><!-- Notification-summary -->
                 </a>
             </div><!-- gu1of3 -->
@@ -73,58 +73,14 @@
                 </span>
             </h2>
 
-            <div class="Card Notification Card-go--container">
-                <a href="/answer.php" class="Card-go--trigger"></a>
-                <div class="Notification-score">
-                    <div>
-                        <span data-icon="notification"></span>
-                    </div>
-                </div>
-                <div class="Notification-summary">
-                    <div class="Card-label--small">2 hours ago</div>
-                    <div class="Notification-summary-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis praesentium, officiis omnis voluptatibus!</div>
-                    <a href="#" class="Notification-summary-link">View Details</a>
-                </div><!-- Notification-summary -->
-            </div><!-- Card -->
-
-            <div class="Card Notification Card-go--container">
-                <a href="/answer.php" class="Card-go--trigger"></a>
-                <div class="Notification-score">
-                    <div>+6
-                        <span class="Notification-score-label">Points</span>
-                    </div>
-                </div>
-                <div class="Notification-summary">
-                    <div class="Card-label--small">2 hours ago</div>
-                    <div class="Notification-summary-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis praesentium, officiis omnis voluptatibus!</div>
-                    <a href="#" class="Notification-summary-link">View Details</a>
-                </div><!-- Notification-summary -->
-            </div><!-- Card -->
-
             @Html.DisplayForList(x => x.Notifications, "Notifications")
-
-
+            
 
             <h2 class="js-sticky h3" id="dilemmas">
                 <span class="js-sticky--offset">
                     Your Current Dilemmas
                 </span>
             </h2>
-
-            <div class="Card Notification Notification--ask Card-go--container">
-                <a href="/answer.php" class="Card-go--trigger"></a>
-                <div class="Notification-score">
-                    <div>
-                        <span data-icon="ask"></span>
-                    </div>
-                </div>
-                <div class="Notification-summary">
-                    <div class="Card-label--small">2 hours ago</div>
-                    <div class="Notification-summary-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis praesentium, officiis omnis voluptatibus!</div>
-                    <a href="#" class="Notification-summary-link">View Details</a>
-                </div><!-- Notification-summary -->
-            </div><!-- Card -->
-
 
             @if (Model.Dilemmas.Any())
             {
@@ -140,20 +96,6 @@
                     Advice You've Given
                 </span>
             </h2>
-
-            <div class="Card Notification Notification--advise Card-go--container">
-                <a href="/answer.php" class="Card-go--trigger"></a>
-                <div class="Notification-score">
-                    <div>
-                        <span data-icon="advise"></span>
-                    </div>
-                </div>
-                <div class="Notification-summary">
-                    <div class="Card-label--small">2 hours ago</div>
-                    <div class="Notification-summary-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis praesentium, officiis omnis voluptatibus!</div>
-                    <a href="#" class="Notification-summary-link">View Details</a>
-                </div><!-- Notification-summary -->
-            </div><!-- Card -->
 
             @if (Model.Answers.Any())
             {

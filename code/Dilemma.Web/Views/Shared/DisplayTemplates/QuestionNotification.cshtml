@@ -1,6 +1,6 @@
 ﻿@model Dilemma.Business.ViewModels.QuestionViewModel
 
-<div class="Card Notification Card-go--container">
+<div class="Card Notification Notification--advise Card-go--container">
     <a href="@Url.Action("Index", "Answers", new { questionId = Model.QuestionId })" class="Card-go--trigger"></a>
     <div class="Notification-score">
         <div><span data-icon="@(Model.IsMyQuestion ? "ask" : "advise")"></span></div>
