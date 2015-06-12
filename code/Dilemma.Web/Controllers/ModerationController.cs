@@ -37,13 +37,15 @@ namespace Dilemma.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowUserRole(UserRole.Public)]
         [Route("moderation/dilemma/{questionId:int:min(1)}")]
         public ActionResult QuestionHistory(int questionId)
         {
             var viewModel = ManualModerationService.Value.GetQuestionHistory(questionId);
             return View(new ModerationHistoryViewModel<QuestionModerationHistoryViewModel>(viewModel, GetSidebarViewModel()));
         }
-        
+
+        [AllowUserRole(UserRole.Public)]
         [Route("moderation/answer/{answerId:int:min(1)}")]
         public ActionResult AnswerHistory(int answerId)
         {
@@ -51,6 +53,7 @@ namespace Dilemma.Web.Controllers
             return View(new ModerationHistoryViewModel<AnswerModerationHistoryViewModel>(viewModel, GetSidebarViewModel()));
         }
 
+        [AllowUserRole(UserRole.Public)]
         [Route("moderation/followup/{followupId:int:min(1)}")]
         public ActionResult FollowupHistory(int followupId)
         {
