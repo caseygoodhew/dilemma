@@ -205,7 +205,6 @@ GO
 
 
 
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -282,6 +281,11 @@ AS
       FROM Moderation m, QuestionRetirement qr, Answer a
      WHERE a.Question_QuestionId = qr.QuestionId
        AND m.Answer_AnswerId = a.AnswerId
+     UNION 
+    SELECT m.ModerationId
+      FROM Moderation m, QuestionRetirement qr, Followup f
+     WHERE f.Question_QuestionId = qr.QuestionId
+       AND m.Followup_FollowupId = f.FollowupId
 
 	/********************************************************/
 	/* UPDATE USER RECORDS									*/
@@ -351,6 +355,12 @@ AS
               FROM Answer a, QuestionRetirement qr
              WHERE a.Question_QuestionId = qr.QuestionId)
 
+/*	DELETE FROM ReportedPost
+	 WHERE Followup_FollowupId IN (
+            SELECT f.FollowupId 
+              FROM Followup_Followup f, QuestionRetirement qr
+             WHERE f.Question_QuestionId = qr.QuestionId)*/
+
 	DELETE FROM ReportedPost
 	 WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement) 
 	
@@ -364,6 +374,10 @@ AS
             SELECT a.AnswerId 
               FROM Answer a, QuestionRetirement qr
              WHERE a.Question_QuestionId = qr.QuestionId)
+        OR Followup_FollowupId IN (
+            SELECT f.FollowupId 
+              FROM Followup f, QuestionRetirement qr
+             WHERE f.Question_QuestionId = qr.QuestionId)
     
     DELETE FROM ModerationEntry
      WHERE Moderation_ModerationId IN (SELECT ModerationId FROM ModerationRetirement)
@@ -379,6 +393,17 @@ AS
              WHERE a.Question_QuestionId = qr.QuestionId)
          
     DELETE FROM Answer
+     WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
+ 
+    UPDATE Question
+	   SET Followup_FollowupId = NULL
+	 WHERE QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
+	
+	UPDATE Question
+	   SET Followup_FollowupId = NULL
+	 WHERE QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
+	
+	DELETE FROM Followup
      WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
  
     DELETE FROM Bookmark

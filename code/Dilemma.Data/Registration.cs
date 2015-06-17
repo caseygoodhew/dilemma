@@ -74,8 +74,9 @@ namespace Dilemma.Data
             messagePipe.Locator<AnswerDataAction, IInternalPointDistributor>(AnswerDataAction.StateChanged, x => x.OnAnswerStateChange);
             messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.StateChanged, x => x.OnAnswerStateChange);
 
+            messagePipe.Locator<AnswerDataAction, IInternalPointDistributor>(AnswerDataAction.VoteCast, x => x.OnVoteCast);
             messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.VoteCast, x => x.OnVoteCast);
-
+            
             messagePipe.Locator<AnswerDataAction, IInternalPointDistributor>(AnswerDataAction.BestAnswerAwarded, x => x.OnBestAnswerAwarded);
             messagePipe.Locator<AnswerDataAction, IInternalNotificationDistributor>(AnswerDataAction.BestAnswerAwarded, x => x.OnBestAnswerAwarded);
         }
@@ -85,6 +86,7 @@ namespace Dilemma.Data
             messagePipe.Locator<FollowupDataAction, IInternalModerationRouter>(FollowupDataAction.Created, x => x.OnFollowupCreated);
             messagePipe.Locator<FollowupDataAction, IInternalManualModerationRepository>(FollowupDataAction.Created, x => x.OnFollowupCreated);
 
+            messagePipe.Locator<FollowupDataAction, IInternalPointDistributor>(FollowupDataAction.StateChanged, x => x.OnFollowupStateChange);
             messagePipe.Locator<FollowupDataAction, IInternalNotificationDistributor>(FollowupDataAction.StateChanged, x => x.OnFollowupStateChange);
         }
 

@@ -88,6 +88,12 @@ namespace Dilemma.Data.Repositories
         /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         public IEnumerable<T> QuestionList<T>(int maximum) where T : class
         {
+            /////////////////////////////////////////////////////////////////
+            // TODO: THIS SHOULD NOT GET CALLED EVERY TIME
+            CloseQuestions();
+            AdministrationRepository.Value.RetireOldQuestions();
+            /////////////////////////////////////////////////////////////////
+            
             using (var context = new DilemmaContext())
             {
                 return QuestionList<T>(context.Questions, maximum);
@@ -259,6 +265,11 @@ namespace Dilemma.Data.Repositories
         /// <returns>The answer id if a slot is available or null if it is not available.</returns>
         public int? RequestAnswerSlot(int userId, int questionId)
         {
+            /////////////////////////////////////////////////////////////////
+            // TODO: THIS SHOULD NOT GET CALLED EVERY TIME
+            AdministrationRepository.Value.ExpireAnswerSlots();
+            /////////////////////////////////////////////////////////////////
+            
             using (var context = new DilemmaContext())
             {
                 if (HasUserAnsweredQuestion(context, userId, questionId))
@@ -498,6 +509,8 @@ namespace Dilemma.Data.Repositories
                                            : AnswerDataAction.VoteCast;
 
                 var messageContext = new AnswerMessageContext(answerDataAction, context, vote.Answer);
+                messageContext.Dictionary["VoteCastBy"] = userId;
+
                 AnswerMessagePipe.Value.Announce(messageContext);
             }
         }

@@ -35,6 +35,9 @@ namespace Dilemma.Data.Repositories
                     case PointType.QuestionAnswered:
                     case PointType.StarVoteReceived:
                     case PointType.PopularVoteReceived:
+                    case PointType.VoteCast:
+                    case PointType.StarVoteAwarded:
+                    case PointType.WhatHappenedNext:
                         relatedQuestion = context.GetOrAttachNew<Question, int>(referenceId.Value, x => x.QuestionId);
                         break;
                     default:
