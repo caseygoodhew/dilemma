@@ -9259,6 +9259,11 @@ html {
   .page-hd .navbar-nav .dropdown-menu a {
     background: #fff;
   }
+  .page-hd .navbar-nav .nav-pin-header {
+    top: -30px;
+    position: fixed;
+    right: -50px;
+  }
 }
 @media only screen and (min-width: 600px) {
   .nav-main a {

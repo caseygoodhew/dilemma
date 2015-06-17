@@ -390,10 +390,39 @@ WriteLiteral("></span>\r\n                                <span");
 WriteLiteral(" class=\"nav-level-1-text\"");
 
 WriteLiteral(">Profile</span>\r\n                            </a>\r\n                        </li>\r" +
-"\n                    </ul>\r\n");
+"\n                        <li");
 
+WriteLiteral(" class=\"nav-level-1 nav-pin-header\"");
+
+WriteLiteral(">\r\n                            <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 4587), Tuple.Create("\"", 4629)
             
             #line 76 "..\..\Views\Shared\Header.cshtml"
+, Tuple.Create(Tuple.Create("", 4594), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "StaticPages")
+            
+            #line default
+            #line hidden
+, 4594), false)
+);
+
+WriteLiteral(" class=\"nav-level-1-link\"");
+
+WriteLiteral(">\r\n                                <span");
+
+WriteLiteral(" data-icon=\"nothing\"");
+
+WriteLiteral(" sytle=\"display:none\"");
+
+WriteLiteral("></span>\r\n                                <span");
+
+WriteLiteral(" class=\"nav-level-1-text\"");
+
+WriteLiteral(">(?)</span>\r\n                            </a>\r\n                        </li>\r\n   " +
+"                 </ul>\r\n");
+
+            
+            #line 82 "..\..\Views\Shared\Header.cshtml"
                 }         
 
             
