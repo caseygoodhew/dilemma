@@ -420,7 +420,7 @@ namespace Dilemma.Data.Repositories
                         .Where(x => userId == null || x.ForUser.UserId == userId.Value)
                         .Select(x => new
                         {
-                            MostRecentEntry = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).FirstOrDefault(),
+                            MostRecentEntry = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ThenByDescending(y => y.ModerationEntryId).FirstOrDefault(),
                             x.ModerationEntries,
                             x.ModerationFor,
                             x.ModerationId
