@@ -15,7 +15,7 @@ namespace Dilemma.Business.ViewModels
         /// <summary>
         /// Gets or sets the amount of time that a question should remain open from it's creation date.
         /// </summary>
-        public QuestionLifetime QuestionLifetime { get; set; }
+        public int QuestionLifetimeDays { get; set; }
 
         /// <summary>
         /// Gets or sets the system environment.

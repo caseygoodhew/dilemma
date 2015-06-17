@@ -21,7 +21,7 @@ namespace Dilemma.Data.EntityFramework.Initialization
                 context.SystemConfiguration.Add(new SystemConfiguration
                 {
                     MaxAnswers = 10,
-                    QuestionLifetime = QuestionLifetime.OneDay,
+                    QuestionLifetimeDays = 21,
                     SystemEnvironment = SystemEnvironment.Production,
                     RetireQuestionAfterDays = 14,
                     ExpireAnswerSlotsAfterMinutes = 15,

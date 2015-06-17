@@ -18,7 +18,7 @@ namespace Dilemma.Business.Conversion
             return new SystemConfiguration
             {
                 MaxAnswers = viewModel.MaxAnswers,
-                QuestionLifetime = viewModel.QuestionLifetime,
+                QuestionLifetimeDays = viewModel.QuestionLifetimeDays,
                 SystemEnvironment = viewModel.SystemEnvironment,
                 RetireQuestionAfterDays = viewModel.RetireQuestionAfterDays,
                 ExpireAnswerSlotsAfterMinutes = viewModel.ExpireAnswerSlotsAfterMinutes,
@@ -38,7 +38,7 @@ namespace Dilemma.Business.Conversion
             return new SystemConfigurationViewModel
             {
                 MaxAnswers = model.MaxAnswers,
-                QuestionLifetime = model.QuestionLifetime,
+                QuestionLifetimeDays = model.QuestionLifetimeDays,
                 SystemEnvironment = model.SystemEnvironment,
                 RetireQuestionAfterDays = model.RetireQuestionAfterDays,
                 ExpireAnswerSlotsAfterMinutes = model.ExpireAnswerSlotsAfterMinutes,

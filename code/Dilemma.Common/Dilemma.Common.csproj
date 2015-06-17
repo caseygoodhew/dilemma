@@ -62,7 +62,6 @@
     <Compile Include="NotificationType.cs" />
     <Compile Include="NotificationTypeLocator.cs" />
     <Compile Include="PointType.cs" />
-    <Compile Include="QuestionLifetime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionState.cs" />
     <Compile Include="ReportReason.cs" />

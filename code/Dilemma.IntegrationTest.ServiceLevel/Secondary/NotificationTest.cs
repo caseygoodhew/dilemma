@@ -28,7 +28,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Secondary
                         SystemConfigurationViewModel = new SystemConfigurationViewModel
                                                            {
                                                                MaxAnswers = 3,
-                                                               QuestionLifetime = QuestionLifetime.FiveMinutes,
+                                                               QuestionLifetimeDays = QuestionLifetime.FiveMinutes,
                                                                SystemEnvironment = SystemEnvironment.Testing
                                                            },
                         ServerConfigurationViewModel = new ServerConfigurationViewModel

@@ -127,6 +127,18 @@
     <Compile Include="Migrations\201506021832108_Migration6.Designer.cs">
       <DependentUpon>201506021832108_Migration6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506171338314_Migration7.cs" />
+    <Compile Include="Migrations\201506171338314_Migration7.Designer.cs">
+      <DependentUpon>201506171338314_Migration7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506171348030_Migration8.cs" />
+    <Compile Include="Migrations\201506171348030_Migration8.Designer.cs">
+      <DependentUpon>201506171348030_Migration8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506171352434_Migration9.cs" />
+    <Compile Include="Migrations\201506171352434_Migration9.Designer.cs">
+      <DependentUpon>201506171352434_Migration9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\EmailLogLevel.cs" />
     <Compile Include="Models\Followup.cs" />
@@ -244,6 +256,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506021832108_Migration6.resx">
       <DependentUpon>201506021832108_Migration6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506171338314_Migration7.resx">
+      <DependentUpon>201506171338314_Migration7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506171348030_Migration8.resx">
+      <DependentUpon>201506171348030_Migration8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506171352434_Migration9.resx">
+      <DependentUpon>201506171352434_Migration9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,7 +14,8 @@ namespace Dilemma.Data.EntityFramework.Initialization
         /// </summary>
         /// <param name="context">The <see cref="DilemmaContext"/> to initialize.</param>
         public static void Initialize(DilemmaContext context)
-        {/*
+        {
+            //*
             var enumToLookup = new EnumToLookup();
             var migrationSql = enumToLookup.GenerateMigrationSql(context);
             Debug.WriteLine("********************************************************");
@@ -22,7 +23,7 @@ namespace Dilemma.Data.EntityFramework.Initialization
             Debug.WriteLine("********************************************************");
             Debug.Write(migrationSql);
             Debug.WriteLine("********************************************************");
-            */
+            //*/
             SystemConfigurationInitialization.Seed(context);
             CategoryInitialization.Seed(context);
             PointConfigurationInitialization.Seed(context);

@@ -208,26 +208,9 @@ namespace Dilemma.Business.Services
 
         private static void SetTimeframes(SystemConfiguration systemConfiguration, QuestionViewModel questionViewModel)
         {
-            var now = TimeSource.Value.Now;
-            questionViewModel.CreatedDateTime = now;
-
-            switch (systemConfiguration.QuestionLifetime)
-            {
-                case QuestionLifetime.OneMinute:
-                    questionViewModel.ClosesDateTime = now.AddMinutes(1);
-                    break;
-                case QuestionLifetime.FiveMinutes:
-                    questionViewModel.ClosesDateTime = now.AddMinutes(5);
-                    break;
-                case QuestionLifetime.OneDay:
-                    questionViewModel.ClosesDateTime = now.AddDays(1);
-                    break;
-                case QuestionLifetime.OneYear:
-                    questionViewModel.ClosesDateTime = now.AddYears(1);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            questionViewModel.CreatedDateTime = TimeSource.Value.Now;
+            questionViewModel.ClosesDateTime =
+                questionViewModel.CreatedDateTime.Value.AddDays(systemConfiguration.QuestionLifetimeDays);
         }
 
         private static QuestionDetailsViewModel MarkBookmarks(QuestionDetailsViewModel question)

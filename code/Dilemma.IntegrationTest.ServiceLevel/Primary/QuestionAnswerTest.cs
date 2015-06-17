@@ -34,7 +34,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
                     SystemConfigurationViewModel = new SystemConfigurationViewModel
                     {
                         MaxAnswers = 3,
-                        QuestionLifetime = QuestionLifetime.FiveMinutes,
+                        QuestionLifetimeDays = QuestionLifetime.FiveMinutes,
                         SystemEnvironment = SystemEnvironment.Testing
                     },
                     ServerConfigurationViewModel = new ServerConfigurationViewModel
@@ -259,7 +259,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         [TestMethod]
         public void OnlyExpectedAnswersExpire()
         {
-            Administration.UpdateSystemConfiguration(x => x.QuestionLifetime = QuestionLifetime.OneDay);
+            Administration.UpdateSystemConfiguration(x => x.QuestionLifetimeDays = QuestionLifetime.OneDay);
             
             SetupQuestionWithAnswer();
 
