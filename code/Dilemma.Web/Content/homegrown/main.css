@@ -7732,9 +7732,12 @@ button:active,
 .Button-label.is-active {
   display: none;
 }
-[class^='Button'].is-active .Button-label.is-active,
-[class*=' Button'].is-active .Button-label.is-active {
-  display: inline;
+@media (min-width: 500px) {
+  [class^='Button'].is-active .Button-label.is-active,
+  [class*=' Button'].is-active .Button-label.is-active {
+    display: inline;
+    background-color: transparent;
+  }
 }
 [class^='Button'].is-active .Button-label.is-inactive,
 [class*=' Button'].is-active .Button-label.is-inactive {
