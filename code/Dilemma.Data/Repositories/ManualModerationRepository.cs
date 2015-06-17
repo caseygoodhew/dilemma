@@ -370,7 +370,7 @@ namespace Dilemma.Data.Repositories
 		    using (var context = new DilemmaContext())
 		    {
 			    return
-				    context.Moderations.Select(x => x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).FirstOrDefault())
+				    context.Moderations.Select(x => x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ThenByDescending(y => y.ModerationEntryId).FirstOrDefault())
 					    .Count(x => x.State == ModerationState.Queued || x.State == ModerationState.ReQueued);
 		    }
 	    }
