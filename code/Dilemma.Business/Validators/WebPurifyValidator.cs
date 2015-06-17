@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Dilemma.Business.Services;
 using Dilemma.Business.WebPurify;
@@ -23,7 +24,7 @@ namespace Dilemma.Business.Validators
 
         protected override bool IsValid(PropertyValidatorContext context)
         {
-	        var systemConfigurationViewModel = AdministrationService.Value.GetSystemServerConfiguration().SystemConfigurationViewModel;
+            var systemConfigurationViewModel = AdministrationService.Value.GetSystemServerConfiguration().SystemConfigurationViewModel;
 
 			if (!systemConfigurationViewModel.EnableWebPurify)
 	        {
@@ -42,16 +43,21 @@ namespace Dilemma.Business.Validators
                 return true;
             }
 
+
+            var stopwatch = Stopwatch.StartNew();
+            
             IEnumerable<string> explicits;
             var result = true;
             var status = WebPurifyResponder.Value.Return(text, out explicits);
+
+            var elapsedTime = stopwatch.ElapsedMilliseconds;
 
             var tidiedExplicits = explicits.Distinct().OrderBy(x => x).ToList();
             var explicitsString = string.Join(", ", tidiedExplicits.Select(x => string.Format("'{0}'", x)));
 
             if (status == WebPurifyStatus.Ok)
             {
-                Logger.Value.Info(string.Format("WebPurifyStatus.Ok : {0} explicits : {1}", tidiedExplicits.Count, explicitsString));
+                Logger.Value.Info(string.Format("WebPurifyStatus.Ok : {0} milliseconds : {1} explicits : {2}", elapsedTime, tidiedExplicits.Count, explicitsString));
             }
             else
             {

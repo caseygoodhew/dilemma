@@ -396,7 +396,7 @@ namespace Dilemma.Data.Repositories
                 moderationId,
                 string.Format("REPORTED FOR {0}: {1}", reportReason.ToString().ToUpper(), itemText));
 
-            Logger.Value.Info("Moderable Reported");
+            Logger.Value.Warn("Moderable Reported");
         }
 
         private static void OnModerableCreated(DilemmaContext context, Moderation moderation, string message)
@@ -407,7 +407,7 @@ namespace Dilemma.Data.Repositories
 
             AddModerationEntry(context, moderation.ModerationId, ModerationState.Queued, moderation.ForUser.UserId, message);
 
-            Logger.Value.Info("Moderable Created");
+            Logger.Value.Warn("Moderable Created");
         }
 
         private static T GetNextForUser<T>(int? userId) where T : class
