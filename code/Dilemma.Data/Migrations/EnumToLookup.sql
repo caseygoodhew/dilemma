@@ -222,6 +222,9 @@ INSERT INTO #lookups (Id, Name) VALUES (1, N'Question Asked');
 INSERT INTO #lookups (Id, Name) VALUES (2, N'Question Answered');
 INSERT INTO #lookups (Id, Name) VALUES (3, N'Star Vote Received');
 INSERT INTO #lookups (Id, Name) VALUES (4, N'Popular Vote Received');
+INSERT INTO #lookups (Id, Name) VALUES (5, N'Vote Cast');
+INSERT INTO #lookups (Id, Name) VALUES (6, N'Star Vote Awarded');
+INSERT INTO #lookups (Id, Name) VALUES (7, N'What Happened Next');
 
 MERGE INTO [Enum_PointType] dst
 	USING #lookups src ON src.Id = dst.Id
@@ -281,5 +284,6 @@ DROP TABLE #lookups;
  IF OBJECT_ID('FK_ReportedPost_Reason', 'F') IS NULL ALTER TABLE [ReportedPost] ADD CONSTRAINT FK_ReportedPost_Reason FOREIGN KEY ([Reason]) REFERENCES [Enum_ReportReason] (Id);
  IF OBJECT_ID('FK_SystemConfiguration_SystemEnvironment', 'F') IS NULL ALTER TABLE [SystemConfiguration] ADD CONSTRAINT FK_SystemConfiguration_SystemEnvironment FOREIGN KEY ([SystemEnvironment]) REFERENCES [Enum_SystemEnvironment] (Id);
  IF OBJECT_ID('FK_UserPoint_PointType', 'F') IS NULL ALTER TABLE [UserPoint] ADD CONSTRAINT FK_UserPoint_PointType FOREIGN KEY ([PointType]) REFERENCES [Enum_PointType] (Id);
+
 
 commit;
