@@ -432,7 +432,7 @@ namespace Dilemma.Data.Repositories
                         .Select(x => new Moderation
                         {
                             ModerationId = x.ModerationId,
-                            ModerationEntries = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ToList(),
+                            ModerationEntries = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ThenByDescending(y => y.ModerationEntryId).ToList(),
                             ModerationFor = x.ModerationFor
                         })
                         .FirstOrDefault();

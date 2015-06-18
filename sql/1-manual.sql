@@ -1,205 +1,3 @@
-CREATE UNIQUE INDEX IX_PointType ON PointConfiguration (PointType);
-GO
-
-CREATE UNIQUE INDEX IX_UniqueVote ON Vote (User_UserId, Question_QuestionId);
-GO
-
-CREATE UNIQUE INDEX IX_LogLevel ON EmailLogLevel (LogLevel);
-GO
-
-
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-IF OBJECT_ID ( 'TimeSourceNow', 'FN' ) IS NOT NULL 
-    DROP FUNCTION TimeSourceNow;
-GO
-
-CREATE FUNCTION TimeSourceNow
-	(@DateTimeNow datetime2 = null)
-RETURNS datetime2
-WITH EXECUTE AS CALLER
-AS
-BEGIN
-	IF @DateTimeNow IS NULL OR NOT EXISTS (SELECT * FROM dbo.SystemConfiguration WHERE SystemEnvironment = 1) -- check for testing environment
-	BEGIN
-		SET @DateTimeNow = GETUTCDATE()
-	END
-
-	RETURN (@DateTimeNow)
-END
-GO
-
-
-
-
-
-
-
-IF OBJECT_ID ( 'FlushRetirementTables', 'P' ) IS NOT NULL 
-    DROP PROCEDURE FlushRetirementTables;
-GO
-
-CREATE PROCEDURE FlushRetirementTables
-	@ForceFlush bit = null 
-AS
-BEGIN
-	-- check for development or testing environment
-	IF @ForceFlush = 1 OR NOT EXISTS (SELECT * FROM dbo.SystemConfiguration WHERE SystemEnvironment in (0, 1)) 
-	BEGIN
-		DELETE FROM ModerationRetirement
-		DELETE FROM UserPointRetirement
-		DELETE FROM QuestionRetirement
-		DELETE FROM VoteCountRetirement
-	END
-END
-GO
-
-
-
-
-
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-IF OBJECT_ID ( 'ExpireAnswerSlots', 'P' ) IS NOT NULL 
-    DROP PROCEDURE ExpireAnswerSlots;
-GO
-
-CREATE PROCEDURE ExpireAnswerSlots
-	@DateTimeNow datetime2 = null
-AS
-	SET @DateTimeNow = dbo.TimeSourceNow(@DateTimeNow)
-	
-	UPDATE Answer
-	   SET AnswerState = 500 -- Expired
-	 WHERE AnswerId IN (	
-		SELECT AnswerId
-		  FROM Answer a, SystemConfiguration sc
-		 WHERE a.AnswerState = 100 -- ReservedSlot
-		   AND DATEADD("mi", sc.ExpireAnswerSlotsAfterMinutes, a.LastTouchedDateTime) < @DateTimeNow)
-
-	UPDATE LastRunLog SET ExpireAnswerSlots = @DateTimeNow;
-GO
-
-
-
-
-
-
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-IF OBJECT_ID ( 'CloseQuestions', 'P' ) IS NOT NULL 
-    DROP PROCEDURE CloseQuestions;
-GO
-
-CREATE PROCEDURE CloseQuestions
-	@DateTimeNow datetime2 = null
-AS
-	SET @DateTimeNow = dbo.TimeSourceNow(@DateTimeNow)
-
-    UPDATE Question
-       SET ClosedDateTime = @DateTimeNow
-     WHERE QuestionId IN (
-        SELECT questionId
-		  FROM Question
-		 WHERE QuestionState = 200 -- Approved Question
-		   AND ClosedDateTime IS NULL
-		   AND ClosesDateTime < @DateTimeNow
-		 UNION 
-		SELECT q.QuestionId
-		  FROM Question q, (
-			SELECT Question_QuestionId QuestionId, COUNT(*) AnswerCount
-			  FROM Answer
-			 WHERE AnswerState = 300 -- Approved Answer
-			 GROUP BY Question_QuestionId
-			) a
-		 WHERE q.QuestionId = a.QuestionId
-		   AND q.QuestionState = 200 -- Approved Question
-		   AND q.ClosedDateTime IS NULL
-		   AND (q.MaxAnswers = a.AnswerCount)
-	)
-
-	UPDATE LastRunLog SET CloseQuestions = @DateTimeNow;
-GO
-
-
-
-
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-IF OBJECT_ID ( 'UserStatistics', 'P' ) IS NOT NULL 
-    DROP PROCEDURE UserStatistics;
-GO
-
-CREATE PROCEDURE UserStatistics
-	@userId int
-AS
-	SELECT u.UserId, 
-		   u.HistoricQuestions + ISNULL(q.QuestionCount, 0) TotalQuestions, 
-		   u.HistoricAnswers + ISNULL(a.AnswerCount, 0) TotalAnswers,
-		   u.HistoricPoints + ISNULL(p.PointsAwarded, 0) TotalPoints,
-		   u.HistoricStarVotes + ISNULL(s.StarVoteCount, 0) TotalStarVotes,
-		   u.HistoricPopularVotes TotalPopularVotes
-	  FROM [User] u
-	  LEFT JOIN (
-			SELECT User_UserId UserId, COUNT(*) QuestionCount
-			  FROM Question
-			 WHERE QuestionState = 200 -- approved
-			   AND User_UserId = @userId
-			 GROUP BY User_UserId) q
-				ON u.UserId = q.UserId
-	  LEFT JOIN (
-			SELECT User_UserId UserId, COUNT(*) AnswerCount
-			  FROM Answer
-			 WHERE AnswerState = 300 -- approved
-			   AND User_UserId = @userId
-			 GROUP BY User_UserId) a
-				ON u.UserId = a.UserId
-	  LEFT JOIN (
-			SELECT ForUser_UserId UserId, SUM(PointsAwarded) PointsAwarded
-			  FROM UserPoint
-			 WHERE ForUser_UserId = @userId
-			 GROUP BY ForUser_UserId) p
-				ON u.UserId = p.UserId
-	  LEFT JOIN (
-			SELECT a.User_UserId UserId, COUNT(*) StarVoteCount
-			  FROM Question q, Answer a, Vote v
-			 WHERE q.QuestionId = a.Question_QuestionId
-			   AND a.Question_QuestionId = v.Question_QuestionId
-			   AND a.AnswerId = v.Answer_AnswerId
-			   AND q.User_UserId = v.User_UserId
-			   AND a.AnswerState = 300 -- approved
-			   AND a.User_UserId = @userId
-			 GROUP BY a.User_UserId) s
-				ON u.UserId = s.UserId
-	 WHERE u.UserId = @userId
-GO
-
-
-
-
-
-
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -276,6 +74,11 @@ AS
       FROM Moderation m, QuestionRetirement qr, Answer a
      WHERE a.Question_QuestionId = qr.QuestionId
        AND m.Answer_AnswerId = a.AnswerId
+     UNION 
+    SELECT m.ModerationId
+      FROM Moderation m, QuestionRetirement qr, Followup f
+     WHERE f.Question_QuestionId = qr.QuestionId
+       AND m.Followup_FollowupId = f.FollowupId
 
 	/********************************************************/
 	/* UPDATE USER RECORDS									*/
@@ -345,6 +148,12 @@ AS
               FROM Answer a, QuestionRetirement qr
              WHERE a.Question_QuestionId = qr.QuestionId)
 
+/*	DELETE FROM ReportedPost
+	 WHERE Followup_FollowupId IN (
+            SELECT f.FollowupId 
+              FROM Followup_Followup f, QuestionRetirement qr
+             WHERE f.Question_QuestionId = qr.QuestionId)*/
+
 	DELETE FROM ReportedPost
 	 WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement) 
 	
@@ -358,6 +167,10 @@ AS
             SELECT a.AnswerId 
               FROM Answer a, QuestionRetirement qr
              WHERE a.Question_QuestionId = qr.QuestionId)
+        OR Followup_FollowupId IN (
+            SELECT f.FollowupId 
+              FROM Followup f, QuestionRetirement qr
+             WHERE f.Question_QuestionId = qr.QuestionId)
     
     DELETE FROM ModerationEntry
      WHERE Moderation_ModerationId IN (SELECT ModerationId FROM ModerationRetirement)
@@ -375,6 +188,17 @@ AS
     DELETE FROM Answer
      WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
  
+    UPDATE Question
+	   SET Followup_FollowupId = NULL
+	 WHERE QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
+	
+	UPDATE Question
+	   SET Followup_FollowupId = NULL
+	 WHERE QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
+	
+	DELETE FROM Followup
+     WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
+ 
     DELETE FROM Bookmark
 	 WHERE Question_QuestionId IN (SELECT QuestionId FROM QuestionRetirement)
 	
@@ -386,7 +210,6 @@ AS
 
 	UPDATE LastRunLog SET RetireOldQuestions = @DateTimeNow;
 GO
-
 
 
 
@@ -454,18 +277,6 @@ begin
 	CREATE TABLE [Enum_ReportReason] (Id int PRIMARY KEY, Name nvarchar(255));
 	exec sys.sp_addextendedproperty @name=N'MS_Description', @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE',
 		@level1name=N'Enum_ReportReason', @value=N'Automatically generated. Contents will be overwritten on app startup. Table & contents generated by https://github.com/timabell/ef-enum-to-lookup';
-end
-IF OBJECT_ID('Enum_ServerRole', 'U') IS NULL
-begin
-	CREATE TABLE [Enum_ServerRole] (Id int PRIMARY KEY, Name nvarchar(255));
-	exec sys.sp_addextendedproperty @name=N'MS_Description', @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE',
-		@level1name=N'Enum_ServerRole', @value=N'Automatically generated. Contents will be overwritten on app startup. Table & contents generated by https://github.com/timabell/ef-enum-to-lookup';
-end
-IF OBJECT_ID('Enum_QuestionLifetime', 'U') IS NULL
-begin
-	CREATE TABLE [Enum_QuestionLifetime] (Id int PRIMARY KEY, Name nvarchar(255));
-	exec sys.sp_addextendedproperty @name=N'MS_Description', @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE',
-		@level1name=N'Enum_QuestionLifetime', @value=N'Automatically generated. Contents will be overwritten on app startup. Table & contents generated by https://github.com/timabell/ef-enum-to-lookup';
 end
 IF OBJECT_ID('Enum_SystemEnvironment', 'U') IS NULL
 begin
@@ -623,6 +434,9 @@ INSERT INTO #lookups (Id, Name) VALUES (1, N'Question Asked');
 INSERT INTO #lookups (Id, Name) VALUES (2, N'Question Answered');
 INSERT INTO #lookups (Id, Name) VALUES (3, N'Star Vote Received');
 INSERT INTO #lookups (Id, Name) VALUES (4, N'Popular Vote Received');
+INSERT INTO #lookups (Id, Name) VALUES (5, N'Vote Cast');
+INSERT INTO #lookups (Id, Name) VALUES (6, N'Star Vote Awarded');
+INSERT INTO #lookups (Id, Name) VALUES (7, N'What Happened Next');
 
 MERGE INTO [Enum_PointType] dst
 	USING #lookups src ON src.Id = dst.Id
@@ -641,40 +455,6 @@ INSERT INTO #lookups (Id, Name) VALUES (200, N'Spam');
 INSERT INTO #lookups (Id, Name) VALUES (300, N'Unrelated To Subject');
 
 MERGE INTO [Enum_ReportReason] dst
-	USING #lookups src ON src.Id = dst.Id
-	WHEN MATCHED AND src.Name <> dst.Name THEN
-		UPDATE SET Name = src.Name
-	WHEN NOT MATCHED THEN
-		INSERT (Id, Name)
-		VALUES (src.Id, src.Name)
-	WHEN NOT MATCHED BY SOURCE THEN
-		DELETE
-;
-TRUNCATE TABLE #lookups;
-
-INSERT INTO #lookups (Id, Name) VALUES (100, N'Offline');
-INSERT INTO #lookups (Id, Name) VALUES (200, N'Moderation');
-INSERT INTO #lookups (Id, Name) VALUES (300, N'Public');
-INSERT INTO #lookups (Id, Name) VALUES (400, N'Question Seeder');
-
-MERGE INTO [Enum_ServerRole] dst
-	USING #lookups src ON src.Id = dst.Id
-	WHEN MATCHED AND src.Name <> dst.Name THEN
-		UPDATE SET Name = src.Name
-	WHEN NOT MATCHED THEN
-		INSERT (Id, Name)
-		VALUES (src.Id, src.Name)
-	WHEN NOT MATCHED BY SOURCE THEN
-		DELETE
-;
-TRUNCATE TABLE #lookups;
-
-INSERT INTO #lookups (Id, Name) VALUES (0, N'One Minute');
-INSERT INTO #lookups (Id, Name) VALUES (1, N'Five Minutes');
-INSERT INTO #lookups (Id, Name) VALUES (2, N'One Day');
-INSERT INTO #lookups (Id, Name) VALUES (3, N'One Year');
-
-MERGE INTO [Enum_QuestionLifetime] dst
 	USING #lookups src ON src.Id = dst.Id
 	WHEN MATCHED AND src.Name <> dst.Name THEN
 		UPDATE SET Name = src.Name
@@ -714,127 +494,21 @@ DROP TABLE #lookups;
  IF OBJECT_ID('FK_Notification_NotificationTarget', 'F') IS NULL ALTER TABLE [Notification] ADD CONSTRAINT FK_Notification_NotificationTarget FOREIGN KEY ([NotificationTarget]) REFERENCES [Enum_NotificationTarget] (Id);
  IF OBJECT_ID('FK_PointConfiguration_PointType', 'F') IS NULL ALTER TABLE [PointConfiguration] ADD CONSTRAINT FK_PointConfiguration_PointType FOREIGN KEY ([PointType]) REFERENCES [Enum_PointType] (Id);
  IF OBJECT_ID('FK_ReportedPost_Reason', 'F') IS NULL ALTER TABLE [ReportedPost] ADD CONSTRAINT FK_ReportedPost_Reason FOREIGN KEY ([Reason]) REFERENCES [Enum_ReportReason] (Id);
- IF OBJECT_ID('FK_SystemConfiguration_QuestionLifetime', 'F') IS NULL ALTER TABLE [SystemConfiguration] ADD CONSTRAINT FK_SystemConfiguration_QuestionLifetime FOREIGN KEY ([QuestionLifetime]) REFERENCES [Enum_QuestionLifetime] (Id);
  IF OBJECT_ID('FK_SystemConfiguration_SystemEnvironment', 'F') IS NULL ALTER TABLE [SystemConfiguration] ADD CONSTRAINT FK_SystemConfiguration_SystemEnvironment FOREIGN KEY ([SystemEnvironment]) REFERENCES [Enum_SystemEnvironment] (Id);
  IF OBJECT_ID('FK_UserPoint_PointType', 'F') IS NULL ALTER TABLE [UserPoint] ADD CONSTRAINT FK_UserPoint_PointType FOREIGN KEY ([PointType]) REFERENCES [Enum_PointType] (Id);
+
 
 commit;
 
 
-
-
-
-/*********************************************************************************/
-/*  LOGGING                                                                      */
-/* http://justinpdavis.blogspot.co.uk/2010/04/logging-to-database-with-nlog.html */
-/*********************************************************************************/
-
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-
-SET ANSI_PADDING ON 
-GO
-
-CREATE TABLE [dbo].[SystemLogging]( 
-    [SystemLoggingGuid] [UNIQUEIDENTIFIER] ROWGUIDCOL  NOT NULL, 
-    [EnteredDate] [DATETIME] NULL, 
-    [LogApplication] [VARCHAR](200) NULL, 
-    [LogDate] [VARCHAR](100) NULL, 
-    [LogLevel] [VARCHAR](100) NULL, 
-    [LogLogger] [VARCHAR](MAX) NULL, 
-    [LogMessage] [VARCHAR](MAX) NULL, 
-    [LogMachineName] [VARCHAR](MAX) NULL, 
-    [LogUserName] [VARCHAR](MAX) NULL, 
-    [LogCallSite] [VARCHAR](MAX) NULL, 
-    [LogThread] [VARCHAR](100) NULL, 
-    [LogException] [VARCHAR](MAX) NULL, 
-    [LogStacktrace] [VARCHAR](MAX) NULL, 
-CONSTRAINT [PKSystemLogging] PRIMARY KEY CLUSTERED 
-( 
-    [SYSTEMLOGGINGGUID] ASC 
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY] 
-) ON [PRIMARY]
+SET IDENTITY_INSERT [dbo].[PointConfiguration] ON 
 
 GO
-
-SET ANSI_PADDING OFF 
+INSERT [dbo].[PointConfiguration] ([Id], [PointType], [Name], [Description], [Points]) VALUES (5, 5, N'Vote Cast', N'Points are awarded for casting a vote for someone else''s answer. Points are awarded immediately.', 100)
 GO
-
-ALTER TABLE [DBO].[SYSTEMLOGGING] ADD  CONSTRAINT [DFSystemLoggingSystemLoggingGuid]  DEFAULT (NEWID()) FOR [SYSTEMLOGGINGGUID] 
+INSERT [dbo].[PointConfiguration] ([Id], [PointType], [Name], [Description], [Points]) VALUES (6, 6, N'Star Vote Awarded', N'Points are awarded for awarding the star vote on your dilemma. Points are awarded immediately.', 100)
 GO
-
-ALTER TABLE [DBO].[SYSTEMLOGGING] ADD  CONSTRAINT [DFSystemLoggingEnteredDate]  DEFAULT (GETDATE()) FOR [ENTEREDDATE] 
+INSERT [dbo].[PointConfiguration] ([Id], [PointType], [Name], [Description], [Points]) VALUES (7, 7, N'What Happened Next', N'Points are awarded for telling the people that answered, voted, and bookmarked what course of action you took. Points are awarded immediately.', 100)
 GO
-
-
-
-SET ANSI_NULLS ON 
-GO 
-SET QUOTED_IDENTIFIER ON 
-GO 
-
-IF OBJECT_ID ( 'LogEmail', 'TR' ) IS NOT NULL 
-    DROP TRIGGER LogEmail;
+SET IDENTITY_INSERT [dbo].[PointConfiguration] OFF
 GO
-
--- ============================================= 
--- Author:        Justin Davis 
--- Create date: 4/1/2008 
--- Description:    Send email of log message 
--- ============================================= 
-CREATE TRIGGER [dbo].[LogEmail] 
-   ON  [dbo].[systemlogging] 
-   AFTER insert 
-AS 
-BEGIN 
-    -- SET NOCOUNT ON added to prevent extra result sets from 
-    -- interfering with SELECT statements. 
-    SET NOCOUNT ON; 
-    
-	IF NOT EXISTS (SELECT * FROM SystemConfiguration WHERE EmailErrors = 1 AND EmailErrorsTo is not null)
-	Begin
-		Return
-	End
-
-	Declare @ToEmail varchar(100) 
-    Declare @Title varchar(100) 
-    Declare @logmessage varchar(8000) 
-    Declare @loglevel as varchar(100)    
-    set @ToEmail = (SELECT EmailErrorsTo FROM SystemConfiguration)
-    set @loglevel = (select loglevel from inserted) 
-    set @Title = 'OurDilemmas ' + @loglevel 
-	set @logmessage = (select 
-		'User Date:' + char(9) + char(9) + logdate + char(13) + char(10) + 
-		'Computer:'+ char(9) + logmachinename + char(13) + char(10) +  
-		'User:' + char(9) + char(9) + logusername + char(13) + char(10) +  
-		'Level:' + char(9)+ loglevel + char(13) + char(10) +  
-		'Logger:' + char(9)+ loglogger + char(13) + char(10) + 
-		'Thread:'+ char(9) + logthread + char(13) + char(10) +    
-		'CallSite:'+ char(9) + logcallsite + char(13) + char(10) + 
-		'Message:' + char(9) + logmessage + char(13) + char(10) +  
-		'Exception:'+ char(9) + logexception + char(13) + char(10) +  
-		'StackTrace:'+ char(9) + logstacktrace as 'emailmessage'
-    from inserted) 
-    
-	If EXISTS (SELECT * FROM EmailLogLevel WHERE LOWER(LogLevel) = LOWER(@loglevel) AND EnableEmails = 1)
-	Begin
-		EXEC msdb.dbo.sp_send_dbmail @recipients=@ToEmail, @body= @logmessage,  @subject = @Title, @profile_name = 'admin'
-	End
-END
-GO
-
-INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Debug', 0)
-INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Error', 1)
-INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Fatal', 1)
-INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Info', 1)
-INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Trace', 0)
-INSERT INTO [EmailLogLevel] ([LogLevel], [EnableEmails]) VALUES ('Warn', 1)
-GO
-
-
-
-
-
