@@ -11,7 +11,6 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    [AllowSystemEnvironment(SystemEnvironment.Development)]
     [AllowUserRole(UserRole.Moderator)]
     public class ModerationController : DilemmaBaseController
     {
