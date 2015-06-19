@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SubStringRendererWrapper.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="LoggerAdapter.cs" />

@@ -15,6 +15,9 @@ namespace Dilemma.Logging
         public static void Register(IRegistrar registrar)
         {
             registrar.Register<ILogger>(() => new LoggerAdapter());
+
+            NLog.Config.ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("substring", typeof (SubStringRendererWrapper));
+            NLog.Config.ConfigurationItemFactory.Default.LayoutRenderers.RegisterDefinition("emailsubject", typeof(EmailSubjectRendererWrapper));
         }
     }
 
