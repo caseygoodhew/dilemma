@@ -18,13 +18,41 @@
     </div>
     <div class="Card-section">
         <h3 class="h4 info pt10 pb20 align-center">What's on your mind?</h3>
-        <a href="@Url.ActionWithCategory("Index", "Ask", (string)ViewBag.Category, true)" class="Button--ask">
+        <a href="@Url.ActionWithCategory("Index", "Ask", (string) ViewBag.Category, true)" class="Button--ask">
             <span data-icon="ask"></span>
             Post Your Dilemma
         </a>
     </div>
 </div>
-        
+
+<!--div class="featured-content">
+    <img src="/Content/images/ads/300x250_uap.gif" width="300" height="250" >
+</div-->
+
+@if (showNotifications)
+{
+    <div class="Card Card--sidebar-profile">
+        @if (Model.NewNotificationsCount > 0)
+        {
+            <a class="Card-section Card-section--notification Card-go--container" href="@Url.Action("Index", "Profile")">
+                <span class="Card-go--trigger"></span>
+                @Html.DisplayFor(x => x.Notifications, "SidebarNotificationSummary")
+            </a>
+        }
+        else
+        {
+            <div class="Card-section Card-section--notification">
+                @Html.DisplayFor(x => x.Notifications, "SidebarNotificationSummary")
+            </div>
+        }
+    </div>
+    
+    <div>
+        @Html.DisplayForList(x => x.Notifications, "Notifications")
+    </div>
+}
+
+
 <div class="Card Card--sidebar-profile">
     <div class="Card-section Rank user-is-level-@Model.UserStatistics.UserRank.Rank.Level">
 
@@ -67,32 +95,7 @@
             </tr>
         </table> 
     </div>  <!-- Rank -->         
-    @if (showNotifications)
-    {
-        if (notificationCount > 0)
-        {
-            <a class="Card-section Card-section--notification Card-go--container" href="@Url.Action("Index", "Profile")">
-                <span class="Card-go--trigger"></span>
-                @Html.DisplayFor(x => x.Notifications, "SidebarNotificationSummary")
-            </a>
-        }
-        else
-        {
-            <div class="Card-section Card-section--notification">
-                @Html.DisplayFor(x => x.Notifications, "SidebarNotificationSummary")
-            </div>
-        }
-    }
+    
 </div>
 
-<!--div class="featured-content">
-    <img src="/Content/images/ads/300x250_uap.gif" width="300" height="250" >
-</div-->
-
-@if (showNotifications)
-{
-    <div>
-        @Html.DisplayForList(x => x.Notifications, "Notifications")
-    </div>
-}
 
