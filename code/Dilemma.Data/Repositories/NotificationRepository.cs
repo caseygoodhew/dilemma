@@ -24,7 +24,16 @@ namespace Dilemma.Data.Repositories
         {
             using (var context = new DilemmaContext())
             {
-                return context.Notifications.Where(x => x.ForUser.UserId == forUserId).Count(x => x.ActionedDateTime == null);
+                return context.Notifications
+                            .Where(x => x.ForUser.UserId == forUserId)
+                            .Where(x => !x.ActionedDateTime.HasValue)
+                            .GroupBy(x => new
+                            {
+                                N = x.Question == null ? x.NotificationId : 0,
+                                Q = x.Question == null ? 0 : x.Question.QuestionId,
+                                T = x.Question == null ? 0 : x.NotificationType
+                            })
+                            .Count();
             }
         }
 
@@ -37,7 +46,12 @@ namespace Dilemma.Data.Repositories
                         context.Notifications
                             .Where(x => x.ForUser.UserId == forUserId)
                             .Where(x => !x.ActionedDateTime.HasValue)
-                            .GroupBy(x => x.Question == null ? x.NotificationId : x.Question.QuestionId)
+                            .GroupBy(x => new
+                            {
+                                N = x.Question == null ? x.NotificationId : 0,
+                                Q = x.Question == null ? 0 : x.Question.QuestionId,
+                                T = x.Question == null ? 0 : x.NotificationType
+                            })
                             .OrderByDescending(g => g.Max(x => x.CreatedDateTime))
                             .Take(maxGroupings)
                             .SelectMany(x => x));

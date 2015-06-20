@@ -22,12 +22,15 @@ namespace Dilemma.Web.Controllers
         public ActionResult Index()
         {
             var questions = QuestionService.Value.GetMyActivity().ToList();
+
+            var mostNotifications = NotificationService.Value.GetTopUnread(50);
+            
             var sidebar = GetSidebarViewModel();
             
             return View(new MyProfileViewModel
                             {
                                 Sidebar = sidebar,
-                                Notifications = sidebar.Notifications,
+                                Notifications = mostNotifications,
                                 Dilemmas = questions.Where(x => x.IsMyQuestion),
                                 Answers = questions.Where(x => !x.IsMyQuestion)
                             });
