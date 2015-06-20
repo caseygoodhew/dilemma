@@ -410,19 +410,13 @@ WriteLiteral(" class=\"nav-level-1-link\"");
 
 WriteLiteral(">\r\n                                <span");
 
-WriteLiteral(" data-icon=\"nothing\"");
+WriteLiteral(" data-icon=\"settings\"");
 
-WriteLiteral(" sytle=\"display:none\"");
-
-WriteLiteral("></span>\r\n                                <span");
-
-WriteLiteral(" class=\"nav-level-1-text\"");
-
-WriteLiteral(">(?)</span>\r\n                            </a>\r\n                        </li>\r\n   " +
-"                 </ul>\r\n");
+WriteLiteral("></span>\r\n                            </a>\r\n                        </li>\r\n      " +
+"              </ul>\r\n");
 
             
-            #line 82 "..\..\Views\Shared\Header.cshtml"
+            #line 81 "..\..\Views\Shared\Header.cshtml"
                 }         
 
             

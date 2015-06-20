@@ -57,6 +57,12 @@
   top: -7px;
 }
 
+.nav-level-1 [data-icon=settings] {
+    font-size: 25px;
+    width: 15px;
+    padding-top: 9px;
+    margin-left: 10px;
+}
 
 
 @media @bp-xs-only {
@@ -220,9 +226,9 @@
     } 
     .nav-pin-header
       {
-        top: -30px;
+        top: -5px;
         position: fixed;
-        right: -50px;
+        right: -40px;
       }
   }
 
@@ -242,7 +248,7 @@
     .js-sticky.stuck {
         display:none !important;
     }
-    @media only screen and (max-width: 780px) {
+    @media only screen and (max-width: @m) {
         .page-hd .navbar-nav {
              display:none !important;
         }
