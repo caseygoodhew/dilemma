@@ -5,7 +5,7 @@
 @{
     var showNotifications = ViewBag.HideNotifications == null || !ViewBag.HideNotifications;
 
-    var notificationCount = Model.Notifications.Count();
+    ViewBag.NotificationCount = Model.NewNotificationsCount;
 }
 
 <div class="Card Card--sidebar-ask">
