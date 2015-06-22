@@ -410,7 +410,7 @@ WriteLiteral(" class=\"nav-level-1-link\"");
 
 WriteLiteral(">\r\n                                <span");
 
-WriteLiteral(" data-icon=\"settings\"");
+WriteLiteral(" data-icon=\"mail\"");
 
 WriteLiteral("></span>\r\n                            </a>\r\n                        </li>\r\n      " +
 "              </ul>\r\n");
