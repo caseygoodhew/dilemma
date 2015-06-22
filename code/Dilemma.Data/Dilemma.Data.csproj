@@ -143,6 +143,10 @@
     <Compile Include="Migrations\201506200510403_Migration10.Designer.cs">
       <DependentUpon>201506200510403_Migration10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506220529448_Migration11.cs" />
+    <Compile Include="Migrations\201506220529448_Migration11.Designer.cs">
+      <DependentUpon>201506220529448_Migration11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\EmailLogLevel.cs" />
     <Compile Include="Models\Followup.cs" />
@@ -272,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506200510403_Migration10.resx">
       <DependentUpon>201506200510403_Migration10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506220529448_Migration11.resx">
+      <DependentUpon>201506220529448_Migration11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
