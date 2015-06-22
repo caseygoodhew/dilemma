@@ -17,5 +17,12 @@ namespace Dilemma.Web.Controllers
         {
             return View();
         }
+        
+        
+        [Route("sitemap")]
+        public ActionResult EmptyPage()
+        {
+            return View();
+        }
 	}
 }

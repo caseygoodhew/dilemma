@@ -851,6 +851,7 @@
       <LastGenOutput>Confirm.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\StaticPages\Index.cshtml" />
+    <Content Include="Views\StaticPages\EmptyPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
