@@ -110,14 +110,14 @@ WriteLiteral(" ");
             #line hidden
             
             #line 16 "..\..\Views\Shared\_Layout.cshtml"
-                                   Write(ViewBag.Title);
+                                   Write(ViewBag.Titles);
 
             
             #line default
             #line hidden
             
             #line 16 "..\..\Views\Shared\_Layout.cshtml"
-                                                      ;
+                                                       
         }
 
             
