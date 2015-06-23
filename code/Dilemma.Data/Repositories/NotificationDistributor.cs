@@ -156,7 +156,7 @@ namespace Dilemma.Data.Repositories
                     // FollowupApproved -> Questioner
                     NotificationRepository.Value.Raise(
                         messageContext.DataContext,
-                        followup.Question.User.UserId,
+                        followup.User.UserId,
                         NotificationType.FollowupApproved,
                         NotificationTarget.Questioner,
                         NotificationLookupBy.Followup,

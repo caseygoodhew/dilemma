@@ -81,25 +81,27 @@ WriteLiteral(">\r\n");
 
             
             #line 12 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-                
+	            
             
             #line default
             #line hidden
             
             #line 12 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-                 if (Model.IsClosed)
-                {
+                 if (Model.IsApproved)
+	            {
+		             if (Model.IsClosed)
+		             {
 
             
             #line default
             #line hidden
-WriteLiteral("                    ");
+WriteLiteral("\t\t\t             ");
 
 WriteLiteral("Closed ");
 
             
-            #line 14 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-                            Write(Model.ClosedDateTime.ToRelativeText());
+            #line 16 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+                                 Write(Model.ClosedDateTime.ToRelativeText());
 
             
             #line default
@@ -107,21 +109,21 @@ WriteLiteral("Closed ");
 WriteLiteral("\r\n");
 
             
-            #line 15 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-                }
-                else
-                {
+            #line 17 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+		             }
+		             else
+		             {
 
             
             #line default
             #line hidden
-WriteLiteral("                    ");
+WriteLiteral("\t\t\t             ");
 
 WriteLiteral("Closes ");
 
             
-            #line 18 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-                            Write(Model.ClosesDateTime.ToRelativeText());
+            #line 20 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+                                 Write(Model.ClosesDateTime.ToRelativeText());
 
             
             #line default
@@ -129,8 +131,24 @@ WriteLiteral("Closes ");
 WriteLiteral("\r\n");
 
             
-            #line 19 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-                }
+            #line 21 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+		             }
+	            }
+	            else
+	            {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\t\t\t\t\t");
+
+WriteLiteral("Waiting on moderation");
+
+WriteLiteral("\r\n");
+
+            
+            #line 26 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+	            }
 
             
             #line default
@@ -139,39 +157,39 @@ WriteLiteral("                \r\n            </div>\r\n            <ol");
 
 WriteLiteral(" \r\n                class=\"Dilemma-respondents horizontal line\"");
 
-WriteAttribute("title", Tuple.Create(" \r\n                title=\"", 736), Tuple.Create("\"", 827)
-, Tuple.Create(Tuple.Create("", 762), Tuple.Create("Posted", 762), true)
-, Tuple.Create(Tuple.Create(" ", 768), Tuple.Create("in", 769), true)
+WriteAttribute("title", Tuple.Create(" \r\n                title=\"", 882), Tuple.Create("\"", 973)
+, Tuple.Create(Tuple.Create("", 908), Tuple.Create("Posted", 908), true)
+, Tuple.Create(Tuple.Create(" ", 914), Tuple.Create("in", 915), true)
             
-            #line 24 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create(" ", 771), Tuple.Create<System.Object, System.Int32>(Model.CategoryName
-            
-            #line default
-            #line hidden
-, 772), false)
-, Tuple.Create(Tuple.Create("", 791), Tuple.Create(",", 791), true)
-            
-            #line 24 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create(" ", 792), Tuple.Create<System.Object, System.Int32>(Model.TotalAnswers
+            #line 31 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+, Tuple.Create(Tuple.Create(" ", 917), Tuple.Create<System.Object, System.Int32>(Model.CategoryName
             
             #line default
             #line hidden
-, 793), false)
-, Tuple.Create(Tuple.Create(" ", 812), Tuple.Create("answers", 813), true)
-, Tuple.Create(Tuple.Create(" ", 820), Tuple.Create("so", 821), true)
-, Tuple.Create(Tuple.Create(" ", 823), Tuple.Create("far", 824), true)
+, 918), false)
+, Tuple.Create(Tuple.Create("", 937), Tuple.Create(",", 937), true)
+            
+            #line 31 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+, Tuple.Create(Tuple.Create(" ", 938), Tuple.Create<System.Object, System.Int32>(Model.TotalAnswers
+            
+            #line default
+            #line hidden
+, 939), false)
+, Tuple.Create(Tuple.Create(" ", 958), Tuple.Create("answers", 959), true)
+, Tuple.Create(Tuple.Create(" ", 966), Tuple.Create("so", 967), true)
+, Tuple.Create(Tuple.Create(" ", 969), Tuple.Create("far", 970), true)
 );
 
 WriteLiteral(">\r\n");
 
             
-            #line 25 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 32 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 25 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 32 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                  for (var i = 0; i < @Model.MaxAnswers; i++)
                 {
                     if (i < @Model.TotalAnswers)
@@ -187,7 +205,7 @@ WriteLiteral(" class=\"Dilemma-respondent\"");
 WriteLiteral("></li>\r\n");
 
             
-            #line 30 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 37 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                     }
                     else
                     {
@@ -202,7 +220,7 @@ WriteLiteral(" class=\"Dilemma-respondent Dilemma-respondent--empty\"");
 WriteLiteral("></li>\r\n");
 
             
-            #line 34 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 41 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                     }
                 }
 
@@ -215,7 +233,7 @@ WriteLiteral("                \r\n            </ol>    \r\n        </div>\r\n   
 WriteLiteral("    ");
 
             
-            #line 41 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 48 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
 Write(Html.Partial("DisplayTemplates/QuestionCard", Model));
 
             
@@ -224,13 +242,13 @@ Write(Html.Partial("DisplayTemplates/QuestionCard", Model));
 WriteLiteral("\r\n    \r\n    \r\n");
 
             
-            #line 44 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 51 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 44 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 51 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
      if (!Model.IsMyQuestion || !isDilemmaViewPage)
     {
 
@@ -248,13 +266,13 @@ WriteLiteral(" class=\"u-2of5\"");
 WriteLiteral(">\r\n");
 
             
-            #line 48 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 55 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 55 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                  if (!isDilemmaViewPage)
                 {
                      if (Model.IsMyQuestion || (Model.IsOpen && Model.IHaveAnswsered) || (Model.IsClosed && Model.IHaveVoted))
@@ -265,17 +283,17 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                         <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1820), Tuple.Create("\"", 2101)
+WriteAttribute("href", Tuple.Create(" href=\"", 1966), Tuple.Create("\"", 2247)
             
-            #line 52 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create("", 1827), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
+            #line 59 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+, Tuple.Create(Tuple.Create("", 1973), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
                                                                       {
                                                                           Model.QuestionId
                                                                       })
             
             #line default
             #line hidden
-, 1827), false)
+, 1973), false)
 );
 
 WriteLiteral(" class=\"Button--answer\"");
@@ -295,7 +313,7 @@ WriteLiteral(" class=\"Button-label\"");
 WriteLiteral(">View</span>\r\n                         </a>\r\n");
 
             
-            #line 59 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 66 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                      }
                      else if (Model.IsOpen)
                      {
@@ -305,17 +323,17 @@ WriteLiteral(">View</span>\r\n                         </a>\r\n");
             #line hidden
 WriteLiteral("                         <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2446), Tuple.Create("\"", 2727)
+WriteAttribute("href", Tuple.Create(" href=\"", 2592), Tuple.Create("\"", 2873)
             
-            #line 62 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create("", 2453), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
+            #line 69 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+, Tuple.Create(Tuple.Create("", 2599), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
                                                                       {
                                                                           Model.QuestionId
                                                                       })
             
             #line default
             #line hidden
-, 2453), false)
+, 2599), false)
 );
 
 WriteLiteral(" class=\"Button--answer\"");
@@ -335,7 +353,7 @@ WriteLiteral(" class=\"Button-label\"");
 WriteLiteral(">Advise</span>\r\n                         </a>\r\n");
 
             
-            #line 69 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 76 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                      }
                      else if (Model.IsClosed && !Model.IsMyQuestion)
                      {
@@ -345,17 +363,17 @@ WriteLiteral(">Advise</span>\r\n                         </a>\r\n");
             #line hidden
 WriteLiteral("                         <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3099), Tuple.Create("\"", 3380)
+WriteAttribute("href", Tuple.Create(" href=\"", 3245), Tuple.Create("\"", 3526)
             
-            #line 72 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-, Tuple.Create(Tuple.Create("", 3106), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
+            #line 79 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+, Tuple.Create(Tuple.Create("", 3252), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Answers", new
                                                                       {
                                                                           Model.QuestionId
                                                                       })
             
             #line default
             #line hidden
-, 3106), false)
+, 3252), false)
 );
 
 WriteLiteral("  class=\"Button--vote \"");
@@ -371,7 +389,7 @@ WriteLiteral(" class=\"Button-label\"");
 WriteLiteral(">Vote</span>\r\n                         </a>\r\n");
 
             
-            #line 79 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 86 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                      }
                 }
 
@@ -381,13 +399,13 @@ WriteLiteral(">Vote</span>\r\n                         </a>\r\n");
 WriteLiteral("            </div>\r\n");
 
             
-            #line 82 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 89 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 82 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 89 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
              if (!Model.IsMyQuestion)
             {
 
@@ -402,22 +420,22 @@ WriteLiteral(">\r\n                    <button");
 
 WriteLiteral(" type=\"button\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 3764), Tuple.Create("\"", 3858)
-, Tuple.Create(Tuple.Create("", 3772), Tuple.Create("Button--bookmark", 3772), true)
-, Tuple.Create(Tuple.Create(" ", 3788), Tuple.Create("js-bookmark-button", 3789), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 3910), Tuple.Create("\"", 4004)
+, Tuple.Create(Tuple.Create("", 3918), Tuple.Create("Button--bookmark", 3918), true)
+, Tuple.Create(Tuple.Create(" ", 3934), Tuple.Create("js-bookmark-button", 3935), true)
             
-            #line 85 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
-     , Tuple.Create(Tuple.Create(" ", 3807), Tuple.Create<System.Object, System.Int32>(Model.IsBookmarked ? "is-active" : string.Empty
+            #line 92 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+     , Tuple.Create(Tuple.Create(" ", 3953), Tuple.Create<System.Object, System.Int32>(Model.IsBookmarked ? "is-active" : string.Empty
             
             #line default
             #line hidden
-, 3808), false)
+, 3954), false)
 );
 
 WriteLiteral(" data-question-id=\"");
 
             
-            #line 85 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 92 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                                                                                                                                                       Write(Model.QuestionId);
 
             
@@ -455,7 +473,7 @@ WriteLiteral(" title=\"Report an issue with this question\"");
 WriteLiteral("  data-question-id=\"");
 
             
-            #line 92 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 99 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
                                                                                                                                         Write(Model.QuestionId);
 
             
@@ -483,7 +501,7 @@ WriteLiteral(">Flagged</span>\r\n                    </button>                  
 "              </div>\r\n");
 
             
-            #line 98 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 105 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
             }
 
             
@@ -494,7 +512,7 @@ WriteLiteral("\r\n        </div>\r\n");
 WriteLiteral("        <!-- Dilemma-actions -->\r\n");
 
             
-            #line 102 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
+            #line 109 "..\..\Views\Shared\DisplayTemplates\QuestionSummary.cshtml"
     }
 
             

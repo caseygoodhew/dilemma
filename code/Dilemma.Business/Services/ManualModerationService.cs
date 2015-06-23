@@ -28,7 +28,14 @@ namespace Dilemma.Business.Services
         /// <returns>The <see cref="ModerationViewModel"/> or null.</returns>
         public ModerationViewModel GetNext()
         {
-            return ModerationRepository.Value.GetNext<ModerationViewModel>();
+	        var moderation = ModerationRepository.Value.GetNext<ModerationViewModel>();
+
+	        if (moderation != null)
+	        {
+		        moderation.ModerationsWaitingCount = ModerationRepository.Value.BacklogCount();
+	        }
+
+	        return moderation;
         }
 
         /// <summary>

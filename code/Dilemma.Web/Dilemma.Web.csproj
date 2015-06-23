@@ -198,6 +198,7 @@
     <Compile Include="Controllers\PointConfigurationController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QuickAuthenticationController.cs" />
+    <Compile Include="Controllers\StaticPagesController.cs" />
     <Compile Include="Controllers\SystemServerConfigurationController.cs" />
     <Compile Include="DataTransferObjects\BookmarkDto.cs" />
     <Compile Include="DataTransferObjects\ReportDto.cs" />
@@ -221,6 +222,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ask\Confirm.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Confirm.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Views\Ask\Index.generated.cs">
       <AutoGen>True</AutoGen>
@@ -632,7 +638,6 @@
     <Content Include="Content\homegrown\5-overrides\_shame.less" />
     <Content Include="Content\homegrown\css\animate.css.map" />
     <Content Include="Content\homegrown\main.less" />
-    <Content Include="Content\fonts\dilemmicons\.DS_Store" />
     <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.eot" />
     <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.ttf" />
     <Content Include="Content\fonts\dilemmicons\dilemmas-Regular-webfont.woff" />
@@ -657,6 +662,8 @@
     <Content Include="Content\images\icons\fav\manifest.json" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Question Seeder %28i-e00ade11%29.pubxml" />
     <None Include="Properties\PublishProfiles\Dilemma AWS Testing Server %28i-eb5a63e0%29.pubxml" />
+    <None Include="Properties\PublishProfiles\moderation.ourdilemmas.com.pubxml" />
+    <None Include="Properties\PublishProfiles\ourdilemmas.com.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -682,7 +689,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -837,6 +846,12 @@
     <Content Include="Views\PointConfiguration\Edit.cshtml" />
     <Content Include="Views\PointConfiguration\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Ask\Confirm.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Confirm.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\StaticPages\Index.cshtml" />
+    <Content Include="Views\StaticPages\EmptyPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

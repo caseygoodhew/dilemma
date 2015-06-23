@@ -70,5 +70,10 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Domains
 
             return viewModel;
         }
+
+		public static void CloseQuestions()
+		{
+			_questionService.Value.CloseQuestions();
+		}
     }
 }

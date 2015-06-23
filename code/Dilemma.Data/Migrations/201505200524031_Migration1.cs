@@ -9,7 +9,7 @@ namespace Dilemma.Data.Migrations
         {
             AddColumn("dbo.SystemConfiguration", "EnableWebPurify", c => c.Boolean(nullable: false));
             AddColumn("dbo.SystemConfiguration", "EmailErrors", c => c.Boolean(nullable: false));
-            AddColumn("dbo.SystemConfiguration", "EmailErrorsTo", c => c.String(nullable: false));
+            AddColumn("dbo.SystemConfiguration", "EmailErrorsTo", c => c.String(nullable: true));
         }
         
         public override void Down()

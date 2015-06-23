@@ -9,13 +9,16 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    //[AllowUserRole(UserRole.Administrator)]
+    [AllowUserRole(UserRole.Administrator)]
     public class LastRunLogController : DilemmaBaseController
     {
-        private static readonly Lazy<IAdministrationService> AdministrationService =
-            Locator.Lazy<IAdministrationService>();
+		private static readonly Lazy<IAdministrationService> AdministrationService =
+			Locator.Lazy<IAdministrationService>();
 
-        //
+		private static readonly Lazy<IQuestionService> QuestionService =
+			Locator.Lazy<IQuestionService>();
+
+		//
         // GET: /LastRunLog/
         public ActionResult Index()
         {
@@ -39,7 +42,7 @@ namespace Dilemma.Web.Controllers
         [Route("CloseQuestions")]
         public ActionResult CloseQuestions()
         {
-            AdministrationService.Value.CloseQuestions();
+            QuestionService.Value.CloseQuestions();
             return RedirectToAction("Index");
         }
     }

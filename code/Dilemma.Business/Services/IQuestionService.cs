@@ -108,5 +108,7 @@ namespace Dilemma.Business.Services
         /// </summary>
         /// <param name="questionId">The question to remove the bookmark from.</param>
         void RemoveBookmark(int questionId);
+
+	    void CloseQuestions();
     }
 }

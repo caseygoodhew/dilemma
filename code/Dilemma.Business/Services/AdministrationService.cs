@@ -79,11 +79,6 @@ namespace Dilemma.Business.Services
             AdministrationRepository.Value.RetireOldQuestions();
         }
 
-        public void CloseQuestions()
-        {
-            AdministrationRepository.Value.CloseQuestions();
-        }
-
         public LastRunLogViewModel GetLastRunLog()
         {
             return AdministrationRepository.Value.GetLastRunLog<LastRunLogViewModel>();

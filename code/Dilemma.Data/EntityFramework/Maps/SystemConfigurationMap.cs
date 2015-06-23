@@ -16,13 +16,13 @@ namespace Dilemma.Data.EntityFramework.Maps
         {
             HasKey(p => p.Id);
             Property(p => p.MaxAnswers).IsRequired();
-            Property(p => p.QuestionLifetime).IsRequired();
+            Property(p => p.QuestionLifetimeDays).IsRequired();
             Property(p => p.SystemEnvironment).IsRequired();
             Property(p => p.RetireQuestionAfterDays).IsRequired();
             Property(p => p.ExpireAnswerSlotsAfterMinutes).IsRequired();
             Property(p => p.EnableWebPurify).IsRequired();
             Property(p => p.EmailErrors).IsRequired();
-            Property(p => p.EmailErrorsTo).IsRequired();
+			Property(p => p.EmailErrorsTo).IsOptional();
         }
     }
 }

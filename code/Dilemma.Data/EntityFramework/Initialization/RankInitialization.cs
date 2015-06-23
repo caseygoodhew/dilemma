@@ -30,28 +30,28 @@ namespace Dilemma.Data.EntityFramework.Initialization
             context.Ranks.Add(
                 new Rank
                     {
-                        PointsRequired = 100,
+                        PointsRequired = 1000,
                         Name = "Wise Owl"
                     });
 
             context.Ranks.Add(
                 new Rank
                     {
-                        PointsRequired = 1000,
+                        PointsRequired = 5000,
                         Name = "Guru"
                     });
 
             context.Ranks.Add(
                 new Rank
                     {
-                        PointsRequired = 5000,
+                        PointsRequired = 15000,
                         Name = "Angel"
                     });
 
             context.Ranks.Add(
                 new Rank
                     {
-                        PointsRequired = 20000,
+                        PointsRequired = 50000,
                         Name = "Deity"
                     });
         }

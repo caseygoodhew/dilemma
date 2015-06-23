@@ -53,7 +53,7 @@ WriteLiteral("\r\n");
             
             #line 5 "..\..\Views\Shared\DisplayTemplates\SidebarNotificationSummary.cshtml"
   
-    var notificationCount = Model.Count();
+    var notificationCount = ViewBag.NotificationCount;
 
             
             #line default

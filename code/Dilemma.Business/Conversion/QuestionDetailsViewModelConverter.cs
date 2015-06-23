@@ -88,7 +88,7 @@ namespace Dilemma.Business.Conversion
                 return false;
             }
             
-            return model.TotalAnswers <= model.MaxAnswers;
+            return model.TotalAnswers < model.MaxAnswers;
         }
 
         private static bool CanVote(Question model)

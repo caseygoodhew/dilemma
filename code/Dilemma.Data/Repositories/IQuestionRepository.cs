@@ -145,5 +145,7 @@ namespace Dilemma.Data.Repositories
         void RemoveBookmark(int userId, int questionId);
 
         IEnumerable<int> GetBookmarkedQuestionIds(int userId);
+
+		void CloseQuestions();
     }
 }

@@ -9,14 +9,21 @@
     <div class="Card-section Card-info">
         <div class="line align-center">
             <div class="Card-label--small">
-                @if (Model.IsClosed)
-                {
-                    <text>Closed @Model.ClosedDateTime.ToRelativeText()</text>
-                }
-                else
-                {
-                    <text>Closes @Model.ClosesDateTime.ToRelativeText()</text>
-                }
+	            @if (Model.IsApproved)
+	            {
+		             if (Model.IsClosed)
+		             {
+			             <text>Closed @Model.ClosedDateTime.ToRelativeText()</text>
+		             }
+		             else
+		             {
+			             <text>Closes @Model.ClosesDateTime.ToRelativeText()</text>
+		             }
+	            }
+	            else
+	            {
+					<text>Waiting on moderation</text>
+	            }
                 
             </div>
             <ol 

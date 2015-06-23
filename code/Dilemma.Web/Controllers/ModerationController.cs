@@ -11,7 +11,8 @@ using Disposable.Common.ServiceLocator;
 
 namespace Dilemma.Web.Controllers
 {
-    //[AllowUserRole(UserRole.Moderator)]
+    [AllowSystemEnvironment(SystemEnvironment.Development)]
+    [AllowUserRole(UserRole.Moderator)]
     public class ModerationController : DilemmaBaseController
     {
         private static readonly Lazy<IManualModerationService> ManualModerationService = Locator.Lazy<IManualModerationService>();
@@ -20,7 +21,7 @@ namespace Dilemma.Web.Controllers
         // GET: /Moderation/
         public ActionResult Index()
         {
-            return View(ManualModerationService.Value.GetNext());
+			return View(ManualModerationService.Value.GetNext());
         }
 
         [HttpPost]
@@ -37,13 +38,15 @@ namespace Dilemma.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowUserRole(UserRole.Public)]
         [Route("moderation/dilemma/{questionId:int:min(1)}")]
         public ActionResult QuestionHistory(int questionId)
         {
             var viewModel = ManualModerationService.Value.GetQuestionHistory(questionId);
             return View(new ModerationHistoryViewModel<QuestionModerationHistoryViewModel>(viewModel, GetSidebarViewModel()));
         }
-        
+
+        [AllowUserRole(UserRole.Public)]
         [Route("moderation/answer/{answerId:int:min(1)}")]
         public ActionResult AnswerHistory(int answerId)
         {
@@ -51,6 +54,7 @@ namespace Dilemma.Web.Controllers
             return View(new ModerationHistoryViewModel<AnswerModerationHistoryViewModel>(viewModel, GetSidebarViewModel()));
         }
 
+        [AllowUserRole(UserRole.Public)]
         [Route("moderation/followup/{followupId:int:min(1)}")]
         public ActionResult FollowupHistory(int followupId)
         {

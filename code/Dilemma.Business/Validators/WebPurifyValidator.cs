@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using Dilemma.Business.Services;
 using Dilemma.Business.WebPurify;
 using Dilemma.Logging;
 using Disposable.Common.ServiceLocator;
@@ -12,7 +14,9 @@ namespace Dilemma.Business.Validators
     {
         private static readonly string ErrorMessage = "'{PropertyName}' cannot contain the word(s) {Explicits}.";
 
-        private static readonly Lazy<IWebPurifyResponder> WebPurifyResponder = Locator.Lazy<IWebPurifyResponder>();
+		private static readonly Lazy<IAdministrationService> AdministrationService = Locator.Lazy<IAdministrationService>();
+		
+		private static readonly Lazy<IWebPurifyResponder> WebPurifyResponder = Locator.Lazy<IWebPurifyResponder>();
 
         private static readonly Lazy<ILogger> Logger = Locator.Lazy<ILogger>();
 
@@ -20,7 +24,14 @@ namespace Dilemma.Business.Validators
 
         protected override bool IsValid(PropertyValidatorContext context)
         {
-            if (context.PropertyValue == null)
+            var systemConfigurationViewModel = AdministrationService.Value.GetSystemServerConfiguration().SystemConfigurationViewModel;
+
+			if (!systemConfigurationViewModel.EnableWebPurify)
+	        {
+		        return true;
+	        }
+			
+			if (context.PropertyValue == null)
             {
                 return true;
             }
@@ -32,16 +43,21 @@ namespace Dilemma.Business.Validators
                 return true;
             }
 
+
+            var stopwatch = Stopwatch.StartNew();
+            
             IEnumerable<string> explicits;
             var result = true;
             var status = WebPurifyResponder.Value.Return(text, out explicits);
+
+            var elapsedTime = stopwatch.ElapsedMilliseconds;
 
             var tidiedExplicits = explicits.Distinct().OrderBy(x => x).ToList();
             var explicitsString = string.Join(", ", tidiedExplicits.Select(x => string.Format("'{0}'", x)));
 
             if (status == WebPurifyStatus.Ok)
             {
-                Logger.Value.Info(string.Format("WebPurifyStatus.Ok : {0} explicits : {1}", tidiedExplicits.Count, explicitsString));
+                Logger.Value.Info(string.Format("WebPurifyStatus.Ok : {0} milliseconds : {1} explicits : {2}", elapsedTime, tidiedExplicits.Count, explicitsString));
             }
             else
             {

@@ -179,7 +179,10 @@ button,
 [class^='Button'],
 [class*=' Button'] {
   &.is-active .Button-label.is-active {
-    display: inline;
+    @media (min-width:500px) {
+        display: inline;
+        background-color: transparent;
+      }
   }
   &.is-active .Button-label.is-inactive {
     display: none;

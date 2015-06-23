@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dilemma.Web.Views.Shared
+namespace ASP
 {
     using System;
     using System.Collections.Generic;
@@ -27,13 +27,17 @@ namespace Dilemma.Web.Views.Shared
     using System.Web.Security;
     using System.Web.UI;
     using System.Web.WebPages;
+    using Dilemma.Common;
     using Dilemma.Web;
+    using Dilemma.Web.Extensions;
+    using Disposable.Common.Extensions;
+    using Disposable.Web.Common;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/Error.cshtml")]
-    public partial class Error : System.Web.Mvc.WebViewPage<System.Web.Mvc.HandleErrorInfo>
+    public partial class _Views_Shared_Error_cshtml : System.Web.Mvc.WebViewPage<System.Web.Mvc.HandleErrorInfo>
     {
-        public Error()
+        public _Views_Shared_Error_cshtml()
         {
         }
         public override void Execute()

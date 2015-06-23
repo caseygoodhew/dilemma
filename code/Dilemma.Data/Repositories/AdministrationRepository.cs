@@ -63,31 +63,18 @@ namespace Dilemma.Data.Repositories
 
         public void SetServerConfiguration<T>(T serverConfigurationType) where T : class
         {
-            var systemConfiguration = ConverterFactory.ConvertOne<T, ServerConfiguration>(serverConfigurationType);
+            var serverConfiguration = ConverterFactory.ConvertOne<T, ServerConfiguration>(serverConfigurationType);
             
             using (var context = new DilemmaContext())
             {
-                systemConfiguration.Name = ServerName.Get();
-                systemConfiguration.Id = GetServerConfigurationId(context, systemConfiguration.Name);
-                context.ServerConfiguration.Update(context, systemConfiguration);
-                context.SaveChangesVerbose();
-
+	            ServerConfiguration.Write(serverConfiguration);
                 ExpireCache();
             }
         }
 
         public T GetServerConfiguration<T>() where T : class
         {
-            var serverName = ServerName.Get();
-            
-            var serverConfiguration = Cache.Value.Get(
-                () =>
-                {
-                    using (var context = new DilemmaContext())
-                    {
-                        return context.ServerConfiguration.Single(x => x.Name == serverName);
-                    }
-                });
+            var serverConfiguration = Cache.Value.Get(() => ServerConfiguration.Read());
 
             return ConverterFactory.ConvertOne<ServerConfiguration, T>(serverConfiguration);
         }
@@ -162,18 +149,6 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        public void CloseQuestions()
-        {
-            using (var context = new DilemmaContext())
-            {
-                var nowParameter = new SqlParameter("@DateTimeNow", TimeSource.Value.Now);
-                // we don't expect a result, but if we don't ToList then the query doesn't execute
-                var result = context.Database.SqlQuery<CloseQuestions>("CloseQuestions @DateTimeNow", nowParameter).ToList();
-                
-                context.SaveChangesVerbose();
-            }
-        }
-
         public T GetLastRunLog<T>() where T : class
         {
             using (var context = new DilemmaContext())
@@ -223,11 +198,6 @@ namespace Dilemma.Data.Repositories
             Cache.Value.Expire<SystemConfiguration>();
             
             Cache.Value.Expire<ServerConfiguration>();
-        }
-
-        private static int GetServerConfigurationId(DilemmaContext context, string serverName)
-        {
-            return context.ServerConfiguration.Where(x => x.Name == serverName).Select(x => x.Id).Single();
         }
     }
 }

@@ -40,11 +40,6 @@ namespace Dilemma.Data.EntityFramework
         public DbSet<SystemConfiguration> SystemConfiguration { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="ServerConfiguration"/> database set. 
-        /// </summary>
-        public DbSet<ServerConfiguration> ServerConfiguration { get; set; }
-
-        /// <summary>
         /// Gets or sets the <see cref="Categories"/> database set.
         /// </summary>
         public DbSet<Category> Categories { get; set; }
@@ -129,7 +124,6 @@ namespace Dilemma.Data.EntityFramework
             modelBuilder.Configurations.Add(new AnswerMap());
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new SystemConfigurationMap());
-            modelBuilder.Configurations.Add(new ServerConfigurationMap());
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new DevelopmentUserMap());
             modelBuilder.Configurations.Add(new NotificationMap());

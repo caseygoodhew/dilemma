@@ -19,6 +19,18 @@ namespace Dilemma.Common
 
         [Display(Name = "Popular Vote Received", Description = "Points are awarded for receiving the star vote on a question and contributing to the community. Points are awarded immediately.")]
         [DefaultValue(100)]
-        PopularVoteReceived = 4
+        PopularVoteReceived = 4,
+
+        [Display(Name = "Vote Cast", Description = "Points are awarded for casting a vote for someone else's answer. Points are awarded immediately.")]
+        [DefaultValue(100)]
+        VoteCast = 5,
+
+        [Display(Name = "Star Vote Awarded", Description = "Points are awarded for awarding the star vote on your dilemma. Points are awarded immediately.")]
+        [DefaultValue(100)]
+        StarVoteAwarded = 6,
+
+        [Display(Name = "What Happened Next", Description = "Points are awarded for telling the people that answered, voted, and bookmarked what course of action you took. Points are awarded immediately.")]
+        [DefaultValue(100)]
+        WhatHappenedNext = 7,
     }
 }

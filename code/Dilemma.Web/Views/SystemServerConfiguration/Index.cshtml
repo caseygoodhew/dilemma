@@ -19,10 +19,10 @@
     </div>
     
     <div class="form-group">
-        @Html.LabelFor(x => x.SystemConfigurationViewModel.QuestionLifetime, new { @class = "col-md-2 col-sm-3 control-label" })
+        @Html.LabelFor(x => x.SystemConfigurationViewModel.QuestionLifetimeDays, new { @class = "col-md-2 col-sm-3 control-label" })
         <div class="col-md-3 col-sm-4">
-            @Html.EnumDropDownListFor(x => x.SystemConfigurationViewModel.QuestionLifetime, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.SystemConfigurationViewModel.QuestionLifetime)
+            @Html.TextBoxFor(x => x.SystemConfigurationViewModel.QuestionLifetimeDays, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.SystemConfigurationViewModel.QuestionLifetimeDays)
         </div>
     </div>
     
@@ -81,14 +81,6 @@
         <div class="col-md-3 col-sm-4">
             @Html.EnumDropDownListFor(x => x.ServerConfigurationViewModel.ServerRole, new { @class = "form-control" })
             @Html.ValidationMessageFor(x => x.ServerConfigurationViewModel.ServerRole)
-        </div>
-    </div>
-    
-    <div class="form-group">
-        @Html.LabelFor(x => x.ServerConfigurationViewModel.Name, new { @class = "col-md-2 col-sm-3 control-label" })
-        <div class="col-md-3 col-sm-4">
-            @Html.TextBoxFor(x => x.ServerConfigurationViewModel.Name, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.ServerConfigurationViewModel.Name)
         </div>
     </div>
     

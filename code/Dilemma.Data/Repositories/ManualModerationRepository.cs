@@ -365,7 +365,17 @@ namespace Dilemma.Data.Repositories
             }
         }
 
-        private static void ReportToExisting(
+	    public int BacklogCount()
+	    {
+		    using (var context = new DilemmaContext())
+		    {
+			    return
+				    context.Moderations.Select(x => x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ThenByDescending(y => y.ModerationEntryId).FirstOrDefault())
+					    .Count(x => x.State == ModerationState.Queued || x.State == ModerationState.ReQueued);
+		    }
+	    }
+
+	    private static void ReportToExisting(
             DilemmaContext context,
             int userId,
             ReportReason reportReason,
@@ -386,7 +396,7 @@ namespace Dilemma.Data.Repositories
                 moderationId,
                 string.Format("REPORTED FOR {0}: {1}", reportReason.ToString().ToUpper(), itemText));
 
-            Logger.Value.Info("Moderable Reported");
+            Logger.Value.Warn("Moderable Reported");
         }
 
         private static void OnModerableCreated(DilemmaContext context, Moderation moderation, string message)
@@ -397,7 +407,7 @@ namespace Dilemma.Data.Repositories
 
             AddModerationEntry(context, moderation.ModerationId, ModerationState.Queued, moderation.ForUser.UserId, message);
 
-            Logger.Value.Info("Moderable Created");
+            Logger.Value.Warn("Moderable Created");
         }
 
         private static T GetNextForUser<T>(int? userId) where T : class
@@ -410,7 +420,7 @@ namespace Dilemma.Data.Repositories
                         .Where(x => userId == null || x.ForUser.UserId == userId.Value)
                         .Select(x => new
                         {
-                            MostRecentEntry = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).FirstOrDefault(),
+                            MostRecentEntry = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ThenByDescending(y => y.ModerationEntryId).FirstOrDefault(),
                             x.ModerationEntries,
                             x.ModerationFor,
                             x.ModerationId
@@ -422,7 +432,7 @@ namespace Dilemma.Data.Repositories
                         .Select(x => new Moderation
                         {
                             ModerationId = x.ModerationId,
-                            ModerationEntries = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ToList(),
+                            ModerationEntries = x.ModerationEntries.OrderByDescending(y => y.CreatedDateTime).ThenByDescending(y => y.ModerationEntryId).ToList(),
                             ModerationFor = x.ModerationFor
                         })
                         .FirstOrDefault();

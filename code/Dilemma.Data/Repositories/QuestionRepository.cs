@@ -88,6 +88,12 @@ namespace Dilemma.Data.Repositories
         /// <returns>A list of <see cref="Question"/>s converted to type T.</returns>
         public IEnumerable<T> QuestionList<T>(int maximum) where T : class
         {
+            /////////////////////////////////////////////////////////////////
+            // TODO: THIS SHOULD NOT GET CALLED EVERY TIME
+            CloseQuestions();
+            AdministrationRepository.Value.RetireOldQuestions();
+            /////////////////////////////////////////////////////////////////
+            
             using (var context = new DilemmaContext())
             {
                 return QuestionList<T>(context.Questions, maximum);
@@ -259,6 +265,11 @@ namespace Dilemma.Data.Repositories
         /// <returns>The answer id if a slot is available or null if it is not available.</returns>
         public int? RequestAnswerSlot(int userId, int questionId)
         {
+            /////////////////////////////////////////////////////////////////
+            // TODO: THIS SHOULD NOT GET CALLED EVERY TIME
+            AdministrationRepository.Value.ExpireAnswerSlots();
+            /////////////////////////////////////////////////////////////////
+            
             using (var context = new DilemmaContext())
             {
                 if (HasUserAnsweredQuestion(context, userId, questionId))
@@ -498,6 +509,8 @@ namespace Dilemma.Data.Repositories
                                            : AnswerDataAction.VoteCast;
 
                 var messageContext = new AnswerMessageContext(answerDataAction, context, vote.Answer);
+                messageContext.Dictionary["VoteCastBy"] = userId;
+
                 AnswerMessagePipe.Value.Announce(messageContext);
             }
         }
@@ -588,6 +601,42 @@ namespace Dilemma.Data.Repositories
             using (var context = new DilemmaContext())
             {
                 return context.Bookmarks.Where(x => x.User.UserId == userId).Select(x => x.Question.QuestionId).ToList();
+            }
+        }
+
+		public void CloseQuestions()
+        {
+            using (var context = new DilemmaContext())
+            {
+	            var now = TimeSource.Value.Now;
+				
+				var questionSetOne =
+		            context.Questions.Include(x => x.User).Where(x => x.QuestionState == Common.QuestionState.Approved)
+			            .Where(x => x.ClosedDateTime == null)
+			            .Where(x => x.ClosesDateTime < now)
+			            .ToList();
+
+	            var questionSetTwo =
+		            context.Questions.Include(x => x.User).Where(x => x.QuestionState == QuestionState.Approved)
+			            .Where(x => x.ClosedDateTime == null)
+			            .Where(x => x.MaxAnswers <= x.Answers.Count(a => a.AnswerState == Common.AnswerState.Approved))
+			            .ToList();
+
+	            var questions = questionSetOne.Concat(questionSetTwo).GroupBy(x => x.QuestionId).Select(x => x.First()).ToList();
+
+	            foreach (var question in questions)
+	            {
+		            var messageContext = new QuestionMessageContext(QuestionDataAction.OpenForVoting, context, question);
+		            QuestionMessagePipe.Value.Announce(messageContext);
+	            }
+
+				questions.ForEach(x => x.ClosedDateTime = now);
+
+                var lastRunLog = context.LastRunLog.Single();
+                lastRunLog.CloseQuestions = TimeSource.Value.Now;
+                context.Entry(lastRunLog).Property(x => x.CloseQuestions).IsModified = true;
+
+	            context.SaveChangesVerbose();
             }
         }
 
@@ -827,7 +876,7 @@ namespace Dilemma.Data.Repositories
                                             }).ToList(),
                                             Category = x.Category,
                                             ClosesDateTime = x.ClosesDateTime,
-                                            CreatedDateTime = x.ClosesDateTime,
+											CreatedDateTime = x.CreatedDateTime,
                                             ClosedDateTime = x.ClosedDateTime,
                                             MaxAnswers = x.MaxAnswers,
                                             QuestionId = x.QuestionId,

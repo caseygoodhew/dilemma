@@ -53,7 +53,7 @@ namespace ASP
             #line hidden
 WriteLiteral("\r\n\r\n\r\n<h1");
 
-WriteLiteral(" class=\"mb0 mh15 pb0\"");
+WriteLiteral(" class=\"mb0 mh15 pb10\"");
 
 WriteLiteral(">\r\n    <span");
 
@@ -84,29 +84,208 @@ WriteLiteral(" role=\"main\"");
 
 WriteLiteral(" class=\"main\"");
 
-WriteLiteral(">\r\n            \r\n        <h2");
-
-WriteLiteral(" class=\"js-sticky h3\"");
-
-WriteLiteral(">\r\n            <span");
-
-WriteLiteral(" class=\"js-sticky--offset\"");
-
-WriteLiteral(">\r\n                Your Current Dilemmas\r\n            </span>\r\n        </h2>\r\n\r\n " +
-"       <div");
+WriteLiteral(">\r\n            \r\n        <div");
 
 WriteLiteral(" class=\"Dilemmas\"");
 
-WriteLiteral(">\r\n\r\n");
+WriteLiteral(">\r\n\r\n        <div");
+
+WriteLiteral(" class=\"line\"");
+
+WriteLiteral(">\r\n\r\n            <div");
+
+WriteLiteral(" class=\"gu1of3\"");
+
+WriteLiteral(">\r\n                <a");
+
+WriteLiteral(" href=\"#notifications\"");
+
+WriteLiteral(" class=\"Card Notification Notification--mini\"");
+
+WriteLiteral(">\r\n                    <div");
+
+WriteLiteral(" class=\"Notification-score\"");
+
+WriteLiteral(">\r\n                        <div>\r\n                            <span");
+
+WriteLiteral(" data-icon=\"notification\"");
+
+WriteLiteral("></span>\r\n                        </div>\r\n                    </div>\r\n           " +
+"         <div");
+
+WriteLiteral(" class=\"Notification-summary\"");
+
+WriteLiteral(">\r\n                        <div");
+
+WriteLiteral(" class=\"Notification--mini-number\"");
+
+WriteLiteral(">");
 
             
-            #line 30 "..\..\Views\Profile\Index.cshtml"
+            #line 34 "..\..\Views\Profile\Index.cshtml"
+                                                          Write(Model.Notifications.Count());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                        <div");
+
+WriteLiteral(" class=\"Notification--mini-type\"");
+
+WriteLiteral(">");
+
+            
+            #line 35 "..\..\Views\Profile\Index.cshtml"
+                                                         Write(Model.Notifications.Count() == 1 ? "NOTIFICATION" : "NOTIFICATIONS");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </div><!-- Notification-summary -->\r\n                " +
+"</a>\r\n            </div><!-- gu1of3 -->\r\n\r\n            <div");
+
+WriteLiteral(" class=\"gu1of3\"");
+
+WriteLiteral(">\r\n                <a");
+
+WriteLiteral(" href=\"#dilemmas\"");
+
+WriteLiteral(" class=\"Card Notification Notification--ask Notification--mini\"");
+
+WriteLiteral(">\r\n                    <div");
+
+WriteLiteral(" class=\"Notification-score\"");
+
+WriteLiteral(">\r\n                        <div>\r\n                            <span");
+
+WriteLiteral(" data-icon=\"ask\"");
+
+WriteLiteral("></span>\r\n                        </div>\r\n                    </div>\r\n           " +
+"         <div");
+
+WriteLiteral(" class=\"Notification-summary\"");
+
+WriteLiteral(">\r\n                        <div");
+
+WriteLiteral(" class=\"Notification--mini-number\"");
+
+WriteLiteral(">");
+
+            
+            #line 48 "..\..\Views\Profile\Index.cshtml"
+                                                          Write(Model.Dilemmas.Count());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                        <div");
+
+WriteLiteral(" class=\"Notification--mini-type\"");
+
+WriteLiteral(">");
+
+            
+            #line 49 "..\..\Views\Profile\Index.cshtml"
+                                                         Write(Model.Dilemmas.Count() == 1 ? "DILEMMA" : "DILEMMAS");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </div><!-- Notification-summary -->\r\n                " +
+"</a>\r\n            </div><!-- gu1of3 -->\r\n\r\n            <div");
+
+WriteLiteral(" class=\"gu1of3\"");
+
+WriteLiteral(">\r\n                <a");
+
+WriteLiteral(" href=\"#answers\"");
+
+WriteLiteral(" class=\"Card Notification Notification--advise Notification--mini\"");
+
+WriteLiteral(">\r\n                    <div");
+
+WriteLiteral(" class=\"Notification-score\"");
+
+WriteLiteral(">\r\n                        <div>\r\n                            <span");
+
+WriteLiteral(" data-icon=\"advise\"");
+
+WriteLiteral("></span>\r\n                        </div>\r\n                    </div>\r\n           " +
+"         <div");
+
+WriteLiteral(" class=\"Notification-summary\"");
+
+WriteLiteral(">\r\n                        <div");
+
+WriteLiteral(" class=\"Notification--mini-number\"");
+
+WriteLiteral(">");
+
+            
+            #line 62 "..\..\Views\Profile\Index.cshtml"
+                                                          Write(Model.Answers.Count());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                        <div");
+
+WriteLiteral(" class=\"Notification--mini-type\"");
+
+WriteLiteral(">");
+
+            
+            #line 63 "..\..\Views\Profile\Index.cshtml"
+                                                         Write(Model.Answers.Count() == 1 ? "ANSWER" : "ANSWERS");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                    </div><!-- Notification-summary -->\r\n                " +
+"</a>\r\n            </div><!-- gu1of3 -->\r\n\r\n        </div><!-- line -->\r\n\r\n      " +
+"      <h2");
+
+WriteLiteral(" class=\"js-sticky h3\"");
+
+WriteLiteral(" id=\"notifications\"");
+
+WriteLiteral(">\r\n                <span");
+
+WriteLiteral(" class=\"js-sticky--offset\"");
+
+WriteLiteral(">\r\n                    Notifications\r\n                </span>\r\n            </h2>\r" +
+"\n\r\n");
+
+WriteLiteral("            ");
+
+            
+            #line 76 "..\..\Views\Profile\Index.cshtml"
+       Write(Html.DisplayForList(x => x.Notifications, "Notifications"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n            \r\n\r\n            <h2");
+
+WriteLiteral(" class=\"js-sticky h3\"");
+
+WriteLiteral(" id=\"dilemmas\"");
+
+WriteLiteral(">\r\n                <span");
+
+WriteLiteral(" class=\"js-sticky--offset\"");
+
+WriteLiteral(">\r\n                    Your Current Dilemmas\r\n                </span>\r\n          " +
+"  </h2>\r\n\r\n");
+
+            
+            #line 85 "..\..\Views\Profile\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 30 "..\..\Views\Profile\Index.cshtml"
+            #line 85 "..\..\Views\Profile\Index.cshtml"
              if (Model.Dilemmas.Any())
             {
                 
@@ -114,14 +293,14 @@ WriteLiteral(">\r\n\r\n");
             #line default
             #line hidden
             
-            #line 32 "..\..\Views\Profile\Index.cshtml"
+            #line 87 "..\..\Views\Profile\Index.cshtml"
            Write(Html.DisplayForList(x => x.Dilemmas, "QuestionNotification"));
 
             
             #line default
             #line hidden
             
-            #line 32 "..\..\Views\Profile\Index.cshtml"
+            #line 87 "..\..\Views\Profile\Index.cshtml"
                                                                              
             }
             else
@@ -131,14 +310,14 @@ WriteLiteral(">\r\n\r\n");
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Profile\Index.cshtml"
+            #line 91 "..\..\Views\Profile\Index.cshtml"
            Write(Html.Partial("DisplayTemplates/NoDilemmas"));
 
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Views\Profile\Index.cshtml"
+            #line 91 "..\..\Views\Profile\Index.cshtml"
                                                             
             }
 
@@ -149,6 +328,8 @@ WriteLiteral("\r\n            <h2");
 
 WriteLiteral(" class=\"js-sticky h3\"");
 
+WriteLiteral(" id=\"answers\"");
+
 WriteLiteral(">\r\n                <span");
 
 WriteLiteral(" class=\"js-sticky--offset\"");
@@ -157,13 +338,13 @@ WriteLiteral(">\r\n                    Advice You\'ve Given\r\n                <
 "</h2>\r\n\r\n");
 
             
-            #line 45 "..\..\Views\Profile\Index.cshtml"
+            #line 100 "..\..\Views\Profile\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 45 "..\..\Views\Profile\Index.cshtml"
+            #line 100 "..\..\Views\Profile\Index.cshtml"
              if (Model.Answers.Any())
             {
                 
@@ -171,14 +352,14 @@ WriteLiteral(">\r\n                    Advice You\'ve Given\r\n                <
             #line default
             #line hidden
             
-            #line 47 "..\..\Views\Profile\Index.cshtml"
+            #line 102 "..\..\Views\Profile\Index.cshtml"
            Write(Html.DisplayForList(x => x.Answers, "QuestionNotification"));
 
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Views\Profile\Index.cshtml"
+            #line 102 "..\..\Views\Profile\Index.cshtml"
                                                                             
             }
             else
@@ -199,14 +380,14 @@ WriteLiteral(" class=\"line\"");
 WriteLiteral(">\r\n                        <span>&nbsp;&nbsp;&nbsp;</span>\r\n                     " +
 "   <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1499), Tuple.Create("\"", 1538)
+WriteAttribute("href", Tuple.Create(" href=\"", 4090), Tuple.Create("\"", 4129)
             
-            #line 55 "..\..\Views\Profile\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1506), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
+            #line 110 "..\..\Views\Profile\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 4097), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
             
             #line default
             #line hidden
-, 1506), false)
+, 4097), false)
 );
 
 WriteLiteral(" class=\"Button--ask\"");
@@ -219,34 +400,14 @@ WriteLiteral("></span> \r\n                            Start Advising Now\r\n   
 "  </a>\r\n                    </div>\r\n                </div>\r\n");
 
             
-            #line 61 "..\..\Views\Profile\Index.cshtml"
+            #line 116 "..\..\Views\Profile\Index.cshtml"
             }
 
             
             #line default
             #line hidden
-WriteLiteral("                \r\n            <h2");
-
-WriteLiteral(" class=\"js-sticky h3\"");
-
-WriteLiteral(">\r\n                <span");
-
-WriteLiteral(" class=\"js-sticky--offset\"");
-
-WriteLiteral(">\r\n                    Notifications\r\n                </span>\r\n            </h2>\r" +
-"\n\r\n");
-
-WriteLiteral("            ");
-
-            
-            #line 69 "..\..\Views\Profile\Index.cshtml"
-       Write(Html.DisplayForList(x => x.Notifications, "Notifications"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                \r\n        </div>\r\n\r\n    </main><!-- main-->   \r\n\r\n</div>\r\n    \r" +
-"\n\r\n");
+WriteLiteral("                \r\n\r\n                \r\n        </div>\r\n\r\n    </main><!-- main-->  " +
+" \r\n\r\n</div>\r\n    \r\n\r\n");
 
 DefineSection("scripts", () => {
 

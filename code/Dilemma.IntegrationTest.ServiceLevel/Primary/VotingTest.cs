@@ -32,7 +32,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
                         SystemConfigurationViewModel = new SystemConfigurationViewModel
                                                            {
                                                                MaxAnswers = 5,
-                                                               QuestionLifetime = QuestionLifetime.FiveMinutes,
+                                                               QuestionLifetimeDays = QuestionLifetime.FiveMinutes,
                                                                SystemEnvironment = SystemEnvironment.Testing
                                                            },
                         ServerConfigurationViewModel = new ServerConfigurationViewModel

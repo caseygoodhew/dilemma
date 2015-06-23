@@ -59,7 +59,7 @@ WriteLiteral(">\r\n    \r\n    <div");
 
 WriteLiteral(" class=\"Card-section Card-info\"");
 
-WriteLiteral(">\r\n        What did you do?\r\n    </div>\r\n\r\n");
+WriteLiteral(">\r\n        How did it Go? Did the Advice Help?\r\n    </div>\r\n\r\n");
 
 WriteLiteral("    ");
 

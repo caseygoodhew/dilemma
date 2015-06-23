@@ -38,8 +38,6 @@ namespace Dilemma.Business.Services
         
         void RetireOldQuestions();
 
-        void CloseQuestions();
-
         LastRunLogViewModel GetLastRunLog();
 
         bool IsOnline();

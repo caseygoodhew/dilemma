@@ -3,7 +3,7 @@
 @model IEnumerable<Dilemma.Business.ViewModels.NotificationListViewModel>
 
 @{
-    var notificationCount = Model.Count();
+    var notificationCount = ViewBag.NotificationCount;
 }
 
 <div style="width: 60px; overflow: hidden; float: left;">

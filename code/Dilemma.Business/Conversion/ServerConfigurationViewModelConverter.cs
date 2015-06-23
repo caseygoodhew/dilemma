@@ -1,4 +1,5 @@
 ﻿using Dilemma.Business.ViewModels;
+using Dilemma.Common;
 using Dilemma.Data.Models;
 
 namespace Dilemma.Business.Conversion
@@ -30,7 +31,6 @@ namespace Dilemma.Business.Conversion
         {
             return new ServerConfigurationViewModel
                        {
-                           Name = model.Name,
                            ServerRole = model.ServerRole
                        };
         }

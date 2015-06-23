@@ -16,7 +16,7 @@ Update-Database -ProjectName Dilemma.Data -TargetMigration:"201504031318593_Migr
 RELEASE:
 Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: $InitialDatabase
 
-Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: 201504031318593_Migration18 
+Update-Database -ProjectName Dilemma.Data -Script -SourceMigration: 201506171352434_Migration9 
 
 
 

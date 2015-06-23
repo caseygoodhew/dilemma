@@ -119,6 +119,34 @@
     <Compile Include="Migrations\201505290527381_Migration4.Designer.cs">
       <DependentUpon>201505290527381_Migration4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505311022397_Migration5.cs" />
+    <Compile Include="Migrations\201505311022397_Migration5.Designer.cs">
+      <DependentUpon>201505311022397_Migration5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506021832108_Migration6.cs" />
+    <Compile Include="Migrations\201506021832108_Migration6.Designer.cs">
+      <DependentUpon>201506021832108_Migration6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506171338314_Migration7.cs" />
+    <Compile Include="Migrations\201506171338314_Migration7.Designer.cs">
+      <DependentUpon>201506171338314_Migration7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506171348030_Migration8.cs" />
+    <Compile Include="Migrations\201506171348030_Migration8.Designer.cs">
+      <DependentUpon>201506171348030_Migration8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506171352434_Migration9.cs" />
+    <Compile Include="Migrations\201506171352434_Migration9.Designer.cs">
+      <DependentUpon>201506171352434_Migration9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506200510403_Migration10.cs" />
+    <Compile Include="Migrations\201506200510403_Migration10.Designer.cs">
+      <DependentUpon>201506200510403_Migration10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506220529448_Migration11.cs" />
+    <Compile Include="Migrations\201506220529448_Migration11.Designer.cs">
+      <DependentUpon>201506220529448_Migration11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\EmailLogLevel.cs" />
     <Compile Include="Models\Followup.cs" />
@@ -128,7 +156,6 @@
     <Compile Include="Models\Proxies\QuestionHistoryProxy.cs" />
     <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\ReportedPost.cs" />
-    <Compile Include="Models\Virtual\CloseQuestions.cs" />
     <Compile Include="Models\Virtual\ExpireAnswerSlots.cs" />
     <Compile Include="Models\Virtual\ModerationRetirement.cs" />
     <Compile Include="Models\Virtual\QuestionRetirement.cs" />
@@ -139,14 +166,12 @@
     <Compile Include="EntityFramework\Maps\ModerationMap.cs" />
     <Compile Include="EntityFramework\Maps\NotificationMap.cs" />
     <Compile Include="EntityFramework\Maps\DevelopmentUserMap.cs" />
-    <Compile Include="EntityFramework\Maps\ServerConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\UserMap.cs" />
     <Compile Include="EntityFramework\Maps\SystemConfigurationMap.cs" />
     <Compile Include="EntityFramework\Maps\QuestionMap.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Answer.cs" />
-    <Compile Include="Models\ServerConfiguration.cs" />
     <Compile Include="Models\PointConfiguration.cs" />
     <Compile Include="Models\DevelopmentUser.cs" />
     <Compile Include="Models\Moderation.cs" />
@@ -202,8 +227,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Migrations\DbMail.sql" />
     <Content Include="Migrations\EnumToLookup.sql" />
     <Content Include="Migrations\HowToMigrate.txt" />
+    <Content Include="Migrations\Logging.sql" />
     <Content Include="Migrations\Manual.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +258,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505290527381_Migration4.resx">
       <DependentUpon>201505290527381_Migration4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505311022397_Migration5.resx">
+      <DependentUpon>201505311022397_Migration5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506021832108_Migration6.resx">
+      <DependentUpon>201506021832108_Migration6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506171338314_Migration7.resx">
+      <DependentUpon>201506171338314_Migration7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506171348030_Migration8.resx">
+      <DependentUpon>201506171348030_Migration8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506171352434_Migration9.resx">
+      <DependentUpon>201506171352434_Migration9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506200510403_Migration10.resx">
+      <DependentUpon>201506200510403_Migration10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506220529448_Migration11.resx">
+      <DependentUpon>201506220529448_Migration11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

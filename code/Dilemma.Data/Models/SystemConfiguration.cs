@@ -31,12 +31,12 @@ namespace Dilemma.Data.Models
         public int MaxAnswers { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum lifetime that <see cref="Question"/>s are allowed to be open. Changing 
+        /// Gets or sets the maximum lifetime in days that questions are allowed to be open. Changing 
         /// this setting will not change the lifetime of existing <see cref="Question"/>s as each 
         /// <see cref="Question"/> stores its own copy of this value when it is created. This allows the 
         /// system to remain dynamic.
         /// </summary>
-        public QuestionLifetime QuestionLifetime { get; set; }
+        public int QuestionLifetimeDays { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="SystemEnvironment"/>.

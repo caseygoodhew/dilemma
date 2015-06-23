@@ -34,7 +34,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
                     SystemConfigurationViewModel = new SystemConfigurationViewModel
                     {
                         MaxAnswers = 3,
-                        QuestionLifetime = QuestionLifetime.FiveMinutes,
+                        QuestionLifetimeDays = QuestionLifetime.FiveMinutes,
                         SystemEnvironment = SystemEnvironment.Testing
                     },
                     ServerConfigurationViewModel = new ServerConfigurationViewModel
@@ -259,7 +259,7 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
         [TestMethod]
         public void OnlyExpectedAnswersExpire()
         {
-            Administration.UpdateSystemConfiguration(x => x.QuestionLifetime = QuestionLifetime.OneDay);
+            Administration.UpdateSystemConfiguration(x => x.QuestionLifetimeDays = QuestionLifetime.OneDay);
             
             SetupQuestionWithAnswer();
 
@@ -285,21 +285,21 @@ namespace Dilemma.IntegrationTest.ServiceLevel.Primary
             SetupQuestionWithAnswer();
             SecurityManager.LoginNewAnonymous("Another User");
             
-            Administration.CloseQuestions();
+            Questions.CloseQuestions();
             var question = Questions.GetQuestion("Question").QuestionViewModel;
             Assert.IsTrue(question.IsOpen);
             Assert.IsFalse(question.IsClosed);
 
             TimeWarpSource.Value.FreezeTime(question.ClosesDateTime);
 
-            Administration.CloseQuestions();
+			Questions.CloseQuestions();
             question = Questions.GetQuestion("Question").QuestionViewModel;
             Assert.IsTrue(question.IsOpen);
             Assert.IsFalse(question.IsClosed);
 
             TimeWarpSource.Value.FreezeTime(question.ClosesDateTime.Value.AddSeconds(1));
 
-            Administration.CloseQuestions();
+			Questions.CloseQuestions();
             question = Questions.GetQuestion("Question").QuestionViewModel;
             Assert.IsFalse(question.IsOpen);
             Assert.IsTrue(question.IsClosed);
