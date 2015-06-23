@@ -24,7 +24,7 @@ namespace Dilemma.Data.EntityFramework.Initialization
                 new Rank
                     {
                         PointsRequired = 0,
-                        Name = "Teacher"
+                        Name = "Scholar"
                     });
 
             context.Ranks.Add(
@@ -45,7 +45,7 @@ namespace Dilemma.Data.EntityFramework.Initialization
                 new Rank
                     {
                         PointsRequired = 15000,
-                        Name = "Angel"
+                        Name = "Guardian"
                     });
 
             context.Ranks.Add(
