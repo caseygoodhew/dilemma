@@ -66,5 +66,15 @@ namespace Dilemma.Business.Services
         {
             return UserRepository.Value.GetUserStatistics<UserStatisticsViewModel>(SecurityManager.Value.GetUserId());
         }
+
+        public string GetHomePage()
+        {
+            return SecurityManager.Value.GetHomePage();
+        }
+
+        public void SetHomePage(string homePage)
+        {
+            SecurityManager.Value.SetHomePage(homePage);
+        }
     }
 }

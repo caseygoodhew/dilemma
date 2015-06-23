@@ -78,6 +78,25 @@ namespace Dilemma.Security
             return int.Parse(ReadClaims().Single(x => x.Type == ClaimTypes.Sid).Value);
         }
 
+        public string GetHomePage()
+        {
+            var hasClaim = ReadClaims().Any(x => x.Type == "HomePage");
+
+            if (!hasClaim)
+            {
+                IssueAnonymousCookie(GetUserId());
+            }
+
+            var result = ReadClaims().Single(x => x.Type == "HomePage").Value;
+
+            return ReadClaims().Single(x => x.Type == "HomePage").Value;
+        }
+
+        public void SetHomePage(string homePage)
+        {
+            IssueAnonymousCookie(GetUserId(), homePage);
+        }
+
         /// <summary>
         /// Sets the current user id.
         /// </summary>
@@ -141,12 +160,13 @@ namespace Dilemma.Security
             return UserRepository.Value.CreateAnonymousUser();
         }
 
-        private static void IssueAnonymousCookie(int userId)
+        private static void IssueAnonymousCookie(int userId, string homePage = "/")
         {
             var claims = new List<Claim>
                              {
                                  new Claim(ClaimTypes.Anonymous, ClaimTypes.Anonymous),
-                                 new Claim(ClaimTypes.Sid, userId.ToString(CultureInfo.InvariantCulture))
+                                 new Claim(ClaimTypes.Sid, userId.ToString(CultureInfo.InvariantCulture)),
+                                 new Claim("HomePage", homePage)
                              };
 
             var userClaims = new UserClaims(claims);

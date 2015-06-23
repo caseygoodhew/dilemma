@@ -23,6 +23,8 @@ namespace Dilemma.Web.Controllers
         public JsonResult Vote(VoteDto vote)
         {
             QuestionService.Value.RegisterVote(vote.AnswerId);
+
+            PromoteUserHomePage();
             
             return Json(new { success = true });
         }
@@ -64,6 +66,8 @@ namespace Dilemma.Web.Controllers
                 }
 
                 ViewBag.CanVote = false;
+
+                PromoteUserHomePage();
                 
                 return PartialView(
                     "DisplayTemplates/Answer",

@@ -16,11 +16,20 @@ namespace Dilemma.Web.Controllers
     {
         private static readonly Lazy<IAdministrationService> AdministrationService =
             Locator.Lazy<IAdministrationService>();
+
+        private static readonly Lazy<IUserService> UserService = Locator.Lazy<IUserService>();
         
         //
         // GET: /Home/
         public ActionResult Index()
         {
+            var homePage = UserService.Value.GetHomePage();
+
+            if (homePage != "/")
+            {
+                return Redirect(homePage);
+            }
+            
             var systemServerConfiguration = AdministrationService.Value.GetSystemServerConfiguration();
 
             ViewBag.SuppressPageBd = true;

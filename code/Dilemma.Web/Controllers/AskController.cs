@@ -63,7 +63,9 @@ namespace Dilemma.Web.Controllers
                 var questionId = QuestionService.Value.SaveNewQuestion(model.Question);
 				var questionDetails = QuestionService.Value.GetQuestion(questionId);
 
-				return View("Confirm", new DilemmaDetailsViewModel {
+                PromoteUserHomePage();
+                
+                return View("Confirm", new DilemmaDetailsViewModel {
 					QuestionDetails = questionDetails,
 					Sidebar = GetSidebarViewModel()
 				});

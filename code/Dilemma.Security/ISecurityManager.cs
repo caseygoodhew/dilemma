@@ -46,5 +46,9 @@ namespace Dilemma.Security
         bool Is(UserRole userRole);
 
         bool IsValidAccessKey(string accessKey);
+
+        string GetHomePage();
+
+        void SetHomePage(string homePage);
     }
 }

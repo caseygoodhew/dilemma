@@ -26,5 +26,9 @@ namespace Dilemma.Business.Services
         UserViewModel GetUser(int userId);
 
         UserStatisticsViewModel GetUserStatistics();
+
+        string GetHomePage();
+
+        void SetHomePage(string homePage);
     }
 }

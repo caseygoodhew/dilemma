@@ -24,6 +24,11 @@ namespace Dilemma.Web.Controllers
             ViewBag.Categories = SiteService.Value.GetCategories();
         }
 
+        protected static void PromoteUserHomePage()
+        {
+            UserService.Value.SetHomePage("/dilemmas");
+        }
+        
         protected static SidebarViewModel GetSidebarViewModel()
         {
             return new SidebarViewModel
