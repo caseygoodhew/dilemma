@@ -135,8 +135,16 @@ WriteLiteral("\r\n                        <p");
 
 WriteLiteral(" class=\"info\"");
 
-WriteLiteral(">Ask your question in complete anonymity. All questions disappear within a couple" +
-" of weeks.</p>\r\n");
+WriteLiteral(">Ask your question in complete anonymity. All questions disappear within ");
+
+            
+            #line 24 "..\..\Views\Ask\Index.cshtml"
+                                                                                                           Write(ViewBag.WeeksQuestionsOpen);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" weeks.</p>\r\n");
 
 WriteLiteral("                        ");
 

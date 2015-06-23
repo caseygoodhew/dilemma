@@ -21,7 +21,7 @@
                     
                     <div class="form-group">
                         @Html.LabelFor(x => x.Question.Text, "What's on your mind?", new { @class = "h3 pv10" })
-                        <p class="info">Ask your question in complete anonymity. All questions disappear within a couple of weeks.</p>
+                        <p class="info">Ask your question in complete anonymity. All questions disappear within @ViewBag.WeeksQuestionsOpen weeks.</p>
                         @Html.TextAreaFor(x => x.Question.Text, new { @class = "form-control", cols="30", rows="10"})
                         @Html.ValidationMessageFor(x => x.Question.Text)
                     </div>

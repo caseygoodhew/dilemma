@@ -243,9 +243,17 @@ WriteLiteral("></span>\r\n                </div>\r\n                <div");
 
 WriteLiteral(" class=\"Media-text\"");
 
-WriteLiteral(@">
-                    <h2>Anonymity</h2>
-                    <p>Questions and Answers disappear in 15 days</p>  
+WriteLiteral(">\r\n                    <h2>Anonymity</h2>\r\n                    <p>Questions and A" +
+"nswers disappear within ");
+
+            
+            #line 66 "..\..\Views\Home\Index.cshtml"
+                                                         Write(ViewBag.WeeksQuestionsOpen);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@" weeks.</p>  
                     <p>Your account is completely anonymous. None of your details are stored on our servers. Your account is stored in an encrypted cookie on your phone or PC, which you can easily remove by deleting your cookies.</p>
                 </div>
             </div><!-- Media Media-to-stack -->
@@ -379,14 +387,14 @@ WriteLiteral(" class=\"wrap\"");
 
 WriteLiteral(">\r\n            <h2>Ask * Advise * Vote</h2>\r\n            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5550), Tuple.Create("\"", 5589)
+WriteAttribute("href", Tuple.Create(" href=\"", 5581), Tuple.Create("\"", 5620)
             
             #line 127 "..\..\Views\Home\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 5557), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
+, Tuple.Create(Tuple.Create("", 5588), Tuple.Create<System.Object, System.Int32>(Url.Action("Index", "Dilemmas")
             
             #line default
             #line hidden
-, 5557), false)
+, 5588), false)
 );
 
 WriteLiteral(" class=\"Button Button--red\"");

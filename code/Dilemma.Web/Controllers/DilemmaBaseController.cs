@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Web.Mvc;
 
 using Dilemma.Business.Services;
@@ -31,6 +32,61 @@ namespace Dilemma.Web.Controllers
                            NewNotificationsCount = NotificationService.Value.CountNewNotifications(),
                            Notifications = NotificationService.Value.GetTopUnread(2)
                        };
+        }
+
+        protected static string NumberToText(decimal number)
+        {
+            if (number == 0)
+            {
+                return "zero";
+            }
+
+            if (number == 1)
+            {
+                return "one";
+            }
+
+            if (number == 2)
+            {
+                return "two";
+            }
+
+            if (number == 3)
+            {
+                return "three";
+            }
+
+            if (number == 4)
+            {
+                return "four";
+            }
+
+            if (number == 5)
+            {
+                return "five";
+            }
+
+            if (number == 6)
+            {
+                return "six";
+            }
+
+            if (number == 7)
+            {
+                return "seven";
+            }
+
+            if (number == 8)
+            {
+                return "eight";
+            }
+
+            if (number == 9)
+            {
+                return "nine";
+            }
+
+            return number.ToString(CultureInfo.CurrentCulture);
         }
     }
 }

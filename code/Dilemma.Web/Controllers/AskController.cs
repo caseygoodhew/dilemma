@@ -20,6 +20,9 @@ namespace Dilemma.Web.Controllers
         private static readonly Lazy<ISiteService> SiteService = Locator.Lazy<ISiteService>();
         
         private static readonly Lazy<IQuestionService> QuestionService = Locator.Lazy<IQuestionService>();
+
+        private static readonly Lazy<IAdministrationService> AdministrationService =
+            Locator.Lazy<IAdministrationService>();
         
         [Route("ask")]
         public ActionResult Index()
@@ -32,6 +35,7 @@ namespace Dilemma.Web.Controllers
         [Route("ask/{category:alpha}")]
         public ActionResult Index(string category)
         {
+            SetWeeksOpen();
             ViewBag.Category = category;
             return View(InitNewQuestion(CategoryHelper.GetCategory(category)));
         }
@@ -51,6 +55,7 @@ namespace Dilemma.Web.Controllers
         [Route("ask/{category:alpha}")]
         public ActionResult Index(string category, AskViewModel model)
         {
+            SetWeeksOpen();
             ViewBag.Category = category;
             
             if (ModelState.IsValid)
@@ -97,6 +102,17 @@ namespace Dilemma.Web.Controllers
             questionViewModel.Sidebar = GetSidebarViewModel();
 
             return questionViewModel;
+        }
+
+        private void SetWeeksOpen()
+        {
+            var systemServerConfiguration = AdministrationService.Value.GetSystemServerConfiguration();
+
+            ViewBag.WeeksQuestionsOpen =
+                NumberToText(Math.Ceiling(
+                    ((decimal)
+                        (systemServerConfiguration.SystemConfigurationViewModel.QuestionLifetimeDays +
+                         systemServerConfiguration.SystemConfigurationViewModel.RetireQuestionAfterDays))/7));
         }
     }
 }
