@@ -28,7 +28,7 @@
                     
                     <div class="form-group">
                         @Html.LabelFor(x => x.Question.CategoryId, "Which best describes your dilemma?", new { @class = "h3 pv10" })
-                        @Html.DropDownListFor(x => x.Question.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), new { @class = "form-control" })
+                        @Html.DropDownListFor(x => x.Question.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), "-- Select a category --", new { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.Question.CategoryId)
                     </div>
                     

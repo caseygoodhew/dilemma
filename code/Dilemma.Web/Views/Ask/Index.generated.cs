@@ -187,7 +187,7 @@ WriteLiteral("                        ");
 
             
             #line 31 "..\..\Views\Ask\Index.cshtml"
-                   Write(Html.DropDownListFor(x => x.Question.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), new { @class = "form-control" }));
+                   Write(Html.DropDownListFor(x => x.Question.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"), "-- Select a category --", new { @class = "form-control" }));
 
             
             #line default
