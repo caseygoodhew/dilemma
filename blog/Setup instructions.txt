@@ -1,0 +1,52 @@
+LINUX SERVER SETUP
+------------------
+
+Setting up a LAMP server on AWS
+http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html
+
+Setting up Wordpress on an AWS LAMP server
+http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hosting-wordpress.html
+
+
+
+IIS REVERSE PROXY SETUP
+-----------------------
+
+Setting up a Reverse Proxy using IIS, URL Rewrite and ARR
+http://blogs.msdn.com/b/carlosag/archive/2010/04/02/setting-up-a-reverse-proxy-using-iis-url-rewrite-and-arr.aspx
+I DONT THINK WE NEED ARR
+
+
+
+ADD THIS TO WEB.CONFIG (Remove /Dilemma.Web)
+<rewrite>
+    <rules>
+        <rule name="Match /blog/*" stopProcessing="true">
+            <match url="^blog/(.*)" />
+            <action type="Rewrite" url="http://ec2-52-17-215-194.eu-west-1.compute.amazonaws.com/{R:1}" />
+        </rule>
+        <rule name="Match /blog" stopProcessing="true">
+            <match url="^blog" />
+            <action type="Rewrite" url="http://ec2-52-17-215-194.eu-west-1.compute.amazonaws.com/" />
+        </rule>
+    </rules>
+    <outboundRules>
+        <rule name="Rewrite casual links" preCondition="Response is HTML"> 
+              <match filterByTags="A, Area, Base, Form, Frame, Head, IFrame, Img, Input, Link, Script" pattern="^http(s)?://ec2-52-17-215-194.eu-west-1.compute.amazonaws.com/(.*)" /> 
+              <action type="Rewrite" value="/Dilemma.Web/blog/{R:2}" /> 
+        </rule>
+        <rule name="Rewrite relative paths" preCondition="Response is HTML"> 
+              <match filterByTags="A, Area, Base, Form, Frame, Head, IFrame, Img, Input, Link, Script" pattern="^/(.*)" negate="false" /> 
+              <action type="Rewrite" value="/{R:1}" /> 
+        </rule> 
+        <rule name="Rewrite embed js regex"> 
+              <match pattern="http(s)?:\\/\\/ec2-52-17-215-194.eu-west-1.compute.amazonaws.com\\/(.*)" /> 
+              <action type="Rewrite" value="\/Dilemma.Web\/blog\/{R:2}" /> 
+        </rule>
+        <preConditions> 
+              <preCondition name="Response is HTML"> 
+                    <add input="{RESPONSE_CONTENT_TYPE}" pattern="^text/html" /> 
+              </preCondition> 
+        </preConditions> 
+    </outboundRules> 
+</rewrite>
