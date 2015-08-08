@@ -14,7 +14,6 @@ IIS REVERSE PROXY SETUP
 
 Setting up a Reverse Proxy using IIS, URL Rewrite and ARR
 http://blogs.msdn.com/b/carlosag/archive/2010/04/02/setting-up-a-reverse-proxy-using-iis-url-rewrite-and-arr.aspx
-I DONT THINK WE NEED ARR
 
 
 
