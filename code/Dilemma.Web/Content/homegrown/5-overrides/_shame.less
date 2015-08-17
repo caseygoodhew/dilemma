@@ -20,7 +20,7 @@
 
 .page-home .navbar-nav {
   display: none;
-} 
+}
 
 
 
@@ -83,3 +83,19 @@
 }
 
 
+
+
+
+
+// hide fixed elemnts when is a touch browser that is using chrome or chrome ios (crios)
+// fixfixed is added to body tag by javascript
+.fixfixed {
+    .js-sticky.stuck {
+        display:none !important;
+    }
+    @media only screen and (max-width: @m) {
+        .page-hd .navbar-nav {
+             display:none !important;
+        }
+    }
+}

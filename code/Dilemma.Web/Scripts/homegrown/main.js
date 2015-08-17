@@ -22,18 +22,18 @@
 
 // a sensible, reliable way to test for IE <= 9
 var ie = (function(){
- 
+
     var undef,
         v = 3,
         div = document.createElement('div'),
         all = div.getElementsByTagName('i');
-    
+
     while (
         div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
         all[0]
     );
-    
-    return v > 4 ? v : undef;   
+
+    return v > 4 ? v : undef;
 }());
 
 // get viewport size in a cross browser style and fashion
@@ -85,7 +85,7 @@ function win_resize() {
   var win_resized_width = getViewport()[0];
   var win_resized_height = getViewport()[1];
 
-  if (win_resized_width < 780) {
+  if (win_resized_width < 810) {
     $('.nav-level-2-menu').css('width',win_resized_width - 14);
     if ($('#nav-mask').length < 1 ){
       $('body').append('<div id="nav-mask"/>')
@@ -135,20 +135,39 @@ $(document).ready(function() {
   // a plugin to fix the 'to answer' and 'to vote' things on scroll
   $('.js-sticky').waypoint('sticky');
 
-  
+  _menu_active = false;
   $('.js-nav-level-2-menu-trigger').on('click', function(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    $(this).parent().toggleClass('is-active');
-    $("#nav-mask").toggle();
-    //$(this).closest('.Dilemma-text').toggleClass('is-active');
+    _this = $(this);
+    if ( _menu_active == true ) {
+      //console.log( '_menu_active == true' );
+      if (_this.parent().hasClass('is-active')) {
+        //console.log( "_this.parent().hasClass('is-active')" );
+        $('.nav-level-1.is-active').removeClass('is-active');
+        $("#nav-mask").hide();
+        _menu_active = false;
+      } else {
+        //console.log( "!!! _this.parent().hasClass('is-active')" );
+        $('.nav-level-1.is-active').removeClass('is-active');
+        _this.parent().addClass('is-active');
+        _menu_active = true
+      }
+    } else {
+      //console.log( '_menu_active != true' );
+      $("#nav-mask").show();
+      _this.parent().addClass('is-active');
+      _menu_active = true
+    }
   });
 
 
+  $('.nav-level-2-menu').each( function () {
+    $(this).parent().addClass('children-' + $(this).children().length );
+  })
 
 
-
-  // get the original height from the css 
+  // get the original height from the css
   var Dilemma_text_height = $('.Dilemma-text:first').height();
 
   $('.Dilemma-text-toggle').on('click', function(e) {
@@ -181,7 +200,7 @@ $(document).ready(function() {
 
   // $('.js-dismissable-trigger').on('click', function() {
   //   $(this).closest('.js-dismissable').fadeOut();
-  // }); 
+  // });
 
 
   /*
@@ -225,16 +244,16 @@ $(document).ready(function() {
                     // all buttons of this type can now be disabled
                     $('.js-voting-button').attr('disabled', 'disabled');
                     _this.removeAttr('disabled');
-                    
+
                     $('.js-voting-button:not([disabled])').off('click');
                 },
                 error: function () {
-                    
+
                 }
             });
           }
           second++;
-        }, 
+        },
         1000
       );
 
@@ -249,8 +268,8 @@ $(document).ready(function() {
 
     }
   });
-  
-  
+
+
   $('.js-bookmark-button:not([disabled])').on('click', function() {
     var isAdd = $(this).toggleClass('is-active').hasClass('is-active');
     $.ajax({
@@ -259,7 +278,7 @@ $(document).ready(function() {
         data: JSON.stringify({ questionId: $(this).data('question-id') }),
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            
+
         },
         error: function () {
 
@@ -303,11 +322,11 @@ $(document).ready(function() {
   });
 
 
-  
+
 
   /*
 
-    Position the sticky headers 
+    Position the sticky headers
 
   ======================================================*/
   // var width_of_stream = $('.stream').width() - 16;
@@ -317,7 +336,7 @@ $(document).ready(function() {
   //     'margin': '0 auto'
   //   });
   // });
-  
+
   /*
 
     mobile menu show / hide
@@ -352,19 +371,19 @@ $(document).ready(function() {
         }
       }
     })
-  ; 
+  ;
 
 
 
 
     var _browser = navigator.userAgent.toLowerCase();
-    // Mobile chrome is a bit 'special' and forgets what position fixed means when an input gets focus so 'solution' is to 
+    // Mobile chrome is a bit 'special' and forgets what position fixed means when an input gets focus so 'solution' is to
     if (
             (
-                (_browser.match('crios'))  ||  (_browser.match('chrome'))
+                ( _browser.match('crios') )  ||  ( _browser.match('chrome') )
             )
             && (Modernizr.touch)
-        ) {
+    ) {
         $(document).on('focus', 'textarea,input,select', function() {
             $('body').addClass('fixfixed');
         }).on('blur', 'textarea,input,select', function() {
@@ -388,33 +407,33 @@ $(document).ready(function() {
  * to offer multiple easing options
  *
  * TERMS OF USE - jQuery Easing
- * 
- * Open source under the BSD License. 
- * 
+ *
+ * Open source under the BSD License.
+ *
  * Copyright Â© 2008 George McGinley Smith
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without modification, 
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list 
- * of conditions and the following disclaimer in the documentation and/or other materials 
+ * Redistributions in binary form must reproduce the above copyright notice, this list
+ * of conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
- * 
- * Neither the name of the author nor the names of contributors may be used to endorse 
+ *
+ * Neither the name of the author nor the names of contributors may be used to endorse
  * or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
  *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
- *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
  * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
- * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
 */
 
@@ -530,7 +549,7 @@ jQuery.extend( jQuery.easing,
     return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
   },
   easeInOutBack: function (x, t, b, c, d, s) {
-    if (s == undefined) s = 1.70158; 
+    if (s == undefined) s = 1.70158;
     if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
     return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
   },
@@ -557,32 +576,32 @@ jQuery.extend( jQuery.easing,
 /*
  *
  * TERMS OF USE - EASING EQUATIONS
- * 
- * Open source under the BSD License. 
- * 
+ *
+ * Open source under the BSD License.
+ *
  * Copyright Â© 2001 Robert Penner
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without modification, 
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
- * Redistributions of source code must retain the above copyright notice, this list of 
+ *
+ * Redistributions of source code must retain the above copyright notice, this list of
  * conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list 
- * of conditions and the following disclaimer in the documentation and/or other materials 
+ * Redistributions in binary form must reproduce the above copyright notice, this list
+ * of conditions and the following disclaimer in the documentation and/or other materials
  * provided with the distribution.
- * 
- * Neither the name of the author nor the names of contributors may be used to endorse 
+ *
+ * Neither the name of the author nor the names of contributors may be used to endorse
  * or promote products derived from this software without specific prior written permission.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
  *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
  *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
- *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED 
+ *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
  * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED 
- * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */

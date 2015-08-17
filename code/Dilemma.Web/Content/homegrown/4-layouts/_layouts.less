@@ -2,20 +2,20 @@
 
 /*
 
-  Basic layout is mobile first, 
+  Basic layout is mobile first,
   with extra layout applied to larger screens
 
 ======================================================*/
 
 /*
- 
+
    Key sizes, breakpoints etc hang off these
- 
+
 ======================================================*/
-    
+
   @xs:     0px;
   @s:    600px;
-  @m:    810px;
+  @m:    870px;
   @l:    960px;
   @xl:  1280px;
   @xxl: 1400px;
@@ -45,28 +45,28 @@
     display: none;
   }
 
-  @media @bp-s  { 
+  @media @bp-s  {
     .size-xs-only { display: none; }
     .size-s-and-up { display: block; }
     .size-s-and-up.inline { display: inline; }
-    .size-s-and-up.inline-block { display: block; } 
+    .size-s-and-up.inline-block { display: block; }
   }
-  @media @bp-m  { 
+  @media @bp-m  {
     .size-m-and-up { display: block; }
     .size-m-and-up.inline { display: inline; }
-    .size-m-and-up.inline-block { display: block; } 
+    .size-m-and-up.inline-block { display: block; }
   }
-  @media @bp-l  { 
+  @media @bp-l  {
     .size-l-and-up { display: block; }
     .size-l-and-up.inline { display: inline; }
-    .size-l-and-up.inline-block { display: block; } 
+    .size-l-and-up.inline-block { display: block; }
   }
-  @media @bp-xl { 
+  @media @bp-xl {
     .size-xl-and-up { display: block; }
     .size-xl-and-up.inline { display: inline; }
-    .size-xl-and-up.inline-block { display: block; }  
+    .size-xl-and-up.inline-block { display: block; }
   }
- 
+
 
 
 html, body {
@@ -79,7 +79,7 @@ html {
 
 /*
 
-  Z-index 
+  Z-index
 
 ======================================================*/
 
@@ -118,27 +118,27 @@ html {
 ======================================================*/
 
   .wrap {
-    position: relative; 
+    position: relative;
     padding: 0;
   }
-  .js-sticky--offset { 
-    padding: 0 16px; 
+  .js-sticky--offset {
+    padding: 0 16px;
   }
   // restrict width when we get to xl, otherwise use all of the screen
   @media @bp-m {
-    .wrap { 
-      padding: 0 10px; 
-    } 
-    .stuck .js-sticky--offset { 
-      padding: 0 28px; 
-    } 
+    .wrap {
+      padding: 0 10px;
+    }
+    .stuck .js-sticky--offset {
+      padding: 0 28px;
+    }
   }
   @media @bp-l {
     .wrap,
-    .stuck .js-sticky--offset { 
+    .stuck .js-sticky--offset {
       max-width: 1100px;
-      margin: 0 auto; 
-    } 
+      margin: 0 auto;
+    }
   }
   .js-sticky--offset {
 
@@ -149,7 +149,7 @@ html {
   Main layout styles
 
 ======================================================*/
-  .sidebar, 
+  .sidebar,
   .page-ft {
     display: none;
   }
@@ -197,7 +197,7 @@ html {
     position: absolute;
     top: 0;
     width: 300px;
-  }  
+  }
 }
 
 
@@ -220,10 +220,10 @@ html {
     width: 50%;
     float: right;
   }
-  .Rank-image img { 
+  .Rank-image img {
     width: 40px;
   }
-  tr:first-child .Rank-score, 
+  tr:first-child .Rank-score,
   tr:first-child .Rank-facet {
     border-top:0 none;
   }

@@ -2,36 +2,36 @@
 \
   ABOUT THIS STYLESHEET
 
-    * Bootstrap less files are included so that bootstrap mixins etc may be used by custom css 
+    * Bootstrap less files are included so that bootstrap mixins etc may be used by custom css
     * Bootstrap files are not modified to allow easy updates
     * Bootstrap less files that are not being used may be commented out to reduce filesize
     * Bootstrap comes first and is over-ridden by custom styles
-    * Custom styles do not use bootstrap class names 
+    * Custom styles do not use bootstrap class names
       * to make it clearer what is controlled by what
       * to make it simpler to ditch bootstrap if that is ever desired
       * to make it easier to turn off Bootstrap components as desired
 /
 ======================================================*/
 
-  /* 
-    Config 
-   
+  /*
+    Config
+
   ======================================================*/
     // Pathing variables
-    @bootstrap: "../bootstrap";  
-    @imagepath: "/content/images"; 
+    @bootstrap: "../bootstrap";
+    @imagepath: "http://ourdilemmas.com/content/images";
     @fontpath: "../fonts";
 
 /*=====================================================
 \
-  BOOTSTRAP — Variables 
+  BOOTSTRAP — Variables
 /
 ======================================================*/
 
   // BOOTSTRAP variables
   @import "@{bootstrap}/variables.less";
 
-  // CUSTOM variable over-rides 
+  // CUSTOM variable over-rides
   @import "0-base/_bootstrap-variables.less";
 
 /*=====================================================
@@ -41,7 +41,7 @@
 ======================================================*/
 
   // Core mixins
-  @import "@{bootstrap}/mixins.less"; 
+  @import "@{bootstrap}/mixins.less";
 
   // Reset and dependencies
   @import "@{bootstrap}/normalize.less";
@@ -53,21 +53,21 @@
   @import "@{bootstrap}/type.less";
   @import "@{bootstrap}/code.less";
   @import "@{bootstrap}/grid.less";
-  @import "@{bootstrap}/tables.less"; 
+  @import "@{bootstrap}/tables.less";
   @import "@{bootstrap}/forms.less";
   @import "@{bootstrap}/buttons.less";
 
   // Components
   @import "@{bootstrap}/component-animations.less";
   @import "@{bootstrap}/dropdowns.less";
-  @import "@{bootstrap}/button-groups.less"; 
+  @import "@{bootstrap}/button-groups.less";
   @import "@{bootstrap}/input-groups.less";
   @import "@{bootstrap}/navs.less";
   @import "@{bootstrap}/navbar.less";
   @import "@{bootstrap}/breadcrumbs.less";
   @import "@{bootstrap}/pagination.less";
   @import "@{bootstrap}/pager.less";
-  @import "@{bootstrap}/labels.less"; 
+  @import "@{bootstrap}/labels.less";
   @import "@{bootstrap}/badges.less";
   @import "@{bootstrap}/jumbotron.less";
   @import "@{bootstrap}/thumbnails.less";
@@ -86,31 +86,31 @@
   @import "@{bootstrap}/popovers.less";
   @import "@{bootstrap}/carousel.less";
 
-  // Utility classes 
+  // Utility classes
   @import "@{bootstrap}/utilities.less";
   @import "@{bootstrap}/responsive-utilities.less";
 
 /*=====================================================
-\ 
+\
   CUSTOM
 
     // Uses SUIT naming conventions https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md
-    // u-utilityName 
+    // u-utilityName
     // ComponentName
     // ComponentName--modifierName
     // ComponentName-descendantName
-    // ComponentName.is-stateOfComponent 
+    // ComponentName.is-stateOfComponent
 /
 ======================================================*/
 
-  @import "0-base/_variables.less"; 
+  @import "0-base/_variables.less";
 
   @import "0-base/_elements.less";
   @import "0-base/_typography-classes.less";
   @import "0-base/_utility-classes.less";
 
-  @import "1-components/_media-unit.less";  
-  @import "1-components/_lists.less"; 
+  @import "1-components/_media-unit.less";
+  @import "1-components/_lists.less";
   @import "1-components/_dilemmicons.less";
   @import "1-components/_forms.less";
   @import "1-components/_buttons.less";
@@ -132,15 +132,7 @@
 
   @import "5-overrides/_layout-overrides.less";
   @import "5-overrides/_animate.less";
-  
+
   // this should be empty, a place for emergency fixes
   @import "5-overrides/_shame.less";
-
-
-
-
-
-
-
-
-
+ //test
