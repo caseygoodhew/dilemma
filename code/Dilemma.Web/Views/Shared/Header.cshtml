@@ -7,7 +7,7 @@
     var counter = 3;
     Func<int> getNextCounter = () => counter++;
     Func<string, string> getMenuClass = (x) => x == tidyString(ViewBag.Category ?? string.Empty) ? " is-page-current " : string.Empty;
-    
+
     var isOffline = ViewBag.Offline == true;
     var categories = ViewBag.Categories ?? Enumerable.Empty<CategoryViewModel>();
 }
@@ -30,10 +30,10 @@
                             <a href="javascript://click" class="dropdown-toggle nav-level-1-link js-nav-level-2-menu-trigger" role="button" aria-expanded="false">
                                 <span data-icon="advise"></span>
                                 <span class="nav-level-1-text">
-                                    Advise &amp; Vote 
+                                    Advise &amp; Vote
                                     <span class="caret"></span>
                                 </span>
-                
+
                             </a>
                             <ul class="nav-level-2-menu" role="menu">
                                 <li class="nav-level-2 in-category-1 js-categories-all @getMenuClass("all")">
@@ -72,13 +72,29 @@
                                 <span class="nav-level-1-text">Profile</span>
                             </a>
                         </li>
-                        <li class="nav-level-1 nav-pin-header">
-                            <a href="@Url.Action("Index", "StaticPages")" class="nav-level-1-link">
-                                <span data-icon="mail"></span>
+                        <li class="nav-level-1 nav-more">
+                            <a href="javascript://click" class="dropdown-toggle nav-level-1-link js-nav-level-2-menu-trigger" role="button" aria-expanded="false" title="More ...">
+                              <span class="nav-more-icon">&hellip;</span>
+                              <span class="nav-level-1-text">
+                                more
+                                <span class="caret"></span>
+                              </span>
                             </a>
+                            <ul class="nav-level-2-menu" role="menu">
+                                <li class="nav-level-2">
+                                    <a href="http://ourdilemmas.com/blog" class="nav-level-2-link">
+                                      Blog
+                                    </a>
+                                </li>
+                                <li class="nav-level-2">
+                                    <a href="http://ourdilemmas.com/about" class="nav-level-2-link">
+                                      About / Contact
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
-                }         
+                }
             </div><!-- wrap -->
         </div>
     </nav>
