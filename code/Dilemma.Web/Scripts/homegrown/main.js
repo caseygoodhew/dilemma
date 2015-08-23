@@ -86,7 +86,7 @@ function win_resize() {
   var win_resized_height = getViewport()[1];
 
   if (win_resized_width < 810) {
-    $('.nav-level-2-menu').css('width',win_resized_width - 14);
+    $('.nav-level-2-menu').css('width',win_resized_width);
     if ($('#nav-mask').length < 1 ){
       $('body').append('<div id="nav-mask"/>')
     }

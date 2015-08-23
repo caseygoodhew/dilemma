@@ -7926,7 +7926,7 @@ button:active,
   top: 0;
   bottom: 0;
   right: 0;
-  background: url("/content/images/chevron-right.png") center center no-repeat transparent;
+  background: url("http://ourdilemmas.com/content/images/chevron-right.png") center center no-repeat transparent;
 }
 .Card-go--trigger:hover {
   background-color: #f8f8f8;
@@ -8568,7 +8568,7 @@ form.Answer:after {
   color: #999;
 }
 body {
-  background: #e9e9e9 url("/content/images/pattern-a.png");
+  background: #e9e9e9 url("http://ourdilemmas.com/content/images/pattern-a.png");
 }
 .disguise-link,
 .disguise-link:hover {
@@ -9282,8 +9282,8 @@ html {
   min-height: 51px;
 }
 .nav-level-1.nav-more .nav-more-icon {
-  font-size: 30px;
-  line-height: 0.5;
+  font-size: 24px;
+  line-height: 16px;
   border: 1px solid #FFF;
   border-radius: 50%;
   display: inline-block;
@@ -9291,6 +9291,7 @@ html {
   height: 32px;
   text-align: center;
   margin: 2px;
+  font-family: 'Arial ', 'ArialMT', 'Roboto', sans-serif;
 }
 .nav-more .dropdown-toggle {
   padding-left: 10px;
