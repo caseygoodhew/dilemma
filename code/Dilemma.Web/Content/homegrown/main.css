@@ -9306,8 +9306,8 @@ html {
   min-height: 51px;
 }
 .nav-level-1.nav-more .nav-more-icon {
-  font-size: 30px;
-  line-height: 0.5;
+  font-size: 24px;
+  line-height: 16px;
   border: 1px solid #FFF;
   border-radius: 50%;
   display: inline-block;
@@ -9315,6 +9315,7 @@ html {
   height: 32px;
   text-align: center;
   margin: 2px;
+  font-family: 'Arial ', 'ArialMT', 'Roboto', sans-serif;
 }
 .nav-more .dropdown-toggle {
   padding-left: 10px;
