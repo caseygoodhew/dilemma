@@ -14,11 +14,8 @@
 
 // LEVEL 1
 
-.nav-level-1 {
-  // border-top: @ui-divider-width @ui-border-color solid;
-  &:first-child {
-    border-top: 0 none;
-  }
+.nav-level-1:first-child {
+  border-top: 0 none;
 }
 .page-hd .nav-level-1-link {
   padding: 7px 8px 7px 22px;
@@ -29,6 +26,19 @@
   height: 31px;
   width: 30px;
 }
+.nav-level-1 [data-icon=settings] {
+  font-size: 25px;
+  width: 15px;
+  padding-top: 1px;
+  margin-left: 10px;
+  font-size: 48px;
+}
+.nav-level-1 [data-icon=mail] {
+  font-size: 25px;
+  width: 15px;
+  padding-top: 9px;
+  margin-left: 10px;
+}
 .nav-level-1.is-page-current .nav-level-1-link,
 .nav-level-1.is-page-current .nav-level-1-link:hover {
   color:#fff;
@@ -36,6 +46,7 @@
     color:@color-accent;
   }
 }
+// highlight active dropdown tab
 .nav-level-1.is-active .nav-level-1-link {
   background: #fff  !important;
   color: #222 !important;
@@ -55,14 +66,22 @@
   display: inline-block;
   position: relative;
   top: -7px;
+  @media only screen and (min-width: @xs) and (max-width: @m)  {
+    top: 0;
+  }
+  @media only screen and (min-width: @xs) and (max-width: @s)  {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
 }
 
-.nav-level-1 [data-icon=mail] {
-    font-size: 25px;
-    width: 15px;
-    padding-top: 9px;
-    margin-left: 10px;
-}
+
+// .nav-level-1.is-active.children-2 .nav-level-1-link {
+//   padding-bottom: 2 * 40px;
+// }
+
+
+
 
 
 @media @bp-xs-only {
@@ -103,8 +122,8 @@
   }
 }
 // because bootstrap
-.navbar-inverse .navbar-nav > .open > a, 
-.navbar-inverse .navbar-nav > .open > a:hover, 
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
   background: transparent !important;
   .caret {
@@ -122,8 +141,9 @@
   right: auto;
   margin: 0;
   padding: 0;
-  min-width: 320px;
-  max-width: 400px;
+  @media only screen and (min-width: @m)  {
+    width: 240px;
+  }
   box-shadow: 0 10px 10px rgba(0,0,0,0.5);
 
   max-height: 0;
@@ -139,14 +159,14 @@
 }
 @dropdown-max-height: 400px;// if the menu gets longer increase this value
 .nav-level-1:hover .nav-level-2-menu {
-  max-height: @dropdown-max-height; 
+  max-height: @dropdown-max-height;
   @media only screen and (min-width: @xs) and (max-width: @m)  {
     max-height: 0; // dont hover at mobile sizes
   }
 }
 // click to stick at all sizes
 .nav-level-1.is-active .nav-level-2-menu {
-  max-height: @dropdown-max-height; 
+  max-height: @dropdown-max-height;
   @media only screen and (min-width: @xs) and (max-width: @m)  {
     position: static;
     bottom: 65px;
@@ -173,7 +193,7 @@
 .nav-level-2 a:hover {
   background: @color-bg-white-hover !important;
   text-decoration: none;
-  color: @color-accent !important;  
+  color: @color-accent !important;
 }
 .nav-level-2.is-page-current a,
 .nav-level-2.is-page-current a:hover {
@@ -223,7 +243,7 @@
       a {
         background: #fff;
       }
-    } 
+    }
     .nav-pin-header
       {
         top: -5px;
@@ -238,29 +258,77 @@
     a {
       padding: 10px;
     }
-  }  
+  }
 }
 
-
-// hide fixed elemnts when is a touch browser that is using chrome or chrome ios (crios)
-// fixfixed is added to body tag by javascript
-.fixfixed {
-    .js-sticky.stuck {
-        display:none !important;
-    }
-    @media only screen and (max-width: @m) {
-        .page-hd .navbar-nav {
-             display:none !important;
-        }
-    }
+.nav-level-1 .nav-level-1-link {
+  min-height: 51px;
+}
+.nav-level-1.nav-more .nav-more-icon {
+  font-size: 24px;
+  line-height: 16px;
+  border: 1px solid #FFF;
+  border-radius: 50%;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  margin: 2px;
+  font-family: 'Arial ', 'ArialMT', 'Roboto', sans-serif;
+}
+.nav-more .dropdown-toggle {
+  padding-left: 10px;
+  margin-left: 12px;
+  padding-right: 10px;
+}
+@media only screen and (min-width: 811px) {
+  .nav-level-1.nav-more .nav-level-2-menu {
+    left: auto;
+    right: 0;
+    min-width: 200px;
+  }
+  .nav-level-1.nav-more .nav-level-1-text {
+    top: 4px;
+  }
+}
+@media only screen and (min-width: 811px) {
+  .nav-level-1.nav-more .nav-level-2-menu {
+    left: auto;
+    right: 0;
+    min-width: 200px;
+  }
+}
+@media only screen and (max-width: 870px)  {
+  .nav-level-1-text {
+    display: block;
+  }
+  .page-hd .navbar-nav li {
+    width: 25%;
+    float: left;
+    text-align: center;
+  }
+  .nav-level-1.nav-more.is-active .dropdown-toggle {
+    margin-bottom: 80px;
+  }
+  .nav-level-2-menu {
+    max-width: inherit !important;
+  }
 }
 
+  // .nav-level-1.nav-more .nav-level-2-menu li a {
+  //   position: absolute;
+  //   left: -300%;
+  //   background: #fff;
+  // }
 
-
-.nav-level-1 [data-icon=settings] {
-  font-size: 25px;
-  width: 15px;
-  padding-top: 1px;
-  margin-left: 10px;
-  font-size: 48px;
+@media only screen and (max-width: 870px) {
+  .nav-more.is-active .nav-level-2-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFF;
+    color: #000;
+    max-height: 80px;
+  }
 }
