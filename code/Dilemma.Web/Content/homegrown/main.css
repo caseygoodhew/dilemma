@@ -7415,7 +7415,7 @@ h2 [data-icon] {
   content: "\E004";
 }
 [data-icon="vote"]:before {
-  content: "\E005";
+  content: "\E016";
 }
 [data-icon="love"]:before {
   content: "\E006";
@@ -8496,7 +8496,7 @@ button:active,
 }
 .Answer.is-upvoted .Answer-text:before {
   background: #729f0c;
-  content: "\E005";
+  content: "\E016";
   padding: 16px;
 }
 .Answer.is-mine.is-upvoted .Answer-text:before,
@@ -8516,7 +8516,7 @@ button:active,
 }
 .Answer.is-mine.is-upvoted .Answer-text p:first-child:before {
   background: #729f0c;
-  content: "\E005";
+  content: "\E016";
   z-index: 5;
   position: absolute;
   top: 60px;
@@ -8543,7 +8543,7 @@ button:active,
   text-align: left;
 }
 .Answer.user-is-questioner .number-bubble:before {
-  content: '\E005';
+  content: '\E016';
   font-family: "dilemmasregular";
   border: 0 none;
   font-size: 32px;
