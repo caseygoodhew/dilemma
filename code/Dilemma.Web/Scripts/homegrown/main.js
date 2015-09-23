@@ -214,22 +214,22 @@ $(document).ready(function() {
 
     var _this =  $(this);
 
-    if (window.vote_countdown == 0) {
-
-      window.vote_countdown = 1;
-
-      window.countdownElement = _this.children('.is-inactive');
-      var  seconds = 3,
-          second = 0,
-          interval;
-
-      vote_countdown_stash = countdownElement.text();
-
-      window.interval = setInterval(
-        function() {
-          window.countdownElement.text('Voting in ' + (seconds - second));
-          if (second >= seconds) {
-              clearInterval(window.interval);
+    // if (window.vote_countdown == 0) {
+    //
+    //   window.vote_countdown = 1;
+    //
+    //   window.countdownElement = _this.children('.is-inactive');
+    //   var  seconds = 3,
+    //       second = 0,
+    //       interval;
+    //
+    //   vote_countdown_stash = countdownElement.text();
+    //
+    //   window.interval = setInterval(
+    //     function() {
+          // window.countdownElement.text('Voting in ' + (seconds - second));
+          // if (second >= seconds) {
+          //     clearInterval(window.interval);
 
               $.ajax({
                 url: '/ajax/vote',
@@ -247,26 +247,24 @@ $(document).ready(function() {
 
                     $('.js-voting-button:not([disabled])').off('click');
                 },
-                error: function () {
-
-                }
-            });
-          }
-          second++;
-        },
-        1000
-      );
-
-    } else {
-
-      clearInterval(window.interval);
-      window.interval = null;
-      window.vote_countdown = 0;
-      window.countdownElement.text(vote_countdown_stash);
-      // replace with correct action
-      alert('[user would never see this] — action cancelled');
-
-    }
+                error: function () { }
+              });
+      //     }
+      //     second++;
+      //   },
+      //   1000
+      // );
+    // 
+    // } else {
+    //
+    //   clearInterval(window.interval);
+    //   window.interval = null;
+    //   window.vote_countdown = 0;
+    //   window.countdownElement.text(vote_countdown_stash);
+    //   // replace with correct action
+    //   alert('[user would never see this] — action cancelled');
+    //
+    // }
   });
 
 
